@@ -10,6 +10,8 @@ class Listado extends CI_Controller {
     }
 
     public function index() {
+        //coment
+        
         $this->load->model('alumnos');
         $datos['lista'] = $this->alumnos->listar();
         $this->load->view('listar_alumnos', $datos);
