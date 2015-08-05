@@ -12,10 +12,9 @@ class Listado extends CI_Controller {
 
     public function index() {
         //coment
-
-
         $datos['lista'] = $this->usuarios->listarUsuarios();
         $this->load->view('listar_usuarios', $datos);
     }
 
+    
 }
