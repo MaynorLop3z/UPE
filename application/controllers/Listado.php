@@ -7,14 +7,15 @@ class Listado extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+        $this->load->model('usuarios');
     }
 
     public function index() {
         //coment
-        
-        $this->load->model('alumnos');
-        $datos['lista'] = $this->alumnos->listar();
-        $this->load->view('listar_alumnos', $datos);
+
+
+        $datos['lista'] = $this->usuarios->listarUsuarios();
+        $this->load->view('listar_usuarios', $datos);
     }
 
 }
