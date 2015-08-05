@@ -21,10 +21,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>Carnet</th>
-                                <th>Nombres</th>
-                                <th>Apellidos</th>
-                                <th>Nacimiento</th>
+                                <th>Codigo</th>
+                                <th>Nombre</th>
+                                <th>Correo</th>
+                                <th>Usuario</th>
                             </tr>
                         </thead>
                         <tbody>
