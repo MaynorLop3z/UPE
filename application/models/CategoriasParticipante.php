@@ -26,7 +26,7 @@ class CategoriasParticipante extends CI_Model {
     }
 
     public function EliminarCategoriasParticipante($CodigoCategoriasParticipantes) {
-        $this->db->delete('CategoriasParticipante', array('CodigoCategoriasParticipantes' => $CodigoCategoriasParticipante));
+        $this->db->delete('CategoriasParticipante', array('CodigoCategoriasParticipantes' => $CodigoCategoriasParticipantes));
         //Habra que hacer un update a los participantes????
     }
 
