@@ -24,19 +24,23 @@
                 <ul class="nav navbar-nav">
                     <a class="navbar-brand" href="#">tal cosa</a>
                     <li><a href="#">tal cosa 2</a></li>
-                    <li><a href="#"> otra cosa</a></li>
+                    <li><a href="#">otra cosa</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    
-                    <li><label for="inputEmail" class="sr-only">Email address</label></li>
-                    <li><label for="inputPassword" class="sr-only">Password</label></li>
-                   
-                    <li><input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus></li>
-                    <li><input type="password" id="inputPassword" class="form-control" placeholder="Password" required></li>
-                    
-                    <li><input type="checkbox" value="remember-me"> Remember me </li>
-                    <li><button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button></li>
-                    
+                    <form class="form-inline" role="form">
+                        <div class="form-group">
+                    <label for="inputEmail" class="sr-only">Email address</label>
+                    <label for="inputPassword" class="sr-only">Password</label>
+                        </div>
+                    <div class="form-group">
+                    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required></li>
+                    </div>               
+                      <div class="checkbox">
+                      <label><input type="checkbox"> Remember me</label>
+                            </div>
+                            <button class="btn btn-default btn-block" type="submit">Sign in</button>
+                       </form>
                 </ul>
 
         </div> 
