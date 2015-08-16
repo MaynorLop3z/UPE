@@ -1,5 +1,8 @@
 <?php
 
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
+
 class EstadosParticipantes extends CI_Model {
 
     public function __construct() {
@@ -11,12 +14,13 @@ class EstadosParticipantes extends CI_Model {
         $this->db->select('CodigoEstados, '
                 . 'NombreEstado, '
                 . 'Estado'
-                );
+        );
         $this->db->from('EstadosParticipantes');
         $consulta = $this->db->get();
         $resultado = $consulta->result();
         return $resultado;
     }
+
     public function CrearEstado($NombreEstado, $Estado) {
         $data = array(
             //            'CodigoEstados' => null,
@@ -25,10 +29,11 @@ class EstadosParticipantes extends CI_Model {
         );
         $this->db->insert('EstadosParticipantes', $data);
     }
-public function EliminarEstado($CodigoEstados) {
+
+    public function EliminarEstado($CodigoEstados) {
         $this->db->delete('EstadosParticipantes', array('CodigoEstados' => $CodigoEstados));
     }
-    
+
     public function ModificarEstado($CodigoEstados, $NombreEstado, $Estado, $UsuarioModifica, $IPModifica, $FechaModifica) {
         $data = array(
             //            'CodigoEstados' => null,
@@ -38,7 +43,8 @@ public function EliminarEstado($CodigoEstados) {
             'IPModifica' => $IPModifica,
             'FechaModifica' => $FechaModifica
         );
-                $this->db->where('CodigoEstados', $CodigoEstados);
+        $this->db->where('CodigoEstados', $CodigoEstados);
         $this->db->update('EstadosParticipantes', $data);
     }
+
 }

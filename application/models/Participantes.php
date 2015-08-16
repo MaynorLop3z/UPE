@@ -1,5 +1,8 @@
 <?php
 
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
+
 class Participantes extends CI_Model {
 
     public function __construct() {
@@ -75,4 +78,5 @@ class Participantes extends CI_Model {
         $this->db->where('CodigoParticipante', $CodigoParticipante);
         $this->db->update('Participantes', $data);
     }
+
 }

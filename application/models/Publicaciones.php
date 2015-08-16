@@ -63,7 +63,7 @@ class Publicaciones extends CI_Model {
         $resultado = $consulta->result();
         return $resultado;
     }
-    
+
     public function listarPublicacionesGrupoParticipantes($GrupoParticipantes) {
         $this->db->select('CodigoPublicacion, '
                 . 'UsuarioPublica, '
@@ -101,25 +101,44 @@ class Publicaciones extends CI_Model {
         $resultado = $consulta->result();
         return $resultado;
     }
-//    public function CrearTiposPublicacion($NombrePublicacion) {
-//        $data = array(
-//            'NombrePublicacion' => $NombrePublicacion
-//        );
-//        $this->db->insert('TiposPublicacion', $data);
-//    }
-//
-//    public function EliminarTiposPublicacion($CodigoTiposPublicacion) {
-//        $this->db->delete('TiposPublicacion', array('CodigoEstados' => $CodigoTiposPublicacion));
-//        //Hay que verificar si existen publicaciones de ser asi no eliminar o cambiar a una
-//        //por defecto
-//    }
-//
-//    public function ModificarTiposPublicacion($CodigoTiposPublicacion, $NombrePublicacion) {
-//        $data = array(
-//            'NombrePublicacion' => $NombrePublicacion,
-//        );
-//        $this->db->where('CodigoTiposPublicacion', $CodigoTiposPublicacion);
-//        $this->db->update('EstadosParticipantes', $data);
-//    }
 
+    public function CrearPublicacion($UsuarioPublica, $FechaPublica, $Titulo, $Contenido, $Estado, $CodigoCodigoGrupoPeriodo, $CodigoGrupoPeriodoUsuario, $GrupoParticipantes, $CodigoTipoPublicacion, $ParticipantePublica = null) {
+        $data = array(
+            'UsuarioPublica' => $UsuarioPublica,
+            'FechaPublica' => $FechaPublica,
+            'Titulo' => $Titulo,
+            'Contenido' => $Contenido,
+            'ParticipantePublica' => $ParticipantePublica,
+            'Estado' => $Estado,
+            'CodigoCodigoGrupoPeriodo' => $CodigoCodigoGrupoPeriodo,
+            'CodigoGrupoPeriodoUsuario' => $CodigoGrupoPeriodoUsuario,
+            'GrupoParticipantes' => $GrupoParticipantes,
+            'CodigoTipoPublicacion' => $CodigoTipoPublicacion
+        );
+        $this->db->insert('Publicaciones', $data);
+    }
+
+
+    public function EliminarPublicacion($CodigoPublicacion) {
+        $this->db->delete('Publicaciones', array('CodigoPublicacion' => $CodigoPublicacion));
+        //Hay que verificar si existen publicaciones de ser asi no eliminar o cambiar a una
+        //por defecto
+    }
+
+    public function ModificarPublicacion($CodigoPublicacion, $UsuarioPublica, $FechaPublica, $Titulo, $Contenido, $Estado, $CodigoCodigoGrupoPeriodo, $CodigoGrupoPeriodoUsuario, $GrupoParticipantes, $CodigoTipoPublicacion, $ParticipantePublica = null) {
+        $data = array(
+            'UsuarioPublica' => $UsuarioPublica,
+            'FechaPublica' => $FechaPublica,
+            'Titulo' => $Titulo,
+            'Contenido' => $Contenido,
+            'ParticipantePublica' => $ParticipantePublica,
+            'Estado' => $Estado,
+            'CodigoCodigoGrupoPeriodo' => $CodigoCodigoGrupoPeriodo,
+            'CodigoGrupoPeriodoUsuario' => $CodigoGrupoPeriodoUsuario,
+            'GrupoParticipantes' => $GrupoParticipantes,
+            'CodigoTipoPublicacion' => $CodigoTipoPublicacion
+        );
+        $this->db->where('CodigoPublicacion', $CodigoPublicacion);
+        $this->db->update('Publicaciones', $data);
+    }
 }
