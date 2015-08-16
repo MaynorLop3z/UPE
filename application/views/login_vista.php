@@ -7,7 +7,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Bootstrap -->          
         <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="../bootstrap/css/login.css" rel="stylesheet">
         <link rel="icon" href="../bootstrap/DarkSide.ico" type="image/x-icon" />
         <script src="../bootstrap/js/jquery.min.js"></script>
         <script src="../bootstrap/js/bootstrap.min.js"></script>
