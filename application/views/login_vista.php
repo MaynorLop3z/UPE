@@ -7,7 +7,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Bootstrap -->          
         <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="../bootstrap/css/login.css" rel="stylesheet">
         <link rel="icon" href="../bootstrap/DarkSide.ico" type="image/x-icon" />
         <script src="../bootstrap/js/jquery.min.js"></script>
         <script src="../bootstrap/js/bootstrap.min.js"></script>
@@ -16,33 +15,33 @@
 
     <body>
         <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">UPESYS</a>
-            </div>
-            <div>
-                <ul class="nav navbar-nav">
-                    <a class="navbar-brand" href="#">tal cosa</a>
-                    <li><a href="#">tal cosa 2</a></li>
-                    <li><a href="#">otra cosa</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <form class="form-inline" role="form">
-                        <div class="form-group">
-                    <label for="inputEmail" class="sr-only">Email address</label>
-                    <label for="inputPassword" class="sr-only">Password</label>
-                        </div>
-                    <div class="form-group">
-                    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required></li>
-                    </div>               
-                      <div class="checkbox">
-                      <label><input type="checkbox"> Remember me</label>
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">UPESYS</a>
+                </div>
+                <div>
+                    <ul class="nav navbar-nav">
+                        <a class="navbar-brand" href="#">Bienvenido </a>
+                        <li><a href="#">Juan perez </a></li>
+                        <li><a href="#">!!!!!!</a></li>
+                    </ul>
+                    <!-- de aqui empieza el form para loguin -->
+                    <div class="nav navbar-nav navbar-right">
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <label class="sr-only" for="inputEmail">Email</label>
+                                <input type="email" class="form-control" id="inputEmail" placeholder="Email" required autofocus>
                             </div>
-                            <button class="btn btn-default btn-block" type="submit">Sign in</button>
-                       </form>
-                </ul>
+                            <div class="form-group">
+                                <label class="sr-only" for="inputPassword">Password</label>
+                                <input type="password" class="form-control" id="inputPassword" placeholder="Contraseña" required>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox"> Remember me</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </form> </div><!-- de aqui termina el form para loguin -->
 
-        </div> 
-    </body>
-</html>
+                </div> 
+                </body>
+                </html>
