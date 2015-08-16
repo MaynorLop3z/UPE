@@ -10,8 +10,22 @@ class Login extends CI_Controller {
     }
 
     public function index() {
- 
-        $this->load->view('login_vista');
+
+
+        if (isset($_POST['user'])) {
+
+            $this->load->model('usuario_model');
+            $this->load->helper('url');
+            if ($this->usuario_model->login($_POST['user'], $_POST['password'])) {
+
+//            if (true) {
+                redirect('welcome');
+            } else {
+                $this->load->view('login_vista');
+            }
+        } else {
+            $this->load->view('login_vista');
+        }
     }
 
 }
