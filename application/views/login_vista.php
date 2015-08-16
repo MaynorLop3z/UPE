@@ -11,38 +11,35 @@
         <link rel="icon" href="../bootstrap/DarkSide.ico" type="image/x-icon" />
         <script src="../bootstrap/js/jquery.min.js"></script>
         <script src="../bootstrap/js/bootstrap.min.js"></script>
-
     </head>
 
     <body>
         <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">UPESYS</a>
-            </div>
-            <div>
-                <ul class="nav navbar-nav">
-                    <a class="navbar-brand" href="#">tal cosa</a>
-                    <li><a href="#">tal cosa 2</a></li>
-                    <li><a href="#">otra cosa</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <form class="form-inline" role="form">
-                        <div class="form-group">
-                    <label for="inputEmail" class="sr-only">Email address</label>
-                    <label for="inputPassword" class="sr-only">Password</label>
-                        </div>
-                    <div class="form-group">
-                    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required></li>
-                    </div>               
-                      <div class="checkbox">
-                      <label><input type="checkbox"> Remember me</label>
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">UPESYS</a>
+                </div>
+                <div>
+                    <ul class="nav navbar-nav">
+                        <a class="navbar-brand" href="#">tal cosa</a>
+                        <li><a href="#">tal cosa 2</a></li>
+                        <li><a href="#">otra cosa</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <form method="POST" action="" class="form-inline" role="form">
+                            <div class="form-group">
+                                <label for="inputEmail" class="sr-only">Email address</label>
+                                <label for="inputPassword" class="sr-only">Password</label>
                             </div>
-                            <button class="btn btn-default btn-block" type="submit">Sign in</button>
-                       </form>
-                </ul>
+                            <div class="form-group">
+                                <input type="text" id="user" name="user" class="form-control" placeholder="Email address" required autofocus>
+                                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required></li>
+                            </div>               
 
-        </div> 
-    </body>
-</html>
+                            <input type="submit" class="btn btn-default btn-block" value="Ingresar" />
+                        </form>
+                    </ul>
+
+                </div> 
+                </body>
+                </html>
