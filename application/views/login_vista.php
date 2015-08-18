@@ -18,27 +18,29 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="#">UPESYS</a>
                 </div>
-                
                 <div>
                     <ul class="nav navbar-nav">
-                        <a class="navbar-brand" href="#">tal cosa</a>
-                        <li><a href="#">tal cosa 2</a></li>
-                        <li><a href="#">otra cosa</a></li>
+                        <a class="navbar-brand" href="#">Bienvenido </a>
+                        <li><a href="#">Juan perez </a></li>
+                        <li><a href="#">!!!!!!</a></li>
                     </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <form method="POST" action="" class="form-inline" role="form">
+                    <!-- de aqui empieza el form para loguin -->
+                    <div class="nav navbar-nav navbar-right">
+                        <form method="POST" action=""class="form-inline" role="form">
                             <div class="form-group">
-                                <label for="inputEmail" class="sr-only">Email address</label>
-                                <label for="inputPassword" class="sr-only">Password</label>
+                                <label class="sr-only" for="inputEmail">Email</label>
+                                <input type="text" id="user" name="user" class="form-control" placeholder="Email address" required autofocus>
                             </div>
                             <div class="form-group">
-                                <input type="text" id="user" name="user" class="form-control" placeholder="Email address" required autofocus>
-                                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required></li>
-                            </div>               
-
-                            <input type="submit" class="btn btn-default btn-block" value="Ingresar" />
-                        </form>
-                    </ul>
+                                <label class="sr-only" for="inputPassword">Password</label>
+                                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox"> Remember me</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Login</button>
+ <!--<span span class="glyphicon glyphicon-log-in"/>-->
+                        </form> </div><!-- de aqui termina el form para loguin -->
 
                 </div> 
                 </body>
