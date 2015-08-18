@@ -2,6 +2,7 @@
 
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
+//controlador de la pagina principal, permite logear a los usuarios
 
 class Login extends CI_Controller {
 
@@ -13,12 +14,12 @@ class Login extends CI_Controller {
 
 
         if (isset($_POST['user'])) {
-
+  
             $this->load->model('usuario_model');
             $this->load->helper('url');
             if ($this->usuario_model->login($_POST['user'], $_POST['password'])) {
 
-//            if (true) {
+//            if (true)   {
                 redirect('pagPrincipal');
             } else {
                 $this->load->view('login_vista');
