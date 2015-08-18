@@ -19,7 +19,7 @@ class Login extends CI_Controller {
             if ($this->usuario_model->login($_POST['user'], $_POST['password'])) {
 
 //            if (true) {
-                redirect('welcome');
+                redirect('pagPrincipal');
             } else {
                 $this->load->view('login_vista');
             }
