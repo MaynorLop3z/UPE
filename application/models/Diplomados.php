@@ -22,8 +22,8 @@ class Diplomados extends CI_Model {
         $resultado = $consulta->result();
         return $resultado;
     }
-    
-        public function listarDiplomadosCategoria($CodigoCategoriaDiplomado) {
+
+    public function listarDiplomadosCategoria($CodigoCategoriaDiplomado) {
         $this->db->select('CodigoDiplomado, '
                 . 'NombreDiplomado, '
                 . 'Descripcion, '
@@ -35,8 +35,18 @@ class Diplomados extends CI_Model {
         $resultado = $consulta->result();
         return $resultado;
     }
-public function EliminarDiplomado($CodigoDiplomado) {
-    $this->db->delete('Diplomados', array('CodigoDiplomado' => $CodigoDiplomado));
+    
+    public function crearDiplomado($NombreDiplomado, $Descripcion, $Estado) {
+        $data = array(
+            'NombreDiplomado' => $NombreDiplomado,
+            'Descripcion' => $Descripcion,
+            'Estado' => $Estado,
+        );
+        $this->db->insert('Modulos', $data);
+    }
+
+    public function EliminarDiplomado($CodigoDiplomado) {
+        $this->db->delete('Diplomados', array('CodigoDiplomado' => $CodigoDiplomado));
     }
 
     public function ModificarDiplomado($CodigoDiplomado, $NombreDiplomado, $Descripcion, $Estado) {
