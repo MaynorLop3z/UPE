@@ -37,7 +37,7 @@
                     <div>
                         <ul class="nav  navbar-right center-block ">
                             <label id="labelpersona">Johanna Rodriguez</label>
-                            <button id="btnsalir"   class="btn btn-default "><span class="glyphicon glyphicon-log-out"></span>Salir</button>
+                            <button id="btnsalir" name="btnsalir" onclick="window.location.href='Login'" class="btn btn-default "><span class="glyphicon glyphicon-log-out"></span>Salir</button>
                         </ul>
                     </div>                   
                 </div> 
@@ -50,7 +50,7 @@
                 <ul class="nav nav-pills nav-stacked" role="tablist">
                     <li class="drop down"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Usuarios <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a name="crear" id="crear" type="text" value="crear Usuario"/>Crear usuario</li>
+                            <li><a name="crear" id="crear" type="text" value="crear Usuario"/>Agregar usuario</li>
                             <li><a href="#">Modificar Usuario</a></li>
                             <li><a href="#">Eliminar Usuario</a></li>
                         </ul>
@@ -67,6 +67,20 @@
                             <li><a id="nuevoDiplomado" href="#">Nuevo Diplomado</a></li>
                             <li><a id="modificarDiplomado"href="#">Modificar Diplomado</a></li>
                             <li><a id="eliminarDiplomado" href="#">Eliminar Diplomado </a></li>
+                        </ul>
+                    </li>
+                    <li class="drop down"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Publicaciones<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a id="nuevoDiplomado" href="#">Nueva publicacion</a></li>
+                            <li><a id="modificarDiplomado"href="#">Modificar publicacion </a></li>
+                            <li><a id="eliminarDiplomado" href="#">Eliminar publicacion </a></li>
+                        </ul>
+                    </li>
+                    <li class="drop down"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Horarios<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a id="nuevoDiplomado" href="#">Agregar Horario</a></li>
+                            <li><a id="modificarDiplomado"href="#">Modificar Horario</a></li>
+                            <li><a id="eliminarDiplomado" href="#">Eliminar Horario  </a></li>
                         </ul>
                     </li>
                 </ul>
