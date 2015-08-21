@@ -7,7 +7,7 @@
                 <div class="form-group">
                     <label for="Usuario" class="col-lg-3 control-label">Usuario</label>
                     <div class="col-lg-6">
-                        <input type="text" class="form-control" id="Usuario" placeholder="Nombre Usuario">
+                        <input type="text" class="form-control" id="Usuario" placeholder="Nombre Usuario" required>
                     </div>
                     <div class="col-lg-3">
                         <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
@@ -16,7 +16,7 @@
                 <div class="form-group">
                     <label for="Email" class="col-lg-3 control-label">E-mail</label>
                     <div class="col-lg-6">
-                        <input type="email" class="form-control" id="Email" placeholder="Correo Electronico">
+                        <input type="email" class="form-control" id="Email" placeholder="Correo Electronico" required>
                     </div>
                     <div class="col-lg-3">
                         <label id="emR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
@@ -25,7 +25,7 @@
                 <div class="form-group">
                     <label for="Password" class="col-lg-3 control-label">Contraseña</label>
                     <div class="col-lg-6">
-                        <input type="password" class="form-control" id="Password" placeholder="Contraseña">
+                        <input type="password" class="form-control" id="Password" placeholder="Contraseña"  required>
                     </div>
                     <div class="col-lg-3">
                         <label id="paR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
@@ -34,7 +34,7 @@
                 <div class="form-group">
                     <label for="Password2" class="col-lg-3 control-label">Confirmar Contraseña</label>
                     <div class="col-lg-6">
-                        <input type="password" class="form-control" id="Password2" placeholder="Repita Contraseña">
+                        <input type="password" class="form-control" id="Password2" placeholder="Repita Contraseña" required>
                     </div>
                     <div class="col-lg-3">
                         <label id="prR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
