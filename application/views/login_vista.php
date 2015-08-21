@@ -7,41 +7,61 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Bootstrap -->          
         <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="icon" href="../bootstrap/DarkSide.ico" type="image/x-icon" />
+        <link rel="icon" href="../bootstrap/minerva.jpg" type="image/x-icon" />
         <script src="../bootstrap/js/jquery.min.js"></script>
         <script src="../bootstrap/js/bootstrap.min.js"></script>
     </head>
 
     <body>
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#">UPESYS</a>
-                </div>
-                <div>
-                    <ul class="nav navbar-nav">
-                        <a class="navbar-brand" href="#">Bienvenido </a>
-                        <li><a href="#">Juan perez </a></li>
-                        <li><a href="#">!!!!!!</a></li>
-                    </ul>
-                    <!-- de aqui empieza el form para loguin -->
-                    <div class="nav navbar-nav navbar-right">
-                        <form method="POST" action=""class="form-inline" role="form">
-                            <div class="form-group">
-                                <label class="sr-only" for="inputEmail">Email</label>
-                                <input type="text" id="user" name="user" class="form-control" placeholder="Email address" required autofocus>
-                            </div>
-                            <div class="form-group">
-                                <label class="sr-only" for="inputPassword">Password</label>
-                                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox"> Remember me</label>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Login</button>
- <!--<span span class="glyphicon glyphicon-log-in"/>-->
-                        </form> </div><!-- de aqui termina el form para loguin -->
+        <!-- Se crea la navbar que incluye el login -->
+        <div  class="container">
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
 
-                </div> 
-                </body>
-                </html>
+                    <a class="navbar-brand" href="#">UPESYS</a>
+
+                    <div>
+
+                        <!-- de aqui empieza el form para loguin -->
+                        <div class="nav navbar-nav navbar-right ">
+                            <form method="POST" action=""class="form-inline" role="form">
+                                <div class="form-group">
+                                    <label class="sr-only" for="inputEmail">Email</label>
+                                    <input type="text" id="user" name="user" class="form-horizontal col-lg-12" placeholder="Email address" required autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <label class="sr-only" for="inputPassword">Password</label>
+                                    <input type="password" id="password" name="password" class="form-horizontal col-lg-12" placeholder="Password" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">
+                                    <span span class="glyphicon glyphicon-log-in"/> Login</button>
+                            </form> </div><!-- de aqui termina el form para loguin -->
+
+                    </div> 
+                </div>
+            </nav>
+
+            <!-- finaliza el navbar de el login -->
+
+            <!-- contendeor de busqueda start-->
+            <div class="container col-lg-3">
+
+                <h1>hola  mundo</h1>
+            </div>
+            <!-- contendeor de busqueda end-->
+
+            <!-- contendeor de publicaciones start-->
+            <div class="container-fluid">
+                <h1> soy una publicacion </h1>
+            </div>
+            <!-- contendeor de publicaciones end-->
+
+            <!-- footer start-->
+            <div class="panel-footer">
+                <h3>dfkjfkjfkdjk</h3> 
+            </div>
+            <!-- footer end-->
+        </div>
+        
+    </body>
+</html>
