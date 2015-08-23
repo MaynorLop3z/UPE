@@ -24,7 +24,7 @@
             
              $(document).ready(function () {
                 $("#modificarUsuario").click(function (event) {
-                    $("#divp").load('UsuarioNcontroller');
+                    $("#divp").load('UsuarioMcontroller');
                 });
             });
              $(document).ready(function () {
