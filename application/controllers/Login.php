@@ -45,9 +45,9 @@ class Login extends CI_Controller {
     private function colocarImg($ruta) {
         try {
             
-        } catch (Exception $exc) {
+        } catch (Exception $exc)  {
             $exc->getTrace();
-        }
+        }  
     }
 
 }
