@@ -57,17 +57,17 @@
             <!-- contendeor de publicaciones end-->
 
             <!-- footer start-->
-            <div class="container-fluid">            
+            <!--<div class="container-fluid"> -->           
                 <nav class=" navbar navbar-fixed-bottom">
                     <div class="panel-footer">
                     <div class="text-center "> Universidad de El Salvador Facultad Multidiciplinaria de Occidente
                         Unidad Proyectos Academicos Especiales  UESFmocc
                         Tel: (+503) 2480-0800
-                        <img  src="../bootstrap/minervaVerde.png"  />
+                        <img  src="../bootstrap/images/minervaVerde.png"  />
                     </div>
                 </div>
             </nav>
-            </div>
+            
             <!-- footer end-->
         </div>
 

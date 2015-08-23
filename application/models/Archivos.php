@@ -18,7 +18,7 @@ class Archivos extends CI_Model {
                 . 'Estado, '
                 . 'CodigoUsuarios'
         );
-        $this->db->from('EstadosParticipantes');
+        $this->db->from('Archivos');
         $this->db->where('CodigoPublicaciones', $CodigoPublicaciones);
         $consulta = $this->db->get();
         $resultado = $consulta->result();

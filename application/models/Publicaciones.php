@@ -10,7 +10,7 @@ class Publicaciones extends CI_Model {
     public function listarPublicaciones() {
         $this->db->select('CodigoPublicacion, '
                 . 'UsuarioPublica, '
-                . 'FechaPublica, '
+                . 'FechaPublicacion, '
                 . 'Titulo, '
                 . 'Contenido, '
                 . 'ParticipantePublica, '
