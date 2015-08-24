@@ -17,81 +17,31 @@
         <!-- Acción sobre el botón con id=boton y actualizamos el div con id=capa -->
         <script type="text/javascript">
             $(document).ready(function () {
-                $("#crearUsuario").click(function (event) {
-                    $("#divp").load('UsuarioNcontroller');
+                $("#Usuario").click(function (event) {
+                    $("#divp").load('Usuariocontroller');
+                });
+            });
+                $(document).ready(function () {
+                $("#Roles").click(function (event) {
+                    $("#divp").load('Usuariocontroller');
+                });
+            });
+                $(document).ready(function () {
+                $("#Diplomados").click(function (event) {
+                    $("#divp").load('Usuariocontroller');
+                });
+            });
+                $(document).ready(function () {
+                $("#Publicaciones").click(function (event) {
+                    $("#divp").load('Usuariocontroller');
+                });
+            });
+                $(document).ready(function () {
+                $("#Horarios").click(function (event) {
+                    $("#divp").load('Usuariocontroller');
                 });
             });
             
-             $(document).ready(function () {
-                $("#modificarUsuario").click(function (event) {
-                    $("#divp").load('UsuarioMcontroller');
-                });
-            });
-             $(document).ready(function () {
-                $("#eliminarUsuario").click(function (event) {
-                    $("#divp").load('UsuarioNcontroller');
-                });
-            });
-             $(document).ready(function () {
-                $("#eliminarRol").click(function (event) {
-                    $("#divp").load('UsuarioNcontroller');
-                });
-            });
-             $(document).ready(function () {
-                $("#modificarRol").click(function (event) {
-                    $("#divp").load('UsuarioNcontroller');
-                });
-            });
-             $(document).ready(function () {
-                $("#asignarRol").click(function (event) {
-                    $("#divp").load('UsuarioNcontroller');
-                });
-            });
-             $(document).ready(function () {
-                $("#nuevoDiplomado").click(function (event) {
-                    $("#divp").load('UsuarioNcontroller');
-                });
-            });
-             $(document).ready(function () {
-                $("#modificarDiplomado").click(function (event) {
-                    $("#divp").load('UsuarioNcontroller');
-                });
-            });
-             $(document).ready(function () {
-                $("#eliminarDiplomado").click(function (event) {
-                    $("#divp").load('UsuarioNcontroller');
-                });
-            });
-             $(document).ready(function () {
-                $("#nuevaPub").click(function (event) {
-                    $("#divp").load('UsuarioNcontroller');
-                });
-            });
-             $(document).ready(function () {
-                $("#modificarPub").click(function (event) {
-                    $("#divp").load('UsuarioNcontroller');
-                });
-            });
-             $(document).ready(function () {
-                $("#eliminarPub").click(function (event) {
-                    $("#divp").load('UsuarioNcontroller');
-                });
-            });
-            $(document).ready(function () {
-                $("#agregarHora").click(function (event) {
-                    $("#divp").load('UsuarioNcontroller');
-                });
-            });
-            $(document).ready(function () {
-                $("#modificarHora").click(function (event) {
-                    $("#divp").load('UsuarioNcontroller');
-                });
-            });
-            $(document).ready(function () {
-                $("#eliminarHora").click(function (event) {
-                    $("#divp").load('UsuarioNcontroller');
-                });
-            });
         </script>
 
 
@@ -119,42 +69,17 @@
             <div class="col-lg-3">
                 <h2>Funciones</h2>             
                 <ul class="nav nav-pills nav-stacked" role="tablist">
-                    <li class="drop down"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Usuarios <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a name="crearUsuario" id="crearUsuario" type="text" value="crear Usuario"/>Agregar usuario</li>
-                            <li><a name="modificarUsuario" id="modificarUsuario" type="text" value="Modificar Usuario"/>Modificar Usuario</a></li>
-                            <li><a name="eliminarUsuario" id="eliminarUsuario" type="text" value="Eliminar Usuario"/>Eliminar Usuario</a></li>
-                        </ul>
+                    <li class="drop down"><a name="Usuario" id="Usuario" type="text" value="Usuario"class="dropdown-toggle" data-toggle="dropdown" href="#">Usuarios </a>
                     </li>
-                    <li class="drop down"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Roles<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a name="eliminarRol" id="eliminarRol" type="text" value="Eliminar Rol"/>Eliminar Rol</a></li>
-                            <li><a name="modificarRol" id="modificarRol" type="text" value="Modificar Rol"/>Modificar Rol</a></li>
-                            <li><a name="asignarRol" id="asignarRol" type="text" value="Asignar Rol"/>Asignar Rol</a></li>
-                        </ul>
+                    <li class="drop down"><a name="Roles" id="Roles" type="text" value="Roles"class="dropdown-toggle" data-toggle="dropdown" href="#">Roles</a>
                     </li>
-                    <li class="drop down"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Diplomados <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a name="nuevoDiplomado" id="nuevoDiplomado" type="text" value="Nuevo Diplomado"/>Nuevo Diplomado</a></li>
-                            <li><a name="modificarDiplomado" id="modificarDiplomado" type="text" value="Modificar Diplomado "/>Modificar Diplomado</a></li>
-                            <li><a name="eliminarDiplomado" id="eliminarDiplomado" type="text" value="Eliminar Diplomado"/>Eliminar Diplomado </a></li>
-                        </ul>
+                    <li class="drop down"><a name="Diplomados" id="Diplomados" type="text" value="Diplomados"class="dropdown-toggle" data-toggle="dropdown" href="#">Diplomados </a>
                     </li>
-                    <li class="drop down"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Publicaciones<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a name="nuevaPub" id="nuevaPub" type="text" value="Nueva Publicacion"/>Nueva publicacion</a></li>
-                            <li><a name="modificarPub" id="modificarPub" type="text" value="Modificar Publicacion"/>Modificar publicacion </a></li>
-                            <li><a name="eliminarPub" id="eliminarPub" type="text" value="Eliminar Publicacion"/>Eliminar publicacion </a></li>
-                        </ul>
+                    <li class="drop down"><a name="Publicaciones" id="Publicaciones" type="text" value="Publicaciones"class="dropdown-toggle" data-toggle="dropdown" href="#">Publicaciones</a>
                     </li>
-                    <li class="drop down"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Horarios<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a name="agregarHora" id="agregarHora" type="text" value="Agregar Horario"/>Agregar Horario</a></li>
-                            <li><a name="modificarHora" id="modificarHora" type="text" value="Modificar Horario"/>Modificar Horario</a></li>
-                            <li><a name="eliminarHora" id="eliminarHora" type="text" value="Eliminar Horario"/>Eliminar Horario  </a></li>
-                        </ul>
-                    </li>
-                </ul>
+                    <li class="drop down"><a name="Horarios" id="Horarios" type="text" value="Horarios"class="dropdown-toggle" data-toggle="dropdown" href="#">Horarios</a>
+                 </ul>
+                 
             </div>
             <div id="divp" class="col-lg-9"  ><!--Este Div es  donde se deben  cargar  las Diferentes Funciones  -->
 
