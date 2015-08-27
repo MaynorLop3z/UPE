@@ -23,22 +23,22 @@
             });
                 $(document).ready(function () {
                 $("#Roles").click(function (event) {
-                    $("#divp").load('Usuariocontroller');
+                    $("#divp").load('RolesController');
                 });
             });
                 $(document).ready(function () {
                 $("#Diplomados").click(function (event) {
-                    $("#divp").load('Usuariocontroller');
+                    $("#divp").load('DiplomadosController');
                 });
             });
                 $(document).ready(function () {
                 $("#Publicaciones").click(function (event) {
-                    $("#divp").load('Usuariocontroller');
+                    $("#divp").load('PublicacionesController');
                 });
             });
                 $(document).ready(function () {
                 $("#Horarios").click(function (event) {
-                    $("#divp").load('Usuariocontroller');
+                    $("#divp").load('HorariosController');
                 });
             });
             
