@@ -158,7 +158,7 @@
 	<div class="container-fluid ">
         <form action="validacionUsuarioN" class="form-horizontal" method="post" >
             <fieldset>
-                <legend class="modal-header">Modificar Usuario:</legend> 
+                <legend class="modal-header">Eliminar Usuario:</legend> 
                 <div class="form-group">
                     <label for="Usuario" class="col-lg-3 control-label">Usuario</label>
                     <div class="col-lg-6">
