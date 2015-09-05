@@ -3,11 +3,14 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 //include './application/models/dto/UsuariosDTO.php';
-class Usuario_model extends CI_Model {
-
+include('ModeloBase.php');
+class Usuario_model extends ModeloBase {
+    public $salaries, $salaries2;
     public function construct() {
         parent::__construct();
         $this->load->database(); //con esto hacemos que pueda cargar nuestra base de datos con el modelo
+        $salaries = model_load_model('dto/UsuariosDTO');
+        $salaries2 = model_load_model('dto/UsuariosDTO');
     }
 
     public function login($username, $password) {
