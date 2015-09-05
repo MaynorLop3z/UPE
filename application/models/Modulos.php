@@ -10,7 +10,7 @@ class Modulos extends CI_Model {
         $this->load->database();
     }
 
-    public function listarTurnos() {
+    public function listarModulos() {
         $this->db->select('CodigoModulo, '
                 . 'NombreModulo, '
                 . 'OrdenModulo, '
@@ -46,7 +46,7 @@ class Modulos extends CI_Model {
     }
 
     public function ModificarModulo($CodigoModulo, $OrdenModulo, $Estado, $CodigoDiplomados, $CodigoTurnos, $UsuarioModifica, $IPModifica, $FechaModifica) {
-        $$data = array(
+        $data = array(
             'OrdenModulo' => $OrdenModulo,
             'Estado' => $Estado,
             'CodigoDiplomados' => $CodigoDiplomados,
