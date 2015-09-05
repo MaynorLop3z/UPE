@@ -2,7 +2,7 @@
 
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
-include './application/models/dto/UsuariosDTO.php';
+//include './application/models/dto/UsuariosDTO.php';
 class Usuario_model extends CI_Model {
 
     public function construct() {
