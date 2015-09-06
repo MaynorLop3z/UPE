@@ -17,7 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | environments.
 |
 */
-$config['base_url'] = 'http://localhost/~maynorlop3z/UPE/';
+$config['base_url'] = 'http://localhost/UPE/';
 
 /*
 |--------------------------------------------------------------------------
