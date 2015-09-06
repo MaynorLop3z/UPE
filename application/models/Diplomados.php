@@ -2,8 +2,8 @@
 
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
-
-class Diplomados extends CI_Model {
+include('ModeloBase.php');
+class Diplomados extends ModeloBase {
 
     public function __construct() {
         parent::__construct();
@@ -15,7 +15,8 @@ class Diplomados extends CI_Model {
                 . 'NombreDiplomado, '
                 . 'Descripcion, '
                 . 'Estado, '
-                . 'CodigoCategoriaDiplomado'
+                . 'CodigoCategoriaDiplomado,'
+                . 'Comentarios'
         );
         $this->db->from('Diplomados');
         $consulta = $this->db->get();
@@ -27,7 +28,8 @@ class Diplomados extends CI_Model {
         $this->db->select('CodigoDiplomado, '
                 . 'NombreDiplomado, '
                 . 'Descripcion, '
-                . 'Estado'
+                . 'Estado, '
+                . 'Comentarios'
         );
         $this->db->from('Diplomados');
         $this->db->where('CodigoCategoriaDiplomado', $CodigoCategoriaDiplomado);
@@ -36,11 +38,12 @@ class Diplomados extends CI_Model {
         return $resultado;
     }
     
-    public function crearDiplomado($NombreDiplomado, $Descripcion, $Estado) {
+    public function crearDiplomado($NombreDiplomado, $Descripcion, $Estado, $Comentarios=null) {
         $data = array(
             'NombreDiplomado' => $NombreDiplomado,
             'Descripcion' => $Descripcion,
             'Estado' => $Estado,
+            'Comentarios' => $Comentarios
         );
         $this->db->insert('Modulos', $data);
     }
@@ -49,11 +52,12 @@ class Diplomados extends CI_Model {
         $this->db->delete('Diplomados', array('CodigoDiplomado' => $CodigoDiplomado));
     }
 
-    public function ModificarDiplomado($CodigoDiplomado, $NombreDiplomado, $Descripcion, $Estado) {
+    public function ModificarDiplomado($CodigoDiplomado, $NombreDiplomado, $Descripcion, $Estado, $Comentarios) {
         $data = array(
             'NombreEstado' => $NombreDiplomado,
             'Descripcion' => $Descripcion,
-            'Estado' => $Estado
+            'Estado' => $Estado,
+            'Comentarios' => $Comentarios
         );
         $this->db->where('CodigoDiplomado', $CodigoDiplomado);
         $this->db->update('Diplomados', $data);

@@ -1,6 +1,9 @@
 <?php
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
+include('ModeloBase.php');
 
-class Usuarios extends CI_Model {
+class Usuarios extends ModeloBase {
 
     public function __construct() {
         parent::__construct();

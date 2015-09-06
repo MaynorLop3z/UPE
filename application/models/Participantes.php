@@ -2,8 +2,8 @@
 
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
-
-class Participantes extends CI_Model {
+include('ModeloBase.php');
+class Participantes extends ModeloBase {
 
     public function __construct() {
         parent::__construct();
@@ -24,14 +24,15 @@ class Participantes extends CI_Model {
                 . 'NivelAcademico, '
                 . 'NombreEncargado, '
                 . 'Descripcion, '
-                . 'CodigoCategoriaParticipantes');
+                . 'CodigoCategoriaParticipantes, '
+                . 'Comentarios');
         $this->db->from('Participantes');
         $consulta = $this->db->get();
         $resultado = $consulta->result();
         return $resultado;
     }
 
-    public function CrearParticipante($Nombre, $CorreoElectronico, $TelefonoFijo, $TelefonoCelular, $Direccion, $FechaNacimiento, $CodigoCategoriaParticipantes, $NumeroDUI = null, $CodigoUniversidadProcedencia = null, $Carrera = null, $NivelAcademico = null, $NombreEncargado = null, $Descripcion = null) {
+    public function CrearParticipante($Nombre, $CorreoElectronico, $TelefonoFijo, $TelefonoCelular, $Direccion, $FechaNacimiento, $CodigoCategoriaParticipantes, $NumeroDUI = null, $CodigoUniversidadProcedencia = null, $Carrera = null, $NivelAcademico = null, $NombreEncargado = null, $Descripcion = null, $Comentarios = NULL) {
         $data = array(
 //            'CodigoPermisos' => null,
             'Nombre' => $Nombre,
@@ -46,7 +47,8 @@ class Participantes extends CI_Model {
             'NivelAcademico' => $NivelAcademico,
             'NombreEncargado' => $NombreEncargado,
             'Descripcion' => $Descripcion,
-            'CodigoCategoriaParticipantes' => $CodigoCategoriaParticipantes
+            'CodigoCategoriaParticipantes' => $CodigoCategoriaParticipantes,
+            'Comentarios' => $Comentarios,
         );
         $this->db->insert('Participantes', $data);
     }
@@ -55,7 +57,7 @@ class Participantes extends CI_Model {
         $this->db->delete('Participantes', array('CodigoParticipante' => $CodigoParticipante));
     }
 
-    public function ModificarParticipante($CodigoParticipante, $Nombre, $CorreoElectronico, $TelefonoFijo, $TelefonoCelular, $Direccion, $FechaNacimiento, $CodigoCategoriaParticipantes, $UsuarioModifica, $IPModifica, $FechaModifica, $NumeroDUI = null, $CodigoUniversidadProcedencia = null, $Carrera = null, $NivelAcademico = null, $NombreEncargado = null, $Descripcion = null) {
+    public function ModificarParticipante($CodigoParticipante, $Nombre, $CorreoElectronico, $TelefonoFijo, $TelefonoCelular, $Direccion, $FechaNacimiento, $CodigoCategoriaParticipantes, $UsuarioModifica, $IPModifica, $FechaModifica, $NumeroDUI = null, $CodigoUniversidadProcedencia = null, $Carrera = null, $NivelAcademico = null, $NombreEncargado = null, $Comentarios=null,$Descripcion = null) {
         $data = array(
 //            'CodigoPermisos' => null,
             'Nombre' => $Nombre,
@@ -73,7 +75,8 @@ class Participantes extends CI_Model {
             'CodigoCategoriaParticipantes' => $CodigoCategoriaParticipantes,
             'UsuarioModifica' => $UsuarioModifica,
             'IPModifica' => $IPModifica,
-            'FechaModifica' => $FechaModifica
+            'FechaModifica' => $FechaModifica,
+            'Comentarios' => $Comentarios
         );
         $this->db->where('CodigoParticipante', $CodigoParticipante);
         $this->db->update('Participantes', $data);

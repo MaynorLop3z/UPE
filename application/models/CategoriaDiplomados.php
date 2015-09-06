@@ -2,8 +2,8 @@
 
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
-
-class CategoriaDiplomados extends CI_Model {
+include('ModeloBase.php');
+class CategoriaDiplomados extends ModeloBase {
 
     public function __construct() {
         parent::__construct();
@@ -13,7 +13,8 @@ class CategoriaDiplomados extends CI_Model {
     public function listarCategoriasDiplomados() {
         $this->db->select('CodigoCategoriaDiplomado, '
                 . 'NombreCategoriaDiplomado, '
-                . 'Estado'
+                . 'Estado, '
+                . 'Comentarios'
         );
         $this->db->from('CategoriaDiplomados');
         $consulta = $this->db->get();
@@ -21,10 +22,11 @@ class CategoriaDiplomados extends CI_Model {
         return $resultado;
     }
 
-    public function CrearCategoriaDiplomado($NombreCategoriaDiplomado, $Estado) {
+    public function CrearCategoriaDiplomado($NombreCategoriaDiplomado, $Estado, $Comentarios = null) {
         $data = array(
             'NombreCategoriaDiplomado' => $NombreCategoriaDiplomado,
-            'Estado' => $Estado
+            'Estado' => $Estado,
+            'Comentarios' => $Comentarios
         );
         $this->db->insert('CategoriaDiplomados', $data);
     }
@@ -33,13 +35,14 @@ class CategoriaDiplomados extends CI_Model {
     $this->db->delete('CategoriaDiplomados', array('CodigoCategoriaDiplomado' => $CodigoCategoriaDiplomado));
     }
 
-    public function ModificarCategoriaDiplomado($CodigoCategoriaDiplomado, $NombreCategoriaDiplomado, $Estado, $UsuarioModifica, $IPModifica, $FechaModifica) {
+    public function ModificarCategoriaDiplomado($CodigoCategoriaDiplomado, $NombreCategoriaDiplomado, $Estado, $UsuarioModifica, $IPModifica, $FechaModifica, $Comentarios = null) {
         $data = array(
             'NombreEstado' => $NombreCategoriaDiplomado,
             'Estado' => $Estado,
             'UsuarioModifica' => $UsuarioModifica,
             'IPModifica' => $IPModifica,
-            'FechaModifica' => $FechaModifica
+            'FechaModifica' => $FechaModifica,
+            'Comentarios' => $Comentarios
         );
         $this->db->where('CodigoCategoriaDiplomado', $CodigoCategoriaDiplomado);
         $this->db->update('CategoriaDiplomados', $data);

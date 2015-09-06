@@ -2,8 +2,8 @@
 
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
-
-class CategoriasParticipante extends CI_Model {
+include('ModeloBase.php');
+class CategoriasParticipante extends ModeloBase {
 
     public function __construct() {
         parent::__construct();
@@ -11,19 +11,24 @@ class CategoriasParticipante extends CI_Model {
     }
 
     public function listarCategoriasParticipante() {
-        $this->db->select('CodigoCategoriasParticipantes, NombreCategoriasParticipante, CuotaCategoriasParticipante, Descripcion');
+        $this->db->select('CodigoCategoriasParticipantes, '
+                . 'NombreCategoriasParticipante, '
+                . 'CuotaCategoriasParticipante, '
+                . 'Descripcion, '
+                . 'Comentarios');
         $this->db->from('CategoriasParticipante');
         $consulta = $this->db->get();
         $resultado = $consulta->result();
         return $resultado;
     }
 
-    public function CrearCategoriasParticipante($NombreCategoriasParticipante, $CuotaCategoriasParticipante, $Descripcion = '') {
+    public function CrearCategoriasParticipante($NombreCategoriasParticipante, $CuotaCategoriasParticipante, $Descripcion = '', $Comentarios = null) {
         $data = array(
 //            'CodigoPermisos' => null,
             'NombreCategoriasParticipante' => $NombreCategoriasParticipante,
             'CuotaCategoriasParticipante' => $CuotaCategoriasParticipante,
-            'Descripcion' => $Descripcion
+            'Descripcion' => $Descripcion,
+            'Comentarios' => $Comentarios
         );
         $this->db->insert('CategoriasParticipante', $data);
     }
@@ -33,11 +38,12 @@ class CategoriasParticipante extends CI_Model {
         //Habra que hacer un update a los participantes????
     }
 
-    public function ModificarCategoriasParticipante($CodigoCategoriasParticipantes, $NombreCategoriasParticipante, $CoutaCategoriasParticipante, $Descripcion) {
+    public function ModificarCategoriasParticipante($CodigoCategoriasParticipantes, $NombreCategoriasParticipante, $CoutaCategoriasParticipante, $Descripcion, $Comentarios=null) {
         $data = array(
             'NombreCategoriasParticipante' => $NombreCategoriasParticipante,
             'CuotaCategoriasParticipante' => $CoutaCategoriasParticipante,
-            'Descripcion' => $Descripcion
+            'Descripcion' => $Descripcion,
+            'Comentarios' => $Comentarios
         );
 
         $this->db->where('CodigoCategoriasParticipantes', $CodigoCategoriasParticipantes);

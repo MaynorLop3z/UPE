@@ -2,8 +2,8 @@
 
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
-
-class Modulos extends CI_Model {
+include('ModeloBase.php');
+class Modulos extends ModeloBase {
 
     public function __construct() {
         parent::__construct();
@@ -17,7 +17,8 @@ class Modulos extends CI_Model {
                 . 'Estado, '
                 . 'CodigoDiplomados, '
                 . 'CodigoTurnos, '
-                . 'CodigoDiplomados'
+                . 'CodigoDiplomados, '
+                . 'Comentarios'
         );
         $this->db->from('Modulos');
         $consulta = $this->db->get();
@@ -25,14 +26,15 @@ class Modulos extends CI_Model {
         return $resultado;
     }
 
-    public function crearModulo($NombreModulo, $OrdenModulo, $Estado, $CodigoDiplomados, $CodigoTurnos, $CodigoDiplomados) {
+    public function crearModulo($NombreModulo, $OrdenModulo, $Estado, $CodigoDiplomados, $CodigoTurnos, $CodigoDiplomados, $Comentarios=null) {
         $data = array(
             'NombreModulo' => $NombreModulo,
             'OrdenModulo' => $OrdenModulo,
             'Estado' => $Estado,
             'CodigoDiplomados' => $CodigoDiplomados,
             'CodigoTurnos' => $CodigoTurnos,
-            'CodigoDiplomados' => $CodigoDiplomados
+            'CodigoDiplomados' => $CodigoDiplomados,
+            'Comentarios' => $Comentarios
         );
         $this->db->insert('Modulos', $data);
     }
@@ -45,7 +47,7 @@ class Modulos extends CI_Model {
         $this->db->delete('Modulos', array('CodigoDiplomado' => $CodigoDiplomado));
     }
 
-    public function ModificarModulo($CodigoModulo, $OrdenModulo, $Estado, $CodigoDiplomados, $CodigoTurnos, $UsuarioModifica, $IPModifica, $FechaModifica) {
+    public function ModificarModulo($CodigoModulo, $OrdenModulo, $Estado, $CodigoDiplomados, $CodigoTurnos, $UsuarioModifica, $IPModifica, $FechaModifica, $Comentarios= null) {
         $data = array(
             'OrdenModulo' => $OrdenModulo,
             'Estado' => $Estado,
@@ -53,7 +55,8 @@ class Modulos extends CI_Model {
             'CodigoTurnos' => $CodigoTurnos,
             'UsuarioModifica' => $UsuarioModifica,
             'IPModifica' => $IPModifica,
-            'FechaModifica' => $FechaModifica
+            'FechaModifica' => $FechaModifica,
+            'Comentarios' => $Comentarios
         );
         $this->db->where('CodigoModulo', $CodigoModulo);
         $this->db->update('Modulos', $data);

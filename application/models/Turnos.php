@@ -2,8 +2,8 @@
 
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
-
-class Turnos extends CI_Model {
+include('ModeloBase.php');
+class Turnos extends ModeloBase {
 
     public function __construct() {
         parent::__construct();
@@ -15,7 +15,8 @@ class Turnos extends CI_Model {
                 . 'NombreTurno, '
                 . 'HoraInicio, '
                 . 'HoraFin, '
-                . 'Estado'
+                . 'Estado ,'
+                . 'Comentarios'
         );
         $this->db->from('Turnos');
         $consulta = $this->db->get();
@@ -23,13 +24,14 @@ class Turnos extends CI_Model {
         return $resultado;
     }
 
-    public function CrearTurno($NombreTurno, $FechaTurno, $HoraInicio, $HoraFin, $Estado) {
+    public function CrearTurno($NombreTurno, $FechaTurno, $HoraInicio, $HoraFin, $Estado, $Comentarios=NULL) {
         $data = array(
             'NombreTurno' => $NombreTurno,
             'FechaTurno' => $FechaTurno,
             'HoraInicio' => $HoraInicio,
             'HoraFin' => $HoraFin,
             'Estado' => $Estado,
+            'Comentarios' => $Comentarios
         );
         $this->db->insert('Turnos', $data);
     }
@@ -38,7 +40,7 @@ class Turnos extends CI_Model {
         $this->db->delete('Turnos', array('CodigoTurno' => $CodigoTurno));
     }
 
-    public function ModificarTurno($CodigoTurno, $NombreTurno, $FechaTurno, $HoraInicio, $HoraFin, $Estado, $UsuarioModifica, $IPModifica, $FechaModifica) {
+    public function ModificarTurno($CodigoTurno, $NombreTurno, $FechaTurno, $HoraInicio, $HoraFin, $Estado, $Comentarios=null, $UsuarioModifica, $IPModifica, $FechaModifica) {
         $data = array(
             'NombreTurno' => $NombreTurno,
             'FechaTurno' => $FechaTurno,
@@ -47,7 +49,8 @@ class Turnos extends CI_Model {
             'Estado' => $Estado,
             'UsuarioModifica' => $UsuarioModifica,
             'IPModifica' => $IPModifica,
-            'FechaModifica' => $FechaModifica
+            'FechaModifica' => $FechaModifica,
+            'Comentarios' => $Comentarios,
         );
         $this->db->where('CodigoTurno', $CodigoTurno);
         $this->db->update('Turno', $data);

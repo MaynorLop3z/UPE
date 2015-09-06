@@ -2,8 +2,8 @@
 
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
-
-class Modulos extends CI_Model {
+include('ModeloBase.php');
+class Modulos extends ModeloBase {
 
     public function __construct() {
         parent::__construct();
