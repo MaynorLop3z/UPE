@@ -4,18 +4,23 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 //controlador de la pagina principal, permite logear a los usuarios
+include './application/models/dto/UsuariosDTO.php';
 
 class Login extends CI_Controller {
 
+    public $usuarioDTO;
+
     public function __construct() {
         parent::__construct();
+        $this->usuarioDTO = new UsuariosDTO();
     }
 
     public function index() {
-
+        $nombreUser = $this->usuarioDTO->getNombre();
         $this->load->model('publicaciones');
         $this->load->model('archivos');
-        if (isset($_POST['user'])) {
+        $user = $this->input->post('user');
+        if ($user) {
 
             $this->load->model('usuario_model');
             $this->load->helper('url');
@@ -45,9 +50,9 @@ class Login extends CI_Controller {
     private function colocarImg($ruta) {
         try {
             
-        } catch (Exception $exc)  {
+        } catch (Exception $exc) {
             $exc->getTrace();
-        }  
+        }
     }
 
 }
