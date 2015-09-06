@@ -41,7 +41,11 @@
                     $("#divp").load('HorariosController');
                 });
             });
-            
+             $(document).ready(function () {
+                $("#Modulos").click(function (event) {
+                    $("#divp").load('ModulosController');
+                });
+            });
         </script>
 
 
@@ -78,7 +82,10 @@
                     <li class="drop down"><a name="Publicaciones" id="Publicaciones" type="text" value="Publicaciones"class="dropdown-toggle" data-toggle="dropdown" href="#">Publicaciones</a>
                     </li>
                     <li class="drop down"><a name="Horarios" id="Horarios" type="text" value="Horarios"class="dropdown-toggle" data-toggle="dropdown" href="#">Horarios</a>
-                 </ul>
+                    </li>
+                    <li class="drop down"><a name="Modulos" id="Modulos" type="text" value="Horarios"class="dropdown-toggle" data-toggle="dropdown" href="#">Modulos</a>
+                    </li>
+                </ul>
                  
             </div>
             <div id="divp" class="col-lg-9"  ><!--Este Div es  donde se deben  cargar  las Diferentes Funciones  -->
