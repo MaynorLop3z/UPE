@@ -5,18 +5,22 @@ if (!defined('BASEPATH'))
 
 //controlador de la pagina principal, permite logear a los usuarios
 include './application/models/dto/UsuariosDTO.php';
+include './application/controllers/Listar.php';
 
 class Login extends CI_Controller {
 
     public $usuarioDTO;
+    public $test;
 
     public function __construct() {
         parent::__construct();
         $this->usuarioDTO = new UsuariosDTO();
+        $this->test= new Listar();
     }
 
     public function index() {
         $nombreUser = $this->usuarioDTO->getNombre();
+        $test=  $this->test->prueba();
         $this->load->model('publicaciones');
         $this->load->model('archivos');
         $user = $this->input->post('user');
