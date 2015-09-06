@@ -2,7 +2,7 @@
 
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
-
+include './application/models/dto/UsuariosDTO.php';
 class Usuario_model extends CI_Model {
 
     public function construct() {
@@ -12,7 +12,7 @@ class Usuario_model extends CI_Model {
 
     public function login($username, $password) {
         try {
-
+            $this->load->model();
             $this->db->where('NombreUsuario', $username);
             $this->db->where('ContraseniaUsuario', $password);
             $q = $this->db->get('Usuarios');
