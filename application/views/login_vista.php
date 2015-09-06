@@ -7,9 +7,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Bootstrap -->          
         <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="icon" href="../bootstrap/minerva.jpg" type="image/x-icon" />
+        <link rel="icon" href="../bootstrap/images/minerva.jpg" type="image/x-icon" />
         <script src="../bootstrap/js/jquery.min.js"></script>
         <script src="../bootstrap/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+
+
     </head>
 
     <body>
@@ -44,22 +52,37 @@
             <!-- finaliza el navbar de el login -->
 
             <!-- contendeor de busqueda start-->
-            <div class="container col-lg-3">
+            <div class="container col-lg-4">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-search"></span></span>
+                    <input type="search" class="form-control" placeholder="Buscar" aria-describedby="basic-addon1">
 
-                <h1>hola  mundo</h1>
+                </div>
+                
+                <br>
+                    <ul>
+                        <li>Por Fecha</li>
+                        <li>Por Departamento</li>
+                        <li>Ultimas Noticias</li>
+                    </ul>
+                
+
+
+               
             </div>
             <!-- contendeor de busqueda end-->
 
             <!-- contendeor de publicaciones start-->
-            <div class="container-fluid">
-                <h1> soy una publicacion </h1>
+            <div class="container-fluid" >
+
             </div>
+
             <!-- contendeor de publicaciones end-->
 
             <!-- footer start-->
             <!--<div class="container-fluid"> -->           
-                <nav class=" navbar navbar-fixed-bottom">
-                    <div class="panel-footer">
+            <nav class=" navbar navbar-fixed-bottom">
+                <div class="panel-footer">
                     <div class="text-center "> Universidad de El Salvador Facultad Multidiciplinaria de Occidente
                         Unidad Proyectos Academicos Especiales  UESFmocc
                         Tel: (+503) 2480-0800
@@ -67,7 +90,7 @@
                     </div>
                 </div>
             </nav>
-            
+
             <!-- footer end-->
         </div>
 
