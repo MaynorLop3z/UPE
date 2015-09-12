@@ -12,3 +12,4 @@ nbproject/*
 nbproject/private/*
 
 application/config/config.php
+system/cache/*
