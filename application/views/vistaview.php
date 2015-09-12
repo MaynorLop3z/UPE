@@ -46,6 +46,11 @@
                     $("#divp").load('ModulosController');
                 });
             });
+            $(document).ready(function () {
+                $("#Participantes").click(function (event) {
+                    $("#divp").load('ParticipantesController');
+                });
+            });
         </script>
 
 
@@ -83,7 +88,9 @@
                     </li>
                     <li class="drop down"><a name="Horarios" id="Horarios" type="text" value="Horarios"class="dropdown-toggle" data-toggle="dropdown" href="#">Horarios</a>
                     </li>
-                    <li class="drop down"><a name="Modulos" id="Modulos" type="text" value="Horarios"class="dropdown-toggle" data-toggle="dropdown" href="#">Modulos</a>
+                    <li class="drop down"><a name="Modulos" id="Modulos" type="text" value="Modulos"class="dropdown-toggle" data-toggle="dropdown" href="#">Modulos</a>
+                    </li>
+                    <li class="drop down"><a name="Participantes" id="Participantes" type="text" value="Participantes" class="dropdown-toggle" data-toggle="dropdown" href="#">Participantes</a>
                     </li>
                 </ul>
                  
