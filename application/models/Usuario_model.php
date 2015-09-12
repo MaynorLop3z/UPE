@@ -3,8 +3,8 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 //include './application/models/dto/UsuariosDTO.php';
-include('ModeloBase.php');
-class Usuario_model extends ModeloBase {
+//include('ModeloBase.php');
+class Usuario_model extends CI_Model {
     public $salaries, $salaries2;
     public function construct() {
         parent::__construct();
