@@ -45,9 +45,12 @@
 <div class="modal-dialog">
 <div class="modal-content">
 	<div class="container-fluid ">
+            <button type="button" class="close btn-lg" data-dismiss="modal" aria-hidden="true">×</button>
+            
         <form action="Usuariocontroller" class="form-horizontal" method="post" >
             <fieldset>
                 <legend class="modal-header">Agregar Usuario:</legend> 
+                
                 <div class="form-group">
                     <label for="Usuario" class="col-lg-3 control-label">Usuario</label>
                     <div class="col-lg-6">
@@ -86,9 +89,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="submit" id="btnEnviar" onclick="" class=" btn btn-default" name="Aceptar">Aceptar</button>
-                    <button type="submit" id="btnLimpiar" onclick="" class=" btn btn-default" name="Limpiar">Limpiar</button>
-                    <button type="submit" id="btnCerrar" onclick="" class=" btn btn-default" name="Cerrar">Cerrar</button>
-                </div>
+                    <button type="reset" id="btnLimpiar" onclick="" class=" btn btn-default" name="Limpiar">Limpiar</button>
+                  </div>
                 </div>
             </fieldset>
         </form>
@@ -101,6 +103,7 @@
 <div class="modal-dialog">
 <div class="modal-content">
 	<div class="container-fluid ">
+            <button type="button" class="close btn-lg" data-dismiss="modal" aria-hidden="true">×</button>
         <form action="Usuariocontroller" class="form-horizontal" method="post" >
             <fieldset>
                 <legend class="modal-header">Modificar Usuario:</legend> 
@@ -142,8 +145,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="submit" id="btnEnviar" onclick="" class=" btn btn-default" name="Aceptar">Aceptar</button>
-                    <button type="submit" id="btnLimpiar" onclick="" class=" btn btn-default" name="Limpiar">Limpiar</button>
-                    <button type="submit" id="btnCerrar" onclick="" class=" btn btn-default" name="Cerrar">Cerrar</button>
+                    <button type="reset" id="btnLimpiar" onclick="" class=" btn btn-default" name="Limpiar">Limpiar</button>
+                    
                 </div>
                 
             </fieldset>
@@ -156,14 +159,15 @@
 <div class="modal-dialog">
 <div class="modal-content">
 	<div class="container-fluid ">
+            <button type="button" class="close btn-lg" data-dismiss="modal" aria-hidden="true">×</button>
          <form action="UsuarioController" class="form-horizontal" method="post" >
             <fieldset>
                 <legend class="modal-header">Usuario:</legend> 
                 <div class="form-group">
-                    <label for="selectUsuario" class="col-lg-3 control-label">Usuarios</label>
+                    <label for="selectUsuario" class="col-lg-3 control-label" >Usuarios</label>
                     <div class="col-lg-9">
                         
-                        <select class="form-control" id="selectUsuario">
+                        <select class="form-control" id="selectUsuario" >
                             <option>usuario 1</option>
                             <option>Usuario 2</option>
                             <option>Usuario 3</option>
@@ -172,7 +176,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="submit" id="btnEnviarU" onclick="" class=" btn btn-default" name="Aceptar">Aceptar</button>
-                    <button type="submit" id="btnCancelarU" onclick="" class=" btn btn-default" name="Limpiar">Cancelar</button>
+                    <button type="reset" id="btnLimpiar" onclick="" class=" btn btn-default" name="Limpiar">Limpiar</button>
                 </div>
                 
             </fieldset></div>
