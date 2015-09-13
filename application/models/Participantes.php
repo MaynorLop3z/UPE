@@ -1,7 +1,9 @@
 <?php
 
-if (!defined('BASEPATH'))
+if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
+}
+
 //include('ModeloBase.php');
 class Participantes extends CI_Model {
 
@@ -32,7 +34,7 @@ class Participantes extends CI_Model {
         return $resultado;
     }
 
-    public function CrearParticipante($Nombre, $CorreoElectronico, $TelefonoFijo, $TelefonoCelular, $Direccion, $FechaNacimiento, $CodigoCategoriaParticipantes, $NumeroDUI = null, $CodigoUniversidadProcedencia = null, $Carrera = null, $NivelAcademico = null, $NombreEncargado = null, $Descripcion = null, $Comentarios = NULL) {
+    public function CrearParticipante($Nombre, $CorreoElectronico, $TelefonoFijo, $TelefonoCelular, $Direccion, $FechaNacimiento, $CodigoCategoriaParticipantes, $NumeroDUI, $CodigoUniversidadProcedencia, $Carrera, $NivelAcademico, $NombreEncargado, $Descripcion, $Comentarios) {
         $data = array(
 //            'CodigoPermisos' => null,
             'Nombre' => $Nombre,
@@ -50,16 +52,19 @@ class Participantes extends CI_Model {
             'CodigoCategoriaParticipantes' => $CodigoCategoriaParticipantes,
             'Comentarios' => $Comentarios,
         );
-        $this->db->insert('Participantes', $data);
+        if ($this->db->insert('Participantes', $data)){return true;
+        } else {
+            return false;
+        }
+        
     }
 
     public function EliminarParticipante($CodigoParticipante) {
         $this->db->delete('Participantes', array('CodigoParticipante' => $CodigoParticipante));
     }
-
-    public function ModificarParticipante($CodigoParticipante, $Nombre, $CorreoElectronico, $TelefonoFijo, $TelefonoCelular, $Direccion, $FechaNacimiento, $CodigoCategoriaParticipantes, $UsuarioModifica, $IPModifica, $FechaModifica, $NumeroDUI = null, $CodigoUniversidadProcedencia = null, $Carrera = null, $NivelAcademico = null, $NombreEncargado = null, $Comentarios=null,$Descripcion = null) {
+//me dio error al crear un procedimiento con mas de 20 lineas $CodigoUniversidadProcedencia = null,
+    public function ModificarParticipante($CodigoParticipante, $Nombre, $CorreoElectronico, $TelefonoFijo, $TelefonoCelular, $Direccion, $FechaNacimiento, $CodigoCategoriaParticipantes, $UsuarioModifica, $IPModifica, $FechaModifica, $NumeroDUI = null, $Carrera = null, $NivelAcademico = null, $NombreEncargado = null, $Comentarios=null,$Descripcion = null) {
         $data = array(
-//            'CodigoPermisos' => null,
             'Nombre' => $Nombre,
             'CorreoElectronico' => $CorreoElectronico,
             'TelefonoFijo' => $TelefonoFijo,
@@ -67,7 +72,6 @@ class Participantes extends CI_Model {
             'FechaNacimiento' => $FechaNacimiento,
             'Direccion' => $Direccion,
             'NumeroDUI' => $NumeroDUI,
-            'CodigoUniversidadProcedencia' => $CodigoUniversidadProcedencia,
             'Carrera' => $Carrera,
             'NivelAcademico' => $NivelAcademico,
             'NombreEncargado' => $NombreEncargado,
@@ -81,5 +85,13 @@ class Participantes extends CI_Model {
         $this->db->where('CodigoParticipante', $CodigoParticipante);
         $this->db->update('Participantes', $data);
     }
-
+public function listarCategoriasParticipante() {
+        $this->db->select('CodigoCategoriaParticipantes, '
+                . 'NombreCategoriaParticipante'
+                );
+        $this->db->from('CategoriasParticipante');
+        $consulta = $this->db->get();
+        $resultado = $consulta->result();
+        return $resultado;
+    }
 }
