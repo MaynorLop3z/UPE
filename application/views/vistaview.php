@@ -18,7 +18,7 @@
         <script type="text/javascript">
             $(document).ready(function () {
                 $("#Usuario").click(function (event) {
-                    $("#divp").load('Usuariocontroller');
+                    $("#divp").load('UsuarioController');
                 });
             });
                 $(document).ready(function () {

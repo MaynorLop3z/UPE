@@ -12,8 +12,13 @@ class PagPrincipal extends CI_Controller {
     }
 
     public function index() {
- 
-        $this->load->view('vistaview');
+        try {
+            $this->load->view('vistaview'); 
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+
+       
     }
 
 }
