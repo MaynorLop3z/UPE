@@ -12,7 +12,7 @@ class RolesController extends CI_Controller {
     public function index() {
  
         
-        $this->load->view('Roles');
+        $this->load->view('RolesTab');
     }
 
 }

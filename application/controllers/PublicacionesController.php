@@ -12,7 +12,7 @@ class PublicacionesController extends CI_Controller {
     public function index() {
  
         
-        $this->load->view('Publicaiones');
+        $this->load->view('PublicacionesTab');
     }
 
 }

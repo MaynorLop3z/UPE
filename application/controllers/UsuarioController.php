@@ -15,7 +15,7 @@ class Usuariocontroller extends CI_Controller {
         try {
 
             $data['Usuarios'] = $this->Usuarios->listarUsuarios();
-            $this->load->view('Usuario', $data);
+            $this->load->view('UsuariosTab', $data);
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }
