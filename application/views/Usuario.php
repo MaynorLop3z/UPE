@@ -11,7 +11,7 @@
         <script src="../bootstrap/js/bootstrap.min.js"></script>
 
         <!--script para cargar la pagina  -->
-        <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <!--<script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
     </head>
     <body>
         <div class="container">
@@ -31,18 +31,21 @@
                             <th>Nombre</th>
                             <th>Correo</th>
                             <th>Usuario</th>
+                            <th>Gestionarm</th>
                         </tr>
                     </thead> 
                     <tbody>
                         <?php
+                         $codigoUsuario;
                         foreach ($Usuarios as $user) {
                             ?>
                             <tr>
                                 <td><?= $user->Nombre ?></td>
                                 <td><?= $user->CorreoUsuario ?></td>
                                 <td><?= $user->NombreUsuario ?></td>
-                                <td><a class="btn btn-success" href="UsuarioController.php?id=<?= $user->CodigoUsuario ?>">Modificar</a>
-                                    <a class="btn btn-danger" href="UsuarioController.php?id='.$row['id'].'">Eliminar</a></td>
+                                <td><a data-toggle="modal" title="Editar Usuario" class="btn btn-success" href="#usuarioModifica" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-pencil"></span> </a>
+
+                                    <a data-toggle="modal" title="Eliminar Usuario" class="btn btn-danger" href="#usuarioElimina"><span class="glyphicon glyphicon-remove"></span></a></td>
                             </tr>
                             <?php
                         }
@@ -51,7 +54,8 @@
                 </table>   
             </div>
             <div class="col-lg-3"></div>
-        </div> 
+        </div>  </a>
+
         <!-- Modal Para el Usuario Nuevo  ------------------------------------------------------------------------------------>
         <div id="usuarioNuevo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -179,14 +183,8 @@
                             <fieldset>
                                 <legend class="modal-header">Usuario:</legend> 
                                 <div class="form-group">
-                                    <label for="selectUsuario" class="col-lg-3 control-label" >Usuarios</label>
                                     <div class="col-lg-9">
-
-                                        <select class="form-control" id="selectUsuario" >
-                                            <option>usuario 1</option>
-                                            <option>Usuario 2</option>
-                                            <option>Usuario 3</option>
-                                        </select>
+                                        <label>¿Realmente desea eliminar al usuario seleccionado?</label>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -194,8 +192,10 @@
                                     <button type="reset" id="btnLimpiar" onclick="" class=" btn btn-default" name="Limpiar">Limpiar</button>
                                 </div>
 
-                            </fieldset></div>
-                </div>     </form>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>   
             </div>
         </div>
     </div>

@@ -50,7 +50,7 @@ class Usuariocontroller extends CI_Controller {
             $this->load->model('Usuarios');
             
             $this->Usuarios->guardarUsuario(null, $nombreUsuario, $contraseniaUsuario, $nombrePersonaUsuario, $correo);
-            redirect('PagPrincipal');
+           
         } else {
             $this->guardar();
         }
