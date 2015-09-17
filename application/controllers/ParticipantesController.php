@@ -28,7 +28,7 @@ class ParticipantesController extends CI_Controller {
           $data['Alumnos'] = $this->Participantes->listarParticipantes();
           //$this->load->model('CategoriasParticipante');
           $data['CategoriasP'] = $this->Participantes->listarCategoriasParticipante();
-        $this->load->view('ParticipantesTab',$data);
+        $this->load->view('Participantes',$data);
     }
     
     public function agregar() {

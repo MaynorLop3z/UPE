@@ -84,7 +84,7 @@ and open the template in the editor.
             include 'PublicacionesModal.php';
             include 'HorariosModal.php';
             include 'ModulosModal.php';
-            include 'ParticipantesModal.php';
+//            include 'ParticipantesModal.php';
             ?>
         </div>
     </body>
