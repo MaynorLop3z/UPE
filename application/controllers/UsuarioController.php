@@ -15,7 +15,7 @@ class Usuariocontroller extends CI_Controller {
         try {
 
             $data['Usuarios'] = $this->Usuarios->listarUsuarios();
-          $datau=  $this->load->view('Usuario', $data);
+            $datau = $this->load->view('Usuario', $data);
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }
@@ -46,13 +46,11 @@ class Usuariocontroller extends CI_Controller {
             $nombrePersonaUsuario = $this->input->post('UsuarioNombre');
             $contraseniaUsuario = $this->input->post('UsuarioPassword');
             $correo = $this->input->post('UsuarioEmail');
-            $nombreUsuario=$nombrePersonaUsuario.'123';
+            $nombreUsuario = $nombrePersonaUsuario . '123';
             $this->load->model('Usuarios');
-            
-            $this->Usuarios->guardarUsuario(null, $nombreUsuario, $contraseniaUsuario, $nombrePersonaUsuario, $correo);
-           
-        } else {
-            $this->guardar();
+
+            $arrayData = $this->Usuarios->guardarUsuario(null, $nombreUsuario, $contraseniaUsuario, $nombrePersonaUsuario, $correo);
+            echo json_encode($arrayData);
         }
     }
 

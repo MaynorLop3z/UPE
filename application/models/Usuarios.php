@@ -1,6 +1,8 @@
 <?php
+
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
+
 //include('ModeloBase.php');
 
 class Usuarios extends CI_Model {
@@ -18,21 +20,18 @@ class Usuarios extends CI_Model {
         return $resultado;
     }
 
-    public function guardarUsuario($codigoUsuario=null, $nombreUsuario, $contraseniaUsuario,$nombrePersonaUsuario,$correo) {
+    public function guardarUsuario($codigoUsuario = null, $nombreUsuario, $contraseniaUsuario, $nombrePersonaUsuario, $correo) {
         $data = array(
-            
-            
             'NombreUsuario' => $nombreUsuario,
             'ContraseniaUsuario' => $contraseniaUsuario,
-            'Nombre'=>$nombrePersonaUsuario,
-            'CorreoUsuario'=>$correo
+            'Nombre' => $nombrePersonaUsuario,
+            'CorreoUsuario' => $correo
         );
-        if ($codigoUsuario) {
-            $this->db->where('CodigoUsuario', $codigoUsuario);
-            $this->db->update('Usuarios', $data);
-        } else {
-            $this->db->insert('Usuarios', $data);
-        }
+        $this->db->insert('Usuarios', $data);
+        $insert_id = $this->db->insert_id();
+        $data['CodigoUsuario'] =  $insert_id;
+        return $data;
+        
     }
 
     public function eliminarUsuario($codigoUsuario) {

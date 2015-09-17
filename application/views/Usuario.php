@@ -17,26 +17,22 @@
         <div class="container">
 
             <!-- Trigger the modal with a button,  Me falta centrar los botones el el div-->
-
-            <div class="btn btn-group">
-                <button href="#usuarioNuevo"  class="btn btn-default btn-default" data-toggle="modal">Usuario Nuevo</button>
-                <button href="#usuarioModifica" class="btn btn-default btn-default" data-toggle="modal">Modificar Usuario</button>
-                <button href="#usuarioElimina" class="btn btn-default btn-default" data-toggle="modal">Eliminar Usuario</button>
+            <div class="container">
+                <button href="#usuarioNuevo"  class="btn btn-default btn-default" data-toggle="modal"><span class="glyphicon glyphicon-plus"></span>Usuario Nuevo</button>
             </div>
             <!-- DIv para la tabla  donde se muestran todos los usuario-->
             <div id="divp" class="col-lg-9">
-                <table class="table table-bordered table-striped table-hover table-responsive">
+                <table id="tableUsers" class="table table-bordered table-striped table-hover table-responsive">
                     <thead>
                         <tr>
                             <th>Nombre</th>
                             <th>Correo</th>
                             <th>Usuario</th>
-                            <th>Gestionarm</th>
+                            <th>Gestionar</th>
                         </tr>
                     </thead> 
                     <tbody>
                         <?php
-                        static $codigoUsuario = 1;
                         foreach ($Usuarios as $user) {
                             ?>
                             <tr id="tr<?php echo $user->CodigoUsuario ?>">
@@ -44,8 +40,7 @@
                                 <td class="correo_Usuario" ><?= $user->CorreoUsuario ?></td>
                                 <td class="nickName_Usuario" ><?= $user->NombreUsuario ?></td>
                                 <td><a id="<?php echo $user->CodigoUsuario ?>" data-toggle="modal" title="Editar Usuario" class="btn btn-success" href="#usuarioModifica" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-pencil"></span> </a>
-
-                                    <a data-toggle="modal" title="Eliminar Usuario" class="btn btn-danger" href="#usuarioElimina"><span class="glyphicon glyphicon-remove"></span></a></td>
+                                    <a data-toggle="modal" title="Eliminar Usuario" class="btn btn-danger" href="#usuarioElimina"><span class="glyphicon glyphicon-trash"></span></a></td>
                             </tr>
                             <?php
                         }
@@ -125,7 +120,7 @@
                 <script type="text/javascript">
 
                     var codigoUsuario;
-                    $('#usuarioModifica').on('show.bs.modal', function (event) {
+                    $('#usuarioModifica').on('show.bs.modal', function(event) {
                         codigoUsuario = (event.relatedTarget.id);
                         var tr = $('#tr' + codigoUsuario);
                         var nombre_Usuario = tr.find('.nombre_Usuario').html().toString().trim();
@@ -138,7 +133,7 @@
                         $('#Passwordmodificar').val(correo_Usuario);
                     });
 
-                    $("#frmGuardarUSer").submit(function (event) {
+                    $("#frmGuardarUSer").submit(function(event) {
 
                         // Stop form from submitting normally
                         event.preventDefault();
@@ -154,15 +149,21 @@
                         var posting = $.post(url, {UsuarioNombre: UsuarioNombre, UsuarioPassword: UsuarioPassword, UsuarioEmail: UsuarioEmail});
 
                         // Put the results in a div
-                        posting.done(function (data) {
+                        posting.done(function(data) {
 //                            var content = $(data).find("#content");
 //                            $("#result").empty().append(content);
 //                           console.log("a");
-                            $('#usuarioNuevo').modal('hide')
-                            $('body').removeClass('modal-open');
-                            $('.modal-backdrop').remove();
-                           $("#divp").load('UsuarioController');
-
+                            if (data != null) {
+                                var obj = jQuery.parseJSON(data);
+//                                alert(obj.CodigoUsuario);
+                                var trResult = "<tr id=tr" + obj.CodigoUsuario + "></tr>"
+                                var strToAdd = '<tr><td>hoola</td><td>hoola</td><td>hoola</td><td>hoola</td></tr>';
+                                $('#tableUsers').append(strToAdd);
+                                $('#usuarioNuevo').modal('hide')
+                                $('body').removeClass('modal-open');
+                                $('.modal-backdrop').remove();
+//                                $("#divp").load('UsuarioController');
+                            }
                         });
                     });
 
