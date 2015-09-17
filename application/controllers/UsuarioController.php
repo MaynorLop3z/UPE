@@ -1,7 +1,8 @@
 <?php
 
-if (!defined('BASEPATH'))
+if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
+}
 
 class Usuariocontroller extends CI_Controller {
 
@@ -15,7 +16,7 @@ class Usuariocontroller extends CI_Controller {
         try {
 
             $data['Usuarios'] = $this->Usuarios->listarUsuarios();
-            $this->load->view('UsuariosTab', $data);
+            $this->load->view('Usuario', $data);
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }

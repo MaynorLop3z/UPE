@@ -12,7 +12,7 @@ class DiplomadosController extends CI_Controller {
     public function index() {
  
         
-        $this->load->view('DiplomadosTab');
+        $this->load->view('Diplomados');
     }
 
 }

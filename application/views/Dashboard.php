@@ -78,12 +78,12 @@ and open the template in the editor.
                 <div class="col-md-1"></div>
             </div>
             <?php
-            include 'UsuariosModal.php';
-            include 'RolesModal.php';
-            include 'DiplomadosModal.php';
-            include 'PublicacionesModal.php';
-            include 'HorariosModal.php';
-            include 'ModulosModal.php';
+//            include 'UsuariosModal.php';
+//            include 'RolesModal.php';
+//            include 'DiplomadosModal.php';
+//            include 'PublicacionesModal.php';
+//            include 'HorariosModal.php';
+//            include 'ModulosModal.php';
 //            include 'ParticipantesModal.php';
             ?>
         </div>

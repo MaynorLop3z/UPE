@@ -9,7 +9,7 @@
             <button href="#AlumnoElimina" class="btn btn-default btn-default" data-toggle="modal">Eliminar Alumno</button>
         </div>
         <?php
-        if ($creacion) {
+//        if ($creacion) {
             ?>
             <!--            <div class="row">
                         <div class="col-md-8 alert alert-success alert-dismissible fade in" role="alert">
@@ -18,7 +18,7 @@
                 </div>
                             </div>-->
             <?php
-        } else {
+//        } else {
             ?>
             <!--        <div class="row">
                         <div class="col-md-8 alert alert-danger alert-dismissible fade in" role="alert">
@@ -27,7 +27,7 @@
                 </div>
                             </div>-->
             <?php
-        }
+//        }
         ?>
         <!-- DIv para la tabla  donde se muestran todos los usuario-->
         <!--            <div class="col-lg-9">-->
