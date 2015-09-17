@@ -24,7 +24,7 @@
                 <button href="#usuarioElimina" class="btn btn-default btn-default" data-toggle="modal">Eliminar Usuario</button>
             </div>
             <!-- DIv para la tabla  donde se muestran todos los usuario-->
-            <div class="col-lg-9">
+            <div id="divp" class="col-lg-9">
                 <table class="table table-bordered table-striped table-hover table-responsive">
                     <thead>
                         <tr>
@@ -148,17 +148,20 @@
                                 UsuarioNombre = $form.find("input[name='UsuarioNombre']").val(),
                                 UsuarioPassword = $form.find("input[name='UsuarioPassword']").val(),
                                 UsuarioEmail = $form.find("input[name='UsuarioEmail']").val(),
-                              
                                 url = $form.attr("action");
 
                         // Send the data using post
-                        var posting = $.post(url, {UsuarioNombre: UsuarioNombre,UsuarioPassword:UsuarioPassword,UsuarioEmail:UsuarioEmail, });
+                        var posting = $.post(url, {UsuarioNombre: UsuarioNombre, UsuarioPassword: UsuarioPassword, UsuarioEmail: UsuarioEmail});
 
                         // Put the results in a div
                         posting.done(function (data) {
 //                            var content = $(data).find("#content");
 //                            $("#result").empty().append(content);
-                            alert("agregado");
+//                           console.log("a");
+                            $('#usuarioNuevo').modal('hide')
+                            $('body').removeClass('modal-open');
+                            $('.modal-backdrop').remove();
+                           $("#divp").load('UsuarioController');
 
                         });
                     });
