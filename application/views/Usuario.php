@@ -63,7 +63,7 @@
                 <div class="container-fluid ">
                     <button type="button" class="close btn-lg" data-dismiss="modal" aria-hidden="true">X</button>
 
-                    <form action="<?php echo base_url() ?>index.php/UsuarioController/guardarUsuario/" class="form-horizontal" method="post" >
+                    <form id="frmGuardarUSer" action="<?php echo base_url() ?>index.php/UsuarioController/guardarUsuario/" class="form-horizontal" method="post" >
                         <fieldset>
                             <legend class="modal-header">Agregar Usuario:</legend> 
 
@@ -137,6 +137,32 @@
                         $('#Emailmodificar').val(correo_Usuario);
                         $('#Passwordmodificar').val(correo_Usuario);
                     });
+
+                    $("#frmGuardarUSer").submit(function (event) {
+
+                        // Stop form from submitting normally
+                        event.preventDefault();
+
+                        // Get some values from elements on the page:
+                        var $form = $(this),
+                                UsuarioNombre = $form.find("input[name='UsuarioNombre']").val(),
+                                UsuarioPassword = $form.find("input[name='UsuarioPassword']").val(),
+                                UsuarioEmail = $form.find("input[name='UsuarioEmail']").val(),
+                              
+                                url = $form.attr("action");
+
+                        // Send the data using post
+                        var posting = $.post(url, {UsuarioNombre: UsuarioNombre,UsuarioPassword:UsuarioPassword,UsuarioEmail:UsuarioEmail, });
+
+                        // Put the results in a div
+                        posting.done(function (data) {
+//                            var content = $(data).find("#content");
+//                            $("#result").empty().append(content);
+                            alert("agregado");
+
+                        });
+                    });
+
 
                 </script>
 
