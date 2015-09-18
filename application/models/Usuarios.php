@@ -21,17 +21,20 @@ class Usuarios extends CI_Model {
     }
 
     public function guardarUsuario($codigoUsuario = null, $nombreUsuario, $contraseniaUsuario, $nombrePersonaUsuario, $correo) {
-        $data = array(
-            'NombreUsuario' => $nombreUsuario,
-            'ContraseniaUsuario' => $contraseniaUsuario,
-            'Nombre' => $nombrePersonaUsuario,
-            'CorreoUsuario' => $correo
-        );
-        $this->db->insert('Usuarios', $data);
-        $insert_id = $this->db->insert_id();
-        $data['CodigoUsuario'] =  $insert_id;
+        try {
+            $data = array(
+                'NombreUsuario' => $nombreUsuario,
+                'ContraseniaUsuario' => $contraseniaUsuario,
+                'Nombre' => $nombrePersonaUsuario,
+                'CorreoUsuario' => $correo
+            );
+            $this->db->insert('Usuarios', $data);
+            $insert_id = $this->db->insert_id();
+            $data['CodigoUsuario'] = $insert_id;
+        } catch (Exception $e) {
+            $e->getMessage();
+        }
         return $data;
-        
     }
 
     public function eliminarUsuario($codigoUsuario) {

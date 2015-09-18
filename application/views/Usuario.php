@@ -39,7 +39,7 @@
                                 <td class="nombre_Usuario" ><?= $user->Nombre ?></td>
                                 <td class="correo_Usuario" ><?= $user->CorreoUsuario ?></td>
                                 <td class="nickName_Usuario" ><?= $user->NombreUsuario ?></td>
-                                <td><a id="<?php echo $user->CodigoUsuario ?>" data-toggle="modal" title="Editar Usuario" class="btn btn-success" href="#usuarioModifica" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-pencil"></span> </a>
+                                <td class="gestion_User"><a id="<?php echo $user->CodigoUsuario ?>" data-toggle="modal" title="Editar Usuario" class="btn btn-success btn_modificar_user" href="#usuarioModifica" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-pencil"></span> </a>
                                     <a data-toggle="modal" title="Eliminar Usuario" class="btn btn-danger" href="#usuarioElimina"><span class="glyphicon glyphicon-trash"></span></a></td>
                             </tr>
                             <?php
@@ -139,31 +139,31 @@
                         event.preventDefault();
 
                         // Get some values from elements on the page:
-                        var $form = $(this),
-                                UsuarioNombre = $form.find("input[name='UsuarioNombre']").val(),
-                                UsuarioPassword = $form.find("input[name='UsuarioPassword']").val(),
-                                UsuarioEmail = $form.find("input[name='UsuarioEmail']").val(),
-                                url = $form.attr("action");
+                        var $form = $(this), UsuarioNombre = $form.find("input[name='UsuarioNombre']").val(), UsuarioPassword = $form.find("input[name='UsuarioPassword']").val(), UsuarioEmail = $form.find("input[name='UsuarioEmail']").val(), url = $form.attr("action");
 
                         // Send the data using post
                         var posting = $.post(url, {UsuarioNombre: UsuarioNombre, UsuarioPassword: UsuarioPassword, UsuarioEmail: UsuarioEmail});
-
-                        // Put the results in a div
                         posting.done(function(data) {
 //                            var content = $(data).find("#content");
 //                            $("#result").empty().append(content);
 //                           console.log("a");
                             if (data != null) {
                                 var obj = jQuery.parseJSON(data);
-//                                alert(obj.CodigoUsuario);
-                                var trResult = "<tr id=tr" + obj.CodigoUsuario + "></tr>"
-                                var strToAdd = '<tr><td>hoola</td><td>hoola</td><td>hoola</td><td>hoola</td></tr>';
-                                $('#tableUsers').append(strToAdd);
-                                $('#usuarioNuevo').modal('hide')
+                                var trResult = $('#tableUsers tr:last').clone();
+                                trResult.attr('id', 'tr' + obj.CodigoUsuario);
+                                trResult.find('.nombre_Usuario').html(obj.Nombre);
+                                trResult.find('.correo_Usuario').html(obj.CorreoUsuario);
+                                trResult.find('.nickName_Usuario').html(obj.NombreUsuario);
+                                trResult.find('.gestion_User').find('.btn_modificar_user').attr('id', obj.CodigoUsuario);
+                                $('#tableUsers > tbody').append(trResult);
+                                $('#usuarioNuevo').modal('hide');
                                 $('body').removeClass('modal-open');
                                 $('.modal-backdrop').remove();
 //                                $("#divp").load('UsuarioController');
                             }
+                        });
+                        posting.fail(function() {
+                            alert("error");
                         });
                     });
 
@@ -175,7 +175,7 @@
                     <button type="button" class="close btn-lg" data-dismiss="modal" aria-hidden="true">×</button>
                     <form action="Usuariocontroller"  class="form-horizontal" method="post" >
                         <fieldset>
-                            <label id="lblCodigoUser" hidden="true"></label>
+                            <label id="lblCodigoUser" ></label>
 
                             <legend class="modal-header">Modificar Usuario:</legend> 
                             <div class="form-group">
