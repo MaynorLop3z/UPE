@@ -7,19 +7,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Bootstrap -->          
         <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../bootstrap/css/half-slider.css" rel="stylesheet">
         <link rel="icon" href="../bootstrap/images/minerva.jpg" type="image/x-icon" />
         <script src="../bootstrap/js/jquery.min.js"></script>
         <script src="../bootstrap/js/bootstrap.min.js"></script>
-
-
-
-
-
-
-
-
+        <script src="js/less-1.3.3.min.js"></script>
     </head>
-
     <body>
         <!-- Se crea la navbar que incluye el login -->
         <div  class="container">
@@ -51,6 +44,61 @@
 
             <!-- finaliza el navbar de el login -->
 
+
+            <!-- contendeor de publicaciones start-->
+
+            <div class="container-fluid" >
+
+                <header id="myCarousel" class="carousel slide">
+                    <!-- Indicadores -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                    </ol>
+
+                    <!-- PRUEBA -->
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <!-- Set the first background image using inline CSS below. -->
+                            <div class="fill" style="background-image:url('../bootstrap/images/minerva.jpg=Slide One');"></div>
+                            <div class="carousel-caption">
+                                <h2>Caption 1</h2>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <!-- Set the second background image using inline CSS below. -->
+                            <div class="fill" style="background-image:url('../bootstrap/images/minerva.jpg=Slide One');"></div>
+                            <div class="carousel-caption">
+                                <h2>Caption 2</h2>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <!-- Set the third background image using inline CSS below. -->
+                            <div class="fill" style="background-image:url('../bootstrap/images/minerva.jpg=Slide Three');"></div>
+                            <div class="carousel-caption">
+                                <h2>Caption 3</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                        <span class="icon-prev"></span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                        <span class="icon-next"></span>
+                    </a>
+
+                    <!--  end PRUEBA -->
+
+
+                </header>
+
+
+            </div>
+            <!-- contendeor de publicaciones end-->
+
             <!-- contendeor de busqueda start-->
             <div class="container col-lg-4">
                 <div class="input-group">
@@ -58,26 +106,19 @@
                     <input type="search" class="form-control" placeholder="Buscar" aria-describedby="basic-addon1">
 
                 </div>
-                
+
                 <br>
-                    <ul>
-                        <li>Por Fecha</li>
-                        <li>Por Departamento</li>
-                        <li>Ultimas Noticias</li>
-                    </ul>
-                
+                <ul>
+                    <li  >Por Fecha</li>
+                    <li>Por Departamento</li>
+                    <li>Ultimas Noticias</li>
+                </ul>
 
 
-               
+
+
             </div>
             <!-- contendeor de busqueda end-->
-
-            <!-- contendeor de publicaciones start-->
-            <div class="container-fluid" >
-
-            </div>
-
-            <!-- contendeor de publicaciones end-->
 
             <!-- footer start-->
             <!--<div class="container-fluid"> -->           
@@ -92,7 +133,9 @@
             </nav>
 
             <!-- footer end-->
+
         </div>
+
 
     </body>
 </html>
