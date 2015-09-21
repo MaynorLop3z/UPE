@@ -1,6 +1,6 @@
 <!-- Modal Para el Usuario Nuevo  ------------------------------------------------------------------------------------>
 <div id="AlumnoNuevo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog  modal-lg">
         <div class="modal-content">
             <div class="container-fluid ">
                 <form action="" class="form-horizontal" method="post" >
@@ -11,83 +11,87 @@
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             Agregar Alumno:
                         </legend> 
+                        <div class="row">
+                           
+                            <!--- --><div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="AlumnoNombre" class="col-lg-3 control-label">Nombre:</label>
+                                    <div class="col-lg-6 ">
+                                        <input type="text" class="form-control" name="Nombre" id="AlumnoNombre" placeholder="Nombre Alumno" maxlength="100" required>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
+                                    </div>
+                                </div> 
+                                <div class="form-group">
+                                    <label for="AlumnoMail" class="col-lg-3 control-label">Correo Electronico:</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" name="CorreoElectronico" id="AlumnoMail" placeholder="Correo electronico del alumno" maxlength="100" required>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="AlumnoFijo" class="col-lg-3 control-label">Telefono Fijo:</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" name="TelefonoFijo" id="AlumnoFijo" placeholder="Telefono Fijo del Alumno" maxlength="9" required>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="AlumnoMovil" class="col-lg-3 control-label">Telefono Movil:</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" name="TelefonoCelular" id="AlumnoMovil" placeholder="Telefono Celular del Alumno" maxlength="9" required>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
+                                    </div>
+                                </div>
 
-                        <div class="form-group">
-                            <label for="AlumnoNombre" class="col-lg-3 control-label">Nombre:</label>
-                            <div class="col-lg-6">
-                                <input type="text" class="form-control" name="Nombre" id="AlumnoNombre" placeholder="Nombre Alumno" maxlength="100" required>
-                            </div>
-                            <div class="col-lg-3">
-                                <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
-                            </div>
-                        </div>
+                                <div class="form-group">
+                                    <label for="AlumnoDir" class="col-lg-3 control-label">Direccion:</label>
+                                    <div class="col-lg-6">
+                                        <textarea cols="40" rows="5" class="form-control" name="Direccion" id="AlumnoDir" placeholder="Direccion del Alumno" maxlength="200" required></textarea>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="AlumnoDUI" class="col-lg-3 control-label">DUI:</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" name="NumeroDUI" id="AlumnoSUI" placeholder="Numero de DUI del Alumno" maxlength="10">
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
+                                    </div>
+                                </div>
 
-                        <div class="form-group">
-                            <label for="AlumnoMail" class="col-lg-3 control-label">Correo Electronico:</label>
-                            <div class="col-lg-6">
-                                <input type="text" class="form-control" name="CorreoElectronico" id="AlumnoMail" placeholder="Correo electronico del alumno" maxlength="100" required>
-                            </div>
-                            <div class="col-lg-3">
-                                <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="AlumnoFijo" class="col-lg-3 control-label">Telefono Fijo:</label>
-                            <div class="col-lg-6">
-                                <input type="text" class="form-control" name="TelefonoFijo" id="AlumnoFijo" placeholder="Telefono Fijo del Alumno" maxlength="9" required>
-                            </div>
-                            <div class="col-lg-3">
-                                <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="AlumnoMovil" class="col-lg-3 control-label">Telefono Movil:</label>
-                            <div class="col-lg-6">
-                                <input type="text" class="form-control" name="TelefonoCelular" id="AlumnoMovil" placeholder="Telefono Celular del Alumno" maxlength="9" required>
-                            </div>
-                            <div class="col-lg-3">
-                                <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="AlumnoDir" class="col-lg-3 control-label">Direccion:</label>
-                            <div class="col-lg-6">
-                                <textarea cols="40" rows="5" class="form-control" name="Direccion" id="AlumnoDir" placeholder="Direccion del Alumno" maxlength="200" required></textarea>
-                            </div>
-                            <div class="col-lg-3">
-                                <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="AlumnoDUI" class="col-lg-3 control-label">DUI:</label>
-                            <div class="col-lg-6">
-                                <input type="text" class="form-control" name="NumeroDUI" id="AlumnoSUI" placeholder="Numero de DUI del Alumno" maxlength="10">
-                            </div>
-                            <div class="col-lg-3">
-                                <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="AlumnoFNac" class="col-lg-3 control-label">Fecha Nacimiento:</label>
-                            <div class="col-lg-6">
-                                <input type="date" class="form-control" name="FechaNacimiento" id="AlumnoFNac" placeholder="Fecha de nacimiento del Alumno" required>
-                            </div>
-                            <div class="col-lg-3">
-                                <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="AlumnoCarrera" class="col-lg-3 control-label">Carrera:</label>
-                            <div class="col-lg-6">
-                                <input type="text" class="form-control" name="Carrera" id="AlumnoCarrera" placeholder="Carrera del Alumno" maxlength="100">
-                            </div>
-                            <div class="col-lg-3">
-                                <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
-                            </div>
-                        </div>
-
-                        <div class="form-group">
+                                <div class="form-group">
+                                    <label for="AlumnoFNac" class="col-lg-3 control-label">Fecha Nacimiento:</label>
+                                    <div class="col-lg-6">
+                                        <input type="date" class="form-control" name="FechaNacimiento" id="AlumnoFNac" placeholder="Fecha de nacimiento del Alumno" required>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
+                                    </div>
+                                </div>
+                                
+                     <!--- --></div>
+  <!--- --><div class="col-lg-6">
+                         <div class="form-group">
+                                    <label for="AlumnoCarrera" class="col-lg-3 control-label">Carrera:</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" name="Carrera" id="AlumnoCarrera" placeholder="Carrera del Alumno" maxlength="100">
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
+                                    </div>
+                                </div>
+      <div class="form-group">
                             <label for="AlumnoNivel" class="col-lg-3 control-label">Nivel Academico:</label>
                             <div class="col-lg-6">
                                 <input type="text" class="form-control" name="NivelAcademico" id="AlumnoNivel" placeholder="Nivel academico del Alumno" maxlength="100">
@@ -147,14 +151,16 @@
                             <button type="reset" id="btnLimpiar" onclick="" class=" btn btn-default" name="Limpiar">Limpiar</button>
                             <button type="button" id="btnCerrar" data-dismiss="modal" class=" btn btn-default" name="Cerrar">Cerrar</button>
                         </div>
-
+      
+  <!--- --> </div>
+                        </div>
+ 
                     </fieldset>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
 <!-- Modal para Editar Usuario --------------------------------------------------------------------------------------->
 <div id="AlumnoModifica" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
