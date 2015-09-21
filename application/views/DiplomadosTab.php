@@ -3,11 +3,11 @@
         <h3 class="panel-title">Gestion de Diplomados</h3>
     </div>
     <div class="panel-body">
-        <ul class="breadcrumb col-lg-8" >
-            <li><a href="#DiplomadoNuevo" data-toggle="modal">Agregar Diplomado</a></li>
-            <li><a href="#modificarDiplomado" data-toggle="modal">Modificar Diplomado</a></li>
-            <li><a href="#eliminarDiplomado"  data-toggle="modal">Eliminar Diplomado</a></li>
-        </ul>
+      <div class="btn btn-group">
+            <button href="#DiplomadoNuevo"  class="btn btn-default btn-default" data-toggle="modal">Diplomado Nuevo</button>
+            <button href="#ModificarDiplomado" class="btn btn-default btn-default" data-toggle="modal">Modificar Diplomado</button>
+            <button href="#EliminarDiplomado" class="btn btn-default btn-default" data-toggle="modal">Eliminar Diplomado</button>
+        </div>
 
 
         <table class="table table-bordered table-striped table-hover table-responsive">
