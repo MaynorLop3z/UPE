@@ -6,6 +6,7 @@
                 <button type="button" class="close btn-lg" data-dismiss="modal" aria-hidden="true">×</button>
 
                 <form action="<?php echo base_url() ?>index.php/UsuarioController/guardarUsuario/" class="form-horizontal" method="post" >
+                    <button type="button" class="close btn-lg" data-dismiss="modal" aria-hidden="true">×</button>
                     <fieldset>
                         <legend class="modal-header">Agregar Usuario:</legend> 
 
@@ -66,6 +67,7 @@
             <div class="container-fluid ">
                 <button type="button" class="close btn-lg" data-dismiss="modal" aria-hidden="true">×</button>
                 <form action="Usuariocontroller" class="form-horizontal" method="post" >
+                    <button type="button" class="close btn-lg" data-dismiss="modal" aria-hidden="true">×</button>
                     <fieldset>
                         <legend class="modal-header">Modificar Usuario:</legend> 
                         <div class="form-group">
