@@ -42,15 +42,19 @@ class Usuariocontroller extends CI_Controller {
     }
 
     public function guardarUsuario($codigoUsuario = null) {
-        if ($this->input->post()) {
-            $nombrePersonaUsuario = $this->input->post('UsuarioNombre');
-            $contraseniaUsuario = $this->input->post('UsuarioPassword');
-            $correo = $this->input->post('UsuarioEmail');
-            $nombreUsuario = $nombrePersonaUsuario . '123';
-            $this->load->model('Usuarios');
+        try {
+            if ($this->input->post()) {
+                $nombrePersonaUsuario = $this->input->post('UsuarioNombre');
+                $contraseniaUsuario = $this->input->post('UsuarioPassword');
+                $correo = $this->input->post('UsuarioEmail');
+                $nombreUsuario = $nombrePersonaUsuario . '123';
+                $this->load->model('Usuarios');
 
-            $arrayData = $this->Usuarios->guardarUsuario(null, $nombreUsuario, $contraseniaUsuario, $nombrePersonaUsuario, $correo);
-            echo json_encode($arrayData);
+                $arrayData = $this->Usuarios->guardarUsuario(null, $nombreUsuario, $contraseniaUsuario, $nombrePersonaUsuario, $correo);
+                echo json_encode($arrayData);
+            }
+        } catch (Exception $ex) {
+            echo json_encode($ex);
         }
     }
 
