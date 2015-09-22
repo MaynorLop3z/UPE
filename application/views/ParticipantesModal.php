@@ -167,6 +167,7 @@
         <div class="modal-content">
             <div class="container-fluid ">
                 <form action="Usuariocontroller" class="form-horizontal" method="post" >
+                    <button type="button" class="close btn-lg" data-dismiss="modal" aria-hidden="true">×</button>
                     <fieldset>
                         <legend class="modal-header">Modificar Usuario:</legend> 
                         <div class="form-group">
@@ -222,6 +223,7 @@
         <div class="modal-content">
             <div class="container-fluid ">
                 <form action="UsuarioController" class="form-horizontal" method="post" >
+                    <button type="button" class="close btn-lg" data-dismiss="modal" aria-hidden="true">×</button>
                     <fieldset>
                         <legend class="modal-header">Usuario:</legend> 
                         <div class="form-group">
