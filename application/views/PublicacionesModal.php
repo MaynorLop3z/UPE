@@ -4,6 +4,7 @@
         <div class="modal-content">
             <div class="container-fluid ">
                 <form action="PublicacionesController" class="form-horizontal" method="post" >
+                    <button type="button" class="close btn-lg" data-dismiss="modal" aria-hidden="true">×</button>
                     <fieldset>
                         <legend class="modal-header"> Nueva Publicacion:</legend> 
                         <div class="form-group">
