@@ -4,9 +4,11 @@
         <div class="modal-content">
             <div class="container-fluid ">
                 <form action="DiplomadosController" class="form-horizontal" method="post" >
+                    <button type="button" class="close btn-lg" data-dismiss="modal" aria-hidden="true">×</button>
                     <fieldset>
+                        
                         <legend class="modal-header">Nuevo Diplomado:</legend> 
-                        <div class="form-group">
+                                                <div class="form-group">
                             <label for="DiplomadoNombre" class="col-lg-3 control-label">Nombre Del Diplomado</label>
                             <div class="col-lg-9">
                                 <input type="text" class="form-control" id="DiplomadoNombre" placeholder="Nombre del Diplomado" required>
@@ -56,7 +58,9 @@
         <div class="modal-content">
             <div class="container-fluid ">
                 <form action="DiplomadosController" class="form-horizontal" method="post" >
+                    <button type="button" class="close btn-lg" data-dismiss="modal" aria-hidden="true">×</button>
                     <fieldset>
+                        
                         <legend class="modal-header">Editar Diplomado:</legend> 
                         <div class="form-group">
                             <label for="DiplomadoNombre" class="col-lg-3 control-label">Nombre Del Diplomado</label>
