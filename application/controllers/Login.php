@@ -15,12 +15,12 @@ class Login extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->usuarioDTO = new UsuariosDTO();
-        $this->test= new Listar();
+        $this->test = new Listar();
     }
 
     public function index() {
         $nombreUser = $this->usuarioDTO->getNombre();
-        $test=  $this->test->prueba();
+        $test = $this->test->prueba();
         $this->load->model('publicaciones');
         $this->load->model('archivos');
         $user = $this->input->post('user');
@@ -32,9 +32,12 @@ class Login extends CI_Controller {
             if ($this->usuario_model->login($_POST['user'], $_POST['password'])) {
 
 //            if (true)   {
+//                
+//                $this->load->view('usuario');
                 redirect('pagPrincipal');
             } else {
-                $this->load->view('login_vista');
+                //$this->load->view('login_vista');
+                echo 'jajajaj';
             }
         } else {
             //listar publicaciones con sus archivos
