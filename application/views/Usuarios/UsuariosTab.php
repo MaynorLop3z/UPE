@@ -1,3 +1,4 @@
+<?php $this->load->helper('url'); ?>
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">Gestion de Usuarios</h3>
@@ -6,7 +7,7 @@
         <div id="mensajes">
 
         </div>
-        <div   class="container well">
+        <div   class="well">
 
             <button id="btnUsuarioNuevo" class="btn btn-default" ><span class="glyphicon glyphicon-plus"></span>Usuario Nuevo</button>
         </div>

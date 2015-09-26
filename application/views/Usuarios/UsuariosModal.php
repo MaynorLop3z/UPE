@@ -1,3 +1,4 @@
+<?php $this->load->helper('url'); ?>
 <!-- Modal Para el Usuario Nuevo  ------------------------------------------------------------------------------------>
 <div id="usuarioNuevo" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
