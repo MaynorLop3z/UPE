@@ -1,4 +1,5 @@
 <?php $this->load->helper('url'); ?>
+<script src="../bootstrap/js/Usuarios.js"></script>
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">Gestion de Usuarios</h3>

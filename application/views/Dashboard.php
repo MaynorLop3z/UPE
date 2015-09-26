@@ -16,7 +16,7 @@ and open the template in the editor.
         <link rel="icon" href="../bootstrap/minerva.jpg" type="image/x-icon" />
         <script src="../bootstrap/js/jquery.min.js"></script>
         <script src="../bootstrap/js/bootstrap.min.js"></script>
-        <script src="../bootstrap/js/Usuarios.js"></script>
+<!--        <script src="../bootstrap/js/Usuarios.js"></script>-->
         <script type="text/javascript">
             $(document).ready(function() {
                 window.setTimeout(function() {
