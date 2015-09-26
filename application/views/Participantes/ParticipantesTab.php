@@ -10,23 +10,23 @@
         </div>
         <?php
 //        if ($creacion) {
-            ?>
-            <!--            <div class="row">
-                        <div class="col-md-8 alert alert-success alert-dismissible fade in" role="alert">
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                  <strong>Exito!</strong><?= $mensaje ?>
-                </div>
-                            </div>-->
-            <?php
+        ?>
+        <!--            <div class="row">
+                    <div class="col-md-8 alert alert-success alert-dismissible fade in" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+              <strong>Exito!</strong><?= $mensaje ?>
+            </div>
+                        </div>-->
+        <?php
 //        } else {
-            ?>
-            <!--        <div class="row">
-                        <div class="col-md-8 alert alert-danger alert-dismissible fade in" role="alert">
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                  <strong>Error!</strong><?= $mensaje ?>
-                </div>
-                            </div>-->
-            <?php
+        ?>
+        <!--        <div class="row">
+                    <div class="col-md-8 alert alert-danger alert-dismissible fade in" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+              <strong>Error!</strong><?= $mensaje ?>
+            </div>
+                        </div>-->
+        <?php
 //        }
         ?>
         <!-- DIv para la tabla  donde se muestran todos los usuario-->
@@ -54,7 +54,8 @@
                 <?php
                 foreach ($Alumnos as $alum) {
                     ?>
-                    <tr id="<?= $alum->CodigoParticipante ?>">
+                        <!--<tr id="<?= $alum->CodigoParticipante ?>">-->
+                    <tr>
                         <td><?= $alum->CorreoElectronico ?></td>
                         <td><?= $alum->TelefonoFijo ?></td>
                         <td><?= $alum->TelefonoCelular ?></td>
