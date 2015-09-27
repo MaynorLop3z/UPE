@@ -26,7 +26,8 @@ class Login extends CI_Controller {
 //            if (true)   {
 //                
 //                $this->load->view('usuario');
-                redirect('pagPrincipal');
+                //$this->load->view('Dashboard'); 
+                redirect('Dashboard');
             } else {
                 //$this->load->view('login_vista');
                 echo 'jajajaj';
