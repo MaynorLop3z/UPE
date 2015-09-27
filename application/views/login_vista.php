@@ -9,7 +9,7 @@
         <link rel="icon" href="../bootstrap/images/logo.png" type="image/x-icon" />
         <meta name="description" content="">
         <meta name="author" content="">
-         <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="../bootstrap/css/half-slider.css" rel="stylesheet">
         <link rel="icon" href="../bootstrap/images/minerva.jpg" type="image/x-icon" />
         <script src="../bootstrap/js/jquery.min.js"></script>
@@ -69,12 +69,9 @@
 
             <!-- Wrapper for Slides -->
             <div class="carousel-inner">
-                <div class="item active">
+                <div class="item active" >
                     <!-- Set the first background image using inline CSS below. -->
-                    <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide One');"></div>
-                    <div class="carousel-caption">
-                        <h2>Caption 1</h2>
-                    </div>
+                    <div class="fill" style="background-image:url(../bootstrap/images/minervaSlider.png)"></div>
                 </div>
                 <div class="item">
                     <!-- Set the second background image using inline CSS below. -->
@@ -90,6 +87,10 @@
                         <h2>Caption 3</h2>
                     </div>
                 </div>
+                <!--div para el fondo de pantalla-->
+                <div id='background'></div>
+                <!--div para visualizar la imagen grande con el boton cerrar-->
+                <div id='preview'><div id='close'></div><div id='content'></div></div>
             </div>
 
             <!-- Controls -->
@@ -148,7 +149,7 @@
         <!-- /.container -->
 
         <!-- jQuery -->
-       
+
 
         <!-- Script to Activate the Carousel -->
         <script>
