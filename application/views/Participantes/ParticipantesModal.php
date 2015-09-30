@@ -1,5 +1,5 @@
 <!-- Modal Para el Usuario Nuevo  ------------------------------------------------------------------------------------>
-<div id="AlumnoNuevo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="AlumnoNuevo" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog  modal-lg">
         <div class="modal-content">
             <div class="container-fluid ">
@@ -162,7 +162,7 @@
     </div>
 </div>
 <!-- Modal para Editar Usuario --------------------------------------------------------------------------------------->
-<div id="AlumnoModifica" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="AlumnoModifica" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="container-fluid ">
@@ -218,7 +218,7 @@
     </div>
 </div>
 <!-- Modal para Eliminar Usuario --------------------------------------------------------------------------------------->
-<div id="AlumnoElimina" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="AlumnoElimina" class="modal fade" tabindex="-1" data-backdrop="static"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="container-fluid ">
