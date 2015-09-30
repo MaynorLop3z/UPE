@@ -1,5 +1,5 @@
 <!------Modal para el boton Agregar Diplomados----------------------------------------------------------------------------------->
-<div id="DiplomadoNuevo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="DiplomadoNuevo" class="modal fade"  data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="container-fluid ">
@@ -53,7 +53,7 @@
 
 
     <!-- Modal paa modificar Diplomados-------------------------------------------------------------------------------------------->
-    <div id="ModificarDiplomado" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div id="ModificarDiplomado" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="container-fluid ">
@@ -105,7 +105,7 @@
         </div>
     </div>
 <!-- Eliminar DIplomado----->
-<div id="EliminarDiplomado" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="EliminarDiplomado" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="container-fluid ">
