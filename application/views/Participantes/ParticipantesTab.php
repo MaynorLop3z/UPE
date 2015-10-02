@@ -6,9 +6,9 @@
     </div>
     <div class="panel-body">
         <div class="btn btn-group">
-            <button href="#AlumnoNuevo" id="btnADDAlumno" class="btn btn-default btn-default" data-toggle="modal">Alumno Nuevo</button>
-            <button href="#AlumnoEditar" id="btnEDITAlumno" class="btn btn-default btn-default" data-toggle="modal">Modificar Alumno</button>
-            <button href="#AlumnoElimina" id="btnDELAlumno" class="btn btn-default btn-default" data-toggle="modal">Eliminar Alumno</button>
+            <button  id="btnADDAlumno" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Alumno Nuevo</button>
+<!--            <button href="#AlumnoEditar" id="btnEDITAlumno" class="btn btn-default btn-default" data-toggle="modal">Modificar Alumno</button>
+            <button href="#AlumnoElimina" id="btnDELAlumno" class="btn btn-default btn-default" data-toggle="modal">Eliminar Alumno</button>-->
         </div>
         <?php
 //        if ($creacion) {

@@ -4,14 +4,14 @@
     <div class="modal-dialog  modal-lg">
         <div class="modal-content">
             <div class="container-fluid ">
+                <button type="button" class="close" id="btnCerrarModalNewAlum" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <form id="frmADDAlumno" action="<?php echo base_url() ?>index.php/ParticipantesController/agregar/" class="form-horizontal" method="post" >
                     <fieldset>
                         <legend class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             Agregar Alumno:
                         </legend> 
                         <div class="row">
-                           
+
                             <!--- --><div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="AlumnoNombre" class="col-lg-3 control-label">Nombre:</label>
@@ -78,10 +78,10 @@
                                         <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
                                     </div>
                                 </div>
-                                
-                     <!--- --></div>
-  <!--- --><div class="col-lg-6">
-                         <div class="form-group">
+
+                                <!--- --></div>
+                            <!--- --><div class="col-lg-6">
+                                <div class="form-group">
                                     <label for="AlumnoCarrera" class="col-lg-3 control-label">Carrera:</label>
                                     <div class="col-lg-6">
                                         <input type="text" class="form-control" name="Carrera" id="AlumnoCarrera" placeholder="Carrera del Alumno" maxlength="100">
@@ -90,70 +90,70 @@
                                         <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
                                     </div>
                                 </div>
-      <div class="form-group">
-                            <label for="AlumnoNivel" class="col-lg-3 control-label">Nivel Academico:</label>
-                            <div class="col-lg-6">
-                                <input type="text" class="form-control" name="NivelAcademico" id="AlumnoNivel" placeholder="Nivel academico del Alumno" maxlength="100">
-                            </div>
-                            <div class="col-lg-3">
-                                <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
+                                <div class="form-group">
+                                    <label for="AlumnoNivel" class="col-lg-3 control-label">Nivel Academico:</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" name="NivelAcademico" id="AlumnoNivel" placeholder="Nivel academico del Alumno" maxlength="100">
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="AlumnoNEncargado" class="col-lg-3 control-label">Encargado:</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" name="NombreEncargado" id="AlumnoNEncargado" placeholder="Nombre del encargado del Alumno" maxlength="150">
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="AlumnoCategoria" class="col-lg-3 control-label">Categoria:</label>
+                                    <div class="col-lg-6">
+                                        <select class="form-control" id="AlumnoCategoria" name="CodigoCategoriaParticipantes">
+                                            <?php
+                                            foreach ($CategoriasP as $categ) {
+                                                ?>
+                                                <option value="<?= $categ->CodigoCategoriaParticipantes ?>">
+                                                    <?= $categ->NombreCategoriaParticipante ?>
+                                                </option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="AlumnoDescripcion" class="col-lg-3 control-label">Descripcion:</label>
+                                    <div class="col-lg-6">
+                                        <textarea cols="40" rows="5" class="form-control" name="Descripcion" id="AlumnoDescripcion" placeholder="Descripcion del Alumno"></textarea>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="AlumnoComentario" class="col-lg-3 control-label">Comentarios:</label>
+                                    <div class="col-lg-6">
+                                        <textarea cols="40" rows="5" class="form-control" name="Comentarios" id="AlumnoComentario" placeholder="Comentario del Alumno"></textarea>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" id="btnEnviarAlumnoADD" onclick="" class=" btn btn-default" name="Aceptar">Agregar</button>
+                                    <button type="reset" id="btnLimpiarAlumnoADD" onclick="" class=" btn btn-default" name="Limpiar">Limpiar</button>
+                                    <!--<button type="button" id="btnCerrar" data-dismiss="modal" class=" btn btn-default" name="Cerrar">Cerrar</button>-->
+                                </div>
+
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="AlumnoNEncargado" class="col-lg-3 control-label">Encargado:</label>
-                            <div class="col-lg-6">
-                                <input type="text" class="form-control" name="NombreEncargado" id="AlumnoNEncargado" placeholder="Nombre del encargado del Alumno" maxlength="150">
-                            </div>
-                            <div class="col-lg-3">
-                                <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="AlumnoCategoria" class="col-lg-3 control-label">Categoria:</label>
-                            <div class="col-lg-6">
-                                <select class="form-control" id="AlumnoCategoria" name="CodigoCategoriaParticipantes">
-                                    <?php
-                                    foreach ($CategoriasP as $categ) {
-                                        ?>
-                                        <option value="<?= $categ->CodigoCategoriaParticipantes ?>">
-                                            <?= $categ->NombreCategoriaParticipante ?>
-                                        </option>
-                                        <?php
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                            <div class="col-lg-3">
-                                <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="AlumnoDescripcion" class="col-lg-3 control-label">Descripcion:</label>
-                            <div class="col-lg-6">
-                                <textarea cols="40" rows="5" class="form-control" name="Descripcion" id="AlumnoDescripcion" placeholder="Descripcion del Alumno"></textarea>
-                            </div>
-                            <div class="col-lg-3">
-                                <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="AlumnoComentario" class="col-lg-3 control-label">Comentarios:</label>
-                            <div class="col-lg-6">
-                                <textarea cols="40" rows="5" class="form-control" name="Comentarios" id="AlumnoComentario" placeholder="Comentario del Alumno"></textarea>
-                            </div>
-                            <div class="col-lg-3">
-                                <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" id="btnEnviarAlumnoADD" onclick="" class=" btn btn-default" name="Aceptar">Agregar</button>
-                            <button type="reset" id="btnLimpiarAlumnoADD" onclick="" class=" btn btn-default" name="Limpiar">Limpiar</button>
-                            <!--<button type="button" id="btnCerrar" data-dismiss="modal" class=" btn btn-default" name="Cerrar">Cerrar</button>-->
-                        </div>
-      
-  <!--- --> </div>
-                        </div>
- 
+
                     </fieldset>
                 </form>
             </div>
@@ -173,7 +173,7 @@
                             Editar Alumno:
                         </legend> 
                         <div class="row">
-                           
+
                             <!--- --><div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="AlumnoNombreEDIT" class="col-lg-3 control-label">Nombre:</label>
@@ -240,10 +240,10 @@
                                         <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
                                     </div>
                                 </div>
-                                
-                     <!--- --></div>
-  <!--- --><div class="col-lg-6">
-                         <div class="form-group">
+
+                                <!--- --></div>
+                            <!--- --><div class="col-lg-6">
+                                <div class="form-group">
                                     <label for="AlumnoCarreraEDIT" class="col-lg-3 control-label">Carrera:</label>
                                     <div class="col-lg-6">
                                         <input type="text" class="form-control" name="Carrera" id="AlumnoCarreraEDIT" placeholder="Carrera del Alumno" maxlength="100">
@@ -252,70 +252,69 @@
                                         <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
                                     </div>
                                 </div>
-      <div class="form-group">
-                            <label for="AlumnoNivelEDIT" class="col-lg-3 control-label">Nivel Academico:</label>
-                            <div class="col-lg-6">
-                                <input type="text" class="form-control" name="NivelAcademico" id="AlumnoNivelEDIT" placeholder="Nivel academico del Alumno" maxlength="100">
-                            </div>
-                            <div class="col-lg-3">
-                                <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
-                            </div>
+                                <div class="form-group">
+                                    <label for="AlumnoNivelEDIT" class="col-lg-3 control-label">Nivel Academico:</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" name="NivelAcademico" id="AlumnoNivelEDIT" placeholder="Nivel academico del Alumno" maxlength="100">
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="AlumnoNEncargadoEDIT" class="col-lg-3 control-label">Encargado:</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" name="NombreEncargado" id="AlumnoNEncargadoEDIT" placeholder="Nombre del encargado del Alumno" maxlength="150">
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="AlumnoCategoriaEDIT" class="col-lg-3 control-label">Categoria:</label>
+                                    <div class="col-lg-6">
+                                        <select class="form-control" id="AlumnoCategoriaEDIT" name="CodigoCategoriaParticipantes">
+                                            <?php
+                                            foreach ($CategoriasP as $categ) {
+                                                //debo modificar este if para que hale la categoria actual del alumno
+                                                if (true) {
+                                                    echo '<option value="' . $categ->CodigoCategoriaParticipantes . '">' . $categ->NombreCategoriaParticipante . '</option>';
+                                                }
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="AlumnoDescripcionEDIT" class="col-lg-3 control-label">Descripcion:</label>
+                                    <div class="col-lg-6">
+                                        <textarea cols="40" rows="5" class="form-control" name="Descripcion" id="AlumnoDescripcionEDIT" placeholder="Descripcion del Alumno"></textarea>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="AlumnoComentarioEDIT" class="col-lg-3 control-label">Comentarios:</label>
+                                    <div class="col-lg-6">
+                                        <textarea cols="40" rows="5" class="form-control" name="Comentarios" id="AlumnoComentarioEDIT" placeholder="Comentario del Alumno"></textarea>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" id="btnEnviarAlumnoADD" onclick="" class=" btn btn-default" name="Aceptar">Agregar</button>
+                                    <button type="reset" id="btnLimpiarAlumnoADD" onclick="" class=" btn btn-default" name="Limpiar">Limpiar</button>
+                                    <!--<button type="button" id="btnCerrar" data-dismiss="modal" class=" btn btn-default" name="Cerrar">Cerrar</button>-->
+                                </div>
+
+                                <!--- --> </div>
                         </div>
-                        <div class="form-group">
-                            <label for="AlumnoNEncargadoEDIT" class="col-lg-3 control-label">Encargado:</label>
-                            <div class="col-lg-6">
-                                <input type="text" class="form-control" name="NombreEncargado" id="AlumnoNEncargadoEDIT" placeholder="Nombre del encargado del Alumno" maxlength="150">
-                            </div>
-                            <div class="col-lg-3">
-                                <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
-                            </div>
-                        </div>
-                        <div class="form-group">
-                                <label for="AlumnoCategoriaEDIT" class="col-lg-3 control-label">Categoria:</label>
-                            <div class="col-lg-6">
-                                <select class="form-control" id="AlumnoCategoriaEDIT" name="CodigoCategoriaParticipantes">
-                                    <?php
-                                    foreach ($CategoriasP as $categ) {
-                                        ?>
-                                        <option value="<?= $categ->CodigoCategoriaParticipantes ?>">
-                                            <?= $categ->NombreCategoriaParticipante ?>
-                                        </option>
-                                        <?php
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                            <div class="col-lg-3">
-                                <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="AlumnoDescripcionEDIT" class="col-lg-3 control-label">Descripcion:</label>
-                            <div class="col-lg-6">
-                                <textarea cols="40" rows="5" class="form-control" name="Descripcion" id="AlumnoDescripcionEDIT" placeholder="Descripcion del Alumno"></textarea>
-                            </div>
-                            <div class="col-lg-3">
-                                <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="AlumnoComentarioEDIT" class="col-lg-3 control-label">Comentarios:</label>
-                            <div class="col-lg-6">
-                                <textarea cols="40" rows="5" class="form-control" name="Comentarios" id="AlumnoComentarioEDIT" placeholder="Comentario del Alumno"></textarea>
-                            </div>
-                            <div class="col-lg-3">
-                                <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" id="btnEnviarAlumnoADD" onclick="" class=" btn btn-default" name="Aceptar">Agregar</button>
-                            <button type="reset" id="btnLimpiarAlumnoADD" onclick="" class=" btn btn-default" name="Limpiar">Limpiar</button>
-                            <!--<button type="button" id="btnCerrar" data-dismiss="modal" class=" btn btn-default" name="Cerrar">Cerrar</button>-->
-                        </div>
-      
-  <!--- --> </div>
-                        </div>
- 
+
                     </fieldset>
                 </form>
             </div>
@@ -328,7 +327,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="container-fluid ">
-                <form action="UsuarioController" class="form-horizontal" method="post" >
+                <form action="ParticipantesController" class="form-horizontal" method="post" >
                     <button type="button" class="close btn-lg" data-dismiss="modal" aria-hidden="true">×</button>
                     <fieldset>
                         <legend class="modal-header">Usuario:</legend> 
@@ -348,7 +347,8 @@
                             <button type="submit" id="btnCancelarU" onclick="" class=" btn btn-default" name="Limpiar">Cancelar</button>
                         </div>
 
-                    </fieldset></div>
-        </div>     </form>
+                    </fieldset>
+            </div>     </form>
+        </div>
     </div>
 </div>
