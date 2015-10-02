@@ -36,5 +36,21 @@ class ParticipantesController extends CI_Controller {
         $creado = $this->Participantes->CrearParticipante($this->input->post('Nombre'), $this->input->post('CorreoElectronico'), $this->input->post('TelefonoFijo'), $this->input->post('TelefonoCelular'), $this->input->post('Direccion'), $this->input->post('FechaNacimiento'), $this->input->post('CodigoCategoriaParticipantes'), $this->input->post('NumeroDUI'),0, $this->input->post('Carrera'), $this->input->post('NivelAcademico'), $this->input->post('NombreEncargado'), $this->input->post('Descripcion'), $this->input->post('Comentarios'));
         return $creado;
     }
+//    public function guardarParticipantes($codigoUsuario = null) {
+//        try {
+//            if ($this->input->post()) {
+//                $nombrePersonaUsuario = $this->input->post('UsuarioNombre');
+//                $contraseniaUsuario = $this->input->post('UsuarioPassword');
+//                $correo = $this->input->post('UsuarioEmail');
+//                $nombreUsuario = $nombrePersonaUsuario . '123';
+//                $this->load->model('Usuarios');
+//
+//                $arrayData = $this->Usuarios->guardarUsuario(null, $nombreUsuario, $contraseniaUsuario, $nombrePersonaUsuario, $correo);
+//                echo json_encode($arrayData);
+//            }
+//        } catch (Exception $ex) {
+//            echo json_encode($ex);
+//        }
+//    }
 
 }
