@@ -1,5 +1,5 @@
 <?php $this->load->helper('url'); ?>
-<!-- Modal Para el Usuario Nuevo  ------------------------------------------------------------------------------------>
+<!-- Modal Para el Alumno Nuevo  ------------------------------------------------------------------------------------>
 <div id="AlumnoNuevo" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog  modal-lg">
         <div class="modal-content">
@@ -160,16 +160,10 @@
         </div>
     </div>
 </div>
-<<<<<<< HEAD
 
-<!-- Modal Para la modificacion del alumno  ------------------------------------------------------------------------------------>
-<div id="AlumnoEditar" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog  modal-lg">
-=======
-<!-- Modal para Editar Usuario --------------------------------------------------------------------------------------->
+<!-- Modal para Editar Alumnos --------------------------------------------------------------------------------------->
 <div id="AlumnoModifica" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
->>>>>>> 092563a86affb1be608dea0ac5f7f1a4b9d412e8
         <div class="modal-content">
             <div class="container-fluid ">
                 <form action="<?php echo base_url() ?>index.php/ParticipantesController/modificar/" class="form-horizontal" method="post" >
@@ -329,7 +323,7 @@
     </div>
 </div>
 
-<!-- Modal para Eliminar Usuario --------------------------------------------------------------------------------------->
+<!-- Modal para Eliminar Alumnos --------------------------------------------------------------------------------------->
 <div id="AlumnoElimina" class="modal fade" tabindex="-1" data-backdrop="static"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
