@@ -53,9 +53,9 @@ $("#frmADDAlumno").submit(function(event) {
         if (data !== null) {
             var obj = jQuery.parseJSON(data);
             var trResult = $('#tableAlumnos tr:last').clone();
-            trResult.attr('id', 'tr' + obj.CodigoParticipante);
-            trResult.find('.nombre_Usuario').html(obj.Nombre);
-            trResult.find('.correo_Usuario').html(obj.CorreoUsuario);
+            trResult.attr('id', 'Alum' + obj.CodigoParticipante);
+            trResult.find('.Nombre_Alumno').html(obj.AlumnoNombre);
+            trResult.find('.TelefonoMovil_Alumno').html(obj.AlumnoMail);
             trResult.find('.nickName_Usuario').html(obj.NombreUsuario);
             trResult.find('.gestion_User').find('.btn_modificar_alum').attr('id', obj.CodigoParticipante);
             $(document).on("click", "#" + obj.CodigoParticipante.toString(), function() {
@@ -66,8 +66,8 @@ $("#frmADDAlumno").submit(function(event) {
             $("#AlumnoNuevo").modal('toggle');
         }
     });
-    posting.fail(function() {
-        alert("error");
+    posting.fail(function(xhr, textStatus, errorThrown) {
+        alert("error"+xhr.responseText);
     });
 });
 

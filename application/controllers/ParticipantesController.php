@@ -48,8 +48,9 @@ class ParticipantesController extends CI_Controller {
                 $categoria = $this->input->post('AlumnoCategoria');
                 $descripcion = $this->input->post('AlumnoDescripcion');
                 $comentarios = $this->input->post('AlumnoComentarios');
-
-                $arrayData = $this->Participantes->guardar(null, $nombreUsuario, $contraseniaUsuario, $nombrePersonaUsuario, $correo);
+                
+                $universidad = null;
+                $arrayData = $this->Participantes->CrearParticipante($nombre, $mail, $tfijo,$tcel,$direccion,$nacimiento, $categoria,$DUI,$universidad,$carrera,$nivelAcad,$encargado,$descripcion,$comentarios);
                 echo json_encode($arrayData);
             }
         } catch (Exception $ex) {
