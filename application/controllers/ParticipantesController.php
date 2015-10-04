@@ -33,6 +33,31 @@ class ParticipantesController extends CI_Controller {
     }
     
     public function agregar() {
+        try {
+            if ($this->input->post()) {
+                $nombre = $this->input->post('AlumnoNombre');
+                $mail = $this->input->post('AlumnoMail');
+                $tfijo = $this->input->post('AlumnoFijo');
+                $tcel = $this->input->post('AlumnoMovil');
+                $direccion = $this->input->post('AlumnoDir');
+                $DUI = $this->input->post('AlumnoDUI');
+                $nacimiento = $this->input->post('AlumnoFNac');
+                $carrera = $this->input->post('AlumnoCarrera');
+                $nivelAcad = $this->input->post('AlumnoNivel');
+                $encargado = $this->input->post('AlumnoNEncargado');
+                $categoria = $this->input->post('AlumnoCategoria');
+                $descripcion = $this->input->post('AlumnoDescripcion');
+                $comentarios = $this->input->post('AlumnoComentarios');
+
+                $arrayData = $this->Participantes->guardar(null, $nombreUsuario, $contraseniaUsuario, $nombrePersonaUsuario, $correo);
+                echo json_encode($arrayData);
+            }
+        } catch (Exception $ex) {
+            echo json_encode($ex);
+        }
+        
+        
+        
         $creado = $this->Participantes->CrearParticipante($this->input->post('Nombre'), $this->input->post('CorreoElectronico'), $this->input->post('TelefonoFijo'), $this->input->post('TelefonoCelular'), $this->input->post('Direccion'), $this->input->post('FechaNacimiento'), $this->input->post('CodigoCategoriaParticipantes'), $this->input->post('NumeroDUI'),0, $this->input->post('Carrera'), $this->input->post('NivelAcademico'), $this->input->post('NombreEncargado'), $this->input->post('Descripcion'), $this->input->post('Comentarios'));
         return $creado;
     }

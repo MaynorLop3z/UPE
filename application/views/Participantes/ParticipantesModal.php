@@ -62,7 +62,7 @@
                                 <div class="form-group">
                                     <label for="AlumnoDUI" class="col-lg-3 control-label">DUI:</label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control" name="NumeroDUI" id="AlumnoSUI" placeholder="Numero de DUI del Alumno" maxlength="10">
+                                        <input type="text" class="form-control" name="NumeroDUI" id="AlumnoDUI" placeholder="Numero de DUI del Alumno" maxlength="10">
                                     </div>
                                     <div class="col-lg-3">
                                         <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
