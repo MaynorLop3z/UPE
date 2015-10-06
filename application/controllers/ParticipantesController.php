@@ -14,16 +14,16 @@ class ParticipantesController extends CI_Controller {
 
     public function index() {
 
-        if ($this->input->post('Aceptar')) {
-            $data['creacion'] = agregar();
-            if ($data['creacion']) {
-                $data['Mensaje'] = 'Alumno Agregado Exitosamente';
-            } else {
-                $data['Mensaje'] = 'Error al Agregar al alumno';
-            }
-        } else {
-            $data['creacion'] = false;
-        }
+//        if ($this->input->post('Aceptar')) {
+//            $data['creacion'] = agregar();
+//            if ($data['creacion']) {
+//                $data['Mensaje'] = 'Alumno Agregado Exitosamente';
+//            } else {
+//                $data['Mensaje'] = 'Error al Agregar al alumno';
+//            }
+//        } else {
+//            $data['creacion'] = false;
+//        }
         $data['Alumnos'] = $this->Participantes->listarParticipantes();
         //$this->load->model('CategoriasParticipante');
         $data['CategoriasP'] = $this->Participantes->listarCategoriasParticipante();
@@ -45,7 +45,7 @@ class ParticipantesController extends CI_Controller {
                 $encargado = $this->input->post('AlumnoNEncargado');
                 $categoria = $this->input->post('AlumnoCategoria');
                 $descripcion = $this->input->post('AlumnoDescripcion');
-                $comentarios = $this->input->post('AlumnoComentarios');
+                $comentarios = $this->input->post('AlumnoComentario');
 
                 $universidad = 0;
                 $arrayData = $this->Participantes->CrearParticipante($nombre, $mail, $tfijo, $tcel, $direccion, $nacimiento, $categoria, $DUI, $universidad, $carrera, $nivelAcad, $encargado, $descripcion, $comentarios);
