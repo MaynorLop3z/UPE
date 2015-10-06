@@ -47,19 +47,30 @@ $('#AlumnoEditar').on('show.bs.modal', function(event) {
 
 $("#frmADDAlumno").submit(function(event) {
     event.preventDefault();
-    var $form = $(this), AlumnoNombre = $form.find("input[name='Nombre']").val(), AlumnoMail = $form.find("input[name='CorreoElectronico']").val(), AlumnoFijo = $form.find("input[name='TelefonoFijo']").val(), AlumnoMovil = $form.find("input[name='TelefonoCelular']").val(), AlumnoDir = $form.find("input[name='Direccion']").val(),AlumnoDUI = $form.find("input[name='NumeroDUI']").val(), AlumnoFNac = $form.find("input[name='FechaNacimiento']").val(), AlumnoCarrera = $form.find("input[name='Carrera']").val(), AlumnoNivel = $form.find("input[name='NivelAcademico']").val(),AlumnoNEncargado = $form.find("input[name='NombreEncargado']").val(),AlumnoCategoria = $form.find("select[name='CodigoCategoriaParticipantes']").val(),AlumnoDescripcion = $form.find("textare[name='Descripcion']").val(),AlumnoComentario = $form.find("textare[name='Comentarios']").val(),url = $form.attr("action");
+    var $form = $(this), AlumnoNombre = $form.find("input[name='Nombre']").val(), AlumnoMail = $form.find("input[name='CorreoElectronico']").val(), AlumnoFijo = $form.find("input[name='TelefonoFijo']").val(), AlumnoMovil = $form.find("input[name='TelefonoCelular']").val(), AlumnoDir = $form.find("input[name='Direccion']").val(), AlumnoDUI = $form.find("input[name='NumeroDUI']").val(), AlumnoFNac = $form.find("input[name='FechaNacimiento']").val(), AlumnoCarrera = $form.find("input[name='Carrera']").val(), AlumnoNivel = $form.find("input[name='NivelAcademico']").val(), AlumnoNEncargado = $form.find("input[name='NombreEncargado']").val(), AlumnoCategoria = $form.find("select[name='CodigoCategoriaParticipantes']").val(), AlumnoDescripcion = $form.find("textare[name='Descripcion']").val(), AlumnoComentario = $form.find("textare[name='Comentarios']").val(), url = $form.attr("action");
     var posting = $.post(url, {AlumnoNombre: AlumnoNombre, AlumnoMail: AlumnoMail, AlumnoFijo: AlumnoFijo, AlumnoMovil: AlumnoMovil, AlumnoDir: AlumnoDir, AlumnoDUI: AlumnoDUI, AlumnoFNac: AlumnoFNac, AlumnoCarrera: AlumnoCarrera, AlumnoNivel: AlumnoNivel, AlumnoNEncargado: AlumnoNEncargado, AlumnoCategoria: AlumnoCategoria, AlumnoDescripcion: AlumnoDescripcion, AlumnoComentario: AlumnoComentario});
     posting.done(function(data) {
         if (data !== null) {
             var obj = jQuery.parseJSON(data);
             var trResult = $('#tableAlumnos tr:last').clone();
-            trResult.attr('id', 'Alum' + obj.CodigoParticipante);
+            trResult.attr('id', 'alum' + obj.CodigoParticipante);
             trResult.find('.Nombre_Alumno').html(obj.AlumnoNombre);
-            trResult.find('.TelefonoMovil_Alumno').html(obj.AlumnoMail);
-            trResult.find('.nickName_Usuario').html(obj.NombreUsuario);
+            trResult.find('.TelefonoFijo_Alumno').html(obj.AlumnoFijo);
+            trResult.find('.TelefonoMovil_Alumno').html(obj.AlumnoMovil);
+            trResult.find('.Direccion_Alumno').html(obj.AlumnoDir);
+            trResult.find('.DUI_Alumno').html(obj.AlumnoDUI);
+            trResult.find('.Mail_Alumno').html(obj.AlumnoMail);
+            trResult.find('.FechaNac_Alumno').html(obj.AlumnoFNac);
+            trResult.find('.CodU_Alumno').html(0);
+            trResult.find('.Carrerra_Alumno').html(obj.AlumnoCarrera);
+            trResult.find('.NivelAcad_Alumno').html(obj.AlumnoNivel);
+            trResult.find('.NombreEncargado_Alumno').html(obj.AlumnoNEncargado);
+            trResult.find('.CodCat_Alumno').html(obj.AlumnoCategoria);
+            trResult.find('.Descripcion_Alumno').html(obj.AlumnoDescripcion);
+            trResult.find('.Comentarios_Alumno').html(obj.AlumnoComentarios);
             trResult.find('.gestion_User').find('.btn_modificar_alum').attr('id', obj.CodigoParticipante);
             $(document).on("click", "#" + obj.CodigoParticipante.toString(), function() {
-                codigoUsuario = obj.CodigoParticipante;
+                codigoParticipante = obj.CodigoParticipante;
                 $("#AlumnoEditar").modal('toggle');
             });
             $('#tableAlumnos > tbody').append(trResult);
@@ -67,7 +78,7 @@ $("#frmADDAlumno").submit(function(event) {
         }
     });
     posting.fail(function(xhr, textStatus, errorThrown) {
-        alert("error"+xhr.responseText);
+        alert("error" + xhr.responseText);
     });
 });
 

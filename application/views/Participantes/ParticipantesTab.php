@@ -59,7 +59,7 @@
                 <?php
                 foreach ($Alumnos as $alum) {
                     ?>
-                    <tr id=alum"<?= $alum->CodigoParticipante ?>">
+                    <tr id="alum<?= $alum->CodigoParticipante ?>">
     <!--                    <tr>-->
                         <td class="Mail_Alumno"><?= $alum->CorreoElectronico ?></td>
                         <td class="TelefonoFijo_Alumno" style="display: none"><?= $alum->TelefonoFijo ?></td>
@@ -72,7 +72,7 @@
                         <td class="Carrera_Alumno" style="display: none"><?= $alum->Carrera ?></td>
                         <td class="NivelAcad_Alumno" style="display: none"><?= $alum->NivelAcademico ?></td>
                         <td class="NombreEncargado_Alumno" style="display: none"><?= $alum->NombreEncargado ?></td>
-                        <td class="CodPart_Alumno"><?= $alum->CodigoCategoriaParticipantes ?></td>
+                        <td class="CodCat_Alumno"><?= $alum->CodigoCategoriaParticipantes ?></td>
                         <td class="Descripcion_Alumno"><?= $alum->Descripcion ?></td>
                         <td class="gestion_Alumno">
                             <button id="<?php echo $alum->CodigoParticipante ?>"  title="Editar Alumno" class="btn_modificar_alum btn btn-success "  class=" btn btn-info btn-lg"><span class="glyphicon glyphicon-pencil"></span> </button>
