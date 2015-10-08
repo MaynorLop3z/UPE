@@ -74,11 +74,11 @@
                         <td class="NombreEncargado_Alumno" style="display: none"><?= $alum->NombreEncargado ?></td>
                         <td class="CodCat_Alumno"><?= $alum->CodigoCategoriaParticipantes ?></td>
                         <td class="Descripcion_Alumno"><?= $alum->Descripcion ?></td>
+                        <td class="Comentarios_Alumno" style="display: none"><?= $alum->Comentarios ?></td>
                         <td class="gestion_Alumno">
-                            <button id="<?php echo $alum->CodigoParticipante ?>"  title="Editar Alumno" class="btn_modificar_alum btn btn-success "  class=" btn btn-info btn-lg"><span class="glyphicon glyphicon-pencil"></span> </button>
-                            <button data-toggle="modal" title="Eliminar Alumno" class="btn btn-danger" href="#usuarioElimina"><span class="glyphicon glyphicon-trash"></span></button></td>
-                    </tr>
-                            <td class="Comentarios_Alumno" style="display: none"><?= $alum->Comentarios ?></td>
+                            <button id="<?php echo $alum->CodigoParticipante ?>"  title="Editar Alumno" class="btn_modificar_alum btn btn-success"><span class="glyphicon glyphicon-pencil"></span> </button>
+                            <button data-toggle="modal" title="Eliminar Alumno" class="btn btn-danger" href="#AlumnoEliminar"><span class="glyphicon glyphicon-trash"></span></button>
+                        </td>
                     </tr>
                     <?php
                 }
