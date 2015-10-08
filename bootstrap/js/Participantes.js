@@ -51,6 +51,7 @@ $("#frmADDAlumno").submit(function(event) {
     var posting = $.post(url, {AlumnoNombre: AlumnoNombre, AlumnoMail: AlumnoMail, AlumnoFijo: AlumnoFijo, AlumnoMovil: AlumnoMovil, AlumnoDir: AlumnoDir, AlumnoDUI: AlumnoDUI, AlumnoFNac: AlumnoFNac, AlumnoCarrera: AlumnoCarrera, AlumnoNivel: AlumnoNivel, AlumnoNEncargado: AlumnoNEncargado, AlumnoCategoria: AlumnoCategoria, AlumnoDescripcion: AlumnoDescripcion, AlumnoComentario: AlumnoComentario});
     posting.done(function(data) {
         if (data !== null) {
+console.log('No esta vacio');
             var obj = jQuery.parseJSON(data);
             var trResult = $('#tableAlumnos tr:last').clone();
             trResult.attr('id', 'alum' + obj.CodigoParticipante);
@@ -73,12 +74,16 @@ $("#frmADDAlumno").submit(function(event) {
                 codigoParticipante = obj.CodigoParticipante;
                 $("#AlumnoEditar").modal('toggle');
             });
-            $('#tableAlumnos > tbody').append(trResult);
+            $('#tableAlumnos tbody').append(trResult);
             $("#AlumnoNuevo").modal('toggle');
         }
+console.log('data vacio');
     });
-    posting.fail(function(xhr, textStatus, errorThrown) {
-        alert("error" + xhr.responseText);
+    //posting.fail(function(xhr, textStatus, errorThrown) {
+   //     alert("error" + xhr.responseText);
+   // });
+posting.fail(function() {
+        alert("error");
     });
 });
 
