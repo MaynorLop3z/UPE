@@ -31,6 +31,7 @@ and open the template in the editor.
                 $("#Horarios").load('HorariosController');
                 $("#Modulos").load('ModulosController');
                 $("#Participantes").load('ParticipantesController');
+                $("#PublicacionModulo").load('PublicacionMoController');
             });
         </script>
     </head>
@@ -65,6 +66,7 @@ and open the template in the editor.
                             <li role="presentation"><a href="#Roles" aria-controls="Roles" role="tab" data-toggle="tab">Roles</a></li>
                             <li role="presentation"><a href="#Diplomados" aria-controls="Diplomados" role="tab" data-toggle="tab">Diplomados</a></li>
                             <li role="presentation"><a href="#Publicaciones" aria-controls="Publicaciones" role="tab" data-toggle="tab">Publicaciones</a></li>
+                            <li role="presentation"><a href="#PublicacionesModulo" aria-controls="PublicacionesModulo" role="tab" data-toggle="tab">Publicaciones Modulo</a></li>
                             <li role="presentation"><a href="#Horarios" aria-controls="Horarios" role="tab" data-toggle="tab">Horarios</a></li>
                             <li role="presentation"><a href="#Modulos" aria-controls="Modulos" role="tab" data-toggle="tab">Modulos</a></li>
                             <li role="presentation"><a href="#Participantes" aria-controls="Participantes" role="tab" data-toggle="tab">Participantes</a></li>
@@ -74,6 +76,7 @@ and open the template in the editor.
                             <div role="tabpanel" class="tab-pane" id="Roles"></div>
                             <div role="tabpanel" class="tab-pane" id="Diplomados"></div>
                             <div role="tabpanel" class="tab-pane" id="Publicaciones"></div>
+                            <div role="tabpanel" class="tab-pane" id="PublicacionesModulo"></div>
                             <div role="tabpanel" class="tab-pane" id="Horarios"></div>
                             <div role="tabpanel" class="tab-pane" id="Modulos"></div>
                             <div role="tabpanel" class="tab-pane" id="Participantes"></div>

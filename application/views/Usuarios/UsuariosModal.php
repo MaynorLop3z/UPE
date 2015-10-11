@@ -123,7 +123,7 @@
     </div>
 </div>
 <!-- Modal para Eliminar Usuario --------------------------------------------------------------------------------------->
-<div id="usuarioElimina" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="usuarioElimina" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" >
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="container-fluid ">
