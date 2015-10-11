@@ -162,11 +162,11 @@
 </div>
 
 <!-- Modal para Editar Alumnos --------------------------------------------------------------------------------------->
-<div id="AlumnoModifica" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div id="AlumnoEditar" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="container-fluid ">
-                <form action="<?php echo base_url() ?>index.php/ParticipantesController/modificar/" class="form-horizontal" method="post" >
+                <form id="frmEditarAlumno" action="<?php echo base_url() ?>index.php/ParticipantesController/modificar/" class="form-horizontal" method="post" >
                     <fieldset>
                         <legend class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -307,8 +307,8 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="submit" id="btnEnviarAlumnoADD" onclick="" class=" btn btn-default" name="Aceptar">Agregar</button>
-                                    <button type="reset" id="btnLimpiarAlumnoADD" onclick="" class=" btn btn-default" name="Limpiar">Limpiar</button>
+                                    <button type="submit" id="btnEnviarAlumnoEdit" onclick="" class=" btn btn-default" name="Aceptar">Actualizar</button>
+                                    <button type="reset" id="btnLimpiarAlumnoEdit" onclick="" class=" btn btn-default" name="Limpiar">Limpiar</button>
                                     <!--<button type="button" id="btnCerrar" data-dismiss="modal" class=" btn btn-default" name="Cerrar">Cerrar</button>-->
                                 </div>
 

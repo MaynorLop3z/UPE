@@ -46,7 +46,6 @@ class ParticipantesController extends CI_Controller {
                 $categoria = $this->input->post('AlumnoCategoria');
                 $descripcion = $this->input->post('AlumnoDescripcion');
                 $comentarios = $this->input->post('AlumnoComentario');
-
                 $universidad = 0;
                 $arrayData = $this->Participantes->CrearParticipante($nombre, $mail, $tfijo, $tcel, $direccion, $nacimiento, $categoria, $DUI, $universidad, $carrera, $nivelAcad, $encargado, $descripcion, $comentarios);
                 echo json_encode($arrayData);
@@ -54,24 +53,29 @@ class ParticipantesController extends CI_Controller {
         } catch (Exception $ex) {
             echo json_encode($ex);
         }
-//        $creado = $this->Participantes->CrearParticipante($this->input->post('Nombre'), $this->input->post('CorreoElectronico'), $this->input->post('TelefonoFijo'), $this->input->post('TelefonoCelular'), $this->input->post('Direccion'), $this->input->post('FechaNacimiento'), $this->input->post('CodigoCategoriaParticipantes'), $this->input->post('NumeroDUI'), 0, $this->input->post('Carrera'), $this->input->post('NivelAcademico'), $this->input->post('NombreEncargado'), $this->input->post('Descripcion'), $this->input->post('Comentarios'));
-//        return $creado;
     }
 
-//    public function guardarParticipantes($codigoUsuario = null) {
-//        try {
-//            if ($this->input->post()) {
-//                $nombrePersonaUsuario = $this->input->post('UsuarioNombre');
-//                $contraseniaUsuario = $this->input->post('UsuarioPassword');
-//                $correo = $this->input->post('UsuarioEmail');
-//                $nombreUsuario = $nombrePersonaUsuario . '123';
-//                $this->load->model('Usuarios');
-//
-//                $arrayData = $this->Usuarios->guardarUsuario(null, $nombreUsuario, $contraseniaUsuario, $nombrePersonaUsuario, $correo);
-//                echo json_encode($arrayData);
-//            }
-//        } catch (Exception $ex) {
-//            echo json_encode($ex);
-//        }
-//    }
+    
+    public function modificar() {
+        try {
+            if ($this->input->post()) {
+                $codigo = $this->input->post('AlumnoCodigo');
+                $nombre = $this->input->post('AlumnoNombre');
+                $mail = $this->input->post('AlumnoMail');
+                $tfijo = $this->input->post('AlumnoFijo'); $tcel = $this->input->post('AlumnoMovil');
+                $direccion = $this->input->post('AlumnoDir'); $DUI = $this->input->post('AlumnoDUI');
+                $nacimiento = $this->input->post('AlumnoFNac'); $carrera = $this->input->post('AlumnoCarrera');
+                $nivelAcad = $this->input->post('AlumnoNivel');
+                $encargado = $this->input->post('AlumnoNEncargado');
+                $categoria = $this->input->post('AlumnoCategoria');
+                $descripcion = $this->input->post('AlumnoDescripcion');
+                $comentarios = $this->input->post('AlumnoComentario');
+                $universidad = 0; $umodifica = 0; $ipModifica = '192.168.1.1'; $fechaModifica = date('d/m/Y');
+                $arrayData = $this->Participantes->ModificarParticipante($codigo, $nombre, $mail, $tfijo, $tcel, $direccion, $nacimiento, $categoria, $umodifica, $ipModifica, $fechaModifica, $universidad, $DUI, $carrera, $nivelAcad, $encargado, $descripcion, $comentarios);
+                echo json_encode($arrayData);
+            }
+        } catch (Exception $ex) {
+            echo json_encode($ex);
+        }
+    }
 }
