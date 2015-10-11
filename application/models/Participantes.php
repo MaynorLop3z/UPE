@@ -73,7 +73,7 @@ class Participantes extends CI_Model {
                 'NivelAcademico' => $NivelAcademico,'NombreEncargado' => $NombreEncargado, 
                 'Descripcion' => $Descripcion, 'CodigoCategoriaParticipantes' => $CodigoCategoriaParticipantes,
                 'UsuarioModifica' => $UsuarioModifica, 'IPModifica' => $IPModifica,
-                'FechaModifica' => $FechaModifica, 'Comentarios' => $Comentarios
+                'FechaModifica' => $FechaModifica, 'Comentarios' => $Comentarios, 'Descripcion'=> $Descripcion
             );
             $this->db->where('CodigoParticipante', $CodigoParticipante);
             $this->db->update('Participantes', $data);
