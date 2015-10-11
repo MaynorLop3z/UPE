@@ -32,9 +32,10 @@ class Login extends CI_Controller {
                 
             }
         } else {
-            //aqui dene llamar usuarios
+            //aqui debe llamar usuarios
 
             $data['publicacionesMostrar'] = $this->listarPublicaciones();
+            $data['publicacionesCargar']=  $this->mostrarPublicaciones();
             $this->load->view('login_vista', $data);
         }
     }
@@ -60,6 +61,35 @@ class Login extends CI_Controller {
         }
 
         return $listaPublicacionesArchivos;
+    }
+    
+    /*
+     * La siguiente funcion mostrara las publicaciones en el login
+     */
+    public function mostrarPublicaciones() {
+        try {
+            $listaPublicacionesArchivos2 = array();
+            $iterador = 0;
+            $listaPublicaciones = array();
+            $listaPublicaciones = $this->publicaciones->listarPublicaciones();
+            foreach ($listaPublicaciones as $publicacion) {
+
+                $archivos2 = $this->archivos->listarArchivosPublicacion($publicacion->CodigoPublicacion);
+                foreach ($archivos2 as $archivo) {
+                    $publicacionArchivo = array('Titulo' => $publicacion->Titulo,
+                        'Ruta' => $archivo->Ruta, 
+                        'Contenido'=>$publicacion->Contenido,
+                        'FechaPublicacion'=>$publicacion->FechaPublicacion);
+
+                }
+                array_push($listaPublicacionesArchivos2, $publicacionArchivo);
+                $iterador ++;
+            }
+            
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+        return $listaPublicacionesArchivos2;    
     }
 
 }
