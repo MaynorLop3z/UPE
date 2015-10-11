@@ -58,5 +58,14 @@ class Usuariocontroller extends CI_Controller {
             echo json_encode($ex);
         }
     }
+    
+    public function editarUsuario(){
+        if($this->input->post()){
+            if($this->input->post('')){
+                
+            }
+        }
+    }
+    
 
 }
