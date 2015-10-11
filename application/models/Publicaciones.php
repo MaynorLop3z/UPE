@@ -144,3 +144,4 @@ class Publicaciones extends CI_Model {
         $this->db->update('Publicaciones', $data);
     }
 }
+ ?>
