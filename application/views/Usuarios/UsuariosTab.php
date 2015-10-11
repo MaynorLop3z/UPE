@@ -11,7 +11,9 @@
         <div   class="well">
 
             <button id="btnUsuarioNuevo" class="btn btn-default" ><span class="glyphicon glyphicon-plus"></span>Usuario Nuevo</button>
-        </div>
+            <button id="btnActualizarUsuarios" class="btn btn-default" ><span class="glyphicon glyphicon-refresh"></span>Actualizar Lista</button>
+            
+            </div>
         <!--<div id="divp">-->
         <table id="tableUsers" class="table table-bordered table-striped table-hover table-responsive">
             <thead>

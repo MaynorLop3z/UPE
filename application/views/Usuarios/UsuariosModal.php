@@ -64,12 +64,23 @@
                 <button type="button" class="close btn-lg" data-dismiss="modal" aria-hidden="true">×</button>
                 <form action="<?php echo base_url() ?>index.php/UsuarioController/editarUsuario/"  class="form-horizontal" method="post" >
                     <fieldset>
-                        <label id="lblCodigoUser" ></label>
+                        <input type="hidden" id="lblCodigoUser" >
                         <legend class="modal-header">Modificar Usuario:</legend>
+
+                        <div class="form-group">
+                            <label for="Nombre Persona" class="col-lg-3 control-label">Nombre Persona:</label>
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" id="txtNombrePersonaModificar"  placeholder="Nombre de la persona" required>
+                            </div>
+                            <div class="col-lg-3">
+                                <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label for="Usuario" class="col-lg-3 control-label">Usuario</label>
                             <div class="col-lg-6">
-                                <input type="text" class="form-control" id="txtUserModificar"  placeholder="Nombre de la persona" required>
+                                <input type="text" class="form-control" id="txtUserModificar"  placeholder="Nombre de usuario" required>
                             </div>
                             <div class="col-lg-3">
                                 <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
