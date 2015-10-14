@@ -47,9 +47,9 @@
                     <th style="display: none">Carrera</th>
                     <th style="display: none">Nivel Acade.</th>
                     <th style="display: none">Encargado</th>
-                    <th style="display: none">Descripcion</th>
                     <th>Categoria</th>
-                    <th>Comentarios</th>
+                    <th>Descripcion</th>
+                    <th style="display: none">Comentarios</th>
                     <th>Gestion</th>
                     
                     
