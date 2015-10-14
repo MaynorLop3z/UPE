@@ -10,15 +10,25 @@ $("#btnADDAlumno").on('click', function() {
 $('.btn_modificar_alum').on('click', function(event) {
     codigoParticipante = event.target.id;
     filaEdit = $(this);
-    console.log(filaEdit);
+    //console.log(filaEdit);
+    console.log('Clic en editar al codigo:' + codigoParticipante);
     $("#AlumnoEditar").modal('toggle');
+});
+
+
+$('.btn_eliminar_alum').on('click', function(event) {
+    codigoParticipante = event.target.id;
+    //filaEdit = $(this);
+    //console.log(filaEdit);
+    console.log('Clic en eliminar al codigo:' + codigoParticipante);
+    $("#AlumnoEliminar").modal('toggle');
 });
 
 $('#AlumnoEditar').on('show.bs.modal', function(event) {
 //                codigoUsuario = (event.target.id);
-    console.log(codigoParticipante);
+    //console.log(codigoParticipante);
     var alum = $('#alum' + codigoParticipante.substring(5));
-    console.log(alum);
+    //console.log(alum);
     var Mail_Alumno = alum.find('.Mail_Alumno').html().toString().trim();
     var TelefonoFijo_Alumno = alum.find('.TelefonoFijo_Alumno').html().toString().trim();
     var TelefonoMovil_Alumno = alum.find('.TelefonoMovil_Alumno').html().toString().trim();
@@ -49,6 +59,14 @@ $('#AlumnoEditar').on('show.bs.modal', function(event) {
     $('#AlumnoDUIEDIT').val(DUI_Alumno);
     // alert(codigoUsuario);
 });
+
+$('#AlumnoEliminar').on('show.bs.modal', function(event) {
+    console.log("Eliminar Alumno se muestra");
+var alum = $('#alum' + codigoParticipante.substring(7));
+var Nombre_Alumno = alum.find('.Nombre_Alumno').html().toString().trim();
+$('#nombreAlumEliminar').html(Nombre_Alumno);
+});
+
 
 $("#frmADDAlumno").submit(function(event) {
     event.preventDefault();
@@ -83,11 +101,11 @@ $("#frmADDAlumno").submit(function(event) {
                 codigoParticipante = obj.CodigoParticipante;
                 $("#AlumnoEditar").modal('toggle');
             });
-            console.log(fila);
+            //console.log(fila);
             $('#tableAlumnos > tbody').append(fila);
             $("#AlumnoNuevo").modal('toggle');
         }
-        console.log('data vacio');
+        //console.log('data vacio');
     });
     //posting.fail(function(xhr, textStatus, errorThrown) {
     //     alert("error" + xhr.responseText);

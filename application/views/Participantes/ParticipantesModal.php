@@ -323,32 +323,25 @@
 </div>
 
 <!-- Modal para Eliminar Alumnos --------------------------------------------------------------------------------------->
-<div id="AlumnoElimina" class="modal fade" tabindex="-1" data-backdrop="static"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<?php $this->load->helper('url'); ?>
+<div id="AlumnoEliminar" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="container-fluid ">
-                <form action="ParticipantesController" class="form-horizontal" method="post" >
-                    <button type="button" class="close btn-lg" data-dismiss="modal" aria-hidden="true">×</button>
+                <button type="button" class="close" id="btnCerrarModalDELAlum" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <form id="frmADDAlumno" action="<?php echo base_url() ?>index.php/ParticipantesController/eliminar/" class="form-horizontal" method="post" >
                     <fieldset>
-                        <legend class="modal-header">Usuario:</legend> 
-                        <div class="form-group">
-                            <label for="selectUsuario" class="col-lg-3 control-label">Usuarios</label>
-                            <div class="col-lg-9">
-
-                                <select class="form-control" id="selectUsuario">
-                                    <option>usuario 1</option>
-                                    <option>Usuario 2</option>
-                                    <option>Usuario 3</option>
-                                </select>
-                            </div>
-                        </div>
+                        <legend class="modal-header">
+                            Eliminar Alumno
+                        </legend>
+                        <p class="text-center">¿Desea eliminar al alumno: <mark id="nombreAlumEliminar"></mark> ?</p>
                         <div class="modal-footer">
-                            <button type="submit" id="btnEnviarU" onclick="" class=" btn btn-default" name="Aceptar">Aceptar</button>
-                            <button type="submit" id="btnCancelarU" onclick="" class=" btn btn-default" name="Limpiar">Cancelar</button>
+                            <button type="submit" id="btnEnviarAlumnoDEL" onclick="" class="btn btn-default" name="Eliminar">Eliminar</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Cancelar">Cancelar</button>
                         </div>
-
                     </fieldset>
-            </div>     </form>
+                </form>
+            </div>
         </div>
     </div>
 </div>

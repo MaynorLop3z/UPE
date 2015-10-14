@@ -77,7 +77,7 @@
                         <td class="Comentarios_Alumno" style="display: none"><?= $alum->Comentarios ?></td>
                         <td class="gestion_Alumno">
                             <button id="alumE<?php echo $alum->CodigoParticipante ?>"  title="Editar Alumno" class="btn_modificar_alum btn btn-success"><span class="glyphicon glyphicon-pencil"></span> </button>
-                            <button data-toggle="modal" title="Eliminar Alumno" class="btn btn-danger" href="#AlumnoEliminar"><span class="glyphicon glyphicon-trash"></span></button>
+                            <button id="alumDEL<?php echo $alum->CodigoParticipante ?>" title="Eliminar Alumno" class="btn_eliminar_alum btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
                         </td>
                     </tr>
                     <?php
