@@ -8,12 +8,38 @@ class DiplomadosController extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+        $this->load->database();
+        $this->load->model('Diplomados');
     }
 
     public function index() {
- 
+    
+      
+        $data['DiplomadosN']= $this->Diplomados->listarDiplomados(); 
+        $data['CategoriasDi']= $this->Diplomados->listarDiplomadosCategoria();
+        $this->load->view('Diplomados',$data);
         
-        $this->load->view('Diplomados');
+      
     }
 
-}
+    
+    public function guardarDiplomado(){
+        try {
+            if($this->input->post()){ //Estos son los nombres de los input del Form
+                $nombreDiplomado = $this->input->post('DiplomadoNombre');
+                $descripcionDiplomado = $this->input->post('DiplomadoDescripcion');
+                $estado = $this->input->post('radio');
+                $categoriaDi = $this->input->post('CatgoriaDiplomado');
+                $comentarioDi = $this->input->post('ComentarioDiplomado');
+                //$this->load->model('Diplomados');
+                
+                $arrayData = $this->Diplomados->crearDiplomado($nombreDiplomado,$descripcionDiplomado,$estado,$categoriaDi,$comentarioDi);
+                echo json_encode($arrayData);
+                
+            }
+        } catch (Exception $ex) {
+            echo json_encode($ex);
+        }
+    } 
+       }
+
