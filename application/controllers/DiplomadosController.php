@@ -28,12 +28,12 @@ class DiplomadosController extends CI_Controller {
             if($this->input->post()){ //Estos son los nombres de los input del Form
                 $nombreDiplomado = $this->input->post('DiplomadoNombre');
                 $descripcionDiplomado = $this->input->post('DiplomadoDescripcion');
-                $estado = $this->input->post('radio');
+                $optionsactivo= $this->input->post('optionsActivo')==='V';// Agregue la opcion activo  si es seleccionad
                 $categoriaDi = $this->input->post('CatgoriaDiplomado');
                 $comentarioDi = $this->input->post('ComentarioDiplomado');
-                //$this->load->model('Diplomados');
+                $this->load->model('Diplomados');
                 
-                $arrayData = $this->Diplomados->crearDiplomado($nombreDiplomado,$descripcionDiplomado,$estado,$categoriaDi,$comentarioDi);
+                $arrayData = $this->Diplomados->crearDiplomado($nombreDiplomado,$descripcionDiplomado,$optionsactivo,$categoriaDi,$comentarioDi);
                 echo json_encode($arrayData);
                 
             }

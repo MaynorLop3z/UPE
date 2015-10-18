@@ -1,4 +1,6 @@
 <?php $this->load->helper('url'); ?>
+
+
 <!------Modal para el boton Agregar Diplomados----------------------------------------------------------------------------------->
 <div id="DiplomadoNuevo" class="modal fade"  data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -25,18 +27,19 @@
                            <div class="col-lg-9">
                                <div class="radio" name="" id="radio">
                                    <label>
-                                       <input type="radio" name="Opcion1" id="optionsRadios1" value="opcion1" checked="">
+                                       <input type="radio" name="estado" id="optionsActivo" value="opcion1" >
                                        Activo
                                    </label>
                                </div>
-                               <div class="radio">
+                             <div class="radio">
                                    <label>
-                                       <input type="radio" name="Opcion2" id="optionsRadios2" value="opcion2">
+                                       <input type="radio" name="estado" id="optionsInactivo" value="opcion2">
                                        Inactivo
                                    </label>
-                               </div>
+                               </div> 
                            </div>
-                       </div>
+                       </div>                                                                                       
+                        
                         <div class="form-group">
                             <label for="CategoriaDiplomado" class="col-lg-3 control-label">Categoria Diplomado:</label>
                             <div class="col-lg-9">

@@ -10,7 +10,7 @@ $("#BtnADDiplomado").on('click', function() {
    
 });
 
-$('.btnmoddi').on('click', function(event) {
+$('#editDiplomado').on('click', function(event) {
     codigoDiplomado = event.target.id;
     $("#ModificarDiplomado").modal('toggle');
 });
@@ -18,10 +18,10 @@ $('.btnmoddi').on('click', function(event) {
 $('#formgrdDiplomado').submit(function(event){
 event.preventDefault();
 var $form = $(this),DiplomadoNombre = $form.find("input[name='NombreDiplomado']").val(),
-               DiplomadoDescripcion= $form.find("input[name='Descripcion']").val(),
-               radio = $form.find(),
-               CatgoriaDiplomado= $form.find("input[name='CodigoCategoriaDiplomado']").val(),
-               ComentarioDiplomado = $form.find("input[name='Comentarios']").val(),
+               DiplomadoDescripcion= $form.find("textarea[name='Descripcion']").val(),
+               radio = $form.find("input[name='estado']").val(),
+               CatgoriaDiplomado= $form.find("select[name='CodigoCategoriaDiplomado']").val(),
+               ComentarioDiplomado = $form.find("textarea[name='Comentarios']").val(),
                 url = $form.attr("action");
 
 var posting = $.post(url,{
@@ -33,7 +33,7 @@ var posting = $.post(url,{
     });
 posting.done(function(data){
 if(data !== null){
- var obj = jQuery.paseJSON(data);
+ var obj = jQuery.parseJSON(data);
  var fila;
   fila = '<tr id="dip' + obj.CodigoDiplomado + '">'; 
   fila = fila + '<td class="nombre_Diplomado"' + obj.NombreDiplomado+'</td>';
