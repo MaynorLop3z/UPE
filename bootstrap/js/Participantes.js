@@ -165,7 +165,7 @@ $("#frmDELAlumno").submit(function(event) {
     posting.done(function(data) {
         if (data) {
             console.log('Elimina');
-            //$('#tableAlumnos > tbody').remove('#alum'+obj.CodigoParticipante);
+            $('#tableAlumnos').remove('#alum'+AlumnoCodigo);
             $("#AlumnoEliminar").modal('toggle');
             
         }
