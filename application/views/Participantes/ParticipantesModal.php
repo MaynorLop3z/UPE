@@ -329,12 +329,13 @@
         <div class="modal-content">
             <div class="container-fluid ">
                 <button type="button" class="close" id="btnCerrarModalDELAlum" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <form id="frmADDAlumno" action="<?php echo base_url() ?>index.php/ParticipantesController/eliminar/" class="form-horizontal" method="post" >
+                <form id="frmDELAlumno" action="<?php echo base_url() ?>index.php/ParticipantesController/eliminar/" class="form-horizontal" method="post" >
                     <fieldset>
                         <legend class="modal-header">
                             Eliminar Alumno
                         </legend>
                         <p class="text-center">¿Desea eliminar al alumno: <mark id="nombreAlumEliminar"></mark> ?</p>
+                        <input type="hidden" class="form-control" name="onlyFor">
                         <div class="modal-footer">
                             <button type="submit" id="btnEnviarAlumnoDEL" onclick="" class="btn btn-default" name="Eliminar">Eliminar</button>
                             <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Cancelar">Cancelar</button>

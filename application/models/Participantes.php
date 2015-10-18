@@ -58,7 +58,16 @@ class Participantes extends CI_Model {
     }
 
     public function EliminarParticipante($CodigoParticipante) {
+        $eliminado = false;
+        try {
         $this->db->delete('Participantes', array('CodigoParticipante' => $CodigoParticipante));
+        if ($this->db->affected_rows() == 1){
+            $eliminado = true;
+        }
+        } catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        return $eliminado;
     }
 
 //me dio error al crear un procedimiento con mas de 20 lineas $CodigoUniversidadProcedencia = null,

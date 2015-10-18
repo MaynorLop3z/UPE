@@ -45,14 +45,12 @@ class ParticipantesController extends CI_Controller {
                 $encargado = $this->input->post('AlumnoNEncargado');
                 $categoria = $this->input->post('AlumnoCategoria');
                 $descripcion = $this->input->post('AlumnoDescripcion');
-                $comentarios = $this->input->post('AlumnoComentario');
+                $comentarios = $this->input->post('AlumnoComentario'); 
                 $universidad = 0;
                 $arrayData = $this->Participantes->CrearParticipante($nombre, $mail, $tfijo, $tcel, $direccion, $nacimiento, $categoria, $DUI, $universidad, $carrera, $nivelAcad, $encargado, $descripcion, $comentarios);
                 echo json_encode($arrayData);
             }
-        } catch (Exception $ex) {
-            echo json_encode($ex);
-        }
+        } catch (Exception $ex) { echo json_encode($ex); }
     }
 
     
@@ -78,4 +76,16 @@ class ParticipantesController extends CI_Controller {
             echo json_encode($ex);
         }
     }
+     public function eliminar() {
+         $eliminado = false;
+         try {
+             if ($this->input->post()) {
+                 $codigo = $this->input->post('AlumnoCodigo');
+                 $eliminado = $this->Participantes->EliminarParticipante($codigo);
+                 echo $eliminado;
+             }
+         } catch (Exception $ex) {
+            echo json_encode($ex);
+         }
+     }
 }

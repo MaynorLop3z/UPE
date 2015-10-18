@@ -155,3 +155,22 @@ $("#frmEditarAlumno").submit(function(event) {
         alert("error");
     });
 });
+
+
+
+$("#frmDELAlumno").submit(function(event) {
+    event.preventDefault();
+    var $form = $(this), AlumnoCodigo = codigoParticipante.substring(7), url = $form.attr("action");;
+    var posting = $.post(url, {AlumnoCodigo: AlumnoCodigo});
+    posting.done(function(data) {
+        if (data) {
+            console.log('Elimina');
+            //$('#tableAlumnos > tbody').remove('#alum'+obj.CodigoParticipante);
+            $("#AlumnoEliminar").modal('toggle');
+            
+        }
+    });
+    posting.fail(function() {
+        alert("error");
+    });
+});
