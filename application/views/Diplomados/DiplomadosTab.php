@@ -17,7 +17,8 @@
                     <th>Descripcion</th><!-- Coordinador del  diplomado -->
                     <th>Estado</th> <!-- Descripcion del modulo -->
                     <th>Categoria</th>
-                   <th>Comentarios</th>  <!-- Comentarios  sobre los diplomados  -->         
+                   <th>Comentarios</th>  <!-- Comentarios  sobre los diplomados  --> 
+                   <th>Gestionar</th>
                 </tr>
             </thead> 
             <tbody>
@@ -26,14 +27,14 @@
                 ?>
                 
                 <tr id="dip<?php  $dip->CodigoDiplomado?>">
-                    <td class="nombre_Diplomado"><?php $dip->NombreDiplomado ?></td>
-                    <td class="descripcionDiplomado"><?php $dip->Descripcion ?></td>
-                    <td class="estado"><?php $dip->Estado ?></td>
-                    <td class="categoriaDi"><?php $dip->CodigoCategoriaDiplomado?></td>
-                    <td class="comentarioDi"><?php $dip->Comentarios ?></td>
-                    <td class="gestion_dip">
-            <button id="editDiplomado<?php echo $dip->CodigoDiplomado ?>" title="Ediar Diplomado" class="btn btn-success btn btn-info btn-lg btnmoddi"><span class="glyphicon-pencil"></span></button>
-            <button data-toggle="modal" clss="btn btn-danger" title="Eliminar Diplomado" href="#EliminarDiplomado"><span class="glyphicon glyphicon-trash" ></span></button>
+                    <td class="nombre_Diplomado"><?php echo $dip->NombreDiplomado ?></td>
+                    <td class="descripcionDiplomado"><?php echo $dip->Descripcion ?></td>
+                    <td class="estado"><?php echo $dip->Estado ?></td>
+                    <td class="categoriaDi"><?php echo $dip->CodigoCategoriaDiplomado?></td>
+                    <td class="comentarioDi"><?php echo $dip->Comentarios ?></td>
+                    <td class="gestion_dip" >
+            <button id="editDiplomado<?php echo $dip->CodigoDiplomado ?>" title="Editar Diplomado" class="btn btn-success btnmoddi"><span class=" glyphicon glyphicon-pencil"></span></button>
+            <button data-toggle="modal" class="btn btn-danger" title="Eliminar Diplomado" href="#EliminarDiplomado"><span class="glyphicon glyphicon-trash" ></span></button>
                      </td>
                 </tr>
                 <?php

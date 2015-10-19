@@ -10,7 +10,7 @@ $("#BtnADDiplomado").on('click', function() {
    
 });
 
-$('#editDiplomado').on('click', function(event) {
+$('.btnmoddi').on('click', function(event) {
     codigoDiplomado = event.target.id;
     $("#ModificarDiplomado").modal('toggle');
 });
@@ -39,14 +39,14 @@ if(data !== null){
   fila = fila + '<td class="nombre_Diplomado"' + obj.NombreDiplomado+'</td>';
   fila = fila + '<td class="descripcionDiplomado">'+ obj.Descripcion+'</td>';
   fila = fila + '<td class="estado"'+ obj.Estado +'</td>';
-  fila = fila + '<td class="CodigoCategoriaD"'+ obj.CodigoCategoriaDiplomado+'</td>';
-  fila = fila + '<td class="comentarioDi"'+ obj.Comentario + '</td>';
-  $(document).on("click", "#editDiplomado" + obj.CodigoDiplomado.toString(),function(){
+  fila = fila + '<td class="categoriaDi"'+ obj.CodigoCategoriaDiplomado+'</td>';
+  fila = fila + '<td class="comentarioDi"'+ obj.Comentarios + '</td></tr>';
+  $(document).on("click", "#editDiplomado" + obj.CodigoDiplomado.toString(), function(){
       codigoDiplomado = obj.CodigoDiplomado;
       $("#ModificarDiplomado").modal('toggle'); 
   });
   console.log(fila);
-  $('#tableDiplomados> tbody').append(fila);
+  $('#tableDiplomados > tbody').append(fila);
   $('#DiplomadoNuevo').modal('toggle');  
 } console.log('data vacio');
     }); 
