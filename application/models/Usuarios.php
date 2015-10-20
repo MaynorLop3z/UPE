@@ -37,6 +37,14 @@ class Usuarios extends CI_Model {
         return $data;
     }
 
+    public function editarUsuario($codigoUsuario, $nombreUsuario, $contraseniaUsuario, $nombrePersonaUsuario, $correo) {
+        try {
+            
+        } catch (Exception $ex) {
+            $ex->getMessage();
+        }
+    }
+
     public function eliminarUsuario($codigoUsuario) {
         $this->db->where('CodigoUsuario', $codigoUsuario);
         $this->db->delete('Usuarios');
