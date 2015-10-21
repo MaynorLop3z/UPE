@@ -7,7 +7,18 @@
                 <button type="button" class="close btn-lg" id="btnCerrarModalNewUser" data-dismiss="modal" aria-hidden="true">X</button>
                 <form id="frmGuardarUSer" action="<?php echo base_url() ?>index.php/UsuarioController/guardarUsuario/" class="form-horizontal" method="post" >
                     <fieldset>
-                        <legend class="modal-header">Agregar Usuario:</legend> 
+                        <legend class="modal-header">Agregar Usuario:</legend>
+
+                        <div class="form-group">
+                            <label for="Nombre Persona" class="col-lg-3 control-label">Nombre Persona:</label>
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" id="txtNombrePersonaModificar"  placeholder="Nombre de la persona" required>
+                            </div>
+                            <div class="col-lg-3">
+                                <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label for="Usuario" class="col-lg-3 control-label">Usuario</label>
                             <div class="col-lg-6">
@@ -44,6 +55,17 @@
                                 <label id="prR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <label for="Descripcion" class="col-lg-3 control-label">Escriba alguna Descripciòn</label>
+                            <div class="col-lg-6">
+                                <textarea cols="40" rows="5" class="form-control" name="Comentarios" id="UserComent" placeholder="Escriba alguna Descripcion" maxlength="200" ></textarea>
+                            </div>
+                            <div class="col-lg-3">
+                                <label id="prR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
+                            </div>
+                        </div>
+
                         <div class="modal-footer">
                             <input type="submit" id="btnEnviar" value="Guardar" class=" btn btn-default" name="Aceptar"/>
                             <button type="reset" id="btnLimpiar" onclick="" class=" btn btn-default"  name="Limpiar">Limpiar</button>
@@ -86,6 +108,7 @@
                                 <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
                             </div>
                         </div>
+
                         <div class="form-group">
                             <label for="Email" class="col-lg-3 control-label">E-mail</label>
                             <div class="col-lg-6">
@@ -95,6 +118,7 @@
                                 <label id="emR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
                             </div>
                         </div>
+
                         <div class="form-group">
                             <label for="Password" class="col-lg-3 control-label">Contraseña</label>
                             <div class="col-lg-6">
@@ -104,6 +128,7 @@
                                 <label id="paR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
                             </div>
                         </div>
+
                         <div class="form-group">
                             <label for="Password2" class="col-lg-3 control-label">Confirmar Contraseña</label>
                             <div class="col-lg-6">
@@ -113,6 +138,17 @@
                                 <label id="prR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <label for="Descripcion" class="col-lg-3 control-label">Escriba alguna Descripciòn</label>
+                            <div class="col-lg-6">
+                                <textarea cols="40" rows="5" class="form-control" name="Comentarios" id="UserComent" placeholder="Escriba alguna Descripcion" maxlength="200" ></textarea>
+                            </div>
+                            <div class="col-lg-3">
+                                <label id="prR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
+                            </div>
+                        </div>
+
                         <div class="modal-footer">
                             <button type="submit" id="btnEnviar" onclick="" class=" btn btn-default" name="Aceptar">Guardar</button>
                             <button type="reset" id="btnLimpiar" onclick="" class=" btn btn-default" name="Limpiar">Limpiar</button>

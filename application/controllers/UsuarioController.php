@@ -6,66 +6,55 @@ if (!defined('BASEPATH'))
 class Usuariocontroller extends CI_Controller {
 
     public function __construct() {
-        parent::__construct();
-        $this->load->database();
-        $this->load->model('Usuarios');
-    }
-
-    public function index() {
         try {
-
-            $data['Usuarios'] = $this->Usuarios->listarUsuarios();
-//            $datau = 
-                    $this->load->view('Usuario', $data);
+            parent::__construct();
+            $this->load->database();
+            $this->load->model('Usuarios');
+            $this->load->library('utilidadesWeb');
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }
     }
 
-    public function guardar($id = null) {
-        $data = array();
-        $this->load->model('informe_model');
-        if ($id) {
-            $informe = $this->informe_model->obtener_por_id($id);
-            $data['id'] = $informe->id;
-            $data['titulo'] = $informe->titulo;
-            $data['descripcion'] = $informe->descripcion;
-            $data['prioridad'] = $informe->prioridad;
-        } else {
-            $data['id'] = null;
-            $data['titulo'] = null;
-            $data['descripcion'] = null;
-            $data['prioridad'] = null;
+    public function index() {
+        try {
+            $data['Usuarios'] = $this->Usuarios->listarUsuarios();
+//            $datau = 
+            $this->load->view('Usuario', $data);
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
         }
-        $this->load->view('informes/header');
-        $this->load->view('informes/guardar', $data);
-        $this->load->view('informes/footer');
     }
 
     public function guardarUsuario($codigoUsuario = null) {
         try {
             if ($this->input->post()) {
+                $ip = $this->input->ip_address();
+
+//                $ipUsuarioModifica = $this->utilidadesWeb->getIpUsuarioModifica();
                 $nombrePersonaUsuario = $this->input->post('UsuarioNombre');
                 $contraseniaUsuario = $this->input->post('UsuarioPassword');
                 $correo = $this->input->post('UsuarioEmail');
                 $nombreUsuario = $nombrePersonaUsuario . '123';
                 $this->load->model('Usuarios');
-
-                $arrayData = $this->Usuarios->guardarUsuario(null, $nombreUsuario, $contraseniaUsuario, $nombrePersonaUsuario, $correo);
+                $userModifica = $this->session->userdata('codigoUserLogin');
+                $arrayData = $this->Usuarios->guardarUsuario(null, $nombreUsuario, $contraseniaUsuario, $nombrePersonaUsuario, $correo, $userModifica,$ip);
                 echo json_encode($arrayData);
             }
         } catch (Exception $ex) {
-            echo json_encode($ex);
+            $data = array(
+                'Error' => $ex->getMessage(),
+            );
+            echo json_encode($data);
         }
     }
-    
-    public function editarUsuario(){
-        if($this->input->post()){
-            if($this->input->post('')){
+
+    public function editarUsuario() {
+        if ($this->input->post()) {
+            if ($this->input->post('')) {
                 
             }
         }
     }
-    
 
 }

@@ -12,16 +12,16 @@
 
             <button id="btnUsuarioNuevo" class="btn btn-default" ><span class="glyphicon glyphicon-plus"></span>Usuario Nuevo</button>
             <button id="btnActualizarUsuarios" class="btn btn-default" ><span class="glyphicon glyphicon-refresh"></span>Actualizar Lista</button>
-            
-            </div>
+
+        </div>
         <!--<div id="divp">-->
         <table id="tableUsers" class="table table-bordered table-striped table-hover table-responsive">
             <thead>
                 <tr>
-                    <th>Nombre</th>
-                    <th>Correo</th>
-                    <th>Usuario</th>
-                    <th>Gestionar</th>
+                    <th style="text-align:center">Nombre</th>
+                    <th style="text-align:center" >Correo</th>
+                    <th style="text-align:center" >Usuario</th>
+                    <th style="text-align:center" >Gestionar</th>
                 </tr>
             </thead> 
             <tbody>
@@ -32,7 +32,7 @@
                         <td class="nombre_Usuario" ><?= $user->Nombre ?></td>
                         <td class="correo_Usuario" ><?= $user->CorreoUsuario ?></td>
                         <td class="nickName_Usuario" ><?= $user->NombreUsuario ?></td>
-                        <td class="gestion_User">
+                        <td style="text-align:center"  class="gestion_User">
                             <button id="<?php echo $user->CodigoUsuario ?>"  title="Editar Usuario" class="btn_modificar_user btn btn-success "  class=" btn btn-info btn-lg"><span class="glyphicon glyphicon-pencil"></span> </button>
                             <button data-toggle="modal" title="Eliminar Usuario" class="btn btn-danger" href="#usuarioElimina"><span class="glyphicon glyphicon-trash"></span></button></td>
                     </tr>

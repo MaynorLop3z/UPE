@@ -20,13 +20,16 @@ class Usuarios extends CI_Model {
         return $resultado;
     }
 
-    public function guardarUsuario($codigoUsuario = null, $nombreUsuario, $contraseniaUsuario, $nombrePersonaUsuario, $correo) {
+    public function guardarUsuario($codigoUsuario = null, $nombreUsuario, $contraseniaUsuario, $nombrePersonaUsuario, $correo, $userModifica, $ipModifica) {
         try {
             $data = array(
                 'NombreUsuario' => $nombreUsuario,
                 'ContraseniaUsuario' => $contraseniaUsuario,
                 'Nombre' => $nombrePersonaUsuario,
-                'CorreoUsuario' => $correo
+                'CorreoUsuario' => $correo,
+                'FechaModifica' => date("Y/m/d"),
+                'UsuarioModifica' => $userModifica,
+                'IPModifica' => $ipModifica
             );
             $this->db->insert('Usuarios', $data);
             $insert_id = $this->db->insert_id();
@@ -39,7 +42,27 @@ class Usuarios extends CI_Model {
 
     public function editarUsuario($codigoUsuario, $nombreUsuario, $contraseniaUsuario, $nombrePersonaUsuario, $correo) {
         try {
-            
+            try {
+                /** $data = array(
+                  'Nombre' => $Nombre, 'CorreoElectronico' => $CorreoElectronico,
+                  'TelefonoFijo' => $TelefonoFijo, 'TelefonoCelular' => $TelefonoCelular,
+                  'FechaNacimiento' => $FechaNacimiento, 'Direccion' => $Direccion,
+                  'NumeroDUI' => $NumeroDUI, 'Carrera' => $Carrera,
+                  'CodigoUniversidadProcedencia' => $CodigoUniversidadProcedencia,
+                  'NivelAcademico' => $NivelAcademico,'NombreEncargado' => $NombreEncargado,
+                  'Descripcion' => $Descripcion, 'CodigoCategoriaParticipantes' => $CodigoCategoriaParticipantes,
+                  'UsuarioModifica' => $UsuarioModifica, 'IPModifica' => $IPModifica,
+                  'FechaModifica' => $FechaModifica, 'Comentarios' => $Comentarios, 'Descripcion'=> $Descripcion
+                  );
+                  $this->db->where('CodigoParticipante', $CodigoParticipante);
+                  $this->db->update('Participantes', $data);
+                  $data['CodigoParticipante'] = $CodigoParticipante;
+                 */
+            } catch (Exception $ex) {
+
+                $ex->getMessage();
+            }
+            return $data;
         } catch (Exception $ex) {
             $ex->getMessage();
         }
