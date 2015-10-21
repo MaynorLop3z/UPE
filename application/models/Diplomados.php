@@ -49,7 +49,7 @@ class Diplomados extends CI_Model {
             //$this->db->insert('Modulos', $data
             $this->db->insert('Diplomados', $data);
             $insert_id = $this->db->insert_id();
-            $data['CodigoDiplomados'] = $insert_id;
+            $data['CodigoDiplomado'] = $insert_id; //Acabo de quitarle una s 
         } catch (Exception $exe) {
             $exe->getMessage();
         }
@@ -60,15 +60,22 @@ class Diplomados extends CI_Model {
         $this->db->delete('Diplomados', array('CodigoDiplomado' => $CodigoDiplomado));
     }
 
-    public function ModificarDiplomado($CodigoDiplomado, $NombreDiplomado, $Descripcion, $Estado, $Comentarios) {
+    public function ModificarDiplomado($CodigoDiplomado, $NombreDiplomado, $Descripcion, $Estado,$CodigoCategoriaDiplomado,$Comentarios) {
+        try{
         $data = array(
-            'NombreDiplomado' => $NombreDiplomado,
-            'Descripcion' => $Descripcion,
-            'Estado' => $Estado,
-            'Comentarios' => $Comentarios
+                'NombreDiplomado' => $NombreDiplomado,
+                'Descripcion' => $Descripcion,
+                'Estado' => $Estado,
+                'CodigoCategoriaDiplomado' => $CodigoCategoriaDiplomado,
+                'Comentarios' => $Comentarios,
         );
         $this->db->where('CodigoDiplomado', $CodigoDiplomado);
         $this->db->update('Diplomados', $data);
+        $data['CodigoDiplomado']=$CodigoDiplomado;
+    }  catch (Exception $ex){
+        $ex->getMessage();
+    }
+       return $data; 
     }
     
 

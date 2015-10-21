@@ -40,6 +40,31 @@ class DiplomadosController extends CI_Controller {
         } catch (Exception $ex) {
             echo json_encode($ex);
         }
-    } 
+    }
+    
+    public  function editarDiplomado(){
+        try {
+            if($this->input->post()){
+                $codigoDi = $this->input->post('CodigoDiplomado');
+                $nombreDiplomado = $this->input->post('DiplomadoNombre');
+                $descripcionDiplomado = $this->input->post('DiplomadoDescripcion');
+                $optionsactivo= $this->input->post('optionsActivo')==='V';// Agregue la opcion activo  si es seleccionad
+                $categoriaDi = $this->input->post('CatgoriaDiplomado');
+                $comentarioDi = $this->input->post('ComentarioDiplomado');
+                $this->load->model('Diplomados');
+                
+                
+                $arrayData=  $this->Diplomados->ModificarDiplomado($codigoDi,$nombreDiplomado,$descripcionDiplomado,$optionsactivo,$categoriaDi,$comentarioDi);
+                echo json_encode($arrayData);
+                        
+                 }         
+        } catch (Exception $ex) {
+            echo json_encode($ex);
+            
+        }
+        
+        
+    }
+            
        }
 
