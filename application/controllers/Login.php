@@ -25,8 +25,18 @@ class Login extends CI_Controller {
         if ($user) {
             $this->load->model('usuario_model');
             $this->load->helper('url');
-            if ($this->usuario_model->login($_POST['user'], $_POST['password'])) {
 
+            $usuario = $this->usuario_model->login($_POST['user'], $_POST['password']);
+
+            if ($usuario != null) {
+                $usuario_data = array(
+                    'codigoUserLogin' => $usuario->CodigoUsuario,
+                    'nombreUserLogin' => $usuario->NombreUsuario,
+                    'correoUserLogin' => $usuario->CorreoUsuario,
+                    'nombreRealUserLogin' => $usuario->Nombre,
+                    'temaUserLogin' => $usuario->codigoTemaVista,
+                    'logueado' => TRUE);
+                $this->session->set_userdata($usuario_data);
                 redirect('Dashboard');
             } else {
                 
@@ -35,7 +45,7 @@ class Login extends CI_Controller {
             //aqui debe llamar usuarios
 
             $data['publicacionesMostrar'] = $this->listarPublicaciones();
-            $data['publicacionesCargar']=  $this->mostrarPublicaciones();
+            $data['publicacionesCargar'] = $this->mostrarPublicaciones();
             $this->load->view('login_vista', $data);
         }
     }
@@ -62,10 +72,11 @@ class Login extends CI_Controller {
 
         return $listaPublicacionesArchivos;
     }
-    
+
     /*
      * La siguiente funcion mostrara las publicaciones en el login
      */
+
     public function mostrarPublicaciones() {
         try {
             $listaPublicacionesArchivos2 = array();
@@ -77,19 +88,17 @@ class Login extends CI_Controller {
                 $archivos2 = $this->archivos->listarArchivosPublicacion($publicacion->CodigoPublicacion);
                 foreach ($archivos2 as $archivo) {
                     $publicacionArchivo = array('Titulo' => $publicacion->Titulo,
-                        'Ruta' => $archivo->Ruta, 
-                        'Contenido'=>$publicacion->Contenido,
-                        'FechaPublicacion'=>$publicacion->FechaPublicacion);
-
+                        'Ruta' => $archivo->Ruta,
+                        'Contenido' => $publicacion->Contenido,
+                        'FechaPublicacion' => $publicacion->FechaPublicacion);
                 }
                 array_push($listaPublicacionesArchivos2, $publicacionArchivo);
                 $iterador ++;
             }
-            
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }
-        return $listaPublicacionesArchivos2;    
+        return $listaPublicacionesArchivos2;
     }
 
 }

@@ -19,10 +19,13 @@ class Usuario_model extends CI_Model {
             $this->db->where('NombreUsuario', $username);
             $this->db->where('ContraseniaUsuario', $password);
             $q = $this->db->get('Usuarios');
+            
             if ($q->num_rows() > 0) {
-                return true;   
+             $userLogin=$q->row();
+                return $userLogin;   
+                
             } else {
-                return false;
+                return null;
             }
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
