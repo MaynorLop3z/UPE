@@ -160,13 +160,13 @@ $("#frmEditarAlumno").submit(function(event) {
 
 $("#frmDELAlumno").submit(function(event) {
     event.preventDefault();
-    var $form = $(this), AlumnoCodigo = codigoParticipante.substring(7), url = $form.attr("action");;
+    var $form = $(this), AlumnoCodigo = codigoParticipante.substring(7), url = $form.attr("action");
     var posting = $.post(url, {AlumnoCodigo: AlumnoCodigo});
     posting.done(function(data) {
         if (data) {
-            console.log('Elimina');
-            $('#tableAlumnos').remove('#alum'+AlumnoCodigo);
             $("#AlumnoEliminar").modal('toggle');
+            $('#tableAlumnos').find('#alum'+AlumnoCodigo).fadeOut("slow");
+            $('#tableAlumnos').find('#alum'+AlumnoCodigo).remove();
             
         }
     });
