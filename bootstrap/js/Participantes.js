@@ -174,3 +174,18 @@ $("#frmDELAlumno").submit(function(event) {
         alert("error");
     });
 });
+
+
+$("#frmFINDAlumno").submit(function(event) {
+    event.preventDefault();
+    var $form = $(this), AlumnoNombre = $form.find("input[name='NombreBuscado']").val(), url = $form.attr("action");
+    var posting = $.post(url, {NombreBuscado: AlumnoNombre});
+    posting.done(function(data) {
+        if (data) {
+            $('#tableAlumnos').html(data);  
+        }
+    });
+    posting.fail(function() {
+        alert("error");
+    });
+});

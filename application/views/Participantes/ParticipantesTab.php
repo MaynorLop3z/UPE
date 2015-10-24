@@ -7,9 +7,14 @@
     <div class="panel-body">
         <div class="btn btn-group">
             <button  id="btnADDAlumno" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Alumno Nuevo</button>
-<!--            <button href="#AlumnoEditar" id="btnEDITAlumno" class="btn btn-default btn-default" data-toggle="modal">Modificar Alumno</button>
-            <button href="#AlumnoElimina" id="btnDELAlumno" class="btn btn-default btn-default" data-toggle="modal">Eliminar Alumno</button>-->
         </div>
+        <?php $this->load->helper('url'); ?>
+            <form id="frmFINDAlumno" action="<?php echo base_url() ?>index.php/ParticipantesController/buscar/"  method="post" class="form-inline">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="tbNameBuscarAlum" name="NombreBuscado" placeholder="Escriba texto de busqueda aqui" required>
+                </div>
+                <button id="btnFindAlum" type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Buscar Alumno</button>
+            </form>
         <?php
 //        if ($creacion) {
         ?>
@@ -51,8 +56,8 @@
                     <th>Descripcion</th>
                     <th style="display: none">Comentarios</th>
                     <th>Gestion</th>
-                    
-                    
+
+
                 </tr>
             </thead> 
             <tbody>

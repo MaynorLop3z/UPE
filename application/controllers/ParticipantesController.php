@@ -88,4 +88,40 @@ class ParticipantesController extends CI_Controller {
             echo json_encode($ex);
          }
      }
+     
+     public function buscar(){
+         try {
+             if ($this->input->post()) {
+                 $nombre = $this->input->post('NombreBuscado');
+                 $result = $this->Participantes->listarParticipantesByName($nombre);
+                 //echo $result;
+                 $registros = "";
+                 foreach($req as $result){
+                 $registros .= '\t<tr id="'.$req['CodigoParticipante'].'">\n';
+                 $registros .= '\t\t<td class="Mail_Alumno">'.$req['CorreoElectronico'].'</td>\n';
+                 $registros .= '<td class="TelefonoFijo_Alumno" style="display: none">'.$req['TelefonoFijo'].'</td>\n';
+                 $registros .= '<td class="TelefonoMovil_Alumno" style="display: none">'.$req['TelefonoCelular'].'</td>\n';
+                 $registros .= '<td class="Direccion_Alumno" style="display: none">'.$req['Direccion'].'</td>\n';
+                 $registros .= '<td class="DUI_Alumno" style="display: none">'.$req['NumeroDUI'].'</td>\n';
+                 $registros .= '<td class="Nombre_Alumno">'.$req['Nombre'].'</td>\n';
+                 $registros .= '<td class="FechaNac_Alumno" style="display: none">'.$req['FechaNacimiento'].'</td>\n';
+                 $registros .= '<td class="CodU_Alumno" style="display: none">'.$req['CodigoUniversidadProcedencia'].'</td>\n';
+                 $registros .= '<td class="Carrera_Alumno" style="display: none">'.$req['Carrera'].'</td>\n';
+                 $registros .= '<td class="NivelAcad_Alumno" style="display: none">'.$req['NivelAcademico'].'</td>\n';
+                 $registros .= '<td class="NombreEncargado_Alumno" style="display: none">'.$req['NombreEncargado'].'</td>\n';
+                 $registros .= '<td class="CodCat_Alumno">'.$req['CodigoCategoriaParticipantes'].'</td>\n';
+                 $registros .= '<td class="Descripcion_Alumno">'.$req[''].'</td>\n';
+                 $registros .= '<td class="Comentarios_Alumno" style="display: none">'.$req['Descripcion'].'</td>\n';
+                 $registros .= '<td class="gestion_Alumno">\n';
+                 $registros .= '<button id="alumE'.$req['CodigoParticipante'].'"  title="Editar Alumno" class="btn_modificar_alum btn btn-success"><span class="glyphicon glyphicon-pencil"></span> </button>\n';
+                 $registros .= '<button id="alumDEL'.$req['CodigoParticipante'].'" title="Eliminar Alumno" class="btn_eliminar_alum btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>\n';
+                 $registros .= '</td>\n';
+                 $registros .= '</tr>\n';
+                 }
+                 echo $registros;
+             }
+         } catch (Exception $ex) {
+            echo json_encode($ex);
+         }
+     }
 }

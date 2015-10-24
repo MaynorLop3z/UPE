@@ -33,6 +33,29 @@ class Participantes extends CI_Model {
         $resultado = $consulta->result();
         return $resultado;
     }
+    
+    public function listarParticipantesByName($filtro) {
+        $this->db->select('CodigoParticipante, '
+                . 'CorreoElectronico, '
+                . 'TelefonoFijo, '
+                . 'TelefonoCelular, '
+                . 'Direccion, '
+                . 'NumeroDUI, '
+                . 'Nombre, '
+                . 'FechaNacimiento, '
+                . 'CodigoUniversidadProcedencia, '
+                . 'Carrera, '
+                . 'NivelAcademico, '
+                . 'NombreEncargado, '
+                . 'Descripcion, '
+                . 'CodigoCategoriaParticipantes, '
+                . 'Comentarios');
+        $this->db->from('Participantes');
+        $this->db->like('Nombre',$filtro);
+        $consulta = $this->db->get();
+        $resultado = $consulta->result();
+        return $resultado;
+    }
 
     public function CrearParticipante($Nombre, $CorreoElectronico, $TelefonoFijo, $TelefonoCelular, $Direccion, $FechaNacimiento, $CodigoCategoriaParticipantes, $NumeroDUI, $CodigoUniversidadProcedencia, $Carrera, $NivelAcademico, $NombreEncargado, $Descripcion, $Comentarios) {
         try {
