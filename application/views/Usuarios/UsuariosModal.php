@@ -12,7 +12,7 @@
                         <div class="form-group">
                             <label for="Nombre Persona" class="col-lg-3 control-label">Nombre Persona:</label>
                             <div class="col-lg-6">
-                                <input type="text" class="form-control" id="txtNombrePersonaModificar"  placeholder="Nombre de la persona" required>
+                                <input type="text" class="form-control" name="UsuarioNombreReal" id="txtNombrePersonaModificar"  placeholder="Nombre de la persona" required>
                             </div>
                             <div class="col-lg-3">
                                 <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
@@ -49,7 +49,7 @@
                         <div class="form-group">
                             <label for="Password2" class="col-lg-3 control-label">Confirmar Contraseña</label>
                             <div class="col-lg-6">
-                                <input type="password" class="form-control" id="UsuarioPassword2" placeholder="Repita Contraseña" required>
+                                <input type="password" class="form-control" id="UsuarioPassword2" name="UsuarioPassword2" placeholder="Repita Contraseña" required>
                             </div>
                             <div class="col-lg-3">
                                 <label id="prR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
@@ -59,7 +59,7 @@
                         <div class="form-group">
                             <label for="Descripcion" class="col-lg-3 control-label">Escriba alguna Descripciòn</label>
                             <div class="col-lg-6">
-                                <textarea cols="40" rows="5" class="form-control" name="Comentarios" id="UserComent" placeholder="Escriba alguna Descripcion" maxlength="200" ></textarea>
+                                <textarea cols="40" rows="5" class="form-control" name="Comentarios" id="AddUserComent" placeholder="Escriba alguna Descripcion" maxlength="200" ></textarea>
                             </div>
                             <div class="col-lg-3">
                                 <label id="prR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
@@ -86,13 +86,13 @@
                 <button type="button" class="close btn-lg" data-dismiss="modal" aria-hidden="true">×</button>
                 <form action="<?php echo base_url() ?>index.php/UsuarioController/editarUsuario/"  class="form-horizontal" method="post" >
                     <fieldset>
-                        <input type="hidden" id="lblCodigoUser" >
+                        <input type="hidden" id="CodigoUser" >
                         <legend class="modal-header">Modificar Usuario:</legend>
 
                         <div class="form-group">
                             <label for="Nombre Persona" class="col-lg-3 control-label">Nombre Persona:</label>
                             <div class="col-lg-6">
-                                <input type="text" class="form-control" id="txtNombrePersonaModificar"  placeholder="Nombre de la persona" required>
+                                <input type="text" class="form-control"  name="UsuarioNombreReal" id="txtNombrePersonaModificar"  placeholder="Nombre de la persona" required>
                             </div>
                             <div class="col-lg-3">
                                 <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
@@ -102,7 +102,7 @@
                         <div class="form-group">
                             <label for="Usuario" class="col-lg-3 control-label">Usuario</label>
                             <div class="col-lg-6">
-                                <input type="text" class="form-control" id="txtUserModificar"  placeholder="Nombre de usuario" required>
+                                <input type="text" class="form-control" id="txtUserModificar" name="UsuarioNombre"  placeholder="Nombre de usuario" required>
                             </div>
                             <div class="col-lg-3">
                                 <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
@@ -112,7 +112,7 @@
                         <div class="form-group">
                             <label for="Email" class="col-lg-3 control-label">E-mail</label>
                             <div class="col-lg-6">
-                                <input type="email" class="form-control" id="Emailmodificar" placeholder="Correo Electronico" required>
+                                <input type="email" class="form-control" id="Emailmodificar" name="UsuarioEmail"  placeholder="Correo Electronico" required>
                             </div>
                             <div class="col-lg-3">
                                 <label id="emR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
@@ -122,7 +122,7 @@
                         <div class="form-group">
                             <label for="Password" class="col-lg-3 control-label">Contraseña</label>
                             <div class="col-lg-6">
-                                <input type="password" class="form-control" id="Passwordmodificar" placeholder="Contraseña"  required>
+                                <input type="password" class="form-control" id="Passwordmodificar" name="UsuarioPassword" placeholder="Contraseña"  required>
                             </div>
                             <div class="col-lg-3">
                                 <label id="paR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
@@ -132,7 +132,7 @@
                         <div class="form-group">
                             <label for="Password2" class="col-lg-3 control-label">Confirmar Contraseña</label>
                             <div class="col-lg-6">
-                                <input type="password" class="form-control" id="Password2modificar" placeholder="Repita Contraseña" required>
+                                <input type="password" class="form-control" id="Password2modificar" name="UsuarioPassword2" placeholder="Repita Contraseña" required>
                             </div>
                             <div class="col-lg-3">
                                 <label id="prR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
@@ -142,7 +142,7 @@
                         <div class="form-group">
                             <label for="Descripcion" class="col-lg-3 control-label">Escriba alguna Descripciòn</label>
                             <div class="col-lg-6">
-                                <textarea cols="40" rows="5" class="form-control" name="Comentarios" id="UserComent" placeholder="Escriba alguna Descripcion" maxlength="200" ></textarea>
+                                <textarea cols="40" rows="5" class="form-control" name="Comentarios" id="txtAreaUserComent" placeholder="Escriba alguna Descripcion" maxlength="200" ></textarea>
                             </div>
                             <div class="col-lg-3">
                                 <label id="prR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->

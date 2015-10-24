@@ -15,7 +15,7 @@
         <script src="../bootstrap/js/jquery.min.js"></script>
         <script src="../bootstrap/js/bootstrap.min.js"></script>
         <script src="js/less-1.3.3.min.js"></script>
-        <title>Index</title>
+        <title>UPESYS</title>
         <!-- Bootstrap Core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <!-- Custom CSS -->

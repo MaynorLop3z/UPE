@@ -28,7 +28,7 @@
                 <?php
                 foreach ($Usuarios as $user) {
                     ?>
-                    <tr id="tr<?php echo $user->CodigoUsuario ?>">
+                    <tr data-userd='<?php echo json_encode($user) ?>' id="tr<?php echo $user->CodigoUsuario ?>">
                         <td class="nombre_Usuario" ><?= $user->Nombre ?></td>
                         <td class="correo_Usuario" ><?= $user->CorreoUsuario ?></td>
                         <td class="nickName_Usuario" ><?= $user->NombreUsuario ?></td>

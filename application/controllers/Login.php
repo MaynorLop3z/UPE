@@ -35,6 +35,7 @@ class Login extends CI_Controller {
                     'correoUserLogin' => $usuario->CorreoUsuario,
                     'nombreRealUserLogin' => $usuario->Nombre,
                     'temaUserLogin' => $usuario->codigoTemaVista,
+                    'ipUserLogin' => $this->input->ip_address(),
                     'logueado' => TRUE);
                 $this->session->set_userdata($usuario_data);
                 redirect('Dashboard');

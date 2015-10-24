@@ -29,16 +29,17 @@ class Usuariocontroller extends CI_Controller {
     public function guardarUsuario($codigoUsuario = null) {
         try {
             if ($this->input->post()) {
-                $ip = $this->input->ip_address();
-
-//                $ipUsuarioModifica = $this->utilidadesWeb->getIpUsuarioModifica();
-                $nombrePersonaUsuario = $this->input->post('UsuarioNombre');
+                $nombrePersonaUsuario = $this->input->post('UsuarioNombreReal');
                 $contraseniaUsuario = $this->input->post('UsuarioPassword');
+                $comentarios = $this->input->post('Comentarios');
                 $correo = $this->input->post('UsuarioEmail');
-                $nombreUsuario = $nombrePersonaUsuario . '123';
-                $this->load->model('Usuarios');
+                $nombreUsuario = $this->input->post('UsuarioNombre');
+                $ip = $this->session->userdata('ipUserLogin');
                 $userModifica = $this->session->userdata('codigoUserLogin');
-                $arrayData = $this->Usuarios->guardarUsuario(null, $nombreUsuario, $contraseniaUsuario, $nombrePersonaUsuario, $correo, $userModifica,$ip);
+                //La fecha de modificaciòn del registro se coloca en el modelo para evitar enviar mas parametros.
+                $this->load->model('Usuarios');
+
+                $arrayData = $this->Usuarios->guardarUsuario(null, $nombreUsuario, $contraseniaUsuario, $nombrePersonaUsuario, $correo, $userModifica, $ip, $comentarios);
                 echo json_encode($arrayData);
             }
         } catch (Exception $ex) {
@@ -50,10 +51,28 @@ class Usuariocontroller extends CI_Controller {
     }
 
     public function editarUsuario() {
-        if ($this->input->post()) {
-            if ($this->input->post('')) {
-                
+        try {
+            if ($this->input->post()) {
+                if ($this->input->post('CodigoUser')) {
+                    $codigoUsuario = $this->input->post('CodigoUser');
+                    $nombrePersonaUsuario = $this->input->post('UsuarioNombreReal');
+                    $contraseniaUsuario = $this->input->post('UsuarioPassword');
+                    $comentarios = $this->input->post('Comentarios');
+                    $correo = $this->input->post('UsuarioEmail');
+                    $nombreUsuario = $this->input->post('UsuarioNombre');
+                    $ip = $this->session->userdata('ipUserLogin');
+                    $userModifica = $this->session->userdata('codigoUserLogin');
+                    //La fecha de modificaciòn del registro se coloca en el modelo para evitar enviar mas parametros.
+                    $this->load->model('Usuarios');
+                    $arrayData = $this->Usuarios->editarUsuario($codigoUsuario, $nombreUsuario, $contraseniaUsuario, $nombrePersonaUsuario, $correo, $userModifica, $ip, $comentarios);
+                    echo json_encode($arrayData);
+                }
             }
+        } catch (Exception $e) {
+            $data = array(
+                'Error' => $ex->getMessage(),
+            );
+            echo json_encode($data);
         }
     }
 

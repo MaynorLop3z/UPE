@@ -20,7 +20,7 @@ class Usuarios extends CI_Model {
         return $resultado;
     }
 
-    public function guardarUsuario($codigoUsuario = null, $nombreUsuario, $contraseniaUsuario, $nombrePersonaUsuario, $correo, $userModifica, $ipModifica) {
+    public function guardarUsuario($codigoUsuario = null, $nombreUsuario, $contraseniaUsuario, $nombrePersonaUsuario, $correo, $userModifica, $ipModifica, $comentarios) {
         try {
             $data = array(
                 'NombreUsuario' => $nombreUsuario,
@@ -29,7 +29,8 @@ class Usuarios extends CI_Model {
                 'CorreoUsuario' => $correo,
                 'FechaModifica' => date("Y/m/d"),
                 'UsuarioModifica' => $userModifica,
-                'IPModifica' => $ipModifica
+                'IPModifica' => $ipModifica,
+                'Comentarios' => $comentarios
             );
             $this->db->insert('Usuarios', $data);
             $insert_id = $this->db->insert_id();
@@ -40,26 +41,23 @@ class Usuarios extends CI_Model {
         return $data;
     }
 
-    public function editarUsuario($codigoUsuario, $nombreUsuario, $contraseniaUsuario, $nombrePersonaUsuario, $correo) {
+    public function editarUsuario($codigoUsuario, $nombreUsuario, $contraseniaUsuario, $nombrePersonaUsuario, $correo, $userModifica, $ipModifica, $comentarios) {
         try {
             try {
-                /** $data = array(
-                  'Nombre' => $Nombre, 'CorreoElectronico' => $CorreoElectronico,
-                  'TelefonoFijo' => $TelefonoFijo, 'TelefonoCelular' => $TelefonoCelular,
-                  'FechaNacimiento' => $FechaNacimiento, 'Direccion' => $Direccion,
-                  'NumeroDUI' => $NumeroDUI, 'Carrera' => $Carrera,
-                  'CodigoUniversidadProcedencia' => $CodigoUniversidadProcedencia,
-                  'NivelAcademico' => $NivelAcademico,'NombreEncargado' => $NombreEncargado,
-                  'Descripcion' => $Descripcion, 'CodigoCategoriaParticipantes' => $CodigoCategoriaParticipantes,
-                  'UsuarioModifica' => $UsuarioModifica, 'IPModifica' => $IPModifica,
-                  'FechaModifica' => $FechaModifica, 'Comentarios' => $Comentarios, 'Descripcion'=> $Descripcion
-                  );
-                  $this->db->where('CodigoParticipante', $CodigoParticipante);
-                  $this->db->update('Participantes', $data);
-                  $data['CodigoParticipante'] = $CodigoParticipante;
-                 */
+                $data = array(
+                    'NombreUsuario' => $nombreUsuario,
+                    'ContraseniaUsuario' => $contraseniaUsuario,
+                    'Nombre' => $nombrePersonaUsuario,
+                    'CorreoUsuario' => $correo,
+                    'FechaModifica' => date("Y/m/d"),
+                    'UsuarioModifica' => $userModifica,
+                    'IPModifica' => $ipModifica,
+                    'Comentarios' => $comentarios
+                );
+                $this->db->where('CodigoUsuario', $codigoUsuario);
+                $this->db->update('Usuarios', $data);
+                $data['CodigoUsuario'] = $codigoUsuario;
             } catch (Exception $ex) {
-
                 $ex->getMessage();
             }
             return $data;
