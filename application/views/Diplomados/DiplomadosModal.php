@@ -25,13 +25,13 @@
                            <div class="col-lg-9">
                                <div class="radio" name="" id="radio">
                                    <label>
-                                       <input type="radio" name="estado" id="optionsActivo" value="opcion1" >
+                                       <input type="radio" name="estado" id="optionsActivo" value="activo" >
                                        Activo
                                    </label>
                                </div>
                              <div class="radio">
                                    <label>
-                                       <input type="radio" name="estado" id="optionsInactivo" value="opcion2">
+                                       <input type="radio" name="estado" id="optionsInactivo" value="inactivo">
                                        Inactivo
                                    </label>
                                </div> 
@@ -81,7 +81,7 @@
                  <button type="button" class="close" id="btnCerrarDi"  data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                  <form  id="formeditDiplomado" action="<?php echo base_url()?>index.php/DiplomadosController/editarDiplomado/" class="form-horizontal" method="post" >
                      <fieldset>
-                        <legend class="modal-header">Nuevo Diplomado:</legend> 
+                        <legend class="modal-header">Editar Diplomado:</legend> 
                         <div class="form-group">
                             <label for="DiplomadoNombreEdit" class="col-lg-3 control-label">Nombre Del Diplomado</label>
                             <div class="col-lg-9">
@@ -153,12 +153,12 @@
         <div class="modal-content">
             <div class="container-fluid ">
                 <button type="button" class="close btn-lg" data-dismiss="modal" aria-hidden="true">×</button>
-                <form action="UsuarioController" class="form-horizontal" method="post" >
+                <form action="<?php echo base_url() ?>index.php/DiplomadosController/EliminarDiplomado/" class="form-horizontal" class="form-horizontal" method="post" >
                     <fieldset>
                         <legend class="modal-header">Diplomados:</legend> 
                         <div class="form-group">
                             <div class="col-lg-9">
-                                <label>¿Realmente desea eliminar el Diplomado seleccionado?</label>
+                                <label>¿Realmente desea eliminar el Diplomado <!--<mark id="SelectDiEliminar"></mark>--></label>
                             </div>
                         </div>
                         <div class="modal-footer">

@@ -13,13 +13,13 @@
         <table id="tableDiplomados"  class="table table-bordered table-striped table-hover table-responsive">
             <thead>
                 <tr><!--Agregar  Mas informacion acerca de los modulos -->
-                    <th>Diplomado</th> <!-- Nombre de diplomado-->
+                    <th style="">Diplomado</th> <!-- Nombre de diplomado, Ponerlo que vaya al centro -->
                     <th>Descripcion</th><!-- Coordinador del  diplomado -->
                     <th>Estado</th> <!-- Descripcion del modulo -->
                     <th>Categoria</th>
                    <th>Comentarios</th>  <!-- Comentarios  sobre los diplomados  --> 
                    <th>Gestionar</th>
-                </tr>
+                <!--</tr>-->
             </thead> 
             <tbody>
                 <?php
@@ -34,7 +34,7 @@
                     <td class="comentarioDi"><?php echo $dip->Comentarios ?></td>
                     <td class="gestion_dip" >
             <button id="editDiplomado<?php echo $dip->CodigoDiplomado ?>" title="Editar Diplomado" class="btn btn-success btnmoddi"><span class=" glyphicon glyphicon-pencil"></span></button>
-            <button data-toggle="modal" class="btn btn-danger" title="Eliminar Diplomado" href="#EliminarDiplomado"><span class="glyphicon glyphicon-trash" ></span></button>
+            <button id="eliminarDiplo" data-toggle="modal" class="btn btn-danger btndelDi" title="Eliminar Diplomado" href="#EliminarDiplomado"><span class="glyphicon glyphicon-trash" ></span></button>
                      </td>
                 </tr>
                 <?php

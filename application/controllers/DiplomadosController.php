@@ -48,11 +48,12 @@ class DiplomadosController extends CI_Controller {
                 $codigoDi = $this->input->post('CodigoDiplomado');
                 $nombreDiplomado = $this->input->post('DiplomadoNombre');
                 $descripcionDiplomado = $this->input->post('DiplomadoDescripcion');
-                $optionsactivo= $this->input->post('optionsActivo')==='V';// Agregue la opcion activo  si es seleccionad
+                $this->input->post('radio');// Agregue la opcion activo  si es seleccionad     
                 $categoriaDi = $this->input->post('CatgoriaDiplomado');
                 $comentarioDi = $this->input->post('ComentarioDiplomado');
                 $this->load->model('Diplomados');
                 
+                           
                 
                 $arrayData=  $this->Diplomados->ModificarDiplomado($codigoDi,$nombreDiplomado,$descripcionDiplomado,$optionsactivo,$categoriaDi,$comentarioDi);
                 echo json_encode($arrayData);
@@ -65,6 +66,20 @@ class DiplomadosController extends CI_Controller {
         
         
     }
-            
+//            public function eliminarDiplomado (){
+//                $eliminar = false;
+//                
+//                try {
+//                if($this->input->post()){    
+//                $codigo = $this->input->post('CodigoDiplomado');
+//                $eliminar = $this->Diplomados->EliminarDiplomado($codigo);
+//                echo $eliminar;                   
+//                }
+//                } catch (Exception $ex) {
+//                    echo json_encode($ex);
+//                }
+//                
+//                
+//            }
        }
 
