@@ -44,7 +44,7 @@ class DiplomadosController extends CI_Controller {
     
     public  function editarDiplomado(){
         try {
-            if($this->input->post()){
+            if($this->input->post('CodigoDiplomado')){
                 $codigoDi = $this->input->post('CodigoDiplomado');
                 $nombreDiplomado = $this->input->post('DiplomadoNombre');
                 $descripcionDiplomado = $this->input->post('DiplomadoDescripcion');
@@ -52,9 +52,6 @@ class DiplomadosController extends CI_Controller {
                 $categoriaDi = $this->input->post('CatgoriaDiplomado');
                 $comentarioDi = $this->input->post('ComentarioDiplomado');
                 $this->load->model('Diplomados');
-                
-                           
-                
                 $arrayData=  $this->Diplomados->ModificarDiplomado($codigoDi,$nombreDiplomado,$descripcionDiplomado,$optionsactivo,$categoriaDi,$comentarioDi);
                 echo json_encode($arrayData);
                         

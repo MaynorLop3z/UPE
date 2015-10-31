@@ -34,7 +34,7 @@
                     <td class="comentarioDi"><?php echo $dip->Comentarios ?></td>
                     <td class="gestion_dip" >
             <button id="editDiplomado<?php echo $dip->CodigoDiplomado ?>" title="Editar Diplomado" class="btn btn-success btnmoddi"><span class=" glyphicon glyphicon-pencil"></span></button>
-            <button id="eliminarDiplo" data-toggle="modal" class="btn btn-danger btndelDi" title="Eliminar Diplomado" href="#EliminarDiplomado"><span class="glyphicon glyphicon-trash" ></span></button>
+             <button id="DELDiplomado<?php echo $dip->CodigoDiplomado ?>" title="Eliminar Diplomado" class="btndeldip btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
                      </td>
                 </tr>
                 <?php

@@ -39,7 +39,7 @@
                        </div>                                                                                       
                         
                         <div class="form-group">
-                            <label for="CategoriaDiplomado" class="col-lg-3 control-label">Categoria Diplomado:</label>
+                            <label for="CatgoriaDiplomado" class="col-lg-3 control-label">Clomadoategoria Diplomado:</label>
                             <div class="col-lg-9">
                                 <select class="form-control" id="CatgoriaDiplomado" name="CodigoCategoriaDiplomado">                                          
                                     <?php
@@ -81,17 +81,19 @@
                  <button type="button" class="close" id="btnCerrarDi"  data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                  <form  id="formeditDiplomado" action="<?php echo base_url()?>index.php/DiplomadosController/editarDiplomado/" class="form-horizontal" method="post" >
                      <fieldset>
+                         
                         <legend class="modal-header">Editar Diplomado:</legend> 
+                     
                         <div class="form-group">
                             <label for="DiplomadoNombreEdit" class="col-lg-3 control-label">Nombre Del Diplomado</label>
                             <div class="col-lg-9">
-                                <input type="text" class="form-control" name="NombreDiplomadoEdit" id="DiplomadoNombreEdit" placeholder="Nombre del Diplomado" required>
+                                <input type="text" class="form-control" name="NombreDiplomado" id="DiplomadoNombreEdit" placeholder="Nombre del Diplomado" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="DiplomadoDescripcionEdit" class="col-lg-3 control-label">Descripcion</label>
                             <div class="col-lg-9">
-                                <textarea type="text" class="form-control" name="DescripcionEdit" id="DiplomadoDescripcionEdit" placeholder="Descripcion del Diplomado" required></textarea>
+                                <textarea type="text" class="form-control" name="Descripcion" id="DiplomadoDescripcionEdit" placeholder="Descripcion del Diplomado" required></textarea>
                             </div>
                        </div>
                        <div class="form-group">
@@ -115,7 +117,7 @@
                         <div class="form-group">
                             <label for="CatgoriaDiplomadoEdit" class="col-lg-3 control-label">Categoria Diplomado:</label>
                             <div class="col-lg-9">
-                                <select class="form-control" id="CatgoriaDiplomadoEdit" name="CodigoCategoriaDiEdit">                                          
+                                <select class="form-control" id="CatgoriaDiplomadoEdit" name="CodigoCategoriaDiplomado">                                          
                                     <?php
                                     foreach ($CategoriasDi as $cadi){ //AQui para seleccionar  la categoria del diplomado al que pertenece
                                     ?>
