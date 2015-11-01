@@ -1,6 +1,8 @@
 <?php
+
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
+
 //include('ModeloBase.php');
 class Publicaciones extends CI_Model {
 
@@ -118,8 +120,11 @@ class Publicaciones extends CI_Model {
             'CodigoTipoPublicacion' => $CodigoTipoPublicacion
         );
         $this->db->insert('Publicaciones', $data);
+        $insert_id = $this->db->insert_id();
+        $data['CodigoPublicacion'] = $insert_id;
+        
+        return $data;
     }
-
 
     public function EliminarPublicacion($CodigoPublicacion) {
         $this->db->delete('Publicaciones', array('CodigoPublicacion' => $CodigoPublicacion));
@@ -143,5 +148,7 @@ class Publicaciones extends CI_Model {
         $this->db->where('CodigoPublicacion', $CodigoPublicacion);
         $this->db->update('Publicaciones', $data);
     }
+
 }
- ?>
+
+?>
