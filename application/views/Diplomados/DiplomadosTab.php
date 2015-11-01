@@ -26,14 +26,14 @@
                 foreach ($DiplomadosN as $dip){                
                 ?>
                 
-                <tr id="dip<?php  $dip->CodigoDiplomado?>">
+                <tr data-dipd='<?php echo json_encode($dip)?>' id="dip<?php echo $dip->CodigoDiplomado?>">
                     <td class="nombre_Diplomado"><?php echo $dip->NombreDiplomado ?></td>
                     <td class="descripcionDiplomado"><?php echo $dip->Descripcion ?></td>
                     <td class="estado"><?php echo $dip->Estado ?></td>
                     <td class="categoriaDi"><?php echo $dip->CodigoCategoriaDiplomado?></td>
                     <td class="comentarioDi"><?php echo $dip->Comentarios ?></td>
                     <td class="gestion_dip" >
-            <button id="editDiplomado<?php echo $dip->CodigoDiplomado ?>" title="Editar Diplomado" class="btn btn-success btnmoddi"><span class=" glyphicon glyphicon-pencil"></span></button>
+            <button id="editDiplomado<?php echo $dip->CodigoDiplomado ?>" title="Editar Diplomado" class="btnmoddi btn btn-success"><span class=" glyphicon glyphicon-pencil"></span></button>
              <button id="DELDiplomado<?php echo $dip->CodigoDiplomado ?>" title="Eliminar Diplomado" class="btndeldip btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
                      </td>
                 </tr>
