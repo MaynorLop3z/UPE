@@ -83,6 +83,7 @@
                         <td class="gestion_Alumno">
                             <button id="alumE<?php echo $alum->CodigoParticipante ?>"  title="Editar Alumno" class="btn_modificar_alum btn btn-success"><span class="glyphicon glyphicon-pencil"></span> </button>
                             <button id="alumDEL<?php echo $alum->CodigoParticipante ?>" title="Eliminar Alumno" class="btn_eliminar_alum btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
+                            <button id="alumVIEW<?php echo $alum->CodigoParticipante ?>" title="Ver Alumno" class="btn_ver_alum btn btn-info"><span class="glyphicon glyphicon-eye-open"></span></button>
                         </td>
                     </tr>
                     <?php

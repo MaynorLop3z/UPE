@@ -346,3 +346,78 @@
         </div>
     </div>
 </div>
+
+
+<div id="AlumnoVIEWDATA" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" id="btnCerrarModalViewAlum" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Datos del Alumno</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid ">
+                    <div class="row">
+
+                        <!--- --><div class="col-lg-6">
+                            <div>
+                                <h4><span class="label label-primary">Nombre:</span></h4>
+                                <span id="AlumViewNombre"></span>
+                            </div> 
+                            <div>
+                                <h4><span class="label label-primary">Correo Electronico:</span></h4>
+                                <span id="AlumViewEmail"></span>
+                            </div>
+                            <div>
+                                <h4><span class="label label-primary">Telefono Fijo:</span></h4>
+                                <span id="AlumViewTFijo"></span>
+                            </div>
+                            <div>
+                                <h4><span class="label label-primary">Telefono Movil:</span></h4>
+                                <span id="AlumViewTMovil"></span>
+                            </div>
+                            <div>
+                                <h4><span class="label label-primary">Direccion:</span></h4>
+                                <span id="AlumViewDireccion"></span>
+                            </div>
+                            <div>
+                                <h4><span class="label label-primary">DUI:</span></h4>
+                                <span id="AlumViewDUI"></span>
+                            </div>
+                            <div>
+                                <h4><span class="label label-primary">Fecha Nacimiento:</span></h4>
+                                <span id="AlumViewFNac"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div>
+                                <h4><span class="label label-primary">Carrera:</span></h4>
+                                <span id="AlumViewCarrera"></span>
+                            </div>
+                            <div>
+                                <h4><span class="label label-primary">Nivel Academico:</span></h4>
+                                <span id="AlumViewNivelAcad"></span>
+                            </div>
+                            <div>
+                                <h4><span class="label label-primary">Encargado:</span></h4>
+                                <span id="AlumViewEncargado"></span>
+                            </div>
+                            <div>
+                                <h4><span class="label label-primary">Categoria:</span></h4>
+                                <span id="AlumViewCategoria"></span>
+                            </div>
+                            <div>
+                                <h4><span class="label label-primary">Descripcion:</span></h4>
+                                <span id="AlumViewDescripcion"></span>
+                            </div>
+                            <div>
+                                <h4><span class="label label-primary">Comentarios:</span></h4>
+                                <span id="AlumViewComentarios"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

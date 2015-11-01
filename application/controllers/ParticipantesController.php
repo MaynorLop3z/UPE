@@ -93,10 +93,10 @@ class ParticipantesController extends CI_Controller {
          try {
              if ($this->input->post()) {
                  $nombre = $this->input->post('NombreBuscado');
-                 $result = $this->Participantes->listarParticipantesByName($nombre);
+                 $result = json_decode(json_encode($this->Participantes->listarParticipantesByName($nombre)),true);
                  //echo $result;
                  $registros = "";
-                 foreach($req as $result){
+                 foreach ($result as $req ){
                  $registros .= '\t<tr id="'.$req['CodigoParticipante'].'">\n';
                  $registros .= '\t\t<td class="Mail_Alumno">'.$req['CorreoElectronico'].'</td>\n';
                  $registros .= '<td class="TelefonoFijo_Alumno" style="display: none">'.$req['TelefonoFijo'].'</td>\n';
@@ -110,11 +110,12 @@ class ParticipantesController extends CI_Controller {
                  $registros .= '<td class="NivelAcad_Alumno" style="display: none">'.$req['NivelAcademico'].'</td>\n';
                  $registros .= '<td class="NombreEncargado_Alumno" style="display: none">'.$req['NombreEncargado'].'</td>\n';
                  $registros .= '<td class="CodCat_Alumno">'.$req['CodigoCategoriaParticipantes'].'</td>\n';
-                 $registros .= '<td class="Descripcion_Alumno">'.$req[''].'</td>\n';
-                 $registros .= '<td class="Comentarios_Alumno" style="display: none">'.$req['Descripcion'].'</td>\n';
-                 $registros .= '<td class="gestion_Alumno">\n';
-                 $registros .= '<button id="alumE'.$req['CodigoParticipante'].'"  title="Editar Alumno" class="btn_modificar_alum btn btn-success"><span class="glyphicon glyphicon-pencil"></span> </button>\n';
-                 $registros .= '<button id="alumDEL'.$req['CodigoParticipante'].'" title="Eliminar Alumno" class="btn_eliminar_alum btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>\n';
+                 $registros .= '<td class="Descripcion_Alumno">'.$req['Descripcion'].'</td>\n';
+                 $registros .= '<td class="Comentarios_Alumno" style="display: none">'.$req['Comentarios'].'</td>\n';
+                 $registros .= '<td class="gestion_Alumno">';
+                 $registros .= '<button id="alumE'.$req['CodigoParticipante'].'"  title="Editar Alumno" class="btn_modificar_alum btn btn-success"><span class="glyphicon glyphicon-pencil"></span> </button>';
+                 $registros .= '<button id="alumDEL'.$req['CodigoParticipante'].'" title="Eliminar Alumno" class="btn_eliminar_alum btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>';
+                 $registros .= '<button id="alumVIEW'.$req['CodigoParticipante'].'" title="Ver Alumno" class="btn_ver_alum btn btn-info"><span class="glyphicon glyphicon-eye-open"></span></button>';
                  $registros .= '</td>\n';
                  $registros .= '</tr>\n';
                  }
