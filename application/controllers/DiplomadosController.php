@@ -47,7 +47,7 @@ class DiplomadosController extends CI_Controller {
                 $codigoDi = $this->input->post('CodigoDiplomado');
                 $nombreDiplomado = $this->input->post('DiplomadoNombre');
                 $descripcionDiplomado = $this->input->post('DiplomadoDescripcion');
-                $optionsactivo = $this->input->post('radio');// Agregue la opcion activo  si es seleccionad     
+                $optionsactivo = $this->input->post('radio')==='V';// Agregue la opcion activo  si es seleccionad     
                 $categoriaDi = $this->input->post('CatgoriaDiplomado');
                 $comentarioDi = $this->input->post('ComentarioDiplomado');
                 $this->load->model('Diplomados');

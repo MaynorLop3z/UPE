@@ -26,7 +26,8 @@
                 foreach ($DiplomadosN as $dip){                
                 ?>
                 
-                <tr data-dipd='<?php echo json_encode($dip)?>' id="dip<?php echo $dip->CodigoDiplomado?>">
+                <tr  data-dipd='<?php echo json_encode($dip)?>' 
+                    id="dip<?php echo $dip->CodigoDiplomado?>">
                     <td class="nombre_Diplomado"><?php echo $dip->NombreDiplomado ?></td>
                     <td class="descripcionDiplomado"><?php echo $dip->Descripcion ?></td>
                     <td class="estado"><?php echo $dip->Estado ?></td>

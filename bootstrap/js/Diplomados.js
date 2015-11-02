@@ -12,10 +12,10 @@ $('.btnmoddi').on('click', function (event) {
 //codigoDiplomado = event.target.id;
 codigoDiplomado = this.id;
 
-codigoDiplomado = codigoDiplomado.substring(13);
-if(codigoDiplomado !==null){
-    console.log(codigoDiplomado);
-}
+codigoDiplomado = codigoDiplomado.substring(13); /// esto agregue recientemente 
+//if(codigoDiplomado !==null){
+//    console.log(codigoDiplomado);
+//}
 $("#ModificarDiplomado").modal('toggle');
 });
 
@@ -24,27 +24,25 @@ $("#ModificarDiplomado").modal('toggle');
 
 $('#ModificarDiplomado').on('show.bs.modal', function (event) {
   //     codigoDiplomado =(event.target.id);
-    console.log("codigo al abrir modal "+codigoDiplomado);
+    //console.log("codigo al abrir modal "+codigoDiplomado);
    
     var dip = $('#dip' + codigoDiplomado);    
-    var dataDip = dip.data("dipd");
-    
-    
-    
-    if(dataDip !== null){
-        console.log(dataDip.NombreDiplomado.toString().trim());
-       
-}
-        //console.log(dip);
+  //  var dataDip = dip.data("dipd");  recien lo quite   
+//    
+//    if(dataDip !== null){
+//        console.log(dataDip.NombreDiplomado.toString().trim());
+//       
+//}
+//        //console.log(dip);
         
     var Nombre_Diplomado = dip.find('.nombre_Diplomado').html().toString().trim(); 
     var DescripcionDiplomado = dip.find('.descripcionDiplomado').html().toString().trim();
     var Estado = dip.find('.estado').html().toString().trim();
     var CategoriaDi = dip.find('.categoriaDi').html().toString().trim();
     var ComentarioDi = dip.find('.comentarioDi').html().toString().trim();
-    var dataDipl = dip.data("dipd");
-    if(dataDipl !== null){}
-    console.log(ComentarioDi);
+    //var dataDipl = dip.data("dipd"); este lo quite despues vere
+   // if(dataDipl !== null){}
+    //console.log(ComentarioDi); recien quite el de arriba y  este
      
 //     if(ComentarioDi !== null){
 //         console.log(String(ComentarioDi));
@@ -75,7 +73,7 @@ $('#formgrdDiplomado').submit(function (event) {
             CatgoriaDiplomado = $form.find("select[name='CodigoCategoriaDiplomado']").val(),
             ComentarioDiplomado = $form.find("textarea[name='Comentarios']").val(),
             url = $form.attr("action");
-    console.log(radio.toString());
+    //console.log(radio.toString());
     var posting = $.post(url, {
         DiplomadoNombre: DiplomadoNombre,
         DiplomadoDescripcion: DiplomadoDescripcion,
@@ -104,11 +102,11 @@ $('#formgrdDiplomado').submit(function (event) {
                 codigoDiplomado = obj.CodigoDiplomado;
                 $("#ModificarDiplomado").modal('toggle');
             });
-
+            
           
             $('#tableDiplomados > tbody').append(fila);
             $('#DiplomadoNuevo').modal('toggle');
-        }// console.log('data vacio');
+        }// console.log('va vacio');
     });
 
     posting.fail(function () {
@@ -118,31 +116,32 @@ $('#formgrdDiplomado').submit(function (event) {
 
 $("#formeditDiplomado").submit(function (event) {
     event.preventDefault();
-     var $form = $(this),
-     //CodigoDiplomado = codigoDiplomado.substring(13), 
-            DiplomadoNombre  = $form.find("input[name='NombreDiplomado']").val(),
+    var $form = $(this), CodigoDiplomado = codigoDiplomado, 
+            DiplomadoNombre = $form.find("input[name='NombreDiplomado']").val(),
             DiplomadoDescripcion = $form.find("textarea[name='Descripcion']").val(),
             radio = $form.find("input[name='estado']:checked").val(),
             // probar  con el checked
             CatgoriaDiplomado = $form.find("select[name='CodigoCategoriaDiplomado']").val(),
             ComentarioDiplomado = $form.find("textarea[name='Comentarios']").val(),
             url = $form.attr("action");
+    console.log(CodigoDiplomado);  //prueba para ver si imprime el codigo correcto
     
-    var posting = $.post(url,{
-        //CodigoDiplomado: CodigoDiplomado, 
+    var posting = $.post(url, {
+        CodigoDiplomado : CodigoDiplomado,
         DiplomadoNombre: DiplomadoNombre,
         DiplomadoDescripcion: DiplomadoDescripcion,
         radio: radio,
         CatgoriaDiplomado: CatgoriaDiplomado,
-        ComentarioDiplomado: ComentarioDiplomado });
-   
-    posting.done(function(data){
+        ComentarioDiplomado: ComentarioDiplomado
+    });
+    posting.done(function (data) {
         if (data !== null) {
-             var obj = jQuery.parseJSON(data);
-            
-            console.log(obj);
+            var obj = jQuery.parseJSON(data);
             var fila;
-            
+//            if(obj.NombreDiplomado!=null){
+//                console.log("No soy nulo");
+//            }else{ console.log("soy nulo");}
+            //fila = '<tr id="dip' + obj.CodigoDiplomado + '">';
             fila = fila + '<td class="nombre_Diplomado">' + obj.NombreDiplomado + '</td>';
             fila = fila + '<td class="descripcionDiplomado">' + obj.Descripcion + '</td>';
             fila = fila + '<td class="estado">' + obj.Estado + '</td>';
@@ -150,22 +149,22 @@ $("#formeditDiplomado").submit(function (event) {
             fila = fila + '<td class="comentarioDi">' + obj.Comentarios + '</td>';
             fila = fila + '<td class="gestion_dip">';
             fila = fila + '<button id="editDiplomado' + obj.CodigoDiplomado + '" title="Editar Diplomado" class="btn btn-success btnmoddi"><span class=" glyphicon glyphicon-pencil"></span></butto n>';
-            fila = fila + '<button data-toggle="modal" title="Eliminar Alumno" class="btn btn-danger" href="#EliminarDiplomado"><span class="glyphicon glyphicon-trash"></span></button>';
-            fila = fila + '</td>';          
-            $(document).on("click", "#editDiplomado" + obj.CodigoDiplomado.toString(),function(){
-                    codigoDiplomado= obj.CodigoDiplomado;
-                    $("#ModificarDiplomado").modal('toggle');
-                });        
-            $('#tableDiplomados > tbody').find('#dip' + obj.CodigoDiplomado).html(fila);
-            $('#ModificarDiplomado').modal('toggle');
-        }   
+            fila = fila + '<button data-toggle="modal" title="Eliminar Alumno" class="btn btn-danger" href="#AlumnoEliminar"><span class="glyphicon glyphicon-trash"></span></button>';
+            fila = fila + '</td>';
+            $(document).on("click", "#editDiplomado" + obj.CodigoDiplomado.toString(), function () {
+                codigoDiplomado = obj.CodigoDiplomado;
+                $("#ModificarDiplomado").modal('toggle');
+            });
 
+          
+            //$('#tableDiplomados > tbody').append(fila); recien lo quite
+            $('#tableDiplomados >tbody').find('#dip'+obj.CodigoDiplomado).html(fila);
+            $('#ModificarDiplomado').modal('toggle');
+        }// console.log('data vacio');
     });
-    
-    posting.fail(function(data){
-        var obj = jQuery.parseJSON(data);
-          alert(obj.Error);
-        
+
+    posting.fail(function () {
+        alert("error");
     });
 });
 $("#EliminarDiplomado").submit(function(event){
