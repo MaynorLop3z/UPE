@@ -57,9 +57,18 @@ class Diplomados extends CI_Model {
     }
 
     public function EliminarDiplomado($CodigoDiplomado) {
+        $eliminar = false;
+        try{
         $this->db->delete('Diplomados', array('CodigoDiplomado' => $CodigoDiplomado));
+        if($this->db->affected_rows()==1){
+            $eliminar = true;
+        }
+    }  catch (Exception $ex){
+        $ex->getMessage();
     }
-
+    return $eliminar;
+    }
+    
     public function ModificarDiplomado($CodigoDiplomado, $NombreDiplomado, $Descripcion, $Estado,$CodigoCategoriaDiplomado,$Comentarios) {
         try{
         $data = array(

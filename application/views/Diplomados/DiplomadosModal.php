@@ -155,17 +155,17 @@
         <div class="modal-content">
             <div class="container-fluid ">
                 <button type="button" class="close btn-lg" data-dismiss="modal" aria-hidden="true">×</button>
-                <form action="<?php echo base_url() ?>index.php/DiplomadosController/EliminarDiplomado/" class="form-horizontal" class="form-horizontal" method="post" >
+                <form id="frmDELdip" action="<?php echo base_url() ?>index.php/DiplomadosController/EliminarDiplomado/" class="form-horizontal" class="form-horizontal" method="post" >
                     <fieldset>
                         <legend class="modal-header">Diplomados:</legend> 
                         <div class="form-group">
                             <div class="col-lg-9">
-                                <label>¿Realmente desea eliminar el Diplomado <!--<mark id="SelectDiEliminar"></mark>--></label>
+                                <label>¿Realmente desea eliminar el Diplomado<mark id="markeliminar"></mark>?</label>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" id="btnEnviarU" onclick="" class=" btn btn-default" name="Aceptar">Aceptar</button>
-                            <button type="reset" id="btnLimpiar" onclick="" class=" btn btn-default" name="Limpiar">Limpiar</button>
+                            <button type="submit" id="btnEnviarDipD" onclick="" class=" btn btn-default" name="Eliminar">Eliminar</button>
+                            <button type="button"  onclick="" class=" btn btn-default" name="Cancelar">Cancelar</button>
                         </div>
 
                     </fieldset>

@@ -62,20 +62,20 @@ class DiplomadosController extends CI_Controller {
         
         
     }
-//            public function eliminarDiplomado (){
-//                $eliminar = false;
-//                
-//                try {
-//                if($this->input->post()){    
-//                $codigo = $this->input->post('CodigoDiplomado');
-//                $eliminar = $this->Diplomados->EliminarDiplomado($codigo);
-//                echo $eliminar;                   
-//                }
-//                } catch (Exception $ex) {
-//                    echo json_encode($ex);
-//                }
-//                
-//                
-//            }
+            public function eliminarDiplomado (){
+                $eliminar = false;
+                
+                try {
+                if($this->input->post()){    
+                $codigo = $this->input->post('CodigoDiplomado');
+                $eliminar = $this->Diplomados->EliminarDiplomado($codigo);
+                echo $eliminar;                   
+                }
+                } catch (Exception $ex) {
+                    echo json_encode($ex);
+                }
+                
+                
+            }
        }
 
