@@ -100,9 +100,9 @@ $('#AlumnoEditar').on('show.bs.modal', function(event) {
 
 $('#AlumnoEliminar').on('show.bs.modal', function(event) {
     console.log("Eliminar Alumno se muestra");
-var alum = $('#alum' + codigoParticipante.substring(7));
-var Nombre_Alumno = alum.find('.Nombre_Alumno').html().toString().trim();
-$('#nombreAlumEliminar').html(Nombre_Alumno);
+    var alum = $('#alum' + codigoParticipante.substring(7));
+    var Nombre_Alumno = alum.find('.Nombre_Alumno').html().toString().trim();
+    $('#nombreAlumEliminar').html(Nombre_Alumno);
 });
 
 
@@ -138,11 +138,16 @@ $("#frmADDAlumno").submit(function(event) {
             fila = fila + '</td></tr>';
             $(document).on("click", "#alumE" + obj.CodigoParticipante.toString(), function() {
                 codigoParticipante = obj.CodigoParticipante;
+                filaEdit = fila;
                 $("#AlumnoEditar").modal('toggle');
             });
             $(document).on("click", "#alumDEL" + obj.CodigoParticipante.toString(), function() {
                 codigoParticipante = obj.CodigoParticipante;
                 $("#AlumnoEliminar").modal('toggle');
+            });
+            $(document).on("click", "#alumVIEW" + obj.CodigoParticipante.toString(), function() {
+                codigoParticipante = obj.CodigoParticipante;
+                $("#AlumnoVIEWDATA").modal('toggle');
             });
             //console.log(fila);
             $('#tableAlumnos > tbody').append(fila);
@@ -195,9 +200,13 @@ $("#frmEditarAlumno").submit(function(event) {
                 codigoParticipante = obj.CodigoParticipante;
                 $("#AlumnoEliminar").modal('toggle');
             });
-            $('#tableAlumnos > tbody').find('#alum'+obj.CodigoParticipante).html(fila);
+            $(document).on("click", "#alumVIEW" + obj.CodigoParticipante.toString(), function() {
+                codigoParticipante = obj.CodigoParticipante;
+                $("#AlumnoVIEWDATA").modal('toggle');
+            });
+            $('#tableAlumnos > tbody').find('#alum' + obj.CodigoParticipante).html(fila);
             $("#AlumnoEditar").modal('toggle');
-            
+
         }
     });
 //    posting.fail(function(xhr, textStatus, errorThrown) {
@@ -217,9 +226,9 @@ $("#frmDELAlumno").submit(function(event) {
     posting.done(function(data) {
         if (data) {
             $("#AlumnoEliminar").modal('toggle');
-            $('#tableAlumnos').find('#alum'+AlumnoCodigo).fadeOut("slow");
-            $('#tableAlumnos').find('#alum'+AlumnoCodigo).remove();
-            
+            $('#tableAlumnos').find('#alum' + AlumnoCodigo).fadeOut("slow");
+            $('#tableAlumnos').find('#alum' + AlumnoCodigo).remove();
+
         }
     });
     posting.fail(function() {
@@ -234,13 +243,13 @@ $("#frmFINDAlumno").submit(function(event) {
     var posting = $.post(url, {NombreBuscado: AlumnoNombre});
     posting.done(function(data) {
         if (data) {
-            $('#tableAlumnos').html(data);  
+            $('#tableAlumnos').html(data);
         }
     });
 //    posting.fail(function() {
 //        alert("error");
 //    });
-        posting.fail(function(xhr, textStatus, errorThrown) {
-         alert("error" + xhr.responseText);
-     });
+    posting.fail(function(xhr, textStatus, errorThrown) {
+        alert("error" + xhr.responseText);
+    });
 });
