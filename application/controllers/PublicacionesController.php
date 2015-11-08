@@ -44,16 +44,17 @@ class PublicacionesController extends CI_Controller {
                     $tituloP = $this->input->post('titulo');
                     $contenidoP = $this->input->post('contenido');
                     $arrayDataPublicacion = $this->publicaciones->CrearPublicacion($usuarioPublica, $FechaPublicacion, $tituloP, $contenidoP, TRUE, null, null, null, null, null);
-                    $codigoPub = $arrayDataPublicacion['CodigoPublicacion'];
+                   $CodigoPublicaciones = $arrayDataPublicacion['CodigoPublicacion'];
 
                     //ingresar los datos del archivo a la bd
                     $dataImg = $this->upload->data();
-                    $ruta = "/images/" . $dataImg['file_name'];
-                    $nombre = $dataImg['file_name'];
-                    $extension = $dataImg['file_ext'];
-                    $estado = 'True';
-                    $codigoUsuario = $this->session->userdata("codigoUserLogin");
-                    $this->CrearArchivo($ruta, $nombre, $extension, $estado, $codigoUsuario, $codigoPub);
+                    $Ruta = "/images/" . $dataImg['file_name'];
+                    $Nombre = $dataImg['file_name'];
+                    $Extension = $dataImg['file_ext'];
+                    $Estado = True;
+                    $CodigoUsuarios = $this->session->userdata("codigoUserLogin");
+                    $this->archivos->CrearArchivo($Ruta, $Nombre, $Extension, True, $CodigoUsuarios, $CodigoPublicaciones);
+                    //public function CrearArchivo($Ruta, $Nombre, $Extension, $Estado, $CodigoUsuarios, $CodigoPublicaciones)
                    //echo json_encode();
                 }
 

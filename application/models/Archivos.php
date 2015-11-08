@@ -2,6 +2,7 @@
 
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
+
 //include('ModeloBase.php');
 class Archivos extends CI_Model {
 
@@ -40,14 +41,15 @@ class Archivos extends CI_Model {
         return $resultado;
     }
 
-    public function CrearArchivo($Ruta, $Nombre, $Extension, $Estado, $CodigoUsuarios, $CodigoPublicaiones) {
+    public function CrearArchivo($Ruta, $Nombre, $Extension, $Estado, $CodigoUsuarios, $CodigoPublicaciones) {
         $data = array(
-            //            'CodigoArchivos' => null,
-            'Nombre' => $Nombre,
-            'Ruta' => $Ruta,
-            'Extension' => $Extension,
-            'CodigoUsuarios' => $CodigoUsuarios,
-            'CodigoPublicaiones' => $CodigoPublicaiones
+        //            'CodigoArchivos' => null,
+        'Nombre' => $Nombre,
+        'Ruta' => $Ruta,
+        'Extension' => $Extension,
+        'CodigoUsuarios' => $CodigoUsuarios,
+        'CodigoPublicaciones' => $CodigoPublicaciones,
+        'Estado' =>$Estado
         );
         $this->db->insert('Archivos', $data);
     }
