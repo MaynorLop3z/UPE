@@ -84,18 +84,21 @@
 
             <div class="container-fluid ">
                 <button type="button" class="close btn-lg" data-dismiss="modal" aria-hidden="true">×</button>
-                <form action="<?php echo base_url() ?>index.php/UsuarioController/editarUsuario/"  class="form-horizontal" method="post" >
+                <form id="frmEditarUser" action="<?php echo base_url() ?>index.php/UsuarioController/editarUsuario/"  class="form-horizontal" method="post" >
                     <fieldset>
-                        <input type="hidden" id="CodigoUser" >
                         <legend class="modal-header">Modificar Usuario:</legend>
+
+                        <div class="form-group">
+                            <input type="hidden" id="CodigoUser" name="CodigoUser">
+                        </div>
 
                         <div class="form-group">
                             <label for="Nombre Persona" class="col-lg-3 control-label">Nombre Persona:</label>
                             <div class="col-lg-6">
-                                <input type="text" class="form-control"  name="UsuarioNombreReal" id="txtNombrePersonaModificar"  placeholder="Nombre de la persona" required>
+                                <input type="text" class="form-control"  id="txtNombrePersonaModifica"  name="UsuarioNombreReal"  placeholder="Nombre de la persona" required>
                             </div>
                             <div class="col-lg-3">
-                                <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
+                                <label id="usRName" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
                             </div>
                         </div>
 
@@ -159,17 +162,17 @@
     </div>
 </div>
 <!-- Modal para Eliminar Usuario --------------------------------------------------------------------------------------->
-<div id="usuarioElimina" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" >
+<div id="usuarioElimina" data-backdrop="static"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="container-fluid ">
                 <button type="button" class="close btn-lg" data-dismiss="modal" aria-hidden="true">×</button>
-                <form action="UsuarioController" class="form-horizontal" method="post" >
+                <form id="frmEliminarUser" action="<?php echo base_url() ?>index.php/UsuarioController/eliminarUsuario/" class="form-horizontal" method="post" >
                     <fieldset>
                         <legend class="modal-header">Usuario:</legend> 
                         <div class="form-group">
                             <div class="col-lg-9">
-                                <label>¿Realmente desea eliminar al usuario seleccionado?</label>
+                                <label>¿Realmente desea eliminar al usuario <mark id="nombreUserEliminar"></mark>?</label>
                             </div>
                         </div>
                         <div class="modal-footer">

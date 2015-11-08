@@ -5,25 +5,29 @@ $("#btnUsuarioNuevo").on('click', function () {
 });
 
 $('.btn_modificar_user').on('click', function (event) {
-    codigoUsuario = event.target.id;
+    codigoUsuario = this.id;
     $("#usuarioModifica").modal('toggle');
 });
 
+$('.btn_eliminar_user').on('click', function (event) {
+    codigoUsuario = this.id;
+    codigoUsuario = codigoUsuario.substring(6);
+    console.log("cualquyir babosasadasdasdasdadasdsadad");
+    $("#usuarioElimina").modal('show');
+});
+
 $('#usuarioModifica').on('show.bs.modal', function (event) {
-//                codigoUsuario = (event.target.id);
+
     var tr = $('#tr' + codigoUsuario);
-    var correo_Usuario = tr.find('.correo_Usuario').html().toString().trim();
-    var correo_Usuario = tr.find('.correo_Usuario').html().toString().trim();
-    var dataU= tr.data("userd");
-    if(dataU!==null){
-        
-    }
-    $('#CodigoUser').html(codigoUsuario);
-    $('#txtUserModificar').val(dataU.Nombre.toString().trim());
-    $('#Emailmodificar').val(correo_Usuario);
-    $('#Passwordmodificar').val(correo_Usuario);
-    $('#txtAreaUserComent').val(correo_Usuario);
-    // alert(codigoUsuario);
+    var dataU = tr.data("userd");
+//
+
+    $('#txtUserModificar').val(dataU.NombreUsuario);
+    $('#txtNombrePersonaModifica').val(dataU.Nombre);
+    $('#Emailmodificar').val(dataU.CorreoUsuario);
+    $('#Passwordmodificar').val(dataU.ContraseniaUsuario);
+    $('#txtAreaUserComent').val(dataU.Comentarios);
+
 });
 
 $("#frmGuardarUSer").submit(function (event) {
@@ -70,12 +74,13 @@ $("#frmGuardarUSer").submit(function (event) {
 $("#frmEditarUser").submit(function (event) {
     event.preventDefault();
     var $form = $(this), UsuarioNombre = $form.find("input[name='UsuarioNombre']").val(),
+            CodigoUsuario = codigoUsuario,
             UsuarioPassword = $form.find("input[name='UsuarioPassword']").val(),
             UsuarioEmail = $form.find("input[name='UsuarioEmail']").val(),
             UsuarioNombreReal = $form.find("input[name='UsuarioNombreReal']").val(),
             Comentarios = $form.find("textarea[name='Comentarios']").val(),
             url = $form.attr("action");
-    var posting = $.post(url, {UsuarioNombre: UsuarioNombre,
+    var posting = $.post(url, {CodigoUsuario: CodigoUsuario, UsuarioNombre: UsuarioNombre,
         UsuarioPassword: UsuarioPassword,
         UsuarioEmail: UsuarioEmail,
         Comentarios: Comentarios,
@@ -83,7 +88,6 @@ $("#frmEditarUser").submit(function (event) {
     posting.done(function (data) {
         if (data !== null) {
             var obj = jQuery.parseJSON(data);
-
             var fila;//= '<tr id="tr' + obj.CodigoUsuario + '">';
             fila = fila + '<td class="nombre_Usuario" >' + obj.Nombre + '</td>';
             fila = fila + '<td class="correo_Usuario" >' + obj.CorreoUsuario + '</td>';
@@ -93,12 +97,14 @@ $("#frmEditarUser").submit(function (event) {
             fila = fila + '<button data-toggle="modal" title="Eliminar Usuario" class="btn btn-danger" href="#usuarioElimina"><span class="glyphicon glyphicon-trash"></span></button>';
             fila = fila + '</td>';
 
-            $(document).on("click", "#" + obj.CodigoUsuario.toString(), function () {
+            $(document).on("click", "#" + obj.CodigoUsuario, function () {
                 codigoUsuario = obj.CodigoUsuario;
                 $("#usuarioModifica").modal('toggle');
             });
             //$('#tableUsers > tbody').append(fila);
-            $('#tableUsers > tbody').find("#" + obj.CodigoUsuario).html(fila);
+            var trUser = $('#tableUsers > tbody').find("#tr" + obj.CodigoUsuario);
+            trUser.html(fila);
+            trUser.data("userd", obj);
             $("#usuarioModifica").modal('toggle');
         }
     });
@@ -107,3 +113,30 @@ $("#frmEditarUser").submit(function (event) {
         alert(obj.Error);
     });
 });
+
+
+$("#frmEliminarUser").submit(function (event) {
+    event.preventDefault();
+    var $form = $(this), CodigoUsuario = codigoUsuario, url = $form.attr("action");
+    var posting = $.post(url, {CodigoUsuario: CodigoUsuario});
+    posting.done(function (data) {
+        if (data) {
+            $("#usuarioElimina").modal('toggle');
+            $('#tableUsers').find('#tr' + codigoUsuario).fadeOut("slow");
+            $('#tableUsers').find('#tr' + codigoUsuario).remove();
+        }
+    });
+    posting.fail(function () {
+        alert("error");
+    });
+});
+
+$('#usuarioElimina').on('show.bs.modal', function (event) {
+    console.log("codigo user es:" + codigoUsuario);
+    var tr = $('#tr' + codigoUsuario);
+    var dataU = tr.data("userd");
+    $('#nombreUserEliminar').html(dataU.Nombre);
+});
+
+
+

@@ -53,8 +53,9 @@ class Usuariocontroller extends CI_Controller {
     public function editarUsuario() {
         try {
             if ($this->input->post()) {
-                if ($this->input->post('CodigoUser')) {
-                    $codigoUsuario = $this->input->post('CodigoUser');
+                $codigoUser=$this->input->post('CodigoUsuario');
+                if ($codigoUser!=null) {
+                    $codigoUsuario = $codigoUser;
                     $nombrePersonaUsuario = $this->input->post('UsuarioNombreReal');
                     $contraseniaUsuario = $this->input->post('UsuarioPassword');
                     $comentarios = $this->input->post('Comentarios');
@@ -70,10 +71,24 @@ class Usuariocontroller extends CI_Controller {
             }
         } catch (Exception $e) {
             $data = array(
-                'Error' => $ex->getMessage(),
+                'Error' => $ex->getMessage()
             );
             echo json_encode($data);
         }
     }
+    
+      public function eliminarUsuario() {
+         $eliminado = false;
+         try {
+             if ($this->input->post()) {
+                 $codigo = $this->input->post('CodigoUsuario');
+                 $eliminado = $this->Usuarios->eliminarUsuario($codigo);
+                 echo $eliminado;
+             }
+         } catch (Exception $ex) {
+            echo json_encode($ex);
+         }
+     }
+     
 
 }

@@ -13,10 +13,14 @@ class Usuarios extends CI_Model {
     }
 
     public function listarUsuarios() {
-        $this->db->select('CodigoUsuario, Nombre, CorreoUsuario, NombreUsuario');
-        $this->db->from('Usuarios');
-        $consulta = $this->db->get();
-        $resultado = $consulta->result();
+        try {
+            $this->db->select('CodigoUsuario, Nombre, CorreoUsuario, NombreUsuario, ContraseniaUsuario, Comentarios');
+            $this->db->from('Usuarios');
+            $consulta = $this->db->get();
+            $resultado = $consulta->result();
+        } catch (Exception $e) {
+            $e->getMessage();
+        }
         return $resultado;
     }
 
@@ -67,8 +71,17 @@ class Usuarios extends CI_Model {
     }
 
     public function eliminarUsuario($codigoUsuario) {
-        $this->db->where('CodigoUsuario', $codigoUsuario);
-        $this->db->delete('Usuarios');
+        $eliminado = false;
+        try {
+            $this->db->where('CodigoUsuario', $codigoUsuario);
+            $this->db->delete('Usuarios');
+            if ($this->db->affected_rows() == 1) {
+                $eliminado = true;
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+        return $eliminado;
     }
 
     public function findUsuario($codigoUsuario) {

@@ -33,8 +33,9 @@
                         <td class="correo_Usuario" ><?= $user->CorreoUsuario ?></td>
                         <td class="nickName_Usuario" ><?= $user->NombreUsuario ?></td>
                         <td style="text-align:center"  class="gestion_User">
-                            <button id="<?php echo $user->CodigoUsuario ?>"  title="Editar Usuario" class="btn_modificar_user btn btn-success "  class=" btn btn-info btn-lg"><span class="glyphicon glyphicon-pencil"></span> </button>
-                            <button data-toggle="modal" title="Eliminar Usuario" class="btn btn-danger" href="#usuarioElimina"><span class="glyphicon glyphicon-trash"></span></button></td>
+                            <button id="<?php echo $user->CodigoUsuario ?>" title="Editar Usuario" class="btn_modificar_user btn btn-success "  class=" btn btn-info btn-lg"><span class="glyphicon glyphicon-pencil"></span> </button>
+                            <button id="btnDel<?php echo $user->CodigoUsuario ?>" title="Eliminar Usuario" class="btn_eliminar_user btn btn-danger" class=" btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>
+                        </td>
                     </tr>
                     <?php
                 }
