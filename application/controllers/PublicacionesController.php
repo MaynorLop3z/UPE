@@ -40,10 +40,10 @@ class PublicacionesController extends CI_Controller {
                     echo 'Entro al controller';
                     //ingresar los datos de una publicacion a la bd
                     $usuarioPublica = $this->session->userdata("codigoUserLogin");
-                    $fechaPublica = date('Y-m-d');
+                    $FechaPublicacion= date('Y-m-d');
                     $tituloP = $this->input->post('titulo');
                     $contenidoP = $this->input->post('contenido');
-                    $arrayDataPublicacion = $this->publicaciones->CrearPublicacion($usuarioPublica, $fechaPublica, $tituloP, $contenidoP, TRUE, null, null, null, null, null);
+                    $arrayDataPublicacion = $this->publicaciones->CrearPublicacion($usuarioPublica, $FechaPublicacion, $tituloP, $contenidoP, TRUE, null, null, null, null, null);
                     $codigoPub = $arrayDataPublicacion['CodigoPublicacion'];
 
                     //ingresar los datos del archivo a la bd
@@ -53,10 +53,8 @@ class PublicacionesController extends CI_Controller {
                     $extension = $dataImg['file_ext'];
                     $estado = 'True';
                     $codigoUsuario = $this->session->userdata("codigoUserLogin");
-                    $arrayDataArchivo = $this->CrearArchivo($ruta, $nombre, $extension, $estado, $codigoUsuario, $codigoPub);
-
-
-                    //echo json_encode();
+                    $this->CrearArchivo($ruta, $nombre, $extension, $estado, $codigoUsuario, $codigoPub);
+                   //echo json_encode();
                 }
 
 

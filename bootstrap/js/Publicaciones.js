@@ -14,19 +14,19 @@ $(document).ready(function () {
     $("#divPub").submit(function (event)
 
     {
-        console.log("entro a la funcion");
-        event.preventDefault();
-        var $div = $(this);
-        Titulo = $div.find("input[name='tituloPub']").val();
-        console.log(Titulo),
-        Contenido = $div.find("textarea[name='contenido']").val();
-        console.log(Contenido);
-//        url = base_url("index.php/PublicacionesController/do_upload");
-        test = $div.find("input[name='escondido']").val();
-        console.log(test);
-        var posting = $.post(test, {titulo: Titulo, contenido: Contenido});
-        console.log(posting);
-
+//        console.log("entro a la funcion");
+//        event.preventDefault();
+//        var $div = $(this);
+//        Titulo = $div.find("input[name='tituloPub']").val();
+//        console.log(Titulo),
+//        Contenido = $div.find("textarea[name='contenido']").val();
+//        console.log(Contenido);
+////        url = base_url("index.php/PublicacionesController/do_upload");
+//        test = $div.find("input[name='escondido']").val();
+//        console.log(test);
+//        var posting = $.post(test, {titulo: Titulo, contenido: Contenido});
+//        console.log(posting);
+//
 
 
 

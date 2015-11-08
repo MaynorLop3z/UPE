@@ -32,7 +32,7 @@ class Publicaciones extends CI_Model {
 
     public function listarPublicacionesUsuario($UsuarioPublica) {
         $this->db->select('CodigoPublicacion, '
-                . 'FechaPublica, '
+                 . 'FechaPublicacion, '
                 . 'Titulo, '
                 . 'Contenido, '
                 . 'ParticipantePublica, '
@@ -52,7 +52,7 @@ class Publicaciones extends CI_Model {
     public function listarPublicacionesGrupoPeriodo($CodigoGrupoPeriodo) {
         $this->db->select('CodigoPublicacion, '
                 . 'UsuarioPublica, '
-                . 'FechaPublica, '
+                 . 'FechaPublicacion, '
                 . 'Titulo, '
                 . 'Contenido, '
                 . 'ParticipantePublica, '
@@ -71,7 +71,7 @@ class Publicaciones extends CI_Model {
     public function listarPublicacionesGrupoParticipantes($GrupoParticipantes) {
         $this->db->select('CodigoPublicacion, '
                 . 'UsuarioPublica, '
-                . 'FechaPublica, '
+                 . 'FechaPublicacion, '
                 . 'Titulo, '
                 . 'Contenido, '
                 . 'ParticipantePublica, '
@@ -90,7 +90,7 @@ class Publicaciones extends CI_Model {
     public function listarPublicacionesTipoPublicacion($CodigoTipoPublicacion) {
         $this->db->select('CodigoPublicacion, '
                 . 'UsuarioPublica, '
-                . 'FechaPublica, '
+                 . 'FechaPublicacion, '
                 . 'Titulo, '
                 . 'Contenido, '
                 . 'ParticipantePublica, '
@@ -106,17 +106,17 @@ class Publicaciones extends CI_Model {
         return $resultado;
     }
 
-    public function CrearPublicacion($UsuarioPublica, $FechaPublica, $Titulo, $Contenido, $Estado, $CodigoCodigoGrupoPeriodo, $CodigoGrupoPeriodoUsuario, $GrupoParticipantes, $CodigoTipoPublicacion, $ParticipantePublica = null) {
+    public function CrearPublicacion($UsuarioPublica, $FechaPublicacion, $Titulo, $Contenido, $Estado, $CodigoGrupoPeriodo, $CodigoGrupoPeriodoUsuario, $CodigoGrupoParticipantes, $CodigoTipoPublicacion, $ParticipantePublica = null) {
         $data = array(
             'UsuarioPublica' => $UsuarioPublica,
-            'FechaPublica' => $FechaPublica,
+            'FechaPublicacion' => $FechaPublicacion,
             'Titulo' => $Titulo,
             'Contenido' => $Contenido,
             'ParticipantePublica' => $ParticipantePublica,
             'Estado' => $Estado,
-            'CodigoCodigoGrupoPeriodo' => $CodigoCodigoGrupoPeriodo,
+            'CodigoGrupoPeriodo' => $CodigoGrupoPeriodo,
             'CodigoGrupoPeriodoUsuario' => $CodigoGrupoPeriodoUsuario,
-            'GrupoParticipantes' => $GrupoParticipantes,
+            'CodigoGrupoParticipantes' => $CodigoGrupoParticipantes,
             'CodigoTipoPublicacion' => $CodigoTipoPublicacion
         );
         $this->db->insert('Publicaciones', $data);
@@ -132,15 +132,15 @@ class Publicaciones extends CI_Model {
         //por defecto
     }
 
-    public function ModificarPublicacion($CodigoPublicacion, $UsuarioPublica, $FechaPublica, $Titulo, $Contenido, $Estado, $CodigoCodigoGrupoPeriodo, $CodigoGrupoPeriodoUsuario, $GrupoParticipantes, $CodigoTipoPublicacion, $ParticipantePublica = null) {
+    public function ModificarPublicacion($CodigoPublicacion, $UsuarioPublica, $FechaPublicacion, $Titulo, $Contenido, $Estado, $CodigoCodigoGrupoPeriodo, $CodigoGrupoPeriodoUsuario, $GrupoParticipantes, $CodigoTipoPublicacion, $ParticipantePublica = null) {
         $data = array(
             'UsuarioPublica' => $UsuarioPublica,
-            'FechaPublica' => $FechaPublica,
+            'FechaPublicacion' => $FechaPublicacion,
             'Titulo' => $Titulo,
             'Contenido' => $Contenido,
             'ParticipantePublica' => $ParticipantePublica,
             'Estado' => $Estado,
-            'CodigoCodigoGrupoPeriodo' => $CodigoCodigoGrupoPeriodo,
+            'CodigoGrupoPeriodo' => $CodigoCodigoGrupoPeriodo,
             'CodigoGrupoPeriodoUsuario' => $CodigoGrupoPeriodoUsuario,
             'GrupoParticipantes' => $GrupoParticipantes,
             'CodigoTipoPublicacion' => $CodigoTipoPublicacion
