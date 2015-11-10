@@ -6,13 +6,15 @@ $("#btnUsuarioNuevo").on('click', function () {
 
 $('.btn_modificar_user').on('click', function (event) {
     codigoUsuario = this.id;
-    $("#usuarioModifica").modal('toggle');
+
+    $("#usuarioModifica").modal('show');
+
 });
 
 $('.btn_eliminar_user').on('click', function (event) {
     codigoUsuario = this.id;
     codigoUsuario = codigoUsuario.substring(6);
-    console.log("cualquyir babosasadasdasdasdadasdsadad");
+
     $("#usuarioElimina").modal('show');
 });
 
@@ -52,16 +54,35 @@ $("#frmGuardarUSer").submit(function (event) {
             fila = fila + '<td class="correo_Usuario" >' + obj.CorreoUsuario + '</td>';
             fila = fila + '<td class="nickName_Usuario" >' + obj.NombreUsuario + '</td>';
             fila = fila + '<td style="text-align:center"  class="gestion_User">';
-            fila = fila + '<button id="' + obj.CodigoUsuario + '"  title="Editar Usuario" class="btn_modificar_user btn btn-success "  class=" btn btn-info btn-lg"><span class="glyphicon glyphicon-pencil"></span> </button>';
-            fila = fila + '<button data-toggle="modal" title="Eliminar Usuario" class="btn btn-danger" href="#usuarioElimina"><span class="glyphicon glyphicon-trash"></span></button>';
+//            fila = fila + '<button id="' + obj.CodigoUsuario + '"  title="Editar Usuario" class="btn_modificar_user btn btn-success "  class=" btn btn-info btn-lg"><span class="glyphicon glyphicon-pencil"></span> </button>';
+//            fila = fila + '<button id="btnDel' + obj.CodigoUsuario + '" title="Eliminar Usuario" class="btn_eliminar_user btn btn-danger" class=" btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>';
             fila = fila + '</td></tr>';
-
-            $(document).on("click", "#" + obj.CodigoUsuario.toString(), function () {
-                codigoUsuario = obj.CodigoUsuario;
-                $("#usuarioModifica").modal('toggle');
-            });
+//           
+//            $(document).on("click", ".btn_modificar_user", function () {
+//                codigoUsuario = obj.CodigoUsuario;
+//                $("#usuarioModifica").modal('toggle');
+//            });
+//            $(document).on("click", "#btnDel" + obj.CodigoUsuario, function () {
+//                codigoUsuario = obj.CodigoUsuario;
+//                $("#usuarioElimina").modal('toggle');
+//            });
             $('#tableUsers > tbody').append(fila);
+
+//            
+
+
+            var trUser = $('#tableUsers > tbody').find("#tr" + obj.CodigoUsuario);
+            trUser.data("userd", obj);
+            var tdGestionUser = trUser.find(".gestion_User");
+            console.log(tdGestionUser);
+
+            var divgestionUserBtn = $("#gestionUserBtn");
+            divgestionUserBtn.find(".btn_modificar_user").attr("id", "" + obj.CodigoUsuario);
+            divgestionUserBtn.find(".btn_eliminar_user").attr("id", "btnDel" + obj.CodigoUsuario);
+            tdGestionUser.html(divgestionUserBtn);
+
             $("#usuarioNuevo").modal('toggle');
+
         }
     });
     posting.fail(function (data) {
@@ -88,22 +109,12 @@ $("#frmEditarUser").submit(function (event) {
     posting.done(function (data) {
         if (data !== null) {
             var obj = jQuery.parseJSON(data);
-            var fila;//= '<tr id="tr' + obj.CodigoUsuario + '">';
-            fila = fila + '<td class="nombre_Usuario" >' + obj.Nombre + '</td>';
-            fila = fila + '<td class="correo_Usuario" >' + obj.CorreoUsuario + '</td>';
-            fila = fila + '<td class="nickName_Usuario" >' + obj.NombreUsuario + '</td>';
-            fila = fila + '<td style="text-align:center"  class="gestion_User">';
-            fila = fila + '<button id="' + obj.CodigoUsuario + '"  title="Editar Usuario" class="btn_modificar_user btn btn-success "  class=" btn btn-info btn-lg"><span class="glyphicon glyphicon-pencil"></span> </button>';
-            fila = fila + '<button data-toggle="modal" title="Eliminar Usuario" class="btn btn-danger" href="#usuarioElimina"><span class="glyphicon glyphicon-trash"></span></button>';
-            fila = fila + '</td>';
 
-            $(document).on("click", "#" + obj.CodigoUsuario, function () {
-                codigoUsuario = obj.CodigoUsuario;
-                $("#usuarioModifica").modal('toggle');
-            });
-            //$('#tableUsers > tbody').append(fila);
             var trUser = $('#tableUsers > tbody').find("#tr" + obj.CodigoUsuario);
-            trUser.html(fila);
+            trUser.find('.nombre_Usuario').html(obj.Nombre);
+            trUser.find('.correo_Usuario').html(obj.CorreoUsuario);
+            trUser.find('.nickName_Usuario').html(obj.NombreUsuario);
+
             trUser.data("userd", obj);
             $("#usuarioModifica").modal('toggle');
         }
@@ -132,7 +143,7 @@ $("#frmEliminarUser").submit(function (event) {
 });
 
 $('#usuarioElimina').on('show.bs.modal', function (event) {
-    console.log("codigo user es:" + codigoUsuario);
+
     var tr = $('#tr' + codigoUsuario);
     var dataU = tr.data("userd");
     $('#nombreUserEliminar').html(dataU.Nombre);
