@@ -32,10 +32,12 @@ and open the template in the editor.
                 $("#Modulos").load('ModulosController');
                 $("#Participantes").load('ParticipantesController');
                 $("#PublicacionModulo").load('PublicacionMoController');
+                $("#VistasAyuda").load('VistaAyudaCtrl');
             });
         </script>
     </head>
     <body>
+        <div id="VistasAyuda" style='display:none;'></div>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-1"></div>
