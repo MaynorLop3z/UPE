@@ -41,15 +41,18 @@ class Archivos extends CI_Model {
         return $resultado;
     }
 
-    public function CrearArchivo($Ruta, $Nombre, $Extension, $Estado, $CodigoUsuarios, $CodigoPublicaciones) {
+    public function CrearArchivo($Ruta, $Nombre, $Extension, $Estado, $CodigoUsuarios, $CodigoPublicaciones, $UsuarioModifica, $IpModifica, $FechaModifica) {
         $data = array(
-        //            'CodigoArchivos' => null,
-        'Nombre' => $Nombre,
-        'Ruta' => $Ruta,
-        'Extension' => $Extension,
-        'CodigoUsuarios' => $CodigoUsuarios,
-        'CodigoPublicaciones' => $CodigoPublicaciones,
-        'Estado' =>$Estado
+            //            'CodigoArchivos' => null,
+            'Nombre' => $Nombre,
+            'Ruta' => $Ruta,
+            'Extension' => $Extension,
+            'CodigoUsuarios' => $CodigoUsuarios,
+            'CodigoPublicaciones' => $CodigoPublicaciones,
+            'Estado' => $Estado,
+            'UsuarioModifica' => $UsuarioModifica,
+            'IpModifica' => $IpModifica,
+            'FechaModifica' => $FechaModifica
         );
         $this->db->insert('Archivos', $data);
     }

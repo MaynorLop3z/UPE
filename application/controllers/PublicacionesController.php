@@ -21,7 +21,7 @@ class PublicacionesController extends CI_Controller {
 
     function do_upload() {
         try {
-            $config['upload_path'] = './bootstrap/images/';
+            $config['upload_path'] = './bootstrap/images/publicaciones';
             $config['allowed_types'] = 'jpg|png';
             $config['max_size'] = '100';
             $config['max_width'] = '1024';
@@ -48,13 +48,14 @@ class PublicacionesController extends CI_Controller {
 
                     //ingresar los datos del archivo a la bd
                     $dataImg = $this->upload->data();
-                    $Ruta = "/images/" . $dataImg['file_name'];
+                    $Ruta = "/images/publicaciones/" . $dataImg['file_name'];
                     $Nombre = $dataImg['file_name'];
                     $Extension = $dataImg['file_ext'];
                     $Estado = True;
                     $CodigoUsuarios = $this->session->userdata("codigoUserLogin");
-                    $this->archivos->CrearArchivo($Ruta, $Nombre, $Extension, True, $CodigoUsuarios, $CodigoPublicaciones);
-                    //public function CrearArchivo($Ruta, $Nombre, $Extension, $Estado, $CodigoUsuarios, $CodigoPublicaciones)
+                    $ipPublica= $this->session->userdata("ipUserLogin");
+                    $this->archivos->CrearArchivo($Ruta, $Nombre, $Extension, $Estado, $CodigoUsuarios, $CodigoPublicaciones,$usuarioPublica,$ipPublica,$FechaPublicacion);
+                    // public function CrearArchivo($Ruta, $Nombre, $Extension, $Estado, $CodigoUsuarios, $CodigoPublicaciones, $UsuarioModifica, $IpModifica, $FechaModifica) {
                    //echo json_encode();
                 }
 
