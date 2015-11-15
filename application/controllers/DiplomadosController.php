@@ -1,5 +1,4 @@
 <?php
-
 if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
@@ -13,61 +12,70 @@ class DiplomadosController extends CI_Controller {
     }
 
     public function index() {
-
-
-        $data['DiplomadosN'] = $this->Diplomados->listarDiplomados();
-        $data['CategoriasDi'] = $this->Diplomados->listarDiplomadosCategoria();
-        $this->load->view('Diplomados', $data);
+    
+      
+        $data['DiplomadosN']= $this->Diplomados->listarDiplomados(); 
+        $data['CategoriasDi']= $this->Diplomados->listarDiplomadosCategoria();
+        $this->load->view('Diplomados',$data);
+        
+      
     }
 
-    public function guardarDiplomado() {
+    
+    public function guardarDiplomado(){
         try {
-            if ($this->input->post()) { //Estos son los nombres de los input del Form
+            if($this->input->post()){ //Estos son los nombres de los input del Form
                 $nombreDiplomado = $this->input->post('DiplomadoNombre');
                 $descripcionDiplomado = $this->input->post('DiplomadoDescripcion');
-                $optionsactivo = $this->input->post('optionsActivo') === 'V'; // Agregue la opcion activo  si es seleccionad
+                $optionsactivo= $this->input->post('optionsActivo')==='V';// Agregue la opcion activo  si es seleccionad
                 $categoriaDi = $this->input->post('CatgoriaDiplomado');
                 $comentarioDi = $this->input->post('ComentarioDiplomado');
                 $this->load->model('Diplomados');
-
-                $arrayData = $this->Diplomados->crearDiplomado($nombreDiplomado, $descripcionDiplomado, $optionsactivo, $categoriaDi, $comentarioDi);
+                
+                $arrayData = $this->Diplomados->crearDiplomado($nombreDiplomado,$descripcionDiplomado,$optionsactivo,$categoriaDi,$comentarioDi);
                 echo json_encode($arrayData);
+                
             }
         } catch (Exception $ex) {
             echo json_encode($ex);
         }
     }
-
-    public function editarDiplomado() {
+    
+    public  function editarDiplomado(){
         try {
-            if ($this->input->post('CodigoDiplomado')) {
+            if($this->input->post('CodigoDiplomado')){
                 $codigoDi = $this->input->post('CodigoDiplomado');
                 $nombreDiplomado = $this->input->post('DiplomadoNombre');
                 $descripcionDiplomado = $this->input->post('DiplomadoDescripcion');
-                $optionsactivo = $this->input->post('radio') === 'V'; // Agregue la opcion activo  si es seleccionad     
+                $optionsactivo = $this->input->post('radio')==='V';// Agregue la opcion activo  si es seleccionad     
                 $categoriaDi = $this->input->post('CatgoriaDiplomado');
                 $comentarioDi = $this->input->post('ComentarioDiplomado');
                 $this->load->model('Diplomados');
-                $arrayData = $this->Diplomados->ModificarDiplomado($codigoDi, $nombreDiplomado, $descripcionDiplomado, $optionsactivo, $categoriaDi, $comentarioDi);
+                $arrayData=  $this->Diplomados->ModificarDiplomado($codigoDi,$nombreDiplomado,$descripcionDiplomado,$optionsactivo,$categoriaDi,$comentarioDi);
                 echo json_encode($arrayData);
-            }
+                        
+                 }         
         } catch (Exception $ex) {
             echo json_encode($ex);
+            
         }
+        
+        
     }
-
-    public function eliminarDiplomado() {
-        $eliminar = false;
-
-        try {
-            if ($this->input->post()) {
+            public function eliminarDiplomado (){
+                $eliminar = false;
+                
+                try {
+                if($this->input->post()){    
                 $codigo = $this->input->post('CodigoDiplomado');
                 $eliminar = $this->Diplomados->EliminarDiplomado($codigo);
-                echo $eliminar;
+                echo $eliminar;                   
+                }
+                } catch (Exception $ex) {
+                    echo json_encode($ex);
+                }
+                
+                
             }
-        } catch (Exception $ex) {
-            echo json_encode($ex);
-        }
-    }
+       }
 
-}

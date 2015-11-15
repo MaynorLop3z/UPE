@@ -9,17 +9,16 @@ $("#BtnADDiplomado").on('click', function () {
 });
 
 $('.btnmoddi').on('click', function (event) {
-    codigoDiplomado = this.id;
-    codigoDiplomado = codigoDiplomado.substring(13); /// esto agregue recientemente 
-    $("#ModificarDiplomado").modal('toggle');
+codigoDiplomado = this.id;
+codigoDiplomado = codigoDiplomado.substring(13); /// esto agregue recientemente 
+$("#ModificarDiplomado").modal('toggle');
 });
 
 
-$('.btndeldip').on('click', function (event) {
-    codigoDiplomado = this.id;
-    codigoDiplomado = codigoDiplomado.substring(13);
-    console.log("Prueba");
-    $('#EliminarDiplomado').modal('show');
+$('.btndeldip').on('click', function(event){
+    $codigoDiplomado = this.id;
+    //$codigoDiplomado = codigoDiplomado.substring(13);
+    $('#EliminarDiplomado').modal('toggle');  
 });
 
 $('#ModificarDiplomado').on('show.bs.modal', function (event) {
@@ -38,11 +37,11 @@ $('#ModificarDiplomado').on('show.bs.modal', function (event) {
 
 
 
-$("#EliminarDiplomado").on('show.bs.modal',function(event){
-    console.log("Se muestra la modal de eliminar Diplomado ");
+$("EliminarDiplomado").on('show.bs.modal',function(event){
+    console.log("mostrar alumno");
     var dip = $('#dip' + codigoDiplomado);
     var nombre_Diplomado = dip.find('.nombre_Diplomado').html().toString().trim();
-    $('#EliminarDi').html(nombre_Diplomado);    
+    $('#markeliminar').html(nombre_Diplomado);    
 });
 
 
@@ -59,7 +58,7 @@ $('#formgrdDiplomado').submit(function (event) {
         var posting = $.post(url, {
         DiplomadoNombre: DiplomadoNombre,
         DiplomadoDescripcion: DiplomadoDescripcion,
-        radio: radio,
+        radio: radio.toString(),
         CatgoriaDiplomado: CatgoriaDiplomado,
         ComentarioDiplomado: ComentarioDiplomado
     });
@@ -75,9 +74,8 @@ $('#formgrdDiplomado').submit(function (event) {
             fila = fila + '<td class="comentarioDi">' + obj.Comentarios + '</td>';
             fila = fila + '<td class="gestion_dip">';
             fila = fila + '<button id="editDiplomado' + obj.CodigoDiplomado + '" title="Editar Diplomado" class="btn btn-success btnmoddi"><span class=" glyphicon glyphicon-pencil"></span></butto n>';
-            fila = fila + '<button data-toggle="modal" title="Eliminar Diplomado " class="btn btn-danger" href="#EliminarDiplomado"><span class="glyphicon glyphicon-trash"></span></button>';
+            fila = fila + '<button data-toggle="modal" title="Eliminar Alumno" class="btn btn-danger" href="#AlumnoEliminar"><span class="glyphicon glyphicon-trash"></span></button>';
             fila = fila + '</td></tr>';
-            
             $(document).on("click", "#editDiplomado" + obj.CodigoDiplomado.toString(), function () {
                 codigoDiplomado = obj.CodigoDiplomado;
                 $("#ModificarDiplomado").modal('toggle');
@@ -130,7 +128,7 @@ $("#formeditDiplomado").submit(function (event) {
             fila = fila + '<td class="comentarioDi">' + obj.Comentarios + '</td>';
             fila = fila + '<td class="gestion_dip">';
             fila = fila + '<button id="editDiplomado' + obj.CodigoDiplomado + '" title="Editar Diplomado" class="btn btn-success btnmoddi"><span class=" glyphicon glyphicon-pencil"></span></butto n>';
-            fila = fila + '<button data-toggle="modal" title="Eliminar Diplomado" class="btn btn-danger" href="#EliminarDiplomado"><span class="glyphicon glyphicon-trash"></span></button>';
+            fila = fila + '<button data-toggle="modal" title="Eliminar Alumno" class="btn btn-danger" href="#AlumnoEliminar"><span class="glyphicon glyphicon-trash"></span></button>';
             fila = fila + '</td>';
             $(document).on("click", "#editDiplomado" + obj.CodigoDiplomado.toString(), function () {
                 codigoDiplomado = obj.CodigoDiplomado;
@@ -140,6 +138,7 @@ $("#formeditDiplomado").submit(function (event) {
                 codigoDiplomado = obj.CodigoDiplomado;
                 $("EliminarDiplomado").modal('toggle');
             });
+            //$('#tableDiplomados > tbody').append(fila); recien lo quite
             $('#tableDiplomados >tbody').find('#dip'+obj.CodigoDiplomado).html(fila);
             $('#ModificarDiplomado').modal('toggle');
         }// console.log('data vacio');
@@ -149,15 +148,18 @@ $("#formeditDiplomado").submit(function (event) {
     });
 });
 
+
+
+
 $("#frmDELdip").submit(function(event){
     event.preventDefault();
-    var $form = $(this),CodigoDiplomado = codigoDiplomado, url = $form.attr("action");
+    var $form = $(this),CodigoDiplomado = codigoDiplomado, url = $form.attr("action");;
     var posting = $.post(url,{CodigoDiplomado : CodigoDiplomado });
     posting.done(function(data){
         if(data){
             $("#EliminarDiplomado").modal('toggle');
-            $('#tableDiplomados').find('#dip'+ CodigoDiplomado).fadeOut("slow");
-            $('#tableDiplomados').find('#dip'+ CodigoDiplomado).remove();
+            $('#tableDiplomados').find('#dip'+CodigoDiplomado).fadeOut("slow");
+            $('#tableDiplomados').find('#dip'+CodigoDiplomado).remove();
              }
     });
     posting.fail(function(){
