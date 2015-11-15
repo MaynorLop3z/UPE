@@ -41,17 +41,18 @@
                 }
                 ?>
             </tbody>
-        </table>   
-        <div align="left">
+        </table>
+        <div class="row">
             <ul class="pager">
                 <li><a href="#">&lt;&lt;</a></li>
                 <li><a href="#">&lt;</a></li>
                 <li><input type="text" size="5">/100</li>
                 <li><a href="#">&gt;</a></li>
                 <li><a href="#">&gt;&gt;</a></li>
-               
+                <li>[100-110/200]</li>
             </ul>
-             <div>[100-110/200]</div>
+             
+        
         </div>
         
     <!--<div class="panel-footer">Panel footer</div>-->
