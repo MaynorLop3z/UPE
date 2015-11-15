@@ -15,6 +15,8 @@ class Usuarios extends CI_Model {
     public function listarUsuarios() {
         try {
             $this->db->select('CodigoUsuario, Nombre, CorreoUsuario, NombreUsuario, ContraseniaUsuario, Comentarios');
+            $this->db->limit(10);
+            $this->db->order_by("FechaModifica", "desc"); 
             $this->db->from('Usuarios');
             $consulta = $this->db->get();
             $resultado = $consulta->result();

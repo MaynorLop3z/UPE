@@ -57,30 +57,22 @@ $("#frmGuardarUSer").submit(function (event) {
 //            fila = fila + '<button id="' + obj.CodigoUsuario + '"  title="Editar Usuario" class="btn_modificar_user btn btn-success "  class=" btn btn-info btn-lg"><span class="glyphicon glyphicon-pencil"></span> </button>';
 //            fila = fila + '<button id="btnDel' + obj.CodigoUsuario + '" title="Eliminar Usuario" class="btn_eliminar_user btn btn-danger" class=" btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>';
             fila = fila + '</td></tr>';
-//           
-//            $(document).on("click", ".btn_modificar_user", function () {
-//                codigoUsuario = obj.CodigoUsuario;
-//                $("#usuarioModifica").modal('toggle');
-//            });
-//            $(document).on("click", "#btnDel" + obj.CodigoUsuario, function () {
-//                codigoUsuario = obj.CodigoUsuario;
-//                $("#usuarioElimina").modal('toggle');
-//            });
+
             $('#tableUsers > tbody').append(fila);
-
-//            
-
 
             var trUser = $('#tableUsers > tbody').find("#tr" + obj.CodigoUsuario);
             trUser.data("userd", obj);
             var tdGestionUser = trUser.find(".gestion_User");
+
             console.log(tdGestionUser);
 
             var divgestionUserBtn = $("#gestionUserBtn");
-            divgestionUserBtn.find(".btn_modificar_user").attr("id", "" + obj.CodigoUsuario);
-            divgestionUserBtn.find(".btn_eliminar_user").attr("id", "btnDel" + obj.CodigoUsuario);
-            tdGestionUser.html(divgestionUserBtn);
-
+            if (divgestionUserBtn !== null) {
+                var divgestionUserBtnClone = divgestionUserBtn.clone(true);
+                divgestionUserBtnClone.find(".btn_modificar_user").attr("id", "" + obj.CodigoUsuario);
+                divgestionUserBtnClone.find(".btn_eliminar_user").attr("id", "btnDel" + obj.CodigoUsuario);
+                tdGestionUser.html(divgestionUserBtnClone);
+            }
             $("#usuarioNuevo").modal('toggle');
 
         }
