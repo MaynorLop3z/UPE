@@ -19,6 +19,7 @@ class Usuariocontroller extends CI_Controller {
     public function index() {
         try {
             $data['Usuarios'] = $this->Usuarios->listarUsuarios();
+            $data['ToTalUsers'] = $this->Usuarios->countAllUsers();
 //            $datau = 
             $this->load->view('Usuario', $data);
         } catch (Exception $exc) {
@@ -53,8 +54,8 @@ class Usuariocontroller extends CI_Controller {
     public function editarUsuario() {
         try {
             if ($this->input->post()) {
-                $codigoUser=$this->input->post('CodigoUsuario');
-                if ($codigoUser!=null) {
+                $codigoUser = $this->input->post('CodigoUsuario');
+                if ($codigoUser != null) {
                     $codigoUsuario = $codigoUser;
                     $nombrePersonaUsuario = $this->input->post('UsuarioNombreReal');
                     $contraseniaUsuario = $this->input->post('UsuarioPassword');
@@ -76,19 +77,18 @@ class Usuariocontroller extends CI_Controller {
             echo json_encode($data);
         }
     }
-    
-      public function eliminarUsuario() {
-         $eliminado = false;
-         try {
-             if ($this->input->post()) {
-                 $codigo = $this->input->post('CodigoUsuario');
-                 $eliminado = $this->Usuarios->eliminarUsuario($codigo);
-                 echo $eliminado;
-             }
-         } catch (Exception $ex) {
+
+    public function eliminarUsuario() {
+        $eliminado = false;
+        try {
+            if ($this->input->post()) {
+                $codigo = $this->input->post('CodigoUsuario');
+                $eliminado = $this->Usuarios->eliminarUsuario($codigo);
+                echo $eliminado;
+            }
+        } catch (Exception $ex) {
             echo json_encode($ex);
-         }
-     }
-     
+        }
+    }
 
 }

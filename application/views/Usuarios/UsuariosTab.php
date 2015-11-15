@@ -49,12 +49,12 @@
                 <li><input type="text" size="5">/100</li>
                 <li><a href="#">&gt;</a></li>
                 <li><a href="#">&gt;&gt;</a></li>
-                <li>[100-110/200]</li>
+                <li>[<?php echo "1-".count($Usuarios)."/". $ToTalUsers ?>]</li>
             </ul>
-             
-        
+
+
         </div>
-        
-    <!--<div class="panel-footer">Panel footer</div>-->
-</div>
+
+        <!--<div class="panel-footer">Panel footer</div>-->
+    </div>
 </div>

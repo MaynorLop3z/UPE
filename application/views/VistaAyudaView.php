@@ -5,6 +5,17 @@
             <button id="" title="Editar Usuario"   class="btn_modificar_user btn btn-success "  class=" btn btn-info btn-lg"><span class="glyphicon glyphicon-pencil"></span></button>
             <button id="" title="Eliminar Usuario" class="btn_eliminar_user btn btn-danger"     class=" btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"> </span></button>
         </div>
+        
+        <div id="gestionDipBtn">
+            <button id="" title="Editar Usuario"   class="btn_modificar_dip btn btn-success "  class=" btn btn-info btn-lg"><span class="glyphicon glyphicon-pencil"></span></button>
+            <button id="" title="Eliminar Usuario" class="btn_eliminar_dip btn btn-danger"     class=" btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"> </span></button>
+        </div>
+        
+        <div id="gestionParticipantesBtn">
+            <button id="" title="Editar Usuario"   class="btn_modificar_dip btn btn-success "  class=" btn btn-info btn-lg"><span class="glyphicon glyphicon-pencil"></span></button>
+            <button id="" title="Eliminar Usuario" class="btn_eliminar_dip btn btn-danger"     class=" btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"> </span></button>
+        </div>
+        
     </body>
 </html> 
 

@@ -64,8 +64,6 @@ $("#frmGuardarUSer").submit(function (event) {
             trUser.data("userd", obj);
             var tdGestionUser = trUser.find(".gestion_User");
 
-            console.log(tdGestionUser);
-
             var divgestionUserBtn = $("#gestionUserBtn");
             if (divgestionUserBtn !== null) {
                 var divgestionUserBtnClone = divgestionUserBtn.clone(true);
