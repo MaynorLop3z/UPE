@@ -16,10 +16,11 @@ $("#ModificarDiplomado").modal('toggle');
 
 
 $('.btndeldip').on('click', function(event){
-    $codigoDiplomado = this.id;
-    //$codigoDiplomado = codigoDiplomado.substring(13);
+    codigoDiplomado = this.id;
+    codigoDiplomado = codigoDiplomado.substring(12);
     $('#EliminarDiplomado').modal('toggle');  
 });
+// ESpacio solo por salud del git
 
 $('#ModificarDiplomado').on('show.bs.modal', function (event) {
     var dip = $('#dip' + codigoDiplomado);    
@@ -38,7 +39,7 @@ $('#ModificarDiplomado').on('show.bs.modal', function (event) {
 
 
 $("EliminarDiplomado").on('show.bs.modal',function(event){
-    console.log("mostrar alumno");
+    console.log("mostrar Diplomado");
     var dip = $('#dip' + codigoDiplomado);
     var nombre_Diplomado = dip.find('.nombre_Diplomado').html().toString().trim();
     $('#markeliminar').html(nombre_Diplomado);    
@@ -58,7 +59,7 @@ $('#formgrdDiplomado').submit(function (event) {
         var posting = $.post(url, {
         DiplomadoNombre: DiplomadoNombre,
         DiplomadoDescripcion: DiplomadoDescripcion,
-        radio: radio.toString(),
+        radio: radio,
         CatgoriaDiplomado: CatgoriaDiplomado,
         ComentarioDiplomado: ComentarioDiplomado
     });
@@ -74,7 +75,7 @@ $('#formgrdDiplomado').submit(function (event) {
             fila = fila + '<td class="comentarioDi">' + obj.Comentarios + '</td>';
             fila = fila + '<td class="gestion_dip">';
             fila = fila + '<button id="editDiplomado' + obj.CodigoDiplomado + '" title="Editar Diplomado" class="btn btn-success btnmoddi"><span class=" glyphicon glyphicon-pencil"></span></butto n>';
-            fila = fila + '<button data-toggle="modal" title="Eliminar Alumno" class="btn btn-danger" href="#AlumnoEliminar"><span class="glyphicon glyphicon-trash"></span></button>';
+            fila = fila + '<button data-toggle="modal" title="Eliminar Diplomado" class="btn btn-danger" href="#eliminarDiplomado"><span class="glyphicon glyphicon-trash"></span></button>';
             fila = fila + '</td></tr>';
             $(document).on("click", "#editDiplomado" + obj.CodigoDiplomado.toString(), function () {
                 codigoDiplomado = obj.CodigoDiplomado;
@@ -154,7 +155,7 @@ $("#formeditDiplomado").submit(function (event) {
 $("#frmDELdip").submit(function(event){
     event.preventDefault();
     var $form = $(this),CodigoDiplomado = codigoDiplomado, url = $form.attr("action");;
-    var posting = $.post(url,{CodigoDiplomado : CodigoDiplomado });
+    var posting = $.post(url,{CodigoDiplomado : CodigoDiplomado });  //Aqui muestra el error -------------------------------------->
     posting.done(function(data){
         if(data){
             $("#EliminarDiplomado").modal('toggle');
