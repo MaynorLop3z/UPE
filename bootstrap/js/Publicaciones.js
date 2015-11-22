@@ -5,31 +5,17 @@
  */
 
 var codigoUsuario;
-$(document).ready(function () {
+$(document).ready(function (data) {
     console.log("Si esta llamando al js");
-
-
-
 //funcion para guardar la img en la carpeta
-    $("#divPub").submit(function (event)
-
-    {
-//        console.log("entro a la funcion");
-//        event.preventDefault();
-//        var $div = $(this);
-//        Titulo = $div.find("input[name='tituloPub']").val();
-//        console.log(Titulo),
-//        Contenido = $div.find("textarea[name='contenido']").val();
-//        console.log(Contenido);
-////        url = base_url("index.php/PublicacionesController/do_upload");
-//        test = $div.find("input[name='escondido']").val();
-//        console.log(test);
-//        var posting = $.post(test, {titulo: Titulo, contenido: Contenido});
-//        console.log(posting);
-//
-
-
-
-    });
+    if (data !== null) {
+        var obj = jQuery.parseJSON(data);
+        var fila;
+        fila = '<tr id="dip' + obj.CodigoPublicacion + '"';
+        fila = fila + '<td class="Titulo">' + obj.Titulo + '</td>';
+    }
+    ;
 
 });
+
+

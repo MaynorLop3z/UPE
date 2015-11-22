@@ -8,15 +8,19 @@ class PublicacionesController extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+        $this->load->database();$this->load->database();
         $this->load->helper(array('form', 'url'));
         $this->load->model('publicaciones');
         $this->load->model('archivos');
+        
+        
     }
 
     public function index() {
-
-
-        $this->load->view('Publicaciones');
+        
+        
+        $data['TituloN']=  $this->publicaciones->listarPublicaciones();
+        $this->load->view('publicaciones',$data);
     }
 
     function do_upload() {
