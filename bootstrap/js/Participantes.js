@@ -7,29 +7,45 @@ $("#btnADDAlumno").on('click', function() {
     //$("#myModal").modal('toggle')
 });
 
-$('.btn_modificar_alum').on('click', function(event) {
-    codigoParticipante = this.id;
-    filaEdit = $(this);
-    //console.log(filaEdit);
-    //console.log('Clic en editar al codigo:' + codigoParticipante);
+//$('.btn_modificar_alum').on('click', function(event) {
+//    codigoParticipante = this.id;
+//    filaEdit = $(this);
+//    //console.log(filaEdit);
+//    //console.log('Clic en editar al codigo:' + codigoParticipante);
+//    $("#AlumnoEditar").modal('toggle');
+//});
+
+function mostrarEditAlumno(fila){
+    codigoParticipante = fila.id;
+    filaEdit = fila;
     $("#AlumnoEditar").modal('toggle');
-});
+}
 
-$('.btn_ver_alum').on('click', function(event) {
-    codigoParticipante = this.id;
-    //filaEdit = $(this);
-    //console.log(filaEdit);
-    //console.log('Clic en ver al codigo:' + codigoParticipante);
+function mostrarInfoAlumno(fila){
+    codigoParticipante = fila.id;
     $("#AlumnoVIEWDATA").modal('toggle');
-});
+}
 
-$('.btn_eliminar_alum').on('click', function(event) {
-    codigoParticipante = this.id;
-    //filaEdit = $(this);
-    //console.log(filaEdit);
-    //console.log('Clic en eliminar al codigo:' + codigoParticipante);
+function mostrarDelAlumno(fila){
+    codigoParticipante = fila.id;
     $("#AlumnoEliminar").modal('toggle');
-});
+}
+
+//$('.btn_ver_alum').on('click', function(event) {
+//    codigoParticipante = this.id;
+//    //filaEdit = $(this);
+//    //console.log(filaEdit);
+//    //console.log('Clic en ver al codigo:' + codigoParticipante);
+//    $("#AlumnoVIEWDATA").modal('toggle');
+//});
+
+//$('.btn_eliminar_alum').on('click', function(event) {
+//    codigoParticipante = this.id;
+//    //filaEdit = $(this);
+//    //console.log(filaEdit);
+//    //console.log('Clic en eliminar al codigo:' + codigoParticipante);
+//    $("#AlumnoEliminar").modal('toggle');
+//});
 
 $('#AlumnoVIEWDATA').on('show.bs.modal', function(event) {
     var alum = $('#alum' + codigoParticipante.substring(8));
@@ -120,7 +136,7 @@ $("#frmADDAlumno").submit(function(event) {
             fila = fila + '<td class="Mail_Alumno">' + obj.CorreoElectronico + '</td>';
             fila = fila + '<td class="TelefonoFijo_Alumno" style="display: none">' + obj.TelefonoFijo + '</td>';
             fila = fila + '<td class="TelefonoMovil_Alumno" style="display: none">' + obj.TelefonoCelular + '</td>';
-            fila = fila + '<td class="Direccion_Alumno" style="display: none">' + obj.Dirreccion + '</td>';
+            fila = fila + '<td class="Direccion_Alumno" style="display: none">' + obj.Direccion + '</td>';
             fila = fila + '<td class="DUI_Alumno" style="display: none">' + obj.NumeroDUI + '</td>';
             fila = fila + '<td class="Nombre_Alumno">' + obj.Nombre + '</td>';
             fila = fila + '<td class="FechaNac_Alumno" style="display: none">' + obj.FechaNacimiento + '</td>';
@@ -132,23 +148,10 @@ $("#frmADDAlumno").submit(function(event) {
             fila = fila + '<td class="Descripcion_Alumno">' + obj.Descripcion + '</td>';
             fila = fila + '<td class="Comentarios_Alumno" style="display: none">' + obj.Comentarios + '</td>';
             fila = fila + '<td class="gestion_Alumno">';
-            fila = fila + '<button id="AlumE' + obj.CodigoParticipante + '"  title="Editar Alumno" class="btn_modificar_alum btn btn-success"><span class="glyphicon glyphicon-pencil"></span> </button>';
-            fila = fila + '<button id="alumDEL' + obj.CodigoParticipante + '" title="Eliminar Alumno" class="btn_eliminar_alum btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>';
-            fila = fila + '<button id="alumVIEW' + obj.CodigoParticipante + '" title="Ver Alumno" class="btn_ver_alum btn btn-info"><span class="glyphicon glyphicon-eye-open"></span></button>';
+            fila = fila + '<button id="AlumE' + obj.CodigoParticipante + '"  onclick="mostrarEditAlumno(this)" title="Editar Alumno" class="btn_modificar_alum btn btn-success"><span class="glyphicon glyphicon-pencil"></span> </button>';
+            fila = fila + '<button id="alumDEL' + obj.CodigoParticipante + '" onclick="mostrarDelAlumno(this)" title="Eliminar Alumno" class="btn_eliminar_alum btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>';
+            fila = fila + '<button id="alumVIEW' + obj.CodigoParticipante + '" onclick="mostrarInfoAlumno(this)" title="Ver Alumno" class="btn_ver_alum btn btn-info"><span class="glyphicon glyphicon-eye-open"></span></button>';
             fila = fila + '</td></tr>';
-            $(document).on("click", "#alumE" + obj.CodigoParticipante.toString(), function() {
-                codigoParticipante = obj.CodigoParticipante;
-                filaEdit = fila;
-                $("#AlumnoEditar").modal('toggle');
-            });
-            $(document).on("click", "#alumDEL" + obj.CodigoParticipante.toString(), function() {
-                codigoParticipante = obj.CodigoParticipante;
-                $("#AlumnoEliminar").modal('toggle');
-            });
-            $(document).on("click", "#alumVIEW" + obj.CodigoParticipante.toString(), function() {
-                codigoParticipante = obj.CodigoParticipante;
-                $("#AlumnoVIEWDATA").modal('toggle');
-            });
             //console.log(fila);
             $('#tableAlumnos > tbody').append(fila);
             $("#AlumnoNuevo").modal('toggle');
@@ -188,9 +191,9 @@ $("#frmEditarAlumno").submit(function(event) {
             fila = fila + '<td class="Descripcion_Alumno">' + obj.Descripcion + '</td>';
             fila = fila + '<td class="Comentarios_Alumno" style="display: none">' + obj.Comentarios + '</td>';
             fila = fila + '<td class="gestion_Alumno">';
-            fila = fila + '<button id="AlumE' + obj.CodigoParticipante + '"  title="Editar Alumno" class="btn_modificar_alum btn btn-success"><span class="glyphicon glyphicon-pencil"></span> </button>';
-            fila = fila + '<button id="alumDEL' + obj.CodigoParticipante + '" title="Eliminar Alumno" class="btn_eliminar_alum btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>';
-            fila = fila + '<button id="alumVIEW' + obj.CodigoParticipante + '" title="Ver Alumno" class="btn_ver_alum btn btn-info"><span class="glyphicon glyphicon-eye-open"></span></button>';
+            fila = fila + '<button id="AlumE' + obj.CodigoParticipante + '" onclick="mostrarEditAlumno(this)" title="Editar Alumno" class="btn_modificar_alum btn btn-success"><span class="glyphicon glyphicon-pencil"></span> </button>';
+            fila = fila + '<button id="alumDEL' + obj.CodigoParticipante + '" onclick="mostrarDelAlumno(this)" title="Eliminar Alumno" class="btn_eliminar_alum btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>';
+            fila = fila + '<button id="alumVIEW' + obj.CodigoParticipante + '" onclick="mostrarInfoAlumno(this)" title="Ver Alumno" class="btn_ver_alum btn btn-info"><span class="glyphicon glyphicon-eye-open"></span></button>';
             fila = fila + '</td>';
             $(document).on("click", "#alumE" + obj.CodigoParticipante.toString(), function() {
                 codigoParticipante = obj.CodigoParticipante;
@@ -228,7 +231,6 @@ $("#frmDELAlumno").submit(function(event) {
             $("#AlumnoEliminar").modal('toggle');
             $('#tableAlumnos').find('#alum' + AlumnoCodigo).fadeOut("slow");
             $('#tableAlumnos').find('#alum' + AlumnoCodigo).remove();
-
         }
     });
     posting.fail(function() {
