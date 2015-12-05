@@ -13,11 +13,15 @@ class DiplomadosController extends CI_Controller {
 
     public function index() {
     
-      
-        $data['DiplomadosN']= $this->Diplomados->listarDiplomados(); 
+        try {
+             $data['DiplomadosN']= $this->Diplomados->listarDiplomados(); 
         $data['CategoriasDi']= $this->Diplomados->listarDiplomadosCategoria();
         $this->load->view('Diplomados',$data);
         
+        } catch (Exception $ex) {
+           echo $ex->getTraceAsString(); 
+        }
+       
       
     }
 
@@ -27,7 +31,7 @@ class DiplomadosController extends CI_Controller {
             if($this->input->post()){ //Estos son los nombres de los input del Form
                 $nombreDiplomado = $this->input->post('DiplomadoNombre');
                 $descripcionDiplomado = $this->input->post('DiplomadoDescripcion');
-                $optionsactivo= $this->input->post('optionsActivo')==='V';// Agregue la opcion activo  si es seleccionad
+                $optionsactivo= $this->input->post('optionsActivo');// Agregue la opcion activo  si es seleccionad
                 $categoriaDi = $this->input->post('CatgoriaDiplomado');
                 $comentarioDi = $this->input->post('ComentarioDiplomado');
                 $this->load->model('Diplomados');

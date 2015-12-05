@@ -11,22 +11,43 @@ class Diplomados extends CI_Model {
         $this->load->database();
     }
 
-    public function listarDiplomados() {
-        $this->db->select('CodigoDiplomado, '
-                . 'NombreDiplomado, '
-                . 'Descripcion, '
-                . 'Estado, '
-                . 'CodigoCategoriaDiplomado,'
-                . 'Comentarios'
+//    public function listarDiplomados() {
+//      $query =  $this->db->query("SELECT d.CodigoDiplomado, d.NombreDiplomado, d.Descripcion, d.Estado, cd.NombreCategoriaDiplomado, d.Comentarios FROM Diplomados d JOIN CategoriaDiplomados cd ON d.CodigoCategoriaDiplomado = cd.CodigoCategoriaDiplomado") ;
+//        $resultado =  $query->result();
+//        echo "Talcosa";
+//        return $resultado;
+//        
+//    }
+//    public function listarDiplomados() {
+//        $this->db->select('CodigoDiplomado, '
+//                . 'NombreDiplomado, '
+//                . 'Descripcion, '
+//                . 'Estado, '
+//                . 'CodigoCategoriaDiplomado,'
+//                . 'Comentarios'
+//                
+//                
+//        );
+//        $this->db->from('Diplomados');
+//        $consulta = $this->db->get();
+//        $resultado = $consulta->result();
+//        return $resultado;
+//    }
+public function listarDiplomados() {
+        try {
+            $consulta = $this->db->query('SELECT "d"."CodigoDiplomado", "d"."NombreDiplomado", "d"."Descripcion", "d"."Estado", "cd"."NombreCategoriaDiplomado", "d"."Comentarios" FROM "Diplomados" "d" JOIN "CategoriaDiplomados" "cd" ON "d"."CodigoCategoriaDiplomado" = "cd"."CodigoCategoriaDiplomado"');
+//            $consulta = $this->db->query('SELECT d.CodigoDiplomado FROM Diplomados d');
+            if($consulta!=null){
+            $resultado = $consulta->result();
+            }else{
                 
-                
-        );
-        $this->db->from('Diplomados');
-        $consulta = $this->db->get();
-        $resultado = $consulta->result();
-        return $resultado;
+            }
+           
+            return $resultado;
+        } catch (Exception $exc) {
+            return $exc->getTraceAsString();
+        }
     }
-
     public function listarDiplomadosCategoria() {
         $this->db->select('CodigoCategoriaDiplomado,'.'NombreCategoriaDiplomado');
         $this->db->from('CategoriaDiplomados');

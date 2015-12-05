@@ -10,41 +10,27 @@ $("#BtnADDiplomado").on('click', function () {
 
 $('.btnmoddi').on('click', function (event) {
 codigoDiplomado = this.id;
-codigoDiplomado = codigoDiplomado.substring(13); /// esto agregue recientemente 
-$("#ModificarDiplomado").modal('toggle');
+codigoDiplomado = codigoDiplomado.substring(5); /// esto agregue recientemente 
+$("#ModificarDiplomado").modal('show');
 });
 
 
 $('.btndeldip').on('click', function(event){
     codigoDiplomado = this.id;
     codigoDiplomado = codigoDiplomado.substring(12);
-    $('#EliminarDiplomado').modal('toggle');  
+    $('#EliminarDiplomado').modal('show');  
 });
 // ESpacio solo por salud del git
 
 $('#ModificarDiplomado').on('show.bs.modal', function (event) {
-    var dip = $('#dip' + codigoDiplomado);    
-    var Nombre_Diplomado = dip.find('.nombre_Diplomado').html().toString().trim(); 
-    var DescripcionDiplomado = dip.find('.descripcionDiplomado').html().toString().trim();
-    var Estado = dip.find('.estado').html().toString().trim();
-    var CategoriaDi = dip.find('.categoriaDi').html().toString().trim();
-    var ComentarioDi = dip.find('.comentarioDi').html().toString().trim();
-    $('#DiplomadoNombreEdit').val(Nombre_Diplomado);
-    $('#DiplomadoDescripcionEdit').val(DescripcionDiplomado);
-    $('#estado').val(Estado);
-    $('#CatgoriaDiplomadoEdit').val(CategoriaDi);
-    $('#ComentarioDiplomadoEdit').val(ComentarioDi);
-});
-
-
-
-$("EliminarDiplomado").on('show.bs.modal',function(event){
-    console.log("mostrar Diplomado");
     var dip = $('#dip' + codigoDiplomado);
-    var nombre_Diplomado = dip.find('.nombre_Diplomado').html().toString().trim();
-    $('#markeliminar').html(nombre_Diplomado);    
+    var dataD = dip.data("dipd");
+    $('#DiplomadoNombreEdit').val(dataD.NombreDiplomado);
+    $('#DiplomadoDescripcionEdit').val(dataD.Descripcion);
+    $('#estado').val(dataD.Estado);
+    $('#CatgoriaDiplomadoEdit').val(dataD.CodigoCategoriaDiplomado);
+    $('#ComentarioDiplomadoEdit').val(dataD.Comentarios);
 });
-
 
 
 $('#formgrdDiplomado').submit(function (event) {
@@ -66,50 +52,72 @@ $('#formgrdDiplomado').submit(function (event) {
     posting.done(function (data) {
         if (data !== null) {
             var obj = jQuery.parseJSON(data);
-            var fila;
-            fila = '<tr id="dip' + obj.CodigoDiplomado + '">';
+            
+            var fila = '<tr id="dip' + obj.CodigoDiplomado + '">';
             fila = fila + '<td class="nombre_Diplomado">' + obj.NombreDiplomado + '</td>';
             fila = fila + '<td class="descripcionDiplomado">' + obj.Descripcion + '</td>';
             fila = fila + '<td class="estado">' + obj.Estado + '</td>';
             fila = fila + '<td class="categoriaDi">' + obj.CodigoCategoriaDiplomado + '</td>';
             fila = fila + '<td class="comentarioDi">' + obj.Comentarios + '</td>';
-            fila = fila + '<td class="gestion_dip">';
-            fila = fila + '<button id="editDiplomado' + obj.CodigoDiplomado + '" title="Editar Diplomado" class="btn btn-success btnmoddi"><span class=" glyphicon glyphicon-pencil"></span></butto n>';
-            fila = fila + '<button data-toggle="modal" title="Eliminar Diplomado" class="btn btn-danger" href="#eliminarDiplomado"><span class="glyphicon glyphicon-trash"></span></button>';
+            fila = fila + '<td style="text-aling:center"  class="gestion_dip">';
+//            fila = fila + '<button id="editDiplomado' + obj.CodigoDiplomado + '" title="Editar Diplomado" class="btn btn-success btnmoddi"><span class=" glyphicon glyphicon-pencil"></span></butto n>';
+//            fila = fila + '<button data-toggle="modal" title="Eliminar Diplomado" class="btn btn-danger" href="#eliminarDiplomado"><span class="glyphicon glyphicon-trash"></span></button>';
             fila = fila + '</td></tr>';
-            $(document).on("click", "#editDiplomado" + obj.CodigoDiplomado.toString(), function () {
-                codigoDiplomado = obj.CodigoDiplomado;
-                $("#ModificarDiplomado").modal('toggle');
-            });
-            
-            $(document).on("click", "#DELDiplomado"+obj.CodigoDiplomado.toString(),function(){
-                codigoDiplomado = obj.CodigoDiplomado;
-                $("EliminarDiplomado").modal('toggle');
-            });
-            
+                        
+//            $(document).on("click", "#editDiplomado" + obj.CodigoDiplomado.toString(), function () {
+//                codigoDiplomado = obj.CodigoDiplomado;
+//                $("#ModificarDiplomado").modal('toggle');
+//            });
+//            
+//            $(document).on("click", "#DELDiplomado"+obj.CodigoDiplomado.toString(),function(){
+//                codigoDiplomado = obj.CodigoDiplomado;
+//                $("EliminarDiplomado").modal('toggle');
+//            });
+//            
           
             $('#tableDiplomados > tbody').append(fila);
+            var dipDip = $('#tableDiplomados > tbody').find('#dip'+obj.CodigoDiplomado);
+            dipDip.data("dipd", obj);
+            var tdGestionDip = dipDip.find(".gestion_dip");
+            
+            var divgestionDipBtn = $("#gestionDipBtn");
+            if(divgestionDipBtn !== null){
+                var divgestionDipBtnClone = divgestionDipBtn.clone(true);
+                divgestionDipBtnClone.find(".btnmoddi_").attr("id", "btnmo" + obj.CodigoDiplomado);
+                divgestionDipBtnClone.find(".btndeldip").attr("id","DELDiplomado" + obj.CodigoDiplomado);
+                tdGestionDip.html(divgestionDipBtnClone);
+            }
             $('#DiplomadoNuevo').modal('toggle');
         }
-    });
-    posting.fail(function () {
-        alert("error");
+    }); 
+    posting.fail(function (data) {
+        var obj = jQuery.parseJson(data);
+        alert(obj.Error);
     });
 });
 
+$("EliminarDiplomado").on('show.bs.modal',function(event){
+    
+    var dip = $('#dip' + codigoDiplomado);
+    var noDip = dip.data('dipd');
+    $('#markeliminar').html(noDip.nombreDiplomado);    
+});
 
 
 $("#formeditDiplomado").submit(function (event) {
     event.preventDefault();
-    var $form = $(this), CodigoDiplomado = codigoDiplomado, 
+    var $form = $(this), 
             DiplomadoNombre = $form.find("input[name='NombreDiplomado']").val(),
+            CodigoDiplomado = codigoDiplomado, 
+            
             DiplomadoDescripcion = $form.find("textarea[name='Descripcion']").val(),
             radio = $form.find("input[name='estado']:checked").val(),
             // probar  con el checked
             CatgoriaDiplomado = $form.find("select[name='CodigoCategoriaDiplomado']").val(),
             ComentarioDiplomado = $form.find("textarea[name='Comentarios']").val(),
             url = $form.attr("action");
-    console.log(CodigoDiplomado);  //prueba para ver si imprime el codigo correcto    
+            console.log(codigoDiplomado);
+  //prueba para ver si imprime el codigo correcto    
     var posting = $.post(url, {
         CodigoDiplomado : CodigoDiplomado,
         DiplomadoNombre: DiplomadoNombre,
@@ -121,37 +129,25 @@ $("#formeditDiplomado").submit(function (event) {
     posting.done(function (data) {
         if (data !== null) {
             var obj = jQuery.parseJSON(data);
-            var fila;
-            fila = fila + '<td class="nombre_Diplomado">' + obj.NombreDiplomado + '</td>';
-            fila = fila + '<td class="descripcionDiplomado">' + obj.Descripcion + '</td>';
-            fila = fila + '<td class="estado">' + obj.Estado + '</td>';
-            fila = fila + '<td class="categoriaDi">' + obj.CodigoCategoriaDiplomado + '</td>';
-            fila = fila + '<td class="comentarioDi">' + obj.Comentarios + '</td>';
-            fila = fila + '<td class="gestion_dip">';
-            fila = fila + '<button id="editDiplomado' + obj.CodigoDiplomado + '" title="Editar Diplomado" class="btn btn-success btnmoddi"><span class=" glyphicon glyphicon-pencil"></span></butto n>';
-            fila = fila + '<button data-toggle="modal" title="Eliminar Alumno" class="btn btn-danger" href="#AlumnoEliminar"><span class="glyphicon glyphicon-trash"></span></button>';
-            fila = fila + '</td>';
-            $(document).on("click", "#editDiplomado" + obj.CodigoDiplomado.toString(), function () {
-                codigoDiplomado = obj.CodigoDiplomado;
-                $("#ModificarDiplomado").modal('toggle');
-            });
-            $(document).on("click", "#DELDiplomado" + obj.CodigoDiplomado.toString(), function () {
-                codigoDiplomado = obj.CodigoDiplomado;
-                $("EliminarDiplomado").modal('toggle');
-            });
-            //$('#tableDiplomados > tbody').append(fila); recien lo quite
-            $('#tableDiplomados >tbody').find('#dip'+obj.CodigoDiplomado).html(fila);
-            $('#ModificarDiplomado').modal('toggle');
-        }// console.log('data vacio');
+            var dipDip = $('#tableDiplomados > tbody').find("#dip" + obj.CodigoDiplomado);
+            dipDip.find('.nombre_Diplomado').html(obj.NombreDiplomado);
+            dipDip.find('.descripcionDiplomado').html(obj.Descripcion);
+            dipDip.find('.estado').html(obj.Estado);
+            dipDip.find('.categoriaDi').html(obj.CodigoCategoriaDiplomado);
+            dipDip.data("dipd",obj);
+            $("#ModificarDiplomado").modal('toggle'); 
+        }
     });
-    posting.fail(function () {
-        alert("error");
-    });
-});
-
-
-
-
+            
+            
+           posting.fail(function(data){
+                var obj = jQuery.parseJSON(data);
+                alert(obj.Error);
+                
+            });
+            });
+            
+            
 $("#frmDELdip").submit(function(event){
     event.preventDefault();
     var $form = $(this),CodigoDiplomado = codigoDiplomado, url = $form.attr("action");;

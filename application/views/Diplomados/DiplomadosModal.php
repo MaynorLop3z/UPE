@@ -160,7 +160,7 @@
                         <legend class="modal-header">Diplomados:</legend> 
                         <div class="form-group">
                             <div class="col-lg-9">
-                                <label>¿Realmente desea eliminar el Diplomado<mark id="markeliminar"></mark>?</label>
+                                <label>¿Realmente desea eliminar el Diplomado <mark id="markeliminar"></mark>?</label>
                             </div>
                         </div>
                         <div class="modal-footer">
