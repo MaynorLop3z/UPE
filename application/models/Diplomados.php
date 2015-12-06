@@ -48,10 +48,10 @@ public function listarDiplomados() {
             return $exc->getTraceAsString();
         }
     }
-    public function listarDiplomadosCategoria() {
-        $this->db->select('CodigoCategoriaDiplomado,'.'NombreCategoriaDiplomado');
-        $this->db->from('CategoriaDiplomados');
-        //$this->db->where('CodigoCategoriaDiplomado');
+    public function listarDiplomadosCategoria($idCategoria) {
+        $this->db->select('CodigoDiplomado,'.'NombreDiplomado');
+        $this->db->from('Diplomados');
+        $this->db->where('CodigoCategoriaDiplomado', $idCategoria);
         $consulta = $this->db->get();
         $resultado = $consulta->result();
         return $resultado;
@@ -120,5 +120,17 @@ public function listarDiplomados() {
               
        
   // }
+    
+    public function listarCategoriasDiplomados() {
+        $this->db->select('CodigoCategoriaDiplomado, '
+                . 'NombreCategoriaDiplomado, '
+                . 'Estado, '
+                . 'Comentarios'
+        );
+        $this->db->from('CategoriaDiplomados');
+        $consulta = $this->db->get();
+        $resultado = $consulta->result();
+        return $resultado;
+    }
 
 }

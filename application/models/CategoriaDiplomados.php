@@ -1,7 +1,9 @@
 <?php
 
-if (!defined('BASEPATH'))
+if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
+}
+
 //include('ModeloBase.php');
 class CategoriaDiplomados extends CI_Model {
 
