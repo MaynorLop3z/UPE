@@ -106,7 +106,7 @@ class Publicaciones extends CI_Model {
         return $resultado;
     }
 
-    public function CrearPublicacion($UsuarioPublica, $FechaPublicacion, $Titulo, $Contenido, $Estado, $CodigoGrupoPeriodo, $CodigoGrupoPeriodoUsuario, $CodigoGrupoParticipantes, $CodigoTipoPublicacion, $ParticipantePublica = null) {
+    public function CrearPublicacion($UsuarioPublica, $FechaPublicacion, $Titulo, $Contenido, $Estado, $CodigoGrupoPeriodo, $CodigoGrupoPeriodoUsuario, $CodigoGrupoParticipantes, $CodigoTipoPublicacion, $ParticipantePublica ) {
         $data = array(
             'UsuarioPublica' => $UsuarioPublica,
             'FechaPublicacion' => $FechaPublicacion,
