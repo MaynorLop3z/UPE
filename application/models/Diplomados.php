@@ -33,6 +33,21 @@ class Diplomados extends CI_Model {
 //        $resultado = $consulta->result();
 //        return $resultado;
 //    }
+    public function listarModulos($codigoDiplomado) {
+        $this->db->select('CodigoModulo, '
+                . 'NombreModulo, '
+                . 'OrdenModulo, '
+                . 'Estado, '
+                . 'CodigoDiplomado, '
+                . 'CodigoTurnos, '
+                . 'Comentarios'
+        );
+        $this->db->from('Modulos');
+        $this->db->where('CodigoDiplomado', $codigoDiplomado);
+        $consulta = $this->db->get();
+        $resultado = $consulta->result();
+        return $resultado;
+    }
 public function listarDiplomados() {
         try {
             $consulta = $this->db->query('SELECT "d"."CodigoDiplomado", "d"."NombreDiplomado", "d"."Descripcion", "d"."Estado", "cd"."NombreCategoriaDiplomado", "d"."Comentarios" FROM "Diplomados" "d" JOIN "CategoriaDiplomados" "cd" ON "d"."CodigoCategoriaDiplomado" = "cd"."CodigoCategoriaDiplomado"');

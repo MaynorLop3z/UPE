@@ -33,4 +33,16 @@ class GestionGruposController extends CI_Controller {
 	<?php
         }
     }
+    
+    public function getModulos(){
+        if($this->input->post('idDiplomado')){
+        $codigoDiplomado = $this->input->post('idDiplomado');
+        $modulos = $this->Diplomados->listarModulos($codigoDiplomado);
+        foreach ($modulos as $modul){
+        ?>
+	<option value="<?=$modul->CodigoModulo ?>"><?=$modul->NombreModulo ?></option>
+	<?php
+        }
+        }
+    }
 }

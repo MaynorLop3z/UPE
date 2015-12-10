@@ -27,6 +27,15 @@ and open the template in the editor.
                         });
                     });
                 });
+                $("#Diplomado").change(function() {
+                    $("#Diplomado option:selected").each(function() {
+                        idDiplomado = $(this).val();
+                        $.post("<?php echo base_url() ?>index.php/GestionGruposController/getModulos/", {idDiplomado: idDiplomado}, function(data) {
+        console.log("EntroModulo");                    
+        $("#Modulo").html(data);
+                        });
+                    });
+                });
             });
         </script>
     </head>
@@ -72,7 +81,9 @@ and open the template in the editor.
                                     ?>
                                 </select>
                                 <select class="form-control" name="Diplomado" id="Diplomado">
-                                    </select>
+                                </select>
+                                <select class="form-control" name="Modulo" id="Modulo">
+                                </select>
                             </form>
                         </div>
                     </div>
