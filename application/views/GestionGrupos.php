@@ -69,6 +69,7 @@ and open the template in the editor.
                         </div>
                         <div class="panel-body">
                             <form class="form-horizontal" name="formulario1" action="" method="POST">
+                                <label for="Categorias">Categoria: </label> 
                                 <select class="form-control" name="Categorias" id="Categorias">
                                     <?php
                                     foreach ($Categorias as $categoria) {
@@ -80,10 +81,20 @@ and open the template in the editor.
                                     }
                                     ?>
                                 </select>
+                                <label for="Diplomado">Diplomado: </label>
                                 <select class="form-control" name="Diplomado" id="Diplomado">
                                 </select>
+                                <label for="Modulo">Modulo: </label>
                                 <select class="form-control" name="Modulo" id="Modulo">
                                 </select>
+                                <label for="FechaInicioPeriodo">Fecha de Inicio: </label>
+                                <input type="date" class="form-control" name="FechaInicioPeriodo" id="FechaInicioPeriodo" placeholder="Fecha de Inicio del Periodo" required>
+                                <label for="FechaFinPeriodo">Fecha de Finalizacion: </label>
+                                <input type="date" class="form-control" name="FechaFinPeriodo" id="FechaFinPeriodo" placeholder="Fecha de Finalizacion del Periodo" required>
+                                <label for="ComentariosPeriodo">Comentarios: </label>
+                                <textarea cols="40" rows="5" class="form-control" name="ComentariosPeriodo" id="ComentariosPeriodo" placeholder="Comentarios del Periodo"></textarea>
+                                <button type="submit" id="btnEnviarPeriodoADD" onclick="" class=" btn btn-default" name="Aceptar">Agregar Periodo</button>
+                                <button type="reset" id="btnLimpiarPeriodoADD" onclick="" class=" btn btn-default" name="Limpiar">Limpiar Datos</button>
                             </form>
                         </div>
                     </div>
