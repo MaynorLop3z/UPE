@@ -23,7 +23,7 @@ function  editaDiplomado(fila){
 function eliminarDiplomado(fila){
  codigoDiplomado = fila.id;
  codigoDiplomado = codigoDiplomado.substring(12);
-   $('#EliminarDiplomado').modal('toogle');
+   $('#EliminarDiplomado').modal('toggle');
    
 }
 //$('.btndeldip').on('click', function(event){
