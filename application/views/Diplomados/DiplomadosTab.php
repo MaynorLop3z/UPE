@@ -37,8 +37,8 @@
                     <td class="categoriaDi"><?php echo $dip->NombreCategoriaDiplomado?></td>
                     <td class="comentarioDi"><?php echo $dip->Comentarios ?></td>
                     <td class="gestion_dip" >
-            <button id="btnmo<?php echo $dip->CodigoDiplomado ?>" title="Editar Diplomado" class="btnmoddi btn btn-success" class="btn btn-info btn-lg"><span class=" glyphicon glyphicon-pencil"></span></button>
-             <button id="DELDiplomado<?php echo $dip->CodigoDiplomado ?>" title="Eliminar Diplomado" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>
+            <button id="btnmo<?php echo $dip->CodigoDiplomado ?>" onclick="editaDiplomado(this)" title="Editar Diplomado" class="btnmoddi btn btn-success" class="btn btn-info btn-lg"><span class=" glyphicon glyphicon-pencil"></span></button>
+             <button id="DELDiplomado<?php echo $dip->CodigoDiplomado ?>" onclick="eliminarDiplomado(this)"  title="Eliminar Diplomado" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>
                      </td>
                 </tr>
                 <?php

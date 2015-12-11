@@ -15,7 +15,7 @@ class DiplomadosController extends CI_Controller {
     
         try {
              $data['DiplomadosN']= $this->Diplomados->listarDiplomados(); 
-        $data['CategoriasDi']= $this->Diplomados->listarDiplomadosCategoria();
+        $data['CategoriasDi']= $this->Diplomados->listarCategoriasDiplomados();
         $this->load->view('Diplomados',$data);
         
         } catch (Exception $ex) {
