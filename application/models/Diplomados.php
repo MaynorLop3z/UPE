@@ -63,14 +63,14 @@ public function listarDiplomados() {
             return $exc->getTraceAsString();
         }
     }
-//    public function listarDiplomadosCategoria() {
-//        $this->db->select('CodigoDiplomado,'.'NombreDiplomado');
-//        $this->db->from('Diplomados');
-//        $this->db->where('CodigoCategoriaDiplomado');
-//        $consulta = $this->db->get();
-//        $resultado = $consulta->result();
-//        return $resultado;
-//    }
+    public function listarDiplomadosCategoria($idCategoria) {
+        $this->db->select('CodigoDiplomado,'.'NombreDiplomado');
+        $this->db->from('Diplomados');
+        $this->db->where('CodigoCategoriaDiplomado',$idCategoria);
+        $consulta = $this->db->get();
+        $resultado = $consulta->result();
+        return $resultado;
+    }
     
     public function crearDiplomado($NombreDiplomado, $Descripcion, $Estado,$CodigoCategoriaDiplomado,$Comentarios) {
         try {
