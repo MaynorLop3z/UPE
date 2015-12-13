@@ -39,9 +39,9 @@ and open the template in the editor.
                 });
             });
 
-            $("#PeriodoADD").submit(function(event) {
+            $("#frmADDPeriodo").submit(function(event) {
                 event.preventDefault();
-                var $form = $(this), idModulo = $form.find("select[name='Modulo']").val(), FechaInicio = $form.find("input[name='FechaInicioPeriodo']").val(), FechaFin = $form.find("input[name='FechaFinPeriodo']").val(), ComentariosPeriodo = $form.find("textarea[name=ComentariosPeriodo]").val(), url = $form.attr("action"), estadoPeriodo = true;
+                var $form = $(this), idModulo = $form.find("select[name='CodigoModulo']").val(), FechaInicio = $form.find("input[name='FechaInicioPeriodo']").val(), FechaFin = $form.find("input[name='FechaFinPeriodo']").val(), ComentariosPeriodo = $form.find("textarea[name=ComentariosPeriodo]").val(), url = $form.attr("action"), estadoPeriodo = true;
                 var posting = $.post(url, {idModulo: idModulo, FechaInicio: FechaInicio, FechaFin: FechaFin, ComentariosPeriodo: ComentariosPeriodo, estadoPeriodo: estadoPeriodo});
                 posting.done(function(data) {
                     if (data !== null) {
@@ -87,7 +87,7 @@ and open the template in the editor.
                             <h3 class="panel-title">Gestion de Grupos</h3>
                         </div>
                         <div class="panel-body">
-                            <form class="form-horizontal" name="PeriodoADD" action="<?php echo base_url() ?>index.php/PeriodosController/insertPeriodo/" method="POST">
+                            <form class="form-horizontal" name="PeriodoList" action="<?php echo base_url() ?>index.php/PeriodosController/insertPeriodo/" method="POST">
                                 <div class="row">
                                     <div class="form-group">
                                         <label for="Categorias" class="col-lg-1 control-label">Categoria: </label> 
