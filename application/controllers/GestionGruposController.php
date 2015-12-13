@@ -45,4 +45,22 @@ class GestionGruposController extends CI_Controller {
         }
         }
     }
+    
+    public function  insertPeriodo(){
+        try {
+        if($this->input->post('idModulo')){
+        //$this->load->model('Periodos');
+        $FechaInico = $this->input->post('FechaInicio');
+        $FechaFin = $this->input->post('FechaFin');
+        $Estado = $this->input->post('estadoPeriodo');
+        $Modulo = $this->input->post('idModulo');
+        $Comentarios = $this->input->post('ComentariosPeriodo');
+        $data = $this->Diplomados->crearPeriodo($FechaInico,$FechaFin,$Estado,$Comentarios,$Modulo);
+        echo json_decode($data);
+        }
+        }
+        catch (Exception $ex) {
+            echo json_encode($ex);
+        }
+    }
 }

@@ -24,6 +24,7 @@ class Modulos extends CI_Model {
     }
     
     public function crearPeriodo($FechaInicioPeriodo, $FechaFinPeriodo, $Estado, $Comentario, $CodigoModulo) {
+        try {
         $data = array(
             'FechaInicioPeriodo' => $FechaInicioPeriodo,
             'FechaFinPeriodo' => $FechaFinPeriodo,
@@ -32,6 +33,12 @@ class Modulos extends CI_Model {
             'CodigoModulo' => $CodigoModulo
         );
         $this->db->insert('Periodos', $data);
+        $insert_id = $this->db->insert_id();
+        $data['CodigoPeriodo'] = $insert_id;
+        } catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        return $data;
     }
 
     public function EliminarPeriodoModulo($CodigoModulo) {
