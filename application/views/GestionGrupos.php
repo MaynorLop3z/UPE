@@ -33,6 +33,7 @@ and open the template in the editor.
                         $.post("<?php echo base_url() ?>index.php/GestionGruposController/getModulos/", {idDiplomado: idDiplomado}, function(data) {
                             console.log("EntroModulo");
                             $("#Modulo").html(data);
+                            $("#CodigoModulo").html(data);
                         });
                     });
                 });
@@ -138,6 +139,13 @@ and open the template in the editor.
                                     Agregar Periodo:
                                 </legend> 
                                 <div class="row">
+                                    <div class="form-group">
+                                        <label for="Modulo" class="col-lg-3 control-label">Modulo: </label>
+                                        <div class="col-lg-6 ">
+                                            <select class="form-control" name="CodigoModulo" id="CodigoModulo">
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <label for="FechaInicioPeriodo" class="col-lg-3 control-label text-left">Fecha de Inicio: </label>
                                         <div class="col-lg-6">
