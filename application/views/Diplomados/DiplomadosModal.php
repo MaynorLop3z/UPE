@@ -39,7 +39,7 @@
                        </div>                                                                                       
                         
                         <div class="form-group">
-                            <label for="CatgoriaDiplomado" class="col-lg-3 control-label">Clomadoategoria Diplomado:</label>
+                            <label for="CatgoriaDiplomado" class="col-lg-3 control-label">Categoria Diplomado:</label>
                             <div class="col-lg-9">
                                 <select class="form-control" id="CatgoriaDiplomado" name="CodigoCategoriaDiplomado">                                          
                                     <?php
