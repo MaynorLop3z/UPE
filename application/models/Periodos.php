@@ -1,9 +1,11 @@
 <?php
 
-if (!defined('BASEPATH'))
+if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
+}
+
 //include('ModeloBase.php');
-class Modulos extends CI_Model {
+class Periodos extends CI_Model {
 
     public function __construct() {
         parent::__construct();

@@ -16,6 +16,7 @@ and open the template in the editor.
         <link rel="icon" href="../bootstrap/minerva.jpg" type="image/x-icon" />
         <script src="../bootstrap/js/jquery.min.js"></script>
         <script src="../bootstrap/js/bootstrap.min.js"></script>
+        <!--script src="../bootstrap/js/Periodos.js"></script-->
         <script language="javascript">
             $(document).ready(function() {
                 $("#Categorias").change(function() {
@@ -38,24 +39,6 @@ and open the template in the editor.
                     });
                 });
             });
-
-            $("#frmADDPeriodo").submit(function(event) {
-                event.preventDefault();
-                var $form = $(this), idModulo = $form.find("select[name='CodigoModulo']").val(), FechaInicio = $form.find("input[name='FechaInicioPeriodo']").val(), FechaFin = $form.find("input[name='FechaFinPeriodo']").val(), ComentariosPeriodo = $form.find("textarea[name=ComentariosPeriodo]").val(), url = $form.attr("action"), estadoPeriodo = true;
-                var posting = $.post(url, {idModulo: idModulo, FechaInicio: FechaInicio, FechaFin: FechaFin, ComentariosPeriodo: ComentariosPeriodo, estadoPeriodo: estadoPeriodo});
-                posting.done(function(data) {
-                    if (data !== null) {
-                        console.log("Realizo el insert");
-                        //$("#TEST").html("<h1>Insertado</h1>");
-                    }
-                });
-                posting.fail(function() {
-                    alert("error");
-                });
-            });
-            function NuevoPeriodoModalShow() {
-                $("#PeriodoNuevo").modal();
-            }
         </script>
     </head>
     <body>
@@ -87,7 +70,7 @@ and open the template in the editor.
                             <h3 class="panel-title">Gestion de Grupos</h3>
                         </div>
                         <div class="panel-body">
-                            <form class="form-horizontal" name="PeriodoList" action="<?php echo base_url() ?>index.php/PeriodosController/insertPeriodo/" method="POST">
+                            <form class="form-horizontal" name="PeriodoList" action="" method="POST">
                                 <div class="row">
                                     <div class="form-group">
                                         <label for="Categorias" class="col-lg-1 control-label">Categoria: </label> 
@@ -185,5 +168,27 @@ and open the template in the editor.
                 </div>
             </div>
         </div>
+        <script language="javascript">
+            $("#frmADDPeriodo").submit(function(event) {
+                event.preventDefault();
+                var $form = $(this), idModulo = $form.find("select[name='CodigoModulo']").val(), FechaInicio = $form.find("input[name='FechaInicioPeriodo']").val(), FechaFin = $form.find("input[name='FechaFinPeriodo']").val(), ComentariosPeriodo = $form.find("textarea[name=ComentariosPeriodo]").val(), url = $form.attr("action"), estadoPeriodo = true;
+                console.log(idModulo);
+                var posting = $.post(url, {idModulo: idModulo, FechaInicio: FechaInicio, FechaFin: FechaFin, ComentariosPeriodo: ComentariosPeriodo, estadoPeriodo: estadoPeriodo});
+                posting.done(function(data) {
+                    if (data !== null) {
+                        console.log("Realizo el insert");
+                        //$("#TEST").html("<h1>Insertado</h1>");
+                        $("#PeriodoNuevo").modal('toggle');
+                    }
+                });
+                posting.fail(function() {
+                    alert("error");
+                });
+            });
+            function NuevoPeriodoModalShow() {
+                $("#PeriodoNuevo").modal();
+            }
+
+        </script>
     </body>
 </html>
