@@ -38,6 +38,15 @@ and open the template in the editor.
                         });
                     });
                 });
+                $("#Modulo").change(function() {
+                    $("#Modulo option:selected").each(function() {
+                        idModulo = $(this).val();
+                        $.post("<?php echo base_url() ?>index.php/PeriodosController/listarByModulo/", {idModulo: idModulo}, function(data) {
+                            console.log("EntroTablaPeriodos");
+                            $("#bodytablaPeriodos").html(data);
+                        });
+                    });
+                });
             });
         </script>
     </head>
@@ -105,6 +114,21 @@ and open the template in the editor.
                                 </div>
                             </form>
                             <button  id="btnADDPeriodo" class="btn btn-default" onclick="NuevoPeriodoModalShow()"><span class="glyphicon glyphicon-plus"></span>Nuevo Periodo</button>
+                            <div id="tablaPeriodos">
+                                <table border="1" class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Codigo</th>
+                                            <th>Fecha Inicio</th>
+                                            <th>Fecha Fin</th>
+                                            <th>Estado</th>
+                                            <th>Comentarios</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="bodytablaPeriodos">
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-1"></div>

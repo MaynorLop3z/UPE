@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Description of GestionPeriodos
  *
@@ -32,6 +31,24 @@ class PeriodosController extends CI_Controller {
             }
         } catch (Exception $ex) {
             echo json_encode($ex);
+        }
+    }
+
+    public function listarByModulo() {
+        if ($this->input->post('idModulo')) {
+            $idModulo = $this->input->post('idModulo');
+            $Periodos = $this->Periodos->listarPeriodosByModulo($idModulo);
+            foreach ($Periodos as $period) {
+                ?>
+                <tr>
+                    <th><?= $period->CodigoPeriodo ?></th>
+                    <th><?= $period->FechaInicioPeriodo ?></th>
+                    <th><?= $period->FechaFinPeriodo ?></th>
+                    <th><?= $period->Estado ?></th>
+                    <th><?= $period->Comentario ?></th>
+                </tr>
+                <?php
+            }
         }
     }
 

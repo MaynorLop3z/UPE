@@ -25,6 +25,21 @@ class Periodos extends CI_Model {
         return $resultado;
     }
     
+    public function listarPeriodosByModulo($idModulo) {
+        $this->db->select('CodigoPeriodo, '
+                . 'FechaInicioPeriodo, '
+                . 'FechaFinPeriodo, '
+                . 'Estado, '
+                . 'Comentario, '
+                . 'CodigoModulo'
+        );
+        $this->db->from('Periodos');
+        $this->db->where('CodigoModulo', $idModulo);
+        $consulta = $this->db->get();
+        $resultado = $consulta->result();
+        return $resultado;
+    }
+    
     public function crearPeriodo($FechaInicioPeriodo, $FechaFinPeriodo, $Estado, $Comentario, $CodigoModulo) {
         try {
         $data = array(
