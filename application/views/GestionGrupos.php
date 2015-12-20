@@ -23,7 +23,7 @@ and open the template in the editor.
                     $("#Categorias option:selected").each(function() {
                         idCategoria = $(this).val();
                         $.post("<?php echo base_url() ?>index.php/GestionGruposController/getDiplomados/", {idCategoria: idCategoria}, function(data) {
-                            console.log("Entro");
+//                            console.log("Entro");
                             $("#Diplomado").html(data);
                         });
                     });
@@ -32,7 +32,7 @@ and open the template in the editor.
                     $("#Diplomado option:selected").each(function() {
                         idDiplomado = $(this).val();
                         $.post("<?php echo base_url() ?>index.php/GestionGruposController/getModulos/", {idDiplomado: idDiplomado}, function(data) {
-                            console.log("EntroModulo");
+//                            console.log("EntroModulo");
                             $("#Modulo").html(data);
                             $("#CodigoModulo").html(data);
                         });
@@ -42,7 +42,7 @@ and open the template in the editor.
                     $("#Modulo option:selected").each(function() {
                         idModulo = $(this).val();
                         $.post("<?php echo base_url() ?>index.php/PeriodosController/listarByModulo/", {idModulo: idModulo}, function(data) {
-                            console.log("EntroTablaPeriodos");
+//                            console.log("EntroTablaPeriodos");
                             $("#bodytablaPeriodos").html(data);
                         });
                     });
@@ -118,11 +118,11 @@ and open the template in the editor.
                                 <table border="1" class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
-                                            <th>Codigo</th>
                                             <th>Fecha Inicio</th>
                                             <th>Fecha Fin</th>
                                             <th>Estado</th>
                                             <th>Comentarios</th>
+                                            <th>Gestion</th>
                                         </tr>
                                     </thead>
                                     <tbody id="bodytablaPeriodos">
@@ -192,7 +192,30 @@ and open the template in the editor.
                 </div>
             </div>
         </div>
+        <div id="PeriodoEliminar" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="container-fluid ">
+                        <button type="button" class="close" id="btnCerrarModalDELPeriodo" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <form id="frmDELPeriodo" action="<?php echo base_url() ?>index.php/PeriodosController/deletePeriodo/" class="form-horizontal" method="post" >
+                            <fieldset>
+                                <legend class="modal-header">
+                                    Eliminar Alumno
+                                </legend>
+                                <p class="text-center">¿Desea eliminar al Periodo del: <mark id="nombrePeriodoEliminar"></mark> ?</p>
+                                <input type="hidden" class="form-control" name="onlyFor">
+                                <div class="modal-footer">
+                                    <button type="submit" id="btnEnviarPeriodoDEL" onclick="" class="btn btn-default" name="Eliminar">Eliminar</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Cancelar">Cancelar</button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
         <script language="javascript">
+            var codigoPeriodo;
             $("#frmADDPeriodo").submit(function(event) {
                 event.preventDefault();
                 var $form = $(this), idModulo = $form.find("select[name='CodigoModulo']").val(), FechaInicio = $form.find("input[name='FechaInicioPeriodo']").val(), FechaFin = $form.find("input[name='FechaFinPeriodo']").val(), ComentariosPeriodo = $form.find("textarea[name=ComentariosPeriodo]").val(), url = $form.attr("action"), estadoPeriodo = true;
@@ -200,9 +223,31 @@ and open the template in the editor.
                 var posting = $.post(url, {idModulo: idModulo, FechaInicio: FechaInicio, FechaFin: FechaFin, ComentariosPeriodo: ComentariosPeriodo, estadoPeriodo: estadoPeriodo});
                 posting.done(function(data) {
                     if (data !== null) {
-                        console.log("Realizo el insert");
-                        //$("#TEST").html("<h1>Insertado</h1>");
                         $("#PeriodoNuevo").modal('toggle');
+                    }
+                });
+                posting.fail(function() {
+                    alert("error");
+                });
+            });
+            $('#PeriodoEliminar').on('show.bs.modal', function(event) {
+                var perio = $('#Periodo' + codigoPeriodo.substring(10));
+                var Fecha_Inicio = perio.find('.fip').html().toString().trim();
+                var Fecha_Fin = perio.find('.fip').html().toString().trim();
+                $('#nombrePeriodoEliminar').html(Fecha_Inicio + " al " + Fecha_Fin);
+            });
+            $("#frmDELPeriodo").submit(function(event) {
+                event.preventDefault();
+                var $form = $(this), PeriodoCodigo = codigoPeriodo.substring(10), url = $form.attr("action");
+                console.log(PeriodoCodigo);
+                var posting = $.post(url, {PeriodoCodigo: PeriodoCodigo});
+                posting.done(function(data) {
+                    console.log(data);
+                    if (data) {
+                        console.log(data);
+                        $("#PeriodoEliminar").modal('toggle');
+                        $('#tablaPeriodos').find('#Peridoo' + PeriodoCodigo).fadeOut("slow");
+                        $('#tablaPeriodos').find('#Periodo' + PeriodoCodigo).remove();
                     }
                 });
                 posting.fail(function() {
@@ -211,6 +256,10 @@ and open the template in the editor.
             });
             function NuevoPeriodoModalShow() {
                 $("#PeriodoNuevo").modal();
+            }
+            function DeletePeriodoShow(fila) {
+                codigoPeriodo = fila.id;
+                $("#PeriodoEliminar").modal('toggle');
             }
 
         </script>

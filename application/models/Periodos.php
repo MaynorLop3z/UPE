@@ -62,7 +62,18 @@ class Periodos extends CI_Model {
         $this->db->delete('Periodos', array('CodigoModulo' => $CodigoModulo));
     }
     public function EliminarPeriodo($CodigoPeriodo) {
-        $this->db->delete('Periodos', array('CodigoPeriodo' => $CodigoPeriodo));
+//        $eliminado = 0;
+          try {
+           $this->db->delete('Periodos', array('CodigoPeriodo' => $CodigoPeriodo));
+//          if ($this->db->affected_rows() == 1){
+//            $eliminado = true;
+//        }
+           $eliminado = $this->db->affected_rows();
+        } catch (Exception $ex) {
+            $ex->getMessage();
+            $eliminado = 0;
+        }
+       return $eliminado;
     }
     public function ModificarPeriodo($CodigoPeriodo, $FechaInicioPeriodo, $Estado, $CodigoModulo, $FechaFinPeriodo, $Comentario) {
         $data = array(
