@@ -75,15 +75,21 @@ class Periodos extends CI_Model {
         }
        return $eliminado;
     }
-    public function ModificarPeriodo($CodigoPeriodo, $FechaInicioPeriodo, $Estado, $CodigoModulo, $FechaFinPeriodo, $Comentario) {
+    public function ModificarPeriodo($CodigoPeriodo, $FechaInicioPeriodo, $Estado, $FechaFinPeriodo, $Comentario) {
+        try {
         $data = array(
             'FechaInicioPeriodo' => $FechaInicioPeriodo,
             'Estado' => $Estado,
             'FechaFinPeriodo' => $FechaFinPeriodo,
-            'Comentario' => $Comentario,
-            'CodigoModulo' => $CodigoModulo
+            'Comentario' => $Comentario
+//            'CodigoModulo' => $CodigoModulo
         );
         $this->db->where('CodigoPeriodo', $CodigoPeriodo);
         $this->db->update('Periodos', $data);
+        $data['CodigoPeriodo'] = $CodigoPeriodo;
+        } catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        return $data;
     }
 }

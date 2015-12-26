@@ -46,7 +46,7 @@ class PeriodosController extends CI_Controller {
                     <th class="ep"><?= $period->Estado ?></th>
                     <th class="cp"><?= $period->Comentario ?></th>
                     <th>
-                        <button id="PeriodoE<?= $period->CodigoPeriodo ?>" onclick="mostrarEditPeriodo(this)" title="Editar Periodo" class="btn_modificar_periodo btn btn-success"><span class="glyphicon glyphicon-pencil"></span> </button>
+                        <button id="PeriodoE<?= $period->CodigoPeriodo ?>" onclick="EditPeriodoShow(this)" title="Editar Periodo" class="btn_modificar_periodo btn btn-success"><span class="glyphicon glyphicon-pencil"></span> </button>
                         <button id="PeriodoDEL<?= $period->CodigoPeriodo ?>" onclick="DeletePeriodoShow(this)" title="Eliminar Periodo" class="btn_eliminar_periodo btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
                     </th>
                 </tr>
@@ -54,30 +54,32 @@ class PeriodosController extends CI_Controller {
             }
         }
     }
-//    public function eliminarPeriodo($PeriodoCodigo){
-//        $eliminado = false;
-//          try {
-//           $this->db->delete('Periodos', array('CodigoPeriodo' => $PeriodoCodigo));
-//          if ($this->db->affected_rows() == 1){
-//            $eliminado = true;
-//        }
-//        } catch (Exception $ex) {
-//            $ex->getMessage();
-//        }
-//       return $eliminado;
-//    }
-    public function deletePeriodo(){
-        
+
+    public function deletePeriodo() {
+
         if ($this->input->post('PeriodoCodigo')) {
             $CodigoPeriodo = $this->input->post('PeriodoCodigo');
             $estado = $this->Periodos->EliminarPeriodo($CodigoPeriodo);
-        }
-        else {
+        } else {
             $estado = 0;
         }
         echo $estado;
     }
 
-    
+    public function editPeriodo() {
+        try {
+            if ($this->input->post()) {
+                $Codigo = $this->input->post('idPeriodo');
+                $FechaInicio = $this->input->post('FechaInicio');
+                $FechaFinal = $this->input->post('FechaFinal');
+                $Comentarios = $this->input->post('Comentarios');
+                $Estado = $this->input->post('Estado');
+                $arrayData = $this->Periodos->ModificarPeriodo($Codigo, $FechaInicio, $Estado, $FechaFinal, $Comentarios);
+                echo json_encode($arrayData);
+            }
+        } catch (Exception $ex) {
+            echo json_encode($ex);
+        }
+    }
 
 }
