@@ -43,7 +43,7 @@ class PeriodosController extends CI_Controller {
                 <tr id="Periodo<?= $period->CodigoPeriodo ?>">
                     <th class="fip"><?= $period->FechaInicioPeriodo ?></th>
                     <th class="ffp"><?= $period->FechaFinPeriodo ?></th>
-                    <th class="ep"><?= $period->Estado ?></th>
+                    <th class="ep"><?= ($period->Estado === 't') ? 'Activo' : 'Inactivo' ?></th>
                     <th class="cp"><?= $period->Comentario ?></th>
                     <th>
                         <button id="PeriodoE<?= $period->CodigoPeriodo ?>" onclick="EditPeriodoShow(this)" title="Editar Periodo" class="btn_modificar_periodo btn btn-success"><span class="glyphicon glyphicon-pencil"></span> </button>

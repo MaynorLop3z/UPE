@@ -244,6 +244,15 @@ and open the template in the editor.
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <label for="EstadoPeriodo" class="col-lg-3 control-label">Estado: </label>
+                                        <div class="col-lg-6">
+                                            <label class="checkbox"><input type="checkbox" name="EstadoPeriodo" id="EstadoPeriodoE" value="1">Activado</label> 
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="ComentariosPeriodo" class="col-lg-3 control-label">Comentarios: </label>
                                         <div class="col-lg-6">
                                             <textarea cols="40" rows="5" class="form-control" name="ComentariosPeriodo" id="ComentariosPeriodoE" placeholder="Comentarios del Periodo"></textarea>
@@ -253,7 +262,7 @@ and open the template in the editor.
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" id="btnEnviarPeriodoEdit" onclick="" class=" btn btn-default" name="Aceptar">Agregar</button>
+                                        <button type="submit" id="btnEnviarPeriodoEdit" onclick="" class=" btn btn-default" name="Aceptar">Actualizar</button>
                                         <button type="reset" id="btnLimpiarPeriodoEdit" onclick="" class=" btn btn-default" name="Limpiar">Limpiar</button>
                                     </div>
                                 </div>
@@ -290,6 +299,14 @@ and open the template in the editor.
                 var Fecha_Inicio = perio.find('.fip').html().toString().trim();
                 var Fecha_Fin = perio.find('.ffp').html().toString().trim();
                 var Comentarios = perio.find('.cp').html().toString().trim();
+                var Estado = perio.find('.ep').html().toString().trim();
+                //console.log(Estado);
+                //console.log((Estado === "Activado"));
+                if (Estado === "Activo") {
+                    $("#EstadoPeriodoE").prop("checked", true);
+                } else {
+                    $("#EstadoPeriodoE").prop("checked", false);
+                }
 //                $('#nombrePeriodoEliminar').html(Fecha_Inicio + " al " + Fecha_Fin);
                 $('#FechaInicioPeriodoE').val(Fecha_Inicio);
                 $('#FechaFinPeriodoE').val(Fecha_Fin);
@@ -319,13 +336,15 @@ and open the template in the editor.
                         , FechaInicio = $form.find("input[name='FechaInicioPeriodo']").val()
                         , FechaFinal = $form.find("input[name='FechaFinPeriodo']").val()
                         , Comentarios = $form.find("textarea[name='ComentariosPeriodo']").val()
+                        , Estado = $("#EstadoPeriodoE").prop("checked")
                         , url = $form.attr("action");
+                        console.log(Estado);
                 var posting = $.post(url,
                         {idPeriodo: idPeriodo
                             , FechaInicio: FechaInicio
                             , FechaFinal: FechaFinal
                             , Comentarios: Comentarios
-                            , Estado: true});
+                            , Estado: (Estado) ? 1:0});
                 posting.done(function(data) {
                     if (data !== null) {
                         var obj = jQuery.parseJSON(data);
@@ -333,6 +352,14 @@ and open the template in the editor.
                         trPeriodo.find('.ffp').html(obj.FechaFinPeriodo);
                         trPeriodo.find('.fip').html(obj.FechaInicioPeriodo);
                         trPeriodo.find('.cp').html(obj.Comentario);
+                        console.log(obj.Estado);
+                        if(obj.Estado === 1){
+                            console.log("in");
+                            trPeriodo.find('.ep').html("Activo");
+                        }else{
+                console.log("out");            
+                trPeriodo.find('.ep').html("Inactivo");
+                        }
                         $("#PeriodoModificar").modal('toggle');
                     }
                 });
