@@ -37,7 +37,7 @@ $(document).ready(function () {
     });
 
     //al enviar el formulario
-    $(':button').click(function () {
+    $('#subir').click(function () {
         //información del formulario
         var formData = new FormData($(".formulario")[0]);
         var message = "";
@@ -55,16 +55,20 @@ $(document).ready(function () {
             //mientras enviamos el archivo
             beforeSend: function () {
                 message = $("<span class='before'>Subiendo la imagen, por favor espere...</span>");
-                showMessage(message)
+                showMessage(message);
             },
             //una vez finalizado correctamente
             success: function (data) {
+                var file = $("#imagen")[0].files[0];
+                var fileName = file.name;
+                console.log(fileName);
                 message = $("<span class='success'>La imagen ha subido correctamente.</span>");
                 showMessage(message);
                 if (isImage(fileExtension))
                 {
-                    console.log(data);
-                    $(".showImage").html("<img src='/UPE/bootstrap/images/publicaciones/" + data + "' />");
+                    console.log(fileName);
+                    $(".showImage").html("<img src='/UPE/bootstrap/images/publicaciones/" + fileName + "' />");
+
                 }
             },
             //si ha ocurrido un error
@@ -105,5 +109,3 @@ $(document).ready(function () {
 
 
 });
-
-
