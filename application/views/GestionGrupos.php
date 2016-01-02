@@ -271,6 +271,99 @@ and open the template in the editor.
                     </div>
                 </div>
             </div>
+        </div>
+        <div id="PeriodoGestion" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog  modal-lg">
+                <div class="modal-content">
+                    <div class="container-fluid ">
+                        <button type="button" class="close" id="btnCerrarModalGestionPeriodo" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <div class="modal-header">
+                            Grupos del Periodo:
+                        </div> 
+                        <div>
+                            <form id="frmEditPeriodo" action="<?php echo base_url() ?>index.php/PeriodosController/editPeriodo/" class="form-inline" method="post" >
+                                <fieldset>
+                                    <h4>
+                                        Agregar Grupo:
+                                    </h4>
+                                    <div class="row">
+                                        <div class="form-group-sm">
+                                            <label for="Aula" class="col-md-1 control-label">Aula: </label>
+                                            <input type="text" class="col-md-2 form-control" name="Aula" id="AulaNombre" placeholder="Aula" maxlength="10" required>
+                                        </div>
+                                        <div class="form-group-sm">
+                                            <label for="HoraEntradaGrupo" class="col-md-1 control-label">Entrada: </label>
+                                            <input type="time" class="col-md-2 form-control" name="HoraEntradaGrupo" id="HoraEntradaGrupo" placeholder="Hora Inicializacion sesion" required>  
+                                        </div>
+
+                                        <div class="form-group-sm">
+                                            <label for="HoraSalidaGrupo" class="col-md-1 control-label">Salida: </label>
+                                            <input type="time" class="col-md-2 form-control" name="HoraSalidaGrupo" id="HoraSalidaGrupo" placeholder="Hora finalizacion sesion" required>
+                                        </div>
+                                        <div class="form-group-sm">
+                                            <div class="col-md-1"></div>
+                                            <button type="submit" id="btnEnviarGrupoPeriodoEdit" onclick="" class="col-md-2 btn btn-default" name="Aceptar"><span class="glyphicon glyphicon-plus"></span>Agregar</button>
+                                        </div>
+                                    </div>
+                                    <!--                                    <div class="form-group">
+                                                                            <label for="Aula" class="col-lg-3 control-label">Aula:</label>
+                                                                            <div class="col-lg-6 ">
+                                                                                <input type="text" class="form-control" name="Aula" id="AulaNombre" placeholder="Aula" maxlength="10" required>
+                                                                            </div>
+                                                                            <div class="col-lg-3">
+                                                                                <label id="usR" class="warning"></label>  Para  cuando el campo sea requerido
+                                                                            </div>
+                                                                        </div>-->
+                                    <!--                                    <div class="form-group">
+                                                                            <label for="HoraEntradaGrupo" class="col-lg-3 control-label">Hora de Salida: </label>
+                                                                            <div class="col-lg-6">
+                                                                                <input type="time" class="form-control" name="HoraEntradaGrupo" id="HoraEntradaGrupo" placeholder="Hora Inicializacion sesion" required>
+                                                                            </div>
+                                                                            <div class="col-lg-3">
+                                                                                <label id="usR" class="warning"></label>  Para  cuando el campo sea requerido
+                                                                            </div>
+                                                                        </div>-->
+                                    <!--                                    <div class="form-group">
+                                                                            <label for="HoraSalidaGrupo" class="col-lg-3 control-label">Hora de Salida: </label>
+                                                                            <div class="col-lg-6">
+                                                                                <input type="time" class="form-control" name="HoraSalidaGrupo" id="HoraSalidaGrupo" placeholder="Hora finalizacion sesion" required>
+                                                                            </div>
+                                                                            <div class="col-lg-3">
+                                                                                <label id="usR" class="warning"></label>  Para  cuando el campo sea requerido
+                                                                            </div>
+                                                                        </div>-->
+                                    <!--                                    <div class="row">
+                                                                            <div class="col-md-11"></div>
+                                                                            <div class="col-md-1 form-group">
+                                                                                <button type="submit" id="btnEnviarGrupoPeriodoEdit" onclick="" class=" btn btn-default" name="Aceptar"><span class="glyphicon glyphicon-plus"></span></button>
+                                                                                <button type="reset" id="btnLimpiarGrupoPeriodoEdit" onclick="" class=" btn btn-default" name="Limpiar">Limpiar</button>
+                                                                            </div>-->
+                                    <!--                                    </div>-->
+                                </fieldset>
+                            </form>
+                            <h4>Grupos Existentes:</h4>
+                            <table border="1" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Codigo</th>
+                                        <th>Estado</th>
+                                        <th>Hora de Entrada</th>
+                                        <th>Hora de Salida</th>
+                                        <th>Aula</th>
+                                        <th>Alumnos</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bodytablaPeriodosGrupos">
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div> 
         <script language="javascript">
             var codigoPeriodo;
@@ -338,13 +431,13 @@ and open the template in the editor.
                         , Comentarios = $form.find("textarea[name='ComentariosPeriodo']").val()
                         , Estado = $("#EstadoPeriodoE").prop("checked")
                         , url = $form.attr("action");
-                        console.log(Estado);
+                console.log(Estado);
                 var posting = $.post(url,
                         {idPeriodo: idPeriodo
                             , FechaInicio: FechaInicio
                             , FechaFinal: FechaFinal
                             , Comentarios: Comentarios
-                            , Estado: (Estado) ? 1:0});
+                            , Estado: (Estado) ? 1 : 0});
                 posting.done(function(data) {
                     if (data !== null) {
                         var obj = jQuery.parseJSON(data);
@@ -353,12 +446,12 @@ and open the template in the editor.
                         trPeriodo.find('.fip').html(obj.FechaInicioPeriodo);
                         trPeriodo.find('.cp').html(obj.Comentario);
                         console.log(obj.Estado);
-                        if(obj.Estado === 1){
+                        if (obj.Estado === '1') {
                             console.log("in");
                             trPeriodo.find('.ep').html("Activo");
-                        }else{
-                console.log("out");            
-                trPeriodo.find('.ep').html("Inactivo");
+                        } else {
+                            console.log("out");
+                            trPeriodo.find('.ep').html("Inactivo");
                         }
                         $("#PeriodoModificar").modal('toggle');
                     }
@@ -377,6 +470,10 @@ and open the template in the editor.
             function EditPeriodoShow(fila) {
                 codigoPeriodo = fila.id;
                 $("#PeriodoModificar").modal('toggle');
+            }
+            function GestionPeriodoShow(fila) {
+                codigoPeriodo = fila.id;
+                $("#PeriodoGestion").modal('toggle');
             }
         </script>
     </body>

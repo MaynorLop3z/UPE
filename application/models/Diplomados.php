@@ -39,7 +39,7 @@ class Diplomados extends CI_Model {
                 . 'OrdenModulo, '
                 . 'Estado, '
                 . 'CodigoDiplomado, '
-                . 'CodigoTurnos, '
+                . 'CodigoTurno, '
                 . 'Comentarios'
         );
         $this->db->from('Modulos');
