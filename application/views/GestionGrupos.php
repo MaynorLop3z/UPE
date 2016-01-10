@@ -1,9 +1,4 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <?php $this->load->helper('url'); ?>
@@ -281,7 +276,7 @@ and open the template in the editor.
                             Grupos del Periodo:
                         </div> 
                         <div>
-                            <form id="frmEditPeriodo" action="<?php echo base_url() ?>index.php/PeriodosController/editPeriodo/" class="form-inline" method="post" >
+                            <form id="frmGrupoAdd" action="<?php echo base_url() ?>index.php/PeriodosController/insertGrupo/" class="form-inline" method="post" >
                                 <fieldset>
                                     <h4>
                                         Agregar Grupo:
@@ -302,7 +297,7 @@ and open the template in the editor.
                                         </div>
                                         <div class="form-group-sm">
                                             <div class="col-md-1"></div>
-                                            <button type="submit" id="btnEnviarGrupoPeriodoEdit" onclick="" class="col-md-2 btn btn-default" name="Aceptar"><span class="glyphicon glyphicon-plus"></span>Agregar</button>
+                                            <button type="submit" id="btnEnviarGrupoPeriodoAdd" onclick="" class="col-md-2 btn btn-default" name="Aceptar"><span class="glyphicon glyphicon-plus"></span>Agregar</button>
                                         </div>
                                     </div>
                                     <!--                                    <div class="form-group">
@@ -345,18 +340,17 @@ and open the template in the editor.
                             <table border="1" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Codigo</th>
+                                        <!--<th>Codigo</th>-->
                                         <th>Estado</th>
                                         <th>Hora de Entrada</th>
                                         <th>Hora de Salida</th>
                                         <th>Aula</th>
-                                        <th>Alumnos</th>
+                                        <!--<th>Alumnos</th>-->
                                     </tr>
                                 </thead>
                                 <tbody id="bodytablaPeriodosGrupos">
                                 </tbody>
                             </table>
-
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -445,9 +439,9 @@ and open the template in the editor.
                         trPeriodo.find('.ffp').html(obj.FechaFinPeriodo);
                         trPeriodo.find('.fip').html(obj.FechaInicioPeriodo);
                         trPeriodo.find('.cp').html(obj.Comentario);
-                        console.log(obj.Estado);
+//                        console.log(obj.Estado);
                         if (obj.Estado === '1') {
-                            console.log("in");
+//                            console.log("in");
                             trPeriodo.find('.ep').html("Activo");
                         } else {
                             console.log("out");
@@ -459,6 +453,72 @@ and open the template in the editor.
                 posting.fail(function(xhr, textStatus, errorThrown) {
                     alert("error" + xhr.responseText);
                 });
+            });
+            $("#frmGrupoAdd").submit(function(event) {
+                event.preventDefault();
+                var $form = $(this), idPeriodo = codigoPeriodo.substring(10)
+                        , HoraEntrada = $form.find("input[name='HoraEntradaGrupo']").val()
+                        , HoraSalida = $form.find("input[name='HoraSalidaGrupo']").val()
+//                        , Estado = $("#EstadoPeriodoE").prop("checked")
+                        , Aula = $form.find("input[name='Aula']").val()
+                        , url = $form.attr("action");
+//                console.log(Estado);
+                var posting = $.post(url,
+                        {idPeriodo: idPeriodo
+                            , HoraEntrada: HoraEntrada
+                            , HoraSalida: HoraSalida
+                            , Aula: Aula});
+                posting.done(function(data) {
+                    if (data !== null) {
+                        var obj = jQuery.parseJSON(data);
+                        var fila = "";
+                        fila += '<tr id="GrupoPeriodo' + obj.CodigoGrupoPeriodo + '">\n';
+                        fila += '<td class="Estado_Grupo">' + ((obj.Estado === 't') ? 'Activo' : 'Inactivo') + '</td>\n';
+                        fila += '<td class="Hora_Entrada">' + obj.HoraEntrada + '</td>\n';
+                        fila += '<td class="Hora_Salida">' + obj.HoraSalida + '</td>\n';
+                        fila += '<td class="Aula">' + obj.Aula + '</td>\n';
+                        fila += '</tr>\n';
+//                        console.log(fila);
+                        $('#bodytablaPeriodosGrupos').append(fila);
+//                        $(this).trigger("reset");
+                        $form.find("input[name='HoraEntradaGrupo']").val("");
+                        $form.find("input[name='HoraSalidaGrupo']").val("");
+                        $form.find("input[name='Aula']").val("");
+                        //$("#PeriodoGestion").modal('toggle');
+                    }
+                });
+                posting.fail(function(xhr, textStatus, errorThrown) {
+                    alert("error" + xhr.responseText);
+                });
+            });
+            $('#PeriodoGestion').on('show.bs.modal', function(event) {
+                var idPeriodo = codigoPeriodo.substring(10);
+                var url = "<?php echo base_url() ?>index.php/PeriodosController/listarGrupos/";
+                var posting = $.post(url, {idPeriodo: idPeriodo});
+                posting.done(function(data) {
+                    if (data !== null) {
+                        var obj = jQuery.parseJSON(data);
+                        var tabla = "";
+                        for (x in obj) {
+                            tabla += '<tr id="GrupoPeriodo' + obj[x].CodigoGrupoPeriodo + '">\n';
+                            tabla += '<td class="Estado_Grupo">' + ((obj[x].Estado === 't') ? 'Activo' : 'Inactivo') + '</td>\n';
+                            tabla += '<td class="Hora_Entrada">' + obj[x].HoraEntrada + '</td>\n';
+                            tabla += '<td class="Hora_Salida">' + obj[x].HoraSalida + '</td>\n';
+                            tabla += '<td class="Aula">' + obj[x].Aula + '</td>\n';
+                            tabla += '</tr>\n';
+//                            for (y in obj[x]) {
+//                                console.log(obj[x][y]);
+//                            }
+                        }
+//                        console.log(tabla);
+                        $('#bodytablaPeriodosGrupos').html(tabla);
+
+                    }
+                });
+                posting.fail(function(xhr, textStatus, errorThrown) {
+                    alert("error" + xhr.responseText);
+                });
+                //$('#nombrePeriodoEliminar').html(Fecha_Inicio + " al " + Fecha_Fin);
             });
             function NuevoPeriodoModalShow() {
                 $("#PeriodoNuevo").modal();

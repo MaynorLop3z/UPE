@@ -33,6 +33,21 @@ class PeriodosController extends CI_Controller {
             echo json_encode($ex);
         }
     }
+    
+    public function insertGrupo() {
+        try {
+            if ($this->input->post('idPeriodo')) {
+                $HoraEntrada = $this->input->post('HoraEntrada');
+                $HoraSalida = $this->input->post('HoraSalida');
+                $idPeriodo = $this->input->post('idPeriodo');
+                $Aula = $this->input->post('Aula');
+                $data = $this->Periodos->crearGrupo($idPeriodo, $HoraEntrada, $HoraSalida, $Aula);
+                echo json_encode($data);
+            }
+        } catch (Exception $ex) {
+            echo json_encode($ex);
+        }
+    }
 
     public function listarByModulo() {
         if ($this->input->post('idModulo')) {
@@ -76,6 +91,18 @@ class PeriodosController extends CI_Controller {
                 $Comentarios = $this->input->post('Comentarios');
                 $Estado = $this->input->post('Estado');
                 $arrayData = $this->Periodos->ModificarPeriodo($Codigo, $FechaInicio, $Estado, $FechaFinal, $Comentarios);
+                echo json_encode($arrayData);
+            }
+        } catch (Exception $ex) {
+            echo json_encode($ex);
+        }
+    }
+
+    public function listarGrupos() {
+        try {
+            if ($this->input->post()) {
+                $Codigo = $this->input->post('idPeriodo');
+                $arrayData = $this->Periodos->listarGrupos($Codigo);
                 echo json_encode($arrayData);
             }
         } catch (Exception $ex) {

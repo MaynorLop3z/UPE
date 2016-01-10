@@ -24,6 +24,37 @@ class Periodos extends CI_Model {
         $resultado = $consulta->result();
         return $resultado;
     }
+    public function listarGrupos($idPeriodo) {
+        $this->db->select('CodigoGrupoPeriodo, '
+                . 'CodigoPeriodo, '
+                . 'Estado, '
+                . 'HoraEntrada, '
+                . 'HoraSalida, '
+                . 'Aula'
+        );
+        $this->db->from('GrupoPeriodos');
+        $this->db->where('CodigoPeriodo', $idPeriodo);
+        $consulta = $this->db->get();
+        $resultado = $consulta->result();
+        return $resultado;
+    }
+    public function crearGrupo($idPeriodo, $HoraEntrada, $HoraSalida, $Aula) {
+        try {
+        $data = array(
+            'HoraEntrada' => $HoraEntrada,
+            'HoraSalida' => $HoraSalida,
+            'Estado' => 't',
+            'Aula' => $Aula,
+            'CodigoPeriodo' => $idPeriodo
+        );
+        $this->db->insert('GrupoPeriodos', $data);
+        $insert_id = $this->db->insert_id();
+        $data['CodigoGrupoPeriodo'] = $insert_id;
+        } catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        return $data;
+    }
     
     public function listarPeriodosByModulo($idModulo) {
         $this->db->select('CodigoPeriodo, '
