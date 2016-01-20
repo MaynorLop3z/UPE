@@ -39,6 +39,22 @@
                         </div>                                                                                       
 
                         <div class="form-group">
+                            <label for="Turno" class="col-lg-3 control-label">Turno:</label>
+                            <div class="col-lg-9">
+                                <select class="form-control" id="Turno" name="Turno">                                          
+                                    <?php
+                                    foreach ($Turno as $TurMo) { //AQui para seleccionar el diplomado al que pertenece
+                                        ?>
+                                        <option value="<?= $TurMo->CodigoTurno ?>">
+                                            <?php echo $TurMo->NombreTurno ?> <!-- Para imprimir El nombre en el select-->
+                                        </option>
+                                    <?php }
+                                    ?>
+
+                                </select>
+                            </div>
+                        </div>
+                          <div class="form-group">
                             <label for="NombreDiplomado" class="col-lg-3 control-label">Diplomado:</label>
                             <div class="col-lg-9">
                                 <select class="form-control" id="NombreDiplomado" name="NameDiplomado">                                          
@@ -55,7 +71,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="ComentarioDiplomado" class="col-lg-3 control-label">Comentarios</label>
+                            <label for="ComentarioDiplomado" class="col-lg-3 control-label">Comentarios:</label>
                             <div class="col-lg-9">
                                 <textarea id="ComentarioMod" name="Comentarios"  type="text" class="form-control"  placeholder="Comentario Modulo" required></textarea>
                             </div>
@@ -73,7 +89,7 @@
         </div>
     </div>
 </div>
-<!-- Modal paa modificar Diplomados --------------------------------------------------------------------------------------------------------------------------------------->
+<!-- Modal para modificar Diplomados --------------------------------------------------------------------------------------------------------------------------------------->
 <div id="ModificarDiplomado" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -149,7 +165,7 @@
         </div>
     </div>
 </div>
-<!-- Eliminar DIplomado----->
+<!-- Modal para eliminar Modulos----->
 <div id="EliminarDiplomado" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

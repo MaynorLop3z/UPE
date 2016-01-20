@@ -58,7 +58,19 @@ class Modulos extends CI_Model {
     }
     return $eliminar;
     }
-    
+    public function listarTurnos() {
+        $this->db->select('CodigoTurno, '
+                . 'NombreTurno, '
+                . 'HoraInicio, '
+                . 'HoraFin, '
+                . 'Estado ,'
+                . 'Comentarios'
+        );
+        $this->db->from('Turnos');
+        $consulta = $this->db->get();
+        $resultado = $consulta->result();
+        return $resultado;
+    }
     public function EliminarModulos($CodigoDiplomado){  //Preguntar para uqe sirve
         $this->db->delete('Modulos', array('CodigoDiplomado' => $CodigoDiplomado));
     }
