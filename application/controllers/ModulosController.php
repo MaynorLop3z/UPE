@@ -37,12 +37,19 @@ public function guardarModulo($CodigoModulo = null)
             $turno = $this->input->post("Turno");
             $nombreDiplomado = $this->input->post('$NombreDiplomado');
             $ComentarioModulo  = $this->input->post('ComentarioMod');
-            $ip = $this->session->userdata('ipUserMo');
-            $userModi = $this->session->userdata('codigoUserMo');
+            $ip = $this->session->userdata('ipUserMo');// La ip del usuario que modifica 
+            $userModi = $this->session->userdata('codigoUserMo'); //codigo del usuario qeumodifica 
+            $fechaMo = $this->session->userdata('fechaMo');
             $this->load->model('Modulos');
-        }
+            
+            $arrayData = $this->Modulos->crearModulo(null, $NombreModulo,$OrdenModulo,$radio,$userModi,$ip,$fechaMo,$turno,$nombreDiplomado,$ComentarioModulo);
+        }   echo json_encode($arrayData);
+        
     } catch (Exception $exc) {
-        echo $exc->getTraceAsString();
+        $data = array(
+            'Error' => $exc->getMessage(),
+        );
+        echo json_encode($data);
     }
     
     

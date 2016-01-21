@@ -25,12 +25,15 @@ class Modulos extends CI_Model {
         return $resultado;
     }
 
-    public function crearModulo($NombreModulo, $OrdenModulo, $Estado, $CodigoTurno, $CodigoDiplomado, $Comentarios=null) {
+    public function crearModulo($NombreModulo, $OrdenModulo, $Estado,$userModi,$ip,$fechaMo,$CodigoTurno, $CodigoDiplomado, $Comentarios=null) {
        try{
         $data = array(
             'NombreModulo' => $NombreModulo,
             'OrdenModulo' => $OrdenModulo,
             'Estado' => $Estado,
+            'UsuarioModifica'=>$userModi,
+            'IpModifica'=>$ip,
+            'FechaModifica'=>$fechaMo,            
             'CodigoDiplomado' => $CodigoDiplomado,
             'CodigoTurno' => $CodigoTurno,
             'CodigoDiplomado' => $CodigoDiplomado,
