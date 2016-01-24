@@ -47,4 +47,4 @@
         </div>
     </div>
 </div>
-<script src="../bootstrap/js/Publicaciones.js"></script>
+

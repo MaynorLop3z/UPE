@@ -5,6 +5,8 @@
  */
 
 var codigoUsuario;
+var fileExtension = "";
+var fileName = "";
 $(document).ready(function () {
 //    console.log("Si esta llamando al js");
 ////funcion para  mostrar la tablaa
@@ -18,16 +20,17 @@ $(document).ready(function () {
 //    ;
     $(".messages").hide();
     //queremos que esta variable sea global
-    var fileExtension = "";
-    var fileName=" ";
+
 
     $(':file').change(function ()
     {
         //obtenemos un array con los datos del archivo
         var file = $("#imagen")[0].files[0];
         //obtenemos el nombre del archivo
-        var fileName = file.name;
+        fileName = file.name;
         //obtenemos la extensión del archivo
+        
+        alert("asdsadasdas"+fileName);
         fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1);
         //obtenemos el tamaño del archivo
         var fileSize = file.size;
@@ -60,9 +63,9 @@ $(document).ready(function () {
             },
             //una vez finalizado correctamente
             success: function (data) {
-                var file = $("#imagen")[0].files[0];
-                var fileName = file.name;
-                console.log(fileName);
+              //  var file = $("#imagen")[0].files[0];
+                //fileName = file.name;
+                alert(fileName);
                 message = $("<span class='success'>La imagen ha subido correctamente.</span>");
                 showMessage(message);
                 if (isImage(fileExtension))
@@ -105,41 +108,38 @@ $(document).ready(function () {
                 break;
         }
     }
-
-
-
-
 });
+
 $('#botones').submit(function (event) {
     event.preventDefault();
-    var $form = $(this), Titulo= $form.find("input[name='titulo']").val(),
+    var $form = $(this), Titulo = $form.find("input[name='titulo']").val(),
             Contenido = $form.find("textarea[name='contenido']").val(),
-            url = $form.attr("action"), 
-            nombre = $fileName, 
-            ext= $fileExtension;
-            console.log(Titulo + Contenido + url + nombre + ext);
-        var posting = $.post(url, {
+            url = $form.attr("action"),
+            nombre = fileName,
+            ext = fileExtension;
+    console.log(Titulo + Contenido + url + nombre + ext);
+    var posting = $.post(url, {
         Titulo: Titulo,
-         Contenido: Contenido,
-        nombre : nombre,
-        ext : ext
+        Contenido: Contenido,
+        nombre: nombre,
+        ext: ext
     });
     console.log(posting);
     posting.done(function (data) {
         if (data !== null) {
             var obj = jQuery.parseJSON(data);
-            
+
         }
-    }); 
+    });
     posting.fail(function (data) {
         var obj = jQuery.parseJson(data);
         alert(obj.Error);
     });
 });
 
-function eliminarDiplomado(fila){
- codigoDiplomado = fila.id;
- codigoDiplomado = codigoDiplomado.substring(12);
-   $('#EliminarDiplomado').modal('toggle');
-   
+function eliminarDiplomado(fila) {
+    codigoDiplomado = fila.id;
+    codigoDiplomado = codigoDiplomado.substring(12);
+    $('#EliminarDiplomado').modal('toggle');
+
 }
