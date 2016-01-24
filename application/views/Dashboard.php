@@ -18,21 +18,25 @@ and open the template in the editor.
         <script src="../bootstrap/js/bootstrap.min.js"></script>
 <!--        <script src="../bootstrap/js/Usuarios.js"></script>-->
         <script type="text/javascript">
-            $(document).ready(function() {
-                window.setTimeout(function() {
-                    $(".alert").fadeTo(1500, 0).slideUp(500, function() {
+            $(document).ready(function () {
+                window.setTimeout(function () {
+                    $(".alert").fadeTo(1500, 0).slideUp(500, function () {
                         $(this).remove();
                     });
                 }, 5000);
-                $("#Usuarios").load('UsuarioController');
-                $("#Roles").load('RolesController');
-                $("#Diplomados").load('DiplomadosController');
-                $("#Publicaciones").load('PublicacionesController');
-                $("#Horarios").load('HorariosController');
-                $("#Modulos").load('ModulosController');
-                $("#Participantes").load('ParticipantesController');
-                $("#PublicacionModulo").load('PublicacionMoController');
-                $("#VistasAyuda").load('VistaAyudaCtrl');
+<?php
+foreach ($Permisos as $p) {
+
+    if ($p->systemPart == MENU_PPAL_RIGHT) {
+        ?>
+
+                        $('#<?= $p->idContainer ?>').load('<?= $p->controllerContainer ?>');
+
+
+        <?php
+    }
+}
+?>
             });
         </script>
     </head>
@@ -48,7 +52,7 @@ and open the template in the editor.
                         </div>
                         <div>
                             <ul class="nav  navbar-right center-block ">
-                                <label id="labelpersona">Johanna Rodriguez</label>
+                                <label id="labelpersona"><?= $this->session->userdata('nombreUserLogin'); ?></label>
                                 <button id="btnsalir" name="btnsalir" onclick="window.location.href = 'Login'" class="btn btn-default "><span class="glyphicon glyphicon-log-out"></span>Salir</button>
                             </ul>
                         </div> 
@@ -63,25 +67,44 @@ and open the template in the editor.
                 <div class="col-md-10">
                     <div role="tabpanel">
                         <!-- Nav tabs -->
+
                         <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active"><a href="#Usuarios" aria-controls="Usuarios" role="tab" data-toggle="tab">Usuarios</a></li>
-                            <li role="presentation"><a href="#Roles" aria-controls="Roles" role="tab" data-toggle="tab">Roles</a></li>
-                            <li role="presentation"><a href="#Diplomados" aria-controls="Diplomados" role="tab" data-toggle="tab">Diplomados</a></li>
-                            <li role="presentation"><a href="#Publicaciones" aria-controls="Publicaciones" role="tab" data-toggle="tab">Publicaciones</a></li>
-                            <li role="presentation"><a href="#PublicacionesModulo" aria-controls="PublicacionesModulo" role="tab" data-toggle="tab">Publicaciones Modulo</a></li>
-                            <li role="presentation"><a href="#Horarios" aria-controls="Horarios" role="tab" data-toggle="tab">Horarios</a></li>
-                            <li role="presentation"><a href="#Modulos" aria-controls="Modulos" role="tab" data-toggle="tab">Modulos</a></li>
-                            <li role="presentation"><a href="#Participantes" aria-controls="Participantes" role="tab" data-toggle="tab">Participantes</a></li>
+                            <?php
+                            //$iterator = 0;
+                            foreach ($Permisos as $p) {
+                                if ($p->systemPart == MENU_PPAL_RIGHT) {
+                                    ?>
+                                    <li role="presentation" <?php
+                            if ($p->idContainer == CONTROLLER_TAP_PANEL_DEFAULT) {
+                                echo 'class="active"';
+                            } else {
+                                echo '';
+                            }
+                                    ?> ><a href="#<?= $p->idContainer ?>" aria-controls="<?= $p->idContainer ?>" role="tab" data-toggle="tab"><?= $p->NombrePermiso ?></a></li>
+                                        <?php
+                                        //$iterator++;
+                                    }
+                                }
+                                ?>
                         </ul>
                         <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="Usuarios"></div>
-                            <div role="tabpanel" class="tab-pane" id="Roles"></div>
-                            <div role="tabpanel" class="tab-pane" id="Diplomados"></div>
-                            <div role="tabpanel" class="tab-pane" id="Publicaciones"></div>
-                            <div role="tabpanel" class="tab-pane" id="PublicacionesModulo"></div>
-                            <div role="tabpanel" class="tab-pane" id="Horarios"></div>
-                            <div role="tabpanel" class="tab-pane" id="Modulos"></div>
-                            <div role="tabpanel" class="tab-pane" id="Participantes"></div>
+                            <?php
+                            foreach ($Permisos as $p) {
+                                if ($p->systemPart == MENU_PPAL_RIGHT) {
+                                    ?>
+                                    <div role="tabpanel" <?php
+                            if ($p->idContainer == CONTROLLER_TAP_PANEL_DEFAULT) {
+                                echo 'class="tab-pane active"';
+                            } else {
+                                echo 'class="tab-pane"';
+                            }
+                                    ?> class="tab-pane" id="<?= $p->idContainer ?>"></div>
+
+                                    <?php
+                                    //$iterator++;
+                                }
+                            }
+                            ?>
                         </div>
                     </div>
 

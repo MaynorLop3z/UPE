@@ -24,21 +24,27 @@ class Login extends CI_Controller {
         $user = $this->input->post('user');
         if ($user) {
             $this->load->model('usuario_model');
+            $this->load->model('Usuarios');
             $this->load->helper('url');
 
             $usuario = $this->usuario_model->login($_POST['user'], $_POST['password']);
 
             if ($usuario != null) {
+
+                $permisos = $this->Usuarios->listRoleByUser($usuario->CodigoUsuario);
+                $data['Permisos'] = $permisos;
                 $usuario_data = array(
                     'codigoUserLogin' => $usuario->CodigoUsuario,
                     'nombreUserLogin' => $usuario->NombreUsuario,
                     'correoUserLogin' => $usuario->CorreoUsuario,
                     'nombreRealUserLogin' => $usuario->Nombre,
-                    'temaUserLogin' => $usuario->codigoTemaVista,
+                    // 'temaUserLogin' => $usuario->codigoTemaVista,
                     'ipUserLogin' => $this->input->ip_address(),
+                    'permisosUsuer' => $permisos,
                     'logueado' => TRUE);
                 $this->session->set_userdata($usuario_data);
-                redirect('Dashboard');
+                // redirect('Dashboard');
+                $this->load->view('Dashboard', $data);
             } else {
                 
             }

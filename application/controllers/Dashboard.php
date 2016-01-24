@@ -18,8 +18,6 @@ class Dashboard extends CI_Controller {
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }
-
-       
     }
 
 }

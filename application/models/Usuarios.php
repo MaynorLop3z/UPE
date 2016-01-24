@@ -12,12 +12,17 @@ class Usuarios extends CI_Model {
         $this->load->database();
     }
 
-    public function listarUsuarios() {
+    public function listarUsuarios($limit, $offset) {
         try {
-            $this->db->select('CodigoUsuario, Nombre, CorreoUsuario, NombreUsuario, ContraseniaUsuario, Comentarios');
-            $this->db->limit(10);
-            $this->db->order_by("FechaModifica", "desc");
+            $this->db->select('CodigoUsuario, Nombre, CorreoUsuario, NombreUsuario, ContraseniaUsuario, Comentarios ');
+            if ($limit == null && $offset == null) {
+                $limit = ROWS_PER_PAGE;
+                $offset = 0;
+            }
+            $limit = ROWS_PER_PAGE;
+//            $this->db->order_by("FechaModifica", "desc");
             $this->db->from('Usuarios');
+            $this->db->limit($limit, $offset);
             $consulta = $this->db->get();
             $resultado = $consulta->result();
         } catch (Exception $e) {
@@ -94,6 +99,24 @@ class Usuarios extends CI_Model {
         $resultado = $consulta->row();
         return $resultado;
     }
+    
+    public function listRoleByUser($codigoUsuario){
+       try
+       {
+           $stringQuery='SELECT "Permisos"."CodigoPermisos", "Permisos"."NombrePermiso", "Permisos"."EstadoPermisos", "Permisos"."UsuarioModifica", "Permisos"."IpModifica", "Permisos"."FechaModifica", "Permisos"."idContainer", "Permisos"."classContainer", "Permisos"."controllerContainer", "Permisos"."systemPart" FROM public."Permisos", public."UsuarioRoles", public."RolesPermisos" WHERE "Permisos"."CodigoPermisos" = "RolesPermisos"."CodigoPermisos" AND"UsuarioRoles"."CodigoRol" = "RolesPermisos"."CodigoRol" AND "UsuarioRoles"."CodigoUsuario" =';
+           $stringQuery=$stringQuery.$codigoUsuario;
+        $consulta=  $this->db->query($stringQuery);
+        if($consulta!=null){
+            $resultado = $consulta->result();
+            }else{
+                
+            }
+            return $resultado;
+       }catch(Exception $e){
+            return $e->getTraceAsString();
+       }
+    }
+    
 
     public function countAllUsers() {
         $num_rows = $this->db->count_all_results('Usuarios');

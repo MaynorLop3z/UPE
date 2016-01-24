@@ -1,20 +1,14 @@
 var codigoUsuario;
-
 $("#btnUsuarioNuevo").on('click', function () {
     $("#usuarioNuevo").modal();
 });
-
 $('.btn_modificar_user').on('click', function (event) {
     codigoUsuario = this.id;
-
     $("#usuarioModifica").modal('show');
-
 });
-
 $('.btn_eliminar_user').on('click', function (event) {
     codigoUsuario = this.id;
     codigoUsuario = codigoUsuario.substring(6);
-
     $("#usuarioElimina").modal('show');
 });
 
@@ -29,7 +23,6 @@ $('#usuarioModifica').on('show.bs.modal', function (event) {
     $('#Emailmodificar').val(dataU.CorreoUsuario);
     $('#Passwordmodificar').val(dataU.ContraseniaUsuario);
     $('#txtAreaUserComent').val(dataU.Comentarios);
-
 });
 
 $("#frmGuardarUSer").submit(function (event) {
@@ -48,31 +41,27 @@ $("#frmGuardarUSer").submit(function (event) {
     posting.done(function (data) {
         if (data !== null) {
             var obj = jQuery.parseJSON(data);
-
             var fila = '<tr id="tr' + obj.CodigoUsuario + '">';
             fila = fila + '<td class="nombre_Usuario" >' + obj.Nombre + '</td>';
             fila = fila + '<td class="correo_Usuario" >' + obj.CorreoUsuario + '</td>';
             fila = fila + '<td class="nickName_Usuario" >' + obj.NombreUsuario + '</td>';
             fila = fila + '<td style="text-align:center"  class="gestion_User">';
-//            fila = fila + '<button id="' + obj.CodigoUsuario + '"  title="Editar Usuario" class="btn_modificar_user btn btn-success "  class=" btn btn-info btn-lg"><span class="glyphicon glyphicon-pencil"></span> </button>';
-//            fila = fila + '<button id="btnDel' + obj.CodigoUsuario + '" title="Eliminar Usuario" class="btn_eliminar_user btn btn-danger" class=" btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>';
             fila = fila + '</td></tr>';
-
             $('#tableUsers > tbody').append(fila);
-
             var trUser = $('#tableUsers > tbody').find("#tr" + obj.CodigoUsuario);
             trUser.data("userd", obj);
             var tdGestionUser = trUser.find(".gestion_User");
-
             var divgestionUserBtn = $("#gestionUserBtn");
+            
             if (divgestionUserBtn !== null) {
-                var divgestionUserBtnClone = divgestionUserBtn.clone(true);
+//                var divgestionUserBtnClone = divgestionUserBtn.clone(true);
+                alert('Crea el div');
+                var divgestionUserBtnClone = divgestionUserBtn;
                 divgestionUserBtnClone.find(".btn_modificar_user").attr("id", "" + obj.CodigoUsuario);
                 divgestionUserBtnClone.find(".btn_eliminar_user").attr("id", "btnDel" + obj.CodigoUsuario);
                 tdGestionUser.html(divgestionUserBtnClone);
             }
             $("#usuarioNuevo").modal('toggle');
-
         }
     });
     posting.fail(function (data) {
@@ -80,9 +69,8 @@ $("#frmGuardarUSer").submit(function (event) {
         alert(obj.Error);
     });
 });
-
-
-$("#frmEditarUser").submit(function (event) {
+//-*public function frmEditarUser(){
+("#frmEditarUser").submit(function (event) {
     event.preventDefault();
     var $form = $(this), UsuarioNombre = $form.find("input[name='UsuarioNombre']").val(),
             CodigoUsuario = codigoUsuario,
@@ -99,12 +87,10 @@ $("#frmEditarUser").submit(function (event) {
     posting.done(function (data) {
         if (data !== null) {
             var obj = jQuery.parseJSON(data);
-
             var trUser = $('#tableUsers > tbody').find("#tr" + obj.CodigoUsuario);
             trUser.find('.nombre_Usuario').html(obj.Nombre);
             trUser.find('.correo_Usuario').html(obj.CorreoUsuario);
             trUser.find('.nickName_Usuario').html(obj.NombreUsuario);
-
             trUser.data("userd", obj);
             $("#usuarioModifica").modal('toggle');
         }
@@ -114,7 +100,6 @@ $("#frmEditarUser").submit(function (event) {
         alert(obj.Error);
     });
 });
-
 
 $("#frmEliminarUser").submit(function (event) {
     event.preventDefault();
@@ -139,5 +124,30 @@ $('#usuarioElimina').on('show.bs.modal', function (event) {
     $('#nombreUserEliminar').html(dataU.Nombre);
 });
 
+
+
+$('#txtPagingSearchUsr').keypress((function (e) {
+    if (e.which == 13) {
+
+        var data_inic = $('#txtPagingSearchUsr').data("datainic");
+        var data_in = $('#txtPagingSearchUsr').val();
+
+        var url = "http://localhost/UPE/index.php/UsuarioController/listarUsuariosPorRango/";
+        var posting = $.post(url, {data_ini: data_in});
+
+        posting.done(function (data) {
+            if (data !== null) {
+                var obj = jQuery.parseJSON(data);
+                $('#tableUsers > tbody').remove();
+                $.each(obj, function (k, v) {
+                    console.log(v.Nombre.toString().trim() + " - " + v.CodigoUsuario);
+                });
+            }
+        });
+        posting.fail(function (data) {
+            alert("error");
+        });
+    }
+}));
 
 
