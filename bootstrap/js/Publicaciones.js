@@ -19,6 +19,7 @@ $(document).ready(function () {
     $(".messages").hide();
     //queremos que esta variable sea global
     var fileExtension = "";
+    var fileName=" ";
 
     $(':file').change(function ()
     {
@@ -109,3 +110,36 @@ $(document).ready(function () {
 
 
 });
+$('#botones').submit(function (event) {
+    event.preventDefault();
+    var $form = $(this), Titulo= $form.find("input[name='titulo']").val(),
+            Contenido = $form.find("textarea[name='contenido']").val(),
+            url = $form.attr("action"), 
+            nombre = $fileName, 
+            ext= $fileExtension;
+            console.log(Titulo + Contenido + url + nombre + ext);
+        var posting = $.post(url, {
+        Titulo: Titulo,
+         Contenido: Contenido,
+        nombre : nombre,
+        ext : ext
+    });
+    console.log(posting);
+    posting.done(function (data) {
+        if (data !== null) {
+            var obj = jQuery.parseJSON(data);
+            
+        }
+    }); 
+    posting.fail(function (data) {
+        var obj = jQuery.parseJson(data);
+        alert(obj.Error);
+    });
+});
+
+function eliminarDiplomado(fila){
+ codigoDiplomado = fila.id;
+ codigoDiplomado = codigoDiplomado.substring(12);
+   $('#EliminarDiplomado').modal('toggle');
+   
+}
