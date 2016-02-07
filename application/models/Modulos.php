@@ -11,7 +11,9 @@ class Modulos extends CI_Model {
     }
 
   public function listarModulos() {
-           $this->db->select('CodigoModulo, '
+         
+      try{
+          $this->db->select('CodigoModulo, '
                 . 'NombreModulo, '
                 . 'OrdenModulo, '
                 . 'Estado, '
@@ -20,12 +22,15 @@ class Modulos extends CI_Model {
                 . 'Comentarios'
         );
         $this->db->from('Modulos');  
-        $consulta = $this->db->get();
-        $resultado = $consulta->result();
-        return $resultado;
+        $consultaM = $this->db->get();
+        $resultadoM = $consultaM->result();
+  }  catch (Exception $ex){
+      $ex->getMessage();
+  }
+        return $resultadoM;
     }
 
-    public function crearModulo($NombreModulo, $OrdenModulo, $Estado,$userModi,$ip,$fechaMo,$CodigoTurno, $CodigoDiplomado, $Comentarios=null) {
+    public function crearModulo($CodigoModulo = null, $NombreModulo, $OrdenModulo, $Estado,$userModi,$ip,$fechaMo,$CodigoTurno, $CodigoDiplomado, $Comentarios) {
        try{
         $data = array(
             'NombreModulo' => $NombreModulo,

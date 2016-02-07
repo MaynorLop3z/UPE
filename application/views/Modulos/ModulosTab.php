@@ -39,10 +39,11 @@
                         <?php
                         foreach ($Modulos as $Mod) {
                             ?>
+                        
                         <tr data-Modd ='<?php echo json_encode($Mod)?> 'id="mod<?= $Mod->CodigoModulo ?>">
                                 <td class="NombreMod"><?= $Mod->NombreModulo ?></td>
-             <!--no estan definido--> <td class="ordenMo"><?= $Mod->OrdenModulo?></td>
-                                <td class="Estado"><?= $Mod->Estado?></td>
+                                <td class="ordenMo"><?= $Mod->OrdenModulo?></td>
+                                <td class="Estado"><?= $Mod->Estado?></td> 
                                 <td class="TurnoM"><?= $Mod->CodigoTurno?></td>
                                 <td class="DipName"><?= $Mod->CodigoDiplomado?></td>
                                 <td class="ComenMo"><?= $Mod->Comentarios?></td>
