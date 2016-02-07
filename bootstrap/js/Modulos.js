@@ -11,27 +11,39 @@ $('.btn_modificar_Mod').on('click',function(event){
 $('.btn_eliminar_Mod').on('click',function(event){
     codigoModulo = this.id;
     codigoModulo = codigoModulo.substring();
-    $("#EliminarModulo").modal();
+    $("#EliminarModulo").modal('show');
 });
 
 // modificar  Modulo ----------->
+$('.btn_modificar_Mod').on('show.bs.modal',function(event){
+    var tr = $('#tr'+ codigoModulo);
+    var dataM = tr.data("Modd");
+    
+    $('#ModuloEditNombre').val(dataM.NombreModulo);
+    $('#ModuloEditOrden').val(dataM.OrdenModulo);
+    $('#Estado').val(dataM.Estado);
+    $('#TurnoEDit').val(dataM.CodigoTurno);
+    $('#NombreEditDiplomado').val(dataM.CodigoDiplomado);
+    $('#ComentarioEditMod').val(dataM.Comentarios);
+    
+});
 $("#formgrdMo").submit(function(event){
     event.preventDefault();
     var $form = $(this), 
-    moduloName = $form.find("input[name='NombreModulo']").val(),
-    moduloOrden = $form.find("input[name='ordenM']").val(),
-    estadoMo = $form.find("input[name='radio']").val(),
-    turnoMo= $form.find("select[name='Turno']").val(),
-    nombreDiplomado = $form.find("select[name='NombreDiplomado']").val(),
-    comentarioMod = $form.find("textarea[name='Comentarios']").val(),
+   ModuloNombre = $form.find("input[name='NombreModulo']").val(),
+    ModuloOrden = $form.find("input[name='ordenM']").val(),
+    Estado = $form.find("input[name='Activo']").val(),
+    Turno= $form.find("select[name='Turno']").val(),
+    NombreDiplomado = $form.find("select[name='NombreDiplomado']").val(),
+    ComentarioMod = $form.find("textarea[name='Comentarios']").val(),
     url = $form.attr("action");
-            var posting = $.post(url,{
-               moduloName:moduloName,
-               moduloOrden:moduloOrden,
-               estadoMo:estadoMo,
-               turnoMo:turnoMo,
-               nombreDiplomado:nombreDiplomado,
-               comentarioMod:comentarioMod               
+            var posting = $.post(url, {
+               ModuloNombre:ModuloNombre,
+               ModuloOrden:ModuloOrden,
+               Estado:Estado,
+               Turno:Turno,
+               NombreDiplomado:NombreDiplomado,
+               ComentarioMod:ComentarioMod               
             });
                     posting.done(function(data){
                         if(data !== null){
@@ -48,13 +60,26 @@ $("#formgrdMo").submit(function(event){
                             $('#tableModulos >tbody').append(fila);
                             var trMod = $('#tableModulos >tbody').find("#tr" + obj.CodigoModulo);
                             trMod.data("Modd".obj);
-                            var tdGestionModulos = trMod.find("gestion_Mod");
-                            var divgestionModBtn = $("#")
+                            var tdGestionModulos = trMod.find(".gestion_Mod");
+                            var divgestionModBtn = $("#gestion_Mod");
+                            
+                            if(divgestionModBtn !== null){
+                                alert('crea el div');
+                                var divgestionModBtnClone = divgestionModBtn;
+                                divgestionModBtnClone.find(".btn_modificar_Mod").attr("id","btnModiM"+obj.CodigoModulo);
+                                divgestionModBtnClone.find(".btn_eliminar_Mod").attr("id","btnDELM" + obj.CodigoModulo);
+                                tdGestionModulos.html(divgestionModBtnClone);
+                            }
+                                $("#NuevoModulo").modal('toggle');
                         }
                     });
-            
+            posting.fail(function (data) {
+        var obj = jQuery.parseJSON(data);
+        alert(obj.Error);
+    });
+});  
     
-});
+
 
 
 
