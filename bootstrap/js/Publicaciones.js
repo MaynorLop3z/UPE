@@ -6,7 +6,7 @@
 
 var codigoUsuario;
 var fileExtension = "";
-var fileName = "";
+var fileName;
 $(document).ready(function () {
 //    console.log("Si esta llamando al js");
 ////funcion para  mostrar la tablaa
@@ -29,9 +29,10 @@ $(document).ready(function () {
         //obtenemos el nombre del archivo
         fileName = file.name;
         //obtenemos la extensión del archivo
-        
-        alert("asdsadasdas"+fileName);
         fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1);
+        $('#nombreImg').val(fileName);
+        $('#extImg').val(fileExtension);
+
         //obtenemos el tamaño del archivo
         var fileSize = file.size;
         //obtenemos el tipo de archivo image/png ejemplo
@@ -63,18 +64,26 @@ $(document).ready(function () {
             },
             //una vez finalizado correctamente
             success: function (data) {
-              //  var file = $("#imagen")[0].files[0];
+                //  var file = $("#imagen")[0].files[0];
                 //fileName = file.name;
-                alert(fileName);
+
                 message = $("<span class='success'>La imagen ha subido correctamente.</span>");
                 showMessage(message);
                 if (isImage(fileExtension))
                 {
-                    console.log(fileName);
-                    $(".showImage").html("<img src='/UPE/bootstrap/images/publicaciones/" + fileName + "' />");
+                    var sizeImg = new Image();
+                    //obtenemos el tamaño de la imagen para redirmensionarla si no es del tamaño adecuado
+                    sizeImg.src = "/UPE/bootstrap/images/publicaciones/" + fileName;
+                    
+                    if (sizeImg.width < 500) {
+                        $(".showImage").html("<img  align=center src='/UPE/bootstrap/images/publicaciones/" + fileName + "' />");
+                    } else {
+                        $(".showImage").html("<img width ='500' heigth='100' src='/UPE/bootstrap/images/publicaciones/" + fileName + "' />");
+                    }
 
                 }
             },
+            
             //si ha ocurrido un error
             error: function () {
                 message = $("<span class='error'>Ha ocurrido un error.</span>");
@@ -110,14 +119,18 @@ $(document).ready(function () {
     }
 });
 
-$('#botones').submit(function (event) {
+$('#botones').submit(function (event)
+{
+    console.log(document.getElementById("nombreImg").value);
+//    alert(document.getElementById("extImg").value);
+
     event.preventDefault();
     var $form = $(this), Titulo = $form.find("input[name='titulo']").val(),
             Contenido = $form.find("textarea[name='contenido']").val(),
             url = $form.attr("action"),
-            nombre = fileName,
-            ext = fileExtension;
-    console.log(Titulo + Contenido + url + nombre + ext);
+            nombre = $form.children('input[id=nombreImg]').val(),
+            ext = $form.children('input[name=extenImg]').val();
+    
     var posting = $.post(url, {
         Titulo: Titulo,
         Contenido: Contenido,
@@ -137,9 +150,9 @@ $('#botones').submit(function (event) {
     });
 });
 
-function eliminarDiplomado(fila) {
-    codigoDiplomado = fila.id;
-    codigoDiplomado = codigoDiplomado.substring(12);
-    $('#EliminarDiplomado').modal('toggle');
-
-}
+//function eliminarDiplomado(fila) {
+//    codigoDiplomado = fila.id;
+//    codigoDiplomado = codigoDiplomado.substring(12);
+//    $('#EliminarDiplomado').modal('toggle');
+//
+//}

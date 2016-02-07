@@ -63,13 +63,13 @@ class PublicacionesController extends CI_Controller {
                 $CodigoPublicaciones = $arrayDataPublicacion['CodigoPublicacion'];
 //ingresar los datos del archivo a la bd
                 $nambre = $this->input->post('nombre');
-                $test = "" . $nambre;
-                $ext = $this->input->post('ext') . "";
+                $test = $nambre;
+                $ext = $this->input->post('ext');
                 $Ruta = "/images/publicaciones/" . $test;
                 $Estado = True;
                 $CodigoUsuarios = $this->session->userdata("codigoUserLogin");
                 $ipPublica = $this->session->userdata("ipUserLogin");
-                $aa = $this->archivos->CrearArchivo($Ruta, $test, $ext, $Estado, $CodigoUsuarios, $CodigoPublicaciones, $usuarioPublica, $ipPublica, $FechaPublicacion);
+                 $this->archivos->CrearArchivo($Ruta, $test, $ext, $Estado, $CodigoUsuarios, $CodigoPublicaciones, $usuarioPublica, $ipPublica, $FechaPublicacion);
 
 //echo json_encode($aa);
             }
