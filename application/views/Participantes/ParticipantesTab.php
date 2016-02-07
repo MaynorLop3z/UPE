@@ -65,6 +65,7 @@
                                     <button id="alumE<?php echo $alum->CodigoParticipante ?>" onclick="mostrarEditAlumno(this)" title="Editar Alumno" class="btn_modificar_alum btn btn-success"><span class="glyphicon glyphicon-pencil"></span> </button>
                                     <button id="alumDEL<?php echo $alum->CodigoParticipante ?>" onclick="mostrarDelAlumno(this)" title="Eliminar Alumno" class="btn_eliminar_alum btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
                                     <button id="alumVIEW<?php echo $alum->CodigoParticipante ?>" onclick="mostrarInfoAlumno(this)" title="Ver Alumno" class="btn_ver_alum btn btn-info"><span class="glyphicon glyphicon-eye-open"></span></button>
+                                    <button id="alumGROUP<?php echo $alum->CodigoParticipante ?>" onclick="mostrarGruposPeriodos(this)" title="Agregar a Grupo" class="btn_group_add btn btn-warning"><span class="glyphicon glyphicon-list-alt"></span></button>
                                 </td>
                             </tr>
                             <?php

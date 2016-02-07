@@ -421,3 +421,137 @@
         </div>
     </div>
 </div>
+<!-- Modal para Agregar Alumnos a Periodos--------------------------------------------------------------------------------------->
+<?php $this->load->helper('url'); ?>
+<div id="AlumnoGrupoPeriodo" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="container-fluid ">
+                <button type="button" class="close" id="btnCerrarModalGestionPeriodoAlumno" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <div class="modal-header">
+                    Grupos del Periodo:
+                </div> 
+                <div>
+                    <form id="frmGrupoPeriodo" action="<?php echo base_url() ?>index.php/PeriodosController/listarGruposPeriodos/" class="form-inline" method="post" >
+                        <fieldset>
+                            <h4>
+                                Diplomado:
+                            </h4>
+                            <div class="row">
+                                <div class="form-group">
+                                    <label for="Diplomado" class="col-lg-1 control-label">Diplomado: </label>
+                                    <div class="col-lg-9 ">
+                                        <select class="form-control" name="Diplomado" id="DiplomadoP">
+                                            <?php
+                                            foreach ($DiplomadosP as $diplomado) {
+                                                ?>
+                                                <option value="<?= $diplomado->CodigoDiplomado ?>">
+                                                    <?= $diplomado->NombreDiplomado ?>
+                                                </option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                    <h4>Grupos Existentes:</h4>
+                    <table border="1" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Modulo</th>
+                                <th>Fecha Inicio</th>
+                                <th>Fecha Fin</th>
+                                <th>Hora de Entrada</th>
+                                <th>Hora de Salida</th>
+                                <th>Aula</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bodytablaPeriodosGrupos">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="AlumnoVIEWDATA" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" id="btnCerrarModalViewAlum" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Datos del Alumno</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid ">
+                    <div class="row">
+
+                        <!--- --><div class="col-lg-6">
+                            <div>
+                                <h4><span class="label label-primary">Nombre:</span></h4>
+                                <span id="AlumViewNombre"></span>
+                            </div> 
+                            <div>
+                                <h4><span class="label label-primary">Correo Electronico:</span></h4>
+                                <span id="AlumViewEmail"></span>
+                            </div>
+                            <div>
+                                <h4><span class="label label-primary">Telefono Fijo:</span></h4>
+                                <span id="AlumViewTFijo"></span>
+                            </div>
+                            <div>
+                                <h4><span class="label label-primary">Telefono Movil:</span></h4>
+                                <span id="AlumViewTMovil"></span>
+                            </div>
+                            <div>
+                                <h4><span class="label label-primary">Direccion:</span></h4>
+                                <span id="AlumViewDireccion"></span>
+                            </div>
+                            <div>
+                                <h4><span class="label label-primary">DUI:</span></h4>
+                                <span id="AlumViewDUI"></span>
+                            </div>
+                            <div>
+                                <h4><span class="label label-primary">Fecha Nacimiento:</span></h4>
+                                <span id="AlumViewFNac"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div>
+                                <h4><span class="label label-primary">Carrera:</span></h4>
+                                <span id="AlumViewCarrera"></span>
+                            </div>
+                            <div>
+                                <h4><span class="label label-primary">Nivel Academico:</span></h4>
+                                <span id="AlumViewNivelAcad"></span>
+                            </div>
+                            <div>
+                                <h4><span class="label label-primary">Encargado:</span></h4>
+                                <span id="AlumViewEncargado"></span>
+                            </div>
+                            <div>
+                                <h4><span class="label label-primary">Categoria:</span></h4>
+                                <span id="AlumViewCategoria"></span>
+                            </div>
+                            <div>
+                                <h4><span class="label label-primary">Descripcion:</span></h4>
+                                <span id="AlumViewDescripcion"></span>
+                            </div>
+                            <div>
+                                <h4><span class="label label-primary">Comentarios:</span></h4>
+                                <span id="AlumViewComentarios"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
