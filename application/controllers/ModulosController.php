@@ -19,7 +19,7 @@ class ModulosController extends CI_Controller {
 public function index() {
 try{
         $data['Modulos'] = $this->Modulos->listarModulos(null,null);
-        //$data['ModulosDip'] = $this->Modulos->listarDiplomados(); //ESto lo acabo de escribir
+        $data['Diplomados'] = $this->Modulos->listarDiplomados(); //ESto lo acabo de escribir
         $data['Turno'] = $this->Modulos->listarTurnos(); // Seleccionar el Modulo
         $this->load->view('Modulos', $data);
     }  catch (Exception $exc){

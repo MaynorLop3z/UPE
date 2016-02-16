@@ -14,7 +14,19 @@
                 <?php $this->load->helper('url'); ?>
                 <form id="frmfindDipl" action="<?php echo base_url() ?>index.php/ModulosController/buscar/"  method="post" class="form-inline">
                     <span>Diplomado:</span>
-                    <input type="text" class="form-control" id="tbDipBuscar" name="DipBuscado" placeholder="Escriba el Diplomado a buscar" required>                
+                     <div>
+                                <select class ="form-control" id="Turno" name="Turno">                                          
+                                    <?php
+                                    foreach ($Diplomados as $DipMo) { //Aqui para seleccionar el Turno a que Pertenece
+                                        ?>
+                                        <option value="<?= $DipMo->CodigoDiplomado ?>">
+                                            <?php echo $DipMo->NombreDiplomado?> <!-- Para imprimir El nombre en el select-->
+                                        </option>
+                                    <?php }
+                                    ?>
+
+                                </select>
+                            </div>           
                     <button id="btnFindDip" type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>Buscar Por Diplomado</button>
                 </form>
             </div>
