@@ -54,7 +54,17 @@ public function guardarModulo($CodigoModulo = null)
     
     
 }
-public function  editarModuo(){
+public function  editarModulo(){
     
 }
+public function  EliminarModulo(){
+    
+}
+   
+    
+public function BuscarModulos(){
+        
+        
     }
+           
+ }

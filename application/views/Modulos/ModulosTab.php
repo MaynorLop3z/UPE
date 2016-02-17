@@ -12,10 +12,10 @@
             </div>
             <div class="col-md-6">
                 <?php $this->load->helper('url'); ?>
-                <form id="frmfindDipl" action="<?php echo base_url() ?>index.php/ModulosController/buscar/"  method="post" class="form-inline">
+                <form id="frmfindDipl" action="<?php echo base_url() ?>index.php/ModulosController/BuscarModulos/"  method="post" class="form-inline">
                     <span>Diplomado:</span>
-                     <div>
-                                <select class ="form-control" id="Turno" name="Turno">                                          
+                    
+                                <select class ="form-control" id="Diplomadoname" name="Diplomadoname">                                          
                                     <?php
                                     foreach ($Diplomados as $DipMo) { //Aqui para seleccionar el Turno a que Pertenece
                                         ?>
@@ -26,7 +26,7 @@
                                     ?>
 
                                 </select>
-                            </div>           
+                                      
                     <button id="btnFindDip" type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>Buscar Por Diplomado</button>
                 </form>
             </div>

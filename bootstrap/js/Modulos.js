@@ -3,6 +3,10 @@ $("#btnAddModulo").on('click', function () {
     $("#NuevoModulo").modal();
 });
 
+$('#btnFindDip').on('click', function() {
+   console.log("Hola");
+});
+
 $('.btn_modificar_Mod').on('click',function(event){
     codigoModulo = this.id;
     $("#ModificarModulo").modal('show');
