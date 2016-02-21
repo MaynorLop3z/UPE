@@ -33,7 +33,8 @@ class ParticipantesController extends CI_Controller {
     public function listarGruposPeriodos() {
         if ($this->input->post('idDiplomado')) {
             $idDiplomado = $this->input->post('idDiplomado');
-            $Periodos = $this->Participantes->listarGruposPeriodos($idDiplomado);
+            $idParticipante = $this->input->post('idParticipante');
+            $Periodos = $this->Participantes->listarGruposPeriodos($idDiplomado, $idParticipante);
             foreach ($Periodos as $period) {
                 ?>
                 <tr id="GrupoPeriodo<?= $period->codigogrupoperiodo ?>">
@@ -44,14 +45,27 @@ class ParticipantesController extends CI_Controller {
                     <th class="hsgp"><?= $period->horasalida ?></th>
                     <th class="agp"><?= $period->aula ?></th>
                     <th>
-                        <button id="GrupoPeriodoADD<?= $period->codigogrupoperiodo ?>" onclick="inscribirUsaurio(this)" title="Agregar alumno al periodo" class="btn_agregar_periodo btn btn-success"><span class="glyphicon glyphicon-ok"></span> </button>
+                        <?php
+                        if ($period->inscrito == 1) {
+                            ?>
+                            <button id="GrupoPeriodoADD<?= $period->codigogrupoperiodo ?>" onclick="inscribirUsaurio(this)" title="Agregar alumno al periodo" class="btn_agregar_periodo btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </button>    
+
+
+                            <?php
+                        } else {
+                            ?> 
+                            <button id="GrupoPeriodoADD<?= $period->codigogrupoperiodo ?>" onclick="inscribirUsaurio(this)" title="Agregar alumno al periodo" class="btn_agregar_periodo btn btn-success"><span class="glyphicon glyphicon-ok"></span> </button>
+                            <?php
+                        }
+                        ?>
                     </th>
                 </tr>
                 <?php
             }
         }
     }
-    public function inscribirAlumno(){
+
+    public function inscribirAlumno() {
         try {
             if ($this->input->post()) {
                 $idGrupoPeriodo = $this->input->post('idGrupoPeriodo');

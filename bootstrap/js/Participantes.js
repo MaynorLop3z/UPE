@@ -5,9 +5,13 @@ var countColor = 1;
 $("#DiplomadoP").change(function() {
     $("#DiplomadoP option:selected").each(function() {
         idDiplomado = $(this).val();
-        $.post("ParticipantesController/listarGruposPeriodos/", {idDiplomado: idDiplomado}, function(data) {
+        var idParticipante = codigoParticipante.substring(9);
+        var posting = $.post("ParticipantesController/listarGruposPeriodos/", {idDiplomado: idDiplomado, idParticipante: idParticipante}, function(data) {
 //                            console.log("EntroModulo");
             $("#bodytablaPeriodosGrupos").html(data);
+        });
+        posting.fail(function(xhr, textStatus, errorThrown) {
+            alert("error" + xhr.responseText);
         });
     });
 });
@@ -45,28 +49,28 @@ function mostrarGruposPeriodos(fila) {
     $("#AlumnoGrupoPeriodo").modal('toggle');
 }
 function inscribirUsaurio(fila) {
-     var codigoDiplomado = fila.id;
-     var idGrupoPeriodo = codigoDiplomado.substring(15);
-     var idParticipante = codigoParticipante.substring(9);
+    var codigoDiplomado = fila.id;
+    var idGrupoPeriodo = codigoDiplomado.substring(15);
+    var idParticipante = codigoParticipante.substring(9);
 //     console.log(idParticipante);
 //     console.log(idGrupoPeriodo);
     //alert(codigoDiplomado);
     var url = "ParticipantesController/inscribirAlumno/";
-    var posting = $.post(url, {idParticipante:idParticipante, idGrupoPeriodo:idGrupoPeriodo});
-    posting.done(function(data){
+    var posting = $.post(url, {idParticipante: idParticipante, idGrupoPeriodo: idGrupoPeriodo});
+    posting.done(function(data) {
         var property = document.getElementById(codigoDiplomado);
         if (countColor === 0) {
 //            property.style.backgroundColor = "#FFFFFF"
             property.className = "btn_agregar_periodo btn btn-success";
             property.title = "Agregar alumno al periodo";
-            $("#"+codigoDiplomado).html('<span class="glyphicon glyphicon-ok"></span>');
-            countColor = 1;        
+            $("#" + codigoDiplomado).html('<span class="glyphicon glyphicon-ok"></span>');
+            countColor = 1;
         }
         else {
 //            property.style.backgroundColor = "#7FFF00"
             property.className = "btn_agregar_periodo btn btn-danger";
             property.title = "Eliminar alumno al periodo";
-            $("#"+codigoDiplomado).html('<span class="glyphicon glyphicon-remove"></span>');
+            $("#" + codigoDiplomado).html('<span class="glyphicon glyphicon-remove"></span>');
             countColor = 0;
         }
     });

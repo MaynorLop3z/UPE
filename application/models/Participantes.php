@@ -40,9 +40,9 @@ class Participantes extends CI_Model {
         $resultado = $consulta->result();
         return $resultado;
     }
-    public function listarGruposPeriodos($idDiplomado) {
+    public function listarGruposPeriodos($idDiplomado,$idParticipante) {
         try {
-            $consulta = $this->db->query('select * from getgruposactuales('.$idDiplomado.')');
+            $consulta = $this->db->query('select * from getgruposactualesbyalumno('.$idDiplomado.', '.$idParticipante.')');
 //            $consulta = $this->db->query('SELECT d.CodigoDiplomado FROM Diplomados d');
             if ($consulta != null) {
                 $resultado = $consulta->result();
