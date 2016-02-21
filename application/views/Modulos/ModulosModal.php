@@ -44,6 +44,23 @@
                             </div>
                         </div>
                          <!-- Se quita Diplomados ya que debe ser automatico-->
+                          <select class ="form-control" id="Diplomadoname" name="Diplomadoname">                                          
+                                    <?php
+                                    foreach ($Diplomados as $DipMo) { //Aqui para seleccionar el Turno a que Pertenece
+                                        ?>
+                                        <option value="<?= $DipMo->CodigoDiplomado ?>">
+                                            <?php echo $DipMo->NombreDiplomado?> <!-- Para imprimir El nombre en el select-->
+                                        </option>
+                                    <?php }
+                                    ?>
+
+                                </select>
+                         
+                         
+                         
+                         
+                         
+                         
                         <div class="form-group">
                             <label for="ComentarioDiplomado" class="col-lg-3 control-label">Comentarios:</label>
                             <div class="col-lg-9">

@@ -15,17 +15,7 @@
                 <form id="frmfindDipl" action="<?php echo base_url() ?>index.php/ModulosController/BuscarModulos/"  method="post" class="form-inline">
                     <span>Diplomado:</span>
                     
-                                <select class ="form-control" id="Diplomadoname" name="Diplomadoname">                                          
-                                    <?php
-                                    foreach ($Diplomados as $DipMo) { //Aqui para seleccionar el Turno a que Pertenece
-                                        ?>
-                                        <option value="<?= $DipMo->CodigoDiplomado ?>">
-                                            <?php echo $DipMo->NombreDiplomado?> <!-- Para imprimir El nombre en el select-->
-                                        </option>
-                                    <?php }
-                                    ?>
-
-                                </select>
+                               
                                       
                     <button id="btnFindDip" type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>Buscar Por Diplomado</button>
                 </form>

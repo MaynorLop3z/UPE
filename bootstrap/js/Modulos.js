@@ -3,7 +3,7 @@ $("#btnAddModulo").on('click', function () {
     $("#NuevoModulo").modal();
 });
 
-$('#btnFindDip').on('click', function() {
+$('#btnFindDip').on('click', function() { ///    boton pra encontrar el diplomado del select
    console.log("Hola");
 });
 
@@ -38,9 +38,10 @@ $("#formgrdMo").submit(function(event){
     ModuloOrden = $form.find("input[name='ordenM']").val(),
     Estado = $form.find("input[name='Activo']").val(),
     Turno= $form.find("select[name='Turno']").val(),
-    NombreDiplomado = $form.find("select[name='NombreDiplomado']").val(),
+    NombreDiplomado = $form.find("select[name='Diplomadoname']").val(),
     ComentarioMod = $form.find("textarea[name='Comentarios']").val(),
     url = $form.attr("action");
+    if(NombreDiplomado !== null){console.log("no es nulo");} ////// prueba  de  nulidad u.u 
             var posting = $.post(url, {
                ModuloNombre:ModuloNombre,
                ModuloOrden:ModuloOrden,
@@ -62,7 +63,7 @@ $("#formgrdMo").submit(function(event){
                             fila = fila + '<td style="text-align:center"  class="gestion_User">';
             fila = fila + '</td></tr>';
                             $('#tableModulos >tbody').append(fila);
-                            var trMod = $('#tableModulos >tbody').find("#tr" + obj.CodigoModulo);
+                            var trMod = $('#tableModulos > tbody').find("#tr" + obj.CodigoModulo);
                             trMod.data("Modd".obj);
                             var tdGestionModulos = trMod.find(".gestion_Mod");
                             var divgestionModBtn = $("#gestion_Mod");

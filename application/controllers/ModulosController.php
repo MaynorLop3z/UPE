@@ -11,6 +11,7 @@ class ModulosController extends CI_Controller {
         parent::__construct();
         $this->load->database();
         $this->load->model('Modulos');
+        $this->load->model('Diplomados'); // Esto agregue 21 /02/2016  2:16 PM;
         
     }  catch (Exception $exc){
         echo $exc->getTraceAsString();
@@ -18,7 +19,7 @@ class ModulosController extends CI_Controller {
 
 public function index() {
 try{
-        $data['Modulos'] = $this->Modulos->listarModulos(null,null);
+        $data['Modulos'] = $this->Modulos->listarModulos(null, null);
         $data['Diplomados'] = $this->Modulos->listarDiplomados(); //ESto lo acabo de escribir
         $data['Turno'] = $this->Modulos->listarTurnos(); // Seleccionar el Modulo
         $this->load->view('Modulos', $data);
@@ -67,4 +68,4 @@ public function BuscarModulos(){
         
     }
            
- }
+}
