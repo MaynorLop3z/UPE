@@ -55,6 +55,22 @@ class Participantes extends CI_Model {
             return $exc->getTraceAsString();
         }
     }
+    public function inscribirParticipante( $grupoperiodo, $participante, $usuario) {
+        try {
+            $consulta = $this->db->query('SELECT agregaralumnogrupo('.$grupoperiodo.','.$participante.','.$usuario.') AS "Inscripcion"');
+//            $consulta = $this->db->query('select * from getgruposactuales('.$idDiplomado.')');
+//            $consulta = $this->db->query('SELECT d.CodigoDiplomado FROM Diplomados d');
+            if ($consulta != null) {
+                $resultado = $consulta->result();
+            } else {
+                
+            }
+
+            return $resultado;
+        } catch (Exception $exc) {
+            return $exc->getTraceAsString();
+        }
+    }
     public function listarParticipantesByName($filtro) {
         $this->db->select('CodigoParticipante, '
                 . 'CorreoElectronico, '

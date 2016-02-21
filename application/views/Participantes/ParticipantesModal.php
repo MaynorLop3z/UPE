@@ -424,7 +424,7 @@
 <!-- Modal para Agregar Alumnos a Periodos--------------------------------------------------------------------------------------->
 <?php $this->load->helper('url'); ?>
 <div id="AlumnoGrupoPeriodo" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog  modal-lg">
         <div class="modal-content">
             <div class="container-fluid ">
                 <button type="button" class="close" id="btnCerrarModalGestionPeriodoAlumno" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -439,7 +439,7 @@
                             </h4>
                             <div class="row">
                                 <div class="form-group">
-                                    <label for="Diplomado" class="col-lg-1 control-label">Diplomado: </label>
+                                    <label for="Diplomado" class="col-lg-2 control-label">Diplomado: </label>
                                     <div class="col-lg-9 ">
                                         <select class="form-control" name="Diplomado" id="DiplomadoP">
                                             <?php
@@ -467,6 +467,7 @@
                                 <th>Hora de Entrada</th>
                                 <th>Hora de Salida</th>
                                 <th>Aula</th>
+                                <th>Inscrito</th>
                             </tr>
                         </thead>
                         <tbody id="bodytablaPeriodosGrupos">

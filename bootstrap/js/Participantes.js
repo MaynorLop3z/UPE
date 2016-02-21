@@ -46,8 +46,15 @@ function mostrarGruposPeriodos(fila) {
 }
 function inscribirUsaurio(fila) {
      var codigoDiplomado = fila.id;
+     var idGrupoPeriodo = codigoDiplomado.substring(15);
+     var idParticipante = codigoParticipante.substring(9);
+//     console.log(idParticipante);
+//     console.log(idGrupoPeriodo);
     //alert(codigoDiplomado);
-    var property = document.getElementById(codigoDiplomado);
+    var url = "ParticipantesController/inscribirAlumno/";
+    var posting = $.post(url, {idParticipante:idParticipante, idGrupoPeriodo:idGrupoPeriodo});
+    posting.done(function(data){
+        var property = document.getElementById(codigoDiplomado);
         if (countColor === 0) {
 //            property.style.backgroundColor = "#FFFFFF"
             property.className = "btn_agregar_periodo btn btn-success";
@@ -62,6 +69,10 @@ function inscribirUsaurio(fila) {
             $("#"+codigoDiplomado).html('<span class="glyphicon glyphicon-remove"></span>');
             countColor = 0;
         }
+    });
+    posting.fail(function(xhr, textStatus, errorThrown) {
+        alert("error" + xhr.responseText);
+    });
 }
 //$('.btn_ver_alum').on('click', function(event) {
 //    codigoParticipante = this.id;

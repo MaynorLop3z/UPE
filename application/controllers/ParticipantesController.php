@@ -51,6 +51,19 @@ class ParticipantesController extends CI_Controller {
             }
         }
     }
+    public function inscribirAlumno(){
+        try {
+            if ($this->input->post()) {
+                $idGrupoPeriodo = $this->input->post('idGrupoPeriodo');
+                $idParticipante = $this->input->post('idParticipante');
+                $idUsuario = $this->session->userdata('codigoUserLogin');
+                $arrayData = $this->Participantes->inscribirParticipante($idGrupoPeriodo, $idParticipante, $idUsuario);
+                echo json_encode($arrayData);
+            }
+        } catch (Exception $ex) {
+            echo json_encode($ex);
+        }
+    }
 
     public function agregar() {
         try {
