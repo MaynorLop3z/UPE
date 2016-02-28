@@ -59,19 +59,17 @@ function inscribirUsaurio(fila) {
     var posting = $.post(url, {idParticipante: idParticipante, idGrupoPeriodo: idGrupoPeriodo});
     posting.done(function(data) {
         var property = document.getElementById(codigoDiplomado);
-        if (countColor === 0) {
-//            property.style.backgroundColor = "#FFFFFF"
+        var obj = jQuery.parseJSON(data);
+        //console.log(obj[0]);
+        if (obj[0].Inscripcion === "3") {
             property.className = "btn_agregar_periodo btn btn-success";
             property.title = "Agregar alumno al periodo";
             $("#" + codigoDiplomado).html('<span class="glyphicon glyphicon-ok"></span>');
-            countColor = 1;
         }
         else {
-//            property.style.backgroundColor = "#7FFF00"
             property.className = "btn_agregar_periodo btn btn-danger";
             property.title = "Eliminar alumno al periodo";
             $("#" + codigoDiplomado).html('<span class="glyphicon glyphicon-remove"></span>');
-            countColor = 0;
         }
     });
     posting.fail(function(xhr, textStatus, errorThrown) {
@@ -223,6 +221,7 @@ $("#frmEditarAlumno").submit(function(event) {
         if (data !== null) {
             var obj = jQuery.parseJSON(data);
             var fila;
+  //          console.log(obj);
 //console.log($('#tableAlumnos > tbody').find('#alum'+obj.CodigoParticipante).html());
             fila = fila + '<td class="Mail_Alumno">' + obj.CorreoElectronico + '</td>';
             fila = fila + '<td class="TelefonoFijo_Alumno" style="display: none">' + obj.TelefonoFijo + '</td>';
