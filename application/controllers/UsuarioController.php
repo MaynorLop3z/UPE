@@ -1,5 +1,4 @@
 <?php
-
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
@@ -12,6 +11,7 @@ class Usuariocontroller extends CI_Controller {
             parent::__construct();
             $this->load->database();
             $this->load->model('Usuarios');
+            $this->load->model('Rol');
             //$this->load->library('utilidadesWeb');
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
@@ -21,6 +21,8 @@ class Usuariocontroller extends CI_Controller {
     public function index() {
         try {
             $data['Usuarios'] = $this->Usuarios->listarUsuarios(null, null);
+            $data['RolesList'] = $this->Rol->listarRoles();
+
             $data['RowsPorPag'] = ROWS_PER_PAGE;
             $data['ToTalRegistros'] = $this->Usuarios->countAllUsers();
             $data['PagInicial'] = 1;
@@ -43,24 +45,22 @@ class Usuariocontroller extends CI_Controller {
             $encontrado = 0;
 
             foreach ($elemsWithRights as $elem) {
-               foreach ($permisos as $right) {
+                foreach ($permisos as $right) {
                     if ($elem->id == $right->NombrePermiso) {
                         $encontrado = 1;
-                 
+
                         break;
-                   } else {
+                    } else {
 //                        
                     }
                 }
                 if ($encontrado == 1) {
-                   
-                  
-                     $encontrado=0;
+
+
+                    $encontrado = 0;
                     continue;
-                   
-                } 
-                else {
-                  $elem->outertext='';
+                } else {
+                    $elem->outertext = '';
                 }
             }
 
@@ -160,6 +160,58 @@ class Usuariocontroller extends CI_Controller {
             }
         } catch (Exception $ex) {
             echo json_encode($ex);
+        }
+    }
+
+    public function rolByUsr() {
+        try {
+            if ($this->input->post()) {
+                $codigo = $this->input->post('cod_usr');
+                if ($codigo != null) {
+                    $rolesList = $this->Rol->listarRoles();
+                    //Asignacion del array de roles al nuevo arreglo
+                    $RolesByUser = $this->Usuarios->getRolesByUsr($codigo);
+
+                    foreach ($rolesList as $rol) {
+                        ?> 
+                        <tr  id="tr<?php echo $rol->CodigoRol ?>">
+                            <td class="nombre_Rol" ><?= $rol->NombreRol ?></td>
+                            <td style="text-align:center"  class="gestion_UserR">
+
+                                <input class='checkR'  data-rold='<?php echo json_encode($rol) ?>' type="checkbox" <?php
+                                       foreach ($RolesByUser as $ru) {
+                                           if ($ru->CodigoRol == $rol->CodigoRol) {
+                                               ?>checked="true"<?php
+                                           }
+                                       }
+                                       ?> value="">
+                            </td>
+                        </tr>
+                        <?php
+                    }
+                }
+            }else{
+                
+            }
+        } catch (Exception $exc) {
+            echo json_encode($exc);
+        }
+    }
+
+    public function AplyRmvRols() {
+        try {
+            if ($this->input->post()) {
+                if ($this->input->post('rolesUserSelect')) {
+                    
+                    $requestArray = (($this->input->post('rolesUserSelect')));
+                   $codeUser= $this->Usuarios->insertDeleteRolesUser($requestArray);
+                   echo $codeUser;
+                } else {
+                    
+                }
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
         }
     }
 

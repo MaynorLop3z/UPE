@@ -31,7 +31,7 @@ class Login extends CI_Controller {
 
             if ($usuario != null) {
 
-                $permisos = $this->Usuarios->listRoleByUser($usuario->CodigoUsuario);
+                $permisos = $this->Usuarios->listPermisosByUser($usuario->CodigoUsuario);
                 $data['Permisos'] = $permisos;
                 $usuario_data = array(
                     'codigoUserLogin' => $usuario->CodigoUsuario,

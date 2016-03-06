@@ -109,5 +109,16 @@ class PeriodosController extends CI_Controller {
             echo json_encode($ex);
         }
     }
+    public function listarGruposPeriodos() {
+        try {
+            if ($this->input->post()) {
+                $Codigo = $this->input->post('idPeriodo');
+                $arrayData = $this->Periodos->Periodos();
+                echo json_encode($arrayData);
+            }
+        } catch (Exception $ex) {
+            echo json_encode($ex);
+        }
+    }
 
 }
