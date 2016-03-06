@@ -214,5 +214,4 @@ class Usuariocontroller extends CI_Controller {
             echo $exc->getTraceAsString();
         }
     }
-
 }
