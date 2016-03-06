@@ -36,24 +36,20 @@ public function guardarModulo($CodigoModulo = null)
             $OrdenModulo= $this->input->post('ModuloOrden');
             $estado = $this->input->post('Estado');
             $turno = $this->input->post('Turno');
-            $nombreDiplomado = $this->input->post('NombreDiplomado');
+            $codigoDiplomado = $this->input->post('NombreDiplomado');
             $ComentarioModulo  = $this->input->post('ComentarioMod');
             $ip = $this->session->userdata('ipUserMo');// La ip del usuario que modifica 
             $userModi = $this->session->userdata('codigoUserMo'); //codigo del usuario qeumodifica 
-           
-            $this->load->model('Modulos');
+             
+           // $this->load->model('Modulos');
             //,
-            $arrayData = $this->Modulos->crearModulo(null, $NombreModulo,$OrdenModulo,$ip,$turno,$estado,$userModi,$nombreDiplomado,$ComentarioModulo);
+            $arrayData = $this->Modulos->crearModulo($NombreModulo,$OrdenModulo,$ip,$turno,$estado,$userModi,$codigoDiplomado,$ComentarioModulo);
         }   echo json_encode($arrayData);
         
     } catch (Exception $exc) {
-        $data = array(
-            'Error' => $exc->getMessage(),
-        );
-        echo json_encode($data);
+         echo json_encode($data);
     }
-    
-    
+  
 }
 public function  editarModulo(){
     

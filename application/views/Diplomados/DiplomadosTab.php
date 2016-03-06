@@ -7,7 +7,7 @@
     <div class="panel-body">
       <div class="btn btn-group">
             <button id="BtnADDiplomado" class="btn btn-default btn-default" data-toggle="modal"><span class="glyphicon glyphicon-plus"></span>Diplomado Nuevo</button>
-             <button id="btnActualizarDi" class="btn btn-default" ><span class="glyphicon glyphicon-refresh"></span>Actualizar</button>
+             <button id="btnActualizarDi" class="btn btn-default" onclick="window.location.reload()"><span class="glyphicon glyphicon-refresh"></span>Actualizar</button>
       </div>
       
         
