@@ -4,20 +4,13 @@
  * and open the template in the editor.
  */
 
+//Variables globales 
 var codigoUsuario;
 var fileExtension = "";
 var fileName;
+
 $(document).ready(function () {
-//    console.log("Si esta llamando al js");
-////funcion para  mostrar la tablaa
-//    if (data !== null) {
-//        var obj = jQuery.parseJSON(data);
-//        var fila;
-//        fila = '<tr id="dip' + obj.CodigoPublicacion + '"';
-//        fila = fila + '<td class="Titulo">' + obj.Titulo + '</td>';
-//         $('#tableTitulo > tbody').append(fila);
-//    }
-//    ;
+
     $(".messages").hide();
     //queremos que esta variable sea global
 
@@ -43,53 +36,68 @@ $(document).ready(function () {
 
     //al enviar el formulario
     $('#subir').click(function () {
+
         //información del formulario
+
         var formData = new FormData($(".formulario")[0]);
         var message = "";
-        //hacemos la petición ajax  
-        $.ajax({
-            url: $('.formulario').attr('action'),
-            type: 'POST',
-            // Form data
-            //datos del formulario
-            data: formData,
-            //necesario para subir archivos via ajax
-            cache: false,
-            contentType: false,
-            processData: false,
-            //mientras enviamos el archivo
-            beforeSend: function () {
-                message = $("<span class='before'>Subiendo la imagen, por favor espere...</span>");
-                showMessage(message);
-            },
-            //una vez finalizado correctamente
-            success: function (data) {
-                //  var file = $("#imagen")[0].files[0];
-                //fileName = file.name;
+        if (isImage(fileExtension) === true) {
+            //hacemos la petición ajax  
+            $.ajax({
+                url: $('.formulario').attr('action'),
+                type: 'POST',
+                // Form data
+                //datos del formulario
+                //necesario para subir archivos via ajax
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                // enviamos el archivo
+                beforeSend: function () {
+                    message = $("<span class='before'>Subiendo la imagen, por favor espere...</span>");
+                    showMessage(message);
+                },
+                //una vez finalizado correctamente
+                success: function (data) {
+                    //  var file = $("#imagen")[0].files[0];
+                    //fileName = file.name;
 
-                message = $("<span class='success'>La imagen ha subido correctamente.</span>");
-                showMessage(message);
-                if (isImage(fileExtension))
-                {
-                    var sizeImg = new Image();
-                    //obtenemos el tamaño de la imagen para redirmensionarla si no es del tamaño adecuado
-                    sizeImg.src = "/UPE/bootstrap/images/publicaciones/" + fileName;
-                    
-                    if (sizeImg.width < 500) {
-                        $(".showImage").html("<img  align=center src='/UPE/bootstrap/images/publicaciones/" + fileName + "' />");
-                    } else {
-                        $(".showImage").html("<img width ='500' heigth='100' src='/UPE/bootstrap/images/publicaciones/" + fileName + "' />");
+                    alert(isImage(fileExtension));
+                    if (isImage(fileExtension) === true)
+                    {
+                        var sizeImg = new Image();
+                        //obtenemos el tamaño de la imagen para redirmensionarla si no es del tamaño adecuado
+                        sizeImg.src = "/UPE/bootstrap/images/publicaciones/" + fileName;
+                        alert(sizeImg.width);
+                        if (sizeImg.width < 500) {
+                            $(".showImage").html("<img  align=center src='/UPE/bootstrap/images/publicaciones/" + fileName + "' />");
+                            alert("if");
+                        } else {
+                            $(".showImage").html("<img width ='500' heigth='100' src='/UPE/bootstrap/images/publicaciones/" + fileName + "' />");
+                            alert("else");
+                        }
+                        message = $("<span class='success'>La imagen ha subido correctamente.</span>");
+                        showMessage(message);
+
                     }
 
+                },
+                //si ha ocurrido un error
+                error: function () {
+                    message = $("<span class='error'>Ha ocurrido un error.</span>");
+                    showMessage(message);
                 }
-            },
-            
-            //si ha ocurrido un error
-            error: function () {
-                message = $("<span class='error'>Ha ocurrido un error.</span>");
-                showMessage(message);
-            }
-        });
+            });
+        }
+//        si el archivo que se intenta subir no es un img
+        else {
+
+            alert("in error");
+            message = $("<span class='error'>Ha ocurrido un error, El archivo no es una Imagen.</span>");
+            showMessage(message);
+        }
+
     });
 
 
@@ -102,14 +110,25 @@ $(document).ready(function () {
 
 //comprobamos si el archivo a subir es una imagen
 //para visualizarla una vez haya subido
+//si no es una img devuelve error
     function isImage(extension)
     {
         switch (extension.toLowerCase())
         {
             case 'jpg':
+                alert("case");
+                return true;
+                break;
             case 'gif':
+                alert("case");
+                return true;
+                break;
             case 'png':
+                alert("case");
+                return true;
+                break;
             case 'jpeg':
+                alert("case");
                 return true;
                 break;
             default:
@@ -121,23 +140,23 @@ $(document).ready(function () {
 
 $('#botones').submit(function (event)
 {
-    console.log(document.getElementById("nombreImg").value);
+alert(document.getElementById("nombreImg").value);
 //    alert(document.getElementById("extImg").value);
 
     event.preventDefault();
     var $form = $(this), Titulo = $form.find("input[name='titulo']").val(),
             Contenido = $form.find("textarea[name='contenido']").val(),
             url = $form.attr("action"),
-            nombre = $form.children('input[id=nombreImg]').val(),
-            ext = $form.children('input[name=extenImg]').val();
-    
+           Nombre = $form.find('input[id=nombreImg]').val(),
+            Extension = $form.find('input[name=extenImg]').val();
+
     var posting = $.post(url, {
         Titulo: Titulo,
         Contenido: Contenido,
-        nombre: nombre,
-        ext: ext
+       Nombre: Nombre,
+       Extension: Extension
     });
-    console.log(posting);
+    alert(posting);
     posting.done(function (data) {
         if (data !== null) {
             var obj = jQuery.parseJSON(data);
