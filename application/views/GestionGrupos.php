@@ -18,8 +18,35 @@
                     $("#Categorias option:selected").each(function() {
                         idCategoria = $(this).val();
                         $.post("<?php echo base_url() ?>index.php/GestionGruposController/getDiplomados/", {idCategoria: idCategoria}, function(data) {
-                            console.log("Entro");
-                            $("#Diplomado").html(data);
+//                            console.log("Entro");
+//                            $("#Diplomado").html(data);
+                            var diplomados = "";
+                            var modulos = "";
+                            var diplomado = JSON.parse(data);
+                            if (diplomado.diplomados.length > 0) {
+                                for (datos in diplomado.diplomados)
+                                {
+                                    diplomados += '<option value="' + diplomado.diplomados[datos].CodigoDiplomado + '">' + diplomado.diplomados[datos].NombreDiplomado + '</option>';
+                                }
+                                $("#Diplomado").html(diplomados);
+//                                console.log(diplomado.test);
+//                                console.log(diplomado.diplomados.length);
+                                if (diplomado.modulos.length > 0) {
+                                    for (datos in diplomado.modulos)
+                                    {
+                                        modulos += '<option value="' + diplomado.modulos[datos].CodigoModulo + '">' + diplomado.modulos[datos].NombreModulo + '</option>';
+                                    }
+                                    $("#Modulo").html(modulos);
+                                }
+                                else {
+                                    $("#Modulo").html(modulos);
+                                }
+
+                            }
+                            else {
+                                $("#Diplomado").html(diplomados);
+                                $("#Modulo").html(modulos);
+                            }
                         });
                     });
                 });

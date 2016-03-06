@@ -32,16 +32,21 @@ class GestionGruposController extends CI_Controller {
 
     public function getDiplomados() {
         $codigoCat = $this->input->post('idCategoria');
-//        $codigoGenerado = '';
-        $diploma2 = $this->Diplomados->listarDiplomadosCategoria($codigoCat);
-        foreach ($diploma2 as $diplo) {
-//            $codigoGenerado.='<option value="' . $diplo['CodigoDiplomado'] . '">' . $diplo['NombreDiplomado'] . '</option>';
-//        }
-//        return $codigoGenerado;
-            ?>
-            <option value="<?= $diplo->CodigoDiplomado ?>"><?= $diplo->NombreDiplomado ?></option>
-            <?php
+        //$diploma2 = $this->Diplomados->listarDiplomadosCategoria($codigoCat);
+        $data = array(
+            "diplomados" =>$this->Diplomados->listarDiplomadosCategoria($codigoCat)
+        );
+        if (count($data["diplomados"]) > 0) {
+            $temp = (array)$data["diplomados"][0];
+            //$data["test"] = $temp["CodigoDiplomado"];
+            $data["modulos"] = $this->Diplomados->listarModulos($temp["CodigoDiplomado"]);
+            if (count($data["modulos"]) > 0) {
+                $temp = (array)$data["modulos"][0];
+                $data["periodos"] = $this->Diplomados->listarPeriodosByModulo($temp["CodigoModulo"]);
+            }
         }
+        
+        echo json_encode($data);
     }
 
     public function getModulos() {
