@@ -18,7 +18,7 @@
                     $("#Categorias option:selected").each(function() {
                         idCategoria = $(this).val();
                         $.post("<?php echo base_url() ?>index.php/GestionGruposController/getDiplomados/", {idCategoria: idCategoria}, function(data) {
-//                            console.log("Entro");
+                            console.log("Entro");
                             $("#Diplomado").html(data);
                         });
                     });
@@ -27,7 +27,7 @@
                     $("#Diplomado option:selected").each(function() {
                         idDiplomado = $(this).val();
                         $.post("<?php echo base_url() ?>index.php/GestionGruposController/getModulos/", {idDiplomado: idDiplomado}, function(data) {
-//                            console.log("EntroModulo");
+                            console.log("EntroModulo");
                             $("#Modulo").html(data);
                             $("#CodigoModulo").html(data);
                         });
@@ -37,7 +37,7 @@
                     $("#Modulo option:selected").each(function() {
                         idModulo = $(this).val();
                         $.post("<?php echo base_url() ?>index.php/PeriodosController/listarByModulo/", {idModulo: idModulo}, function(data) {
-//                            console.log("EntroTablaPeriodos");
+                            console.log("EntroTablaPeriodos");
                             $("#bodytablaPeriodos").html(data);
                         });
                     });

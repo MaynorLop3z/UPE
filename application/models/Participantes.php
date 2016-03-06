@@ -33,7 +33,44 @@ class Participantes extends CI_Model {
         $resultado = $consulta->result();
         return $resultado;
     }
-    
+    public function listarDiplomados() {
+        $this->db->select('CodigoDiplomado,' . 'NombreDiplomado');
+        $this->db->from('Diplomados');
+        $consulta = $this->db->get();
+        $resultado = $consulta->result();
+        return $resultado;
+    }
+    public function listarGruposPeriodos($idDiplomado,$idParticipante) {
+        try {
+            $consulta = $this->db->query('select * from getgruposactualesbyalumno('.$idDiplomado.', '.$idParticipante.')');
+//            $consulta = $this->db->query('SELECT d.CodigoDiplomado FROM Diplomados d');
+            if ($consulta != null) {
+                $resultado = $consulta->result();
+            } else {
+                
+            }
+
+            return $resultado;
+        } catch (Exception $exc) {
+            return $exc->getTraceAsString();
+        }
+    }
+    public function inscribirParticipante( $grupoperiodo, $participante, $usuario) {
+        try {
+            $consulta = $this->db->query('SELECT agregaralumnogrupo('.$grupoperiodo.','.$participante.','.$usuario.') AS "Inscripcion"');
+//            $consulta = $this->db->query('select * from getgruposactuales('.$idDiplomado.')');
+//            $consulta = $this->db->query('SELECT d.CodigoDiplomado FROM Diplomados d');
+            if ($consulta != null) {
+                $resultado = $consulta->result();
+            } else {
+                
+            }
+
+            return $resultado;
+        } catch (Exception $exc) {
+            return $exc->getTraceAsString();
+        }
+    }
     public function listarParticipantesByName($filtro) {
         $this->db->select('CodigoParticipante, '
                 . 'CorreoElectronico, '

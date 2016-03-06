@@ -2,6 +2,7 @@
 
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
+
 //include('ModeloBase.php');
 class Rol extends CI_Model {
 
@@ -11,10 +12,14 @@ class Rol extends CI_Model {
     }
 
     public function listarRoles() {
-        $this->db->select('CodigoRol, NombreRol, Estado, VersionRol, CodigoRolesPermisos');
-        $this->db->from('Rol');
-        $consulta = $this->db->get();
-        $resultado = $consulta->result();
+        try {
+            $this->db->select('CodigoRol, NombreRol, Estado, VersionRol');
+            $this->db->from('Rol');
+            $consulta = $this->db->get();
+            $resultado = $consulta->result();
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
         return $resultado;
     }
 

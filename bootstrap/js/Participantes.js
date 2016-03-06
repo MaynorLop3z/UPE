@@ -1,6 +1,20 @@
 var codigoParticipante;
 var filaEdit;
+var countColor = 1;
 
+$("#DiplomadoP").change(function() {
+    $("#DiplomadoP option:selected").each(function() {
+        idDiplomado = $(this).val();
+        var idParticipante = codigoParticipante.substring(9);
+        var posting = $.post("ParticipantesController/listarGruposPeriodos/", {idDiplomado: idDiplomado, idParticipante: idParticipante}, function(data) {
+//                            console.log("EntroModulo");
+            $("#bodytablaPeriodosGrupos").html(data);
+        });
+        posting.fail(function(xhr, textStatus, errorThrown) {
+            alert("error" + xhr.responseText);
+        });
+    });
+});
 $("#btnADDAlumno").on('click', function() {
 
     $("#AlumnoNuevo").modal();
@@ -15,22 +29,53 @@ $("#btnADDAlumno").on('click', function() {
 //    $("#AlumnoEditar").modal('toggle');
 //});
 
-function mostrarEditAlumno(fila){
+function mostrarEditAlumno(fila) {
     codigoParticipante = fila.id;
     filaEdit = fila;
     $("#AlumnoEditar").modal('toggle');
 }
 
-function mostrarInfoAlumno(fila){
+function mostrarInfoAlumno(fila) {
     codigoParticipante = fila.id;
     $("#AlumnoVIEWDATA").modal('toggle');
 }
 
-function mostrarDelAlumno(fila){
+function mostrarDelAlumno(fila) {
     codigoParticipante = fila.id;
     $("#AlumnoEliminar").modal('toggle');
 }
-
+function mostrarGruposPeriodos(fila) {
+    codigoParticipante = fila.id;
+    $("#AlumnoGrupoPeriodo").modal('toggle');
+}
+function inscribirUsaurio(fila) {
+    var codigoDiplomado = fila.id;
+    var idGrupoPeriodo = codigoDiplomado.substring(15);
+    var idParticipante = codigoParticipante.substring(9);
+//     console.log(idParticipante);
+//     console.log(idGrupoPeriodo);
+    //alert(codigoDiplomado);
+    var url = "ParticipantesController/inscribirAlumno/";
+    var posting = $.post(url, {idParticipante: idParticipante, idGrupoPeriodo: idGrupoPeriodo});
+    posting.done(function(data) {
+        var property = document.getElementById(codigoDiplomado);
+        var obj = jQuery.parseJSON(data);
+        //console.log(obj[0]);
+        if (obj[0].Inscripcion === "3") {
+            property.className = "btn_agregar_periodo btn btn-success";
+            property.title = "Agregar alumno al periodo";
+            $("#" + codigoDiplomado).html('<span class="glyphicon glyphicon-ok"></span>');
+        }
+        else {
+            property.className = "btn_agregar_periodo btn btn-danger";
+            property.title = "Eliminar alumno al periodo";
+            $("#" + codigoDiplomado).html('<span class="glyphicon glyphicon-remove"></span>');
+        }
+    });
+    posting.fail(function(xhr, textStatus, errorThrown) {
+        alert("error" + xhr.responseText);
+    });
+}
 //$('.btn_ver_alum').on('click', function(event) {
 //    codigoParticipante = this.id;
 //    //filaEdit = $(this);
@@ -151,6 +196,7 @@ $("#frmADDAlumno").submit(function(event) {
             fila = fila + '<button id="AlumE' + obj.CodigoParticipante + '"  onclick="mostrarEditAlumno(this)" title="Editar Alumno" class="btn_modificar_alum btn btn-success"><span class="glyphicon glyphicon-pencil"></span> </button>';
             fila = fila + '<button id="alumDEL' + obj.CodigoParticipante + '" onclick="mostrarDelAlumno(this)" title="Eliminar Alumno" class="btn_eliminar_alum btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>';
             fila = fila + '<button id="alumVIEW' + obj.CodigoParticipante + '" onclick="mostrarInfoAlumno(this)" title="Ver Alumno" class="btn_ver_alum btn btn-info"><span class="glyphicon glyphicon-eye-open"></span></button>';
+            fila = fila + '<button id="alumGROUP' + obj.CodigoParticipante + '" onclick="" title="Agregar a Grupo" class="btn_grouo_add btn btn-warning"><span class="glyphicon glyphicon-list-alt"></span></button>';
             fila = fila + '</td></tr>';
             //console.log(fila);
             $('#tableAlumnos > tbody').append(fila);
@@ -175,6 +221,7 @@ $("#frmEditarAlumno").submit(function(event) {
         if (data !== null) {
             var obj = jQuery.parseJSON(data);
             var fila;
+  //          console.log(obj);
 //console.log($('#tableAlumnos > tbody').find('#alum'+obj.CodigoParticipante).html());
             fila = fila + '<td class="Mail_Alumno">' + obj.CorreoElectronico + '</td>';
             fila = fila + '<td class="TelefonoFijo_Alumno" style="display: none">' + obj.TelefonoFijo + '</td>';
@@ -194,6 +241,7 @@ $("#frmEditarAlumno").submit(function(event) {
             fila = fila + '<button id="AlumE' + obj.CodigoParticipante + '" onclick="mostrarEditAlumno(this)" title="Editar Alumno" class="btn_modificar_alum btn btn-success"><span class="glyphicon glyphicon-pencil"></span> </button>';
             fila = fila + '<button id="alumDEL' + obj.CodigoParticipante + '" onclick="mostrarDelAlumno(this)" title="Eliminar Alumno" class="btn_eliminar_alum btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>';
             fila = fila + '<button id="alumVIEW' + obj.CodigoParticipante + '" onclick="mostrarInfoAlumno(this)" title="Ver Alumno" class="btn_ver_alum btn btn-info"><span class="glyphicon glyphicon-eye-open"></span></button>';
+            fila = fila + '<button id="alumGROUP' + obj.CodigoParticipante + '" onclick="" title="Agregar a Grupo" class="btn_grouo_add btn btn-warning"><span class="glyphicon glyphicon-list-alt"></span></button>';
             fila = fila + '</td>';
             $(document).on("click", "#alumE" + obj.CodigoParticipante.toString(), function() {
                 codigoParticipante = obj.CodigoParticipante;

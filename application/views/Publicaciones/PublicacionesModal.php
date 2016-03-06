@@ -1,5 +1,9 @@
+
 <?php $this->load->helper('url'); ?>
+<!--Llamada a la hoja de estilo y al js (abajo)-->
 <script src="../bootstrap/js/Publicaciones.js"></script>
+<link href="../bootstrap/css/publicacioncss.css" rel="stylesheet">
+
 <div id="NuevaPublicacion" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -16,8 +20,9 @@
                                 <!--div para visualizar mensajes-->
                                 <div class="messages"></div><br /><br />
                                 <input type="button" value="Subir Imagen" class="btn btn-default" id="subir" />
+                                <br><br>
                                 <!--div para visualizar la imagen-->
-                                <div class="showImage"></div>
+                                <div class="showImage" id="showImg"   ></div>
                                 <br><br><br>
                             </fieldset>
                         </form>
@@ -28,6 +33,8 @@
                                 <fieldset> 
                                     <label for="titulo" class="col-lg-3 control-label">Titulo:</label> 
                                     <input type="text" class="form-control"  placeholder="Titulo de la publicacion"  name="titulo">
+                                    <input type="hidden" id="nombreImg" name="nameImg" value="">
+                                    <input type="hidden" id="extImg" name="extenImg" value="">
                                     <br>
                                     <label for="contenido" class="col-lg-3 control-label">Contenido:</label>
                                     <textarea  class="form-control"  placeholder="Contenido" name="contenido" id=""></textarea>
@@ -47,4 +54,4 @@
         </div>
     </div>
 </div>
-<script src="../bootstrap/js/Publicaciones.js"></script>
+

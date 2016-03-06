@@ -12,9 +12,11 @@
             </div>
             <div class="col-md-6">
                 <?php $this->load->helper('url'); ?>
-                <form id="frmfindDipl" action="<?php echo base_url() ?>index.php/ModulosController/buscar/"  method="post" class="form-inline">
+                <form id="frmfindDipl" action="<?php echo base_url() ?>index.php/ModulosController/BuscarModulos/"  method="post" class="form-inline">
                     <span>Diplomado:</span>
-                    <input type="text" class="form-control" id="tbDipBuscar" name="DipBuscado" placeholder="Escriba el Diplomado a buscar" required>                
+                    
+                               
+                                      
                     <button id="btnFindDip" type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>Buscar Por Diplomado</button>
                 </form>
             </div>
@@ -39,10 +41,11 @@
                         <?php
                         foreach ($Modulos as $Mod) {
                             ?>
+                        
                         <tr data-Modd ='<?php echo json_encode($Mod)?> 'id="mod<?= $Mod->CodigoModulo ?>">
                                 <td class="NombreMod"><?= $Mod->NombreModulo ?></td>
-             <!--no estan definido--> <td class="ordenMo"><?= $Mod->OrdenModulo?></td>
-                                <td class="Estado"><?= $Mod->Estado?></td>
+                                <td class="ordenMo"><?= $Mod->OrdenModulo?></td>
+                                <td class="Estado"><?= $Mod->Estado?></td> 
                                 <td class="TurnoM"><?= $Mod->CodigoTurno?></td>
                                 <td class="DipName"><?= $Mod->CodigoDiplomado?></td>
                                 <td class="ComenMo"><?= $Mod->Comentarios?></td>

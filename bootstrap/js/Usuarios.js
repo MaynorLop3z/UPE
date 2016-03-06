@@ -11,19 +11,39 @@ $('.btn_eliminar_user').on('click', function (event) {
     codigoUsuario = codigoUsuario.substring(6);
     $("#usuarioElimina").modal('show');
 });
+$('.btn_rls_user').on('click', function (event) {
+    codigoUsuario = this.id;
+    codigoUsuario = codigoUsuario.substring(6);
+    $("#usuarioRoles").modal('show');
+});
+
+
 
 $('#usuarioModifica').on('show.bs.modal', function (event) {
-
     var tr = $('#tr' + codigoUsuario);
     var dataU = tr.data("userd");
 //
-
     $('#txtUserModificar').val(dataU.NombreUsuario);
     $('#txtNombrePersonaModifica').val(dataU.Nombre);
     $('#Emailmodificar').val(dataU.CorreoUsuario);
     $('#Passwordmodificar').val(dataU.ContraseniaUsuario);
     $('#txtAreaUserComent').val(dataU.Comentarios);
 });
+
+$('#usuarioRoles').on('show.bs.modal', function (event) {
+    var url = 'UsuarioController/rolByUsr/';
+    var posting = $.post(url, {cod_usr: codigoUsuario});
+
+    posting.done(function (data) {
+        if (data !== null) {
+            $("#bodyTableUsrRol").html(data);
+        }
+    });
+    posting.fail(function (data) {
+        alert("error");
+    });
+});
+
 
 $("#frmGuardarUSer").submit(function (event) {
     event.preventDefault();
@@ -52,7 +72,7 @@ $("#frmGuardarUSer").submit(function (event) {
             trUser.data("userd", obj);
             var tdGestionUser = trUser.find(".gestion_User");
             var divgestionUserBtn = $("#gestionUserBtn");
-            
+
             if (divgestionUserBtn !== null) {
 //                var divgestionUserBtnClone = divgestionUserBtn.clone(true);
                 alert('Crea el div');
@@ -69,8 +89,8 @@ $("#frmGuardarUSer").submit(function (event) {
         alert(obj.Error);
     });
 });
-//-*public function frmEditarUser(){
-("#frmEditarUser").submit(function (event) {
+
+$("#frmEditarUser").submit(function (event) {
     event.preventDefault();
     var $form = $(this), UsuarioNombre = $form.find("input[name='UsuarioNombre']").val(),
             CodigoUsuario = codigoUsuario,
@@ -124,8 +144,6 @@ $('#usuarioElimina').on('show.bs.modal', function (event) {
     $('#nombreUserEliminar').html(dataU.Nombre);
 });
 
-
-
 $('#txtPagingSearchUsr').keypress((function (e) {
     if (e.which == 13) {
 
@@ -149,5 +167,48 @@ $('#txtPagingSearchUsr').keypress((function (e) {
         });
     }
 }));
+
+
+$("#frmRolUser").submit(function (event) {
+    event.preventDefault();
+    var url = 'http://localhost/UPE/index.php/UsuarioController/AplyRmvRols/';
+    jsonRolsUsr = [];
+
+    $('#bodyTableUsrRol tr').each(function () {
+        var checkR = $(this).find(".gestion_UserR").find(".checkR");
+        var r = checkR.data("rold");
+        if (r != null) {
+            rlObj = {};
+            rlObj ["CodigoUsuario"] = codigoUsuario;
+            rlObj ["CodigoRol"] = r.CodigoRol;
+
+            if (checkR.is(":checked"))
+            {
+                  rlObj ["Sta"] =  "add" ;
+            } else {
+                rlObj ["Sta"] =  "del" ;
+            }
+          
+            jsonRolsUsr.push(rlObj);
+        }
+    });
+    jsonString = JSON.stringify(jsonRolsUsr);
+
+    var posting = $.post(url, {"rolesUserSelect": jsonRolsUsr});
+    posting.done(function (data) {
+        if (data) {
+            $("#usuarioRoles").modal('toggle');
+            
+//            $('#tableUsers').find('#tr' + codigoUsuario).fadeOut("slow");
+//            $('#tableUsers').find('#tr' + codigoUsuario).remove();
+        } else {
+
+        }
+    });
+    posting.fail(function (xhr, textStatus, errorThrown) {
+        alert("error" + xhr.responseText);
+    });
+});
+
 
 
