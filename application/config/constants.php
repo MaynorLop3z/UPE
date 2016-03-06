@@ -91,5 +91,7 @@ define('ROWS_PER_PAGE', 3); //numero de filas que se veran en las tablas.
 define('CONTROLLER_TAP_PANEL_DEFAULT', 'Usuarios');
 define('DEFINE_RIGHT_ALLOWED', '.decorateStyleCrud');
 define('MENU_PPAL_RIGHT', 'MenuPpal');
+define('ELIMINA_REG', 'del');
+define('AGREGA_REG', 'add');
 
 
