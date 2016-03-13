@@ -22,6 +22,7 @@
 //                            $("#Diplomado").html(data);
                             var diplomados = "";
                             var modulos = "";
+                            var periodos = "";
                             var diplomado = JSON.parse(data);
                             if (diplomado.diplomados.length > 0) {
                                 for (datos in diplomado.diplomados)
@@ -37,9 +38,37 @@
                                         modulos += '<option value="' + diplomado.modulos[datos].CodigoModulo + '">' + diplomado.modulos[datos].NombreModulo + '</option>';
                                     }
                                     $("#Modulo").html(modulos);
+                                    $("#CodigoModulo").html(modulos);
+                                    console.log(diplomado.periodos.length);
+                                    if (diplomado.periodos.length > 0) {
+                                        for (datos in diplomado.periodos)
+                                        {
+                                            periodos += '<tr id="Periodo' + diplomado.periodos[datos].CodigoPeriodo + '">';
+                                            periodos += '<th class="fip">' + diplomado.periodos[datos].FechaInicioPeriodo + '</th>';
+                                            periodos += '<th class="ffp">' + diplomado.periodos[datos].FechaFinPeriodo + '</th>';
+                                            if (diplomado.periodos[datos].Estado === 't') {
+                                                periodos += '<th class="ep">Activo</th>';
+
+                                            } else {
+                                                periodos += '<th class="ep">Inactivo</th>';
+                                            }
+                                            periodos += '<th class="cp">' + diplomado.periodos[datos].Comentario + '</th>';
+                                            periodos +='<th>';
+                                            periodos +='<button id="PeriodoE'+diplomado.periodos[datos].CodigoPeriodo+'" onclick="EditPeriodoShow(this)" title="Editar Periodo" class="btn_modificar_periodo btn btn-success"><span class="glyphicon glyphicon-pencil"></span> </button>';
+                                            periodos +='<button id="PeriodoDEL'+diplomado.periodos[datos].CodigoPeriodo+'" onclick="DeletePeriodoShow(this)" title="Eliminar Periodo" class="btn_eliminar_periodo btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>';
+                                            periodos +='<button id="PeriodoGES'+diplomado.periodos[datos].CodigoPeriodo+'" onclick="GestionPeriodoShow(this)" title="Gestionar Periodo" class="btn_gestionar_periodo btn btn-info"><span class="glyphicon glyphicon-cog"></span></button>';
+                                            periodos += '</th></tr>';
+                                        }
+                                        $("#bodytablaPeriodos").html(periodos);
+                                    }
+                                    else {
+                                        $("#bodytablaPeriodos").html(periodos);
+                                    }
+
                                 }
                                 else {
                                     $("#Modulo").html(modulos);
+                                    $("#CodigoModulo").html(modulos);
                                 }
 
                             }
