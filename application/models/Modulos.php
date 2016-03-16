@@ -30,7 +30,7 @@ class Modulos extends CI_Model {
         return $resultadoM;
     }
 
-    public function crearModulo($CodigoModulo = null,$NombreModulo, $OrdenModulo, $Estado,$userModi,$ip,$fechaMo,$CodigoTurno, $CodigoDiplomado, $Comentarios) {
+    public function crearModulo($NombreModulo, $OrdenModulo, $Estado,$userModi,$ip,$fechaMo,$CodigoTurno, $CodigoDiplomado, $Comentarios) {
        try{
         $data = array(
             'NombreModulo' => $NombreModulo,

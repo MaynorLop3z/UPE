@@ -28,26 +28,23 @@ try{
     }
 }
 
-public function guardarModulo($CodigoModulo = null)
+public function guardarModulo()
 {
         try {
         if($this->input->post()){
-            $NombreModulo= $this->input->post('ModuloNombre');
-            $OrdenModulo= $this->input->post('ModuloOrden');
-            $estado = $this->input->post('Estado');
-            $turno = $this->input->post('Turno');
-            $codigoDiplomado = $this->input->post('NombreDiplomado');
-            $ComentarioModulo  = $this->input->post('ComentarioMod');
-            $ip = $this->session->userdata('ipUserMo');// La ip del usuario que modifica 
-            $userModi = $this->session->userdata('codigoUserMo'); //codigo del usuario qeumodifica 
-             
-           // $this->load->model('Modulos');
-            //,
-            $arrayData = $this->Modulos->crearModulo($NombreModulo,$OrdenModulo,$ip,$turno,$estado,$userModi,$codigoDiplomado,$ComentarioModulo);
+            $NombreModulo= $this->input->post('NombreModulo');
+            $OrdenModulo= $this->input->post('ordenM');
+            $Estado = $this->input->post('Activo');
+            $CodigoTurno = $this->input->post('Turno');
+            $CodigoDiplomado = $this->input->post('DiplomadoName');
+            $Comentarios  = $this->input->post('Comentarios');
+          //  $ip = $this->session->userdata('ipUserMo');// La ip del usuario que modifica   $userModi
+          //  $userModi = $this->session->userdata('codigoUserMo'); //codigo del usuario qeumodifica  $ip,
+            $arrayData = $this->Modulos->crearModulo($NombreModulo, $OrdenModulo, $CodigoTurno, $Estado,$CodigoDiplomado, $Comentarios);
         }   echo json_encode($arrayData);
         
-    } catch (Exception $exc) {
-         echo json_encode($data);
+    } catch (Exception $ex) {
+         echo json_encode($ex);
     }
   
 }

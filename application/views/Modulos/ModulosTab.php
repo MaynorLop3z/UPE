@@ -42,7 +42,7 @@
                         foreach ($Modulos as $Mod) {
                             ?>
                         
-                        <tr data-Modd ='<?php echo json_encode($Mod)?> 'id="mod<?= $Mod->CodigoModulo ?>">
+                        <tr id="Mod=<?= $Mod->CodigoModulo ?>">
                                 <td class="NombreMod"><?= $Mod->NombreModulo ?></td>
                                 <td class="ordenMo"><?= $Mod->OrdenModulo?></td>
                                 <td class="Estado"><?= $Mod->Estado?></td> 
