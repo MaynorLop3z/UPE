@@ -93,7 +93,6 @@
                     $("#Modulo option:selected").each(function() {
                         idModulo = $(this).val();
                         $.post("<?php echo base_url() ?>index.php/PeriodosController/listarByModulo/", {idModulo: idModulo}, function(data) {
-                            console.log("EntroTablaPeriodos");
                             $("#bodytablaPeriodos").html(data);
                         });
                     });
