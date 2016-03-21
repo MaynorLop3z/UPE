@@ -4,6 +4,8 @@ if (!defined('BASEPATH'))
 
 include(APPPATH . 'libraries/simple_html_dom.php');
 
+//include(APPPATH . 'libraries/UtilidadesWeb.php');
+
 class Usuariocontroller extends CI_Controller {
 
     public function __construct() {
@@ -12,7 +14,7 @@ class Usuariocontroller extends CI_Controller {
             $this->load->database();
             $this->load->model('Usuarios');
             $this->load->model('Rol');
-            //$this->load->library('utilidadesWeb');
+            $this->load->library('utilidadesWeb');
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }
@@ -26,52 +28,42 @@ class Usuariocontroller extends CI_Controller {
             $data['RowsPorPag'] = ROWS_PER_PAGE;
             $data['ToTalRegistros'] = $this->Usuarios->countAllUsers();
             $data['PagInicial'] = 1;
-            $pathView = APPPATH . 'views/Usuarios/UsuariosTab.php';
-            $pathViewTmp = APPPATH . 'views/Usuarios/UsuariosTabTmp.php';
-            $pathViewHelp = APPPATH . 'views/VistaAyudaView.php';
 
-            $html = file_get_html($pathView, $use_include_path = false, $context = null, $offset = -1, $maxLen = -1, $lowercase = true, $forceTagsClosed = true, $target_charset = DEFAULT_TARGET_CHARSET, $stripRN = false, $defaultBRText = DEFAULT_BR_TEXT);
-
-            $htmlHelp = file_get_html($pathViewHelp, $use_include_path = false, $context = null, $offset = -1, $maxLen = -1, $lowercase = true, $forceTagsClosed = true, $target_charset = DEFAULT_TARGET_CHARSET, $stripRN = false, $defaultBRText = DEFAULT_BR_TEXT);
-
-
-            $this->session->userdata('nombreUserLogin');
             $permisos = $this->session->userdata('permisosUsuer');
-
-
-            //$html->find('button[id=btnUsuarioNuevo]', 0)->innertext = 'Nuevo';
-
-            $elemsWithRights = $html->find(DEFINE_RIGHT_ALLOWED);
-            $encontrado = 0;
-
-            foreach ($elemsWithRights as $elem) {
-                foreach ($permisos as $right) {
-                    if ($elem->id == $right->NombrePermiso) {
-                        $encontrado = 1;
-
-                        break;
-                    } else {
-//                        
-                    }
-                }
-                if ($encontrado == 1) {
-
-
-                    $encontrado = 0;
-                    continue;
-                } else {
-                    $elem->outertext = '';
-                }
-            }
-
-
-
-            $html->save($pathViewTmp);
+            $this->analizarPermisos('views/Usuarios/UsuariosTab.php', 'views/Usuarios/UsuariosTabTmp.php', 'views/VistaAyudaView.php', $permisos);
 //           
             $this->load->view('Usuario', $data);
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }
+    }
+
+    function analizarPermisos($pathView, $pathViewTmp, $pathViewHelp, $permisos) {
+        $pathView = APPPATH . $pathView;
+        $pathViewTmp = APPPATH . $pathViewTmp;
+        $pathViewHelp = APPPATH . $pathViewHelp;
+        $html = file_get_html($pathView, $use_include_path = false, $context = null, $offset = -1, $maxLen = -1, $lowercase = true, $forceTagsClosed = true, $target_charset = DEFAULT_TARGET_CHARSET, $stripRN = false, $defaultBRText = DEFAULT_BR_TEXT);
+        $htmlHelp = file_get_html($pathViewHelp, $use_include_path = false, $context = null, $offset = -1, $maxLen = -1, $lowercase = true, $forceTagsClosed = true, $target_charset = DEFAULT_TARGET_CHARSET, $stripRN = false, $defaultBRText = DEFAULT_BR_TEXT);
+        //$this->session->userdata('nombreUserLogin');
+        $elemsWithRights = $html->find(DEFINE_RIGHT_ALLOWED);
+        $encontrado = 0;
+        foreach ($elemsWithRights as $elem) {
+            foreach ($permisos as $right) {
+                if ($elem->id == $right->NombrePermiso) {
+                    $encontrado = 1;
+                    break;
+                } else {
+                    
+                }
+            }
+            if ($encontrado == 1) {
+                $encontrado = 0;
+                continue;
+            } else {
+                $elem->outertext = '';
+            }
+        }
+        $html->save($pathViewTmp);
     }
 
     public function listarUsuariosPorRango() {
@@ -190,7 +182,7 @@ class Usuariocontroller extends CI_Controller {
                         <?php
                     }
                 }
-            }else{
+            } else {
                 
             }
         } catch (Exception $exc) {
@@ -202,10 +194,10 @@ class Usuariocontroller extends CI_Controller {
         try {
             if ($this->input->post()) {
                 if ($this->input->post('rolesUserSelect')) {
-                    
+
                     $requestArray = (($this->input->post('rolesUserSelect')));
-                   $codeUser= $this->Usuarios->insertDeleteRolesUser($requestArray);
-                   echo $codeUser;
+                    $codeUser = $this->Usuarios->insertDeleteRolesUser($requestArray);
+                    echo $codeUser;
                 } else {
                     
                 }
@@ -214,4 +206,5 @@ class Usuariocontroller extends CI_Controller {
             echo $exc->getTraceAsString();
         }
     }
+
 }
