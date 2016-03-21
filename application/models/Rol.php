@@ -26,18 +26,24 @@ class Rol extends CI_Model {
     //Las cosas de modificacion es decir el User IP Fecha de no se si perdirlas como
     //parametro
 
-    public function CrearRol($NombreRol, $Estado, $VersionRol, $CodigoRolesPermisos) {
-        $data = array(
+    public function CrearRol($NombreRol, $ipModifica, $userModifica) {
+        try {
+            $data = array(
 //            'CodigoRol' => null,
-            'NombreRol' => $NombreRol,
-            'Estado' => $Estado,
-            'VersionRol' => $VersionRol,
-            'CodigoRolesPermisos' => $CodigoRolesPermisos
-//            'UsuarioModifica' => null,
-//            'IPModifica' => null,
-//            'FechaModifica' => null
-        );
-        $this->db->insert('Rol', $data);
+                'NombreRol' => $NombreRol,
+                'Estado' => TRUE,
+                'VersionRol' => 1,
+                'UsuarioModifica' => $userModifica,
+                'IPModifica' => $ipModifica,
+                'FechaModifica' => date("Y/m/d")
+            );
+            $this->db->insert('Rol', $data);
+            $insert_id = $this->db->insert_id();
+            $data['CodigoRol'] = $insert_id;
+        } catch (Exception $e) {
+            $e->getMessage();
+        }
+        return $insert_id;
     }
 
     //Debido a que las eliminaciones en cascada van por nosotros debemos hacer un DELETE al registro
