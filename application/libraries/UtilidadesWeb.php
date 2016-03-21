@@ -18,7 +18,7 @@ if (!defined('BASEPATH'))
  */
 class UtilidadesWeb {
 
-     function getIpUsuarioModifica() {
+    function getIpUsuarioModifica() {
 //        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
 //            return $_SERVER['HTTP_CLIENT_IP'];
 //        }
@@ -26,7 +26,7 @@ class UtilidadesWeb {
 //            return $_SERVER['HTTP_X_FORWARDED_FOR'];
 //        }
 //        return $_SERVER['REMOTE_ADDR'];
-        
+
         return "ejemplo";
     }
 
