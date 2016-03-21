@@ -52,7 +52,7 @@ foreach ($Permisos as $p) {
                         </div>
                         <div>
                             <ul class="nav  navbar-right center-block ">
-                                <label id="labelpersona"><?= $this->session->userdata('nombreUserLogin'); ?></label>
+                                <label id="labelpersona">Bienvenid@: <?= $this->session->userdata('nombreUserLogin'); ?></label>
                                 <button id="btnsalir" name="btnsalir" onclick="window.location.href = 'Login'" class="btn btn-default "><span class="glyphicon glyphicon-log-out"></span>Salir</button>
                             </ul>
                         </div> 
@@ -75,11 +75,11 @@ foreach ($Permisos as $p) {
                                 if ($p->systemPart == MENU_PPAL_RIGHT) {
                                     ?>
                                     <li role="presentation" <?php
-                            if ($p->idContainer == CONTROLLER_TAP_PANEL_DEFAULT) {
-                                echo 'class="active"';
-                            } else {
-                                echo '';
-                            }
+                                    if ($p->idContainer == CONTROLLER_TAP_PANEL_DEFAULT) {
+                                        echo 'class="active"';
+                                    } else {
+                                        echo '';
+                                    }
                                     ?> ><a href="#<?= $p->idContainer ?>" aria-controls="<?= $p->idContainer ?>" role="tab" data-toggle="tab"><?= $p->NombrePermiso ?></a></li>
                                         <?php
                                         //$iterator++;
@@ -93,11 +93,11 @@ foreach ($Permisos as $p) {
                                 if ($p->systemPart == MENU_PPAL_RIGHT) {
                                     ?>
                                     <div role="tabpanel" <?php
-                            if ($p->idContainer == CONTROLLER_TAP_PANEL_DEFAULT) {
-                                echo 'class="tab-pane active"';
-                            } else {
-                                echo 'class="tab-pane"';
-                            }
+                                    if ($p->idContainer == CONTROLLER_TAP_PANEL_DEFAULT) {
+                                        echo 'class="tab-pane active"';
+                                    } else {
+                                        echo 'class="tab-pane"';
+                                    }
                                     ?> class="tab-pane" id="<?= $p->idContainer ?>"></div>
 
                                     <?php

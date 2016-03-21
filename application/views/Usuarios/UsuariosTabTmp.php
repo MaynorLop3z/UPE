@@ -1,4 +1,4 @@
-<?php $this->load->helper('url');?>
+<?php $this->load->helper('url'); ?>
 <script src="../bootstrap/js/Usuarios.js"></script>
 <div class="panel panel-default">
     <div class="panel-heading">
@@ -12,7 +12,7 @@
 
             <button id="btnUsuarioNuevo" class="btn btn-default decorateStyleCrud" ><span class="glyphicon glyphicon-plus"></span>Usuario Nuevo</button>
              
-            
+
         </div>
         <table id="tableUsers" class="table table-bordered table-striped table-hover table-responsive">
             <thead>
@@ -35,7 +35,6 @@
                             <button id="<?php echo $user->CodigoUsuario ?>" title="Editar Usuario" class="btn_modificar_user btn btn-success"><span class="glyphicon glyphicon-pencil"></span> </button>
                             <button id="btnDel<?php echo $user->CodigoUsuario ?>" title="Eliminar Usuario" class="btn_eliminar_user btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
                             <button id="btnRol<?php echo $user->CodigoUsuario ?>" title="Asignar Roles" class="btn_rls_user btn btn-success"><span class="glyphicon glyphicon-user"></span></button>
-                        
                         </td>
                     </tr>
                     <?php
@@ -52,7 +51,7 @@
                 <li><a href="#">&gt;&gt;</a></li>
                 <li>[<?php echo $PagInicial . "-" . count($Usuarios) . "/" . $ToTalRegistros ?>]</li>
             </ul>
- </div>
+        </div>
 
         <!--<div class="panel-footer">Panel footer</div>-->
     </div>
