@@ -1,16 +1,12 @@
 <?php
-
 if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
-
 class Diplomados extends CI_Model {
-
     public function __construct() {
         parent::__construct();
         $this->load->database();
     }
-
     public function listarModulos($codigoDiplomado) {
         $this->db->select('CodigoModulo, '
                 . 'NombreModulo, '
@@ -26,7 +22,6 @@ class Diplomados extends CI_Model {
         $resultado = $consulta->result();
         return $resultado;
     }
-
     public function listarPeriodosByModulo($idModulo) {
         $this->db->select('CodigoPeriodo, '
                 . 'FechaInicioPeriodo, '
@@ -41,7 +36,6 @@ class Diplomados extends CI_Model {
         $resultado = $consulta->result();
         return $resultado;
     }
-
     public function listarDiplomados() {
         try {
             $consulta = $this->db->query('SELECT "d"."CodigoDiplomado", "d"."NombreDiplomado", "d"."Descripcion", "d"."Estado", "cd"."NombreCategoriaDiplomado", "d"."Comentarios" FROM "Diplomados" "d" JOIN "CategoriaDiplomados" "cd" ON "d"."CodigoCategoriaDiplomado" = "cd"."CodigoCategoriaDiplomado"');
@@ -51,13 +45,11 @@ class Diplomados extends CI_Model {
             } else {
                 
             }
-
             return $resultado;
         } catch (Exception $exc) {
             return $exc->getTraceAsString();
         }
     }
-
     public function listarDiplomadosCategoria($idCategoria) {
         $this->db->select('CodigoDiplomado,' . 'NombreDiplomado');
         $this->db->from('Diplomados');
@@ -66,7 +58,6 @@ class Diplomados extends CI_Model {
         $resultado = $consulta->result();
         return $resultado;
     }
-
     public function crearDiplomado($NombreDiplomado, $Descripcion, $Estado, $CodigoCategoriaDiplomado, $Comentarios) {
         try {
             $data = array(
@@ -85,7 +76,6 @@ class Diplomados extends CI_Model {
         }
         return $data;
     }
-
     public function EliminarDiplomado($CodigoDiplomado) {
         $eliminar = false;
         try {
@@ -98,7 +88,6 @@ class Diplomados extends CI_Model {
         }
         return $eliminar;
     }
-
     public function ModificarDiplomado($CodigoDiplomado, $NombreDiplomado, $Descripcion, $Estado, $CodigoCategoriaDiplomado, $Comentarios) {
         try {
             $data = array(
@@ -116,7 +105,6 @@ class Diplomados extends CI_Model {
         }
         return $data;
     }
-
 //Funcion para encontrar los diplomados Arreglarlo 
     // public function buscarDiplomado($CodigoDiplomado){
     //   $this->db->select('CodigoDiplomado,NombreDiplomado,Descripcion,Estado,Comentarios');
@@ -126,7 +114,6 @@ class Diplomados extends CI_Model {
     //$resultadoDiplomado = $consultaDiplomado->row();
     //return $resultadoDiplomado;
     // }
-
     public function listarCategoriasDiplomados() {
         $this->db->select('CodigoCategoriaDiplomado, '
                 . 'NombreCategoriaDiplomado, '
@@ -138,7 +125,6 @@ class Diplomados extends CI_Model {
         $resultado = $consulta->result();
         return $resultado;
     }
-
     //    public function listarDiplomados() {
 //      $query =  $this->db->query("SELECT d.CodigoDiplomado, d.NombreDiplomado, d.Descripcion, d.Estado, cd.NombreCategoriaDiplomado, d.Comentarios FROM Diplomados d JOIN CategoriaDiplomados cd ON d.CodigoCategoriaDiplomado = cd.CodigoCategoriaDiplomado") ;
 //        $resultado =  $query->result();

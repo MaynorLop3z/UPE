@@ -86,32 +86,32 @@
         <div class="modal-content">
             <div class="container-fluid ">
                 <button type="button" class="close" id="btnCerrarMo"  data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>      
-                <form  id="formgrdMo" action="<?php echo base_url() ?>index.php/ModulosController/guardarModulo/" class="form-horizontal" method="post" >
+                <form  id="formEditMod" action="<?php echo base_url() ?>index.php/ModulosController/editarModulo/" class="form-horizontal" method="post" >
                     <fieldset>
                         <legend class="modal-header">Nuevo Modulo:</legend> 
                         <div class="form-group">
-                            <label for="nameModulo" class="col-lg-3 control-label">Nombre Del Modulo:</label>
+                            <label for="nameModuloEdit" class="col-lg-3 control-label">Nombre Del Modulo:</label>
                             <div class="col-lg-9">
-                                <input type="text" class="form-control" name="NombreEditModulo" id="ModuloEditNombre" placeholder="Nombre del Modulo" required>
+                                <input type="text" class="form-control" name="NombreModuloEDit" id="ModuloNombreEdit" placeholder="Nombre del Modulo" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="ModuloOrden" class="col-lg-3 control-label">Orden</label>
+                            <label for="ModuloOrdenEdit" class="col-lg-3 control-label">Orden</label>
                             <div class="col-lg-9">
-                                <textarea type="text" class="form-control" name="ordenM" id="ModuloOrden" placeholder="DerdenMscripcion del Modulo" required></textarea>
+                                <textarea type="text" class="form-control" name="ordenMEdit" id="ModuloOrdenEdit" placeholder="Orden" required></textarea>
                             </div>
                         </div>                     
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Estado</label>
                             <div class="col-lg-9">
-                                <input type="checkbox" id="Estado"  name="Activo" value="True" checked> Activo<br>
+                                <input type="checkbox" id="EstadoE"  name="ActivoE" value="True" > Activo<br>
                             </div>
                         </div>                                                                                       
 
                         <div class="form-group">
                             <label for="Turno" class="col-lg-3 control-label">Turno:</label>
                             <div class="col-lg-9">
-                                <select class ="form-control" id="Turno" name="Turno">                                          
+                                <select class ="form-control" id="TurnoEdit" name="TurnoEdit">                                          
                                     <?php
                                     foreach ($Turno as $TurMo) { //Aqui para seleccionar el Turno a que Pertenece
                                         ?>
@@ -125,10 +125,27 @@
                             </div>
                         </div>
                          <!-- Se quita Diplomados ya que debe ser automatico-->
+                          <select class ="form-control" id="DiplomadonameEdit" name="DiplomadonameEdit">                                          
+                                    <?php
+                                    foreach ($Diplomados as $DipMo) { //Aqui para seleccionar el Turno a que Pertenece
+                                        ?>
+                                        <option value="<?= $DipMo->CodigoDiplomado ?>">
+                                            <?php echo $DipMo->NombreDiplomado?> <!-- Para imprimir El nombre en el select-->
+                                        </option>
+                                    <?php }
+                                    ?>
+
+                                </select>
+                         
+                         
+                         
+                         
+                         
+                         
                         <div class="form-group">
                             <label for="ComentarioDiplomado" class="col-lg-3 control-label">Comentarios:</label>
                             <div class="col-lg-9">
-                                <textarea id="ComentarioMod" name="Comentarios"  type="text" class="form-control"  placeholder="Comentario Modulo" required></textarea>
+                                <textarea id="ComentarioModEdit" name="ComentariosEdit"  type="text" class="form-control"  placeholder="Comentario Modulo" required></textarea>
                             </div>
                         </div>
 

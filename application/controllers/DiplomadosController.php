@@ -2,15 +2,12 @@
 if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
-
 class DiplomadosController extends CI_Controller {
-
     public function __construct() {
         parent::__construct();
         $this->load->database();
         $this->load->model('Diplomados');
     }
-
     public function index() {
     
         try {
@@ -24,7 +21,6 @@ class DiplomadosController extends CI_Controller {
        
       
     }
-
     
     public function guardarDiplomado(){
         try {
@@ -51,7 +47,7 @@ class DiplomadosController extends CI_Controller {
                 $codigoDi = $this->input->post('CodigoDiplomado');
                 $nombreDiplomado = $this->input->post('DiplomadoNombre');
                 $descripcionDiplomado = $this->input->post('DiplomadoDescripcion');
-                $optionsactivo = $this->input->post('radio')==='V';// Agregue la opcion activo  si es seleccionad     
+                $optionsactivo = $this->input->post('radio')===true;// Agregue la opcion activo  si es seleccionad     
                 $categoriaDi = $this->input->post('CatgoriaDiplomado');
                 $comentarioDi = $this->input->post('ComentarioDiplomado');
                 $this->load->model('Diplomados');
@@ -82,4 +78,3 @@ class DiplomadosController extends CI_Controller {
                 
             }
        }
-

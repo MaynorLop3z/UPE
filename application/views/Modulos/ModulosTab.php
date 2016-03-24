@@ -42,7 +42,7 @@
                         foreach ($Modulos as $Mod) {
                             ?>
                         
-                        <tr id="Mod=<?= $Mod->CodigoModulo ?>">
+                        <tr data-Modd='<?=  json_encode($Mod)?>' id="Mod<?= $Mod->CodigoModulo ?>">
                                 <td class="NombreMod"><?= $Mod->NombreModulo ?></td>
                                 <td class="ordenMo"><?= $Mod->OrdenModulo?></td>
                                 <td class="Estado"><?= $Mod->Estado?></td> 
@@ -50,8 +50,8 @@
                                 <td class="DipName"><?= $Mod->CodigoDiplomado?></td>
                                 <td class="ComenMo"><?= $Mod->Comentarios?></td>
                                 <td class="gestion_Mod">
-                                    <button id="ModEdit<?php echo $Mod->CodigoModulo ?>" onclick="" title="Editar Modulo" class="btn_modificar_Mod btn btn-success"><span class="glyphicon glyphicon-pencil"></span> </button>
-                                    <button id="ModDel<?php echo $Mod->CodigoModulo ?>" onclick="" title="Eliminar Modulo" class="btn_eliminar_Mod btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
+            <button id="ModEdit<?php echo $Mod->CodigoModulo ?>" onclick="editModulo(this)" title="Editar Modulo" class="btn_modificar_Mod btn btn-success"><span class="glyphicon glyphicon-pencil"></span> </button>
+            <button id="ModDel<?php echo $Mod->CodigoModulo ?>" onclick="delMo(this)" title="Eliminar Modulo" class="btn_eliminar_Mod btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
                                      </td>
                             </tr>
                             <?php

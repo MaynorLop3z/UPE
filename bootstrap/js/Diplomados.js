@@ -133,7 +133,7 @@ $("#formeditDiplomado").submit(function (event) {
             DiplomadoNombre = $form.find("input[name='NombreDiplomado']").val(),
             CodigoDiplomado = codigoDiplomado,   
             DiplomadoDescripcion = $form.find("textarea[name='Descripcion']").val(),
-            radio = $form.find("input[name='estado']:checked").val(),
+            radio = $form.find("input[name='estado']").val(),
             CatgoriaDiplomado = $form.find("select[name='CodigoCategoriaDiplomado']").val(),
             ComentarioDiplomado = $form.find("textarea[name='Comentarios']").val(),
             url = $form.attr("action");

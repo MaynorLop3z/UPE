@@ -23,20 +23,13 @@
                        <div class="form-group">
                            <label class="col-lg-3 control-label">Estado</label>
                            <div class="col-lg-9">
-                               <div class="radio" name="" id="radio">
-                                   <label>
-                                       <input type="radio" name="estado" id="optionsActivo" value="activo" >
-                                       Activo
-                                   </label>
+                               
+                                   <div class="col-lg-6">
+                                       <label class="checkbox"><input type="checkbox" name="EstadoDiplomado" id="EstadoDiplomado">Activado</label>                                         
+                                  </div>
                                </div>
-                             <div class="radio">
-                                   <label>
-                                       <input type="radio" name="estado" id="optionsInactivo" value="inactivo">
-                                       Inactivo
-                                   </label>
-                               </div> 
-                           </div>
-                       </div>                                                                                       
+                             </div>
+                                                                                                         
                         
                         <div class="form-group">
                             <label for="CatgoriaDiplomado" class="col-lg-3 control-label">Categoria Diplomado:</label>

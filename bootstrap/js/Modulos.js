@@ -17,29 +17,24 @@ function delMo(fila){
     
 }
 
-$('.btn_eliminar_Mod').on('click',function(event){ // convertirlos a funciones 
-    codigoModulo = this.id;
-    codigoModulo = codigoModulo.substring();
-    $("#EliminarModulo").modal('show');
-});
 
 // modificar  Modulo ----------->
 $('.btn_modificar_Mod').on('show.bs.modal',function(event){
-//    var tr = $('#tr'+ codigoModulo);
-//    var dataM = tr.data("Modd");
-//    
-//    $('#ModuloEditNombre').val(dataM.NombreModulo);
-//    $('#ModuloEditOrden').val(dataM.OrdenModulo);
-//    $('#Estado').val(dataM.Estado);
-//    $('#TurnoEDit').val(dataM.CodigoTurno);
-//    $('#NombreEditDiplomado').val(dataM.CodigoDiplomado);
-//    $('#ComentarioEditMod').val(dataM.Comentarios);
+    var Mod = $('#Mod'+ codigoModulo);
+    var dataM = Mod.data("ModM");
     
+   $('#ModuloNombreEdit').val(dataM.NombreModulo);
+   $('#ModuloOrdenEdit').val(dataM.ordenM);
+   $('#EstadoE').val(dataM.Estado);
+   $('#TurnoEdit').val(dataM.Turno);
+   $('#DiplomadonameEdit').val(dataM.Diplomadoname);
+   $('#ComentarioModEdit').val(dataM.Comentarios);
+//  
+
 });
 $("#formgrdMo").submit(function(event){
     event.preventDefault();
-    var $form = $(this), 
-   ModuloNombre = $form.find("input[name='NombreModulo']").val(),
+    var $form = $(this), ModuloNombre = $form.find("input[name='NombreModulo']").val(),
     ModuloOrden = $form.find("textarea[name='ordenM']").val(),
     Estado = $form.find("input[name='Activo']:checked").val(),// para ver si el checked  es la falla
     Turno= $form.find("select[name='Turno']").val(),
@@ -54,12 +49,13 @@ $("#formgrdMo").submit(function(event){
                NombreDiplomado:NombreDiplomado,
                ComentarioMod:ComentarioMod 
            });
-//           if(posting === null){
-//            console.log("es nulo");}
+           if(posting === null){
+            console.log("es nulo");}
                     posting.done(function(data){
                        
                         if(data !== null) {
                             var obj = jQuery.parseJSON(data);
+                            
                             var fila  = '<tr id="$Mod' + obj.CodigoModulo + '">';
                             fila = fila + '<td class="NombreMod" >' + obj.NombreModulo + '</td>';
                             fila = fila + '<td class="ordenMo" >' + obj.OrdenModulo + '</td>';
@@ -72,19 +68,20 @@ $("#formgrdMo").submit(function(event){
                             fila = fila + '<button id="ModDe'+ obj.CodigoDiplomado +'"onclick="delMo(this)" title="Eliminar Modulo" class="btn_eliminar_Mod btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>';
                             fila = fila + '</td></tr>';
                             $('#tableModulos >tbody').append(fila);
-//                            var trMod = $('#tableModulos > tbody').find("#tr" + obj.CodigoModulo);
-//                            trMod.data("Modd".obj);
-//                            var tdGestionModulos = trMod.find(".gestion_Mod");
-//                            var divgestionModBtn = $("#gestion_Mod");
-//                            
-//                            if(divgestionModBtn !== null){
-//                                alert('prueba');
-//                                var divgestionModBtnClone = divgestionModBtn;
-//                                divgestionModBtnClone.find(".btn_modificar_Mod").attr("id","btnModiM"+obj.CodigoModulo);
-//                                divgestionModBtnClone.find(".btn_eliminar_Mod").attr("id","btnDELM" + obj.CodigoModulo);
-//                                tdGestionModulos.html(divgestionModBtnClone);
+                            var ModMod = $('#tableModulos > tbody').find("#Mod" + obj.CodigoModulo);
+                            ModMod.data("Modd".obj);
+                            var tdGestionModulos = ModMod.find(".gestion_Mod");
+                           
+                            var divgestionModBtn = $("#gestion_Mod");
+                            if(divgestionModBtn !== null){
+                                alert('prueba');
+                                var divgestionModBtnClone = divgestionModBtn;
+                                divgestionModBtnClone.find(".btn_modificar_Mod").attr("id","btnModiM"+obj.CodigoModulo);
+                                divgestionModBtnClone.find(".btn_eliminar_Mod").attr("id","btnDELM" + obj.CodigoModulo);
+                                tdGestionModulos.html(divgestionModBtnClone);
                             
-                                $("#NuevoModulo").modal('toggle');
+                            }
+                            $("#NuevoModulo").modal('toggle');
                         }
                     });
             posting.fail(function () {
@@ -101,15 +98,17 @@ $("#formgrdMo").submit(function(event){
 
 // modificar  Modulo ----------->
 $('.btn_modificar_Mod').on('show.bs.modal',function(event){
-    var tr = $('#tr'+ codigoModulo);
-    var dataM = tr.data("Modd");
+    var Mod = $('#Mod'+ codigoModulo);
+    var dataM = Mod.data("Modd");
     
-    $('#ModuloEditNombre').val(dataM.NombreModulo);
-    $('#ModuloEditOrden').val(dataM.OrdenModulo);
-    $('#Estado').val(dataM.Estado);
-    $('#TurnoEDit').val(dataM.CodigoTurno);
-    $('#NombreEditDiplomado').val(dataM.CodigoDiplomado);
-    $('#ComentarioEditMod').val(dataM.Comentarios);
+//    $('#ModuloEditNombre').val(dataM.NombreModulo);
+//    $('#ModuloEditOrden').val(dataM.OrdenModulo);
+//    $('#Estado').val(dataM.Estado);
+//    $('#TurnoEDit').val(dataM.CodigoTurno);
+//    $('#NombreEditDiplomado').val(dataM.CodigoDiplomado);
+//    $('#ComentarioEditMod').val(dataM.Comentarios);
+
+
     
 });
 

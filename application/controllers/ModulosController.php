@@ -19,7 +19,7 @@ class ModulosController extends CI_Controller {
 
 public function index() {
 try{
-        $data['Modulos'] = $this->Modulos->listarModulos(null, null);
+        $data['Modulos'] = $this->Modulos->listarModulos();
         $data['Diplomados'] = $this->Modulos->listarDiplomados(); //ESto lo acabo de escribir
         $data['Turno'] = $this->Modulos->listarTurnos(); // Seleccionar el Modulo
         $this->load->view('Modulos', $data);
@@ -31,15 +31,16 @@ try{
 public function guardarModulo()
 {
         try {
-        if($this->input->post()){
-            $NombreModulo= $this->input->post('NombreModulo');
-            $OrdenModulo= $this->input->post('ordenM');
-            $Estado = $this->input->post('Activo');
+        if($this->input->post('CodigoModulo')){
+            $NombreModulo= $this->input->post('ModuloNombre');
+            $OrdenModulo= $this->input->post('ModuloOrden');
+            $Estado = $this->input->post('Estado');
             $CodigoTurno = $this->input->post('Turno');
             $CodigoDiplomado = $this->input->post('DiplomadoName');
-            $Comentarios  = $this->input->post('Comentarios');
-          //  $ip = $this->session->userdata('ipUserMo');// La ip del usuario que modifica   $userModi
-          //  $userModi = $this->session->userdata('codigoUserMo'); //codigo del usuario qeumodifica  $ip,
+            $Comentarios  = $this->input->post('ComentarioMod');
+          
+       $ip = $this->session->userdata('ipUserMo');// La ip del usuario que modifica   $userModi
+       $userModi = $this->session->userdata('codigoUserMo'); //codigo del usuario qeumodifica  $ip,
             $arrayData = $this->Modulos->crearModulo($NombreModulo, $OrdenModulo, $CodigoTurno, $Estado,$CodigoDiplomado, $Comentarios);
         }   echo json_encode($arrayData);
         
