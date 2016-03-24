@@ -117,7 +117,7 @@ $("#frmGrupoAdd").submit(function(event) {
             fila += '<td class="Aula">' + obj.Aula + '</td>\n';
             fila += '</tr>\n';
 //                        console.log(fila);
-            $('#bodytablaPeriodosGrupos').append(fila);
+            $('#bodytablaPeriodosGruposO').append(fila);
 //                        $(this).trigger("reset");
             $form.find("input[name='HoraEntradaGrupo']").val("");
             $form.find("input[name='HoraSalidaGrupo']").val("");
@@ -131,8 +131,8 @@ $("#frmGrupoAdd").submit(function(event) {
 });
 $('#PeriodoGestion').on('show.bs.modal', function(event) {
     var idPeriodo = codigoPeriodo.substring(10);
-    var url = "PeriodosController/listarGrupos/";
-    var posting = $.post(url, {idPeriodo: idPeriodo});
+    //var url = "PeriodosController/listarGrupos/";
+    var posting = $.post("PeriodosController/listarGrupos/", {idPeriodo: idPeriodo});
     posting.done(function(data) {
         if (data !== null) {
             var obj = jQuery.parseJSON(data);
@@ -148,8 +148,8 @@ $('#PeriodoGestion').on('show.bs.modal', function(event) {
 //                                console.log(obj[x][y]);
 //                            }
             }
-//                        console.log(tabla);
-            $('#bodytablaPeriodosGrupos').html(tabla);
+                        console.log(tabla);
+            $('#bodytablaPeriodosGruposO').html(tabla);
 
         }
     });

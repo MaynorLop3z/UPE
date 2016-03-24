@@ -35,7 +35,6 @@
         });
     });
 </script>
-<script src="../bootstrap/js/GruposPeriodos.js"></script>
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">Gestion de Grupos</h3>

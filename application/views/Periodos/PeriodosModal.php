@@ -199,7 +199,7 @@
                                 <!--<th>Alumnos</th>-->
                             </tr>
                         </thead>
-                        <tbody id="bodytablaPeriodosGrupos">
+                        <tbody id="bodytablaPeriodosGruposO">
                         </tbody>
                     </table>
                 </div>
@@ -210,3 +210,4 @@
         </div>
     </div>
 </div> 
+<script src="../bootstrap/js/GruposPeriodos.js"></script>
