@@ -15,6 +15,7 @@ class Rol extends CI_Model {
         try {
             $this->db->select('CodigoRol, NombreRol, Estado, VersionRol');
             $this->db->from('Rol');
+            $this->db->where('Estado', TRUE);
             $consulta = $this->db->get();
             $resultado = $consulta->result();
         } catch (Exception $exc) {
@@ -22,9 +23,6 @@ class Rol extends CI_Model {
         }
         return $resultado;
     }
-
-    //Las cosas de modificacion es decir el User IP Fecha de no se si perdirlas como
-    //parametro
 
     public function CrearRol($NombreRol, $ipModifica, $userModifica) {
         try {
@@ -53,18 +51,19 @@ class Rol extends CI_Model {
         $this->db->delete('RolesPermisos', array('CodigoRolesPermisos' => CodigoRolesPermisos));
     }
 
-    public function ModificarRol($CodigoRol, $NombreRol, $Estado, $VersionRol, $UsuarioModifica, $IPModifica, $FechaModifica) {
+    public function ModificarRol($CodigoRol, $NombreRol,  $IPModifica ,$UsuarioModifica) {
         $data = array(
             'NombreRol' => $NombreRol,
-            'Estado' => $Estado,
-            'VersionRol' => $VersionRol,
+            'VersionRol' => 1,
             'UsuarioModifica' => $UsuarioModifica,
             'IPModifica' => $IPModifica,
-            'FechaModifica' => $FechaModifica
+            'FechaModifica' => date("Y/m/d")
         );
 
         $this->db->where('CodigoRol', $CodigoRol);
         $this->db->update('Rol', $data);
+         $data['CodigoRol'] = $CodigoRol;
+        return $data;
     }
 
 }

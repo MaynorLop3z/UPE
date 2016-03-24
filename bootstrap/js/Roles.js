@@ -2,14 +2,58 @@ var codigoR;
 $("#btnUsuarioNuevo").on('click', function () {
     $("#usuarioNuevo").modal();
 });
-$('.btn_modificar_user').on('click', function (event) {
-    codigoUsuario = this.id;
-    $("#usuarioModifica").modal('show');
+
+$("#tableRol").on("click", ".btn_modificar_rol", function () {
+    var trRol = $(this).parent().parent().parent();
+
+    var dataR = trRol.data("rold");
+    var tdRol = trRol.find('.nombre_Rol');
+    tdRol.empty();
+    tdRol.append('<input id="txtEditRol" class="form-control" type="text" value=' + dataR.NombreRol + ' name="editRol"/>');
+    $("#txtEditRol").focus();
 });
-$('.btn_eliminar_user').on('click', function (event) {
-    codigoUsuario = this.id;
-    codigoUsuario = codigoUsuario.substring(6);
-    $("#usuarioElimina").modal('show');
+
+$("#tableRol").on("keypress", "#txtEditRol", function (e) {
+    if (e.which == 13) {
+        var trRol = $(this).parent().parent();
+        var tdRol = $(this).parent();
+        var dataR = trRol.data("rold");
+        var data_rVal = $(this).val();
+        var url = "RolesController/editarRol/";
+        var posting = $.post(url, {CodigoRol: dataR.CodigoRol, NombreRol: data_rVal});
+
+        posting.done(function (data) {
+            if (data !== null) {
+                var obj = jQuery.parseJSON(data);
+                trRol.data("rold", obj);
+                tdRol.empty();
+                tdRol.append(obj.NombreRol);
+            }
+        });
+        posting.fail(function (data) {
+            alert("error");
+        });
+
+    }
+});
+
+$("#tableRol").on("blur", "#txtEditRol", function (e) {
+    
+    var trRol = $(this).parent().parent();
+
+    var dataR = trRol.data("rold");
+    var tdRol = trRol.find('.nombre_Rol');
+    tdRol.empty();
+    tdRol.append(dataR.NombreRol);
+
+});
+
+$("#tableRol").on("click", ".btn_eliminar_rol", function () {
+    var trRol = $(this).parent().parent().parent();
+
+    var dataR = trRol.data("rold");
+    codigoR = dataR.CodigoRol;
+    $("#rolElimina").modal('show');
 });
 $('.btn_rls_user').on('click', function (event) {
     codigoUsuario = this.id;
@@ -47,13 +91,13 @@ $('#usuarioRoles').on('show.bs.modal', function (event) {
 
 $("#frmGuardarR").submit(function (event) {
     event.preventDefault();
-    var $form = $(this),RolNombre = $form.find("input[name='RolName']").val(),url = $form.attr("action");
+    var $form = $(this), RolNombre = $form.find("input[name='RolName']").val(), url = $form.attr("action");
     var posting = $.post(url, {RolNombre: RolNombre});
     posting.done(function (data) {
         if (data !== null) {
             $("#tableRol > tbody > tr").remove();
             $('#tableRol > tbody').append(data);
-            
+
         }
     });
     posting.fail(function (data) {
@@ -122,7 +166,7 @@ $('#txtPagingSearchUsr').keypress((function (e) {
         var data_inic = $('#txtPagingSearchUsr').data("datainic");
         var data_in = $('#txtPagingSearchUsr').val();
 
-        var url = "http://localhost/UPE/index.php/UsuarioController/listarUsuariosPorRango/";
+        var url = "UsuarioController/listarUsuariosPorRango/";
         var posting = $.post(url, {data_ini: data_in});
 
         posting.done(function (data) {
@@ -140,47 +184,6 @@ $('#txtPagingSearchUsr').keypress((function (e) {
     }
 }));
 
-
-$("#frmRolUser").submit(function (event) {
-    event.preventDefault();
-    var url = 'http://localhost/UPE/index.php/UsuarioController/AplyRmvRols/';
-    jsonRolsUsr = [];
-
-    $('#bodyTableUsrRol tr').each(function () {
-        var checkR = $(this).find(".gestion_UserR").find(".checkR");
-        var r = checkR.data("rold");
-        if (r != null) {
-            rlObj = {};
-            rlObj ["CodigoUsuario"] = codigoUsuario;
-            rlObj ["CodigoRol"] = r.CodigoRol;
-
-            if (checkR.is(":checked"))
-            {
-                  rlObj ["Sta"] =  "add" ;
-            } else {
-                rlObj ["Sta"] =  "del" ;
-            }
-          
-            jsonRolsUsr.push(rlObj);
-        }
-    });
-    jsonString = JSON.stringify(jsonRolsUsr);
-
-    var posting = $.post(url, {"rolesUserSelect": jsonRolsUsr});
-    posting.done(function (data) {
-        if (data) {
-            $("#usuarioRoles").modal('toggle');
-            
-//            $('#tableUsers').find('#tr' + codigoUsuario).fadeOut("slow");
-//            $('#tableUsers').find('#tr' + codigoUsuario).remove();
-        } else {
-
-        }
-    });
-    posting.fail(function (xhr, textStatus, errorThrown) {
-        alert("error" + xhr.responseText);
-    });
-});
 
 
 
