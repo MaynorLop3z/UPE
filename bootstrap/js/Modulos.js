@@ -39,15 +39,16 @@ $("#formgrdMo").submit(function(event){
     ModuloOrden = $form.find("textarea[name='ordenM']").val(),
     Estado = $form.find("input[name='Activo']:checked").val(),// para ver si el checked  es la falla
     Turno= $form.find("select[name='Turno']").val(),
-    NombreDiplomado = $form.find("select[name='Diplomadoname']").val(),
+    CodDiplomado = $form.find("select[name='Diplomadoname']").val(),
     ComentarioMod = $form.find("textarea[name='Comentarios']").val(),
     url = $form.attr("action");
+    alert(CodDiplomado);
              var posting = $.post(url, { 
                ModuloNombre:ModuloNombre,
                ModuloOrden:ModuloOrden,
                Estado:Estado,
                Turno:Turno,
-               NombreDiplomado:NombreDiplomado,
+               CodDiplomado:CodDiplomado,
                ComentarioMod:ComentarioMod 
            });
            if(posting === null){

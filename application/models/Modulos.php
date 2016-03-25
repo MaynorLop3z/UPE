@@ -10,10 +10,26 @@ class Modulos extends CI_Model {
         $this->load->database();
     }
 
-  public function listarModulos() {
-         
-      try{
-          $this->db->select('CodigoModulo, '
+  public function listarModulos() { 
+      
+//      try {
+//      $consulta = $this->db->query('SELCT "d"."CodigoModulo","d"."NombreModulo", "d"."OrdenModulo","d"."Estado"."d"."UsuarioModifica","d"."IpModifica","d"."FechaModifica","d"."CodigoTurno","d"."CodigoDiplomado","d"."Comentarios" FROM "Modulos" "d"  JOIN "CodigoModulo" "cd" ON "d"."CodigoDiplomado" = "cd"."CodigoDiplomado"');    
+//      if ($consulta!=null){
+//          $resultado = $consulta->result();
+//          
+//      }else{
+//          
+//      }
+//      return $resultado;
+//      }  catch (Exception $exc){
+//          return $exc->getTraceAsString();
+//          
+//      }
+//      
+//      }
+          
+      
+            $this->db->select('CodigoModulo, '
                 . 'NombreModulo, '
                 . 'OrdenModulo, '
                 . 'Estado, '
@@ -21,24 +37,23 @@ class Modulos extends CI_Model {
                 . 'CodigoDiplomado, '       
                 . 'Comentarios'
         );
-        $this->db->from('Modulos');  
+        $this->db->from('Modulos');
+      //  $this->db->where('CodigoModulo',$CodigoModulo);
         $consultaM = $this->db->get();
         $resultadoM = $consultaM->result();
-  }  catch (Exception $ex){
-      $ex->getMessage();
-  }
+ 
         return $resultadoM;
-    }
+  }
 
-    public function crearModulo($NombreModulo, $OrdenModulo, $Estado,$userModi,$ip,$fechaMo,$CodigoTurno, $CodigoDiplomado, $Comentarios) {
+    public function crearModulo($NombreModulo, $OrdenModulo,$CodigoTurno, $Estado ,$CodigoDiplomado, $Comentarios,$IpUserModifica,$UserModifica) {
        try{
         $data = array(
             'NombreModulo' => $NombreModulo,
             'OrdenModulo' => $OrdenModulo,
             'Estado' => $Estado,
-            'UsuarioModifica'=>$userModi,
-            'IpModifica'=>$ip,
-            'FechaModifica'=>$fechaMo, 
+            'UsuarioModifica'=>$UserModifica,
+            'IpModifica'=>$IpUserModifica,
+            'FechaModifica'=>date("Y/m/d"), 
             'CodigoTurno' => $CodigoTurno,
             'CodigoDiplomado' => $CodigoDiplomado,
             'Comentarios' => $Comentarios
