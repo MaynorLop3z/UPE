@@ -2,11 +2,11 @@
 
 
 <html lang="en">
-    <?php $this->load->helper('url'); ?>
+
 
     <head>
 
-
+        <?php $this->load->helper('url'); ?>
 
         <title>UPESYS</title>
         <link rel="icon" href="../bootstrap/minerva.jpg" type="image/x-icon" />
@@ -38,7 +38,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#page-top">Start Bootstrap</a>
+                    <a class="navbar-brand" href="#page-top">UPESYS</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -289,8 +289,8 @@
         </div>
 
         <!-- Ingresar Modals -->
-        <div class="portfolio-modal modal fade" id="Login2" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-content">
+        <div class="portfolio-modal modal fade" id="Login2" tabindex="-1" role="dialog" aria-hidden="true" >
+            <div class="modal-content" style="background:url(../bootstrap/images/profile2.png); background-repeat: no-repeat;   background-position: right bottom; background-color: white ">
                 <div class="close-modal" data-dismiss="modal">
                     <div class="lr">
                         <div class="rl">
@@ -301,27 +301,37 @@
                     <div class="row">
                         <div class="col-lg-8 col-lg-offset-2">
                             <div class="modal-body">
-                                <img class="img-centered"  height="50" width="50" src="../bootstrap/images/minervaVerde.png" alt="">
+                                <!--<img class="img-centered"  height="50" width="50" src="../bootstrap/images/profile2.png" alt="">-->
                                 <h2>Ingresar a UPESYS</h2>
                                 <hr class="star-primary">
-                                <form method="POST" action=""class="form-group" role="form">
+                                <form method="POST" action="Wsite/Index/"   class="form-group" role="form" id="Ingresar">
                                     <p>Ingrese sus credenciales</p>
+                                    <table class="table">
+                                        <!--<ul class="list-unstyled item-details ">-->
+                                        <tr align="rigth"> <td>
+                                                Usuario:
+                                                <strong> <input type="text" id="user" name="user"  placeholder="Email address" required autofocus>
+                                                </strong>
+                                                <br>
+                                            </td>
+                                        </tr>
 
-                                    <ul class="list-unstyled center-block item-details">
-                                        <li>Usuario:
-                                            <strong> <input type="text" id="user" name="user" class="col-lg-12" placeholder="Email address" required autofocus>
-                                            </strong>
-                                        </li>
-                                        <br>
-                                        <br>
-                                        <li>Contraseña:
-                                            <strong><input type="password" id="password" name="password" class="col-lg-12" placeholder="Password" required>
-                                            </strong>
-                                        </li>
+                                        <tr align="rigth"><td> 
+                                                Contraseña:
+                                                <strong><input type="password" id="password" name="password"  placeholder="Password" required>
+                                                </strong>
+                                            </td>
+                                        </tr>
+                                        <!--</ul>-->
+                                    </table>
+                                    <b><a href="#">Olvido su contraseña</a></b>
+                                    <ul class="list-inline item-details">
+                                        <li><button type="button" class="btn btn-default center-block col-lg-8" data-dismiss="modal">Cancelar</button></li>
+                                        <li><button type="submit" class="btn btn-default center-block  col-lg-8" >Aceptar</button></li>
                                     </ul>
                                 </form>
-                                <h6><a href="#">Olvido su contraseña</a> </h6>
-                                <button type="button" class="btn btn-default center-block" data-dismiss="modal"><i class="fa fa-times"></i>Cancelar</button>
+
+
                             </div>
                         </div>
                     </div>
@@ -531,6 +541,7 @@
         <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
         <script src="../bootstrap/js/classie.js"></script>
         <script src="../bootstrap/js/cbpAnimatedHeader.js"></script>
+        <script src="../bootstrap/js/websitejs.js"></script>
 
         <!-- Contact Form JavaScript -->
         <script src="../bootstrap/js/jqBootstrapValidation.js"></script>
