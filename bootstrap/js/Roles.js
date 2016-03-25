@@ -1,7 +1,4 @@
 var codigoR;
-$("#btnUsuarioNuevo").on('click', function () {
-    $("#usuarioNuevo").modal();
-});
 
 $("#tableRol").on("click", ".btn_modificar_rol", function () {
     var trRol = $(this).parent().parent().parent();
@@ -106,46 +103,16 @@ $("#frmGuardarR").submit(function (event) {
     });
 });
 
-$("#frmEditarUser").submit(function (event) {
+$("#frmEliminarRol").submit(function (event) {
     event.preventDefault();
-    var $form = $(this), UsuarioNombre = $form.find("input[name='UsuarioNombre']").val(),
-            CodigoUsuario = codigoUsuario,
-            UsuarioPassword = $form.find("input[name='UsuarioPassword']").val(),
-            UsuarioEmail = $form.find("input[name='UsuarioEmail']").val(),
-            UsuarioNombreReal = $form.find("input[name='UsuarioNombreReal']").val(),
-            Comentarios = $form.find("textarea[name='Comentarios']").val(),
-            url = $form.attr("action");
-    var posting = $.post(url, {CodigoUsuario: CodigoUsuario, UsuarioNombre: UsuarioNombre,
-        UsuarioPassword: UsuarioPassword,
-        UsuarioEmail: UsuarioEmail,
-        Comentarios: Comentarios,
-        UsuarioNombreReal: UsuarioNombreReal});
-    posting.done(function (data) {
-        if (data !== null) {
-            var obj = jQuery.parseJSON(data);
-            var trUser = $('#tableUsers > tbody').find("#tr" + obj.CodigoUsuario);
-            trUser.find('.nombre_Usuario').html(obj.Nombre);
-            trUser.find('.correo_Usuario').html(obj.CorreoUsuario);
-            trUser.find('.nickName_Usuario').html(obj.NombreUsuario);
-            trUser.data("userd", obj);
-            $("#usuarioModifica").modal('toggle');
-        }
-    });
-    posting.fail(function (data) {
-        var obj = jQuery.parseJSON(data);
-        alert(obj.Error);
-    });
-});
-
-$("#frmEliminarUser").submit(function (event) {
-    event.preventDefault();
-    var $form = $(this), CodigoUsuario = codigoUsuario, url = $form.attr("action");
-    var posting = $.post(url, {CodigoUsuario: CodigoUsuario});
+    var $form = $(this), CodigoRol = codigoR, url = $form.attr("action");
+    var posting = $.post(url, {CodigoRol: CodigoRol});
     posting.done(function (data) {
         if (data) {
-            $("#usuarioElimina").modal('toggle');
-            $('#tableUsers').find('#tr' + codigoUsuario).fadeOut("slow");
-            $('#tableUsers').find('#tr' + codigoUsuario).remove();
+            var obj = jQuery.parseJSON(data);
+            $("#rolElimina").modal('toggle');
+            $('#tableRol').find('#tr' + obj.CodigoRol).fadeOut("slow");
+            $('#tableRol').find('#tr' + obj.CodigoRol).remove();
         }
     });
     posting.fail(function () {

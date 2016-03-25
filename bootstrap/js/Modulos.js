@@ -1,4 +1,5 @@
 var codigoModulo;
+
 $("#btnAddModulo").on('click', function () {
     $("#NuevoModulo").modal();
 });

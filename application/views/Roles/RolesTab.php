@@ -36,7 +36,7 @@
                         ?>
                         <tr data-rold='<?php echo json_encode($rol) ?>' id="tr<?php echo $rol->CodigoRol ?>">
                             <td style="text-align:center" class="nombre_Rol" ><?= $rol->NombreRol ?></td>
-                            <td style="text-align:center"  class="gestion_rol">
+                            <td style="text-align:center"  class="gestion_rol block">
                                 <div id="gestionRoles">
                                     <button id="<?php echo $rol->CodigoRol ?>" title="Editar Rol" class="btn_modificar_rol btn btn-success"><span class="glyphicon glyphicon-pencil"></span> </button>
                                     <button id="btnDel<?php echo $rol->CodigoRol ?>" title="Eliminar Rol" class="btn_eliminar_rol btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>

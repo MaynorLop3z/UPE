@@ -3,6 +3,7 @@ if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
 include(APPPATH . 'libraries/simple_html_dom.php');
+
 class RolesController extends CI_Controller {
 
     public function __construct() {
@@ -65,18 +66,18 @@ class RolesController extends CI_Controller {
                 $cadena = '';
 
                 $pathView = APPPATH . 'views/VistaAyudaView.php';
-                $html=file_get_html($pathView);
+                $html = file_get_html($pathView);
                 $elemsWithRights = $html->getElementById('gestionRoles');
 
                 if ($insert_id != null && $insert_id > 0) {
                     $RolesList = $this->Rol->listarRoles();
-                    
+
                     foreach ($RolesList as $rol) {
-                        $obj=json_encode($rol) ;
-                        $cadena.='<tr data-rold='.$obj;
+                        $obj = json_encode($rol);
+                        $cadena.='<tr data-rold=' . $obj;
                         $cadena.=' id="tr' . $rol->CodigoRol . '">';
                         $cadena.=' <td style="text-align:center" class="nombre_Rol" >' . $rol->NombreRol . '</td>';
-                        $cadena.=' <td style="text-align:center"  class="gestion_rol">'.str_get_html($elemsWithRights).'</td></tr>';
+                        $cadena.=' <td style="text-align:center"  class="gestion_rol">' . str_get_html($elemsWithRights) . '</td></tr>';
                     }
                 }
             }
@@ -87,49 +88,16 @@ class RolesController extends CI_Controller {
     }
 
     public function eliminarRol() {
-        
-    }
-    
-    public function editarRol(){
-         try {
+
+        try {
             if ($this->input->post()) {
                 $codigoRol = $this->input->post('CodigoRol');
                 if ($codigoRol != null) {
-                   
-                    $nombreRol = $this->input->post('NombreRol');
                     $ip = $this->session->userdata('ipUserLogin');
                     $userModifica = $this->session->userdata('codigoUserLogin');
                     //La fecha de modificaciòn del registro se coloca en el modelo para evitar enviar mas parametros.
-                    $this->load->model('Rol');
-                    $arrayData = $this->Rol->ModificarRol($codigoRol, $nombreRol,$ip,$userModifica);
-                    echo json_encode($arrayData);
-                }
-            }
-        } catch (Exception $e) {
-            $data = array(
-                'Error' => $ex->getMessage()
-            );
-            echo json_encode($data);
-        } 
-    }
-    
-    /*
-     *  public function editarUsuario() {
-        try {
-            if ($this->input->post()) {
-                $codigoUser = $this->input->post('CodigoUsuario');
-                if ($codigoUser != null) {
-                    $codigoUsuario = $codigoUser;
-                    $nombrePersonaUsuario = $this->input->post('UsuarioNombreReal');
-                    $contraseniaUsuario = $this->input->post('UsuarioPassword');
-                    $comentarios = $this->input->post('Comentarios');
-                    $correo = $this->input->post('UsuarioEmail');
-                    $nombreUsuario = $this->input->post('UsuarioNombre');
-                    $ip = $this->session->userdata('ipUserLogin');
-                    $userModifica = $this->session->userdata('codigoUserLogin');
-                    //La fecha de modificaciòn del registro se coloca en el modelo para evitar enviar mas parametros.
-                    $this->load->model('Usuarios');
-                    $arrayData = $this->Usuarios->editarUsuario($codigoUsuario, $nombreUsuario, $contraseniaUsuario, $nombrePersonaUsuario, $correo, $userModifica, $ip, $comentarios);
+                   // $this->load->model('Rol');
+                    $arrayData = $this->Rol->inactivarRol($codigoRol, $ip, $userModifica);
                     echo json_encode($arrayData);
                 }
             }
@@ -140,6 +108,57 @@ class RolesController extends CI_Controller {
             echo json_encode($data);
         }
     }
+
+    public function editarRol() {
+        try {
+            if ($this->input->post()) {
+                $codigoRol = $this->input->post('CodigoRol');
+                if ($codigoRol != null) {
+
+                    $nombreRol = $this->input->post('NombreRol');
+                    $ip = $this->session->userdata('ipUserLogin');
+                    $userModifica = $this->session->userdata('codigoUserLogin');
+                    //La fecha de modificaciòn del registro se coloca en el modelo para evitar enviar mas parametros.
+                    $this->load->model('Rol');
+                    $arrayData = $this->Rol->ModificarRol($codigoRol, $nombreRol, $ip, $userModifica);
+                    echo json_encode($arrayData);
+                }
+            }
+        } catch (Exception $e) {
+            $data = array(
+                'Error' => $ex->getMessage()
+            );
+            echo json_encode($data);
+        }
+    }
+
+    /*
+     *  public function editarUsuario() {
+      try {
+      if ($this->input->post()) {
+      $codigoUser = $this->input->post('CodigoUsuario');
+      if ($codigoUser != null) {
+      $codigoUsuario = $codigoUser;
+      $nombrePersonaUsuario = $this->input->post('UsuarioNombreReal');
+      $contraseniaUsuario = $this->input->post('UsuarioPassword');
+      $comentarios = $this->input->post('Comentarios');
+      $correo = $this->input->post('UsuarioEmail');
+      $nombreUsuario = $this->input->post('UsuarioNombre');
+      $ip = $this->session->userdata('ipUserLogin');
+      $userModifica = $this->session->userdata('codigoUserLogin');
+      //La fecha de modificaciòn del registro se coloca en el modelo para evitar enviar mas parametros.
+      $this->load->model('Usuarios');
+      $arrayData = $this->Usuarios->editarUsuario($codigoUsuario, $nombreUsuario, $contraseniaUsuario, $nombrePersonaUsuario, $correo, $userModifica, $ip, $comentarios);
+      echo json_encode($arrayData);
+      }
+      }
+      } catch (Exception $e) {
+      $data = array(
+      'Error' => $ex->getMessage()
+      );
+      echo json_encode($data);
+      }
+      }
      */
 
     public function listarByModulo() {

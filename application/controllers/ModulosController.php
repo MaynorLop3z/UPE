@@ -31,7 +31,7 @@ try{
 public function guardarModulo()
 {
         try {
-        if($this->input->post('CodigoModulo')){
+        if($this->input->post()){
             $NombreModulo= $this->input->post('ModuloNombre');
             $OrdenModulo= $this->input->post('ModuloOrden');
             $Estado = $this->input->post('Estado');

@@ -51,7 +51,7 @@ class Rol extends CI_Model {
         $this->db->delete('RolesPermisos', array('CodigoRolesPermisos' => CodigoRolesPermisos));
     }
 
-    public function ModificarRol($CodigoRol, $NombreRol,  $IPModifica ,$UsuarioModifica) {
+    public function ModificarRol($CodigoRol, $NombreRol, $IPModifica, $UsuarioModifica) {
         $data = array(
             'NombreRol' => $NombreRol,
             'VersionRol' => 1,
@@ -62,8 +62,26 @@ class Rol extends CI_Model {
 
         $this->db->where('CodigoRol', $CodigoRol);
         $this->db->update('Rol', $data);
-         $data['CodigoRol'] = $CodigoRol;
+        $data['CodigoRol'] = $CodigoRol;
         return $data;
+    }
+
+    public function inactivarRol($CodigoRol, $ipModifica, $usuarioModifica) {
+        try {
+            $data = array(
+                'Estado' => FALSE,
+                'UsuarioModifica' => $usuarioModifica,
+                'IPModifica' => $ipModifica,
+                'FechaModifica' => date("Y/m/d")
+            );
+
+            $this->db->where('CodigoRol', $CodigoRol);
+            $this->db->update('Rol', $data);
+            $data['CodigoRol'] = $CodigoRol;
+            return $data;
+        } catch (Exception $exc) {
+            $exc->getMessage();
+        }
     }
 
 }

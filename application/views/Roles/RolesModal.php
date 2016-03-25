@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="container-fluid ">
                 <button type="button" class="close btn-lg" data-dismiss="modal" aria-hidden="true">×</button>
-                <form id="frmEliminarUser" action="<?php echo base_url() ?>index.php/RolesController/eliminarRol/" class="form-horizontal" method="post" >
+                <form id="frmEliminarRol" action="RolesController/eliminarRol/" class="form-horizontal" method="post" >
                     <fieldset>
                         <legend class="modal-header">Roles:</legend> 
                         <div class="form-group">
