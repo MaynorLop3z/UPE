@@ -24,12 +24,10 @@ class Wsite extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->usuarioDTO = new UsuariosDTO();
     }
 
     public function index() {
         $this->load->view('wsite');
-        $nombreUser = $this->usuarioDTO->getNombre();
         $this->load->model('publicaciones');
         $this->load->model('archivos');
         $user = $this->input->post('user');
@@ -38,34 +36,36 @@ class Wsite extends CI_Controller {
             $this->load->model('usuario_model');
             $this->load->model('Usuarios');
             $this->load->helper('url');
-            if($this->input->post()){
-                $nombre= $this->input->post('Nombre');
-                $Contrasenia= $this->input->post('Pass');
+            if ($this->input->post()) {
+                $nombre = $this->input->post('user');
+                $Contrasenia = $this->input->post('password');
                 $usuario = $this->usuario_model->login($nombre, $Contrasenia);
+
                 if ($usuario != null) {
 
-                $permisos = $this->Usuarios->listPermisosByUser($usuario->CodigoUsuario);
-                $data['Permisos'] = $permisos;
-                $usuario_data = array(
-                    'codigoUserLogin' => $usuario->CodigoUsuario,
-                    'nombreUserLogin' => $usuario->NombreUsuario,
-                    'correoUserLogin' => $usuario->CorreoUsuario,
-                    'nombreRealUserLogin' => $usuario->Nombre,
-                    'ipUserLogin' => $this->input->ip_address(),
-                    'permisosUsuer' => $permisos,
-                    'logueado' => TRUE);
-                $this->session->set_userdata($usuario_data);
-                // redirect('Dashboard');
-                $this->load->view('Dashboard', $data);
+                    $permisos = $this->Usuarios->listPermisosByUser($usuario->CodigoUsuario);
+                    $data['Permisos'] = $permisos;
+                    $usuario_data = array(
+                        'codigoUserLogin' => $usuario->CodigoUsuario,
+                        'nombreUserLogin' => $usuario->NombreUsuario,
+                        'correoUserLogin' => $usuario->CorreoUsuario,
+                        'nombreRealUserLogin' => $usuario->Nombre,
+                        'ipUserLogin' => $this->input->ip_address(),
+                        'permisosUsuer' => $permisos,
+                        'logueado' => TRUE);
+                    $this->session->set_userdata($usuario_data);
+                    // redirect('Dashboard');
+                    echo "<script type='text/javascript'>";
+                    echo "window.close();";
+                    echo "</script>";
+                    $this->load->view('Dashboard', $data);
+//                    Redirect('Dashboard', $data);
+                }
+            } else {
+                redirect('/wsite', 'refresh');
+//                $this->load->view('wsite');
             }
-        } else {
-            $this->load->view('wsite');
         }
     }
 
-         }
-
-            
-
-            
 }
