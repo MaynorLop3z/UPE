@@ -304,7 +304,7 @@
                                 <!--<img class="img-centered"  height="50" width="50" src="../bootstrap/images/profile2.png" alt="">-->
                                 <h2>Ingresar a UPESYS</h2>
                                 <hr class="star-primary">
-                                <form method="POST" action="Wsite/Index/"   class="form-group" role="form" id="Ingresar">
+                                <form method="POST" action=""   class="form-group" role="form" id="Ingresar">
                                     <p>Ingrese sus credenciales</p>
                                     <table class="table">
                                         <!--<ul class="list-unstyled item-details ">-->

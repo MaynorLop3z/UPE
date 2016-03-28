@@ -53,7 +53,7 @@ foreach ($Permisos as $p) {
                         <div>
                             <ul class="nav  navbar-right center-block ">
                                 <label id="labelpersona">Bienvenid@: <?= $this->session->userdata('nombreUserLogin'); ?></label>
-                                <button id="btnsalir" name="btnsalir" onclick="window.location.href = 'Login'" class="btn btn-default "><span class="glyphicon glyphicon-log-out"></span>Salir</button>
+                                <button id="btnsalir" name="btnsalir" onclick="window.location.href = 'wsite'" class="btn btn-default "><span class="glyphicon glyphicon-log-out"></span>Salir</button>
                             </ul>
                         </div> 
 
