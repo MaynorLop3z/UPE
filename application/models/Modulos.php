@@ -97,17 +97,18 @@ class Modulos extends CI_Model {
         $this->db->delete('Modulos', array('CodigoDiplomado' => $CodigoDiplomado));
     }
 
-    public function ModificarModulo($CodigoModulo, $OrdenModulo, $Estado, $CodigoDiplomados, $CodigoTurnos, $UsuarioModifica, $IPModifica, $FechaModifica, $Comentarios= null) {
+    public function ModificarModulo($CodigoModulo, $NombreModulo, $OrdenModulo, $Estado, $UsuarioModifica, $IPModifica,$FechaModifica, $CodigoTurnos,  $CodigoDiplomados, $Comentarios) {
        try{
         $data = array(
+            'NombreModulo'=>$NombreModulo,
             'OrdenModulo' => $OrdenModulo,
             'Estado' => $Estado,
-            'CodigoDiplomados' => $CodigoDiplomados,
-            'CodigoTurnos' => $CodigoTurnos,
             'UsuarioModifica' => $UsuarioModifica,
             'IPModifica' => $IPModifica,
             'FechaModifica' => $FechaModifica,
-            'Comentarios' => $Comentarios
+            'CodigoTurnos' => $CodigoTurnos,
+            'CodigoDiplomados' => $CodigoDiplomados,
+            'Comentarios' => $Comentarios            
         );
         $this->db->where('CodigoModulo', $CodigoModulo);
         $this->db->update('Modulos', $data);
