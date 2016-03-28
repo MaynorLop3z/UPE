@@ -41,6 +41,7 @@ $(document).ready(function () {
 
         var formData = new FormData($(".formulario")[0]);
         var message = "";
+//        alert(fileName);
         if (isImage(fileExtension) === true) {
             //hacemos la petición ajax  
             $.ajax({
@@ -63,20 +64,22 @@ $(document).ready(function () {
                     //  var file = $("#imagen")[0].files[0];
                     //fileName = file.name;
 
-                    alert(isImage(fileExtension));
+//                    alert(isImage(fileExtension));
                     if (isImage(fileExtension) === true)
                     {
                         var sizeImg = new Image();
                         //obtenemos el tamaño de la imagen para redirmensionarla si no es del tamaño adecuado
                         sizeImg.src = "/UPE/bootstrap/images/publicaciones/" + fileName;
-                        alert(sizeImg.width);
+//                        alert(sizeImg.width);
                         if (sizeImg.width < 500) {
                             $(".showImage").html("<img  align=center src='/UPE/bootstrap/images/publicaciones/" + fileName + "' />");
-                            alert("if");
+//                            alert("if");
                         } else {
                             $(".showImage").html("<img width ='500' heigth='100' src='/UPE/bootstrap/images/publicaciones/" + fileName + "' />");
-                            alert("else");
+//                            alert("else");
                         }
+                        $('#nombreImg').val(fileName);
+                        $('#extImg').val(fileExtension);
                         message = $("<span class='success'>La imagen ha subido correctamente.</span>");
                         showMessage(message);
 
@@ -93,7 +96,7 @@ $(document).ready(function () {
 //        si el archivo que se intenta subir no es un img
         else {
 
-            alert("in error");
+//            alert("in error");
             message = $("<span class='error'>Ha ocurrido un error, El archivo no es una Imagen.</span>");
             showMessage(message);
         }
@@ -116,19 +119,19 @@ $(document).ready(function () {
         switch (extension.toLowerCase())
         {
             case 'jpg':
-                alert("case");
+//                alert("case");
                 return true;
                 break;
             case 'gif':
-                alert("case");
+                //alert("case");
                 return true;
                 break;
             case 'png':
-                alert("case");
+                //alert("case");
                 return true;
                 break;
             case 'jpeg':
-                alert("case");
+                //alert("case");
                 return true;
                 break;
             default:
@@ -140,23 +143,27 @@ $(document).ready(function () {
 
 $('#botones').submit(function (event)
 {
-alert(document.getElementById("nombreImg").value);
+//alert(document.getElementById("nombreImg").value);
 //    alert(document.getElementById("extImg").value);
-
+   alert("Entra");
     event.preventDefault();
     var $form = $(this), Titulo = $form.find("input[name='titulo']").val(),
             Contenido = $form.find("textarea[name='contenido']").val(),
             url = $form.attr("action"),
-           Nombre = $form.find('input[id=nombreImg]').val(),
-            Extension = $form.find('input[name=extenImg]').val();
+            Nombre = $form.find("input[name='nombreImg']").val(),
+            Extension = $form.find("input[name='extImg']").val();
+    alert(Contenido);
+    alert(url);
+    alert(Nombre);
+    alert(Extension);
 
     var posting = $.post(url, {
         Titulo: Titulo,
         Contenido: Contenido,
-       Nombre: Nombre,
-       Extension: Extension
+        Nombre: Nombre,
+        Extension: Extension
     });
-    alert(posting);
+    //alert(posting);
     posting.done(function (data) {
         if (data !== null) {
             var obj = jQuery.parseJSON(data);
@@ -165,7 +172,7 @@ alert(document.getElementById("nombreImg").value);
     });
     posting.fail(function (data) {
         var obj = jQuery.parseJson(data);
-        alert(obj.Error);
+        //alert(obj.Error);
     });
 });
 

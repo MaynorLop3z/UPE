@@ -32,7 +32,7 @@ class Publicaciones extends CI_Model {
 
     public function listarPublicacionesUsuario($UsuarioPublica) {
         $this->db->select('CodigoPublicacion, '
-                 . 'FechaPublicacion, '
+                . 'FechaPublicacion, '
                 . 'Titulo, '
                 . 'Contenido, '
                 . 'ParticipantePublica, '
@@ -52,7 +52,7 @@ class Publicaciones extends CI_Model {
     public function listarPublicacionesGrupoPeriodo($CodigoGrupoPeriodo) {
         $this->db->select('CodigoPublicacion, '
                 . 'UsuarioPublica, '
-                 . 'FechaPublicacion, '
+                . 'FechaPublicacion, '
                 . 'Titulo, '
                 . 'Contenido, '
                 . 'ParticipantePublica, '
@@ -71,7 +71,7 @@ class Publicaciones extends CI_Model {
     public function listarPublicacionesGrupoParticipantes($GrupoParticipantes) {
         $this->db->select('CodigoPublicacion, '
                 . 'UsuarioPublica, '
-                 . 'FechaPublicacion, '
+                . 'FechaPublicacion, '
                 . 'Titulo, '
                 . 'Contenido, '
                 . 'ParticipantePublica, '
@@ -90,7 +90,7 @@ class Publicaciones extends CI_Model {
     public function listarPublicacionesTipoPublicacion($CodigoTipoPublicacion) {
         $this->db->select('CodigoPublicacion, '
                 . 'UsuarioPublica, '
-                 . 'FechaPublicacion, '
+                . 'FechaPublicacion, '
                 . 'Titulo, '
                 . 'Contenido, '
                 . 'ParticipantePublica, '
@@ -106,7 +106,7 @@ class Publicaciones extends CI_Model {
         return $resultado;
     }
 
-    public function CrearPublicacion($UsuarioPublica, $FechaPublicacion, $Titulo, $Contenido, $Estado, $CodigoGrupoPeriodo, $CodigoGrupoPeriodoUsuario, $CodigoGrupoParticipantes, $CodigoTipoPublicacion, $ParticipantePublica ) {
+    public function CrearPublicacion($UsuarioPublica, $FechaPublicacion, $Titulo, $Contenido, $Estado, $CodigoGrupoPeriodo, $CodigoGrupoPeriodoUsuario, $CodigoGrupoParticipantes, $CodigoTipoPublicacion, $ParticipantePublica) {
         $data = array(
             'UsuarioPublica' => $UsuarioPublica,
             'FechaPublicacion' => $FechaPublicacion,
@@ -122,7 +122,7 @@ class Publicaciones extends CI_Model {
         $this->db->insert('Publicaciones', $data);
         $insert_id = $this->db->insert_id();
         $data['CodigoPublicacion'] = $insert_id;
-        
+
         return $data;
     }
 
@@ -147,6 +147,22 @@ class Publicaciones extends CI_Model {
         );
         $this->db->where('CodigoPublicacion', $CodigoPublicacion);
         $this->db->update('Publicaciones', $data);
+    }
+
+    public function CrearArchivo($Ruta, $Nombre, $Extension, $Estado, $CodigoUsuarios, $CodigoPublicaciones, $UsuarioModifica, $IpModifica, $FechaModifica) {
+        $data = array(
+            //            'CodigoArchivos' => null,
+            'Nombre' => $Nombre,
+            'Ruta' => $Ruta,
+            'Extension' => $Extension,
+            'CodigoUsuarios' => $CodigoUsuarios,
+            'CodigoPublicaciones' => $CodigoPublicaciones,
+            'Estado' => $Estado,
+            'UsuarioModifica' => $UsuarioModifica,
+            'IpModifica' => $IpModifica,
+            'FechaModifica' => $FechaModifica
+        );
+        $this->db->insert('Archivos', $data);
     }
 
 }
