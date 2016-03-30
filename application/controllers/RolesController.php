@@ -132,57 +132,58 @@ class RolesController extends CI_Controller {
         }
     }
 
-    /*
-     *  public function editarUsuario() {
-      try {
-      if ($this->input->post()) {
-      $codigoUser = $this->input->post('CodigoUsuario');
-      if ($codigoUser != null) {
-      $codigoUsuario = $codigoUser;
-      $nombrePersonaUsuario = $this->input->post('UsuarioNombreReal');
-      $contraseniaUsuario = $this->input->post('UsuarioPassword');
-      $comentarios = $this->input->post('Comentarios');
-      $correo = $this->input->post('UsuarioEmail');
-      $nombreUsuario = $this->input->post('UsuarioNombre');
-      $ip = $this->session->userdata('ipUserLogin');
-      $userModifica = $this->session->userdata('codigoUserLogin');
-      //La fecha de modificaciòn del registro se coloca en el modelo para evitar enviar mas parametros.
-      $this->load->model('Usuarios');
-      $arrayData = $this->Usuarios->editarUsuario($codigoUsuario, $nombreUsuario, $contraseniaUsuario, $nombrePersonaUsuario, $correo, $userModifica, $ip, $comentarios);
-      echo json_encode($arrayData);
-      }
-      }
-      } catch (Exception $e) {
-      $data = array(
-      'Error' => $ex->getMessage()
-      );
-      echo json_encode($data);
-      }
-      }
-     */
+      public function AplyRmvRights() {
+        try {
+            if ($this->input->post()) {
+                if ($this->input->post('rolesRightsSelect')) {
 
-    public function listarByModulo() {
-        if ($this->input->post('idModulo')) {
-            $idModulo = $this->input->post('­idModulo');
-            $Periodos = $this->Periodos->lis­tarPeriodosByModulo($idModulo);
-            $cadena = '';
-            foreach ($Periodos as $period) {
-                $cadena .='<tr id="Periodo' . $period->CodigoPerio­do . '">';
-                $cadena .= '<th class="fip">' . $period->FechaInicio­Periodo . '</th>';
-                $cadena .= '<th class="ffp">' . $period->FechaFinPer­iodo . '</th>';
-                $cadena .= '<th class="ffp">' . $period->FechaFinPer­iodo . '</th>';
-                if ($period->Estado == 't') {
-                    $cadena .= '<th class="ep">Activo</­th>';
+                    $requestArray = (($this->input->post('rolesRightsSelect')));
+                    $codeR = $this->Rol->insertDeleteRightsByRol($requestArray);
+                    echo $codeR;
                 } else {
-                    $cadena .= '<th class="ep">Inactivo<­/th>';
+                    
                 }
-                $cadena .= '<th class="cp">' . $period­->Comentario . '</th>';
-                $cadena .= '<th><button id="PeriodoE' . $period->CodigoPerio­do . '" onclick="EditPeriodo­Show(this)" title="Editar Periodo" class="btn_modificar­_periodo btn btn-success"><span class="glyphicon glyphicon-pencil"></­span> </button>';
-                $cadena .= '<button id="PeriodoDEL' . $period->CodigoPerio­do . '" onclick="DeletePerio­doShow(this)" title="Eliminar Periodo" class="btn_eliminar_­periodo btn btn-danger"><span class="glyphicon glyphicon-trash"></­span></button>';
-                $cadena .= '<button id="PeriodoGES' . $period->CodigoPerio­do . '" onclick="GestionPeri­odoShow(this)" title="Gestionar Periodo" class="btn_gestionar­_periodo btn btn-info"><span class="glyphicon glyphicon-cog"></­span></button></th></­tr>';
             }
-            echo $cadena;
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
         }
     }
+    
+    public function rightByRol() {
+        try {
+            if ($this->input->post()) {
+                $codigo = $this->input->post('cod_r');
+                if ($codigo != null) {
+                    $permisosList = $this->Rol->listarPermisos();
+                    //Asignacion del array de roles al nuevo arreglo
+                    $RightsByRol = $this->Rol->getRightsByRol($codigo);
+
+                    foreach ($permisosList as $per) {
+                        ?> 
+                        <tr  id="tr<?php echo $per->CodigoPermisos ?>">
+                            <td class="nombre_Per" ><?= $per->NombrePermiso ?></td>
+                            <td class="nombre_controller_cont" ><?= $per->controllerContainer ?></td>
+                            <td style="text-align:center"  class="gestion_RbR">
+
+                                <input class='checkRr'  data-rrd='<?php echo json_encode($per) ?>' type="checkbox" <?php
+                                       foreach ($RightsByRol as $rr) {
+                                           if ($rr->CodigoPermisos == $per->CodigoPermisos) {
+                                               ?>checked="true"<?php
+                                           }
+                                       }
+                                       ?> value="">
+                            </td>
+                        </tr>
+                        <?php
+                    }
+                }
+            } else {
+                
+            }
+        } catch (Exception $exc) {
+            echo json_encode($exc);
+        }
+    }
+    
 
 }

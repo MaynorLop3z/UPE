@@ -84,4 +84,96 @@ class Rol extends CI_Model {
         }
     }
 
+    public function listarPermisos() {
+        try {
+            $this->db->select('CodigoPermisos, NombrePermiso, EstadoPermisos, controllerContainer');
+            $this->db->from('Permisos');
+            $this->db->where('EstadoPermisos', TRUE);
+            $consulta = $this->db->get();
+            $resultado = $consulta->result();
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+        return $resultado;
+    }
+
+    public function getRightsByRol($codigoRol) {
+        try {
+            $stringQuery = 'SELECT "Permisos"."NombrePermiso","RolesPermisos"."CodigoPermisos" FROM "RolesPermisos" INNER JOIN  "Permisos" ON "RolesPermisos"."CodigoPermisos"= "Permisos"."CodigoPermisos" WHERE "EstadoPermisos"=TRUE AND "RolesPermisos"."CodigoRol"=';
+            $stringQuery = $stringQuery . $codigoRol;
+            $stringQuery = $stringQuery . 'ORDER by "Permisos"."NombrePermiso" ASC';
+            $consulta = $this->db->query($stringQuery);
+            if ($consulta != null) {
+                $resultado = $consulta->result();
+            } else {
+                
+            }
+            return $resultado;
+        } catch (Exception $exc) {
+            return $exc->getTraceAsString();
+        }
+    }
+
+    public function insertDeleteRightsByRol($RightsRolesa) {
+        try {
+            $codRol;
+            $rolesRightsDB;
+            $rightEncontrado = FALSE;
+            $rolesRights = $object = json_decode(json_encode(($RightsRolesa)), FALSE);
+            if ($rolesRights != null && count($rolesRights) > 0) {
+                foreach ($rolesRights as $rolRight) {
+                    $codRol = $rolRight->CodigoRol;
+                }
+
+
+                $rolesRightsDB = $this->getRightsByRol($codRol);
+            }
+
+            foreach ($rolesRights as $rolRight) {
+
+                if ($rolRight->Sta == AGREGA_REG) {
+                    //Comprobar que el rol no tenga ese permiso  
+                    if ($rolesRightsDB != null && count($rolesRightsDB) > 0) {
+                        foreach ($rolesRightsDB as $rolRightDB) {
+                            if ($rolRightDB->CodigoPermisos == $rolRight->CodigoPermisos) {
+                                $rightEncontrado = TRUE;
+                                break;
+                            } else {
+                                $rightEncontrado = FALSE;
+                            }
+                        }
+                    } else {
+                        
+                    }
+                    if ($rightEncontrado) {
+                        
+                    } else {
+                        $data = array(
+                            'CodigoPermisos' => $rolRight->CodigoPermisos,
+                            'CodigoRol' => $rolRight->CodigoRol,
+                        );
+                        $this->db->insert('RolesPermisos', $data);
+                    }
+                } else if ($rolRight->Sta == ELIMINA_REG) {
+                    $data = array(
+                        'CodigoPermisos' => $rolRight->CodigoPermisos,
+                        'CodigoRol' => $rolRight->CodigoRol,
+                    );
+                    $this->db->delete('RolesPermisos', $data);
+                    if ($this->db->affected_rows() == 1) {
+                        $eliminado = true;
+                    }
+                }
+            }
+            //Rutina para insertar
+            //$this->db->insert('UsuarioRoles', $data);
+            // $insert_id = $this->db->insert_id();
+            // $data['CodigoUsuario'] = $insert_id;
+            //Rutina para eliminar
+            return $codRol;
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
 }

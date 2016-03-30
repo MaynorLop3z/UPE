@@ -35,7 +35,7 @@ $("#tableRol").on("keypress", "#txtEditRol", function (e) {
 });
 
 $("#tableRol").on("blur", "#txtEditRol", function (e) {
-    
+
     var trRol = $(this).parent().parent();
 
     var dataR = trRol.data("rold");
@@ -52,10 +52,13 @@ $("#tableRol").on("click", ".btn_eliminar_rol", function () {
     codigoR = dataR.CodigoRol;
     $("#rolElimina").modal('show');
 });
-$('.btn_rls_user').on('click', function (event) {
-    codigoUsuario = this.id;
-    codigoUsuario = codigoUsuario.substring(6);
-    $("#usuarioRoles").modal('show');
+
+$("#tableRol").on("click", ".btn_permisos_rol", function () {
+    var trRol = $(this).parent().parent().parent();
+
+    var dataR = trRol.data("rold");
+    codigoR = dataR.CodigoRol;
+    $("#rolesPermisos").modal('show');
 });
 
 
@@ -71,17 +74,17 @@ $('#usuarioModifica').on('show.bs.modal', function (event) {
     $('#txtAreaUserComent').val(dataU.Comentarios);
 });
 
-$('#usuarioRoles').on('show.bs.modal', function (event) {
-    var url = 'UsuarioController/rolByUsr/';
-    var posting = $.post(url, {cod_usr: codigoUsuario});
+$('#rolesPermisos').on('show.bs.modal', function (event) {
+    var url = 'RolesController/rightByRol/';
+    var posting = $.post(url, {cod_r: codigoR});
 
     posting.done(function (data) {
         if (data !== null) {
-            $("#bodyTableUsrRol").html(data);
+            $("#bodyTableRolRights").html(data);
         }
     });
-    posting.fail(function (data) {
-        alert("error");
+    posting.fail(function (xhr, textStatus, errorThrown) {
+        alert("error" + xhr.responseText);
     });
 });
 
@@ -120,13 +123,6 @@ $("#frmEliminarRol").submit(function (event) {
     });
 });
 
-$('#usuarioElimina').on('show.bs.modal', function (event) {
-
-    var tr = $('#tr' + codigoUsuario);
-    var dataU = tr.data("userd");
-    $('#nombreUserEliminar').html(dataU.Nombre);
-});
-
 $('#txtPagingSearchUsr').keypress((function (e) {
     if (e.which == 13) {
 
@@ -150,6 +146,48 @@ $('#txtPagingSearchUsr').keypress((function (e) {
         });
     }
 }));
+
+
+$("#frmRolRight").submit(function (event) {
+    event.preventDefault();
+    var url = 'RolesController/AplyRmvRights/';
+    jsonRolsRights = [];
+
+    $('#bodyTableRolRights tr').each(function () {
+        var checkRr = $(this).find(".gestion_RbR").find(".checkRr");
+        var r = checkRr.data("rrd");
+        if (r != null) {
+            rightObj = {};
+            rightObj ["CodigoRol"] = codigoR;
+            rightObj ["CodigoPermisos"] = r.CodigoPermisos;
+
+            if (checkRr.is(":checked"))
+            {
+                rightObj ["Sta"] = "add";
+            } else {
+                rightObj ["Sta"] = "del";
+            }
+
+            jsonRolsRights.push(rightObj);
+        }
+    });
+    jsonString = JSON.stringify(jsonRolsRights);
+
+    var posting = $.post(url, {"rolesRightsSelect": jsonRolsRights});
+    posting.done(function (data) {
+        if (data !== null) {
+            $("#rolesPermisos").modal('toggle');
+
+//            $('#tableUsers').find('#tr' + codigoUsuario).fadeOut("slow");
+//            $('#tableUsers').find('#tr' + codigoUsuario).remove();
+        } else {
+
+        }
+    });
+    posting.fail(function (xhr, textStatus, errorThrown) {
+        alert("error" + xhr.responseText);
+    });
+});
 
 
 

@@ -169,7 +169,7 @@ $('#txtPagingSearchUsr').keypress((function (e) {
 
 $("#frmRolUser").submit(function (event) {
     event.preventDefault();
-    var url = 'http://localhost/UPE/index.php/UsuarioController/AplyRmvRols/';
+    var url = 'UsuarioController/AplyRmvRols/';
     jsonRolsUsr = [];
 
     $('#bodyTableUsrRol tr').each(function () {
@@ -194,7 +194,7 @@ $("#frmRolUser").submit(function (event) {
 
     var posting = $.post(url, {"rolesUserSelect": jsonRolsUsr});
     posting.done(function (data) {
-        if (data) {
+        if (data!==null) {
             $("#usuarioRoles").modal('toggle');
             
 //            $('#tableUsers').find('#tr' + codigoUsuario).fadeOut("slow");
