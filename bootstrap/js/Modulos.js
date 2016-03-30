@@ -20,34 +20,37 @@ function delMo(fila){
 
 
 // modificar  Modulo ----------->
-$('.btn_modificar_Mod').on('show.bs.modal',function(event){
-    var Mod = $('#Mod'+ codigoModulo);
-    var dataM = Mod.data("ModM");
+$('#ModificarModulo').on('show.bs.modal', function(event){
+    var mod = $('#Mod'+ codigoModulo);
+    
+    
+    var dataM = mod.data("Modm");
+    
     
    $('#ModuloNombreEdit').val(dataM.NombreModulo);
-   $('#ModuloOrdenEdit').val(dataM.ordenM);
+   $('#ModuloOrdenEdit').val(dataM.OrdenModulo);
    $('#EstadoE').val(dataM.Estado);
-   $('#TurnoEdit').val(dataM.Turno);
-   $('#DiplomadonameEdit').val(dataM.Diplomadoname);
+   $('#TurnoEdit').val(dataM.CodigoTurnos);
+   $('#DiplomadonameEdit').val(dataM.CodigoDiplomados);
    $('#ComentarioModEdit').val(dataM.Comentarios);
-//  
-
 });
+
 $("#formgrdMo").submit(function(event){
     event.preventDefault();
     var $form = $(this), ModuloNombre = $form.find("input[name='NombreModulo']").val(),
     ModuloOrden = $form.find("textarea[name='ordenM']").val(),
     Estado = $form.find("input[name='Activo']:checked").val(),// para ver si el checked  es la falla
     Turno= $form.find("select[name='Turno']").val(),
-    NombreDiplomado = $form.find("select[name='Diplomadoname']").val(),
+    CodDiplomado = $form.find("select[name='Diplomadoname']").val(),
     ComentarioMod = $form.find("textarea[name='Comentarios']").val(),
     url = $form.attr("action");
+    alert(CodDiplomado);
              var posting = $.post(url, { 
                ModuloNombre:ModuloNombre,
                ModuloOrden:ModuloOrden,
                Estado:Estado,
                Turno:Turno,
-               NombreDiplomado:NombreDiplomado,
+               CodDiplomado:CodDiplomado,
                ComentarioMod:ComentarioMod 
            });
            if(posting === null){
@@ -98,19 +101,79 @@ $("#formgrdMo").submit(function(event){
 
 
 // modificar  Modulo ----------->
-$('.btn_modificar_Mod').on('show.bs.modal',function(event){
-    var Mod = $('#Mod'+ codigoModulo);
-    var dataM = Mod.data("Modd");
+$("#formEditMod").submit(function(event){
+    event.preventDefault();
+    var $form = $(this),
+    ModuloNombre =  $form.find("input[name='NombreModulo']").val(),
+    CodigoModulo=codigoModulo,
+    ModuloOrden = $form.find("textarea[name='ordenM']").val(),
+    Estado = $form.find("input[name='Activo']:checked").val(),
+    Turno = $form.find("select[name='Turno']").val(),
+    CodDiplomado = $form.find("select[name='Diplomadoname']").val(),
+    ComentarioMod = $form.find("textarea[name='Comentarios']").val(),
+    url = $form.attr("action");
+   
     
-//    $('#ModuloEditNombre').val(dataM.NombreModulo);
-//    $('#ModuloEditOrden').val(dataM.OrdenModulo);
-//    $('#Estado').val(dataM.Estado);
-//    $('#TurnoEDit').val(dataM.CodigoTurno);
-//    $('#NombreEditDiplomado').val(dataM.CodigoDiplomado);
-//    $('#ComentarioEditMod').val(dataM.Comentarios);
-
-
+    var posting= $post(url,{
+        CodigoModulo:CodigoModulo,
+        ModuloNombre:ModuloNombre,
+        ModuloOrden:ModuloOrden,
+        Estado:Estado,
+        Turno:Turno,
+        CodDiplomado: CodDiplomado,
+        ComentarioMod:ComentarioMod
+          
+    });
+    
+    posting.done(function (data){
+        
+        if(data !==null){
+            var obj = JQuery.parseJSON(data);
+            var fila;
+             fila = fila +'<td class=NombreMod>'+ obj.NombreModulo +'</td>';
+             fila = fila + '<td class=ordenMo>'+ obj.OrdenModulo +'</td>';
+             fila = fila + '<td class=Estado>'+obj.Estado + '</td>'; 
+            fila = fila + '<td class=TurnoM>' + obj.CodigoTurno + '</td>';
+            fila = fila + '<td class=DipName>' + obj.CodigoDiplomado + '</td>';
+            fila = fila + '<td class=ComenMo>' + obj.Comentarios + '</td>';
+            fila = fila + '<td class=gestion_Mod>';
+            fila = fila + '<button id="ModEdit' + obj.CodigoModulo + '" onclick="editModulo(this)" title="Editar Modulo" class="btn_modificar_Mod btn btn-success"><span class="glyphicon glyphicon-pencil"></span></button>';
+            fila = fila + '<button id="ModDel' + obj.CodigoModulo +'" onclick="delMo(this)" title="Eliminar Modulo" class="btn_eliminar_Mod btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>';
+           '</td>'; 
+             
+            
+         $(document).on("click", "#ModEdit" + obj.CodigoModulo.toString(), function() {
+                codigoModulo = obj.CodigoModulo;
+                $("#ModificarModulo").modal('toggle');
+                 });
+         $(document).on("click", "#ModDel" + obj.CodigoModulo.toString(), function() {
+                codigoModulo = obj.CodigoModulo;
+                $("#EliminarModulo").modal('toggle');
+           });     
+           $('#tableModulos > tbody').find('#Mod' + obj.CodigoModulo).html(fila);
+            $("#ModificarModulo").modal('toggle');
+        }
+        
+             
+    });
+    
+      posting.fail(function(data){
+                var obj = jQuery.parseJSON(data);
+                alert(obj.Error);
+                
+            
+            });
+    
+    
+    
+    
+    
+    ;
+    
+    
+    
     
 });
+
 
  

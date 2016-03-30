@@ -12,7 +12,7 @@ class PublicacionesController extends CI_Controller {
 //        $this->load->database();
 //$this->load->helper(array('form', 'url'));
         $this->load->model('Publicaciones');
-        $this->load->model('archivos');
+        ///$this->load->model('archivos');
     }
 
     public function index() {
@@ -57,19 +57,22 @@ class PublicacionesController extends CI_Controller {
             if ($this->input->post()) {
                 $usuarioPublica = $this->session->userdata("codigoUserLogin");
                 $FechaPublicacion = date('Y-m-d');
-                $tituloP = $this->input->post('titulo');
-                $contenidoP = $this->input->post('contenido');
+                $tituloP = $this->input->post('Titulo');
+                $contenidoP = $this->input->post('Contenido');
+                $nambre = $this->input->post('Nombre');
+                //echo $nambre;
                 $arrayDataPublicacion = $this->Publicaciones->CrearPublicacion($usuarioPublica, $FechaPublicacion, $tituloP, $contenidoP, TRUE, null, null, null, 1, null);
                 $CodigoPublicaciones = $arrayDataPublicacion['CodigoPublicacion'];
 //ingresar los datos del archivo a la bd
-                $nambre = $this->input->post('nombre');
+                
                 $test = $nambre;
-                $ext = $this->input->post('ext');
+                //echo ' test:'.$nambre;
+                $ext = $this->input->post('Extension');
                 $Ruta = "/images/publicaciones/" . $test;
                 $Estado = True;
                 $CodigoUsuarios = $this->session->userdata("codigoUserLogin");
                 $ipPublica = $this->session->userdata("ipUserLogin");
-                 $this->archivos->CrearArchivo($Ruta, $test, $ext, $Estado, $CodigoUsuarios, $CodigoPublicaciones, $usuarioPublica, $ipPublica, $FechaPublicacion);
+                 $this->Publicaciones->CrearArchivo($Ruta, $test, $ext, $Estado, $CodigoUsuarios, $CodigoPublicaciones, $usuarioPublica, $ipPublica, $FechaPublicacion);
 
 //echo json_encode($aa);
             }

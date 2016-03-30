@@ -28,13 +28,13 @@
                         </form>
 
                         <div>
-                            <form class="form-group-lg" id="botones " method="post" action="<?php echo base_url() ?>index.php/PublicacionesController/subirBd/">
+                            <form class="form-group-lg" id="botones" method="post" action="<?php echo base_url() ?>index.php/PublicacionesController/subirBd/">
                                 <!--en las lineas de abajo esta el cuerpo de la publicacion-->
                                 <fieldset> 
                                     <label for="titulo" class="col-lg-3 control-label">Titulo:</label> 
                                     <input type="text" class="form-control"  placeholder="Titulo de la publicacion"  name="titulo">
-                                    <input type="hidden" id="nombreImg" name="nameImg" value="">
-                                    <input type="hidden" id="extImg" name="extenImg" value="">
+                                    <input type="hidden" id="nombreImg" name="nombreImg" value="">
+                                    <input type="hidden" id="extImg" name="extImg" value="">
                                     <br>
                                     <label for="contenido" class="col-lg-3 control-label">Contenido:</label>
                                     <textarea  class="form-control"  placeholder="Contenido" name="contenido" id=""></textarea>

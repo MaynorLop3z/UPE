@@ -92,26 +92,26 @@
                         <div class="form-group">
                             <label for="nameModuloEdit" class="col-lg-3 control-label">Nombre Del Modulo:</label>
                             <div class="col-lg-9">
-                                <input type="text" class="form-control" name="NombreModuloEDit" id="ModuloNombreEdit" placeholder="Nombre del Modulo" required>
+                                <input type="text" class="form-control" name="NombreModulo" id="ModuloNombreEdit" placeholder="Nombre del Modulo" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="ModuloOrdenEdit" class="col-lg-3 control-label">Orden</label>
                             <div class="col-lg-9">
-                                <textarea type="text" class="form-control" name="ordenMEdit" id="ModuloOrdenEdit" placeholder="Orden" required></textarea>
+                                <textarea type="text" class="form-control" name="ordenM" id="ModuloOrdenEdit" placeholder="Orden" required></textarea>
                             </div>
                         </div>                     
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Estado</label>
                             <div class="col-lg-9">
-                                <input type="checkbox" id="EstadoE"  name="ActivoE" value="True" > Activo<br>
+                                <input type="checkbox" id="EstadoE"  name="Activo" value="True" > Activo<br>
                             </div>
                         </div>                                                                                       
 
                         <div class="form-group">
                             <label for="Turno" class="col-lg-3 control-label">Turno:</label>
                             <div class="col-lg-9">
-                                <select class ="form-control" id="TurnoEdit" name="TurnoEdit">                                          
+                                <select class ="form-control" id="TurnoEdit" name="Turno">                                          
                                     <?php
                                     foreach ($Turno as $TurMo) { //Aqui para seleccionar el Turno a que Pertenece
                                         ?>
@@ -125,7 +125,7 @@
                             </div>
                         </div>
                          <!-- Se quita Diplomados ya que debe ser automatico-->
-                          <select class ="form-control" id="DiplomadonameEdit" name="DiplomadonameEdit">                                          
+                          <select class ="form-control" id="DiplomadonameEdit" name="Diplomadoname">                                          
                                     <?php
                                     foreach ($Diplomados as $DipMo) { //Aqui para seleccionar el Turno a que Pertenece
                                         ?>
@@ -136,16 +136,11 @@
                                     ?>
 
                                 </select>
-                         
-                         
-                         
-                         
-                         
-                         
+                                                  
                         <div class="form-group">
                             <label for="ComentarioDiplomado" class="col-lg-3 control-label">Comentarios:</label>
                             <div class="col-lg-9">
-                                <textarea id="ComentarioModEdit" name="ComentariosEdit"  type="text" class="form-control"  placeholder="Comentario Modulo" required></textarea>
+                                <textarea id="ComentarioModEdit" name="Comentarios"  type="text" class="form-control"  placeholder="Comentario Modulo" required></textarea>
                             </div>
                         </div>
 
