@@ -86,7 +86,7 @@
         <div class="modal-content">
             <div class="container-fluid ">
                 <button type="button" class="close" id="btnCerrarMo"  data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>      
-                <form  id="formEditMod" action="<?php echo base_url() ?>index.php/ModulosController/editarModulo/" class="form-horizontal" method="post" >
+                <form  id="formEditMod" action="<?php echo base_url()?>index.php/ModulosController/editarModulo/" class="form-horizontal" method="post" >
                     <fieldset>
                         <legend class="modal-header">Nuevo Modulo:</legend> 
                         <div class="form-group">
