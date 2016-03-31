@@ -1,5 +1,6 @@
 <?php $this->load->helper('url'); ?>
 <script src="../bootstrap/js/Participantes.js"></script>
+<!--<script src="../bootstrap/js/jquery.mask.js"></script>-->
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">Gestion de Participantes</h3>

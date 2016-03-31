@@ -1,4 +1,5 @@
 <?php $this->load->helper('url'); ?>
+<script src="../bootstrap/js/jquery.mask.js"></script>
 <!-- Modal Para el Alumno Nuevo  ------------------------------------------------------------------------------------>
 <div id="AlumnoNuevo" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog  modal-lg">
@@ -62,7 +63,7 @@
                                 <div class="form-group">
                                     <label for="AlumnoDUI" class="col-lg-3 control-label">DUI:</label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control" name="NumeroDUI" id="AlumnoDUI" placeholder="Numero de DUI del Alumno" maxlength="10">
+                                        <input type="text" class="form-control" name="NumeroDUI" id="AlumnoDUI" data-mask = "00000000-0" placeholder="Numero de DUI del Alumno" maxlength="10">
                                     </div>
                                     <div class="col-lg-3">
                                         <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
