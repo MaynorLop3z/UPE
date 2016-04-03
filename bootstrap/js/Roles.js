@@ -61,19 +61,6 @@ $("#tableRol").on("click", ".btn_permisos_rol", function () {
     $("#rolesPermisos").modal('show');
 });
 
-
-
-$('#usuarioModifica').on('show.bs.modal', function (event) {
-    var tr = $('#tr' + codigoUsuario);
-    var dataU = tr.data("userd");
-//
-    $('#txtUserModificar').val(dataU.NombreUsuario);
-    $('#txtNombrePersonaModifica').val(dataU.Nombre);
-    $('#Emailmodificar').val(dataU.CorreoUsuario);
-    $('#Passwordmodificar').val(dataU.ContraseniaUsuario);
-    $('#txtAreaUserComent').val(dataU.Comentarios);
-});
-
 $('#rolesPermisos').on('show.bs.modal', function (event) {
     var url = 'RolesController/rightByRol/';
     var posting = $.post(url, {cod_r: codigoR});
@@ -122,31 +109,6 @@ $("#frmEliminarRol").submit(function (event) {
         alert("error");
     });
 });
-
-$('#txtPagingSearchUsr').keypress((function (e) {
-    if (e.which == 13) {
-
-        var data_inic = $('#txtPagingSearchUsr').data("datainic");
-        var data_in = $('#txtPagingSearchUsr').val();
-
-        var url = "UsuarioController/listarUsuariosPorRango/";
-        var posting = $.post(url, {data_ini: data_in});
-
-        posting.done(function (data) {
-            if (data !== null) {
-                var obj = jQuery.parseJSON(data);
-                $('#tableUsers > tbody').remove();
-                $.each(obj, function (k, v) {
-                    console.log(v.Nombre.toString().trim() + " - " + v.CodigoUsuario);
-                });
-            }
-        });
-        posting.fail(function (data) {
-            alert("error");
-        });
-    }
-}));
-
 
 $("#frmRolRight").submit(function (event) {
     event.preventDefault();

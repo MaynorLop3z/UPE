@@ -74,19 +74,16 @@ class Usuariocontroller extends CI_Controller {
                 if ($final != null) {
                     $final = ($final * ROWS_PER_PAGE) - ROWS_PER_PAGE;
                 }
-
                 $Response = array();
                 $Usuarios = $this->Usuarios->listarUsuarios($inicio, $final);
                 foreach ($Usuarios as $user) {
                     array_push($Response, ($user));
                 }
                 $responseDef = json_encode($Response);
-                echo ($responseDef);
             }
+            echo ($responseDef);
         } catch (Exception $exc) {
-            $data = array(
-                'Error' => $ex->getMessage(),
-            );
+            $data = array('Error' => $ex->getMessage());
             echo json_encode($data);
         }
     }

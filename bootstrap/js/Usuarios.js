@@ -142,14 +142,17 @@ $('#usuarioElimina').on('show.bs.modal', function (event) {
     $('#nombreUserEliminar').html(dataU.Nombre);
 });
 
-$('#txtPagingSearchUsr').keypress((function (e) {
-    if (e.which == 13) {
+$("#txtPagingSearchUsr").show().keypress(function (e) {
+    e.stopImmediatePropagation();
+    //e.preventDefault();
+    console.log("ejecucion");
+    if (e.which === 13) {
 
         var data_inic = $('#txtPagingSearchUsr').data("datainic");
         var data_in = $('#txtPagingSearchUsr').val();
 
-        var url = "http://localhost/UPE/index.php/UsuarioController/listarUsuariosPorRango/";
-        var posting = $.post(url, {data_ini: data_in});
+        var url = 'UsuarioController/listarUsuariosPorRango/';
+        var posting = $.post(url, {"data_ini": data_in});
 
         posting.done(function (data) {
             if (data !== null) {
@@ -164,7 +167,7 @@ $('#txtPagingSearchUsr').keypress((function (e) {
             alert("error");
         });
     }
-}));
+});
 
 
 $("#frmRolUser").submit(function (event) {
