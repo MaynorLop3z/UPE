@@ -41,7 +41,6 @@ $(document).ready(function () {
 
         var formData = new FormData($(".formulario")[0]);
         var message = "";
-//        alert(fileName);
         if (isImage(fileExtension) === true) {
             //hacemos la petición ajax  
             $.ajax({
@@ -62,29 +61,20 @@ $(document).ready(function () {
                 //una vez finalizado correctamente
                 success: function (data) {
                     //  var file = $("#imagen")[0].files[0];
-                    //fileName = file.name;
-
-//                    alert(isImage(fileExtension));
+//                    fileName = file.name;
                     if (isImage(fileExtension) === true)
                     {
                         var sizeImg = new Image();
                         //obtenemos el tamaño de la imagen para redirmensionarla si no es del tamaño adecuado
                         sizeImg.src = "/UPE/bootstrap/images/publicaciones/" + fileName;
-//                        alert(sizeImg.width);
-                        if (sizeImg.width < 500) {
-                            $(".showImage").html("<img  align=center src='/UPE/bootstrap/images/publicaciones/" + fileName + "' />");
-//                            alert("if");
-                        } else {
-                            $(".showImage").html("<img width ='500' heigth='100' src='/UPE/bootstrap/images/publicaciones/" + fileName + "' />");
-//                            alert("else");
-                        }
+
+                        $(".showImage").html("<img width ='300' heigth='300' src='/UPE/bootstrap/images/publicaciones/" + fileName + "' />");
                         $('#nombreImg').val(fileName);
                         $('#extImg').val(fileExtension);
                         message = $("<span class='success'>La imagen ha subido correctamente.</span>");
                         showMessage(message);
 
                     }
-
                 },
                 //si ha ocurrido un error
                 error: function () {
@@ -95,8 +85,6 @@ $(document).ready(function () {
         }
 //        si el archivo que se intenta subir no es un img
         else {
-
-//            alert("in error");
             message = $("<span class='error'>Ha ocurrido un error, El archivo no es una Imagen.</span>");
             showMessage(message);
         }
@@ -119,19 +107,15 @@ $(document).ready(function () {
         switch (extension.toLowerCase())
         {
             case 'jpg':
-//                alert("case");
                 return true;
                 break;
             case 'gif':
-                //alert("case");
                 return true;
                 break;
             case 'png':
-                //alert("case");
                 return true;
                 break;
             case 'jpeg':
-                //alert("case");
                 return true;
                 break;
             default:
@@ -143,19 +127,12 @@ $(document).ready(function () {
 
 $('#botones').submit(function (event)
 {
-//alert(document.getElementById("nombreImg").value);
-//    alert(document.getElementById("extImg").value);
-   alert("Entra");
     event.preventDefault();
     var $form = $(this), Titulo = $form.find("input[name='titulo']").val(),
             Contenido = $form.find("textarea[name='contenido']").val(),
             url = $form.attr("action"),
             Nombre = $form.find("input[name='nombreImg']").val(),
             Extension = $form.find("input[name='extImg']").val();
-    alert(Contenido);
-    alert(url);
-    alert(Nombre);
-    alert(Extension);
 
     var posting = $.post(url, {
         Titulo: Titulo,
@@ -163,7 +140,7 @@ $('#botones').submit(function (event)
         Nombre: Nombre,
         Extension: Extension
     });
-    //alert(posting);
+
     posting.done(function (data) {
         if (data !== null) {
             var obj = jQuery.parseJSON(data);
@@ -172,8 +149,7 @@ $('#botones').submit(function (event)
     });
     posting.fail(function (data) {
         var obj = jQuery.parseJson(data);
-        //alert(obj.Error);
-    });
+       });
 });
 
 //function eliminarDiplomado(fila) {
