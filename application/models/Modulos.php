@@ -41,8 +41,7 @@ class Modulos extends CI_Model {
       //  $this->db->where('CodigoModulo',$CodigoModulo);
         $consultaM = $this->db->get();
         $resultadoM = $consultaM->result();
- 
-        return $resultadoM;
+         return $resultadoM;
   }
 
     public function crearModulo($NombreModulo, $OrdenModulo,$CodigoTurno, $Estado ,$CodigoDiplomado, $Comentarios,$IpUserModifica,$UserModifica) {
@@ -104,10 +103,10 @@ class Modulos extends CI_Model {
             'OrdenModulo' => $OrdenModulo,
             'Estado' => $Estado,
             'UsuarioModifica' => $UsuarioModifica,
-            'IPModifica' => $IPModifica,
+            'IpModifica' => $IPModifica,
             'FechaModifica'=>date("Y/m/d"), 
-            'CodigoTurnos' => $CodigoTurnos,
-            'CodigoDiplomados' => $CodigoDiplomados,
+            'CodigoTurno' => $CodigoTurnos,
+            'CodigoDiplomado' => $CodigoDiplomados,
             'Comentarios' => $Comentarios            
         );
         $this->db->where('CodigoModulo', $CodigoModulo);

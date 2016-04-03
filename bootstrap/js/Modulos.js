@@ -1,4 +1,5 @@
 var codigoModulo;
+var  filaEdit;
 
 $("#btnAddModulo").on('click', function () {
     $("#NuevoModulo").modal();
@@ -7,7 +8,7 @@ $("#btnAddModulo").on('click', function () {
 function editModulo(fila) {
     codigoModulo = fila.id;
     filaEdit = fila;
-   codigoModulo = codigoModulo.substring(8);
+     //codigoModulo = codigoModulo.substring(8);
      $("#ModificarModulo").modal('toggle');
 }
 
@@ -19,19 +20,43 @@ function delMo(fila) {
 }
 
 // modificar  Modulo ----------->
-$('#ModificarModulo').on('show.bs.modal', function (event) {
+$('#ModificarModulo').on('show.bs.modal', function (event) {   
+    var mod = $('#mod'+ codigoModulo.substring(8));
+   // codigoModulo = codigoModulo.substring(8);
+   // var Mod = $('#Mod' + codigoModulo);
+//    var dataM = Mod.data("ModM");
+//    alert(Mod.ModuloNombre);
+//    
+var NombreMod = mod.find('.NombreMod').html().toString().trim();
+var ordenMo = mod.find('.ordenMo').html().toString().trim();
+var Estado = mod.find('.Estado').html().toString().trim();
+var TurnoM = mod.find('.TurnoM').html().toString().trim();
+var DipName = mod.find('.DipName').html().toString().trim();
+var ComenMo = mod.find('.ComenMo').html().toString().trim();
+
+
+
+$('#ModuloNombreEdit').val(NombreMod);
+$('#ModuloOrdenEdit').val(ordenMo);
+$('#EstadoE').val(Estado);
+$('#TurnoEdit').val(TurnoM);
+$('#DiplomadonameEdit').val(DipName);
+$('#ComentarioModEdit').val(ComenMo);
+
+
     
-    var Mod = $('#Mod' + codigoModulo);
-    var dataM = Mod.data("ModM");
-    alert(Mod.ModuloNombre);
-    
-    
-    $('#ModuloNombreEdit').val(dataM.NombreModulo);
-    $('#ModuloOrdenEdit').val(dataM.OrdenModulo);
-    $('#EstadoE').val(dataM.Estado);
-    $('#TurnoEdit').val(dataM.CodigoTurnos);
-    $('#DiplomadonameEdit').val(dataM.CodigoDiplomados);
-    $('#ComentarioModEdit').val(dataM.Comentarios);
+//    $('#ModuloNombreEdit').val(dataM.NombreModulo);
+//    $('#ModuloOrdenEdit').val(dataM.OrdenModulo);
+//    $('#EstadoE').val(dataM.Estado);
+//    $('#TurnoEdit').val(dataM.CodigoTurnos);
+//    $('#DiplomadonameEdit').val(dataM.CodigoDiplomados);
+//    $('#ComentarioModEdit').val(dataM.Comentarios);
+});
+
+$("#EliminarModulo").on('show.bs.modal',function(event){
+     var mod = $('#mod'+ codigoModulo.substring(7));
+     var NombreMod = mod.find('.NombreMod').html().toString().trim();
+     $('#nombreModuloDel').html(NombreMod);
 });
 
 $("#formgrdMo").submit(function (event) {
@@ -43,7 +68,7 @@ $("#formgrdMo").submit(function (event) {
             CodDiplomado = $form.find("select[name='Diplomadoname']").val(),
             ComentarioMod = $form.find("textarea[name='Comentarios']").val(),
             url = $form.attr("action");
-    alert(CodDiplomado);
+    //alert(CodDiplomado);
     var posting = $.post(url, {
         ModuloNombre: ModuloNombre,
         ModuloOrden: ModuloOrden,
@@ -68,28 +93,30 @@ $("#formgrdMo").submit(function (event) {
             fila = fila + '<td class="DipName" >' + obj.CodigoDiplomado + '</td>';
             fila = fila + '<td class="ComenMo" >' + obj.Comentarios + '</td>';
             fila = fila + '<td style="text-align:center"  class="gestion_Mod">';
-            fila = fila + '<button id="ModEdit' + obj.CodigoModulo + '" onclick="editModulo(this)" title="Editar Modulo" class="btn_modificar_Mod btn btn-success"><span class="glyphicon glyphicon-pencil"></span></button>';
-            fila = fila + '<button id="ModDe' + obj.CodigoDiplomado + '"onclick="delMo(this)" title="Eliminar Modulo" class="btn_eliminar_Mod btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>';
+            fila = fila + '<button id="btnModiM' + obj.CodigoModulo + '" onclick="editModulo(this)" title="Editar Modulo" class="btn_modificar_Mod btn btn-success"><span class="glyphicon glyphicon-pencil"></span></button>';
+            fila = fila + '<button id="btnDELM' + obj.CodigoDiplomado + '"onclick="delMo(this)" title="Eliminar Modulo" class="btn_eliminar_Mod btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>';
             fila = fila + '</td></tr>';
             $('#tableModulos >tbody').append(fila);
-            var ModMod = $('#tableModulos > tbody').find("#Mod" + obj.CodigoModulo);
-            ModMod.data("Modd".obj);
-            var tdGestionModulos = ModMod.find(".gestion_Mod");
-
-            var divgestionModBtn = $("#gestion_Mod");
-            if (divgestionModBtn !== null) {
-                alert('prueba');
-                var divgestionModBtnClone = divgestionModBtn;
-                divgestionModBtnClone.find(".btn_modificar_Mod").attr("id", "btnModiM" + obj.CodigoModulo);
-                divgestionModBtnClone.find(".btn_eliminar_Mod").attr("id", "btnDELM" + obj.CodigoModulo);
-                tdGestionModulos.html(divgestionModBtnClone);
-
-            }
+//            var ModMod = $('#tableModulos > tbody').find("#Mod" + obj.CodigoModulo);
+//            ModMod.data("Modd".obj);
+//            var tdGestionModulos = ModMod.find(".gestion_Mod");
+//
+//            var divgestionModBtn = $("#gestion_Mod");
+//            if (divgestionModBtn !== null) {
+//                alert('prueba');
+//                var divgestionModBtnClone = divgestionModBtn;
+//                divgestionModBtnClone.find(".btn_modificar_Mod").attr("id", "btnModiM" + obj.CodigoModulo);
+//                divgestionModBtnClone.find(".btn_eliminar_Mod").attr("id", "btnDELM" + obj.CodigoModulo);
+//                tdGestionModulos.html(divgestionModBtnClone);
+//
+//            }
             $("#NuevoModulo").modal('toggle');
         }
     });
-    posting.fail(function () {
-        alert("error");
+    posting.fail(function(xhr, textStatus, errorThrown) {
+      alert("error" + xhr.responseText);
+//    posting.fail(function () {
+//        alert("error");
     });
 });
 
@@ -103,19 +130,20 @@ $("#formgrdMo").submit(function (event) {
 // modificar  Modulo ----------->
 $("#formEditMod").submit(function (event) {
     event.preventDefault();
+
     var $form = $(this),
-            ModuloNombre = $form.find("input[name='NombreModulo']").val(),
-            CodigoModulo = codigoModulo,
+    CodigoModulo = codigoModulo.substring(8),
+    ModuloNombre = $form.find("input[name='NombreModulo']").val(),
             ModuloOrden = $form.find("textarea[name='ordenM']").val(),
-            Estado = $form.find("input[name='Activo']:checked").val(),
+            Estado = $form.find("input[name='Activo']").prop('checked'), // para ver si el checked  es la falla
             Turno = $form.find("select[name='Turno']").val(),
             CodDiplomado = $form.find("select[name='Diplomadoname']").val(),
             ComentarioMod = $form.find("textarea[name='Comentarios']").val(),
             url = $form.attr("action");
 
-
-    var posting = $post(url, {
-        CodigoModulo: CodigoModulo,
+            console.log(CodDiplomado);
+     var posting = $.post(url, {
+         CodigoModulo:CodigoModulo,
         ModuloNombre: ModuloNombre,
         ModuloOrden: ModuloOrden,
         Estado: Estado,
@@ -128,7 +156,7 @@ $("#formEditMod").submit(function (event) {
     posting.done(function (data) {
 
         if (data !== null) {
-            var obj = JQuery.parseJSON(data);
+            var obj = jQuery.parseJSON(data);
             var fila;
             fila = fila + '<td class=NombreMod>' + obj.NombreModulo + '</td>';
             fila = fila + '<td class=ordenMo>' + obj.OrdenModulo + '</td>';
@@ -142,11 +170,11 @@ $("#formEditMod").submit(function (event) {
             '</td>';
 
 
-            $(document).on("click", "#ModEdit" + obj.CodigoModulo.toString(), function () {
+            $(document).on("click", "#btnModiM" + obj.CodigoModulo.toString(), function () {
                 codigoModulo = obj.CodigoModulo;
                 $("#ModificarModulo").modal('toggle');
             });
-            $(document).on("click", "#ModDel" + obj.CodigoModulo.toString(), function () {
+            $(document).on("click", "#btnDELM" + obj.CodigoModulo.toString(), function () {
                 codigoModulo = obj.CodigoModulo;
                 $("#EliminarModulo").modal('toggle');
             });

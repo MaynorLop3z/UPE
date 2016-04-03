@@ -39,19 +39,21 @@
                     </thead> 
                     <tbody>
                         <?php
-                        foreach ($Modulos as $Mod) {
+                        foreach ($Modulos as $mod) {
                             ?>
                         
-                        <tr data-ModM='<?php echo json_encode($Mod)?>' id="Mod<?php echo $Mod->CodigoModulo?>">
-                                <td class="NombreMod"><?php echo $Mod->NombreModulo ?></td>
-                                <td class="ordenMo"><?php echo $Mod->OrdenModulo?></td>
-                                <td class="Estado"><?php echo $Mod->Estado?></td> 
-                                <td class="TurnoM"><?php echo $Mod->CodigoTurno?></td>
-                                <td class="DipName"><?php echo $Mod->CodigoDiplomado?></td>
-                                <td class="ComenMo"><?php echo $Mod->Comentarios?></td>
+                      
+                        
+                        <tr id="mod<?= $mod->CodigoModulo?>">
+                                <td class="NombreMod"><?= $mod->NombreModulo ?></td>
+                                <td class="ordenMo"><?= $mod->OrdenModulo?></td>
+                                <td class="Estado"><?=  $mod->Estado?></td> 
+                                <td class="TurnoM"><?= $mod->CodigoTurno?></td>
+                                <td class="DipName"><?= $mod->CodigoDiplomado?></td>
+                                <td class="ComenMo"><?= $mod->Comentarios?></td>
                                 <td class="gestion_Mod">
-            <button id="btnModiM<?php echo $Mod->CodigoModulo ?>" onclick="editModulo(this)" title="Editar Modulo" class="btn_modificar_Mod btn btn-success" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-pencil"></span> </button>
-            <button id="btnDELM<?php echo $Mod->CodigoModulo ?>" onclick="delMo(this)" title="Eliminar Modulo" class="btn_eliminar_Mod btn btn-danger"><span class="glyphicon glyphicon-trash" class="btn btn-info btn-lg"></span></button>
+            <button id="btnModiM<?php echo $mod->CodigoModulo ?>" onclick="editModulo(this)" title="Editar Modulo" class="btn_modificar_Mod btn btn-success" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-pencil"></span> </button>
+            <button id="btnDELM<?php echo $mod->CodigoModulo ?>" onclick="delMo(this)" title="Eliminar Modulo" class="btn_eliminar_Mod btn btn-danger"><span class="glyphicon glyphicon-trash" class="btn btn-info btn-lg"></span></button>
                                      </td>
                             </tr>
                             <?php

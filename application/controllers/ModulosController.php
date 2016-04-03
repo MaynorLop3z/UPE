@@ -16,15 +16,12 @@ class ModulosController extends CI_Controller {
     }
 
 public function index() {
-try{
+
         $data['Modulos'] = $this->Modulos->listarModulos();
-        $data['DiplomadosM'] = $this->Modulos->listarDiplomados(); //ESto lo acabo de escribir
-        $data['TurnoM'] = $this->Modulos->listarTurnos(); // Seleccionar el Modulo
+        $data['Diplomados'] = $this->Modulos->listarDiplomados(); //ESto lo acabo de escribir
+        $data['Turno'] = $this->Modulos->listarTurnos(); // Seleccionar el Modulo
         $this->load->view('Modulos',$data);
-    }  catch (Exception $exc){
-        echo $exc->getTraceAsString();
-        
-    }
+    
 }
 
 public function guardarModulo()
@@ -37,9 +34,8 @@ public function guardarModulo()
             $CodigoTurno = $this->input->post('Turno');
             $CodigoDiplomado = $this->input->post('CodDiplomado');
             $Comentarios  = $this->input->post('ComentarioMod');
-          
-       $ip = $this->session->userdata('ipUserLogin');// La ip del usuario que modifica   $userModi
-       $userModi = $this->session->userdata('codigoUserLogin'); //codigo del usuario qeumodifica  $ip,
+            $ip = $this->session->userdata('ipUserLogin');// La ip del usuario que modifica   $userModi
+            $userModi = $this->session->userdata('codigoUserLogin'); //codigo del usuario qeumodifica  $ip,
         
        
 //       $pathView = APPPATH . 'views/VistaAyudaView.php';                    //ESto
@@ -48,7 +44,7 @@ public function guardarModulo()
            
                 
                 
-                $arrayData = $this->Modulos->crearModulo($NombreModulo, $OrdenModulo, $CodigoTurno, $Estado,$CodigoDiplomado, $Comentarios,$ip,$userModi);
+          $arrayData = $this->Modulos->crearModulo($NombreModulo, $OrdenModulo, $CodigoTurno, $Estado,$CodigoDiplomado, $Comentarios,$ip,$userModi);
         }   echo json_encode($arrayData);
         
     } catch (Exception $ex) {
@@ -62,16 +58,16 @@ public function  editarModulo(){
            $codigoMo = $this->input->post('CodigoModulo');
                 $NombreModulo = $this->input->post('ModuloNombre');
                 $OrdenModulo = $this->input->post('ModuloOrden');
-                $Estado = $this->input->post('Estado')===true;
+                $Estado = $this->input->post('Estado');
                 $CodigoTurno = $this->input->post('Turno');
-                $CodigoDiplomado = $this->input->post('Diplomadoname');
+                $CodigoDiplomado = $this->input->post('CodDiplomado');
                 $Comentarios = $this->input->post('ComentarioMod');
                 $ip = $this->session->userdata('ipUserLogin'); // La ip del usuario que modifica   $userModi
                 $userModi = $this->session->userdata('codigoUserLogin'); //codigo del usuario qeumodifica  $ip,
                 
-                $this->load->model('Modulos');
+               // $this->load->model('Modulos');
                 
-                $arrayData = $this->Modulos->ModificarModulo($codigoMo, $NombreModulo,$OrdenModulo,$CodigoTurno,$Estado,$CodigoDiplomado,$Comentarios,$ip,$userModi);
+                $arrayData = $this->Modulos->ModificarModulo($codigoMo, $NombreModulo,$OrdenModulo,$Estado,$CodigoTurno,$CodigoDiplomado,$Comentarios,$ip,$userModi);
            echo json_encode($arrayData);
        
            
