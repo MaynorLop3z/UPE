@@ -25,6 +25,7 @@
 
     </head>
 
+
     <body id="page-top" class="index">
 
         <!-- Navigation -->
@@ -41,7 +42,7 @@
                     <a class="navbar-brand" href="#page-top">UPESYS</a>
                 </div>
 
-                <!-- Collect the nav links, forms, and other content for toggling -->
+                <!-- Nav con opciones principales(login, mas recientes, about) -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li class="hidden">
@@ -80,7 +81,8 @@
             </div>
         </header>
 
-        <!-- Portfolio Grid Section -->
+
+        <!-- Publicaciones  Grid Section -->
         <section id="portfolio">
             <div class="container">
                 <div class="row">
@@ -90,21 +92,35 @@
                     </div>
                 </div>
                 <div class="row">
-                    
-                 <!--Aqui empieza las publicaciones--> 
+
+                    <!--Aqui empieza las publicaciones--> 
                     <div class="col-sm-4 portfolio-item">
                         <a href="#portfolioModal6" class="portfolio-link" data-toggle="modal">
-                            <div class="caption">
-                                <div class="caption-content">
-                                    <i class="fa fa-search-plus fa-3x"></i>
-                                </div>
-                            </div>
-                            <img src="../bootstrap/images/portfolio/submarine.png" class="img-responsive" alt="">
+                            <?php
+                            //$publicacionesMostrar=null;
+                            if($publicacionesMostrar!= null && count($publicacionesMostrar)>0){
+                            foreach ($publicacionesMostrar as $publicacion) {
+                                $iterador = 0;
+                                $iterador ++;
+                            }
+                            ?> 
+                            <?php
+                            foreach ($publicacionesMostrar as $publicacion) {
+                                ?>
+                                <img  src="<?php echo '../bootstrap' . $publicacion['Ruta'] ?>" class="img-responsive" alt="">
+                                <?php
+                            }
+                            }
+                            ?>
+
+
                         </a>
                     </div>
                 </div>
             </div>
         </section>
+
+
 
         <!-- About Section -->
         <section class="success" id="about">
@@ -335,8 +351,8 @@
             </div>
         </div>
         <!--aqui termina la modal de las publicaciones-->
-        
-        
+
+
         <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-content">
                 <div class="close-modal" data-dismiss="modal">
