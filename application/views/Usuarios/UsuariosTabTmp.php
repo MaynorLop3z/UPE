@@ -14,6 +14,7 @@
              
 
         </div>
+        <div id="containerTablePaging">
         <table id="tableUsers" class="table table-bordered table-striped table-hover table-responsive">
             <thead>
                 <tr>
@@ -46,13 +47,14 @@
             <ul class="pager">
                 <li><a href="#">&lt;&lt;</a></li>
                 <li><a href="#">&lt;</a></li>
-                <li><input data-datainic=NO numeric noise key 1004 type="text" value="1" id="txtPagingSearchUsr" name="txtNumberPag" size="5">/<?php echo intval(ceil($ToTalRegistros / ROWS_PER_PAGE)) ?></li>
+                <li><input data-datainic="1" type="text" value="1" id="txtPagingSearchUsr" name="txtNumberPag" size="5">/<?php echo intval(ceil($ToTalRegistros / ROWS_PER_PAGE)) ?></li>
                 <li><a href="#">&gt;</a></li>
                 <li><a href="#">&gt;&gt;</a></li>
                 <li>[<?php echo $PagInicial . "-" . count($Usuarios) . "/" . $ToTalRegistros ?>]</li>
             </ul>
         </div>
-
+            
         <!--<div class="panel-footer">Panel footer</div>-->
-    </div>
+    </div><!--Fin container table paging-->
+</div>
 </div>

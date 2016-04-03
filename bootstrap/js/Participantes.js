@@ -107,7 +107,7 @@ $('#AlumnoVIEWDATA').on('show.bs.modal', function(event) {
     var Descripcion_Alumno = alum.find('.Descripcion_Alumno').html().toString().trim();
     var Comentarios_Alumno = alum.find('.Comentarios_Alumno').html().toString().trim();
     var Direccion_Alumno = alum.find('.Direccion_Alumno').html().toString().trim();
-    var CodPart_Alumno = alum.find('.CodCat_Alumno').html().toString().trim();
+    var CodPart_Alumno = alum.find('.NameCat_Alumno').html().toString().trim();
     $('#AlumViewNombre').html(Nombre_Alumno);
     $('#AlumViewEmail').html(Mail_Alumno);
     $('#AlumViewTFijo').html(TelefonoFijo_Alumno);
@@ -138,7 +138,7 @@ $('#AlumnoEditar').on('show.bs.modal', function(event) {
     var Carrera_Alumno = alum.find('.Carrera_Alumno').html().toString().trim();
     var NivelAcad_Alumno = alum.find('.NivelAcad_Alumno').html().toString().trim();
     var DNombreEncargado_Alumno = alum.find('.NombreEncargado_Alumno').html().toString().trim();
-    //var CodPart_Alumno = alum.find('.CodPart_Alumno').html().toString().trim();
+    var CodPart_Alumno = alum.find('.CodCat_Alumno').html().toString().trim();
     var Descripcion_Alumno = alum.find('.Descripcion_Alumno').html().toString().trim();
     var Comentarios_Alumno = alum.find('.Comentarios_Alumno').html().toString().trim();
     var Direccion_Alumno = alum.find('.Direccion_Alumno').html().toString().trim();
@@ -152,7 +152,7 @@ $('#AlumnoEditar').on('show.bs.modal', function(event) {
     $('#AlumnoCarreraEDIT').val(Carrera_Alumno);
     $('#AlumnoNivelEDIT').val(NivelAcad_Alumno);
     $('#AlumnoNEncargadoEDIT').val(DNombreEncargado_Alumno);
-    //$('#AlumnoCategoriaEDIT').val(CodPart_Alumno);
+    $('#AlumnoCategoriaEDIT').val(CodPart_Alumno);
     $('#AlumnoDescripcionEDIT').val(Descripcion_Alumno);
     $('#AlumnoComentarioEDIT').val(Comentarios_Alumno);
     $('#AlumnoDUIEDIT').val(DUI_Alumno);
@@ -170,6 +170,8 @@ $('#AlumnoEliminar').on('show.bs.modal', function(event) {
 $("#frmADDAlumno").submit(function(event) {
     event.preventDefault();
     var $form = $(this), AlumnoNombre = $form.find("input[name='Nombre']").val(), AlumnoMail = $form.find("input[name='CorreoElectronico']").val(), AlumnoFijo = $form.find("input[name='TelefonoFijo']").val(), AlumnoMovil = $form.find("input[name='TelefonoCelular']").val(), AlumnoDir = $form.find("textarea[name=Direccion]").val(), AlumnoDUI = $form.find("input[name='NumeroDUI']").val(), AlumnoFNac = $form.find("input[name='FechaNacimiento']").val(), AlumnoCarrera = $form.find("input[name='Carrera']").val(), AlumnoNivel = $form.find("input[name='NivelAcademico']").val(), AlumnoNEncargado = $form.find("input[name='NombreEncargado']").val(), AlumnoCategoria = $form.find("select[name=CodigoCategoriaParticipantes]").val(), AlumnoDescripcion = $form.find("textarea[name=Descripcion]").val(), AlumnoComentario = $form.find("textarea[name=Comentarios]").val(), url = $form.attr("action");
+    var categorias = document.getElementById("AlumnoCategoria");
+    var nombreCategoria = categorias.options[categorias.selectedIndex].text;
     var posting = $.post(url, {AlumnoNombre: AlumnoNombre, AlumnoMail: AlumnoMail, AlumnoFijo: AlumnoFijo, AlumnoMovil: AlumnoMovil, AlumnoDir: AlumnoDir, AlumnoDUI: AlumnoDUI, AlumnoFNac: AlumnoFNac, AlumnoCarrera: AlumnoCarrera, AlumnoNivel: AlumnoNivel, AlumnoNEncargado: AlumnoNEncargado, AlumnoCategoria: AlumnoCategoria, AlumnoDescripcion: AlumnoDescripcion, AlumnoComentario: AlumnoComentario});
     posting.done(function(data) {
         if (data !== null) {
@@ -189,7 +191,8 @@ $("#frmADDAlumno").submit(function(event) {
             fila = fila + '<td class="Carrera_Alumno" style="display: none">' + obj.Carrera + '</td>';
             fila = fila + '<td class="NivelAcad_Alumno" style="display: none">' + obj.NivelAcademico + '</td>';
             fila = fila + '<td class="NombreEncargado_Alumno" style="display: none">' + obj.NombreEncargado + '</td>';
-            fila = fila + '<td class="CodCat_Alumno">' + obj.CodigoCategoriaParticipantes + '</td>';
+            fila = fila + '<td class="CodCat_Alumno" style="display: none">' + obj.CodigoCategoriaParticipantes + '</td>';
+            fila = fila + '<td class="NameCat_Alumno">' + nombreCategoria + '</td>';
             fila = fila + '<td class="Descripcion_Alumno">' + obj.Descripcion + '</td>';
             fila = fila + '<td class="Comentarios_Alumno" style="display: none">' + obj.Comentarios + '</td>';
             fila = fila + '<td class="gestion_Alumno">';
@@ -216,6 +219,8 @@ $("#frmADDAlumno").submit(function(event) {
 $("#frmEditarAlumno").submit(function(event) {
     event.preventDefault();
     var $form = $(this), AlumnoCodigo = codigoParticipante.substring(5), AlumnoNombre = $form.find("input[name='Nombre']").val(), AlumnoMail = $form.find("input[name='CorreoElectronico']").val(), AlumnoFijo = $form.find("input[name='TelefonoFijo']").val(), AlumnoMovil = $form.find("input[name='TelefonoCelular']").val(), AlumnoDir = $form.find("textarea[name=Direccion]").val(), AlumnoDUI = $form.find("input[name='NumeroDUI']").val(), AlumnoFNac = $form.find("input[name='FechaNacimiento']").val(), AlumnoCarrera = $form.find("input[name='Carrera']").val(), AlumnoNivel = $form.find("input[name='NivelAcademico']").val(), AlumnoNEncargado = $form.find("input[name='NombreEncargado']").val(), AlumnoCategoria = $form.find("select[name=CodigoCategoriaParticipantes]").val(), AlumnoDescripcion = $form.find("textarea[name=Descripcion]").val(), AlumnoComentario = $form.find("textarea[name=Comentarios]").val(), url = $form.attr("action");
+   var categorias = document.getElementById("AlumnoCategoriaEDIT");
+    var nombreCategoria = categorias.options[categorias.selectedIndex].text;
     var posting = $.post(url, {AlumnoCodigo: AlumnoCodigo, AlumnoNombre: AlumnoNombre, AlumnoMail: AlumnoMail, AlumnoFijo: AlumnoFijo, AlumnoMovil: AlumnoMovil, AlumnoDir: AlumnoDir, AlumnoDUI: AlumnoDUI, AlumnoFNac: AlumnoFNac, AlumnoCarrera: AlumnoCarrera, AlumnoNivel: AlumnoNivel, AlumnoNEncargado: AlumnoNEncargado, AlumnoCategoria: AlumnoCategoria, AlumnoDescripcion: AlumnoDescripcion, AlumnoComentario: AlumnoComentario});
     posting.done(function(data) {
         if (data !== null) {
@@ -234,7 +239,8 @@ $("#frmEditarAlumno").submit(function(event) {
             fila = fila + '<td class="Carrera_Alumno" style="display: none">' + obj.Carrera + '</td>';
             fila = fila + '<td class="NivelAcad_Alumno" style="display: none">' + obj.NivelAcademico + '</td>';
             fila = fila + '<td class="NombreEncargado_Alumno" style="display: none">' + obj.NombreEncargado + '</td>';
-            fila = fila + '<td class="CodCat_Alumno">' + obj.CodigoCategoriaParticipantes + '</td>';
+            fila = fila + '<td class="CodCat_Alumno" style="display: none">' + obj.CodigoCategoriaParticipantes + '</td>';
+            fila = fila + '<td class="NameCat_Alumno">' + nombreCategoria + '</td>';
             fila = fila + '<td class="Descripcion_Alumno">' + obj.Descripcion + '</td>';
             fila = fila + '<td class="Comentarios_Alumno" style="display: none">' + obj.Comentarios + '</td>';
             fila = fila + '<td class="gestion_Alumno">';

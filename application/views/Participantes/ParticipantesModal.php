@@ -35,7 +35,7 @@
                                 <div class="form-group">
                                     <label for="AlumnoFijo" class="col-lg-3 control-label">Telefono Fijo:</label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control" name="TelefonoFijo" id="AlumnoFijo" placeholder="Telefono Fijo del Alumno" maxlength="9" required>
+                                        <input type="text" class="form-control" name="TelefonoFijo" id="AlumnoFijo" data-mask = "0000-0000" placeholder="Telefono Fijo del Alumno" maxlength="9" required>
                                     </div>
                                     <div class="col-lg-3">
                                         <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
@@ -44,7 +44,7 @@
                                 <div class="form-group">
                                     <label for="AlumnoMovil" class="col-lg-3 control-label">Telefono Movil:</label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control" name="TelefonoCelular" id="AlumnoMovil" placeholder="Telefono Celular del Alumno" maxlength="9" required>
+                                        <input type="text" class="form-control" name="TelefonoCelular" id="AlumnoMovil" data-mask = "0000-0000" placeholder="Telefono Celular del Alumno" maxlength="9" required>
                                     </div>
                                     <div class="col-lg-3">
                                         <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
@@ -73,7 +73,7 @@
                                 <div class="form-group">
                                     <label for="AlumnoFNac" class="col-lg-3 control-label">Fecha Nacimiento:</label>
                                     <div class="col-lg-6">
-                                        <input type="date" class="form-control" name="FechaNacimiento" id="AlumnoFNac" placeholder="Fecha de nacimiento del Alumno" required>
+                                        <input type="date" class="form-control" name="FechaNacimiento" id="AlumnoFNac"  placeholder="Fecha de nacimiento del Alumno" required>
                                     </div>
                                     <div class="col-lg-3">
                                         <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
@@ -197,7 +197,7 @@
                                 <div class="form-group">
                                     <label for="AlumnoFijoEDIT" class="col-lg-3 control-label">Telefono Fijo:</label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control" name="TelefonoFijo" id="AlumnoFijoEDIT" placeholder="Telefono Fijo del Alumno" maxlength="9" required>
+                                        <input type="text" class="form-control" name="TelefonoFijo" id="AlumnoFijoEDIT" data-mask = "0000-0000" placeholder="Telefono Fijo del Alumno" maxlength="9" required>
                                     </div>
                                     <div class="col-lg-3">
                                         <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
@@ -206,7 +206,7 @@
                                 <div class="form-group">
                                     <label for="AlumnoMovilEDIT" class="col-lg-3 control-label">Telefono Movil:</label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control" name="TelefonoCelular" id="AlumnoMovilEDIT" placeholder="Telefono Celular del Alumno" maxlength="9" required>
+                                        <input type="text" class="form-control" name="TelefonoCelular" id="AlumnoMovilEDIT" data-mask = "0000-0000" placeholder="Telefono Celular del Alumno" maxlength="9" required>
                                     </div>
                                     <div class="col-lg-3">
                                         <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
@@ -225,7 +225,7 @@
                                 <div class="form-group">
                                     <label for="AlumnoDUIEDIT" class="col-lg-3 control-label">DUI:</label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control" name="NumeroDUI" id="AlumnoDUIEDIT" placeholder="Numero de DUI del Alumno" maxlength="10">
+                                        <input type="text" class="form-control" name="NumeroDUI" id="AlumnoDUIEDIT" data-mask = "00000000-0" placeholder="Numero de DUI del Alumno" maxlength="10">
                                     </div>
                                     <div class="col-lg-3">
                                         <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
