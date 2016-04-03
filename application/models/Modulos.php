@@ -92,8 +92,28 @@ class Modulos extends CI_Model {
         $resultado = $consulta->result();
         return $resultado;
     }
-    public function EliminarModulos($CodigoDiplomado){  //Preguntar para uqe sirve
-        $this->db->delete('Modulos', array('CodigoDiplomado' => $CodigoDiplomado));
+    public function EliminarModulos($CodigoModulo){  //
+        $this->db->delete('Modulos', array('CodigoModulo' => $CodigoModulo));
+    }
+   
+    
+    
+    
+    public function inactivarModulo($CodigoModulo, $ipModifica, $usuarioModifica){
+        try{
+            $data = array(
+                'Estado'=>FALSE,
+                'UsuarioModifica'=>$usuarioModifica,
+                'IpModifica' =>$ipModifica,
+                'FechaModifica' =>date("Y/m/d")
+                );
+                $this->db->where('CodigoModulo',$CodigoModulo);
+                $this->db->update('Modulos',$data);
+                $data['CodigoModulo'] = $CodigoModulo;
+                return $data;
+        }  catch (Exception $exc){
+            $exc->getMessage();
+        }        
     }
 
     public function ModificarModulo($CodigoModulo, $NombreModulo, $OrdenModulo, $Estado, $CodigoTurnos,  $CodigoDiplomados, $Comentarios,  $IPModifica, $UsuarioModifica) {

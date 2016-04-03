@@ -14,7 +14,7 @@ function editModulo(fila) {
 
 function delMo(fila) {
     codigoModulo = fila.id;
-    codigoModulo = codigoModulo.substring(7);
+   // codigoModulo = codigoModulo.substring(7);
     $("#EliminarModulo").modal('toggle');
 
 }
@@ -54,20 +54,23 @@ $('#ComentarioModEdit').val(ComenMo);
 });
 
 $("#EliminarModulo").on('show.bs.modal',function(event){
+    
      var mod = $('#mod'+ codigoModulo.substring(7));
-     var NombreMod = mod.find('.NombreMod').html().toString().trim();
-     $('#nombreModuloDel').html(NombreMod);
+     var Nombre_Mod = mod.find('.NombreMod').html().toString().trim();
+     console.log(Nombre_Mod);
+       $('#nombreModuloDel').html(Nombre_Mod);
 });
 
 $("#formgrdMo").submit(function (event) {
     event.preventDefault();
     var $form = $(this), ModuloNombre = $form.find("input[name='NombreModulo']").val(),
             ModuloOrden = $form.find("textarea[name='ordenM']").val(),
-            Estado = $form.find("input[name='Activo']:checked").val(), // para ver si el checked  es la falla
+            Estado = $form.find("input[name='Activo']").prop('checked'),
             Turno = $form.find("select[name='Turno']").val(),
             CodDiplomado = $form.find("select[name='Diplomadoname']").val(),
             ComentarioMod = $form.find("textarea[name='Comentarios']").val(),
             url = $form.attr("action");
+            //console.log(Estado);
     //alert(CodDiplomado);
     var posting = $.post(url, {
         ModuloNombre: ModuloNombre,
@@ -178,7 +181,7 @@ $("#formEditMod").submit(function (event) {
                 codigoModulo = obj.CodigoModulo;
                 $("#EliminarModulo").modal('toggle');
             });
-            $('#tableModulos > tbody').find('#Mod' + obj.CodigoModulo).html(fila);
+            $('#tableModulos > tbody').find('#mod' + obj.CodigoModulo).html(fila);
             $("#ModificarModulo").modal('toggle');
         }
 
@@ -187,11 +190,32 @@ $("#formEditMod").submit(function (event) {
         posting.fail(function(xhr, textStatus, errorThrown) {
         alert("error" + xhr.responseText);
                 });
-});
+                
+                
+    });           
+                
+                
+                
 
-
-
-
+$("#frmDelMod").submit(function(event) {
+    event.preventDefault();
+    
+    var $form = $(this), CodigoModulo = codigoModulo.substring(7), url = $form.attr("action");
+    var posting = $.post(url, {CodigoModulo: CodigoModulo});
+    posting.done(function(data) {
+        if (data) {
+            var obj = jQuery.parseJSON(data);
+            $("#EliminarModulo").modal('toggle');
+            $("#tableModulos").find('#mod' + CodigoModulo).fadeOut("slow");
+            $("#tableModulos").find('#mod' + CodigoModulo).remove();
+        }
+    });
+    
+     posting.fail(function(xhr, textStatus, errorThrown) {
+      alert("error" + xhr.responseText);
+    });
+ });
+ 
 
    
 

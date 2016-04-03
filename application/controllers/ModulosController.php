@@ -78,8 +78,51 @@ public function  editarModulo(){
     }   
 }
 public function  EliminarModulo(){
+    try {
+        if($this->input->post()){
+            $codigoModulo = $this->input->post('CodigoModulo');
+            if($codigoModulo !=null){
+                $ip = $this->session->userdata('ipUserLogin');
+                $userModifica = $this->session->userdata('codigoModulo');
+                $arrayData = $this->Modulos->inactivarModulo($codigoModulo,$ip,$userModifica);
+                echo json_encode($arrayData);
+                
+                
+                
+            }
+            
+            
+        }
+        
+    } catch (Exception $exc) {
+        $data = array(
+            
+            'Error'=> $ex->getMessage()
+        );
+    echo json_encode($data);
+}}
+
+
+
+
+
+
+
+
+
+//    $eliminado = false;
+//
+//    try{
+//        if($this->input->post()){
+//         $codigo = $this->input->post('CodigoModulo');
+//         $eliminado = $this->Modulos->EliminarModulos($codigo);
+//         echo $eliminado;
+            
     
-}
+    
+    
+    
+
    
     
 public function BuscarModulos(){

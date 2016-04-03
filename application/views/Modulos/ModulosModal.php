@@ -157,12 +157,13 @@
     </div>
 </div>
 <!--Aqui empieza la modal para eliminar diplomados ----------------------------------------------------------------->
+
 <div id="EliminarModulo" data-backdrop="static"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="container-fluid ">
-                <button type="button" class="close btn-lg" data-dismiss="modal" aria-hidden="true">×</button>
-                <form id="frmDelMod" action="<?php echo base_url() ?>index.php/ModuloController/eliminarModulo/" class="form-horizontal" method="post" >
+                <button type="button" class="close btn-lg" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <form id="frmDelMod" action="<?php echo base_url() ?>index.php/ModulosController/EliminarModulo/" class="form-horizontal" method="post" >
                     <fieldset>
                         <legend class="modal-header">Modulo:</legend> 
                         <div class="form-group">
@@ -171,7 +172,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" id="btnEnviarMo" onclick="" class=" btn btn-default" name="Aceptar">Aceptar</button>
+                            <button type="submit" id="btnEnviarMo" onclick="" class=" btn btn-default" name="Eliminar">Aceptar</button>
                             <button type="reset" id="btnLimpiarMo" onclick="" class=" btn btn-default" name="Limpiar">Limpiar</button>
                         </div>
                     </fieldset>
