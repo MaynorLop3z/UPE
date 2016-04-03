@@ -11,8 +11,9 @@
  *
  * @author Grisshi
  */
-if (!defined('BASEPATH'))
+if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
+}
 //controlador de la pagina principal, permite logear a los usuarios
 include './application/models/dto/UsuariosDTO.php';
 include './application/controllers/Listar.php';
@@ -55,11 +56,9 @@ class Wsite extends CI_Controller {
                         'logueado' => TRUE);
                     $this->session->set_userdata($usuario_data);
                     // redirect('Dashboard');
-                    echo "<script type='text/javascript'>";
-                    echo "window.close();";
-                    echo "</script>";
-                    $this->load->view('Dashboard', $data);
-//                    Redirect('Dashboard', $data);
+                   
+//                    $this->load->view('Dashboard', $data);
+                    Redirect('Dashboard');
                 }
             } else {
                 redirect('/wsite', 'refresh');

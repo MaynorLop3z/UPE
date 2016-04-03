@@ -25,6 +25,7 @@ and open the template in the editor.
                     });
                 }, 5000);
 <?php
+$Permisos=$this->session->userdata('permisosUsuer');
 foreach ($Permisos as $p) {
 
     if ($p->systemPart == MENU_PPAL_RIGHT) {
@@ -71,6 +72,7 @@ foreach ($Permisos as $p) {
                         <ul class="nav nav-tabs" role="tablist">
                             <?php
                             //$iterator = 0;
+                            
                             foreach ($Permisos as $p) {
                                 if ($p->systemPart == MENU_PPAL_RIGHT) {
                                     ?>
