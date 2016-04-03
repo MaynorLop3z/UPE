@@ -37,6 +37,7 @@
                             <th style="display: none">Carrera</th>
                             <th style="display: none">Nivel Acade.</th>
                             <th style="display: none">Encargado</th>
+                            <th style="display: none">CodsCategoria</th>
                             <th>Categoria</th>
                             <th>Descripcion</th>
                             <th style="display: none">Comentarios</th>
@@ -59,7 +60,8 @@
                                 <td class="Carrera_Alumno" style="display: none"><?= $alum->Carrera ?></td>
                                 <td class="NivelAcad_Alumno" style="display: none"><?= $alum->NivelAcademico ?></td>
                                 <td class="NombreEncargado_Alumno" style="display: none"><?= $alum->NombreEncargado ?></td>
-                                <td class="CodCat_Alumno"><?= $alum->CodigoCategoriaParticipantes ?></td>
+                                <td class="CodCat_Alumno" style="display: none"><?= $alum->CodigoCategoriaParticipantes ?></td>
+                                <td class="NameCat_Alumno"><?= $alum->NombreCategoriaParticipante ?></td>
                                 <td class="Descripcion_Alumno"><?= $alum->Descripcion ?></td>
                                 <td class="Comentarios_Alumno" style="display: none"><?= $alum->Comentarios ?></td>
                                 <td class="gestion_Alumno">
