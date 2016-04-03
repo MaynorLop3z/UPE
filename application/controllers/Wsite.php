@@ -28,7 +28,7 @@ class Wsite extends CI_Controller {
     }
 
     public function index() {
-        $this->load->view('wsite');
+       // $this->load->view('wsite');
         $this->load->model('publicaciones');
         $this->load->model('archivos');
         $user = $this->input->post('user');
@@ -56,15 +56,64 @@ class Wsite extends CI_Controller {
                         'logueado' => TRUE);
                     $this->session->set_userdata($usuario_data);
                     // redirect('Dashboard');
-                   
 //                    $this->load->view('Dashboard', $data);
                     Redirect('Dashboard');
                 }
-            } else {
-                redirect('/wsite', 'refresh');
-//                $this->load->view('wsite');
-            }
+            } 
+            
         }
+        else {
+                $data['publicacionesMostrar'] = $this->listarPublicaciones();
+                $data['publicacionesCargar'] = $this->mostrarPublicaciones();
+                $this->load->view('wsite', $data);
+            }
+    }
+
+    public function listarPublicaciones() {
+        try {
+            $listaPublicacionesArchivos = array();
+            $iterador = 0;
+            $listaPublicaciones = array();
+            $listaPublicaciones = $this->publicaciones->listarPublicaciones();
+            foreach ($listaPublicaciones as $publicacion) {
+
+                $archivos = $this->archivos->listarArchivosPublicacion($publicacion->CodigoPublicacion);
+                foreach ($archivos as $archivo) {
+                    $publicacionArchivo = array('Titulo' => $publicacion->Titulo,
+                        'Ruta' => $archivo->Ruta);
+                }
+                array_push($listaPublicacionesArchivos, $publicacionArchivo);
+                $iterador ++;
+            }
+        } catch (Exception $ex) {
+            echo $ex->getTraceAsString();
+        }
+
+        return $listaPublicacionesArchivos;
+    }
+
+    public function mostrarPublicaciones() {
+        try {
+            $listaPublicacionesArchivos2 = array();
+            $iterador = 0;
+            $listaPublicaciones = array();
+            $listaPublicaciones = $this->publicaciones->listarPublicaciones();
+            foreach ($listaPublicaciones as $publicacion) {
+
+                $archivos2 = $this->archivos->listarArchivosPublicacion($publicacion->CodigoPublicacion);
+                foreach ($archivos2 as $archivo) {
+                    $publicacionArchivo = array('Titulo' => $publicacion->Titulo,
+                        'Ruta' => $archivo->Ruta,
+                        'Contenido' => $publicacion->Contenido,
+                        'FechaPublicacion' => $publicacion->FechaPublicacion);
+                }
+                array_push($listaPublicacionesArchivos2, $publicacionArchivo);
+                $iterador ++;
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+        return $listaPublicacionesArchivos2;
     }
 
 }

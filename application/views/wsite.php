@@ -25,6 +25,7 @@
 
     </head>
 
+
     <body id="page-top" class="index">
 
         <!-- Navigation -->
@@ -41,7 +42,7 @@
                     <a class="navbar-brand" href="#page-top">UPESYS</a>
                 </div>
 
-                <!-- Collect the nav links, forms, and other content for toggling -->
+                <!-- Nav con opciones principales(login, mas recientes, about) -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li class="hidden">
@@ -80,7 +81,8 @@
             </div>
         </header>
 
-        <!-- Portfolio Grid Section -->
+
+        <!-- Publicaciones  Grid Section -->
         <section id="portfolio">
             <div class="container">
                 <div class="row">
@@ -89,22 +91,43 @@
                         <hr class="star-primary">
                     </div>
                 </div>
-                <div class="row">
-                    
-                 <!--Aqui empieza las publicaciones--> 
-                    <div class="col-sm-4 portfolio-item">
-                        <a href="#portfolioModal6" class="portfolio-link" data-toggle="modal">
-                            <div class="caption">
-                                <div class="caption-content">
-                                    <i class="fa fa-search-plus fa-3x"></i>
+                 <div class="row">
+                <!--Aqui empieza las publicaciones--> 
+                <?php
+                //$publicacionesMostrar=null;
+                if ($publicacionesMostrar != null && count($publicacionesMostrar) > 0) {
+                    foreach ($publicacionesMostrar as $publicacion) {
+                        $iterador = 0;
+                        $iterador ++;
+                    }
+                    ?>
+                    <?php
+                    foreach ($publicacionesMostrar as $publicacion) {
+                        ?>
+                       
+
+                            <div class="col-sm-4 portfolio-item">
+                                <div class="caption">
+                                    <div class="caption-content">
+                                        <i class="fa fa-search-plus fa-3x"></i>
+                                    </div>
                                 </div>
+                                <a href="#portfolioModal6" class="portfolio-link" data-toggle="modal">
+                                    <img  src="<?php echo '../bootstrap' . $publicacion['Ruta'] ?>" class="img-responsive" alt="">
+
+                                </a>
                             </div>
-                            <img src="../bootstrap/images/portfolio/submarine.png" class="img-responsive" alt="">
-                        </a>
-                    </div>
-                </div>
+                        
+                        <!--//aqui termina row-->
+                        <?php
+                    }
+                }
+                ?>
+                        </div>
             </div>
         </section>
+
+
 
         <!-- About Section -->
         <section class="success" id="about">
@@ -115,18 +138,14 @@
                         <hr class="star-light">
                     </div>
                 </div>
-                <div class="row">
+                <div class="row " >
                     <div class="col-lg-4 col-lg-offset-2">
-                        <p>La unidad de proyectos especiales de la facultdad es la que se encarga de brindar diversos servicios entre los más destacados por su alto fortalecimiento de competencias técnicas y teóricas se encuentran los diplomados  y los cursos de idiomas extranjeros </p>
+                        <p style="text-align: justify;">La unidad de proyectos especiales de la facultdad es la que se encarga de brindar diversos servicios entre los más destacados por su alto fortalecimiento de competencias técnicas y teóricas se encuentran los diplomados  y los cursos de idiomas extranjeros </p>
                     </div>
                     <div class="col-lg-4">
-                        <p>los diplomados ofertados por esta unidad siempre se adecuan a las necesidades del entorno laboral, permitiendo así que las personas interesadas en someterse a una actividad de formación como los diplomados tengan accesibilidad al conocimiento adecuado para enfrentarse al mundo laboral</p>
+                        <p style="text-align: justify;">los diplomados ofertados por esta unidad siempre se adecuan a las necesidades del entorno laboral, permitiendo así que las personas interesadas en someterse a una actividad de formación como los diplomados tengan accesibilidad al conocimiento adecuado para enfrentarse al mundo laboral</p>
                     </div>
-                    <div class="col-lg-8 col-lg-offset-2 text-center">
-                        <a href="http://www.uesocc.edu.sv/index.php" class="btn btn-lg btn-outline">
-                            <i class="fa fa-download"></i> UESOCC
-                        </a>
-                    </div>
+
                 </div>
             </div>
         </section>
@@ -191,34 +210,33 @@
             <div class="footer-above">
                 <div class="container">
                     <div class="row">
-                        <div class="footer-col col-md-4">
-                            <h3>Location</h3>
-                            <p>3481 Melrose Place<br>Beverly Hills, CA 90210</p>
+                        <div class="footer-col col-md-6">
+                            <h3>Telefono de Contacto</h3>
+                            <p>Universidad de El Salvador Facultad Multidiciplinaria de Occidente<br>
+                                Tel: (+503) 2480-0800<br>
+                                <img  src="../bootstrap/images/minervaVerde.png" width="50" height="50"  /></p>
                         </div>
-                        <div class="footer-col col-md-4">
-                            <h3>Around the Web</h3>
+                        <div class="footer-col col-md-6">
+                            <h3>Sitios Universitarios</h3>
                             <ul class="list-inline">
                                 <li>
-                                    <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
+                                    <a href="http://www.uesocc.edu.sv" class="btn-social btn-outline" title="Academica"><i class="fa fa-fw fa-university"></i></a>
                                 </li>
                                 <li>
-                                    <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus"></i></a>
+                                    <a href="https://expediente.uesocc.edu.sv/index.php" class="btn-social btn-outline" title="Expediente Academico"><i class="fa fa-fw fa-archive"></i></a>
                                 </li>
                                 <li>
-                                    <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
+                                    <a href="http://av.uesocc.edu.sv/" class="btn-social btn-outline" title="Aula Virtual"><i class="fa fa-fw fa-pencil"></i></a>
                                 </li>
                                 <li>
-                                    <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin"></i></a>
+                                    <a href="https://correo.uesocc.edu.sv/" class="btn-social btn-outline" title="Correo Institucional"><i class="fa fa-fw fa-envelope"></i></a>
                                 </li>
                                 <li>
-                                    <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-dribbble"></i></a>
+                                    <a href="http://biblioteca.uesocc.edu.sv/" class="btn-social btn-outline " title="Biblioteca"><i class="fa fa-fw fa-book"></i></a>
                                 </li>
                             </ul>
                         </div>
-                        <div class="footer-col col-md-4">
-                            <h3>About Freelancer</h3>
-                            <p>Freelance is a free to use, open source Bootstrap theme created by <a href="http://startbootstrap.com">Start Bootstrap</a>.</p>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -226,7 +244,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
-                            Copyright &copy; Your Website 2014
+                            Copyright &copy; UPESYS 2016
                         </div>
                     </div>
                 </div>
@@ -335,8 +353,8 @@
             </div>
         </div>
         <!--aqui termina la modal de las publicaciones-->
-        
-        
+
+
         <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-content">
                 <div class="close-modal" data-dismiss="modal">
