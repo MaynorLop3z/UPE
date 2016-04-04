@@ -15,7 +15,9 @@
                 <form id="frmfindDipl" action="<?php echo base_url() ?>index.php/ModulosController/BuscarModulos/"  method="post" class="form-inline">
                     <span>Diplomado:</span>
                     
-                               
+              
+                    
+                    
                                       
                     <button id="btnFindDip" type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>Buscar Por Diplomado</button>
                 </form>

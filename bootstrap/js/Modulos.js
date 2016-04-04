@@ -216,12 +216,3 @@ $("#frmDelMod").submit(function(event) {
     });
  });
  
-
-   
-
-
-
-
-
-
-
