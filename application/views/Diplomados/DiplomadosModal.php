@@ -21,16 +21,12 @@
                             </div>
                        </div>
                        <div class="form-group">
-                           <label class="col-lg-3 control-label">Estado</label>
-                           <div class="col-lg-9">
-                               
-                                   <div class="col-lg-6">
-                                       <label class="checkbox"><input type="checkbox" name="EstadoDiplomado" id="EstadoDiplomado">Activado</label>                                         
-                                  </div>
-                               </div>
-                             </div>
-                                                                                                         
-                        
+                            <label class="col-lg-3 control-label">Estado</label>
+                            <div class="col-lg-9">
+                                <input type="checkbox" id="Estado"  name="Activo" value="True" checked> Activo<br>
+                            </div>
+                        </div> 
+                                                                                                                   
                         <div class="form-group">
                             <label for="CatgoriaDiplomado" class="col-lg-3 control-label">Categoria Diplomado:</label>
                             <div class="col-lg-9">
@@ -90,22 +86,11 @@
                             </div>
                        </div>
                        <div class="form-group">
-                           <label class="col-lg-3 control-label">Estado</label>
-                           <div class="col-lg-9">
-                               <div class="radioedit" name="" id="radioedit">
-                                   <label>
-                                       <input type="radio" name="estado" id="optionsActivoEdit" value="opcion1" >
-                                       Activo
-                                   </label>
-                               </div>
-                             <div class="radio">
-                                   <label>
-                                       <input type="radio" name="estado" id="optionsInactivoEdit" value="opcion2">
-                                       Inactivo
-                                   </label>
-                               </div> 
-                           </div>
-                       </div>                                                                                       
+                            <label class="col-lg-3 control-label">Estado</label>
+                            <div class="col-lg-9">
+                                <input type="checkbox" id="EstadoEdit"  name="Activo" value="True" checked> Activo<br>
+                            </div>
+                        </div>                                                                              
                         
                         <div class="form-group">
                             <label for="CatgoriaDiplomadoEdit" class="col-lg-3 control-label">Categoria Diplomado:</label>

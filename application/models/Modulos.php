@@ -38,7 +38,7 @@ class Modulos extends CI_Model {
                 . 'Comentarios'
         );
         $this->db->from('Modulos');
-      //  $this->db->where('CodigoModulo',$CodigoModulo);
+        $this->db->where('Estado',TRUE);
         $consultaM = $this->db->get();
         $resultadoM = $consultaM->result();
          return $resultadoM;

@@ -37,9 +37,28 @@ class Diplomados extends CI_Model {
         return $resultado;
     }
     public function listarDiplomados() {
+        
+//        $this->db->select('CodigoDiplomado,'
+//                .'NombreDiplomado'
+//                .'Descripcion,'
+//                . 'Estado,'
+//                .'CodigoCategoraDiplomado,'
+//                .'Comentarios');
+//        $this->db->from('Diplomados');
+//        $this->db->where('Estado',TRUE);
+//          $consultaD = $this->db->get();
+//          $resultadoD = $consultaD->result();
+//          return $resultadoD;
+//        
+        
+        
+        
+        
+        
         try {
             $consulta = $this->db->query('SELECT "d"."CodigoDiplomado", "d"."NombreDiplomado", "d"."Descripcion", "d"."Estado", "cd"."NombreCategoriaDiplomado", "d"."Comentarios" FROM "Diplomados" "d" JOIN "CategoriaDiplomados" "cd" ON "d"."CodigoCategoriaDiplomado" = "cd"."CodigoCategoriaDiplomado"');
 //            $consulta = $this->db->query('SELECT d.CodigoDiplomado FROM Diplomados d');
+         
             if ($consulta != null) {
                 $resultado = $consulta->result();
             } else {
@@ -49,7 +68,7 @@ class Diplomados extends CI_Model {
         } catch (Exception $exc) {
             return $exc->getTraceAsString();
         }
-    }
+   }
     public function listarDiplomadosCategoria($idCategoria) {
         $this->db->select('CodigoDiplomado,' . 'NombreDiplomado');
         $this->db->from('Diplomados');

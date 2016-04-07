@@ -27,12 +27,12 @@ class DiplomadosController extends CI_Controller {
             if($this->input->post()){ //Estos son los nombres de los input del Form
                 $nombreDiplomado = $this->input->post('DiplomadoNombre');
                 $descripcionDiplomado = $this->input->post('DiplomadoDescripcion');
-                $optionsactivo= $this->input->post('optionsActivo');// Agregue la opcion activo  si es seleccionad
+                $Estado= $this->input->post('Estado');
                 $categoriaDi = $this->input->post('CatgoriaDiplomado');
                 $comentarioDi = $this->input->post('ComentarioDiplomado');
                 $this->load->model('Diplomados');
                 
-                $arrayData = $this->Diplomados->crearDiplomado($nombreDiplomado,$descripcionDiplomado,$optionsactivo,$categoriaDi,$comentarioDi);
+                $arrayData = $this->Diplomados->crearDiplomado($nombreDiplomado,$descripcionDiplomado,$Estado,$categoriaDi,$comentarioDi);
                 echo json_encode($arrayData);
                 
             }
@@ -47,11 +47,11 @@ class DiplomadosController extends CI_Controller {
                 $codigoDi = $this->input->post('CodigoDiplomado');
                 $nombreDiplomado = $this->input->post('DiplomadoNombre');
                 $descripcionDiplomado = $this->input->post('DiplomadoDescripcion');
-                $optionsactivo = $this->input->post('radio')===true;// Agregue la opcion activo  si es seleccionad     
+                $Estado= $this->input->post('Estado');    
                 $categoriaDi = $this->input->post('CatgoriaDiplomado');
                 $comentarioDi = $this->input->post('ComentarioDiplomado');
                 $this->load->model('Diplomados');
-                $arrayData=  $this->Diplomados->ModificarDiplomado($codigoDi,$nombreDiplomado,$descripcionDiplomado,$optionsactivo,$categoriaDi,$comentarioDi);
+                $arrayData=  $this->Diplomados->ModificarDiplomado($codigoDi,$nombreDiplomado,$descripcionDiplomado,$Estado,$categoriaDi,$comentarioDi);
                 echo json_encode($arrayData);
                         
                  }         

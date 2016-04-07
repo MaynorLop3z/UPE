@@ -3,6 +3,7 @@
 /* global posting */
 
 var codigoDiplomado;
+var filaEdit;
 $("#BtnADDiplomado").on('click', function () {
     $("#DiplomadoNuevo").modal();
 });
@@ -16,7 +17,7 @@ $("#BtnADDiplomado").on('click', function () {
 function  editaDiplomado(fila){
     codigoDiplomado = fila.id;
     filaEdit = fila;
-    codigoDiplomado = codigoDiplomado.substring(5);
+   codigoDiplomado = codigoDiplomado.substring(5);
     $("#ModificarDiplomado").modal('toggle');
 }
 
@@ -60,7 +61,7 @@ $('#formgrdDiplomado').submit(function (event) {
     event.preventDefault();
     var $form = $(this), DiplomadoNombre = $form.find("input[name='NombreDiplomado']").val(),
             DiplomadoDescripcion = $form.find("textarea[name='Descripcion']").val(),
-            radio = $form.find("input[name='estado']:checked").val(),
+            Estado = $form.find("input[name='Activo']").prop('checked'),
             // probar  con el checked
             CatgoriaDiplomado = $form.find("select[name='CodigoCategoriaDiplomado']").val(),
             ComentarioDiplomado = $form.find("textarea[name='Comentarios']").val(),
@@ -68,7 +69,7 @@ $('#formgrdDiplomado').submit(function (event) {
         var posting = $.post(url, {
         DiplomadoNombre: DiplomadoNombre,
         DiplomadoDescripcion: DiplomadoDescripcion,
-        radio: radio,
+        Estado: Estado,
         CatgoriaDiplomado: CatgoriaDiplomado,
         ComentarioDiplomado: ComentarioDiplomado
     });
@@ -133,7 +134,7 @@ $("#formeditDiplomado").submit(function (event) {
             DiplomadoNombre = $form.find("input[name='NombreDiplomado']").val(),
             CodigoDiplomado = codigoDiplomado,   
             DiplomadoDescripcion = $form.find("textarea[name='Descripcion']").val(),
-            radio = $form.find("input[name='estado']").val(),
+            Estado = $form.find("input[name='Activo']").prop('checked'),
             CatgoriaDiplomado = $form.find("select[name='CodigoCategoriaDiplomado']").val(),
             ComentarioDiplomado = $form.find("textarea[name='Comentarios']").val(),
             url = $form.attr("action");
@@ -143,7 +144,7 @@ $("#formeditDiplomado").submit(function (event) {
         CodigoDiplomado : CodigoDiplomado,
         DiplomadoNombre: DiplomadoNombre,
         DiplomadoDescripcion: DiplomadoDescripcion,
-        radio: radio,
+        Estado: Estado,
         CatgoriaDiplomado: CatgoriaDiplomado,
         ComentarioDiplomado: ComentarioDiplomado
     });
