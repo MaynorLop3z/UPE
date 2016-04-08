@@ -1,80 +1,83 @@
 <?php
+
 if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
+
 class DiplomadosController extends CI_Controller {
+
     public function __construct() {
         parent::__construct();
         $this->load->database();
         $this->load->model('Diplomados');
     }
+
     public function index() {
-    
-        try {
-             $data['DiplomadosN']= $this->Diplomados->listarDiplomados(); 
-        $data['CategoriasDi']= $this->Diplomados->listarCategoriasDiplomados();
-        $this->load->view('Diplomados',$data);
-        
-        } catch (Exception $ex) {
-           echo $ex->getTraceAsString(); 
-        }
-       
-      
+
+        $data['Diplomados'] = $this->Diplomados->listarDiplomados();
+        $data['CategoriasDi'] = $this->Diplomados->listarCategoriasDiplomados();
+        $this->load->view('Diplomados', $data);
     }
-    
-    public function guardarDiplomado(){
+
+    public function guardarDiplomado() {
         try {
-            if($this->input->post()){ //Estos son los nombres de los input del Form
+            if ($this->input->post()) { //Estos son los nombres de los input del Form
                 $nombreDiplomado = $this->input->post('DiplomadoNombre');
                 $descripcionDiplomado = $this->input->post('DiplomadoDescripcion');
-                $Estado= $this->input->post('Estado');
+                $Estado = $this->input->post('Estado');
                 $categoriaDi = $this->input->post('CatgoriaDiplomado');
                 $comentarioDi = $this->input->post('ComentarioDiplomado');
                 $this->load->model('Diplomados');
-                
-                $arrayData = $this->Diplomados->crearDiplomado($nombreDiplomado,$descripcionDiplomado,$Estado,$categoriaDi,$comentarioDi);
+
+                $arrayData = $this->Diplomados->crearDiplomado($nombreDiplomado, $descripcionDiplomado, $Estado, $categoriaDi, $comentarioDi);
                 echo json_encode($arrayData);
-                
             }
         } catch (Exception $ex) {
             echo json_encode($ex);
         }
     }
-    
-    public  function editarDiplomado(){
+
+    public function editarDiplomado() {
         try {
-            if($this->input->post('CodigoDiplomado')){
+            if ($this->input->post('CodigoDiplomado')) {
                 $codigoDi = $this->input->post('CodigoDiplomado');
-                $nombreDiplomado = $this->input->post('DiplomadoNombre');
-                $descripcionDiplomado = $this->input->post('DiplomadoDescripcion');
-                $Estado= $this->input->post('Estado');    
-                $categoriaDi = $this->input->post('CatgoriaDiplomado');
-                $comentarioDi = $this->input->post('ComentarioDiplomado');
+                $NombreDiplomado = $this->input->post('DiplomadoNombre');
+                $Descripcion = $this->input->post('DiplomadoDescripcion');
+                $Estado = $this->input->post('Estado');
+                $NombreCategoriaDiplomad = $this->input->post('CatgoriaDiplomado');
+                $Comentarios = $this->input->post('ComentarioDiplomado');
                 $this->load->model('Diplomados');
-                $arrayData=  $this->Diplomados->ModificarDiplomado($codigoDi,$nombreDiplomado,$descripcionDiplomado,$Estado,$categoriaDi,$comentarioDi);
+                $arrayData = $this->Diplomados->ModificarDiplomado($codigoDi, $NombreDiplomado, $Descripcion, $Estado, $NombreCategoriaDiplomad, $Comentarios);
                 echo json_encode($arrayData);
-                        
-                 }         
+            }
         } catch (Exception $ex) {
             echo json_encode($ex);
-            
         }
-        
-        
     }
-            public function eliminarDiplomado (){
-                $eliminar = false;
-                
-                try {
-                if($this->input->post()){    
+
+    public function eliminarDiplomado() {
+        //$eliminar = false;
+
+        try {
+            if ($this->input->post()) {
                 $codigo = $this->input->post('CodigoDiplomado');
-                $eliminar = $this->Diplomados->EliminarDiplomado($codigo);
-                echo $eliminar;                   
+                if($codigoDiplomado !=null){
+                 $ip = $this->session->userdata('ipUserLogin');
+                $userModifica = $this->session->userdata('codigoModulo');
+                $arrayData = $this->Diplomados->inactivarDiplomado($codigoDiplomado,$ip,$userModifica);
+                echo json_encode($arrayData);   
+                    
+                    
                 }
-                } catch (Exception $ex) {
-                    echo json_encode($ex);
-                }
-                
-                
+//                $eliminar = $this->Diplomados->EliminarDiplomado($codigo);
+//                echo $eliminar;
             }
-       }
+        } catch (Exception $ex) {
+            $data =  array(
+         'Error'=> $ex->getMessage() 
+                    );
+            echo json_encode($data);
+        }
+    }
+
+}

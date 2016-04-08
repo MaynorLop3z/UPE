@@ -27,12 +27,12 @@
 //                if($DiplomadoN ==null){
 //                    echo "es nulo";
 //                }
-                foreach ($DiplomadosN as $dip){                
+                foreach ($Diplomados as $dip){                
                 ?>
                 
-                <tr  data-dipd='<?php echo json_encode($dip)?>'  id="dip<?php echo $dip->CodigoDiplomado?>">
-                    <td class="nombre_Diplomado"><?php echo $dip->NombreDiplomado ?></td>
-                    <td class="descripcionDiplomado"><?php echo $dip->Descripcion ?></td>
+                <tr id="dip<?=  $dip->CodigoDiplomado?>">
+                    <td class="nombre_Diplomado"><?= $dip->NombreDiplomado ?></td>
+                    <td class="descripcionDiplomado"><?= $dip->Descripcion ?></td>
                     <td class="estado"><?php echo $dip->Estado ?></td>
                     <td class="categoriaDi"><?php echo $dip->NombreCategoriaDiplomado?></td>
                     <td class="comentarioDi"><?php echo $dip->Comentarios ?></td>

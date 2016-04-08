@@ -1,12 +1,49 @@
 <?php
+
 if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
+
 class Diplomados extends CI_Model {
+
     public function __construct() {
         parent::__construct();
         $this->load->database();
     }
+
+    public function listarDiplomados() {
+        
+        
+                try {
+            $consulta = $this->db->query('SELECT "d"."CodigoDiplomado", "d"."NombreDiplomado", "d"."Descripcion", "d"."Estado", "cd"."NombreCategoriaDiplomado", "d"."Comentarios" FROM "Diplomados" "d" JOIN "CategoriaDiplomados" "cd" ON "d"."CodigoCategoriaDiplomado" = "cd"."CodigoCategoriaDiplomado"');
+           // $consulta = $this->db->query('SELECT d.CodigoDiplomado FROM Diplomados d');
+         
+            if ($consulta != null) {
+                $resultado = $consulta->result();
+            } else {
+                
+            }
+            return $resultado;
+        } catch (Exception $exc) {
+            return $exc->getTraceAsString();
+        }
+
+//        $this->db->select('CodigoDiplomado,'
+//                . 'NombreDiplomado'
+//                . 'Descripcion,'
+//                . 'Estado,'
+//                . 'CodigoCategoraDiplomado,'
+//                . 'Comentarios');
+//        $this->db->from('Diplomados');
+//        $this->db->where('Estado', TRUE);
+//        $consultaD = $this->db->get();
+//        $resultadoD = $consultaD->result();
+//        return $resultadoD;
+        
+    }
+
+
+
     public function listarModulos($codigoDiplomado) {
         $this->db->select('CodigoModulo, '
                 . 'NombreModulo, '
@@ -22,6 +59,7 @@ class Diplomados extends CI_Model {
         $resultado = $consulta->result();
         return $resultado;
     }
+
     public function listarPeriodosByModulo($idModulo) {
         $this->db->select('CodigoPeriodo, '
                 . 'FechaInicioPeriodo, '
@@ -36,39 +74,7 @@ class Diplomados extends CI_Model {
         $resultado = $consulta->result();
         return $resultado;
     }
-    public function listarDiplomados() {
-        
-//        $this->db->select('CodigoDiplomado,'
-//                .'NombreDiplomado'
-//                .'Descripcion,'
-//                . 'Estado,'
-//                .'CodigoCategoraDiplomado,'
-//                .'Comentarios');
-//        $this->db->from('Diplomados');
-//        $this->db->where('Estado',TRUE);
-//          $consultaD = $this->db->get();
-//          $resultadoD = $consultaD->result();
-//          return $resultadoD;
-//        
-        
-        
-        
-        
-        
-        try {
-            $consulta = $this->db->query('SELECT "d"."CodigoDiplomado", "d"."NombreDiplomado", "d"."Descripcion", "d"."Estado", "cd"."NombreCategoriaDiplomado", "d"."Comentarios" FROM "Diplomados" "d" JOIN "CategoriaDiplomados" "cd" ON "d"."CodigoCategoriaDiplomado" = "cd"."CodigoCategoriaDiplomado"');
-//            $consulta = $this->db->query('SELECT d.CodigoDiplomado FROM Diplomados d');
-         
-            if ($consulta != null) {
-                $resultado = $consulta->result();
-            } else {
-                
-            }
-            return $resultado;
-        } catch (Exception $exc) {
-            return $exc->getTraceAsString();
-        }
-   }
+
     public function listarDiplomadosCategoria($idCategoria) {
         $this->db->select('CodigoDiplomado,' . 'NombreDiplomado');
         $this->db->from('Diplomados');
@@ -77,6 +83,7 @@ class Diplomados extends CI_Model {
         $resultado = $consulta->result();
         return $resultado;
     }
+
     public function crearDiplomado($NombreDiplomado, $Descripcion, $Estado, $CodigoCategoriaDiplomado, $Comentarios) {
         try {
             $data = array(
@@ -95,6 +102,7 @@ class Diplomados extends CI_Model {
         }
         return $data;
     }
+
     public function EliminarDiplomado($CodigoDiplomado) {
         $eliminar = false;
         try {
@@ -107,6 +115,7 @@ class Diplomados extends CI_Model {
         }
         return $eliminar;
     }
+
     public function ModificarDiplomado($CodigoDiplomado, $NombreDiplomado, $Descripcion, $Estado, $CodigoCategoriaDiplomado, $Comentarios) {
         try {
             $data = array(
@@ -124,6 +133,7 @@ class Diplomados extends CI_Model {
         }
         return $data;
     }
+
 //Funcion para encontrar los diplomados Arreglarlo 
     // public function buscarDiplomado($CodigoDiplomado){
     //   $this->db->select('CodigoDiplomado,NombreDiplomado,Descripcion,Estado,Comentarios');
@@ -133,6 +143,30 @@ class Diplomados extends CI_Model {
     //$resultadoDiplomado = $consultaDiplomado->row();
     //return $resultadoDiplomado;
     // }
+    
+     public function EliminarDiplomados($CodigoDiplomado){  //
+        $this->db->delete('Diplomados', array('CodigoDiplomado' => $CodigoDiplomado));
+    }
+   
+    
+    
+    
+    public function inactivarDiplomado($CodigoDiplomado, $ipModifica, $usuarioModifica){
+        try{
+            $data = array(
+                'Estado'=>FALSE,
+                'UsuarioModifica'=>$usuarioModifica,
+                'IpModifica' =>$ipModifica,
+                'FechaModifica' =>date("Y/m/d")
+                );
+                $this->db->where('CodigoDiplomado',$CodigoDiplomado);
+                $this->db->update('Diplomados',$data);
+                $data['CodigoDiplomado'] = $CodigoDiplomado;
+                return $data;
+        }  catch (Exception $exc){
+            $exc->getMessage();
+        }        
+    }
     public function listarCategoriasDiplomados() {
         $this->db->select('CodigoCategoriaDiplomado, '
                 . 'NombreCategoriaDiplomado, '
@@ -144,6 +178,7 @@ class Diplomados extends CI_Model {
         $resultado = $consulta->result();
         return $resultado;
     }
+
     //    public function listarDiplomados() {
 //      $query =  $this->db->query("SELECT d.CodigoDiplomado, d.NombreDiplomado, d.Descripcion, d.Estado, cd.NombreCategoriaDiplomado, d.Comentarios FROM Diplomados d JOIN CategoriaDiplomados cd ON d.CodigoCategoriaDiplomado = cd.CodigoCategoriaDiplomado") ;
 //        $resultado =  $query->result();
