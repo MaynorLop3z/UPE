@@ -23,7 +23,7 @@ function  editaDiplomado(fila){
 
 function eliminarDiplomado(fila){
  codigoDiplomado = fila.id;
- //codigoDiplomado = codigoDiplomado.substring(12);
+ codigoDiplomado = codigoDiplomado.substring(12);
    $('#EliminarDiplomado').modal('toggle');
    
 }
@@ -122,10 +122,9 @@ $('#formgrdDiplomado').submit(function (event) {
 });
 
 $("EliminarDiplomado").on('show.bs.modal',function(event){
-    
-    var dip = $('#dip' + codigoDiplomado);
-    var NombreDiplomadoE = dip.find('.nombre_Diplomado').html().toString().trim();
-    $('#NombreDipEliminar').html(NombreDiplomadoE);    
+    var dip = $('#dip' + codigoDiplomado.substring(12));
+    var NombreDiplomadoE = dip.find(".nombre_Diplomado").html().toString().trim();
+    $('#nombreDipDel').html(NombreDiplomadoE);    
 });
 
 
@@ -194,7 +193,7 @@ $("#formeditDiplomado").submit(function (event) {
             
 $("#frmDELdip").submit(function(event){
     event.preventDefault();
-    var $form = $(this),CodigoDiplomado = codigoDiplomado.substring(12), url = $form.attr("action");;
+    var $form = $(this),CodigoDiplomado = codigoDiplomado, url = $form.attr("action");;
     var posting = $.post(url,{CodigoDiplomado : CodigoDiplomado });  //Aqui muestra el error -------------------------------------->
     posting.done(function(data){
         if(data){

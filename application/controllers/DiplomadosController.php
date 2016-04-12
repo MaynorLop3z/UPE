@@ -60,11 +60,12 @@ class DiplomadosController extends CI_Controller {
 
         try {
             if ($this->input->post()) {
-                $codigo = $this->input->post('CodigoDiplomado');
+                $codigoDiplomado = $this->input->post('CodigoDiplomado');
                 if($codigoDiplomado !=null){
-                 $ip = $this->session->userdata('ipUserLogin');
-                $userModifica = $this->session->userdata('codigoModulo');
-                $arrayData = $this->Diplomados->inactivarDiplomado($codigoDiplomado,$ip,$userModifica);
+//                 $ip = $this->session->userdata('ipUserLogin');
+//                $userModifica = $this->session->userdata('codigoDiplomado');
+                $arrayData = $this->Diplomados->inactivarDiplomado($codigoDiplomado);
+                       // $ip,$userModifica
                 echo json_encode($arrayData);   
                     
                     

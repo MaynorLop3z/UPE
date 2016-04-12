@@ -151,13 +151,13 @@ class Diplomados extends CI_Model {
     
     
     
-    public function inactivarDiplomado($CodigoDiplomado, $ipModifica, $usuarioModifica){
+    public function inactivarDiplomado($CodigoDiplomado  ){
         try{
             $data = array(
                 'Estado'=>FALSE,
-                'UsuarioModifica'=>$usuarioModifica,
-                'IpModifica' =>$ipModifica,
-                'FechaModifica' =>date("Y/m/d")
+//                'UsuarioModifica'=>$usuarioModifica,
+//                'IpModifica' =>$ipModifica,
+//                'FechaModifica' =>date("Y/m/d")
                 );
                 $this->db->where('CodigoDiplomado',$CodigoDiplomado);
                 $this->db->update('Diplomados',$data);
