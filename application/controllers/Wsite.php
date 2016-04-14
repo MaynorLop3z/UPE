@@ -28,7 +28,7 @@ class Wsite extends CI_Controller {
     }
 
     public function index() {
-       // $this->load->view('wsite');
+        // $this->load->view('wsite');
         $this->load->model('publicaciones');
         $this->load->model('archivos');
         $user = $this->input->post('user');
@@ -59,14 +59,12 @@ class Wsite extends CI_Controller {
 //                    $this->load->view('Dashboard', $data);
                     Redirect('Dashboard');
                 }
-            } 
-            
-        }
-        else {
-                $data['publicacionesMostrar'] = $this->listarPublicaciones();
-                $data['publicacionesCargar'] = $this->mostrarPublicaciones();
-                $this->load->view('wsite', $data);
             }
+        } else {
+            $data['publicacionesMostrar'] = $this->listarPublicaciones();
+            $data['publicacionesCargar'] = $this->mostrarPublicaciones();
+            $this->load->view('wsite', $data);
+        }
     }
 
     public function listarPublicaciones() {
@@ -99,10 +97,11 @@ class Wsite extends CI_Controller {
             $listaPublicaciones = array();
             $listaPublicaciones = $this->publicaciones->listarPublicaciones();
             foreach ($listaPublicaciones as $publicacion) {
-
                 $archivos2 = $this->archivos->listarArchivosPublicacion($publicacion->CodigoPublicacion);
                 foreach ($archivos2 as $archivo) {
-                    $publicacionArchivo = array('Titulo' => $publicacion->Titulo,
+                    $publicacionArchivo = array(
+//                        'CodigoPublicacion'=>$publicacion->CodigoPublicacion,
+                        'Titulo' => $publicacion->Titulo,
                         'Ruta' => $archivo->Ruta,
                         'Contenido' => $publicacion->Contenido,
                         'FechaPublicacion' => $publicacion->FechaPublicacion);
@@ -115,5 +114,29 @@ class Wsite extends CI_Controller {
         }
         return $listaPublicacionesArchivos2;
     }
+
+    // funcion para listar una publicacion segun su id
+    public function mostrarPublicacion($id) {
+        $iterador = 0;
+        $camposPublicacion = array();
+        $listaPublicaciones = $this->publicaciones->listarPublicaciones();
+        try {
+                 foreach ($listaPublicaciones as $publicacion) {
+            if ($id == $publicacion->CodigoPublicacion) {
+                $camposPublicacion = array('Titulo' => $publicacion->Titulo,
+                    'Ruta' => $archivo->Ruta,
+                    'Contenido' => $publicacion->Contenido,
+                    'FechaPublicacion' => $publicacion->FechaPublicacion);
+            }
+            else{
+                return null;
+            }
+        }
+        array_push($camposPublicacion);
+        $iterador ++;
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+        }
 
 }

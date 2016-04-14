@@ -91,39 +91,40 @@
                         <hr class="star-primary">
                     </div>
                 </div>
-                 <div class="row">
-                <!--Aqui empieza las publicaciones--> 
-                <?php
-                //$publicacionesMostrar=null;
-                if ($publicacionesMostrar != null && count($publicacionesMostrar) > 0) {
-                    foreach ($publicacionesMostrar as $publicacion) {
-                        $iterador = 0;
-                        $iterador ++;
-                    }
-                    ?>
+                <div class="row">
+
+                    <!--Aqui empieza las publicaciones--> 
                     <?php
-                    foreach ($publicacionesMostrar as $publicacion) {
+                    //$publicacionesMostrar=null;
+                    if ($publicacionesMostrar != null && count($publicacionesMostrar) > 0) {
+                        foreach ($publicacionesMostrar as $publicacion) {
+                            $iterador = 0;
+                            $iterador ++;
+                        }
                         ?>
-                       
+                        <?php
+                        foreach ($publicacionesMostrar as $publicacion) {
+                            ?>
 
                             <div class="col-sm-4 portfolio-item">
-                                <div class="caption">
-                                    <div class="caption-content">
-                                        <i class="fa fa-search-plus fa-3x"></i>
-                                    </div>
-                                </div>
                                 <a href="#portfolioModal6" class="portfolio-link" data-toggle="modal">
-                                    <img  src="<?php echo '../bootstrap' . $publicacion['Ruta'] ?>" class="img-responsive" alt="">
 
+
+
+                                    <div class="caption">
+                                        <div class="caption-content">
+                                            <i class="fa fa-search-plus fa-3x"></i>
+                                        </div>
+                                    </div>
+                                    <img  src="<?php echo '../bootstrap' . $publicacion['Ruta'] ?>" class="img-responsive" alt="">
                                 </a>
                             </div>
-                        
-                        <!--//aqui termina row-->
-                        <?php
+
+                            <?php
+                        }
                     }
-                }
-                ?>
-                        </div>
+                    ?>
+                </div>
             </div>
         </section>
 
@@ -139,11 +140,9 @@
                     </div>
                 </div>
                 <div class="row " >
-                    <div class="col-lg-4 col-lg-offset-2">
-                        <p style="text-align: justify;">La unidad de proyectos especiales de la facultdad es la que se encarga de brindar diversos servicios entre los más destacados por su alto fortalecimiento de competencias técnicas y teóricas se encuentran los diplomados  y los cursos de idiomas extranjeros </p>
-                    </div>
-                    <div class="col-lg-4">
-                        <p style="text-align: justify;">los diplomados ofertados por esta unidad siempre se adecuan a las necesidades del entorno laboral, permitiendo así que las personas interesadas en someterse a una actividad de formación como los diplomados tengan accesibilidad al conocimiento adecuado para enfrentarse al mundo laboral</p>
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <p style="text-align: justify;">La unidad de proyectos especiales de la facultdad es la que se encarga de brindar diversos servicios entre los más destacados por su alto fortalecimiento de competencias técnicas y teóricas se encuentran los diplomados  y los cursos de idiomas extranjeros 
+                            <br>los diplomados ofertados por esta unidad siempre se adecuan a las necesidades del entorno laboral, permitiendo así que las personas interesadas en someterse a una actividad de formación como los diplomados tengan accesibilidad al conocimiento adecuado para enfrentarse al mundo laboral</p>
                     </div>
 
                 </div>
@@ -155,7 +154,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
-                        <h2>Contact Me</h2>
+                        <h2>Consultas</h2>
                         <hr class="star-primary">
                     </div>
                 </div>
@@ -166,28 +165,28 @@
                         <form name="sentMessage" id="contactForm" novalidate>
                             <div class="row control-group">
                                 <div class="form-group col-xs-12 floating-label-form-group controls">
-                                    <label>Name</label>
+                                    <label>Nombre</label>
                                     <input type="text" class="form-control" placeholder="Name" id="name" required data-validation-required-message="Please enter your name.">
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
                             <div class="row control-group">
                                 <div class="form-group col-xs-12 floating-label-form-group controls">
-                                    <label>Email Address</label>
+                                    <label>Email</label>
                                     <input type="email" class="form-control" placeholder="Email Address" id="email" required data-validation-required-message="Please enter your email address.">
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
                             <div class="row control-group">
                                 <div class="form-group col-xs-12 floating-label-form-group controls">
-                                    <label>Phone Number</label>
+                                    <label>Telefono</label>
                                     <input type="tel" class="form-control" placeholder="Phone Number" id="phone" required data-validation-required-message="Please enter your phone number.">
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
                             <div class="row control-group">
                                 <div class="form-group col-xs-12 floating-label-form-group controls">
-                                    <label>Message</label>
+                                    <label>Mensaje</label>
                                     <textarea rows="5" class="form-control" placeholder="Message" id="message" required data-validation-required-message="Please enter a message."></textarea>
                                     <p class="help-block text-danger"></p>
                                 </div>
@@ -354,7 +353,7 @@
         </div>
         <!--aqui termina la modal de las publicaciones-->
 
-
+        <!--Modal pop up-->
         <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-content">
                 <div class="close-modal" data-dismiss="modal">
@@ -367,24 +366,20 @@
                     <div class="row">
                         <div class="col-lg-8 col-lg-offset-2">
                             <div class="modal-body">
-                                <h2>Project Title</h2>
-                                <hr class="star-primary">
-                                <img src="../bootstrap/images/portfolio/submarine.png" class="img-responsive img-centered" alt="">
-                                <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
-                                <ul class="list-inline item-details">
-                                    <li>Client:
-                                        <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
-                                        </strong>
-                                    </li>
-                                    <li>Date:
-                                        <strong><a href="http://startbootstrap.com">April 2014</a>
-                                        </strong>
-                                    </li>
-                                    <li>Service:
-                                        <strong><a href="http://startbootstrap.com">Web Development</a>
-                                        </strong>
-                                    </li>
-                                </ul>
+                                <?php
+                                foreach ($publicacionesMostrar as $publicacion) {
+                                    if($publicacion['CodigoPublicacion']==$id){?>
+                                     <h2><?php $publicacion['Titulo'] ?></h2>
+                                    <hr class="star-primary">
+                                    <img  src="<?php echo '../bootstrap' . $publicacion['Ruta'] ?>" class="img-responsive img-centered" alt="">
+                                    <p><?php $publicacion['Contenido'] ?></p>   
+                                        
+                                   <?php }
+                                }
+                                    ?>
+
+                                    
+
                                 <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
                             </div>
                         </div>
