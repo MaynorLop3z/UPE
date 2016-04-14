@@ -216,3 +216,19 @@ $("#frmDelMod").submit(function(event) {
     });
  });
  
+ 
+ $("#frmfindMod").submit(function(event){
+      event.preventDefault();
+     var $form = $(this), NombreModulo = $form.find("input[name='FindModulo']").val(), url = $form.attr("action");
+      var posting = $.post(url,{FindModulo:NombreModulo});
+      posting.done(function(data){
+          if(data){
+              $('#tableModulos').html(data);
+              
+          }
+      });
+      posting.fail(function(xhr, textStatus, errorThrown) {
+        alert("error" + xhr.responseText);
+    });
+     
+ });

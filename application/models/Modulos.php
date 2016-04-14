@@ -1,15 +1,29 @@
 <?php
-
 if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
-
 class Modulos extends CI_Model {
     public function __construct() {
         parent::__construct();
         $this->load->database();
     }
-
+    
+    
+    public function listarModulosNombre($filtro){
+        $this->db->select('CodigoModulo, '
+                . 'NombreModulo, '
+                . 'OrdenModulo, '
+                . 'Estado, '
+                . 'CodigoTurno, '
+                . 'CodigoDiplomado, '       
+                . 'Comentarios');
+        $this->db->from('Modulos');
+        $this->db->like('NombreModulo',$filtro);
+        $consulta = $this->db->get();
+        $resultado = $consulta->result();
+        return $resultado;
+        
+    }
   public function listarModulos() { 
       
 //      try {
@@ -43,7 +57,6 @@ class Modulos extends CI_Model {
         $resultadoM = $consultaM->result();
          return $resultadoM;
   }
-
     public function crearModulo($NombreModulo, $OrdenModulo,$CodigoTurno, $Estado ,$CodigoDiplomado, $Comentarios,$IpUserModifica,$UserModifica) {
        try{
         $data = array(
@@ -66,7 +79,6 @@ class Modulos extends CI_Model {
     }
     return $data;
     }
-
     public function EliminarModulo($CodigoModulo) {
         $eliminar = false;
         try{
@@ -115,7 +127,6 @@ class Modulos extends CI_Model {
             $exc->getMessage();
         }        
     }
-
     public function ModificarModulo($CodigoModulo, $NombreModulo, $OrdenModulo, $Estado, $CodigoTurnos,  $CodigoDiplomados, $Comentarios,  $IPModifica, $UsuarioModifica) {
        try{
         $data = array(
@@ -137,8 +148,6 @@ class Modulos extends CI_Model {
        }
        return $data;
     }
-
-
 public function listarDiplomados() {
         $this->db->select('CodigoDiplomado, '
                 . 'NombreDiplomado, '
@@ -163,6 +172,4 @@ public function listaModulosDiplomados(){ //Select para Elegir los diplomados  $
     $resultado= $consulta->result();
     return $resultado;
 }
-
-
 }

@@ -26,7 +26,6 @@
                                 <input type="checkbox" id="Estado"  name="Activo" value="True" checked> Activo<br>
                             </div>
                         </div>                                                                                       
-
                         <div class="form-group">
                             <label for="Turno" class="col-lg-3 control-label">Turno:</label>
                             <div class="col-lg-9">
@@ -107,7 +106,6 @@
                                 <input type="checkbox" id="EstadoE"  name="Activo" value="True" > Activo<br>
                             </div>
                         </div>                                                                                       
-
                         <div class="form-group">
                             <label for="Turno" class="col-lg-3 control-label">Turno:</label>
                             <div class="col-lg-9">
@@ -157,7 +155,6 @@
     </div>
 </div>
 <!--Aqui empieza la modal para eliminar diplomados ----------------------------------------------------------------->
-
 <div id="EliminarModulo" data-backdrop="static"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
     <div class="modal-dialog">
         <div class="modal-content">

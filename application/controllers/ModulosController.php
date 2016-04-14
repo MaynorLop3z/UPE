@@ -127,7 +127,32 @@ public function  EliminarModulo(){
    
     
 public function BuscarModulos(){
+    try {
+    if($this->input->post()){
+        $nombreMo = $this->input->post('FindModulo');
+        $Modulos = json_decode(json_encode($this->Modulos->listarModulosNombre($nombreMo)),true);     
+        $registro = "";
+        foreach ($Modulos as $mod){
+            $registro .= '\t<tr id="' . $mod['CodigoModulo'] . '">\n';
+            $registro .= '<td class="NombreMod">' . $mod['NombreModulo'] . '</td>\n';
+            $registro .= '<td class="ordenMo">' . $mod['OrdenModulo'] . '</td>\n';
+            $registro .= '<td class="Estado">' . $mod['Estado'] . '</td>\n';
+            $registro .= '<td class="TurnoM">' . $mod['CodigoTurno'] .'</td>\n';
+            $registro .= '<td class="DipName">' . $mod['CodigoDiplomado'] .'</td>\n';
+            $registro .= '<td class="ComenMo">' . $mod['Comentarios'] .'</td>\n';
+            $registro.= '<td class=gestion_Mod>';
+            $registro .= '<button id="btnModiM' .$mod['CodigoModulo'] . '" onclick="editModulo(this)" title="Editar Modulo" class="btn_modificar_Mod btn btn-success"><span class="glyphicon glyphicon-pencil"></span></button>';
+            $registro .= '<button id="btnDELM' .$mod['CodigoModulo'] . '" onclick="delMo(this)" title="Eliminar Modulo" class="btn_eliminar_Mod btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>';
+            $registro .= '</td>\n';
+            $registro .= '</tr>\n';
+            
+        }
+        echo $registro;
         
+    }    
+    } catch (Exception $ex) {
+       echo json_encode($ex);
+    }
         
     }
            
