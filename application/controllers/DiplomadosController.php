@@ -81,4 +81,34 @@ class DiplomadosController extends CI_Controller {
         }
     }
 
+
+public function BuscarDiplomados(){
+    try {
+    if($this->input->post()){
+        $nombreDip = $this->input->post('FindDiplomado');
+        $Diplomados = json_decode(json_encode($this->Diplomados->listarDiplomadosNombre($nombreDip)),true);     
+        $registro = "";
+        foreach ($Diplomados as $dip){
+            $registro .= '\t<tr id="' . $dip['CodigoDiplomado'] . '">\n';
+            $registro .= '<td class="nombre_Diplomado">' . $dip['NombreDiplomado'] . '</td>\n';
+            $registro .= '<td class="descripcionDiplomado">' . $dip['Descripcion'] . '</td>\n';
+            $registro .= '<td class="estado">' . $dip['Estado'] . '</td>\n';
+            $registro .= '<td class="categoriaDi">' . $dip['CodigoCategoriaDiplomado'] .'</td>\n';
+            $registro .= '<td class="comentarioDi">' . $dip['Comentarios'] .'</td>\n';
+            $registro.= '<td class=gestion_dip>';
+            $registro .= '<button id="btnmo' .$dip['CodigoDiplomado'] . '" onclick="editaDiplomado(this)" title="Editar Diplomado" class="btnmoddi btn btn-success"><span class="glyphicon glyphicon-pencil"></span></button>';
+            $registro .= '<button id="DELDiplomado' .$dip['CodigoDiplomado'] . '" onclick="eliminarDiplomado(this)" title="Eliminar Diplomado" class="btndeldip btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>';
+            $registro .= '</td>\n';
+            $registro .= '</tr>\n';
+            
+        }
+        echo $registro;
+        
+    }    
+    } catch (Exception $ex) {
+       echo json_encode($ex);
+    }
+        
+    }
+           
 }

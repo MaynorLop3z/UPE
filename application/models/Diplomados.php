@@ -11,13 +11,27 @@ class Diplomados extends CI_Model {
         $this->load->database();
     }
 
+    public function listarDiplomadosNombre($filtro) {
+        $this->db->select('CodigoDiplomado, '
+                . 'NombreDiplomado,'
+                . 'Descripcion, '
+                . 'Estado, '
+                . 'CodigoCategoriaDiplomado, '
+                . 'Comentarios');
+        $this->db->from('Diplomados');
+        $this->db->like('NombreDiplomado', $filtro);
+        $consulta = $this->db->get();
+        $resultado = $consulta->result();
+        return $resultado;
+    }
+
     public function listarDiplomados() {
-        
-        
-                try {
+
+
+        try {
             $consulta = $this->db->query('SELECT "d"."CodigoDiplomado", "d"."NombreDiplomado", "d"."Descripcion", "d"."Estado", "cd"."NombreCategoriaDiplomado", "d"."Comentarios" FROM "Diplomados" "d" JOIN "CategoriaDiplomados" "cd" ON "d"."CodigoCategoriaDiplomado" = "cd"."CodigoCategoriaDiplomado"');
-           // $consulta = $this->db->query('SELECT d.CodigoDiplomado FROM Diplomados d');
-         
+            // $consulta = $this->db->query('SELECT d.CodigoDiplomado FROM Diplomados d');
+
             if ($consulta != null) {
                 $resultado = $consulta->result();
             } else {
@@ -39,10 +53,7 @@ class Diplomados extends CI_Model {
 //        $consultaD = $this->db->get();
 //        $resultadoD = $consultaD->result();
 //        return $resultadoD;
-        
     }
-
-
 
     public function listarModulos($codigoDiplomado) {
         $this->db->select('CodigoModulo, '
@@ -143,30 +154,28 @@ class Diplomados extends CI_Model {
     //$resultadoDiplomado = $consultaDiplomado->row();
     //return $resultadoDiplomado;
     // }
-    
-     public function EliminarDiplomados($CodigoDiplomado){  //
+
+    public function EliminarDiplomados($CodigoDiplomado) {  //
         $this->db->delete('Diplomados', array('CodigoDiplomado' => $CodigoDiplomado));
     }
-   
-    
-    
-    
-    public function inactivarDiplomado($CodigoDiplomado  ){
-        try{
+
+    public function inactivarDiplomado($CodigoDiplomado) {
+        try {
             $data = array(
-                'Estado'=>FALSE,
+                'Estado' => FALSE,
 //                'UsuarioModifica'=>$usuarioModifica,
 //                'IpModifica' =>$ipModifica,
 //                'FechaModifica' =>date("Y/m/d")
-                );
-                $this->db->where('CodigoDiplomado',$CodigoDiplomado);
-                $this->db->update('Diplomados',$data);
-                $data['CodigoDiplomado'] = $CodigoDiplomado;
-                return $data;
-        }  catch (Exception $exc){
+            );
+            $this->db->where('CodigoDiplomado', $CodigoDiplomado);
+            $this->db->update('Diplomados', $data);
+            $data['CodigoDiplomado'] = $CodigoDiplomado;
+            return $data;
+        } catch (Exception $exc) {
             $exc->getMessage();
-        }        
+        }
     }
+
     public function listarCategoriasDiplomados() {
         $this->db->select('CodigoCategoriaDiplomado, '
                 . 'NombreCategoriaDiplomado, '

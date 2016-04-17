@@ -5,11 +5,23 @@
         <h3 class="panel-title">Gestion de Diplomados</h3>
     </div>
     <div class="panel-body">
-      <div class="btn btn-group">
-            <button id="BtnADDiplomado" class="btn btn-default btn-default" data-toggle="modal"><span class="glyphicon glyphicon-plus"></span>Diplomado Nuevo</button>
-             <button id="btnActualizarDi" class="btn btn-default" onclick="window.location.reload()"><span class="glyphicon glyphicon-refresh"></span>Actualizar</button>
-      </div>
-      
+        <div class="row">
+        <div class="col-md-6">
+            <button id="BtnADDiplomado" class="btn btn-default btn-default" data-toggle="modal"><span class="glyphicon glyphicon-plus"></span>Nuevo Diplomado </button>
+            <button id="btnActualizarDi" class="btn btn-default" onclick="window.location.reload()"><span class="glyphicon glyphicon-refresh"></span>Actualizar</button>
+        </div>
+        <div class="col-md-6">
+            <?php $this->load->helper('url'); ?>
+            <form id="frmfindDip" action="<?php echo base_url() ?>index.php/DiplomadosController/BuscarDiplomados/"  method="post" class="form-inline">
+                <span>Diplomados:</span>    
+                <input type="text" class="form-control" name="FindDiplomado" id="FindDiplomado" placeholder="Nombre del Diplomado">
+                <button id="btnFindDip" type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>Buscar Diplomado</button>
+            </form>
+        </div>
+        </div>
+        <br>
+       
+
         
         <table id="tableDiplomados"  class="table table-bordered table-striped table-hover table-responsive">
             <thead>

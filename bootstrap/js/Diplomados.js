@@ -207,3 +207,19 @@ $("#frmDELdip").submit(function(event){
       alert("error" + xhr.responseText);
     });
 });
+
+$("#frmfindDip").submit(function(event){
+    event.preventDefault();
+    var $form = $(this), NombreDiplomado = $form.find("input[name='FindDiplomado']").val(), url = $form.attr("action");
+    var posting = $.post(url,{FindDiplomado:NombreDiplomado});
+    posting.done(function(data){
+        if(data){
+           $('#tableDiplomados').html(data); 
+        }
+               
+   });
+     posting.fail(function(xhr, textStatus, errorThrown) {
+        alert("error" + xhr.responseText);
+     
+});
+});
