@@ -62,7 +62,8 @@ class Wsite extends CI_Controller {
             }
         } else {
             $data['publicacionesMostrar'] = $this->listarPublicaciones();
-            $data['publicacionesCargar'] = $this->mostrarPublicaciones();
+//            $data['publicacionesCargar'] = $this->mostrarPublicaciones();
+//            $data['mostrarUnaPublicacion']=  $this->mostrarPublicacion($id);
             $this->load->view('wsite', $data);
         }
     }
@@ -77,8 +78,12 @@ class Wsite extends CI_Controller {
 
                 $archivos = $this->archivos->listarArchivosPublicacion($publicacion->CodigoPublicacion);
                 foreach ($archivos as $archivo) {
-                    $publicacionArchivo = array('Titulo' => $publicacion->Titulo,
-                        'Ruta' => $archivo->Ruta);
+                    $publicacionArchivo = array(
+                    'CodigoPublicacion' => $publicacion->CodigoPublicacion,
+                    'Titulo' => $publicacion->Titulo,
+                    'Ruta' => $archivo->Ruta,
+                    'Contenido' => $publicacion->Contenido,
+                    'FechaPublicacion' => $publicacion->FechaPublicacion);
                 }
                 array_push($listaPublicacionesArchivos, $publicacionArchivo);
                 $iterador ++;
@@ -100,7 +105,7 @@ class Wsite extends CI_Controller {
                 $archivos2 = $this->archivos->listarArchivosPublicacion($publicacion->CodigoPublicacion);
                 foreach ($archivos2 as $archivo) {
                     $publicacionArchivo = array(
-//                        'CodigoPublicacion'=>$publicacion->CodigoPublicacion,
+                        'CodigoPublicacion' => $publicacion->CodigoPublicacion,
                         'Titulo' => $publicacion->Titulo,
                         'Ruta' => $archivo->Ruta,
                         'Contenido' => $publicacion->Contenido,
@@ -116,27 +121,22 @@ class Wsite extends CI_Controller {
     }
 
     // funcion para listar una publicacion segun su id
-    public function mostrarPublicacion($id) {
-        $iterador = 0;
-        $camposPublicacion = array();
-        $listaPublicaciones = $this->publicaciones->listarPublicaciones();
-        try {
-                 foreach ($listaPublicaciones as $publicacion) {
-            if ($id == $publicacion->CodigoPublicacion) {
-                $camposPublicacion = array('Titulo' => $publicacion->Titulo,
-                    'Ruta' => $archivo->Ruta,
-                    'Contenido' => $publicacion->Contenido,
-                    'FechaPublicacion' => $publicacion->FechaPublicacion);
-            }
-            else{
-                return null;
-            }
-        }
-        array_push($camposPublicacion);
-        $iterador ++;
-        } catch (Exception $exc) {
-            echo $exc->getTraceAsString();
-        }
-        }
-
+//    public function mostrarPublicacion($id) {
+//        $iterador = 0;
+//        $camposPublicacion = array();
+//        $listaPublicaciones = $this->publicaciones->MostrarDatosPublicacion($id);
+//        try {
+//             $camposPublicacion = array(
+//                        'CodigoPublicacion' => $publicacion->CodigoPublicacion,
+//                        'Titulo' => $publicacion->Titulo,
+//                        'Ruta' => $archivo->Ruta,
+//                        'Contenido' => $publicacion->Contenido,
+//                        'FechaPublicacion' => $publicacion->FechaPublicacion);
+//                
+//                array_push($camposPublicacion,$camposPublicacion);
+//            
+//        } catch (Exception $exc) {
+//            echo $exc->getTraceAsString();
+//        }
+//    }
 }

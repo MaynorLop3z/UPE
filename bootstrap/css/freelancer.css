@@ -208,6 +208,12 @@ section.success a.active {
     margin: 0 0 15px;
 }
 
+#pubImg{
+   
+ max-height: 100%;
+
+}
+
 #portfolio .portfolio-item .portfolio-link {
     display: block;
     position: relative;

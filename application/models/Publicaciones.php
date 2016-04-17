@@ -165,6 +165,22 @@ class Publicaciones extends CI_Model {
         $this->db->insert('Archivos', $data);
     }
 
+    public function MostrarDatosPublicacion($id) {
+        try {
+            $stringQuery = 'SELECT "Publicaciones"."CodigoPublicacion","Publicaciones"."Titulo","Publicaciones"."Contenido","Publicaciones"."FechaPublicacion","Archivos"."Ruta" FROM public."Publicaciones",public."Archivos" WHERE "Publicaciones"."CodigoPublicacion" = "Archivos"."CodigoPublicaciones" AND "Publicaciones"."CodigoPublicacion" =';
+            $stringQuery = $stringQuery . $id;
+            $consulta = $this->db->query($stringQuery);
+            if ($consulta != null) {
+                $resultado = $consulta->result();
+            } else {
+                
+            }
+            return $resultado;
+        } catch (Exception $e) {
+            echo $e->getTraceAsString();
+        }
+    }
+
 }
 
 ?>

@@ -106,18 +106,16 @@
                         foreach ($publicacionesMostrar as $publicacion) {
                             ?>
 
-                            <div class="col-sm-4 portfolio-item">
-                                <a href="#portfolioModal6" class="portfolio-link" data-toggle="modal">
-
-
-
+                            <div class="col-sm-4 portfolio-item"  >
+                                <a  id="a<?php echo $publicacion['CodigoPublicacion'] ?>" data-dimg='<?php echo json_encode($publicacion) ?>' class="portfolio-link callModalPublicacion"  >
                                     <div class="caption">
-                                        <div class="caption-content">
+                                        <div class="caption-content" >
                                             <i class="fa fa-search-plus fa-3x"></i>
                                         </div>
                                     </div>
-                                    <img  src="<?php echo '../bootstrap' . $publicacion['Ruta'] ?>" class="img-responsive" alt="">
+                                    <img  src="<?php echo '../bootstrap' . $publicacion['Ruta'] ?>" class="img-responsive" alt="" style="height:500px; width: 500px;">
                                 </a>
+
                             </div>
 
                             <?php
@@ -141,7 +139,7 @@
                 </div>
                 <div class="row " >
                     <div class="col-lg-8 col-lg-offset-2">
-                        <p style="text-align: justify;">La unidad de proyectos especiales de la facultdad es la que se encarga de brindar diversos servicios entre los más destacados por su alto fortalecimiento de competencias técnicas y teóricas se encuentran los diplomados  y los cursos de idiomas extranjeros 
+                        <p style="text-align: justify;">La unidad de proyectos especiales de la facultad es la que se encarga de brindar diversos servicios entre los más destacados por su alto fortalecimiento de competencias técnicas y teóricas se encuentran los diplomados  y los cursos de idiomas extranjeros 
                             <br>los diplomados ofertados por esta unidad siempre se adecuan a las necesidades del entorno laboral, permitiendo así que las personas interesadas en someterse a una actividad de formación como los diplomados tengan accesibilidad al conocimiento adecuado para enfrentarse al mundo laboral</p>
                     </div>
 
@@ -366,20 +364,12 @@
                     <div class="row">
                         <div class="col-lg-8 col-lg-offset-2">
                             <div class="modal-body">
-                                <?php
-                                foreach ($publicacionesMostrar as $publicacion) {
-                                    if($publicacion['CodigoPublicacion']==$id){?>
-                                     <h2><?php $publicacion['Titulo'] ?></h2>
-                                    <hr class="star-primary">
-                                    <img  src="<?php echo '../bootstrap' . $publicacion['Ruta'] ?>" class="img-responsive img-centered" alt="">
-                                    <p><?php $publicacion['Contenido'] ?></p>   
-                                        
-                                   <?php }
-                                }
-                                    ?>
 
-                                    
 
+                                <h2 id="h2TituloPub"></h2>
+                                <hr class="star-primary">
+                                <img  class="img-responsive img-centered " id="imgPub" alt="">
+                                <p id="pContenidoPub"></p>   
                                 <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
                             </div>
                         </div>

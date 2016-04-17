@@ -3,19 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+var codigoPub;
+
+$('.callModalPublicacion').on('click', function (event) {
+    codigoPub = this.id;
+    $("#portfolioModal6").modal('show');
+
+});
 
 
-//$('#Ingresar').submit(function (event) {
-//    event.preventDefault();
-//    var $form = $(this), Nombre = $form.find("input[name='user']").val(),
-//            Pass = $form.find("input[name='password']").val(),
-//                        url = $form.attr("action");
-//                       alert(Nombre + ""+ Pass);
-//        var posting = $.post(url, {
-//        Nombre: Nombre,
-//        Pass: Pass
-//        
-//    });
-//   
-//   
-//});
+$('#portfolioModal6').on('show.bs.modal', function (event) {
+    var pub = $('#' + codigoPub);
+    var dataP = pub.data("dimg");
+
+
+    $('#h2TituloPub').text(dataP.Titulo);
+    $('#imgPub').attr("src", '../bootstrap' + dataP.Ruta);
+    $('#pContenidoPub').text(dataP.Contenido);
+});
+
