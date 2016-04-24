@@ -40,12 +40,12 @@ $('#PeriodoModificar').on('show.bs.modal', function(event) {
 $("#frmDELPeriodo").submit(function(event) {
     event.preventDefault();
     var $form = $(this), PeriodoCodigo = codigoPeriodo.substring(10), url = $form.attr("action");
-    console.log(PeriodoCodigo);
+    //console.log(PeriodoCodigo);
     var posting = $.post(url, {PeriodoCodigo: PeriodoCodigo});
     posting.done(function(data) {
-        console.log(data);
+        //console.log(data);
         if (data) {
-            console.log(data);
+            //console.log(data);
             $("#PeriodoEliminar").modal('toggle');
             $('#tablaPeriodos').find('#Peridoo' + PeriodoCodigo).fadeOut("slow");
             $('#tablaPeriodos').find('#Periodo' + PeriodoCodigo).remove();
@@ -63,7 +63,7 @@ $("#frmEditPeriodo").submit(function(event) {
             , Comentarios = $form.find("textarea[name='ComentariosPeriodo']").val()
             , Estado = $("#EstadoPeriodoE").prop("checked")
             , url = $form.attr("action");
-    console.log(Estado);
+    //console.log(Estado);
     var posting = $.post(url,
             {idPeriodo: idPeriodo
                 , FechaInicio: FechaInicio
@@ -82,7 +82,7 @@ $("#frmEditPeriodo").submit(function(event) {
 //                            console.log("in");
                 trPeriodo.find('.ep').html("Activo");
             } else {
-                console.log("out");
+                //console.log("out");
                 trPeriodo.find('.ep').html("Inactivo");
             }
             $("#PeriodoModificar").modal('toggle');
@@ -115,6 +115,7 @@ $("#frmGrupoAdd").submit(function(event) {
             fila += '<td class="Hora_Entrada">' + obj.HoraEntrada + '</td>\n';
             fila += '<td class="Hora_Salida">' + obj.HoraSalida + '</td>\n';
             fila += '<td class="Aula">' + obj.Aula + '</td>\n';
+            fila += '<td class="testButton"><button id="test' + obj.CodigoGrupoPeriodo + '" onclick="testShow(this)" title="Gestionar Periodo" class="btn_gestionar_periodo btn btn-info"><span class="glyphicon glyphicon-cog"></span></button></td>';
             fila += '</tr>\n';
 //                        console.log(fila);
             $('#bodytablaPeriodosGruposO').append(fila);
@@ -143,12 +144,13 @@ $('#PeriodoGestion').on('show.bs.modal', function(event) {
                 tabla += '<td class="Hora_Entrada">' + obj[x].HoraEntrada + '</td>\n';
                 tabla += '<td class="Hora_Salida">' + obj[x].HoraSalida + '</td>\n';
                 tabla += '<td class="Aula">' + obj[x].Aula + '</td>\n';
+                tabla += '<td class="testButton"><button id="test' + obj[x].CodigoGrupoPeriodo + '" onclick="testShow(this)" title="Gestionar Periodo" class="btn_gestionar_periodo btn btn-info"><span class="glyphicon glyphicon-cog"></span></button></td>';
                 tabla += '</tr>\n';
 //                            for (y in obj[x]) {
 //                                console.log(obj[x][y]);
 //                            }
             }
-                        console.log(tabla);
+//                        console.log(tabla);
             $('#bodytablaPeriodosGruposO').html(tabla);
 
         }
@@ -172,4 +174,7 @@ function EditPeriodoShow(fila) {
 function GestionPeriodoShow(fila) {
     codigoPeriodo = fila.id;
     $("#PeriodoGestion").modal('toggle');
+}
+function testShow(fila) {
+    $("#testModal").modal('toggle');
 }

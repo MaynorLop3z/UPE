@@ -196,6 +196,7 @@
                                 <th>Hora de Entrada</th>
                                 <th>Hora de Salida</th>
                                 <th>Aula</th>
+                                <th>Configuracion</th>
                                 <!--<th>Alumnos</th>-->
                             </tr>
                         </thead>
@@ -209,5 +210,41 @@
             </div>
         </div>
     </div>
-</div> 
+</div>
+
+<div id="testModal" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <div role="tabpanel">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#Maestros" aria-controls="Maestros" role="tab" data-toggle="tab">Maestros</a></li>
+                        <li role="presentation"><a href="#Alumnos" aria-controls="Alumnos" role="tab" data-toggle="tab">Alumnos</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="Maestros">
+                            <div class="contendor">
+                                Maestros
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane active" id="Alumnos">
+                            <div class="contendor">
+                                Alumnos
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p>One fine body&hellip;</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 <script src="../bootstrap/js/GruposPeriodos.js"></script>
