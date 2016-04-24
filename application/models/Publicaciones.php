@@ -25,6 +25,7 @@ class Publicaciones extends CI_Model {
                 . 'CodigoTipoPublicacion'
         );
         $this->db->from('Publicaciones');
+        $this->db->order_by("FechaPublicacion","desc");
         $consulta = $this->db->get();
         $resultado = $consulta->result();
         return $resultado;

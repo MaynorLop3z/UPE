@@ -293,8 +293,8 @@
                                     </table>
                                     <b><a href="#">Olvido su contraseña</a></b>
                                     <ul class="list-inline item-details">
-                                        <li><button type="button" class="btn btn-default center-block col-lg-8" data-dismiss="modal">Cancelar</button></li>
-                                        <li><button type="submit" class="btn btn-default center-block  col-lg-8" >Aceptar</button></li>
+                                        <li><button type="button" class="btn btn-default center-block " data-dismiss="modal">Cancelar</button></li>
+                                        <li><button type="submit" class="btn btn-default center-block  " >Aceptar</button></li>
                                     </ul>
                                 </form>
 
