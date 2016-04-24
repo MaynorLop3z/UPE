@@ -115,7 +115,7 @@ $("#frmGrupoAdd").submit(function(event) {
             fila += '<td class="Hora_Entrada">' + obj.HoraEntrada + '</td>\n';
             fila += '<td class="Hora_Salida">' + obj.HoraSalida + '</td>\n';
             fila += '<td class="Aula">' + obj.Aula + '</td>\n';
-            fila += '<td class="testButton"><button id="test' + obj.CodigoGrupoPeriodo + '" onclick="testShow(this)" title="Gestionar Periodo" class="btn_gestionar_periodo btn btn-info"><span class="glyphicon glyphicon-cog"></span></button></td>';
+            fila += '<td class="GestionButton"><button id="gestion' + obj.CodigoGrupoPeriodo + '" onclick="testShow(this)" title="Gestionar Periodo" class="btn_gestionar_periodo btn btn-info"><span class="glyphicon glyphicon-cog"></span></button></td>';
             fila += '</tr>\n';
 //                        console.log(fila);
             $('#bodytablaPeriodosGruposO').append(fila);
@@ -144,7 +144,7 @@ $('#PeriodoGestion').on('show.bs.modal', function(event) {
                 tabla += '<td class="Hora_Entrada">' + obj[x].HoraEntrada + '</td>\n';
                 tabla += '<td class="Hora_Salida">' + obj[x].HoraSalida + '</td>\n';
                 tabla += '<td class="Aula">' + obj[x].Aula + '</td>\n';
-                tabla += '<td class="testButton"><button id="test' + obj[x].CodigoGrupoPeriodo + '" onclick="testShow(this)" title="Gestionar Periodo" class="btn_gestionar_periodo btn btn-info"><span class="glyphicon glyphicon-cog"></span></button></td>';
+                tabla += '<td class="GestionButton"><button id="gestion' + obj[x].CodigoGrupoPeriodo + '" onclick="testShow(this)" title="Gestionar Periodo" class="btn_gestionar_periodo btn btn-info"><span class="glyphicon glyphicon-cog"></span></button></td>';
                 tabla += '</tr>\n';
 //                            for (y in obj[x]) {
 //                                console.log(obj[x][y]);
@@ -176,5 +176,5 @@ function GestionPeriodoShow(fila) {
     $("#PeriodoGestion").modal('toggle');
 }
 function testShow(fila) {
-    $("#testModal").modal('toggle');
+    $("#gestionGrupoModal").modal('toggle');
 }
