@@ -178,3 +178,15 @@
         </div>   
     </div>
 </div>
+<!--Modulos no definidos---------------------------------------------------------------------------------------------------------------------------------------->
+<div id="ModInd" data-backdrop="static"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="container-fluid ">
+                <button type="button" class="close" id="close"  data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                
+                <label style="center">El modulo no esta  definido</label>
+            </div>
+        </div>
+    </div>
+</div>

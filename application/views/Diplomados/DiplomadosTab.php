@@ -14,7 +14,7 @@
             <?php $this->load->helper('url'); ?>
             <form id="frmfindDip" action="<?php echo base_url() ?>index.php/DiplomadosController/BuscarDiplomados/"  method="post" class="form-inline">
                 <span>Diplomados:</span>    
-                <input type="text" class="form-control" name="FindDiplomado" id="FindDiplomado" placeholder="Nombre del Diplomado">
+                <input type="text" class="form-control" name="FindDiplomado" id="FindDiplomado" placeholder="Nombre del Diplomado" required>
                 <button id="btnFindDip" type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>Buscar Diplomado</button>
             </form>
         </div>
@@ -51,6 +51,7 @@
                     <td class="gestion_dip" >
             <button id="btnmo<?php echo $dip->CodigoDiplomado ?>" onclick="editaDiplomado(this)" title="Editar Diplomado" class="btnmoddi btn btn-success" class="btn btn-info btn-lg"><span class=" glyphicon glyphicon-pencil"></span></button>
              <button id="DELDiplomado<?php echo $dip->CodigoDiplomado ?>" onclick="eliminarDiplomado(this)"  title="Eliminar Diplomado" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>
+             <button id="Addmod<?php echo $dip->CodigoDiplomado ?>" onclick="AddMod(this)"  title="Agregar Modulos" class="btndeldip btn btn-default" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-plus"></span></button>
                      </td>
                 </tr>
                 <?php

@@ -14,6 +14,8 @@ $("#BtnADDiplomado").on('click', function () {
 //$("#ModificarDiplomado").modal('show');
 //});
 
+
+
 function  editaDiplomado(fila){
     codigoDiplomado = fila.id;
     filaEdit = fila;
@@ -215,6 +217,9 @@ $("#frmfindDip").submit(function(event){
     posting.done(function(data){
         if(data){
            $('#tableDiplomados').html(data); 
+        }else{
+         $("#DipInd").modal('toggle');   
+            
         }
                
    });
