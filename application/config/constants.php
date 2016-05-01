@@ -93,5 +93,6 @@ define('DEFINE_RIGHT_ALLOWED', '.decorateStyleCrud');
 define('MENU_PPAL_RIGHT', 'MenuPpal');
 define('ELIMINA_REG', 'del');
 define('AGREGA_REG', 'add');
+define('PUBLICACIONES_X_PAG', 6);
 
 

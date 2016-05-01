@@ -225,6 +225,8 @@ $("#frmDelMod").submit(function(event) {
           if(data){
               $('#tableModulos').html(data);
               
+          }else{
+             $("#ModInd").modal('toggle');
           }
       });
       posting.fail(function(xhr, textStatus, errorThrown) {

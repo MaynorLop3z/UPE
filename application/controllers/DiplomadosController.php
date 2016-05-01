@@ -1,24 +1,19 @@
 <?php
-
 if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
-
 class DiplomadosController extends CI_Controller {
-
     public function __construct() {
         parent::__construct();
         $this->load->database();
         $this->load->model('Diplomados');
+        $this->load->model('Modulos');
     }
-
     public function index() {
-
         $data['Diplomados'] = $this->Diplomados->listarDiplomados();
         $data['CategoriasDi'] = $this->Diplomados->listarCategoriasDiplomados();
         $this->load->view('Diplomados', $data);
     }
-
     public function guardarDiplomado() {
         try {
             if ($this->input->post()) { //Estos son los nombres de los input del Form
@@ -28,7 +23,6 @@ class DiplomadosController extends CI_Controller {
                 $categoriaDi = $this->input->post('CatgoriaDiplomado');
                 $comentarioDi = $this->input->post('ComentarioDiplomado');
                 $this->load->model('Diplomados');
-
                 $arrayData = $this->Diplomados->crearDiplomado($nombreDiplomado, $descripcionDiplomado, $Estado, $categoriaDi, $comentarioDi);
                 echo json_encode($arrayData);
             }
@@ -36,7 +30,6 @@ class DiplomadosController extends CI_Controller {
             echo json_encode($ex);
         }
     }
-
     public function editarDiplomado() {
         try {
             if ($this->input->post('CodigoDiplomado')) {
@@ -54,10 +47,8 @@ class DiplomadosController extends CI_Controller {
             echo json_encode($ex);
         }
     }
-
     public function eliminarDiplomado() {
         //$eliminar = false;
-
         try {
             if ($this->input->post()) {
                 $codigoDiplomado = $this->input->post('CodigoDiplomado');
@@ -80,8 +71,6 @@ class DiplomadosController extends CI_Controller {
             echo json_encode($data);
         }
     }
-
-
 public function BuscarDiplomados(){
     try {
     if($this->input->post()){

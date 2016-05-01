@@ -14,7 +14,7 @@
                 <?php $this->load->helper('url'); ?>
                 <form id="frmfindMod" action="<?php echo base_url() ?>index.php/ModulosController/BuscarModulos/"  method="post" class="form-inline">
                     <span>Modulo:</span>    
-                     <input type="text" class="form-control" name="FindModulo" id="FindModulo" placeholder="Nombre del Modulo">
+                    <input type="text" class="form-control" name="FindModulo" id="FindModulo" placeholder="Nombre del Modulo" required>
                     <button id="btnFindDip" type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>Buscar Modulo</button>
                 </form>
             </div>
