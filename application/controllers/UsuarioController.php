@@ -208,9 +208,9 @@ class Usuariocontroller extends CI_Controller {
         try {
             if ($this->input->post()) {
                 if ($this->input->post('data_ini')) {
-                    $final=0;
-                    $pagAct=$this->input->post('data_ini');
-                    $final=$this->input->post('data_ini');
+                    $final = 0;
+                    $pagAct = $this->input->post('data_ini');
+                    $final = $this->input->post('data_ini');
                     $inicio = ROWS_PER_PAGE;
                     if ($final != null) {
                         $final = ($final * ROWS_PER_PAGE) - ROWS_PER_PAGE;
@@ -236,8 +236,8 @@ class Usuariocontroller extends CI_Controller {
             foreach ($Usuarios as $user) {
                 $cadena.='<tr data-userd=' . json_encode($user) . ' id="tr' . $user->CodigoUsuario . '">';
                 $cadena.='<td class="nombre_Usuario" >' . $user->Nombre . '</td>';
-                $cadena.='<td class="correo_Usuario" >' . $user->CorreoUsuario .'</td>';
-                $cadena.='<td class="nickName_Usuario" >' . $user->NombreUsuario .'</td>';
+                $cadena.='<td class="correo_Usuario" >' . $user->CorreoUsuario . '</td>';
+                $cadena.='<td class="nickName_Usuario" >' . $user->NombreUsuario . '</td>';
                 $cadena.='<td style="text-align:center"  class="gestion_User">';
                 foreach ($elemsWithRights->find('button[class="btn_modificar_user"]') as $key => $but) {
                     $but->{'id'} = $user->CodigoUsuario;
@@ -252,22 +252,16 @@ class Usuariocontroller extends CI_Controller {
                 $cadena.=str_get_html($elemsWithRights);
 
                 $cadena.='</td> </tr>';
-                
             }
-
-
             $cadena.='</tbody></table>';
-            
             $cadena.=' <div class="row">
             <ul class="pager">
                 <li><a href="#">&lt;&lt;</a></li>
                 <li><a href="#">&lt;</a></li>
-                <li><input data-datainic="'.$pagAct.'" type="text" value="'.$pagAct.'" id="txtPagingSearchUsr" name="txtNumberPag" size="5">/'. intval(ceil($this->Usuarios->countAllUsers() / ROWS_PER_PAGE)).'</li>
+                <li><input data-datainic="' . $pagAct . '" type="text" value="' . $pagAct . '" id="txtPagingSearchUsr" name="txtNumberPag" size="5">/' . intval(ceil($this->Usuarios->countAllUsers() / ROWS_PER_PAGE)) . '</li>
                 <li><a href="#">&gt;</a></li>
                 <li><a href="#">&gt;&gt;</a></li>
-                <li>['.($final+1) .' - '.($final+count($Usuarios)) .' / '. $this->Usuarios->countAllUsers().']</li></ul></div>';
-            
-            
+                <li>[' . ($final + 1) . ' - ' . ($final + count($Usuarios)) . ' / ' . $this->Usuarios->countAllUsers() . ']</li></ul></div>';
         } catch (Exception $e) {
             echo $e->getMessage();
         }

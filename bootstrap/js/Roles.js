@@ -1,6 +1,6 @@
 var codigoR;
 
-$("#tableRol").on("click", ".btn_modificar_rol", function () {
+$("#tableRol").on("click", ".btn_modificar_rol", function (e) {
     var trRol = $(this).parent().parent().parent();
 
     var dataR = trRol.data("rold");
@@ -37,7 +37,6 @@ $("#tableRol").on("keypress", "#txtEditRol", function (e) {
 $("#tableRol").on("blur", "#txtEditRol", function (e) {
 
     var trRol = $(this).parent().parent();
-
     var dataR = trRol.data("rold");
     var tdRol = trRol.find('.nombre_Rol');
     tdRol.empty();

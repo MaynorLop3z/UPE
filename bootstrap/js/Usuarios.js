@@ -2,16 +2,19 @@ var codigoUsuario;
 $("#btnUsuarioNuevo").on('click', function () {
     $("#usuarioNuevo").modal();
 });
-$('.btn_modificar_user').on('click', function (event) {
+
+$("#containerTablePaging").on("click", ".btn_modificar_user", function (e) {
     codigoUsuario = this.id;
     $("#usuarioModifica").modal('show');
 });
-$('.btn_eliminar_user').on('click', function (event) {
+
+$("#containerTablePaging").on("click", ".btn_eliminar_user", function (e) {
     codigoUsuario = this.id;
     codigoUsuario = codigoUsuario.substring(6);
     $("#usuarioElimina").modal('show');
 });
-$('.btn_rls_user').on('click', function (event) {
+
+$("#containerTablePaging").on("click", ".btn_rls_user", function (e) {
     codigoUsuario = this.id;
     codigoUsuario = codigoUsuario.substring(6);
     $("#usuarioRoles").modal('show');
@@ -155,10 +158,10 @@ $("#containerTablePaging").on("keypress", "#txtPagingSearchUsr", function (e) {
 
         posting.done(function (data) {
             if (data !== null) {
-                
+
                 $('#containerTablePaging').empty();
                 $('#containerTablePaging').html(data);
-                
+
             }
         });
         posting.fail(function (data) {
@@ -183,11 +186,11 @@ $("#frmRolUser").submit(function (event) {
 
             if (checkR.is(":checked"))
             {
-                  rlObj ["Sta"] =  "add" ;
+                rlObj ["Sta"] = "add";
             } else {
-                rlObj ["Sta"] =  "del" ;
+                rlObj ["Sta"] = "del";
             }
-          
+
             jsonRolsUsr.push(rlObj);
         }
     });
@@ -195,9 +198,9 @@ $("#frmRolUser").submit(function (event) {
 
     var posting = $.post(url, {"rolesUserSelect": jsonRolsUsr});
     posting.done(function (data) {
-        if (data!==null) {
+        if (data !== null) {
             $("#usuarioRoles").modal('toggle');
-            
+
 //            $('#tableUsers').find('#tr' + codigoUsuario).fadeOut("slow");
 //            $('#tableUsers').find('#tr' + codigoUsuario).remove();
         } else {
@@ -209,5 +212,8 @@ $("#frmRolUser").submit(function (event) {
     });
 });
 
+$('.modal-dialog').draggable({
+    handle: ".modal-header"
+});
 
 
