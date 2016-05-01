@@ -199,7 +199,7 @@ $("#frmADDAlumno").submit(function(event) {
             fila = fila + '<button id="AlumE' + obj.CodigoParticipante + '"  onclick="mostrarEditAlumno(this)" title="Editar Alumno" class="btn_modificar_alum btn btn-success"><span class="glyphicon glyphicon-pencil"></span> </button>';
             fila = fila + '<button id="alumDEL' + obj.CodigoParticipante + '" onclick="mostrarDelAlumno(this)" title="Eliminar Alumno" class="btn_eliminar_alum btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>';
             fila = fila + '<button id="alumVIEW' + obj.CodigoParticipante + '" onclick="mostrarInfoAlumno(this)" title="Ver Alumno" class="btn_ver_alum btn btn-info"><span class="glyphicon glyphicon-eye-open"></span></button>';
-            fila = fila + '<button id="alumGROUP' + obj.CodigoParticipante + '" onclick="" title="Agregar a Grupo" class="btn_grouo_add btn btn-warning"><span class="glyphicon glyphicon-list-alt"></span></button>';
+            fila = fila + '<button id="alumGROUP' + obj.CodigoParticipante + '" onclick="mostrarGruposPeriodos(this)" title="Agregar a Grupo" class="btn_grouo_add btn btn-warning"><span class="glyphicon glyphicon-list-alt"></span></button>';
             fila = fila + '</td></tr>';
             //console.log(fila);
             $('#tableAlumnos > tbody').append(fila);
@@ -231,7 +231,7 @@ $("#frmEditarAlumno").submit(function(event) {
             fila = fila + '<td class="Mail_Alumno">' + obj.CorreoElectronico + '</td>';
             fila = fila + '<td class="TelefonoFijo_Alumno" style="display: none">' + obj.TelefonoFijo + '</td>';
             fila = fila + '<td class="TelefonoMovil_Alumno" style="display: none">' + obj.TelefonoCelular + '</td>';
-            fila = fila + '<td class="Direccion_Alumno" style="display: none">' + obj.Dirreccion + '</td>';
+            fila = fila + '<td class="Direccion_Alumno" style="display: none">' + obj.Direccion + '</td>';
             fila = fila + '<td class="DUI_Alumno" style="display: none">' + obj.NumeroDUI + '</td>';
             fila = fila + '<td class="Nombre_Alumno">' + obj.Nombre + '</td>';
             fila = fila + '<td class="FechaNac_Alumno" style="display: none">' + obj.FechaNacimiento + '</td>';
@@ -247,20 +247,20 @@ $("#frmEditarAlumno").submit(function(event) {
             fila = fila + '<button id="AlumE' + obj.CodigoParticipante + '" onclick="mostrarEditAlumno(this)" title="Editar Alumno" class="btn_modificar_alum btn btn-success"><span class="glyphicon glyphicon-pencil"></span> </button>';
             fila = fila + '<button id="alumDEL' + obj.CodigoParticipante + '" onclick="mostrarDelAlumno(this)" title="Eliminar Alumno" class="btn_eliminar_alum btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>';
             fila = fila + '<button id="alumVIEW' + obj.CodigoParticipante + '" onclick="mostrarInfoAlumno(this)" title="Ver Alumno" class="btn_ver_alum btn btn-info"><span class="glyphicon glyphicon-eye-open"></span></button>';
-            fila = fila + '<button id="alumGROUP' + obj.CodigoParticipante + '" onclick="" title="Agregar a Grupo" class="btn_grouo_add btn btn-warning"><span class="glyphicon glyphicon-list-alt"></span></button>';
+            fila = fila + '<button id="alumGROUP' + obj.CodigoParticipante + '" onclick="mostrarGruposPeriodos(this)" title="Agregar a Grupo" class="btn_grouo_add btn btn-warning"><span class="glyphicon glyphicon-list-alt"></span></button>';
             fila = fila + '</td>';
-            $(document).on("click", "#alumE" + obj.CodigoParticipante.toString(), function() {
-                codigoParticipante = obj.CodigoParticipante;
-                $("#AlumnoEditar").modal('toggle');
-            });
-            $(document).on("click", "#alumDEL" + obj.CodigoParticipante.toString(), function() {
-                codigoParticipante = obj.CodigoParticipante;
-                $("#AlumnoEliminar").modal('toggle');
-            });
-            $(document).on("click", "#alumVIEW" + obj.CodigoParticipante.toString(), function() {
-                codigoParticipante = obj.CodigoParticipante;
-                $("#AlumnoVIEWDATA").modal('toggle');
-            });
+//            $(document).on("click", "#alumE" + obj.CodigoParticipante.toString(), function() {
+//                codigoParticipante = obj.CodigoParticipante;
+//                $("#AlumnoEditar").modal('toggle');
+//            });
+//            $(document).on("click", "#alumDEL" + obj.CodigoParticipante.toString(), function() {
+//                codigoParticipante = obj.CodigoParticipante;
+//                $("#AlumnoEliminar").modal('toggle');
+//            });
+//            $(document).on("click", "#alumVIEW" + obj.CodigoParticipante.toString(), function() {
+//                codigoParticipante = obj.CodigoParticipante;
+//                $("#AlumnoVIEWDATA").modal('toggle');
+//            });
             $('#tableAlumnos > tbody').find('#alum' + obj.CodigoParticipante).html(fila);
             $("#AlumnoEditar").modal('toggle');
 

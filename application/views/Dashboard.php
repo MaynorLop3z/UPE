@@ -18,14 +18,18 @@ and open the template in the editor.
         <script src="../bootstrap/js/bootstrap.min.js"></script>
 <!--        <script src="../bootstrap/js/Usuarios.js"></script>-->
         <script type="text/javascript">
-            $(document).ready(function () {
-                window.setTimeout(function () {
-                    $(".alert").fadeTo(1500, 0).slideUp(500, function () {
+            $(document).ready(function() {
+                window.setTimeout(function() {
+                    $(".alert").fadeTo(1500, 0).slideUp(500, function() {
                         $(this).remove();
                     });
                 }, 5000);
+//                $(".alert").alert();
+//                window.setTimeout(function() {
+//                    $(".alert").alert('close');
+//                }, 2000);
 <?php
-$Permisos=$this->session->userdata('permisosUsuer');
+$Permisos = $this->session->userdata('permisosUsuer');
 foreach ($Permisos as $p) {
 
     if ($p->systemPart == MENU_PPAL_RIGHT) {
@@ -72,7 +76,7 @@ foreach ($Permisos as $p) {
                         <ul class="nav nav-tabs" role="tablist">
                             <?php
                             //$iterator = 0;
-                            
+
                             foreach ($Permisos as $p) {
                                 if ($p->systemPart == MENU_PPAL_RIGHT) {
                                     ?>

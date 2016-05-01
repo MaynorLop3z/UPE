@@ -40,7 +40,7 @@ $('#PeriodoModificar').on('show.bs.modal', function(event) {
 $("#frmDELPeriodo").submit(function(event) {
     event.preventDefault();
     var $form = $(this), PeriodoCodigo = codigoPeriodo.substring(10), url = $form.attr("action");
-    //console.log(PeriodoCodigo);
+    console.log(PeriodoCodigo);
     var posting = $.post(url, {PeriodoCodigo: PeriodoCodigo});
     posting.done(function(data) {
         //console.log(data);
@@ -52,7 +52,12 @@ $("#frmDELPeriodo").submit(function(event) {
         }
     });
     posting.fail(function() {
-        alert("error");
+        $("#PeriodoEliminar").modal('toggle');
+        var msj = "<div class='alert alert-danger alert-dismissible fade in' role='alert' >";
+            msj += "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
+            msj +=  "<strong>Error!</strong> Existen grupos asociados al periodo, debe eliminarlos antes de continuar.</div>";
+            $('#MsjErrorPeriodo').html(msj);
+//        alert("error, existen grupos asociados al periodo, elimine todos los grupos del periodo");
     });
 });
 $("#frmEditPeriodo").submit(function(event) {

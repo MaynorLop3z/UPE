@@ -74,7 +74,7 @@
                 <form id="frmDELPeriodo" action="<?php echo base_url() ?>index.php/PeriodosController/deletePeriodo/" class="form-horizontal" method="post" >
                     <fieldset>
                         <legend class="modal-header">
-                            Eliminar Alumno
+                            Eliminar Periodo
                         </legend>
                         <p class="text-center">¿Desea eliminar al Periodo del: <mark id="nombrePeriodoEliminar"></mark> ?</p>
                         <input type="hidden" class="form-control" name="onlyFor">
@@ -228,12 +228,55 @@
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="Maestros">
                             <div class="contendor">
-                                Maestros
+                                <table class="table table-hover table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>Descripcion</th>
+                                            <th>Asignar/Desasignar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>test</td>
+                                            <td>testt</td>
+                                            <td>test</td>
+                                        </tr>
+                                        <tr>
+                                            <td>test</td>
+                                            <td>test</td>
+                                            <td>test</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        <div role="tabpanel" class="tab-pane active" id="Alumnos">
+                        <div role="tabpanel" class="tab-pane" id="Alumnos">
                             <div class="contendor">
                                 Alumnos
+                                <table class="table table-hover table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>DUI</th>
+                                            <th>Categoria</th>
+                                            <th>Comentarios</th>
+                                            <th>Asignar/Desasignar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

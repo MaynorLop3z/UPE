@@ -93,6 +93,7 @@
             </div>
         </form>
         <button  id="btnADDPeriodo" class="btn btn-default" onclick="NuevoPeriodoModalShow()"><span class="glyphicon glyphicon-plus"></span>Nuevo Periodo</button>
+        <div id="MsjErrorPeriodo"></div>
         <div id="tablaPeriodos">
             <table border="1" class="table table-bordered table-hover">
                 <thead>
