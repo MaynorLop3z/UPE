@@ -142,25 +142,23 @@ $('#usuarioElimina').on('show.bs.modal', function (event) {
     $('#nombreUserEliminar').html(dataU.Nombre);
 });
 
-$("#txtPagingSearchUsr").show().keypress(function (e) {
+$("#containerTablePaging").on("keypress", "#txtPagingSearchUsr", function (e) {
     e.stopImmediatePropagation();
     //e.preventDefault();
-    console.log("ejecucion");
     if (e.which === 13) {
 
         var data_inic = $('#txtPagingSearchUsr').data("datainic");
         var data_in = $('#txtPagingSearchUsr').val();
 
-        var url = 'UsuarioController/listarUsuariosPorRango/';
+        var url = 'UsuarioController/paginUsers/';
         var posting = $.post(url, {"data_ini": data_in});
 
         posting.done(function (data) {
             if (data !== null) {
-                var obj = jQuery.parseJSON(data);
-                $('#tableUsers > tbody').remove();
-                $.each(obj, function (k, v) {
-                    console.log(v.Nombre.toString().trim() + " - " + v.CodigoUsuario);
-                });
+                
+                $('#containerTablePaging').empty();
+                $('#containerTablePaging').html(data);
+                
             }
         });
         posting.fail(function (data) {

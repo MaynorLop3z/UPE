@@ -25,7 +25,7 @@ class Publicaciones extends CI_Model {
                 . 'CodigoTipoPublicacion'
         );
         $this->db->from('Publicaciones');
-        $this->db->order_by("FechaPublicacion","desc");
+        $this->db->order_by("FechaPublicacion", "desc");
         $consulta = $this->db->get();
         $resultado = $consulta->result();
         return $resultado;
@@ -180,6 +180,33 @@ class Publicaciones extends CI_Model {
         } catch (Exception $e) {
             echo $e->getTraceAsString();
         }
+    }
+
+    public function ListarPublicacionesPaginacion($offset) {
+        try {
+//            
+//            $this->db->select('CodigoPublicacion, UsuarioPublica, FechaPublicacion, Titulo, '
+//                    . 'Contenido, ParticipantePublica, Estado,CodigoGrupoPeriodo, '
+//                    . 'CodigoGrupoParticipantes, CodigoGrupoPeriodoUsuario, CodigoTipoPublicacion'
+//            );
+            if ($offset == null) {
+                $limit = PUBLICACIONES_X_PAG;
+                $offset = 0;
+            }
+            $limit = PUBLICACIONES_X_PAG;
+            $varLimit = ' limit ' . $limit . ' offset ' . $offset;
+            $stringQuery = 'SELECT "Publicaciones"."CodigoPublicacion","Publicaciones"."Titulo","Publicaciones"."Contenido","Publicaciones"."FechaPublicacion","Archivos"."Ruta" FROM public."Publicaciones",public."Archivos" WHERE "Publicaciones"."CodigoPublicacion" = "Archivos"."CodigoPublicaciones" ORDER BY "FechaPublicacion" desc';
+            $stringQuery = $stringQuery . $varLimit;
+            $consulta = $this->db->query($stringQuery);
+            if ($consulta != null) {
+                $resultado = $consulta->result();
+            } else {
+                
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+        return $resultado;
     }
 
 }

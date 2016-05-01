@@ -62,6 +62,10 @@ class Wsite extends CI_Controller {
             }
         } else {
             $data['publicacionesMostrar'] = $this->listarPublicaciones();
+            $data['PagInicial']=1;
+            $data['PubporPag']=PUBLICACIONES_X_PAG;
+            $data['TotalPaginacion']=  $this->publicaciones->ListarPublicacionesPaginacion( NULL);
+            
 //            $data['publicacionesCargar'] = $this->mostrarPublicaciones();
 //            $data['mostrarUnaPublicacion']=  $this->mostrarPublicacion($id);
             $this->load->view('wsite', $data);
@@ -79,11 +83,11 @@ class Wsite extends CI_Controller {
                 $archivos = $this->archivos->listarArchivosPublicacion($publicacion->CodigoPublicacion);
                 foreach ($archivos as $archivo) {
                     $publicacionArchivo = array(
-                    'CodigoPublicacion' => $publicacion->CodigoPublicacion,
-                    'Titulo' => $publicacion->Titulo,
-                    'Ruta' => $archivo->Ruta,
-                    'Contenido' => $publicacion->Contenido,
-                    'FechaPublicacion' => $publicacion->FechaPublicacion);
+                        'CodigoPublicacion' => $publicacion->CodigoPublicacion,
+                        'Titulo' => $publicacion->Titulo,
+                        'Ruta' => $archivo->Ruta,
+                        'Contenido' => $publicacion->Contenido,
+                        'FechaPublicacion' => $publicacion->FechaPublicacion);
                 }
                 array_push($listaPublicacionesArchivos, $publicacionArchivo);
                 $iterador ++;
@@ -139,4 +143,26 @@ class Wsite extends CI_Controller {
 //            echo $exc->getTraceAsString();
 //        }
 //    }
+    public function listarPublicacionesPaginacion() {
+        try {
+            if ($this->input - post()) {
+                $final = $this->input->post('data_ini');
+                $inicio = PUBLICACIONES_X_PAG;
+                if ($final != null) {
+                    $final = ($final * PUBLICACIONES_X_PAG) - PUBLICACIONES_X_PAG;
+                }
+                $Response = array();
+                $Publicaciones = $this->publicaciones->ListarPublicacionesPaginacion($inicio, $final);
+                foreach ($Publicaciones as $publicacion) {
+                    array_push($Response, $publicacion);
+                }
+                $responseDef = json_encode($Response);
+            }
+            echo ($responseDef);
+        } catch (Exception $exc) {
+            $data = array('Error' => $ex->getMessage());
+            echo json_encode($data);
+        }
+    }
+
 }

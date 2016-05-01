@@ -22,7 +22,7 @@ class Usuarios extends CI_Model {
             $limit = ROWS_PER_PAGE;
 
             $this->db->from('Usuarios');
-             $this->db->order_by("FechaModifica", "desc");
+            $this->db->order_by("FechaModifica", "desc");
             $this->db->limit($limit, $offset);
             $consulta = $this->db->get();
             $resultado = $consulta->result();
