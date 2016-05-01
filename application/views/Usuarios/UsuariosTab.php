@@ -45,11 +45,11 @@
         </table>
         <div class="row">
             <ul class="pager">
-                <li><a href="#">&lt;&lt;</a></li>
-                <li><a href="#">&lt;</a></li>
+                <li><a data-datainic="1" id="aFirstPag" href="#">&lt;&lt;</a></li>
+                <li><a id="aPrevPag" href="#">&lt;</a></li>
                 <li><input data-datainic="1" type="text" value="1" id="txtPagingSearchUsr" name="txtNumberPag" size="5">/<?php echo intval(ceil($ToTalRegistros / ROWS_PER_PAGE)) ?></li>
-                <li><a href="#">&gt;</a></li>
-                <li><a href="#">&gt;&gt;</a></li>
+                <li><a id="aNextPag" href="#">&gt;</a></li>
+                <li><a id="aLastPag" data-datainic="<?php echo intval(ceil($ToTalRegistros / ROWS_PER_PAGE)) ?>" href="#">&gt;&gt;</a></li>
                 <li>[<?php echo $PagInicial . "-" . count($Usuarios) . "/" . $ToTalRegistros ?>]</li>
             </ul>
         </div>
