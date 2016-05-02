@@ -61,7 +61,7 @@ class Wsite extends CI_Controller {
                 }
             }
         } else {
-            $data['publicacionesMostrar'] = $this->listarPublicaciones();
+            $data['publicacionesMostrar'] = count($this->listarPublicaciones());
             $data['PagInicial']=1;
             $data['PubporPag']=PUBLICACIONES_X_PAG;
             $data['TotalPaginacion']=  $this->publicaciones->ListarPublicacionesPaginacion( NULL);
@@ -74,6 +74,7 @@ class Wsite extends CI_Controller {
 
     public function listarPublicaciones() {
         try {
+            $contadora=0;
             $listaPublicacionesArchivos = array();
             $iterador = 0;
             $listaPublicaciones = array();

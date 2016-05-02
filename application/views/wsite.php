@@ -128,26 +128,29 @@
                 </div>
                 <!-- start paginacion-->
 
-                <div class="row">
+                <div class="row" id="paginacionDiv">
+                   
                     <ul class="pager">
-                        <li><a href="#" id="btnpaginicio">&laquo;</a></li>
+                        <li><a  id="btnpaginicio">&laquo;</a></li>
                         <?php
                         $contador = 1;
 
-                        $totalpag = count($publicacion);
-                        if (($totalpag % PUBLICACIONES_X_PAG) != 0) {
-                            $totalpag = intval(ceil(($totalpag / PUBLICACIONES_X_PAG))) + 1;
-                        } else {
+                        $totalpag =$publicacionesMostrar;
+                        
+                        if ((($totalpag % PUBLICACIONES_X_PAG) != 0) && (($totalpag / PUBLICACIONES_X_PAG)>=1)) {
+                            $totalpag = intval(($totalpag / PUBLICACIONES_X_PAG) + 1);
+                            ?>
+                        <?php } else {
                             $totalpag = intval(ceil(($totalpag / PUBLICACIONES_X_PAG)));
                         }
                         while ($contador <= $totalpag) {
                             ?>
-                            <li><a href="#" id="<?php echo $contador ?>"><?php echo $contador ?></a></li>
+                            <li><a id="<?php echo $contador ?>"><?php echo $contador ?></a></li>
                             <?php
                             $contador ++;
                         }
                         ?>
-                            <li><a href="#" id="btnpagfin">&raquo;</a></li>
+                            <li><a id="btnpagfin">&raquo;</a></li>
                     </ul>
                 </div>
                 <!-- finish paginacion-->

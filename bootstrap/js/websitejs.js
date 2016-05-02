@@ -22,14 +22,25 @@ $('#portfolioModal6').on('show.bs.modal', function (event) {
     $('#pContenidoPub').text(dataP.Contenido);
 });
 
-$('#btnSend').on('click', function(event){
-      var link = "mailto:griss@hotmail.com"
+$('#btnSend').on('click', function (event) {
+    alert("Se abrira su gestor de correo electronico para enviar el mensaje.");
+    var link = "mailto:griss@hotmail.com"
 //             + "?cc=myCC"
-             + "&subject= Consulta de: " + escape(document.getElementById('name').value)
-             + "&body=" + escape(document.getElementById('message').value) +"\n\
-          "+"Telefono de Contacto: " + escape(document.getElementById('phone').value);
+            + "&subject= Consulta de: " + escape(document.getElementById('name').value)
+            + "&body=" + escape(document.getElementById('message').value) + "\n\
+          " + "Telefono de Contacto: " + escape(document.getElementById('phone').value);
 
     window.location.href = link;
-    
+
 });
 
+$(document).ready(function (e) {
+    e.stopImmediatePropagation();
+    $('#btnpaginicio').on('click', function (egb) {
+               alert("vamos por buen camino");
+                
+    }
+
+
+    );
+});
