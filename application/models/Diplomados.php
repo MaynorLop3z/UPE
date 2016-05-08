@@ -82,7 +82,7 @@ class Diplomados extends CI_Model {
         $resultado = $consulta->result();
         return $resultado;
     }
-    public function crearDiplomado($NombreDiplomado, $Descripcion, $Estado, $CodigoCategoriaDiplomado, $Comentarios) {
+    public function crearDiplomado($NombreDiplomado, $Descripcion, $Estado, $CodigoCategoriaDiplomado, $Comentarios,$IpUserModifica,$UserModifica) {
         try {
             $data = array(
                 'NombreDiplomado' => $NombreDiplomado,
@@ -90,6 +90,11 @@ class Diplomados extends CI_Model {
                 'Estado' => $Estado,
                 'CodigoCategoriaDiplomado' => $CodigoCategoriaDiplomado,
                 'Comentarios' => $Comentarios,
+                'UsuarioModifica'=>$UserModifica,
+                'IpModifica'=>$IpUserModifica,
+                'FechaModifica'=>date("Y/m/d"), 
+                
+                
             );
             //$this->db->insert('Modulos', $data
             $this->db->insert('Diplomados', $data);
@@ -112,7 +117,7 @@ class Diplomados extends CI_Model {
         }
         return $eliminar;
     }
-    public function ModificarDiplomado($CodigoDiplomado, $NombreDiplomado, $Descripcion, $Estado, $CodigoCategoriaDiplomado, $Comentarios) {
+    public function ModificarDiplomado($CodigoDiplomado, $NombreDiplomado, $Descripcion, $Estado, $CodigoCategoriaDiplomado, $Comentarios,$IPModifica,$UsuarioModifica) {
         try {
             $data = array(
                 'NombreDiplomado' => $NombreDiplomado,
@@ -120,6 +125,9 @@ class Diplomados extends CI_Model {
                 'Estado' => $Estado,
                 'CodigoCategoriaDiplomado' => $CodigoCategoriaDiplomado,
                 'Comentarios' => $Comentarios,
+                'UsuarioModifica' => $UsuarioModifica,
+                'IpModifica' => $IPModifica,
+                'FechaModifica' => date("Y/m/d"),
             );
             $this->db->where('CodigoDiplomado', $CodigoDiplomado);
             $this->db->update('Diplomados', $data);

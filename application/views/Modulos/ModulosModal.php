@@ -15,9 +15,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="ModuloOrden" class="col-lg-3 control-label">Orden</label>
+                            <label for="ModuloOrden" class="col-lg-3 control-label">Correlativo</label>
                             <div class="col-lg-9">
-                                <textarea type="text" class="form-control" name="ordenM" id="ModuloOrden" placeholder="Orden" required></textarea>
+                                <textarea type="number" class="form-control" name="ordenM" id="ModuloOrden" placeholder="Orden" required></textarea>
                             </div>
                         </div>                     
                         <div class="form-group">
@@ -43,6 +43,10 @@
                             </div>
                         </div>
                          <!-- Se quita Diplomados ya que debe ser automatico-->
+                          <div class="form-group">
+                            <label class="col-lg-3 control-label">Diplomado:</label>
+                         
+                         <div class="col-lg-9">
                           <select class ="form-control" id="Diplomadoname" name="Diplomadoname">                                          
                                     <?php
                                     foreach ($Diplomados as $DipMo) { //Aqui para seleccionar el Turno a que Pertenece
@@ -54,9 +58,9 @@
                                     ?>
 
                                 </select>
-                         
-                         
-                         
+                         </div>
+                            </div>
+                                             
                          
                          
                          
@@ -97,7 +101,7 @@
                         <div class="form-group">
                             <label for="ModuloOrdenEdit" class="col-lg-3 control-label">Orden</label>
                             <div class="col-lg-9">
-                                <textarea type="text" class="form-control" name="ordenM" id="ModuloOrdenEdit" placeholder="Orden" required></textarea>
+                                <textarea type="number"  class="form-control" name="ordenM" id="ModuloOrdenEdit" placeholder="Orden" required></textarea>
                             </div>
                         </div>                     
                         <div class="form-group">

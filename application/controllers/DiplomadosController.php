@@ -22,8 +22,10 @@ class DiplomadosController extends CI_Controller {
                 $Estado = $this->input->post('Estado');
                 $categoriaDi = $this->input->post('CatgoriaDiplomado');
                 $comentarioDi = $this->input->post('ComentarioDiplomado');
+                $ip = $this->session->userdata('ipUserLogin'); // La ip del usuario que modifica   $userModi
+                $userModi = $this->session->userdata('codigoUserLogin'); //codigo del usuario qeumodifica  $ip,
                 $this->load->model('Diplomados');
-                $arrayData = $this->Diplomados->crearDiplomado($nombreDiplomado, $descripcionDiplomado, $Estado, $categoriaDi, $comentarioDi);
+                $arrayData = $this->Diplomados->crearDiplomado($nombreDiplomado, $descripcionDiplomado, $Estado, $categoriaDi, $comentarioDi,$ip,$userModi);
                 echo json_encode($arrayData);
             }
         } catch (Exception $ex) {
@@ -39,8 +41,11 @@ class DiplomadosController extends CI_Controller {
                 $Estado = $this->input->post('Estado');
                 $NombreCategoriaDiplomad = $this->input->post('CatgoriaDiplomado');
                 $Comentarios = $this->input->post('ComentarioDiplomado');
+                $ip = $this->session->userdata('ipUserLogin'); // La ip del usuario que modifica   $userModi
+                $userModi = $this->session->userdata('codigoUserLogin'); //codigo del usuario qeumodifica  $ip,
+                
                 $this->load->model('Diplomados');
-                $arrayData = $this->Diplomados->ModificarDiplomado($codigoDi, $NombreDiplomado, $Descripcion, $Estado, $NombreCategoriaDiplomad, $Comentarios);
+                $arrayData = $this->Diplomados->ModificarDiplomado($codigoDi, $NombreDiplomado, $Descripcion, $Estado, $NombreCategoriaDiplomad, $Comentarios,$ip,$userModi);
                 echo json_encode($arrayData);
             }
         } catch (Exception $ex) {

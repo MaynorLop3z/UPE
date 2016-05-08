@@ -27,7 +27,7 @@
                     <thead>
                         <tr>
                             <th>Modulo</th>
-                            <th>Orden</th>
+                            <th>Correlativo</th>
                             <th>Estado</th>
                             <th>Turno</th>
                             <th>Diplomado</th>
