@@ -19,6 +19,12 @@ function delMo(fila) {
 
 }
 
+
+function AddMod(fila){
+    codigoModulo = fila.id;
+    $("")
+}
+
 // modificar  Modulo ----------->
 $('#ModificarModulo').on('show.bs.modal', function (event) {   
     var mod = $('#mod'+ codigoModulo.substring(8));
@@ -97,7 +103,7 @@ $("#formgrdMo").submit(function (event) {
             fila = fila + '<td class="ComenMo" >' + obj.Comentarios + '</td>';
             fila = fila + '<td style="text-align:center"  class="gestion_Mod">';
             fila = fila + '<button id="btnModiM' + obj.CodigoModulo + '" onclick="editModulo(this)" title="Editar Modulo" class="btn_modificar_Mod btn btn-success"><span class="glyphicon glyphicon-pencil"></span></button>';
-            fila = fila + '<button id="btnDELM' + obj.CodigoDiplomado + '"onclick="delMo(this)" title="Eliminar Modulo" class="btn_eliminar_Mod btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>';
+            fila = fila + '<button id="btnDELM' + obj.CodigoModulo + '"onclick="delMo(this)" title="Eliminar Modulo" class="btn_eliminar_Mod btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>';
             fila = fila + '</td></tr>';
             $('#tableModulos >tbody').append(fila);
 //            var ModMod = $('#tableModulos > tbody').find("#Mod" + obj.CodigoModulo);
@@ -170,17 +176,17 @@ $("#formEditMod").submit(function (event) {
             fila = fila + '<td class=gestion_Mod>';
             fila = fila + '<button id="btnModiM' + obj.CodigoModulo + '" onclick="editModulo(this)" title="Editar Modulo" class="btn_modificar_Mod btn btn-success"><span class="glyphicon glyphicon-pencil"></span></button>';
             fila = fila + '<button id="btnDELM' + obj.CodigoModulo + '" onclick="delMo(this)" title="Eliminar Modulo" class="btn_eliminar_Mod btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>';
-            '</td>';
+            fila = fila + '</td>';
 
 
-            $(document).on("click", "#btnModiM" + obj.CodigoModulo.toString(), function () {
-                codigoModulo = obj.CodigoModulo;
-                $("#ModificarModulo").modal('toggle');
-            });
-            $(document).on("click", "#btnDELM" + obj.CodigoModulo.toString(), function () {
-                codigoModulo = obj.CodigoModulo;
-                $("#EliminarModulo").modal('toggle');
-            });
+//            $(document).on("click", "#btnModiM" + obj.CodigoModulo.toString(), function () {
+//                codigoModulo = obj.CodigoModulo;
+//                $("#ModificarModulo").modal('toggle');
+//            });
+//            $(document).on("click", "#btnDELM" + obj.CodigoModulo.toString(), function () {
+//                codigoModulo = obj.CodigoModulo;
+//                $("#EliminarModulo").modal('toggle');
+//            });
             $('#tableModulos > tbody').find('#mod' + obj.CodigoModulo).html(fila);
             $("#ModificarModulo").modal('toggle');
         }

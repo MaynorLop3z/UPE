@@ -99,7 +99,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="ModuloOrdenEdit" class="col-lg-3 control-label">Orden</label>
+                            <label for="ModuloOrdenEdit" class="col-lg-3 control-label">Correlativo</label>
                             <div class="col-lg-9">
                                 <textarea type="number"  class="form-control" name="ordenM" id="ModuloOrdenEdit" placeholder="Orden" required></textarea>
                             </div>
@@ -127,6 +127,9 @@
                             </div>
                         </div>
                          <!-- Se quita Diplomados ya que debe ser automatico-->
+                          <div class="form-group">
+                            <label class="col-lg-3 control-label">Diplomado:</label>
+                            <div class="col-lg-9">
                           <select class ="form-control" id="DiplomadonameEdit" name="Diplomadoname">                                          
                                     <?php
                                     foreach ($Diplomados as $DipMo) { //Aqui para seleccionar el Turno a que Pertenece
@@ -138,7 +141,7 @@
                                     ?>
 
                                 </select>
-                                                  
+                            </div>                 
                         <div class="form-group">
                             <label for="ComentarioDiplomado" class="col-lg-3 control-label">Comentarios:</label>
                             <div class="col-lg-9">

@@ -25,7 +25,7 @@ function  editaDiplomado(fila){
 
 function eliminarDiplomado(fila){
  codigoDiplomado = fila.id;
- //codigoDiplomado = codigoDiplomado.substring(12);
+ codigoDiplomado = codigoDiplomado.substring(12);
    $('#EliminarDiplomado').modal('toggle');
    
 }
@@ -88,7 +88,7 @@ $('#formgrdDiplomado').submit(function (event) {
             fila = fila + '<td class="categoriaDi">' + obj.CodigoCategoriaDiplomado + '</td>';
             fila = fila + '<td class="comentarioDi">' + obj.Comentarios + '</td>';
             fila = fila + '<td style="text-aling:center"  class="gestion_dip">';
-            fila = fila + '<button id="btnmo' + obj.CodigoDiplomado + '" onclick="editaDiplomado(this)" title="Editar Diplomado" class="btnmoddi btn btn-success" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-pencil"></span> </button>';
+           fila = fila + '<button id="btnmo' + obj.CodigoDiplomado + '" onclick="editaDiplomado(this)" title="Editar Diplomado" class="btnmoddi btn btn-success" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-pencil"></span> </button>';
             fila = fila + '<button id="DELDiplomado' + obj.CodigoDiplomado + '" onclick="eliminarDiplomado(this)" title="Eliminar Diplomado" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>';
             fila = fila + '</td></tr>';
                         
@@ -124,7 +124,7 @@ $('#formgrdDiplomado').submit(function (event) {
 });
 
 $("#EliminarDiplomado").on('show.bs.modal',function(event){
-    var dip = $('#dip' + codigoDiplomado.substring(12));
+    var dip = $('#dip' + codigoDiplomado);
     var NombreDiplomadoE = dip.find(".nombre_Diplomado").html().toString().trim();
     $('#nombreDipDel').html(NombreDiplomadoE);    
 });
@@ -171,14 +171,14 @@ $("#formeditDiplomado").submit(function (event) {
 //            dipDip.find('.categoriaDi').html(obj.CodigoCategoriaDiplomado);
 //            dipDip.data("dipd",obj);
 //            $("#ModificarDiplomado").modal('toggle'); 
-        $(document).on("click", "#btnmo" + obj.CodigoDiplomado.toString(), function() {
-                codigoDiplomado = obj.CodigoDiplomado;
-                $("#ModificarDiplomado").modal('toggle');
-                 });
-         $(document).on("click", "#DELDiplomado" + obj.CodigoDiplomado.toString(), function() {
-                codigoDiplomado = obj.CodigoDiplomado;
-                $("#EliminarDiplomado").modal('toggle');
-           });     
+//        $(document).on("click", "#btnmo" + obj.CodigoDiplomado.toString(), function() {
+//                codigoDiplomado = obj.CodigoDiplomado;
+//                $("#ModificarDiplomado").modal('toggle');
+//                 });
+//         $(document).on("click", "#DELDiplomado" + obj.CodigoDiplomado.toString(), function() {
+//                codigoDiplomado = obj.CodigoDiplomado;
+//                $("#EliminarDiplomado").modal('toggle');
+//           });     
            $('#tableDiplomados > tbody').find('#dip' + obj.CodigoDiplomado).html(fila);
             $("#ModificarDiplomado").modal('toggle');
 
