@@ -10,7 +10,6 @@ class Publicaciones extends CI_Model {
         parent::__construct();
         $this->load->database();
     }
-
     public function listarPublicaciones() {
         $this->db->select('CodigoPublicacion, '
                 . 'UsuarioPublica, '

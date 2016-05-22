@@ -128,28 +128,34 @@ $(document).ready(function () {
 $('#botones').submit(function (event)
 {
     event.preventDefault();
+    alert("hola mundo estoy entando aqui");
+   
     var $form = $(this), Titulo = $form.find("input[name='titulo']").val(),
             Contenido = $form.find("textarea[name='contenido']").val(),
             url = $form.attr("action"),
             Nombre = $form.find("input[name='nombreImg']").val(),
-            Extension = $form.find("input[name='extImg']").val();
-
+            Extension = $form.find("input[name='extImg']").val(),
+            categoria = $form.find("select[name='categoriasl']").val();
+            
+    alert($form);
     var posting = $.post(url, {
         Titulo: Titulo,
         Contenido: Contenido,
         Nombre: Nombre,
-        Extension: Extension
+        Extension: Extension,
+        Categoria: categoria
     });
 
     posting.done(function (data) {
         if (data !== null) {
             var obj = jQuery.parseJSON(data);
+            $('#NuevaPublicacion').modal("toggle");
 
         }
     });
-    posting.fail(function (data) {
-        var obj = jQuery.parseJson(data);
-       });
+    posting.fail(function (xhr, textStatus, errorThrown) {
+        alert("error" + xhr.responseText);
+    });
 });
 
 //function eliminarDiplomado(fila) {

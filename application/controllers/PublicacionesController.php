@@ -23,30 +23,23 @@ class PublicacionesController extends CI_Controller {
 
     //Esta funcion sube la imagen a la carpeta destinada
     function do_upload() {
-
         try {
-            $config['upload_path']          = './bootstrap/images/publicaciones/';
-                $config['allowed_types']        = 'gif|jpg|png';
-                $config['max_size']             = 100;
-                $config['max_width']            = 1024;
-                $config['max_height']           = 768;
+            //comprobamos que sea una petición ajax
+            if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
 
-            $this->load->library('upload', $config);
-//            $config['upload_path'] = './bootstrap/images/publicaciones/';  // <- preferences
-            $this->upload->initialize($config);
+                //obtenemos el archivo a subir
+                $file = $_FILES['archivo']['name'];
 
-//            $this->load->library('upload', $config);
-            $file = $_FILES['archivo']['name'];
-//comprobamos si existe un directorio para subir el archivo
-//si no es así, lo creamos
-            if (!is_dir("./bootstrap/images/publicaciones/")) {
+                //comprobamos si existe un directorio para subir el archivo
+                //si no es así, lo creamos
+               if (!is_dir("./bootstrap/images/publicaciones/")) 
                 mkdir("./bootstrap/images/publicaciones/", 0777);
-            }
 
-//comprobamos si el archivo ha subido
-            if ($file && move_uploaded_file($_FILES['archivo']['tmp_name'], "./bootstrap/images/publicaciones/" . $file)) {
-//ingresar los datos de una publicacion a la bd
-                sleep(3); //retrasamos la petición 3 segundos
+                //comprobamos si el archivo ha subido
+                 if ($file && move_uploaded_file($_FILES['archivo']['tmp_name'], "./bootstrap/images/publicaciones/" . $file))  {
+                    sleep(3); //retrasamos la petición 3 segundos
+                    echo $file; //devolvemos el nombre del archivo para pintar la imagen
+                }
             } else {
                 throw new Exception("Error Processing Request", 1);
             }
@@ -55,6 +48,7 @@ class PublicacionesController extends CI_Controller {
         }
     }
 
+//subir los datos de la publicacion de la base de datos            
     function subirBd() {
         try {
             if ($this->input->post()) {
@@ -63,9 +57,8 @@ class PublicacionesController extends CI_Controller {
                 $tituloP = $this->input->post('Titulo');
                 $contenidoP = $this->input->post('Contenido');
                 $nambre = $this->input->post('Nombre');
-                $categoria = $this->input - post('Categoria');
-                $arrayDataPublicacion = $this->Publicaciones->CrearPublicacion($usuarioPublica, $FechaPublicacion, $tituloP, $contenidoP, TRUE, null, null, null, 1, null, $categoria);
-                $CodigoPublicaciones = $arrayDataPublicacion['CodigoPublicacion'];
+                $categoria = $this->input->post('Categoria');
+
 //ingresar los datos del archivo a la bd
                 $test = $nambre;
                 $ext = $this->input->post('Extension');
@@ -73,10 +66,18 @@ class PublicacionesController extends CI_Controller {
                 $Estado = True;
                 $CodigoUsuarios = $this->session->userdata("codigoUserLogin");
                 $ipPublica = $this->session->userdata("ipUserLogin");
-                $this->Publicaciones->CrearArchivo($Ruta, $test, $ext, $Estado, $CodigoUsuarios, $CodigoPublicaciones, $usuarioPublica, $ipPublica, $FechaPublicacion);
+                if ($tituloP != NULL && $contenidoP != NULL && $nambre != NULL) {
+                    $arrayDataPublicacion = $this->Publicaciones->CrearPublicacion($usuarioPublica, $FechaPublicacion, $tituloP, $contenidoP, TRUE, null, null, null, 1, null, $categoria);
+                    $CodigoPublicaciones = $arrayDataPublicacion['CodigoPublicacion'];
+                    $this->Publicaciones->CrearArchivo($Ruta, $test, $ext, $Estado, $CodigoUsuarios, $CodigoPublicaciones, $usuarioPublica, $ipPublica, $FechaPublicacion);
+
+                    echo json_encode($CodigoPublicaciones);
+                } else {
+                    echo "Error algunas de los campos son nulos" + "titulo = " + $tituloP + "contenido = " + $contenidoP + "nombre = " + $nambre + $ext;
+                }
             }
         } catch (Exception $exc) {
-            
+            echo json_encode($exc);
         }
     }
 
