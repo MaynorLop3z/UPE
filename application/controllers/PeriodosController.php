@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Description of GestionPeriodos
  *
@@ -63,10 +64,10 @@ class PeriodosController extends CI_Controller {
                 } else {
                     $cadena .= '<th class="ep">Inactivo</th>';
                 }
-                $cadena .= '<th class="cp">'.$period->Comentario .'</th>';
-                $cadena .= '<th><button id="PeriodoE'. $period->CodigoPeriodo .'" onclick="EditPeriodoShow(this)" title="Editar Periodo" class="btn_modificar_periodo btn btn-success"><span class="glyphicon glyphicon-pencil"></span> </button>';
-                $cadena .= '<button id="PeriodoDEL'. $period->CodigoPeriodo .'" onclick="DeletePeriodoShow(this)" title="Eliminar Periodo" class="btn_eliminar_periodo btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>';
-                $cadena .= '<button id="PeriodoGES'. $period->CodigoPeriodo .'" onclick="GestionPeriodoShow(this)" title="Gestionar Periodo" class="btn_gestionar_periodo btn btn-info"><span class="glyphicon glyphicon-cog"></span></button></th></tr>';
+                $cadena .= '<th class="cp">' . $period->Comentario . '</th>';
+                $cadena .= '<th><button id="PeriodoE' . $period->CodigoPeriodo . '" onclick="EditPeriodoShow(this)" title="Editar Periodo" class="btn_modificar_periodo btn btn-success"><span class="glyphicon glyphicon-pencil"></span> </button>';
+                $cadena .= '<button id="PeriodoDEL' . $period->CodigoPeriodo . '" onclick="DeletePeriodoShow(this)" title="Eliminar Periodo" class="btn_eliminar_periodo btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>';
+                $cadena .= '<button id="PeriodoGES' . $period->CodigoPeriodo . '" onclick="GestionPeriodoShow(this)" title="Gestionar Periodo" class="btn_gestionar_periodo btn btn-info"><span class="glyphicon glyphicon-cog"></span></button></th></tr>';
             }
             echo $cadena;
         }
@@ -116,6 +117,18 @@ class PeriodosController extends CI_Controller {
             if ($this->input->post()) {
                 $Codigo = $this->input->post('idPeriodo');
                 $arrayData = $this->Periodos->Periodos();
+                echo json_encode($arrayData);
+            }
+        } catch (Exception $ex) {
+            echo json_encode($ex);
+        }
+    }
+
+    public function listarDocentes() {
+        try {
+            if ($this->input->post()) {
+                $Codigo = $this->input->post('idPeriodoGrupo');
+                $arrayData = $this->Periodos->listarDocentesGrupos($Codigo);
                 echo json_encode($arrayData);
             }
         } catch (Exception $ex) {

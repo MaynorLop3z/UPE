@@ -11,6 +11,21 @@ class Periodos extends CI_Model {
         parent::__construct();
         $this->load->database();
     }
+    public function listarDocentesGrupos($idGrupoPeriodo) {
+        try {
+            $comando = 'SELECT * FROM getdocentesgrupo ('.$idGrupoPeriodo.')';
+            $consulta = $this->db->query($comando);
+            if ($consulta != null) {
+                $resultado = $consulta->result();
+            } else {
+                
+            }
+
+            return $resultado;
+        } catch (Exception $exc) {
+            return $exc->getTraceAsString();
+        }
+    }
     public function listarGruposPeriodos() {
         try {
             $comando = 'SELECT * FROM getGruposActuales ()';

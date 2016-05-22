@@ -1,4 +1,5 @@
 var codigoPeriodo;
+var codigoGrupoPeriodo;
 $("#frmADDPeriodo").submit(function(event) {
     event.preventDefault();
     var $form = $(this), idModulo = $form.find("select[name='CodigoModulo']").val(), FechaInicio = $form.find("input[name='FechaInicioPeriodo']").val(), FechaFin = $form.find("input[name='FechaFinPeriodo']").val(), ComentariosPeriodo = $form.find("textarea[name=ComentariosPeriodo]").val(), url = $form.attr("action"), estadoPeriodo = true;
@@ -165,6 +166,31 @@ $('#PeriodoGestion').on('show.bs.modal', function(event) {
     });
     //$('#nombrePeriodoEliminar').html(Fecha_Inicio + " al " + Fecha_Fin);
 });
+$('#gestionGrupoModal').on('show.bs.modal', function(event) {
+   var idPeriodoGrupo = codigoGrupoPeriodo.substring(7);
+   var posting = $.post("PeriodosController/listarDocentes/", {idPeriodoGrupo: idPeriodoGrupo});
+   posting.done(function(data) {
+        if (data !== null) {
+            var obj = jQuery.parseJSON(data);
+            var tabla = "";
+            for (x in obj) {
+                tabla += '<tr id="GrupoUser' + obj[x].codigousuario + '">\n';
+                tabla += '<td class="DocenteIdUsuario">' + obj[x].codigousuario + '</td>\n';
+                tabla += '<td class="DocenteUsuario">' + obj[x].nombre + '</td>\n';
+                tabla += '<td class="DocenteInscrito">' + obj[x].inscrito + '</td>\n';
+//                tabla += '<td class="GestionButton"><button id="gestion' + obj[x].CodigoGrupoPeriodo + '" onclick="testShow(this)" title="Gestionar Periodo" class="btn_gestionar_periodo btn btn-info"><span class="glyphicon glyphicon-cog"></span></button></td>';
+                tabla += '</tr>\n';
+
+        }
+        
+            $('#DocentesGrupoPeriodo').html(tabla);
+        }
+    });
+    posting.fail(function(xhr, textStatus, errorThrown) {
+        alert("error" + xhr.responseText);
+    });
+    
+});
 function NuevoPeriodoModalShow() {
     $("#PeriodoNuevo").modal();
 }
@@ -181,5 +207,6 @@ function GestionPeriodoShow(fila) {
     $("#PeriodoGestion").modal('toggle');
 }
 function testShow(fila) {
+    codigoGrupoPeriodo = fila.id;
     $("#gestionGrupoModal").modal('toggle');
 }
