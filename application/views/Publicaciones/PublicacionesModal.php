@@ -31,16 +31,29 @@
                             <form class="form-group-lg" id="botones" method="post" action="<?php echo base_url() ?>index.php/PublicacionesController/subirBd/">
                                 <!--en las lineas de abajo esta el cuerpo de la publicacion-->
                                 <fieldset> 
+                                    <label for="categoria" class=" control-label">Seleccione una categoria: </label> 
+                                    <select name="categoria" onchange="" id="selectCategoria">
+                                        <?php
+                                        foreach ($listCategorias as $categorias) {
+                                            ?>
+                                              <option value=<?php echo $categorias->CodigoCategoriaDiplomado ?>> <?php echo $categorias->NombreCategoriaDiplomado ?>  </option>
+                                            <?php
+                                        }
+                                        ?>
+
+                                    </select>
+                                    <br>
+                                    <br>
                                     <label for="titulo" class="col-lg-3 control-label">Titulo:</label> 
-                                    <input type="text" class="form-control"  placeholder="Titulo de la publicacion"  name="titulo">
-                                    <input type="hidden" id="nombreImg" name="nombreImg" value="">
-                                    <input type="hidden" id="extImg" name="extImg" value="">
+                                    <input type="text" class="form-control"  placeholder="Titulo de la publicacion"  name="titulo" required>
+                                    <input type="hidden" id="nombreImg" name="nombreImg" value="" readonly>
+                                    <input type="hidden" id="extImg" name="extImg" value="" readonly>
                                     <br>
                                     <label for="contenido" class="col-lg-3 control-label">Contenido:</label>
-                                    <textarea  class="form-control"  placeholder="Contenido" name="contenido" id=""></textarea>
+                                    <textarea  class="form-control"  placeholder="Contenido" name="contenido" id="" required></textarea>
                                     <br>
                                     <div class="modal-footer">
-                                        <button type="submit" id="btnAceptar" onclick="" class=" btn btn-default" name="aceptar">Aceptar</button>
+                                        <button type="submit" id="btnAceptar" onclick="" class=" btn btn-default" name="aceptar" data-dismiss="modal">Aceptar</button>
                                         <button type="reset" id="btnLimpiar" onclick="" class=" btn btn-default" name="Limpiar" >Limpiar</button>
                                     </div>
                                 </fieldset>

@@ -22,7 +22,8 @@ class Publicaciones extends CI_Model {
                 . 'CodigoGrupoPeriodo, '
                 . 'CodigoGrupoParticipantes, '
                 . 'CodigoGrupoPeriodoUsuario, '
-                . 'CodigoTipoPublicacion'
+                . 'CodigoTipoPublicacion, '
+                . 'CodigoCategoriaDiplomado'
         );
         $this->db->from('Publicaciones');
         $this->db->order_by("FechaPublicacion", "desc");
@@ -41,7 +42,8 @@ class Publicaciones extends CI_Model {
                 . 'CodigoGrupoPeriodo, '
                 . 'CodigoGrupoParticipantes, '
                 . 'CodigoGrupoPeriodoUsuario, '
-                . 'CodigoTipoPublicacion'
+                . 'CodigoTipoPublicacion, '
+                . 'CodigoCategoriaDiplomado'
         );
         $this->db->from('Publicaciones');
         $this->db->where('UsuarioPublica', $UsuarioPublica);
@@ -60,7 +62,8 @@ class Publicaciones extends CI_Model {
                 . 'Estado, '
                 . 'CodigoGrupoParticipantes, '
                 . 'CodigoGrupoPeriodoUsuario, '
-                . 'CodigoTipoPublicacion'
+                . 'CodigoTipoPublicacion, '
+                . 'CodigoCategoriaDiplomado'
         );
         $this->db->from('Publicaciones');
         $this->db->where('CodigoGrupoPeriodo', $CodigoGrupoPeriodo);
@@ -79,7 +82,8 @@ class Publicaciones extends CI_Model {
                 . 'Estado, '
                 . 'CodigoCodigoGrupoPeriodo, '
                 . 'CodigoGrupoPeriodoUsuario, '
-                . 'CodigoTipoPublicacion'
+                . 'CodigoTipoPublicacion, '
+                . 'CodigoCategoriaDiplomado'
         );
         $this->db->from('Publicaciones');
         $this->db->where('CodigoGrupoParticipantes', $GrupoParticipantes);
@@ -98,7 +102,8 @@ class Publicaciones extends CI_Model {
                 . 'Estado, '
                 . 'CodigoCodigoGrupoPeriodo, '
                 . 'CodigoGrupoPeriodoUsuario, '
-                . 'GrupoParticipantes'
+                . 'GrupoParticipantes, '
+                . 'CodigoCategoriaDiplomado'
         );
         $this->db->from('Publicaciones');
         $this->db->where('CodigoTipoPublicacion', $CodigoTipoPublicacion);
@@ -107,7 +112,7 @@ class Publicaciones extends CI_Model {
         return $resultado;
     }
 
-    public function CrearPublicacion($UsuarioPublica, $FechaPublicacion, $Titulo, $Contenido, $Estado, $CodigoGrupoPeriodo, $CodigoGrupoPeriodoUsuario, $CodigoGrupoParticipantes, $CodigoTipoPublicacion, $ParticipantePublica) {
+    public function CrearPublicacion($UsuarioPublica, $FechaPublicacion, $Titulo, $Contenido, $Estado, $CodigoGrupoPeriodo, $CodigoGrupoPeriodoUsuario, $CodigoGrupoParticipantes, $CodigoTipoPublicacion, $ParticipantePublica, $CodigoCategoriaDiplomado) {
         $data = array(
             'UsuarioPublica' => $UsuarioPublica,
             'FechaPublicacion' => $FechaPublicacion,
@@ -118,7 +123,8 @@ class Publicaciones extends CI_Model {
             'CodigoGrupoPeriodo' => $CodigoGrupoPeriodo,
             'CodigoGrupoPeriodoUsuario' => $CodigoGrupoPeriodoUsuario,
             'CodigoGrupoParticipantes' => $CodigoGrupoParticipantes,
-            'CodigoTipoPublicacion' => $CodigoTipoPublicacion
+            'CodigoTipoPublicacion' => $CodigoTipoPublicacion,
+            'CodigoCategoriaDiplomado' => $CodigoCategoriaDiplomado
         );
         $this->db->insert('Publicaciones', $data);
         $insert_id = $this->db->insert_id();
@@ -133,7 +139,11 @@ class Publicaciones extends CI_Model {
         //por defecto
     }
 
-    public function ModificarPublicacion($CodigoPublicacion, $UsuarioPublica, $FechaPublicacion, $Titulo, $Contenido, $Estado, $CodigoCodigoGrupoPeriodo, $CodigoGrupoPeriodoUsuario, $GrupoParticipantes, $CodigoTipoPublicacion, $ParticipantePublica = null) {
+    public function EliminarArchivo($CodigoArchivo) {
+        $this->db->delete('Archivos', array('CodigoArchivos' => $CodigoArchivo));
+    }
+
+    public function ModificarPublicacion($CodigoPublicacion, $UsuarioPublica, $FechaPublicacion, $Titulo, $Contenido, $Estado, $CodigoCodigoGrupoPeriodo, $CodigoGrupoPeriodoUsuario, $GrupoParticipantes, $CodigoTipoPublicacion, $CodigoCategoriaDiplomado, $ParticipantePublica = null) {
         $data = array(
             'UsuarioPublica' => $UsuarioPublica,
             'FechaPublicacion' => $FechaPublicacion,
@@ -144,7 +154,8 @@ class Publicaciones extends CI_Model {
             'CodigoGrupoPeriodo' => $CodigoCodigoGrupoPeriodo,
             'CodigoGrupoPeriodoUsuario' => $CodigoGrupoPeriodoUsuario,
             'GrupoParticipantes' => $GrupoParticipantes,
-            'CodigoTipoPublicacion' => $CodigoTipoPublicacion
+            'CodigoTipoPublicacion' => $CodigoTipoPublicacion,
+            'CodigoCategoriaDiplomado' => $CodigoCategoriaDiplomado
         );
         $this->db->where('CodigoPublicacion', $CodigoPublicacion);
         $this->db->update('Publicaciones', $data);
@@ -166,9 +177,22 @@ class Publicaciones extends CI_Model {
         $this->db->insert('Archivos', $data);
     }
 
+    public function listarCategoriasDiplomados() {
+        $this->db->select('CodigoCategoriaDiplomado, '
+                . 'NombreCategoriaDiplomado, '
+                . 'Estado, '
+                . 'Comentarios'
+        );
+        $this->db->from('CategoriaDiplomados');
+        $consulta = $this->db->get();
+        $resultado = $consulta->result();
+        return $resultado;
+    }
+
+    
     public function MostrarDatosPublicacion($id) {
         try {
-            $stringQuery = 'SELECT "Publicaciones"."CodigoPublicacion","Publicaciones"."Titulo","Publicaciones"."Contenido","Publicaciones"."FechaPublicacion","Archivos"."Ruta" FROM public."Publicaciones",public."Archivos" WHERE "Publicaciones"."CodigoPublicacion" = "Archivos"."CodigoPublicaciones" AND "Publicaciones"."CodigoPublicacion" =';
+            $stringQuery = 'SELECT "Publicaciones"."CodigoPublicacion","Publicaciones"."Titulo","Publicaciones"."Contenido","Publicaciones"."FechaPublicacion", "Publicaciones"."CodigoCategoriaDiplomado","Archivos"."Ruta" FROM public."Publicaciones",public."Archivos" WHERE "Publicaciones"."CodigoPublicacion" = "Archivos"."CodigoPublicaciones" AND "Publicaciones"."CodigoPublicacion" =';
             $stringQuery = $stringQuery . $id;
             $consulta = $this->db->query($stringQuery);
             if ($consulta != null) {
@@ -184,7 +208,6 @@ class Publicaciones extends CI_Model {
 
     public function ListarPublicacionesPaginacion($offset) {
         try {
-//            
 //            $this->db->select('CodigoPublicacion, UsuarioPublica, FechaPublicacion, Titulo, '
 //                    . 'Contenido, ParticipantePublica, Estado,CodigoGrupoPeriodo, '
 //                    . 'CodigoGrupoParticipantes, CodigoGrupoPeriodoUsuario, CodigoTipoPublicacion'
@@ -195,7 +218,7 @@ class Publicaciones extends CI_Model {
             }
             $limit = PUBLICACIONES_X_PAG;
             $varLimit = ' limit ' . $limit . ' offset ' . $offset;
-            $stringQuery = 'SELECT "Publicaciones"."CodigoPublicacion","Publicaciones"."Titulo","Publicaciones"."Contenido","Publicaciones"."FechaPublicacion","Archivos"."Ruta" FROM public."Publicaciones",public."Archivos" WHERE "Publicaciones"."CodigoPublicacion" = "Archivos"."CodigoPublicaciones" ORDER BY "FechaPublicacion" desc';
+            $stringQuery = 'SELECT "Publicaciones"."CodigoPublicacion","Publicaciones"."Titulo","Publicaciones"."Contenido","Publicaciones"."FechaPublicacion","Publicaciones"."CodigoCategoriaDiplomado","Archivos"."Ruta" FROM public."Publicaciones",public."Archivos" WHERE "Publicaciones"."CodigoPublicacion" = "Archivos"."CodigoPublicaciones" ORDER BY "FechaPublicacion" desc';
             $stringQuery = $stringQuery . $varLimit;
             $consulta = $this->db->query($stringQuery);
             if ($consulta != null) {

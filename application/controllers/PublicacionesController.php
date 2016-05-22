@@ -8,14 +8,16 @@ class PublicacionesController extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+
         $this->load->database();
 //$this->load->helper(array('form', 'url'));
         $this->load->model('Publicaciones');
-        ///$this->load->model('archivos');
+        //  $this->load->model('CategoriaDiplomados');
     }
 
     public function index() {
         $data['TituloN'] = $this->Publicaciones->listarPublicaciones();
+        $data['listCategorias'] = $this->Publicaciones->listarCategoriasDiplomados();
         $this->load->view('Publicaciones', $data);
     }
 
@@ -23,7 +25,17 @@ class PublicacionesController extends CI_Controller {
     function do_upload() {
 
         try {
+            $config['upload_path']          = './bootstrap/images/publicaciones/';
+                $config['allowed_types']        = 'gif|jpg|png';
+                $config['max_size']             = 100;
+                $config['max_width']            = 1024;
+                $config['max_height']           = 768;
+
             $this->load->library('upload', $config);
+//            $config['upload_path'] = './bootstrap/images/publicaciones/';  // <- preferences
+            $this->upload->initialize($config);
+
+//            $this->load->library('upload', $config);
             $file = $_FILES['archivo']['name'];
 //comprobamos si existe un directorio para subir el archivo
 //si no es así, lo creamos
@@ -35,8 +47,7 @@ class PublicacionesController extends CI_Controller {
             if ($file && move_uploaded_file($_FILES['archivo']['tmp_name'], "./bootstrap/images/publicaciones/" . $file)) {
 //ingresar los datos de una publicacion a la bd
                 sleep(3); //retrasamos la petición 3 segundos
-            }
-             else {
+            } else {
                 throw new Exception("Error Processing Request", 1);
             }
         } catch (Exception $exc) {
@@ -52,7 +63,8 @@ class PublicacionesController extends CI_Controller {
                 $tituloP = $this->input->post('Titulo');
                 $contenidoP = $this->input->post('Contenido');
                 $nambre = $this->input->post('Nombre');
-                $arrayDataPublicacion = $this->Publicaciones->CrearPublicacion($usuarioPublica, $FechaPublicacion, $tituloP, $contenidoP, TRUE, null, null, null, 1, null);
+                $categoria = $this->input - post('Categoria');
+                $arrayDataPublicacion = $this->Publicaciones->CrearPublicacion($usuarioPublica, $FechaPublicacion, $tituloP, $contenidoP, TRUE, null, null, null, 1, null, $categoria);
                 $CodigoPublicaciones = $arrayDataPublicacion['CodigoPublicacion'];
 //ingresar los datos del archivo a la bd
                 $test = $nambre;
@@ -64,20 +76,7 @@ class PublicacionesController extends CI_Controller {
                 $this->Publicaciones->CrearArchivo($Ruta, $test, $ext, $Estado, $CodigoUsuarios, $CodigoPublicaciones, $usuarioPublica, $ipPublica, $FechaPublicacion);
             }
         } catch (Exception $exc) {
-        }
-    }
-
-    public function eliminarDiplomado() {
-        $eliminar = false;
-
-        try {
-            if ($this->input->post()) {
-                $codigo = $this->input->post('CodigoPublicacion');
-                $eliminar = $this->publicaciones->EliminarPublicacion($codigo);
-                echo $eliminar;
-            }
-        } catch (Exception $ex) {
-            echo json_encode($ex);
+            
         }
     }
 

@@ -8,7 +8,7 @@
 
         <?php $this->load->helper('url'); ?>
 
-        <title>UPESYS</title>
+        <title>PAESIS</title>
         <link rel="icon" href="../bootstrap/minerva.jpg" type="image/x-icon" />
         <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
         <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -39,7 +39,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#page-top">UPESYS</a>
+                    <a class="navbar-brand" href="#page-top">PAESIS</a>
                 </div>
 
                 <!-- Nav con opciones principales(login, mas recientes, about) -->
@@ -52,10 +52,10 @@
                             <a href="#portfolio">Mas recientes</a>
                         </li>
                         <li class="page-scroll">
-                            <a href="#about">About</a>
+                            <a href="#about">¿Quienes Somos?</a>
                         </li>
                         <li class="page-scroll "  >
-                            <a href="#Login2" class="portfolio-link" data-toggle="modal">Login</a>
+                            <a href="#Login2" class="portfolio-link" data-toggle="modal">Ingresar</a>
 
                         </li>
                     </ul>
@@ -72,7 +72,7 @@
                     <div class="col-lg-12">
                         <img class="img-responsive" src="../bootstrap/images/profile.png" alt="">
                         <div class="intro-text">
-                            <span class="name">Unidad de Proyectos Especiales</span>
+                            <span class="name">Unidad de Proyectos Academicos Especiales</span>
                             <hr class="star-light">
                             <span class="skills">Universidad de El Salvador Facultad Multidiciplinaria de Occidente</span>
                         </div>
@@ -129,18 +129,19 @@
                 <!-- start paginacion-->
 
                 <div class="row" id="paginacionDiv">
-                   
+
                     <ul class="pager">
                         <li><a  id="btnpaginicio">&laquo;</a></li>
                         <?php
                         $contador = 1;
 
-                        $totalpag =$publicacionesMostrar;
-                        
-                        if ((($totalpag % PUBLICACIONES_X_PAG) != 0) && (($totalpag / PUBLICACIONES_X_PAG)>=1)) {
+                        $totalpag = $publicacionesMostrar;
+
+                        if ((($totalpag % PUBLICACIONES_X_PAG) != 0) && (($totalpag / PUBLICACIONES_X_PAG) >= 1)) {
                             $totalpag = intval(($totalpag / PUBLICACIONES_X_PAG) + 1);
                             ?>
-                        <?php } else {
+                            <?php
+                        } else {
                             $totalpag = intval(ceil(($totalpag / PUBLICACIONES_X_PAG)));
                         }
                         while ($contador <= $totalpag) {
@@ -150,7 +151,7 @@
                             $contador ++;
                         }
                         ?>
-                            <li><a id="btnpagfin">&raquo;</a></li>
+                        <li><a id="btnpagfin">&raquo;</a></li>
                     </ul>
                 </div>
                 <!-- finish paginacion-->
@@ -164,7 +165,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
-                        <h2>About</h2>
+                        <h2>¿Quienes Somos?</h2>
                         <hr class="star-light">
                     </div>
                 </div>
@@ -192,27 +193,39 @@
                         <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
                         <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
                         <form name="sentMessage" id="contactForm" novalidate>
+
+                            <div class="row control-group">
+                                <label>Categoria de la Consulta</label>
+
+                                <select name="ad" onchange="">
+                                    <option value="General "> General  </option>
+                                    <option value="Idiomas">Idiomas Extrangeros</option>
+                                    <option value="Fisica">Diplomados en fisica</option>
+                                    <option value="sistemas Informaticos">Sistemas Informaticos</option>
+                                </select>
+                            </div>
+
                             <div class="row control-group">
                                 <div class="form-group col-xs-12 floating-label-form-group controls">
+
+
                                     <label>Nombre</label>
-                                    <input type="text" class="form-control" placeholder="Name" id="name" required data-validation-required-message="Please enter your name.">
+                                    <input type="text" class="form-control" placeholder="Nombre" id="name" required data-validation-required-message="Please enter your name.">
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
-                            <div class="row control-group">
-                                
-                            </div>
+
                             <div class="row control-group">
                                 <div class="form-group col-xs-12 floating-label-form-group controls">
                                     <label>Telefono</label>
-                                    <input type="tel" class="form-control" placeholder="Phone Number" id="phone" required data-validation-required-message="Please enter your phone number.">
+                                    <input type="tel" class="form-control" placeholder="Número Telefonico" id="phone" required data-validation-required-message="Please enter your phone number.">
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
                             <div class="row control-group">
                                 <div class="form-group col-xs-12 floating-label-form-group controls">
                                     <label>Mensaje</label>
-                                    <textarea rows="5" class="form-control" placeholder="Message" id="message" required data-validation-required-message="Please enter a message."></textarea>
+                                    <textarea rows="5" class="form-control" placeholder="Mensaje" id="message" required data-validation-required-message="Please enter a message."></textarea>
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
@@ -220,7 +233,7 @@
                             <div id=""></div>
                             <div class="row">
                                 <div class="form-group col-xs-12">
-                                    <button type="submit" class="btn btn-success btn-lg"id="btnSend">Send</button>
+                                    <button type="submit" class="btn btn-success btn-lg"id="btnSend">Enviar</button>
                                 </div>
                             </div>
                         </form>
@@ -237,7 +250,7 @@
                         <div class="footer-col col-md-6">
                             <h3>Telefono de Contacto</h3>
                             <p>Universidad de El Salvador Facultad Multidiciplinaria de Occidente<br>
-                                Tel: (+503) 2480-0800<br>
+                                Tel: (+503) 2484 0824<br>
                                 <img  src="../bootstrap/images/minervaVerde.png" width="50" height="50"  /></p>
                         </div>
                         <div class="footer-col col-md-6">
@@ -268,7 +281,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
-                            Copyright &copy; UPESYS 2016
+                            Copyright &copy; PAESIS 2016
                         </div>
                     </div>
                 </div>
@@ -296,7 +309,7 @@
                         <div class="col-lg-8 col-lg-offset-2">
                             <div class="modal-body">
                                 <!--<img class="img-centered"  height="50" width="50" src="../bootstrap/images/profile2.png" alt="">-->
-                                <h2>Ingresar a UPESYS</h2>
+                                <h2>Ingresar a PAESIS</h2>
                                 <hr class="star-primary">
                                 <form method="POST" action=""   class="form-group" role="form" id="Ingresar">
                                     <p>Ingrese sus credenciales</p>
@@ -353,7 +366,7 @@
                                 <hr class="star-primary">
                                 <img  class="img-responsive img-centered " id="imgPub" alt="">
                                 <p id="pContenidoPub"></p>   
-                                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</button>
                             </div>
                         </div>
                     </div>

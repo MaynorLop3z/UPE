@@ -20,7 +20,6 @@ include './application/controllers/Listar.php';
 
 class Wsite extends CI_Controller {
 
-    //put your code here
     public $usuarioDTO;
 
     public function __construct() {
@@ -31,6 +30,7 @@ class Wsite extends CI_Controller {
         // $this->load->view('wsite');
         $this->load->model('publicaciones');
         $this->load->model('archivos');
+        $this->load->model('categoriadiplomados');
         $user = $this->input->post('user');
 
         if ($user) {
@@ -62,10 +62,10 @@ class Wsite extends CI_Controller {
             }
         } else {
             $data['publicacionesMostrar'] = count($this->listarPublicaciones());
-            $data['PagInicial']=1;
-            $data['PubporPag']=PUBLICACIONES_X_PAG;
-            $data['TotalPaginacion']=  $this->publicaciones->ListarPublicacionesPaginacion( NULL);
-            
+            $data['PagInicial'] = 1;
+            $data['PubporPag'] = PUBLICACIONES_X_PAG;
+            $data['TotalPaginacion'] = $this->publicaciones->ListarPublicacionesPaginacion(NULL);
+
 //            $data['publicacionesCargar'] = $this->mostrarPublicaciones();
 //            $data['mostrarUnaPublicacion']=  $this->mostrarPublicacion($id);
             $this->load->view('wsite', $data);
@@ -74,7 +74,7 @@ class Wsite extends CI_Controller {
 
     public function listarPublicaciones() {
         try {
-            $contadora=0;
+            $contadora = 0;
             $listaPublicacionesArchivos = array();
             $iterador = 0;
             $listaPublicaciones = array();
@@ -82,13 +82,15 @@ class Wsite extends CI_Controller {
             foreach ($listaPublicaciones as $publicacion) {
 
                 $archivos = $this->archivos->listarArchivosPublicacion($publicacion->CodigoPublicacion);
+                //$categoria = $this->categoriadiplomado->listarCategoriasDiplomados();
                 foreach ($archivos as $archivo) {
                     $publicacionArchivo = array(
                         'CodigoPublicacion' => $publicacion->CodigoPublicacion,
                         'Titulo' => $publicacion->Titulo,
                         'Ruta' => $archivo->Ruta,
                         'Contenido' => $publicacion->Contenido,
-                        'FechaPublicacion' => $publicacion->FechaPublicacion);
+                        'FechaPublicacion' => $publicacion->FechaPublicacion,
+                        'Categoria' => $publicacion->CodigoCategoriaDiplomado);
                 }
                 array_push($listaPublicacionesArchivos, $publicacionArchivo);
                 $iterador ++;
@@ -98,6 +100,14 @@ class Wsite extends CI_Controller {
         }
 
         return $listaPublicacionesArchivos;
+    }
+
+    public function listarCategoriaPubli($idPublicacion) {
+        try {
+            
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
     }
 
     public function mostrarPublicaciones() {
@@ -110,11 +120,12 @@ class Wsite extends CI_Controller {
                 $archivos2 = $this->archivos->listarArchivosPublicacion($publicacion->CodigoPublicacion);
                 foreach ($archivos2 as $archivo) {
                     $publicacionArchivo = array(
-                        'CodigoPublicacion' => $publicacion->CodigoPublicacion,
-                        'Titulo' => $publicacion->Titulo,
-                        'Ruta' => $archivo->Ruta,
-                        'Contenido' => $publicacion->Contenido,
-                        'FechaPublicacion' => $publicacion->FechaPublicacion);
+                    'CodigoPublicacion' => $publicacion->CodigoPublicacion,
+                    'Titulo' => $publicacion->Titulo,
+                    'Ruta' => $archivo->Ruta,
+                    'Contenido' => $publicacion->Contenido,
+                    'FechaPublicacion' => $publicacion->FechaPublicacion,
+                    'Categoria' => $publicacion->CodigoCategoriaDiplomado);
                 }
                 array_push($listaPublicacionesArchivos2, $publicacionArchivo);
                 $iterador ++;

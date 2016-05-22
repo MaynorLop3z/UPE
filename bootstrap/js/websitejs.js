@@ -24,6 +24,8 @@ $('#portfolioModal6').on('show.bs.modal', function (event) {
 
 $('#btnSend').on('click', function (event) {
     alert("Se abrira su gestor de correo electronico para enviar el mensaje.");
+    
+    
     var link = "mailto:griss@hotmail.com"
 //             + "?cc=myCC"
             + "&subject= Consulta de: " + escape(document.getElementById('name').value)
