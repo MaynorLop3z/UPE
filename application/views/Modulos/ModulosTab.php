@@ -7,7 +7,7 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-md-6">
-                <button  id="btnAddModulo" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Nuevo Modulo</button>
+     <!--           <button  id="btnAddModulo" class="btn btn-default"  onclick="AddMod(this)" ><span class="glyphicon glyphicon-plus"></span> Nuevo Modulo</button> -->
                 <button  id="btnActualizar" class="btn btn-default"><span class="glyphicon glyphicon-refresh"></span> Actualizar</button>
             </div>
             <div class="col-md-6">

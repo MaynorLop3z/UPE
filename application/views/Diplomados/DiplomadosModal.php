@@ -51,7 +51,7 @@
                        </div>
                         
                         <div class="modal-footer">
-                            <button type="submit" id="BtnAddDi" onclick="" class=" btn btn-default" name="Aceptar">Aceptar</button>
+                            <button type="submit" id="BtnAddDi" onclick="" class=" btn btn-default" name="Aceptar">Guardar</button>
                             <button type="reset" id="btncleanDi" onclick="" class=" btn btn-default" name="Limpiar">Limpiar</button>
                            
                         </div>
@@ -116,7 +116,7 @@
                        </div>
                         
                         <div class="modal-footer">
-                            <button type="submit" id="BtneditDi" onclick="" class=" btn btn-default" name="Aceptar">Aceptar</button>
+                            <button type="submit" id="BtneditDi" onclick="" class=" btn btn-default" name="Aceptar">Actualizar</button>
                             <button type="reset" id="btncleaneditDi" onclick="" class=" btn btn-default" name="Limpiar">Limpiar</button>
                            
                         </div>
@@ -141,8 +141,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" id="btnEnviarDip" onclick="" class=" btn btn-default" name="Eliminar">Aceptar</button>
-                            <button type="reset" id="btnLimpiarDip" onclick="" class=" btn btn-default" name="Limpiar">Limpiar</button>
+                            <button type="submit" id="btnEnviarDip" onclick="" class=" btn btn-default" name="Eliminar">Eliminar</button>
+                            <button type="reset" id="btnLimpiarDip" onclick="" class=" btn btn-default" name="Limpiar">Cancelar</button>
                         </div>
                     </fieldset>
                 </form>
@@ -158,6 +158,91 @@
                 <button type="button" class="close" id="close"  data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 
                 <label style="center">El Diplomado no esta Definido</label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--agregar modulos----------------------------------------------------------------------------------------->
+<div id="NuevoModuloDip"  class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="container-fluid ">
+                <button type="button" class="close" id="btnCerrarMo"  data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>      
+                <form  id="formgrdMo" action="<?php echo base_url() ?>index.php/ModulosController/guardarModulo/" class="form-horizontal" method="post" >
+                    <fieldset>
+                        <legend class="modal-header">Nuevo Modulo:</legend> 
+                        <div class="form-group">
+                            <label for="nameModulo" class="col-lg-3 control-label">Nombre Del Modulo:</label>
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control" name="NombreModulo" id="ModuloNombre" placeholder="Nombre del Modulo" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="ModuloOrden" class="col-lg-3 control-label">Correlativo</label>
+                            <div class="col-lg-9">
+                                <textarea type="number" class="form-control" name="ordenM" id="ModuloOrden" placeholder="Orden" required></textarea>
+                            </div>
+                        </div>                     
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Estado</label>
+                            <div class="col-lg-9">
+                                <input type="checkbox" id="Estado"  name="Activo" value="True" checked> Activo<br>
+                            </div>
+                        </div>                                                                                       
+                        <div class="form-group">
+                            <label for="Turno" class="col-lg-3 control-label">Turno:</label>
+                            <div class="col-lg-9">
+                                <select class ="form-control" id="Turno" name="Turno">                                          
+                                    <?php
+                                    foreach ($Turno as $TurMo) { //Aqui para seleccionar el Turno a que Pertenece
+                                        ?>
+                                        <option value="<?= $TurMo->CodigoTurno ?>">
+                                            <?php echo $TurMo->NombreTurno ?> <!-- Para imprimir El nombre en el select-->
+                                        </option>
+                                    <?php }
+                                    ?>
+
+                                </select>
+                            </div>
+                        </div>
+                         <!-- Se quita Diplomados ya que debe ser automatico-->
+                          <div class="form-group">
+                            <label class="col-lg-3 control-label">Diplomado:</label>
+                         
+                         <div class="col-lg-9">
+                          <select class ="form-control" id="Diplomadoname" name="Diplomadoname">                                          
+                                    <?php
+                                    foreach ($Diplomados as $DipMo) { //Aqui para seleccionar el Turno a que Pertenece
+                                        ?>
+                                        <option value="<?= $DipMo->CodigoDiplomado ?>">
+                                            <?php echo $DipMo->NombreDiplomado?> <!-- Para imprimir El nombre en el select-->
+                                        </option>
+                                    <?php }
+                                    ?>
+
+                                </select>
+                         </div>
+                            </div>
+                                             
+                         
+                         
+                         
+                        <div class="form-group">
+                            <label for="ComentarioDiplomado" class="col-lg-3 control-label">Comentarios:</label>
+                            <div class="col-lg-9">
+                                <textarea id="ComentarioMod" name="Comentarios"  type="text" class="form-control"  placeholder="Comentario Modulo" required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" id="BtnAddMo" onclick="" class=" btn btn-default" name="Aceptar">Guardar</button>
+                            <button type="reset" id="btncleanMo" onclick="" class=" btn btn-default" name="Limpiar">Limpiar</button>
+
+                        </div>
+
+                    </fieldset>
+                </form>
             </div>
         </div>
     </div>

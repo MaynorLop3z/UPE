@@ -1,6 +1,6 @@
 <?php $this->load->helper('url'); ?>
 <!------Modal para el boton Agregar Modulos----------------------------------------------------------------------------------->
-<div id="NuevoModulo" class="modal fade"  data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!--<div id="NuevoModulo" class="modal fade"  data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="container-fluid ">
@@ -34,7 +34,7 @@
                                     foreach ($Turno as $TurMo) { //Aqui para seleccionar el Turno a que Pertenece
                                         ?>
                                         <option value="<?= $TurMo->CodigoTurno ?>">
-                                            <?php echo $TurMo->NombreTurno ?> <!-- Para imprimir El nombre en el select-->
+                                            <?php echo $TurMo->NombreTurno ?>  Para imprimir El nombre en el select
                                         </option>
                                     <?php }
                                     ?>
@@ -42,7 +42,7 @@
                                 </select>
                             </div>
                         </div>
-                         <!-- Se quita Diplomados ya que debe ser automatico-->
+                          Se quita Diplomados ya que debe ser automatico
                           <div class="form-group">
                             <label class="col-lg-3 control-label">Diplomado:</label>
                          
@@ -52,7 +52,7 @@
                                     foreach ($Diplomados as $DipMo) { //Aqui para seleccionar el Turno a que Pertenece
                                         ?>
                                         <option value="<?= $DipMo->CodigoDiplomado ?>">
-                                            <?php echo $DipMo->NombreDiplomado?> <!-- Para imprimir El nombre en el select-->
+                                            <?php echo $DipMo->NombreDiplomado?>  Para imprimir El nombre en el select
                                         </option>
                                     <?php }
                                     ?>
@@ -82,7 +82,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>-->
 <!-- Modal para modificar Diplomados --------------------------------------------------------------------------------------------------------------------------------------->
 <div id="ModificarModulo" class="modal fade"  data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -150,7 +150,7 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button type="submit" id="BtnAddMo" onclick="" class=" btn btn-default" name="Aceptar">Aceptar</button>
+                            <button type="submit" id="BtnAddMo" onclick="" class=" btn btn-default" name="Aceptar">Actualizar</button>
                             <button type="reset" id="btncleanMo" onclick="" class=" btn btn-default" name="Limpiar">Limpiar</button>
 
                         </div>
@@ -176,8 +176,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" id="btnEnviarMo" onclick="" class=" btn btn-default" name="Eliminar">Aceptar</button>
-                            <button type="reset" id="btnLimpiarMo" onclick="" class=" btn btn-default" name="Limpiar">Limpiar</button>
+                            <button type="submit" id="btnEnviarMo" onclick="" class=" btn btn-default" name="Eliminar">Eliminar</button>
+                            <button type="reset" id="btnLimpiarMo" onclick="" class=" btn btn-default" name="Limpiar">Cancelar</button>
                         </div>
                     </fieldset>
                 </form>

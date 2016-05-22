@@ -1,9 +1,16 @@
 var codigoModulo;
+var codigoDiplomado;
 var  filaEdit;
 
-$("#btnAddModulo").on('click', function () {
-    $("#NuevoModulo").modal();
-});
+//$("#btnAddModulo").on('click', function () {
+//    $("#NuevoModulo").modal();
+//});
+
+
+function AddMod(){
+  $("#NuevoModulo").modal();
+}
+
 
 function editModulo(fila) {
     codigoModulo = fila.id;
@@ -20,10 +27,7 @@ function delMo(fila) {
 }
 
 
-function AddMod(fila){
-    codigoModulo = fila.id;
-    $("")
-}
+
 
 // modificar  Modulo ----------->
 $('#ModificarModulo').on('show.bs.modal', function (event) {   

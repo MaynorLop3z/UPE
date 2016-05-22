@@ -8,11 +8,14 @@ class DiplomadosController extends CI_Controller {
         $this->load->database();
         $this->load->model('Diplomados');
         $this->load->model('Modulos');
+        
     }
     public function index() {
         $data['Diplomados'] = $this->Diplomados->listarDiplomados();
         $data['CategoriasDi'] = $this->Diplomados->listarCategoriasDiplomados();
+        $data['Turno'] = $this->Modulos->listarTurnos();
         $this->load->view('Diplomados', $data);
+   //   $this->load->view('Modulos/ModulosModal',$data);
     }
     public function guardarDiplomado() {
         try {

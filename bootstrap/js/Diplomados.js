@@ -14,7 +14,13 @@ $("#BtnADDiplomado").on('click', function () {
 //$("#ModificarDiplomado").modal('show');
 //});
 
+function AddMod(fila){
+  $("#DiplomadoNuevo").modal();
+}
 
+function AddModDip(fila){
+  $("#NuevoModuloDip").modal();
+}
 
 function  editaDiplomado(fila){
     codigoDiplomado = fila.id;
