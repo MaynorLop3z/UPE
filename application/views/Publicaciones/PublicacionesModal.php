@@ -55,6 +55,7 @@
                                     <div class="modal-footer">
                                         <button type="submit" id="btnAceptar" onclick="" class=" btn btn-default" name="aceptar" >Aceptar</button>
                                         <button type="reset" id="btnLimpiar" onclick="" class=" btn btn-default" name="Limpiar" >Limpiar</button>
+                                        <button type="reset" id="btnCancelarP" onclick="" class=" btn btn-default" name="cancelarP" >Cancelar</button>
                                     </div>
                                 </fieldset>
                             </form>

@@ -128,16 +128,14 @@ $(document).ready(function () {
 $('#botones').submit(function (event)
 {
     event.preventDefault();
-    alert("hola mundo estoy entando aqui");
-   
+      
     var $form = $(this), Titulo = $form.find("input[name='titulo']").val(),
             Contenido = $form.find("textarea[name='contenido']").val(),
             url = $form.attr("action"),
             Nombre = $form.find("input[name='nombreImg']").val(),
             Extension = $form.find("input[name='extImg']").val(),
             categoria = $form.find("select[name='categoriasl']").val();
-            
-    alert($form);
+    
     var posting = $.post(url, {
         Titulo: Titulo,
         Contenido: Contenido,
@@ -156,6 +154,13 @@ $('#botones').submit(function (event)
     posting.fail(function (xhr, textStatus, errorThrown) {
         alert("error" + xhr.responseText);
     });
+});
+$('#btnCancelarP').on('click' ,function(e){
+    
+    
+     var nombreImagen = document.getElementsById('nombreImg').value;
+     alert("holamundo");
+     alert (nombreImagen);
 });
 
 //function eliminarDiplomado(fila) {
