@@ -30,21 +30,20 @@ class Usuariocontroller extends CI_Controller {
             $data['PagInicial'] = 1;
 
             $permisos = $this->session->userdata('permisosUsuer');
-            $this->analizarPermisos('views/Usuarios/UsuariosTab.php', 'views/Usuarios/UsuariosTabTmp.php', 'views/VistaAyudaView.php', $permisos);
+            $this->analizarPermisos('views/Usuarios/UsuariosTab.php', 'views/Usuarios/UsuariosTabTmp.php', $permisos);
 //           
+            $data['buttonsByUserRights'] = $this->analizarPermisosBotonesTablas("gestionUserBtn", $permisos);
             $this->load->view('Usuario', $data);
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }
     }
 
-    function analizarPermisos($pathView, $pathViewTmp, $pathViewHelp, $permisos) {
+    function analizarPermisos($pathView, $pathViewTmp, $permisos) {
         $pathView = APPPATH . $pathView;
         $pathViewTmp = APPPATH . $pathViewTmp;
-        $pathViewHelp = APPPATH . $pathViewHelp;
+
         $html = file_get_html($pathView, $use_include_path = false, $context = null, $offset = -1, $maxLen = -1, $lowercase = true, $forceTagsClosed = true, $target_charset = DEFAULT_TARGET_CHARSET, $stripRN = false, $defaultBRText = DEFAULT_BR_TEXT);
-        $htmlHelp = file_get_html($pathViewHelp, $use_include_path = false, $context = null, $offset = -1, $maxLen = -1, $lowercase = true, $forceTagsClosed = true, $target_charset = DEFAULT_TARGET_CHARSET, $stripRN = false, $defaultBRText = DEFAULT_BR_TEXT);
-        //$this->session->userdata('nombreUserLogin');
         $elemsWithRights = $html->find(DEFINE_RIGHT_ALLOWED);
         $encontrado = 0;
         foreach ($elemsWithRights as $elem) {
@@ -64,6 +63,34 @@ class Usuariocontroller extends CI_Controller {
             }
         }
         $html->save($pathViewTmp);
+    }
+
+    function analizarPermisosBotonesTablas($idBtnsGestion, $permisos) {
+        $pathView = APPPATH . 'views/VistaAyudaView.php';
+        $html = file_get_html($pathView);
+        //param=gestionUserBtn
+        $elemsWithRights = $html->getElementById($idBtnsGestion);
+        $encontrado = 0;
+
+        foreach ($elemsWithRights->find('button') as $key) {
+            foreach ($permisos as $right) {
+//                $key = $elemsWithRights->find('button[class="' . $right->NombrePermiso . '"]');
+                if (explode(" ", $key->class)[0] == $right->NombrePermiso) {
+                    $encontrado = 1;
+                    break;
+                } else {
+                    
+                }
+            }
+            if ($encontrado == 1) {
+                $encontrado = 0;
+                continue;
+            } else {
+                $key->outertext = '';
+            }
+        }
+        //}
+        return str_get_html($elemsWithRights);
     }
 
     public function listarUsuariosPorRango() {
@@ -100,9 +127,11 @@ class Usuariocontroller extends CI_Controller {
                 $userModifica = $this->session->userdata('codigoUserLogin');
                 //La fecha de modificaciòn del registro se coloca en el modelo para evitar enviar mas parametros.
                 $this->load->model('Usuarios');
+                $user = $this->Usuarios->guardarUsuario(null, $nombreUsuario, $contraseniaUsuario, $nombrePersonaUsuario, $correo, $userModifica, $ip, $comentarios);
 
-                $arrayData = $this->Usuarios->guardarUsuario(null, $nombreUsuario, $contraseniaUsuario, $nombrePersonaUsuario, $correo, $userModifica, $ip, $comentarios);
-                echo json_encode($arrayData);
+                if ($user != null) {
+                    echo $this->paginUsers();
+                }
             }
         } catch (Exception $ex) {
             $data = array(
@@ -206,24 +235,25 @@ class Usuariocontroller extends CI_Controller {
 
     public function paginUsers() {
         try {
+            $final = 0;
+            $pagAct = 0;
+            $cadena = '';
+            $filas = '';
             if ($this->input->post()) {
-                if ($this->input->post('data_ini')) {
-                    $final = 0;
+                if ($this->input->post('data_ini') != null) {
                     $pagAct = $this->input->post('data_ini');
                     $final = $this->input->post('data_ini');
-                    $inicio = ROWS_PER_PAGE;
-                    if ($final != null) {
-                        $final = ($final * ROWS_PER_PAGE) - ROWS_PER_PAGE;
-                    }
-
-                    $Usuarios = $this->Usuarios->listarUsuarios($inicio, $final);
+                } else {
+                    $pagAct = 1;
+                    $final = 1;
                 }
             }
-            $pathView = APPPATH . 'views/VistaAyudaView.php';
-            $html = file_get_html($pathView);
-            $elemsWithRights = $html->getElementById('gestionUserBtn');
+            $inicio = ROWS_PER_PAGE;
+            $final = ($final * ROWS_PER_PAGE) - ROWS_PER_PAGE;
+            $Usuarios = $this->Usuarios->listarUsuarios($inicio, $final);
+            $buttonsByUserRights = $this->analizarPermisosBotonesTablas("gestionUserBtn", $permisos = $this->session->userdata('permisosUsuer'));
 
-            $cadena = '<table id=' . '"tableUsers"' . 'class="table table-bordered table-striped table-hover table-responsive"' . '>';
+            $cadena .= '<table id=' . '"tableUsers"' . 'class="table table-bordered table-striped table-hover table-responsive"' . '>';
             $cadena.='<thead>
                 <tr>
                     <th style="text-align:center">Nombre</th>
@@ -234,25 +264,13 @@ class Usuariocontroller extends CI_Controller {
             </thead> 
             <tbody>';
             foreach ($Usuarios as $user) {
-                $cadena.='<tr data-userd=' . json_encode($user) . ' id="tr' . $user->CodigoUsuario . '">';
-                $cadena.='<td class="nombre_Usuario" >' . $user->Nombre . '</td>';
-                $cadena.='<td class="correo_Usuario" >' . $user->CorreoUsuario . '</td>';
-                $cadena.='<td class="nickName_Usuario" >' . $user->NombreUsuario . '</td>';
-                $cadena.='<td style="text-align:center"  class="gestion_User">';
-                foreach ($elemsWithRights->find('button[class="btn_modificar_user"]') as $key => $but) {
-                    $but->{'id'} = $user->CodigoUsuario;
-                }
-                foreach ($elemsWithRights->find('button[class="btn_eliminar_user"]') as $key => $but) {
-                    $but->{'id'} = 'btnDel' . $user->CodigoUsuario;
-                }
-                foreach ($elemsWithRights->find('button[class="btn_rls_user"]') as $key => $but) {
-                    $but->{'id'} = 'btnRol' . $user->CodigoUsuario;
-                }
-
-                $cadena.=str_get_html($elemsWithRights);
-
-                $cadena.='</td> </tr>';
+                $filas.='<tr data-userd=' . ($user->CodigoUsuario) . ' id="tr' . $user->CodigoUsuario . '">';
+                $filas.=' <td class="nombre_Usuario" >' . $user->Nombre . '</td>';
+                $filas.=' <td class="correo_Usuario" >' . $user->CorreoUsuario . '</td>';
+                $filas.=' <td class="nickName_Usuario" >' . $user->NombreUsuario . '</td>';
+                $filas.=' <td style="text-align:center"  class="gestion_User">' . $buttonsByUserRights . '</td> </tr>';
             }
+            $cadena.=$filas;
             $cadena.='</tbody></table>';
             $cadena.=' <div class="row">
             <ul class="pager">
@@ -265,7 +283,26 @@ class Usuariocontroller extends CI_Controller {
         } catch (Exception $e) {
             echo $e->getMessage();
         }
-        echo $cadena;
+        if ($this->input->post('data_ini')) {
+            echo ($cadena);
+        } else {
+            return $cadena;
+        }
+    }
+
+    public function getUsrByCod($codigoUsuario=null) {
+        $codigoUsr=null;
+        if ($this->input->post('codUser')) {
+            $codigoUsr = $this->input->post('codUser');
+        } else {
+            $codigoUsr = $codigoUsuario;
+        }
+        $user = $this->Usuarios->findUsuario($codigoUsr);
+        if ($user != null && $this->input->post('codUser')!=null ) {
+            echo json_encode($user);
+        }else if ($user != null && $this->input->post('codUser')==null){
+            return $user;
+        }
     }
 
 }

@@ -4,31 +4,47 @@ $("#btnUsuarioNuevo").on('click', function () {
 });
 
 $("#containerTablePaging").on("click", ".btn_modificar_user", function (e) {
-    codigoUsuario = this.id;
+    var tr = $(this).parent().parent().parent();
+    var dataU = tr.data("userd");
+    codigoUsuario = dataU;
     $("#usuarioModifica").modal('show');
 });
 
 $("#containerTablePaging").on("click", ".btn_eliminar_user", function (e) {
-    codigoUsuario = this.id;
-    codigoUsuario = codigoUsuario.substring(6);
+    var tr = $(this).parent().parent().parent();
+    var dataU = tr.data("userd");
+    codigoUsuario = dataU;
     $("#usuarioElimina").modal('show');
 });
 
 $("#containerTablePaging").on("click", ".btn_rls_user", function (e) {
-    codigoUsuario = this.id;
-    codigoUsuario = codigoUsuario.substring(6);
+    var tr = $(this).parent().parent().parent();
+    var dataU = tr.data("userd");
+    codigoUsuario = dataU.CodigoUsuario;
     $("#usuarioRoles").modal('show');
 });
 
 $('#usuarioModifica').on('show.bs.modal', function (event) {
-    var tr = $('#tr' + codigoUsuario);
-    var dataU = tr.data("userd");
-//
-    $('#txtUserModificar').val(dataU.NombreUsuario);
-    $('#txtNombrePersonaModifica').val(dataU.Nombre);
-    $('#Emailmodificar').val(dataU.CorreoUsuario);
-    $('#Passwordmodificar').val(dataU.ContraseniaUsuario);
-    $('#txtAreaUserComent').val(dataU.Comentarios);
+
+    var url = 'UsuarioController/getUsrByCod/';
+    var posting = $.post(url, {codUser: codigoUsuario});
+
+    posting.done(function (data) {
+        
+          if (data !== null) {
+           var obj=jQuery.parseJSON(data);
+            $('#txtUserModificar').val(obj.NombreUsuario);
+            $('#txtNombrePersonaModifica').val(obj.Nombre);
+            $('#Emailmodificar').val(obj.CorreoUsuario);
+            $('#Passwordmodificar').val(obj.ContraseniaUsuario);
+            $('#Password2modificar').val(obj.ContraseniaUsuario);
+            $('#txtAreaUserComent').val(obj.Comentarios);
+        }
+    });
+    posting.fail(function (data) {
+        alert("error");
+    });
+
 });
 
 $('#usuarioRoles').on('show.bs.modal', function (event) {
@@ -61,27 +77,9 @@ $("#frmGuardarUSer").submit(function (event) {
         UsuarioNombreReal: UsuarioNombreReal});
     posting.done(function (data) {
         if (data !== null) {
-            var obj = jQuery.parseJSON(data);
-            var fila = '<tr id="tr' + obj.CodigoUsuario + '">';
-            fila = fila + '<td class="nombre_Usuario" >' + obj.Nombre + '</td>';
-            fila = fila + '<td class="correo_Usuario" >' + obj.CorreoUsuario + '</td>';
-            fila = fila + '<td class="nickName_Usuario" >' + obj.NombreUsuario + '</td>';
-            fila = fila + '<td style="text-align:center"  class="gestion_User">';
-            fila = fila + '</td></tr>';
-            $('#tableUsers > tbody').append(fila);
-            var trUser = $('#tableUsers > tbody').find("#tr" + obj.CodigoUsuario);
-            trUser.data("userd", obj);
-            var tdGestionUser = trUser.find(".gestion_User");
-            var divgestionUserBtn = $("#gestionUserBtn");
+            $('#containerTablePaging').empty();
+            $('#containerTablePaging').html(data);
 
-            if (divgestionUserBtn !== null) {
-//                var divgestionUserBtnClone = divgestionUserBtn.clone(true);
-                alert('Crea el div');
-                var divgestionUserBtnClone = divgestionUserBtn;
-                divgestionUserBtnClone.find(".btn_modificar_user").attr("id", "" + obj.CodigoUsuario);
-                divgestionUserBtnClone.find(".btn_eliminar_user").attr("id", "btnDel" + obj.CodigoUsuario);
-                tdGestionUser.html(divgestionUserBtnClone);
-            }
             $("#usuarioNuevo").modal('toggle');
         }
     });

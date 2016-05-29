@@ -35,9 +35,9 @@ class Usuarios extends CI_Model {
     public function guardarUsuario($codigoUsuario = null, $nombreUsuario, $contraseniaUsuario, $nombrePersonaUsuario, $correo, $userModifica, $ipModifica, $comentarios) {
         try {
             $data = array(
-                'NombreUsuario' => $nombreUsuario,
+                'NombreUsuario' => trim($nombreUsuario),
                 'ContraseniaUsuario' => $contraseniaUsuario,
-                'Nombre' => $nombrePersonaUsuario,
+                'Nombre' => trim($nombrePersonaUsuario),
                 'CorreoUsuario' => $correo,
                 'FechaModifica' => date("Y/m/d"),
                 'UsuarioModifica' => $userModifica,
@@ -93,9 +93,9 @@ class Usuarios extends CI_Model {
     }
 
     public function findUsuario($codigoUsuario) {
-        $this->db->select('CodigoUsuario, Nombre, CorreoUsuario, NombreUsuario');
+        $this->db->select('CodigoUsuario, Nombre, CorreoUsuario, NombreUsuario, ContraseniaUsuario, Comentarios');
         $this->db->from('Usuarios');
-        $this->db->where('CodigoUsuario', $id);
+        $this->db->where('CodigoUsuario', $codigoUsuario);
         $consulta = $this->db->get();
         $resultado = $consulta->row();
         return $resultado;
