@@ -313,18 +313,24 @@
                                 <hr class="star-primary">
                                 <form method="POST" action=""   class="form-group" role="form" id="Ingresar">
                                     <p>Ingrese sus credenciales</p>
-                                    <table class="table">
+                                    <style type="text/css">
+                                        table{border-spacing: 0px 0px; }
+                                    </style>
+                                    <table class="table list-inline col-sm-4" >
                                         <!--<ul class="list-unstyled item-details ">-->
-                                        <tr align="rigth"> <td>
-                                                Usuario:
+                                        <tr > <td class="text-justify">
+                                               Usuario:                                            </td>
+                                            <td>
                                                 <strong> <input type="text" id="user" name="user"  placeholder="Email address" required autofocus>
                                                 </strong>
                                                 <br>
-                                            </td>
+                                            </td> 
                                         </tr>
 
-                                        <tr align="rigth"><td> 
+                                        <tr ><td  class="text-justify"> 
                                                 Contraseña:
+                                            </td>
+                                            <td>
                                                 <strong><input type="password" id="password" name="password"  placeholder="Password" required>
                                                 </strong>
                                             </td>
@@ -353,6 +359,7 @@
                 <div class="close-modal" data-dismiss="modal">
                     <div class="lr">
                         <div class="rl">
+
                         </div>
                     </div>
                 </div>

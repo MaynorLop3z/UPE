@@ -14,7 +14,7 @@
 
                     <div class="col-lg-9">
                         <!--La linea de abajo abre el selector de imgs -->
-                        <form class="formulario" enctype="multipart/form-data" method="post" action="<?php echo base_url() ?>index.php/PublicacionesController/do_upload/">
+                        <form class="formulario" enctype="multipart/form-data" method="post" action="<?php echo base_url() ?>index.php/PublicacionesController/do_upload/" id="imgform">
                             <fieldset> 
                                 <input type="file"  size="20" name="archivo" id= "imagen" >
                                 <!--div para visualizar mensajes-->
@@ -50,15 +50,18 @@
                                     <input type="hidden" id="extImg" name="extImg" value="" readonly>
                                     <br>
                                     <label for="contenido" class="col-lg-3 control-label">Contenido:</label>
-                                    <textarea  class="form-control"  placeholder="Contenido" name="contenido" id="" required></textarea>
+                                    <textarea  class="form-control"  placeholder="Contenido" name="contenido" id="pubtexarea" required></textarea>
                                     <br>
                                     <div class="modal-footer">
+                                        
                                         <button type="submit" id="btnAceptar" onclick="" class=" btn btn-default" name="aceptar" >Aceptar</button>
-                                        <button type="reset" id="btnLimpiar" onclick="" class=" btn btn-default" name="Limpiar" >Limpiar</button>
-                                        <button type="reset" id="btnCancelarP" onclick="" class=" btn btn-default" name="cancelarP" >Cancelar</button>
+                                        <button type="reset" id="btnLimpiarPubli" onclick="" class=" btn btn-default" name="Limpiar" >Limpiar</button>
+                                        <button type="reset" id="btnCancelarP" onclick="" class=" btn btn-default" name="cancelar" >Cancelar</button>
                                     </div>
                                 </fieldset>
                             </form>
+                            
+                            
                         </div>
 
                     </div>

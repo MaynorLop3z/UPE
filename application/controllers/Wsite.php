@@ -58,6 +58,16 @@ class Wsite extends CI_Controller {
                     // redirect('Dashboard');
 //                    $this->load->view('Dashboard', $data);
                     Redirect('Dashboard');
+                } else {
+                    
+                    $data['publicacionesMostrar'] = count($this->listarPublicaciones());
+                    $data['PagInicial'] = 1;
+                    $data['PubporPag'] = PUBLICACIONES_X_PAG;
+                    $data['TotalPaginacion'] = $this->publicaciones->ListarPublicacionesPaginacion(NULL);
+
+//            $data['publicacionesCargar'] = $this->mostrarPublicaciones();
+//            $data['mostrarUnaPublicacion']=  $this->mostrarPublicacion($id);
+                    $this->load->view('wsite', $data);
                 }
             }
         } else {
@@ -120,12 +130,12 @@ class Wsite extends CI_Controller {
                 $archivos2 = $this->archivos->listarArchivosPublicacion($publicacion->CodigoPublicacion);
                 foreach ($archivos2 as $archivo) {
                     $publicacionArchivo = array(
-                    'CodigoPublicacion' => $publicacion->CodigoPublicacion,
-                    'Titulo' => $publicacion->Titulo,
-                    'Ruta' => $archivo->Ruta,
-                    'Contenido' => $publicacion->Contenido,
-                    'FechaPublicacion' => $publicacion->FechaPublicacion,
-                    'Categoria' => $publicacion->CodigoCategoriaDiplomado);
+                        'CodigoPublicacion' => $publicacion->CodigoPublicacion,
+                        'Titulo' => $publicacion->Titulo,
+                        'Ruta' => $archivo->Ruta,
+                        'Contenido' => $publicacion->Contenido,
+                        'FechaPublicacion' => $publicacion->FechaPublicacion,
+                        'Categoria' => $publicacion->CodigoCategoriaDiplomado);
                 }
                 array_push($listaPublicacionesArchivos2, $publicacionArchivo);
                 $iterador ++;

@@ -32,11 +32,11 @@ class PublicacionesController extends CI_Controller {
 
                 //comprobamos si existe un directorio para subir el archivo
                 //si no es así, lo creamos
-               if (!is_dir("./bootstrap/images/publicaciones/")) 
-                mkdir("./bootstrap/images/publicaciones/", 0777);
+                if (!is_dir("./bootstrap/images/publicaciones/"))
+                    mkdir("./bootstrap/images/publicaciones/", 0777);
 
                 //comprobamos si el archivo ha subido
-                 if ($file && move_uploaded_file($_FILES['archivo']['tmp_name'], "./bootstrap/images/publicaciones/" . $file))  {
+                if ($file && move_uploaded_file($_FILES['archivo']['tmp_name'], "./bootstrap/images/publicaciones/" . $file)) {
                     sleep(3); //retrasamos la petición 3 segundos
                     echo $file; //devolvemos el nombre del archivo para pintar la imagen
                 }
@@ -78,6 +78,16 @@ class PublicacionesController extends CI_Controller {
             }
         } catch (Exception $exc) {
             echo json_encode($exc);
+        }
+    }
+
+    function borrarImgCarpeta() {
+        $nombreImg = $this->input->post('Nombre');
+        if ($nombreImg != NULL) {
+            $nombreImg="./bootstrap/images/publicaciones/". $nombreImg;
+            unlink($nombreImg);
+        } else {
+            return false;
         }
     }
 

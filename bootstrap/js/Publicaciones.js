@@ -128,14 +128,14 @@ $(document).ready(function () {
 $('#botones').submit(function (event)
 {
     event.preventDefault();
-      
+
     var $form = $(this), Titulo = $form.find("input[name='titulo']").val(),
             Contenido = $form.find("textarea[name='contenido']").val(),
             url = $form.attr("action"),
             Nombre = $form.find("input[name='nombreImg']").val(),
             Extension = $form.find("input[name='extImg']").val(),
             categoria = $form.find("select[name='categoriasl']").val();
-    
+
     var posting = $.post(url, {
         Titulo: Titulo,
         Contenido: Contenido,
@@ -155,12 +155,46 @@ $('#botones').submit(function (event)
         alert("error" + xhr.responseText);
     });
 });
-$('#btnCancelarP').on('click' ,function(e){
-    
-    
-     var nombreImagen = document.getElementsById('nombreImg').value;
-     alert("holamundo");
-     alert (nombreImagen);
+
+
+$('#btnCancelarP').on('click', function (e) {
+    e.preventDefault();
+    var $form = $(this);
+    var Nombre = $('#botones').find("input[name='nombreImg']").val();
+//   <?php echo base_url() ?>index.php/PublicacionesController/borrarImgCarpeta/
+    if (Nombre !== null) {
+//        Nombre= "" + Nombre;
+        $.post("PublicacionesController/borrarImgCarpeta/", {Nombre: Nombre});
+    }
+//    alert(Nombre);
+    $(".showImage").html("");
+    $(":text").each(function () {
+        $($(this)).val('');
+    });
+    $(".messages").html("").show();
+//    $('#subir').reset();
+    document.getElementById("imgform").reset();
+    document.getElementById("pubtexarea").value = "";
+    $('#NuevaPublicacion').modal("toggle");
+});
+
+$('#btnLimpiarPubli').on('click', function (e) {
+    e.preventDefault();
+    var Nombre = $('#botones').find("input[name='nombreImg']").val();
+//   <?php echo base_url() ?>index.php/PublicacionesController/borrarImgCarpeta/
+    if (Nombre !== null) {
+//        Nombre= "" + Nombre;
+        $.post("PublicacionesController/borrarImgCarpeta/", {Nombre: Nombre});
+    }
+//    alert(Nombre);
+    $(".showImage").html("");
+    $(":text").each(function () {
+        $($(this)).val('');
+    });
+    $(".messages").html("").show();
+//    $('#subir').reset();
+    document.getElementById("imgform").reset();
+    document.getElementById("pubtexarea").value = "";
 });
 
 //function eliminarDiplomado(fila) {
