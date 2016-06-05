@@ -127,7 +127,7 @@
         </div>
     </div>
     </div>
-<!-- Eliminar DIplomado----->
+<!-- Eliminar Diplomado----->
 <div id="EliminarDiplomado" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -163,8 +163,73 @@
     </div>
 </div>
 
-<!--agregar modulos----------------------------------------------------------------------------------------->
-<div id="NuevoModuloDip"  class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+ <!---cuando  el diplomado no tenga Modulos------------------------------------------------------->
+    <div id="NocontainsM" data-backdrop="static"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="container-fluid ">
+                <button type="button" class="close" id="close"  data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                
+                <label style="center">No hay modulos agregados al Diplomados</label>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+ <!----Vista de  modulos por  diplomado    ------------------------------------------------------------------------------------------------------------>
+ <div id="ModuloView" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+     <div class="modal-dialog  modal-lg">
+         <div class="modal-content ">
+             <div class="container-fluid ">
+                 <button type="button" class="close" id="btnCerrarMo"  data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                 <form id="ModDip" action="<?php echo base_url() ?>index.php/DiplomadosController/ModViewDip/" class="form-horizontal" class="form-horizontal" method="post" >
+                     <legend>Modulos Por Diplomado</legend>
+
+                     <div class="row">
+                         <div class="col-lg-6"><label>Diplomado:</label></div>
+                         <div class="col-lg-6"><mark id="nombreDipDel"></mark></div>
+                     </div>
+                 </form> 
+                 <div class="row">
+                     <div class="col-md-12">
+                         <table id="tableMoVi" class="table table-bordered table-striped table-hover table-responsive">
+                             <thead>
+                                 <tr>
+                                     <th>Modulo</th>
+                                     <th>Correlativo</th>
+                                     <th>Estado</th>
+                                 </tr>
+                             </thead> 
+                             <tbody>
+                               <?php
+                                 foreach ($Modulos as $mod) {
+                            ?>                                          
+                        <tr id="mod<?= $mod->CodigoModulo?>">
+                                <td class="NombreMod"><?= $mod->NombreModulo ?></td>
+                                <td class="ordenMoD"><?= $mod->OrdenModulo?></td>
+                                <td class="EstadoMoD"><?=  $mod->Estado?></td> 
+                       </tr>
+                            <?php
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+                            
+            </div>
+        </div>
+              
+          
+            </div>
+            </div>
+        </div>
+</div>
+</div>
+ 
+ <!--agregar modulos---------------------------------------------------------------------------------------------------------------------------------->
+<div id="NuevoModuloDip" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="container-fluid ">
@@ -211,7 +276,7 @@
                             <label class="col-lg-3 control-label">Diplomado:</label>
                          
                          <div class="col-lg-9">
-                          <select class ="form-control" id="Diplomadoname" name="Diplomadoname">                                          
+                             <select class ="form-control" id="Diplomadoname" name="Diplomadoname" required>                                          
                                     <?php
                                     foreach ($Diplomados as $DipMo) { //Aqui para seleccionar el Turno a que Pertenece
                                         ?>
@@ -247,3 +312,7 @@
         </div>
     </div>
 </div>
+
+
+
+

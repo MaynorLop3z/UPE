@@ -4,6 +4,8 @@
 
 var codigoDiplomado;
 var filaEdit;
+var codi;
+
 $("#BtnADDiplomado").on('click', function () {
     $("#DiplomadoNuevo").modal();
 });
@@ -14,12 +16,21 @@ $("#BtnADDiplomado").on('click', function () {
 //$("#ModificarDiplomado").modal('show');
 //});
 
-function AddMod(fila){
-  $("#DiplomadoNuevo").modal();
+
+function ViewModDip(fila){
+ codigoDiplomado = fila.id;
+ filaEdit = fila;
+ codigoDiplomado = codigoDiplomado.substring(7);
+    $("#ModuloView").modal();
+    
 }
 
-function AddModDip(fila){
-  $("#NuevoModuloDip").modal();
+//function AddMod(fila){
+//  $("#DiplomadoNuevo").modal();
+//}
+
+function AddModDip(){
+ $("#NuevoModuloDip").modal();
 }
 
 function  editaDiplomado(fila){
@@ -122,6 +133,8 @@ $('#formgrdDiplomado').submit(function (event) {
 //                tdGestionDip.html(divgestionDipBtnClone);
 //            }
             $('#DiplomadoNuevo').modal('toggle');
+        }else{
+            console.log("El Modulos no se ha podido  guardar");
         }
     }); 
    posting.fail(function(xhr, textStatus, errorThrown) {
@@ -129,11 +142,28 @@ $('#formgrdDiplomado').submit(function (event) {
     });
 });
 
+
+
+
+$("#ModuloView").on('show.bs.modal',function(event){
+    var dip = $('#dip' + codigoDiplomado);
+    var NombreDiplomadoView = dip.find(".nombre_Diplomado").html().toString().trim();
+    $('#DipViewMod').html(NombreDiplomadoView);    
+});
+
+
+
+
+
+
 $("#EliminarDiplomado").on('show.bs.modal',function(event){
     var dip = $('#dip' + codigoDiplomado);
+    
     var NombreDiplomadoE = dip.find(".nombre_Diplomado").html().toString().trim();
     $('#nombreDipDel').html(NombreDiplomadoE);    
 });
+
+
 
 
 $("#formeditDiplomado").submit(function (event) {
@@ -225,6 +255,28 @@ $("#frmfindDip").submit(function(event){
            $('#tableDiplomados').html(data); 
         }else{
          $("#DipInd").modal('toggle');   
+            
+        }
+               
+   });
+     posting.fail(function(xhr, textStatus, errorThrown) {
+        alert("error" + xhr.responseText);
+     
+});
+});
+
+
+
+$("#ModDip").submit(function(event){
+     
+    event.preventDefault();
+    var $form = $(this), NombreDiplomado = $form.find("input[name='DipViewMod']").val(), url = $form.attr("action");
+    var posting = $.post(url,{DipViewMod:NombreDiplomado});
+    posting.done(function(data){
+        if(data){
+           $('#tableMoVi').html(data); 
+        }else{
+         $("#NocontainsM").modal('toggle');   
             
         }
                

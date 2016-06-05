@@ -40,8 +40,7 @@
                         foreach ($Modulos as $mod) {
                             ?>
                         
-                      
-                        
+                                              
                         <tr id="mod<?= $mod->CodigoModulo?>">
                                 <td class="NombreMod"><?= $mod->NombreModulo ?></td>
                                 <td class="ordenMo"><?= $mod->OrdenModulo?></td>

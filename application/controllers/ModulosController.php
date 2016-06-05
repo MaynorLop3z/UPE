@@ -10,7 +10,7 @@ class ModulosController extends CI_Controller {
         parent::__construct();
         $this->load->database();
         $this->load->model('Modulos');
-      //  $this->load->model('Diplomados'); esto lo quite a las 10: 11 el 29 de marzo
+        $this->load->model('Diplomados'); 
         //$this->load->model('Turnos');
         
     }
@@ -32,7 +32,7 @@ public function guardarModulo()
             $OrdenModulo= $this->input->post('ModuloOrden');
             $Estado = $this->input->post('Estado');
             $CodigoTurno = $this->input->post('Turno');
-            $CodigoDiplomado = $this->input->post('CodDiplomado');
+            $CodigoDiplomado = $this->input->post('CodDiplomado');//--->
             $Comentarios  = $this->input->post('ComentarioMod');
             $ip = $this->session->userdata('ipUserLogin');// La ip del usuario que modifica   $userModi
             $userModi = $this->session->userdata('codigoUserLogin'); //codigo del usuario qeumodifica  $ip,

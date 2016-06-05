@@ -45,21 +45,21 @@ class Diplomados extends CI_Model {
 //        $resultadoD = $consultaD->result();
 //        return $resultadoD;
     }
-    public function listarModulos($codigoDiplomado) {
-        $this->db->select('CodigoModulo, '
-                . 'NombreModulo, '
-                . 'OrdenModulo, '
-                . 'Estado, '
-                . 'CodigoDiplomado, '
-                . 'CodigoTurno, '
-                . 'Comentarios'
-        );
-        $this->db->from('Modulos');
-        $this->db->where('CodigoDiplomado', $codigoDiplomado);
-        $consulta = $this->db->get();
-        $resultado = $consulta->result();
-        return $resultado;
-    }
+//    public function listarModulos($codigoDiplomado) {
+//        $this->db->select('CodigoModulo, '
+//                . 'NombreModulo, '
+//                . 'OrdenModulo, '
+//                . 'Estado, '
+//                . 'CodigoDiplomado, '
+//                . 'CodigoTurno, '
+//                . 'Comentarios'
+//        );
+//        $this->db->from('Modulos');
+//        $this->db->where('CodigoDiplomado', $codigoDiplomado);
+//        $consulta = $this->db->get();
+//        $resultado = $consulta->result();
+//        return $resultado;
+//    }
     public function listarPeriodosByModulo($idModulo) {
         $this->db->select('CodigoPeriodo, '
                 . 'FechaInicioPeriodo, '

@@ -57,6 +57,25 @@ class Modulos extends CI_Model {
         $resultadoM = $consultaM->result();
          return $resultadoM;
   }
+  
+   public function listarModulosByDiplomado($codigoDiplomado) {
+        $this->db->select('CodigoModulo, '
+                . 'NombreModulo, '
+                . 'OrdenModulo, '
+                . 'Estado, '
+                . 'CodigoDiplomado, '
+                . 'CodigoTurno, '
+                . 'Comentarios'
+        );
+        $this->db->from('Modulos');
+        $this->db->where('CodigoDiplomado',$codigoDiplomado);
+        $consulta = $this->db->get();
+        $resultado = $consulta->result();
+        return $resultado;
+    }
+  
+  
+  
     public function crearModulo($NombreModulo, $OrdenModulo,$CodigoTurno, $Estado ,$CodigoDiplomado, $Comentarios,$IpUserModifica,$UserModifica) {
        try{
         $data = array(

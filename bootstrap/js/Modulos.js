@@ -2,14 +2,14 @@ var codigoModulo;
 var codigoDiplomado;
 var  filaEdit;
 
-//$("#btnAddModulo").on('click', function () {
-//    $("#NuevoModulo").modal();
-//});
 
 
-function AddMod(){
-  $("#NuevoModulo").modal();
-}
+
+//function AddMod(){
+//  $("#NuevoModuloDip").modal('toggle');
+//}
+
+
 
 
 function editModulo(fila) {
@@ -72,7 +72,9 @@ $("#EliminarModulo").on('show.bs.modal',function(event){
 });
 
 $("#formgrdMo").submit(function (event) {
+    console.log(codigoDiplomado);
     event.preventDefault();
+    console.log(codigoDiplomado);
     var $form = $(this), ModuloNombre = $form.find("input[name='NombreModulo']").val(),
             ModuloOrden = $form.find("textarea[name='ordenM']").val(),
             Estado = $form.find("input[name='Activo']").prop('checked'),
@@ -123,7 +125,7 @@ $("#formgrdMo").submit(function (event) {
 //                tdGestionModulos.html(divgestionModBtnClone);
 //
 //            }
-            $("#NuevoModulo").modal('toggle');
+          $("#NuevoModulo").modal('toggle');
         }
     });
     posting.fail(function(xhr, textStatus, errorThrown) {
