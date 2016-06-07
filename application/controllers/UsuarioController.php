@@ -29,6 +29,8 @@ class Usuariocontroller extends CI_Controller {
             $data['ToTalRegistros'] = $this->Usuarios->countAllUsers();
             $data['PagInicial'] = 1;
 
+            $data['totalPaginas'] = $this->getTotalPaginas();
+
             $permisos = $this->session->userdata('permisosUsuer');
             $this->analizarPermisos('views/Usuarios/UsuariosTab.php', 'views/Usuarios/UsuariosTabTmp.php', $permisos);
 //           
@@ -37,6 +39,10 @@ class Usuariocontroller extends CI_Controller {
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }
+    }
+
+    function getTotalPaginas() {
+        return $result = intval(ceil($this->Usuarios->countAllUsers() / ROWS_PER_PAGE));
     }
 
     function analizarPermisos($pathView, $pathViewTmp, $permisos) {
@@ -130,7 +136,7 @@ class Usuariocontroller extends CI_Controller {
                 $user = $this->Usuarios->guardarUsuario(null, $nombreUsuario, $contraseniaUsuario, $nombrePersonaUsuario, $correo, $userModifica, $ip, $comentarios);
 
                 if ($user != null) {
-                    echo $this->paginUsers();
+                    echo $this->paginUsers(null);
                 }
             }
         } catch (Exception $ex) {
@@ -145,6 +151,7 @@ class Usuariocontroller extends CI_Controller {
         try {
             if ($this->input->post()) {
                 $codigoUser = $this->input->post('CodigoUsuario');
+
                 if ($codigoUser != null) {
                     $codigoUsuario = $codigoUser;
                     $nombrePersonaUsuario = $this->input->post('UsuarioNombreReal');
@@ -157,7 +164,7 @@ class Usuariocontroller extends CI_Controller {
                     //La fecha de modificaciòn del registro se coloca en el modelo para evitar enviar mas parametros.
                     $this->load->model('Usuarios');
                     $arrayData = $this->Usuarios->editarUsuario($codigoUsuario, $nombreUsuario, $contraseniaUsuario, $nombrePersonaUsuario, $correo, $userModifica, $ip, $comentarios);
-                    echo json_encode($arrayData);
+                    echo $this->paginUsers($arrayData);
                 }
             }
         } catch (Exception $e) {
@@ -233,16 +240,45 @@ class Usuariocontroller extends CI_Controller {
         }
     }
 
-    public function paginUsers() {
+    public function paginUsers($Users = null) {
         try {
             $final = 0;
             $pagAct = 0;
             $cadena = '';
             $filas = '';
+            $Usuarios = array();
+
             if ($this->input->post()) {
                 if ($this->input->post('data_ini') != null) {
                     $pagAct = $this->input->post('data_ini');
                     $final = $this->input->post('data_ini');
+                    
+                    if ($pagAct <= 0) {
+                        $pagAct = 1;
+                        $final = 1;
+                    }else if($pagAct > $this->getTotalPaginas()) {
+                        $pagAct =$this->getTotalPaginas();
+                        $final=$this->getTotalPaginas();
+                    }
+                    
+                } else if ($this->input->post('data_inip') != null) {
+                    $pagAct = $this->input->post('data_inip') - 1;
+                    $final = $this->input->post('data_inip') - 1;
+                    if ($pagAct <= 0) {
+                        $pagAct = 1;
+                        $final = 1;
+                    }
+                } else if ($this->input->post('data_inin') != null) {
+                    $pagAct = $this->input->post('data_inin');
+                    $pagAct+=1;
+                    $final = $this->input->post('data_inin');
+                    $final+=1;
+                    if ($pagAct > $this->getTotalPaginas()) {
+                        $pagAct =$this->getTotalPaginas();
+                        $final=$this->getTotalPaginas();
+                    }  else {
+                        
+                    }
                 } else {
                     $pagAct = 1;
                     $final = 1;
@@ -250,7 +286,13 @@ class Usuariocontroller extends CI_Controller {
             }
             $inicio = ROWS_PER_PAGE;
             $final = ($final * ROWS_PER_PAGE) - ROWS_PER_PAGE;
-            $Usuarios = $this->Usuarios->listarUsuarios($inicio, $final);
+            if ($Users != null) {
+
+                array_push($Usuarios, $Users);
+            } else {
+                $Usuarios = $this->Usuarios->listarUsuarios($inicio, $final);
+            }
+
             $buttonsByUserRights = $this->analizarPermisosBotonesTablas("gestionUserBtn", $permisos = $this->session->userdata('permisosUsuer'));
 
             $cadena .= '<table id=' . '"tableUsers"' . 'class="table table-bordered table-striped table-hover table-responsive"' . '>';
@@ -274,33 +316,33 @@ class Usuariocontroller extends CI_Controller {
             $cadena.='</tbody></table>';
             $cadena.=' <div class="row">
             <ul class="pager">
-                <li><a href="#">&lt;&lt;</a></li>
-                <li><a href="#">&lt;</a></li>
-                <li><input data-datainic="' . $pagAct . '" type="text" value="' . $pagAct . '" id="txtPagingSearchUsr" name="txtNumberPag" size="5">/' . intval(ceil($this->Usuarios->countAllUsers() / ROWS_PER_PAGE)) . '</li>
-                <li><a href="#">&gt;</a></li>
-                <li><a href="#">&gt;&gt;</a></li>
+               <li><button data-datainic="1" id="aFirstPag" >&lt;&lt;</button></li>
+                <li><button id="aPrevPag" >&lt;</button></li>
+                <li><input data-datainic="' . $pagAct . '" type="text" value="' . $pagAct . '" id="txtPagingSearchUsr" name="txtNumberPag" size="5">/' . $this->getTotalPaginas() . '</li>
+                 <li><button id="aNextPag">&gt;</button></li>
+                <li><button id="aLastPag" data-datainic="' . $this->getTotalPaginas() . '" >&gt;&gt;</button></li>
                 <li>[' . ($final + 1) . ' - ' . ($final + count($Usuarios)) . ' / ' . $this->Usuarios->countAllUsers() . ']</li></ul></div>';
         } catch (Exception $e) {
             echo $e->getMessage();
         }
-        if ($this->input->post('data_ini')) {
+        if ($this->input->post('data_ini') || $this->input->post('data_inin') || $this->input->post('data_inip')) {
             echo ($cadena);
         } else {
             return $cadena;
         }
     }
 
-    public function getUsrByCod($codigoUsuario=null) {
-        $codigoUsr=null;
+    public function getUsrByCod($codigoUsuario = null) {
+        $codigoUsr = null;
         if ($this->input->post('codUser')) {
             $codigoUsr = $this->input->post('codUser');
         } else {
             $codigoUsr = $codigoUsuario;
         }
         $user = $this->Usuarios->findUsuario($codigoUsr);
-        if ($user != null && $this->input->post('codUser')!=null ) {
+        if ($user != null && $this->input->post('codUser') != null) {
             echo json_encode($user);
-        }else if ($user != null && $this->input->post('codUser')==null){
+        } else if ($user != null && $this->input->post('codUser') == null) {
             return $user;
         }
     }

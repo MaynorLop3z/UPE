@@ -10,8 +10,8 @@
         </div>
         <div  id="divBtnCrudUsr" class="well">
 
-            <button id="btnUsuarioNuevo" class="btn btn-default decorateStyleCrud" ><span class="glyphicon glyphicon-plus"></span>Usuario Nuevo</button>
-             
+            
+            <button id="btnActualizarUsuarios" class="btn btn-default decorateStyleCrud" ><span class="glyphicon glyphicon-refresh"></span>Actualizar Lista</button> 
 
         </div>
         <div id="containerTablePaging">
@@ -43,11 +43,11 @@
             </table>
             <div class="row">
                 <ul class="pager">
-                    <li><a data-datainic="1" id="aFirstPag" href="#">&lt;&lt;</a></li>
-                    <li><a id="aPrevPag" href="#">&lt;</a></li>
-                    <li><input data-datainic="1" type="text" value="1" id="txtPagingSearchUsr" name="txtNumberPag" size="5">/<?php echo intval(ceil($ToTalRegistros / ROWS_PER_PAGE)) ?></li>
-                    <li><a id="aNextPag" href="#">&gt;</a></li>
-                    <li><a id="aLastPag" data-datainic="<?php echo intval(ceil($ToTalRegistros / ROWS_PER_PAGE)) ?>" href="#">&gt;&gt;</a></li>
+                    <li><button data-datainic="1" id="aFirstPag" >&lt;&lt;</button></li>
+                    <li><button id="aPrevPag" >&lt;</button></li>
+                    <li><input data-datainic="1" type="text" value="1" id="txtPagingSearchUsr" name="txtNumberPag" size="5">/<?php echo $totalPaginas ?></li>
+                    <li><button id="aNextPag">&gt;</button></li>
+                    <li><button id="aLastPag" data-datainic="<?php echo $totalPaginas ?>" >&gt;&gt;</button></li>
                     <li>[<?php echo $PagInicial . "-" . count($Usuarios) . "/" . $ToTalRegistros ?>]</li>
                 </ul>
             </div>

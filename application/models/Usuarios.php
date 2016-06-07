@@ -39,7 +39,7 @@ class Usuarios extends CI_Model {
                 'ContraseniaUsuario' => $contraseniaUsuario,
                 'Nombre' => trim($nombrePersonaUsuario),
                 'CorreoUsuario' => $correo,
-                'FechaModifica' => date("Y/m/d"),
+                'FechaModifica' => date("Y-m-d H:i:s"),
                 'UsuarioModifica' => $userModifica,
                 'IPModifica' => $ipModifica,
                 'Comentarios' => $comentarios
@@ -61,18 +61,19 @@ class Usuarios extends CI_Model {
                     'ContraseniaUsuario' => $contraseniaUsuario,
                     'Nombre' => $nombrePersonaUsuario,
                     'CorreoUsuario' => $correo,
-                    'FechaModifica' => date("Y/m/d"),
+                    'FechaModifica' => date("Y-m-d H:i:s"),
                     'UsuarioModifica' => $userModifica,
                     'IPModifica' => $ipModifica,
                     'Comentarios' => $comentarios
                 );
                 $this->db->where('CodigoUsuario', $codigoUsuario);
                 $this->db->update('Usuarios', $data);
-                $data['CodigoUsuario'] = $codigoUsuario;
+//                $data['CodigoUsuario'] = $codigoUsuario;
+              return  $this->findUsuario($codigoUsuario);
             } catch (Exception $ex) {
                 $ex->getMessage();
             }
-            return $data;
+            
         } catch (Exception $ex) {
             $ex->getMessage();
         }

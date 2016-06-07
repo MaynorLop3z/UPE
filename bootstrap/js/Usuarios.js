@@ -20,7 +20,7 @@ $("#containerTablePaging").on("click", ".btn_eliminar_user", function (e) {
 $("#containerTablePaging").on("click", ".btn_rls_user", function (e) {
     var tr = $(this).parent().parent().parent();
     var dataU = tr.data("userd");
-    codigoUsuario = dataU.CodigoUsuario;
+    codigoUsuario = dataU;
     $("#usuarioRoles").modal('show');
 });
 
@@ -30,9 +30,9 @@ $('#usuarioModifica').on('show.bs.modal', function (event) {
     var posting = $.post(url, {codUser: codigoUsuario});
 
     posting.done(function (data) {
-        
-          if (data !== null) {
-           var obj=jQuery.parseJSON(data);
+
+        if (data !== null) {
+            var obj = jQuery.parseJSON(data);
             $('#txtUserModificar').val(obj.NombreUsuario);
             $('#txtNombrePersonaModifica').val(obj.Nombre);
             $('#Emailmodificar').val(obj.CorreoUsuario);
@@ -105,12 +105,10 @@ $("#frmEditarUser").submit(function (event) {
         UsuarioNombreReal: UsuarioNombreReal});
     posting.done(function (data) {
         if (data !== null) {
-            var obj = jQuery.parseJSON(data);
-            var trUser = $('#tableUsers > tbody').find("#tr" + obj.CodigoUsuario);
-            trUser.find('.nombre_Usuario').html(obj.Nombre);
-            trUser.find('.correo_Usuario').html(obj.CorreoUsuario);
-            trUser.find('.nickName_Usuario').html(obj.NombreUsuario);
-            trUser.data("userd", obj);
+            
+            $('#containerTablePaging').empty();
+            $('#containerTablePaging').html(data);
+
             $("#usuarioModifica").modal('toggle');
         }
     });
@@ -210,8 +208,90 @@ $("#frmRolUser").submit(function (event) {
     });
 });
 
-$('.modal-dialog').draggable({
-    handle: ".modal-header"
+
+
+$("#containerTablePaging").on("click", "#aFirstPag", function (e) {
+    
+    
+    var data_in= $(this).data("datainic");
+       
+        var url = 'UsuarioController/paginUsers/';
+        var posting = $.post(url, {"data_ini": data_in});
+
+        posting.done(function (data) {
+            if (data !== null) {
+
+                $('#containerTablePaging').empty();
+                $('#containerTablePaging').html(data);
+
+            }
+        });
+        posting.fail(function (data) {
+            alert("error");
+        });
+    
 });
 
+$("#containerTablePaging").on("click", "#aLastPag", function (e) {
+    
+    var data_in= $(this).data("datainic");
+       
+        var url = 'UsuarioController/paginUsers/';
+        var posting = $.post(url, {"data_ini": data_in});
 
+        posting.done(function (data) {
+            if (data !== null) {
+
+                $('#containerTablePaging').empty();
+                $('#containerTablePaging').html(data);
+
+            }
+        });
+        posting.fail(function (data) {
+            alert("error");
+        });
+    
+});
+
+$("#containerTablePaging").on("click", "#aPrevPag", function (e) {
+    
+   var data_inic = $('#txtPagingSearchUsr').data("datainic");
+        var data_in = $('#txtPagingSearchUsr').val();
+        var url = 'UsuarioController/paginUsers/';
+        var posting = $.post(url, {"data_inip": data_in});
+
+        posting.done(function (data) {
+            if (data !== null) {
+
+                $('#containerTablePaging').empty();
+                $('#containerTablePaging').html(data);
+
+            }
+        });
+        posting.fail(function (data) {
+            alert("error");
+        });
+    
+});
+
+$("#containerTablePaging").on("click", "#aNextPag", function (e) {
+    
+    var data_inic = $('#txtPagingSearchUsr').data("datainic");
+        var data_in = $('#txtPagingSearchUsr').val();
+     
+        var url = 'UsuarioController/paginUsers/';
+        var posting = $.post(url, {"data_inin": data_in});
+
+        posting.done(function (data) {
+            if (data !== null) {
+
+                $('#containerTablePaging').empty();
+                $('#containerTablePaging').html(data);
+
+            }
+        });
+        posting.fail(function (data) {
+            alert("error");
+        });
+    
+});
