@@ -10,7 +10,7 @@
         </div>
         <div  id="divBtnCrudUsr" class="well">
 
-            
+            <button id="btnUsuarioNuevo" class="btn btn-default decorateStyleCrud" ><span class="glyphicon glyphicon-plus"></span>Usuario Nuevo</button>
             <button id="btnActualizarUsuarios" class="btn btn-default decorateStyleCrud" ><span class="glyphicon glyphicon-refresh"></span>Actualizar Lista</button> 
 
         </div>
