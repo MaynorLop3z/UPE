@@ -10,6 +10,7 @@ var fileExtension = "";
 var fileName;
 
 $(document).ready(function () {
+//    document.getElementById('btnAceptar').disable=true;
 
     $(".messages").hide();
     //queremos que esta variable sea global
@@ -75,6 +76,8 @@ $(document).ready(function () {
                         showMessage(message);
 
                     }
+//                    botones.btnAceptar.disable = false;
+                    document.getElementById("btnAceptar").disabled = false;
                 },
                 //si ha ocurrido un error
                 error: function () {
@@ -147,6 +150,16 @@ $('#botones').submit(function (event)
     posting.done(function (data) {
         if (data !== null) {
             var obj = jQuery.parseJSON(data);
+            //dejamos todo en blanco  para la siguiente pulicacion
+            $(".showImage").html("");
+            $(":text").each(function () {
+                $($(this)).val('');
+            });
+            $(".messages").html("").show();
+//    $('#subir').reset();
+            document.getElementById("imgform").reset();
+            document.getElementById("pubtexarea").value = "";
+            document.getElementById("btnAceptar").disabled = true;
             $('#NuevaPublicacion').modal("toggle");
 
         }
@@ -175,6 +188,7 @@ $('#btnCancelarP').on('click', function (e) {
 //    $('#subir').reset();
     document.getElementById("imgform").reset();
     document.getElementById("pubtexarea").value = "";
+    document.getElementById("btnAceptar").disabled = true;
     $('#NuevaPublicacion').modal("toggle");
 });
 
@@ -195,6 +209,7 @@ $('#btnLimpiarPubli').on('click', function (e) {
 //    $('#subir').reset();
     document.getElementById("imgform").reset();
     document.getElementById("pubtexarea").value = "";
+    document.getElementById("btnAceptar").disabled = true;
 });
 
 //function eliminarDiplomado(fila) {
