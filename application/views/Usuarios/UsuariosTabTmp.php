@@ -10,10 +10,11 @@
         </div>
         <div  id="divBtnCrudUsr" class="well">
 
-            
+            <button id="btnUsuarioNuevo" class="btn btn-default decorateStyleCrud" ><span class="glyphicon glyphicon-plus"></span>Usuario Nuevo</button>
             <button id="btnActualizarUsuarios" class="btn btn-default decorateStyleCrud" ><span class="glyphicon glyphicon-refresh"></span>Actualizar Lista</button> 
 
         </div>
+        <br>
         <div id="containerTablePaging">
             <table id="tableUsers" class="table table-bordered table-striped table-hover table-responsive">
                 <thead>
@@ -41,7 +42,9 @@
                     ?>
                 </tbody>
             </table>
+            
             <div class="row">
+                <hr>
                 <ul class="pager">
                     <li><button data-datainic="1" id="aFirstPag" >&lt;&lt;</button></li>
                     <li><button id="aPrevPag" >&lt;</button></li>
