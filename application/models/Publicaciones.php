@@ -137,6 +137,10 @@ class Publicaciones extends CI_Model {
         //Hay que verificar si existen publicaciones de ser asi no eliminar o cambiar a una
         //por defecto
     }
+    
+    public function EliminarArchivosPublicacion($CodigoPublicaciones) {
+        $this->db->delete('Archivos', array('CodigoPublicaciones' => $CodigoPublicaciones));
+    }
 
     public function EliminarArchivo($CodigoArchivo) {
         $this->db->delete('Archivos', array('CodigoArchivos' => $CodigoArchivo));
