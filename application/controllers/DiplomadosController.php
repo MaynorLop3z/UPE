@@ -17,7 +17,8 @@ class DiplomadosController extends CI_Controller {
         $data['Diplomados'] = $this->Diplomados->listarDiplomados();
         $data['CategoriasDi'] = $this->Diplomados->listarCategoriasDiplomados();
         $data['Turno'] = $this->Modulos->listarTurnos();
-       // $data['Modulos']=  $this->Modulos->listarModulosByDiplomado();
+        $data['Modulos']= $this->Diplomados->listarModulosByDiplomado();
+       
         $this->load->view('Diplomados', $data);
        // $this->load->view('Modulos/ModulosModal',$data);
     }

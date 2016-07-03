@@ -10,6 +10,9 @@
         <div id="gestionDipBtn">
             <button id="" title="Editar Usuario"   class="btn_modificar_dip btn btn-success "  class=" btn btn-info btn-lg"><span class="glyphicon glyphicon-pencil"></span></button>
             <button id="" title="Eliminar Usuario" class="btn_eliminar_dip btn btn-danger"     class=" btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"> </span></button>
+            <button id="" title="Agregar Modulos" class="btnAddMod btn btn-info" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-plus"></span></button>
+            <button id="" title="Ver modulos" class="btnVIewMod btn btn-warning" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-eye-open"></span></button>       
+        
         </div>
 
         <div id="gestionParticipantesBtn">

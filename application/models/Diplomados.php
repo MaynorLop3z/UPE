@@ -7,7 +7,21 @@ class Diplomados extends CI_Model {
         parent::__construct();
         $this->load->database();
     }
-    public function listarDiplomadosNombre($filtro) {
+    public function listarModulosByDiplomado($codigoDiplomado=null) {
+        $this->db->select('CodigoDiplomado, '
+                . 'NombreDiplomado,'
+                . 'Descripcion, '
+                . 'Estado, '
+                . 'CodigoCategoriaDiplomado, '
+                . 'Comentarios');
+        $this->db->from('Diplomados');
+        $this->db->where('CodigoDiplomado', $codigoDiplomado);
+        $consulta = $this->db->get();
+        $resultado = $consulta->result();
+        return $resultado;
+    }
+    
+     public function listarDiplomadosNombre($filtro) {
         $this->db->select('CodigoDiplomado, '
                 . 'NombreDiplomado,'
                 . 'Descripcion, '
