@@ -27,7 +27,8 @@ class Participantes extends CI_Model {
                 . 'T0.NombreEncargado, '
                 . 'T0.Descripcion, '
                 . 'T0.CodigoCategoriaParticipantes, '
-                . 'T0.Comentarios,'
+                . 'T0.Comentarios, '
+                . 'T0.Genero, '
                 . 'T1.NombreCategoriaParticipante');
         $this->db->from('Participantes T0');
         $this->db->join("CategoriasParticipante T1","T0.CodigoCategoriaParticipantes = T1.CodigoCategoriaParticipantes");
@@ -88,7 +89,8 @@ class Participantes extends CI_Model {
                 . 'NombreEncargado, '
                 . 'Descripcion, '
                 . 'CodigoCategoriaParticipantes, '
-                . 'Comentarios');
+                . 'Comentarios, '
+                . 'Genero');
         $this->db->from('Participantes');
         $this->db->like('Nombre',$filtro);
         $consulta = $this->db->get();
@@ -96,7 +98,7 @@ class Participantes extends CI_Model {
         return $resultado;
     }
 
-    public function CrearParticipante($Nombre, $CorreoElectronico, $TelefonoFijo, $TelefonoCelular, $Direccion, $FechaNacimiento, $CodigoCategoriaParticipantes, $NumeroDUI, $CodigoUniversidadProcedencia, $Carrera, $NivelAcademico, $NombreEncargado, $Descripcion, $Comentarios) {
+    public function CrearParticipante($Nombre, $CorreoElectronico, $TelefonoFijo, $TelefonoCelular, $Direccion, $FechaNacimiento, $CodigoCategoriaParticipantes, $NumeroDUI, $CodigoUniversidadProcedencia, $Carrera, $NivelAcademico, $NombreEncargado, $Descripcion, $Comentarios, $genero) {
         try {
             $data = array(
 //            'CodigoPermisos' => null,
@@ -109,6 +111,7 @@ class Participantes extends CI_Model {
                 'Descripcion' => $Descripcion,
                 'CodigoCategoriaParticipantes' => $CodigoCategoriaParticipantes,
                 'Comentarios' => $Comentarios,
+                'Genero' => $genero
             );
             $this->db->insert('Participantes', $data);
             $insert_id = $this->db->insert_id();
@@ -133,7 +136,7 @@ class Participantes extends CI_Model {
     }
 
 //me dio error al crear un procedimiento con mas de 20 lineas $CodigoUniversidadProcedencia = null,
-    public function ModificarParticipante($CodigoParticipante, $Nombre, $CorreoElectronico, $TelefonoFijo, $TelefonoCelular, $Direccion, $FechaNacimiento, $CodigoCategoriaParticipantes, $UsuarioModifica, $IPModifica, $FechaModifica, $CodigoUniversidadProcedencia, $NumeroDUI = null, $Carrera = null, $NivelAcademico = null, $NombreEncargado = null, $Descripcion = null, $Comentarios = null) {
+    public function ModificarParticipante($CodigoParticipante, $Nombre, $CorreoElectronico, $TelefonoFijo, $TelefonoCelular, $Direccion, $FechaNacimiento, $CodigoCategoriaParticipantes, $UsuarioModifica, $IPModifica, $FechaModifica, $CodigoUniversidadProcedencia, $genero, $NumeroDUI = null, $Carrera = null, $NivelAcademico = null, $NombreEncargado = null, $Descripcion = null, $Comentarios = null) {
         try {
             $data = array(
                 'Nombre' => $Nombre, 'CorreoElectronico' => $CorreoElectronico,
@@ -144,7 +147,7 @@ class Participantes extends CI_Model {
                 'NivelAcademico' => $NivelAcademico,'NombreEncargado' => $NombreEncargado, 
                 'Descripcion' => $Descripcion, 'CodigoCategoriaParticipantes' => $CodigoCategoriaParticipantes,
                 'UsuarioModifica' => $UsuarioModifica, 'IPModifica' => $IPModifica,
-                'FechaModifica' => $FechaModifica, 'Comentarios' => $Comentarios, 'Descripcion'=> $Descripcion
+                'FechaModifica' => $FechaModifica, 'Comentarios' => $Comentarios, 'Descripcion'=> $Descripcion, 'Genero' => $genero
             );
             $this->db->where('CodigoParticipante', $CodigoParticipante);
             $this->db->update('Participantes', $data);

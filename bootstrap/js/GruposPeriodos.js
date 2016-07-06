@@ -139,12 +139,13 @@ $("#frmGrupoAdd").submit(function(event) {
 $('#PeriodoGestion').on('show.bs.modal', function(event) {
     var idPeriodo = codigoPeriodo.substring(10);
     //var url = "PeriodosController/listarGrupos/";
+    $('#bodytablaPeriodosGruposO').html('');
     var posting = $.post("PeriodosController/listarGrupos/", {idPeriodo: idPeriodo});
     posting.done(function(data) {
         if (data !== null) {
             var obj = jQuery.parseJSON(data);
             var tabla = "";
-            for (x in obj) {
+            for (var x in obj) {
                 tabla += '<tr id="GrupoPeriodo' + obj[x].CodigoGrupoPeriodo + '">\n';
                 tabla += '<td class="Estado_Grupo">' + ((obj[x].Estado === 't') ? 'Activo' : 'Inactivo') + '</td>\n';
                 tabla += '<td class="Hora_Entrada">' + obj[x].HoraEntrada + '</td>\n';
@@ -152,11 +153,7 @@ $('#PeriodoGestion').on('show.bs.modal', function(event) {
                 tabla += '<td class="Aula">' + obj[x].Aula + '</td>\n';
                 tabla += '<td class="GestionButton"><button id="gestion' + obj[x].CodigoGrupoPeriodo + '" onclick="testShow(this)" title="Gestionar Periodo" class="btn_gestionar_periodo btn btn-info"><span class="glyphicon glyphicon-cog"></span></button></td>';
                 tabla += '</tr>\n';
-//                            for (y in obj[x]) {
-//                                console.log(obj[x][y]);
-//                            }
             }
-//                        console.log(tabla);
             $('#bodytablaPeriodosGruposO').html(tabla);
 
         }
@@ -164,7 +161,6 @@ $('#PeriodoGestion').on('show.bs.modal', function(event) {
     posting.fail(function(xhr, textStatus, errorThrown) {
         alert("error" + xhr.responseText);
     });
-    //$('#nombrePeriodoEliminar').html(Fecha_Inicio + " al " + Fecha_Fin);
 });
 $('#gestionGrupoModal').on('show.bs.modal', function(event) {
    var idPeriodoGrupo = codigoGrupoPeriodo.substring(7);
@@ -173,12 +169,11 @@ $('#gestionGrupoModal').on('show.bs.modal', function(event) {
         if (data !== null) {
             var obj = jQuery.parseJSON(data);
             var tabla = "";
-            for (x in obj) {
+            for (var x in obj) {
                 tabla += '<tr id="GrupoUser' + obj[x].codigousuario + '">\n';
                 tabla += '<td class="DocenteIdUsuario">' + obj[x].codigousuario + '</td>\n';
                 tabla += '<td class="DocenteUsuario">' + obj[x].nombre + '</td>\n';
                 tabla += '<td class="DocenteInscrito">' + obj[x].inscrito + '</td>\n';
-//                tabla += '<td class="GestionButton"><button id="gestion' + obj[x].CodigoGrupoPeriodo + '" onclick="testShow(this)" title="Gestionar Periodo" class="btn_gestionar_periodo btn btn-info"><span class="glyphicon glyphicon-cog"></span></button></td>';
                 tabla += '</tr>\n';
 
         }
