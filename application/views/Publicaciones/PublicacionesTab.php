@@ -12,6 +12,7 @@
             <thead>
                 <tr><!--Agregar  Mas informacion acerca de los modulos -->
                     <th>Titulo</th>
+                    <th>Categoria</th>
                     <th>Gestionar</th>
 
             </thead> 
@@ -24,8 +25,10 @@
                     <tr  data-dipd='<?php echo json_encode($dip) ?>' 
                          id="dip<?php echo $dip->CodigoPublicacion ?>">
                         <td class="Titulo"><?php echo $dip->Titulo ?></td>
+                        <td class="Categoria"> <?php echo $dip->NombreCategoriaDiplomado ?></td>
+                        
                         <td class="gestion_dip" >
-                            <button id="editTitulo<?php echo $dip->CodigoPublicacion ?>" title="Editar Titulo" class="btnmoddi btn btn-success"><span class=" glyphicon glyphicon-pencil"></span></button>
+                            <button id="editPublicacion<?php echo $dip->CodigoPublicacion ?>" title="Editar Publicacion" class="btnmoddi btn btn-success"><span class=" glyphicon glyphicon-pencil"></span></button>
                             <button id="delPub<?php echo $dip->CodigoPublicacion ?>" onclick=""  title="Eliminar Publicacion" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>
                         </td>
                     </tr>

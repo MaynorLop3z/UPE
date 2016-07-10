@@ -197,12 +197,16 @@
                             <div class="row control-group">
                                 <label>Categoria de la Consulta</label>
 
-                                <select name="ad" onchange="">
-                                    <option value="General "> General  </option>
-                                    <option value="Idiomas">Idiomas Extrangeros</option>
-                                    <option value="Fisica">Diplomados en fisica</option>
-                                    <option value="sistemas Informaticos">Sistemas Informaticos</option>
-                                </select>
+                                <select name="categoriasl" onchange="" id="selectCategoria">
+                                        <?php
+                                        foreach ($listCategorias as $categorias) {
+                                            ?>
+                                              <option value=<?php echo $categorias->CodigoCategoriaDiplomado ?>> <?php echo $categorias->NombreCategoriaDiplomado ?>  </option>
+                                            <?php
+                                        }
+                                        ?>
+
+                                    </select>
                             </div>
 
                             <div class="row control-group">

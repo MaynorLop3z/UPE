@@ -8,6 +8,10 @@
 var codigoUsuario;
 var fileExtension = "";
 var fileName;
+var codigoPublicacion;
+var filaEdit;
+var codi;
+
 
 $(document).ready(function () {
 //    document.getElementById('btnAceptar').disable=true;
@@ -212,9 +216,19 @@ $('#btnLimpiarPubli').on('click', function (e) {
     document.getElementById("btnAceptar").disabled = true;
 });
 
-//function eliminarDiplomado(fila) {
-//    codigoDiplomado = fila.id;
-//    codigoDiplomado = codigoDiplomado.substring(12);
-//    $('#EliminarDiplomado').modal('toggle');
-//
-//}
+function eliminarPublicacion(fila) {
+    codigoPublicacion = fila.id;
+    codigoPublicacion = codigoPublicacion.substring(12);
+    $('#EliminarPublicacion').modal('toggle');
+
+}
+
+
+$("#EliminarPublicacion").on('show.bs.modal',function(event){
+    var dip = $('#dip' + codigoPublicacion);
+    
+    var NombreDiplomadoE = dip.find(".titulo").html().toString().trim();
+    $('#nombreDipPub').html(TituloDiplomado);    
+});
+
+
