@@ -95,7 +95,7 @@
                         <div class="form-group">
                             <label for="CatgoriaDiplomadoEdit" class="col-lg-3 control-label">Categoria Diplomado:</label>
                             <div class="col-lg-9">
-                                <select class="form-control" id="CatgoriaDiplomadoEdit" name="CodigoCategoriaDiplomado">                                          
+                                <select class="form-control" id="CatgoriaDiplomadoEdit" name="CodigoCategoriaDiplomado" required>                                          
                                     <?php
                                     foreach ($CategoriasDi as $cadi){ //AQui para seleccionar  la categoria del diplomado al que pertenece
                                     ?>
@@ -137,7 +137,7 @@
                     <legend class="modal-header">Diplomado:</legend> 
                         <div class="form-group">
                             <div class="col-lg-9">
-                                <label>¿Realmente desea eliminar el Diplomado <mark id="nombreDipDel"></mark>?</label>
+                                <label>¿Realmente desea eliminar el Diplomado <mark id="nombreDipDel">?</mark></label>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -188,9 +188,15 @@
                      <legend>Modulos Por Diplomado</legend>
 
                      <div class="row">
+                         <div class="col-lg-8">
                          <div class="col-lg-6"><label>Diplomado:</label></div>
-                         <div class="col-lg-6"><mark id="nombreDipDel"></mark></div>
-                     </div>
+                         <div class="col-lg-6"><mark id="DipViewMod"></mark></div>
+                         </div>
+                   
+                         <div class="row">
+                       <button id="btnWantedDip" type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>Buscar Modulos</button>
+                         </div>
+                         </div>
                  </form> 
                  <div class="row">
                      <div class="col-md-12">
@@ -227,7 +233,7 @@
         </div>
 </div>
 </div>
- 
+    
  <!--agregar modulos---------------------------------------------------------------------------------------------------------------------------------->
 <div id="NuevoModuloDip" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -275,7 +281,7 @@
                           <div class="form-group">
                             <label class="col-lg-3 control-label">Diplomado:</label>
                          
-                         <div class="col-lg-9">
+                           <div class="col-lg-9">
                              <select class ="form-control" id="Diplomadoname" name="Diplomadoname" required>                                          
                                     <?php
                                     foreach ($Diplomados as $DipMo) { //Aqui para seleccionar el Turno a que Pertenece

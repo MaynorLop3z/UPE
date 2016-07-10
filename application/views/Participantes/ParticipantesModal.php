@@ -50,11 +50,13 @@
                                         <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
                                     </div>
                                 </div>
-
                                 <div class="form-group">
-                                    <label for="AlumnoDir" class="col-lg-3 control-label">Direccion:</label>
+                                    <label for="AlumnoGenero" class="col-lg-3 control-label">Genero:</label>
                                     <div class="col-lg-6">
-                                        <textarea cols="40" rows="5" class="form-control" name="Direccion" id="AlumnoDir" placeholder="Direccion del Alumno" maxlength="200" required></textarea>
+                                        <select class="form-control" id="AlumnoGenero" name="GeneroParticipante">
+                                            <option value="M">Masculino</option>
+                                            <option value="F">Femenino</option>
+                                        </select>
                                     </div>
                                     <div class="col-lg-3">
                                         <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
@@ -69,7 +71,17 @@
                                         <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
                                     </div>
                                 </div>
-
+                                <div class="form-group">
+                                    <label for="AlumnoDir" class="col-lg-3 control-label">Direccion:</label>
+                                    <div class="col-lg-6">
+                                        <textarea cols="40" rows="6" class="form-control" name="Direccion" id="AlumnoDir" placeholder="Direccion del Alumno" maxlength="200" required></textarea>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
+                                    </div>
+                                </div>
+                                <!--- --></div>
+                            <!--- --><div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="AlumnoFNac" class="col-lg-3 control-label">Fecha Nacimiento:</label>
                                     <div class="col-lg-6">
@@ -79,9 +91,6 @@
                                         <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
                                     </div>
                                 </div>
-
-                                <!--- --></div>
-                            <!--- --><div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="AlumnoCarrera" class="col-lg-3 control-label">Carrera:</label>
                                     <div class="col-lg-6">
@@ -131,7 +140,7 @@
                                 <div class="form-group">
                                     <label for="AlumnoDescripcion" class="col-lg-3 control-label">Descripcion:</label>
                                     <div class="col-lg-6">
-                                        <textarea cols="40" rows="5" class="form-control" name="Descripcion" id="AlumnoDescripcion" placeholder="Descripcion del Alumno"></textarea>
+                                        <textarea cols="40" rows="4" class="form-control" name="Descripcion" id="AlumnoDescripcion" placeholder="Descripcion del Alumno"></textarea>
                                     </div>
                                     <div class="col-lg-3">
                                         <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
@@ -140,7 +149,7 @@
                                 <div class="form-group">
                                     <label for="AlumnoComentario" class="col-lg-3 control-label">Comentarios:</label>
                                     <div class="col-lg-6">
-                                        <textarea cols="40" rows="5" class="form-control" name="Comentarios" id="AlumnoComentario" placeholder="Comentario del Alumno"></textarea>
+                                        <textarea cols="40" rows="4" class="form-control" name="Comentarios" id="AlumnoComentario" placeholder="Comentario del Alumno"></textarea>
                                     </div>
                                     <div class="col-lg-3">
                                         <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
@@ -212,11 +221,13 @@
                                         <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
                                     </div>
                                 </div>
-
                                 <div class="form-group">
-                                    <label for="AlumnoDirEDIT" class="col-lg-3 control-label">Direccion:</label>
+                                    <label for="AlumnoGeneroEDIT" class="col-lg-3 control-label">Categoria:</label>
                                     <div class="col-lg-6">
-                                        <textarea cols="40" rows="5" class="form-control" name="Direccion" id="AlumnoDirEDIT" placeholder="Direccion del Alumno" maxlength="200" required></textarea>
+                                        <select class="form-control" id="AlumnoGeneroEDIT" name="GeneroParticipante">
+                                            <option value="M">Masculino</option>
+                                            <option value="F">Femenino</option>
+                                        </select>
                                     </div>
                                     <div class="col-lg-3">
                                         <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
@@ -231,7 +242,17 @@
                                         <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
                                     </div>
                                 </div>
-
+                                <div class="form-group">
+                                    <label for="AlumnoDirEDIT" class="col-lg-3 control-label">Direccion:</label>
+                                    <div class="col-lg-6">
+                                        <textarea cols="40" rows="6" class="form-control" name="Direccion" id="AlumnoDirEDIT" placeholder="Direccion del Alumno" maxlength="200" required></textarea>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
+                                    </div>
+                                </div>
+                                <!--- --></div>
+                            <!--- --><div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="AlumnoFNacEDIT" class="col-lg-3 control-label">Fecha Nacimiento:</label>
                                     <div class="col-lg-6">
@@ -241,9 +262,6 @@
                                         <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
                                     </div>
                                 </div>
-
-                                <!--- --></div>
-                            <!--- --><div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="AlumnoCarreraEDIT" class="col-lg-3 control-label">Carrera:</label>
                                     <div class="col-lg-6">
@@ -292,7 +310,7 @@
                                 <div class="form-group">
                                     <label for="AlumnoDescripcionEDIT" class="col-lg-3 control-label">Descripcion:</label>
                                     <div class="col-lg-6">
-                                        <textarea cols="40" rows="5" class="form-control" name="Descripcion" id="AlumnoDescripcionEDIT" placeholder="Descripcion del Alumno"></textarea>
+                                        <textarea cols="40" rows="4" class="form-control" name="Descripcion" id="AlumnoDescripcionEDIT" placeholder="Descripcion del Alumno"></textarea>
                                     </div>
                                     <div class="col-lg-3">
                                         <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
@@ -301,7 +319,7 @@
                                 <div class="form-group">
                                     <label for="AlumnoComentarioEDIT" class="col-lg-3 control-label">Comentarios:</label>
                                     <div class="col-lg-6">
-                                        <textarea cols="40" rows="5" class="form-control" name="Comentarios" id="AlumnoComentarioEDIT" placeholder="Comentario del Alumno"></textarea>
+                                        <textarea cols="40" rows="4" class="form-control" name="Comentarios" id="AlumnoComentarioEDIT" placeholder="Comentario del Alumno"></textarea>
                                     </div>
                                     <div class="col-lg-3">
                                         <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->

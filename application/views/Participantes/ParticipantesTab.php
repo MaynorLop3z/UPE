@@ -31,6 +31,7 @@
                             <th style="display: none"># Movil</th>
                             <th style="display: none">Direccion</th>
                             <th style="display: none">DUI</th>
+                            <th style="display: none">Genero</th>
                             <th>Nombre</th>
                             <th style="display: none">Fecha Nac.</th>
                             <th style="display: none">Universidad</th>
@@ -54,6 +55,7 @@
                                 <td class="TelefonoMovil_Alumno" style="display: none"><?= $alum->TelefonoCelular ?></td>
                                 <td class="Direccion_Alumno" style="display: none"><?= $alum->Direccion ?></td>
                                 <td class="DUI_Alumno" style="display: none"><?= $alum->NumeroDUI ?></td>
+                                <td class="Genero_Alumno" style="display: none"><?= $alum->Genero ?></td>
                                 <td class="Nombre_Alumno"><?= $alum->Nombre ?></td>
                                 <td class="FechaNac_Alumno" style="display: none"><?= $alum->FechaNacimiento ?></td>
                                 <td class="CodU_Alumno" style="display: none"><?= $alum->CodigoUniversidadProcedencia ?></td>

@@ -95,8 +95,9 @@ class ParticipantesController extends CI_Controller {
                 $categoria = $this->input->post('AlumnoCategoria');
                 $descripcion = $this->input->post('AlumnoDescripcion');
                 $comentarios = $this->input->post('AlumnoComentario');
+                $genero = $this->input->post('AlumnoGenero');
                 $universidad = 0;
-                $arrayData = $this->Participantes->CrearParticipante($nombre, $mail, $tfijo, $tcel, $direccion, $nacimiento, $categoria, $DUI, $universidad, $carrera, $nivelAcad, $encargado, $descripcion, $comentarios);
+                $arrayData = $this->Participantes->CrearParticipante($nombre, $mail, $tfijo, $tcel, $direccion, $nacimiento, $categoria, $DUI, $universidad, $carrera, $nivelAcad, $encargado, $descripcion, $comentarios,$genero);
                 echo json_encode($arrayData);
             }
         } catch (Exception $ex) {
@@ -121,11 +122,12 @@ class ParticipantesController extends CI_Controller {
                 $categoria = $this->input->post('AlumnoCategoria');
                 $descripcion = $this->input->post('AlumnoDescripcion');
                 $comentarios = $this->input->post('AlumnoComentario');
+                $genero = $this->input->post('AlumnoGenero');
                 $universidad = 0;
                 $umodifica = 0;
                 $ipModifica = '192.168.1.1';
                 $fechaModifica = date('d/m/Y');
-                $arrayData = $this->Participantes->ModificarParticipante($codigo, $nombre, $mail, $tfijo, $tcel, $direccion, $nacimiento, $categoria, $umodifica, $ipModifica, $fechaModifica, $universidad, $DUI, $carrera, $nivelAcad, $encargado, $descripcion, $comentarios);
+                $arrayData = $this->Participantes->ModificarParticipante($codigo, $nombre, $mail, $tfijo, $tcel, $direccion, $nacimiento, $categoria, $umodifica, $ipModifica, $fechaModifica, $universidad,$genero, $DUI, $carrera, $nivelAcad, $encargado, $descripcion, $comentarios);
                 echo json_encode($arrayData);
             }
         } catch (Exception $ex) {

@@ -2,20 +2,20 @@ var codigoParticipante;
 var filaEdit;
 var countColor = 1;
 
-$("#DiplomadoP").change(function() {
-    $("#DiplomadoP option:selected").each(function() {
+$("#DiplomadoP").change(function () {
+    $("#DiplomadoP option:selected").each(function () {
         idDiplomado = $(this).val();
         var idParticipante = codigoParticipante.substring(9);
-        var posting = $.post("ParticipantesController/listarGruposPeriodos/", {idDiplomado: idDiplomado, idParticipante: idParticipante}, function(data) {
+        var posting = $.post("ParticipantesController/listarGruposPeriodos/", {idDiplomado: idDiplomado, idParticipante: idParticipante}, function (data) {
 //                            console.log("EntroModulo");
             $("#bodytablaPeriodosGrupos").html(data);
         });
-        posting.fail(function(xhr, textStatus, errorThrown) {
+        posting.fail(function (xhr, textStatus, errorThrown) {
             alert("error" + xhr.responseText);
         });
     });
 });
-$("#btnADDAlumno").on('click', function() {
+$("#btnADDAlumno").on('click', function () {
 
     $("#AlumnoNuevo").modal();
     //$("#myModal").modal('toggle')
@@ -57,7 +57,7 @@ function inscribirUsaurio(fila) {
     //alert(codigoDiplomado);
     var url = "ParticipantesController/inscribirAlumno/";
     var posting = $.post(url, {idParticipante: idParticipante, idGrupoPeriodo: idGrupoPeriodo});
-    posting.done(function(data) {
+    posting.done(function (data) {
         var property = document.getElementById(codigoDiplomado);
         var obj = jQuery.parseJSON(data);
         //console.log(obj[0]);
@@ -72,7 +72,7 @@ function inscribirUsaurio(fila) {
             $("#" + codigoDiplomado).html('<span class="glyphicon glyphicon-remove"></span>');
         }
     });
-    posting.fail(function(xhr, textStatus, errorThrown) {
+    posting.fail(function (xhr, textStatus, errorThrown) {
         alert("error" + xhr.responseText);
     });
 }
@@ -92,7 +92,7 @@ function inscribirUsaurio(fila) {
 //    $("#AlumnoEliminar").modal('toggle');
 //});
 
-$('#AlumnoVIEWDATA').on('show.bs.modal', function(event) {
+$('#AlumnoVIEWDATA').on('show.bs.modal', function (event) {
     var alum = $('#alum' + codigoParticipante.substring(8));
     //console.log(alum);
     var Mail_Alumno = alum.find('.Mail_Alumno').html().toString().trim();
@@ -123,7 +123,7 @@ $('#AlumnoVIEWDATA').on('show.bs.modal', function(event) {
     $('#AlumViewDUI').html(DUI_Alumno);
 });
 
-$('#AlumnoEditar').on('show.bs.modal', function(event) {
+$('#AlumnoEditar').on('show.bs.modal', function (event) {
 //                codigoUsuario = (event.target.id);
     //console.log(codigoParticipante);
     var alum = $('#alum' + codigoParticipante.substring(5));
@@ -142,6 +142,7 @@ $('#AlumnoEditar').on('show.bs.modal', function(event) {
     var Descripcion_Alumno = alum.find('.Descripcion_Alumno').html().toString().trim();
     var Comentarios_Alumno = alum.find('.Comentarios_Alumno').html().toString().trim();
     var Direccion_Alumno = alum.find('.Direccion_Alumno').html().toString().trim();
+    var Genero_Alumno = alum.find('.Genero_Alumno').html().toString().trim();
 //    $('#lblCodigoUser').html(codigoParticipante);
     $('#AlumnoNombreEDIT').val(Nombre_Alumno);
     $('#AlumnoMailEDIT').val(Mail_Alumno);
@@ -156,10 +157,11 @@ $('#AlumnoEditar').on('show.bs.modal', function(event) {
     $('#AlumnoDescripcionEDIT').val(Descripcion_Alumno);
     $('#AlumnoComentarioEDIT').val(Comentarios_Alumno);
     $('#AlumnoDUIEDIT').val(DUI_Alumno);
+    $('#AlumnoGeneroEDIT').val(Genero_Alumno);
     // alert(codigoUsuario);
 });
 
-$('#AlumnoEliminar').on('show.bs.modal', function(event) {
+$('#AlumnoEliminar').on('show.bs.modal', function (event) {
     console.log("Eliminar Alumno se muestra");
     var alum = $('#alum' + codigoParticipante.substring(7));
     var Nombre_Alumno = alum.find('.Nombre_Alumno').html().toString().trim();
@@ -167,13 +169,13 @@ $('#AlumnoEliminar').on('show.bs.modal', function(event) {
 });
 
 
-$("#frmADDAlumno").submit(function(event) {
+$("#frmADDAlumno").submit(function (event) {
     event.preventDefault();
-    var $form = $(this), AlumnoNombre = $form.find("input[name='Nombre']").val(), AlumnoMail = $form.find("input[name='CorreoElectronico']").val(), AlumnoFijo = $form.find("input[name='TelefonoFijo']").val(), AlumnoMovil = $form.find("input[name='TelefonoCelular']").val(), AlumnoDir = $form.find("textarea[name=Direccion]").val(), AlumnoDUI = $form.find("input[name='NumeroDUI']").val(), AlumnoFNac = $form.find("input[name='FechaNacimiento']").val(), AlumnoCarrera = $form.find("input[name='Carrera']").val(), AlumnoNivel = $form.find("input[name='NivelAcademico']").val(), AlumnoNEncargado = $form.find("input[name='NombreEncargado']").val(), AlumnoCategoria = $form.find("select[name=CodigoCategoriaParticipantes]").val(), AlumnoDescripcion = $form.find("textarea[name=Descripcion]").val(), AlumnoComentario = $form.find("textarea[name=Comentarios]").val(), url = $form.attr("action");
+    var $form = $(this), AlumnoNombre = $form.find("input[name='Nombre']").val(), AlumnoMail = $form.find("input[name='CorreoElectronico']").val(), AlumnoFijo = $form.find("input[name='TelefonoFijo']").val(), AlumnoMovil = $form.find("input[name='TelefonoCelular']").val(), AlumnoDir = $form.find("textarea[name=Direccion]").val(), AlumnoDUI = $form.find("input[name='NumeroDUI']").val(), AlumnoFNac = $form.find("input[name='FechaNacimiento']").val(), AlumnoCarrera = $form.find("input[name='Carrera']").val(), AlumnoNivel = $form.find("input[name='NivelAcademico']").val(), AlumnoNEncargado = $form.find("input[name='NombreEncargado']").val(), AlumnoCategoria = $form.find("select[name=CodigoCategoriaParticipantes]").val(), AlumnoDescripcion = $form.find("textarea[name=Descripcion]").val(), AlumnoComentario = $form.find("textarea[name=Comentarios]").val(), AlumnoGenero = $form.find("select[name=GeneroParticipante]").val(), url = $form.attr("action");
     var categorias = document.getElementById("AlumnoCategoria");
     var nombreCategoria = categorias.options[categorias.selectedIndex].text;
-    var posting = $.post(url, {AlumnoNombre: AlumnoNombre, AlumnoMail: AlumnoMail, AlumnoFijo: AlumnoFijo, AlumnoMovil: AlumnoMovil, AlumnoDir: AlumnoDir, AlumnoDUI: AlumnoDUI, AlumnoFNac: AlumnoFNac, AlumnoCarrera: AlumnoCarrera, AlumnoNivel: AlumnoNivel, AlumnoNEncargado: AlumnoNEncargado, AlumnoCategoria: AlumnoCategoria, AlumnoDescripcion: AlumnoDescripcion, AlumnoComentario: AlumnoComentario});
-    posting.done(function(data) {
+    var posting = $.post(url, {AlumnoNombre: AlumnoNombre, AlumnoMail: AlumnoMail, AlumnoFijo: AlumnoFijo, AlumnoMovil: AlumnoMovil, AlumnoDir: AlumnoDir, AlumnoDUI: AlumnoDUI, AlumnoFNac: AlumnoFNac, AlumnoCarrera: AlumnoCarrera, AlumnoNivel: AlumnoNivel, AlumnoNEncargado: AlumnoNEncargado, AlumnoCategoria: AlumnoCategoria, AlumnoDescripcion: AlumnoDescripcion, AlumnoComentario: AlumnoComentario, AlumnoGenero: AlumnoGenero});
+    posting.done(function (data) {
         if (data !== null) {
 //console.log('No esta vacio');
             var obj = jQuery.parseJSON(data);
@@ -185,6 +187,7 @@ $("#frmADDAlumno").submit(function(event) {
             fila = fila + '<td class="TelefonoMovil_Alumno" style="display: none">' + obj.TelefonoCelular + '</td>';
             fila = fila + '<td class="Direccion_Alumno" style="display: none">' + obj.Direccion + '</td>';
             fila = fila + '<td class="DUI_Alumno" style="display: none">' + obj.NumeroDUI + '</td>';
+            fila = fila + '<td class="Genero_Alumno" style="display: none">' + obj.Genero + '</td>';
             fila = fila + '<td class="Nombre_Alumno">' + obj.Nombre + '</td>';
             fila = fila + '<td class="FechaNac_Alumno" style="display: none">' + obj.FechaNacimiento + '</td>';
             fila = fila + '<td class="CodU_Alumno" style="display: none">' + obj.CodigoUniversidadProcedencia + '</td>';
@@ -210,29 +213,30 @@ $("#frmADDAlumno").submit(function(event) {
     //posting.fail(function(xhr, textStatus, errorThrown) {
     //     alert("error" + xhr.responseText);
     // });
-    posting.fail(function() {
+    posting.fail(function () {
         alert("error");
     });
 });
 
 
-$("#frmEditarAlumno").submit(function(event) {
+$("#frmEditarAlumno").submit(function (event) {
     event.preventDefault();
-    var $form = $(this), AlumnoCodigo = codigoParticipante.substring(5), AlumnoNombre = $form.find("input[name='Nombre']").val(), AlumnoMail = $form.find("input[name='CorreoElectronico']").val(), AlumnoFijo = $form.find("input[name='TelefonoFijo']").val(), AlumnoMovil = $form.find("input[name='TelefonoCelular']").val(), AlumnoDir = $form.find("textarea[name=Direccion]").val(), AlumnoDUI = $form.find("input[name='NumeroDUI']").val(), AlumnoFNac = $form.find("input[name='FechaNacimiento']").val(), AlumnoCarrera = $form.find("input[name='Carrera']").val(), AlumnoNivel = $form.find("input[name='NivelAcademico']").val(), AlumnoNEncargado = $form.find("input[name='NombreEncargado']").val(), AlumnoCategoria = $form.find("select[name=CodigoCategoriaParticipantes]").val(), AlumnoDescripcion = $form.find("textarea[name=Descripcion]").val(), AlumnoComentario = $form.find("textarea[name=Comentarios]").val(), url = $form.attr("action");
-   var categorias = document.getElementById("AlumnoCategoriaEDIT");
+    var $form = $(this), AlumnoCodigo = codigoParticipante.substring(5), AlumnoNombre = $form.find("input[name='Nombre']").val(), AlumnoMail = $form.find("input[name='CorreoElectronico']").val(), AlumnoFijo = $form.find("input[name='TelefonoFijo']").val(), AlumnoMovil = $form.find("input[name='TelefonoCelular']").val(), AlumnoDir = $form.find("textarea[name=Direccion]").val(), AlumnoDUI = $form.find("input[name='NumeroDUI']").val(), AlumnoFNac = $form.find("input[name='FechaNacimiento']").val(), AlumnoCarrera = $form.find("input[name='Carrera']").val(), AlumnoNivel = $form.find("input[name='NivelAcademico']").val(), AlumnoNEncargado = $form.find("input[name='NombreEncargado']").val(), AlumnoCategoria = $form.find("select[name=CodigoCategoriaParticipantes]").val(), AlumnoGenero = $form.find("select[name=GeneroParticipante]").val(), AlumnoDescripcion = $form.find("textarea[name=Descripcion]").val(), AlumnoComentario = $form.find("textarea[name=Comentarios]").val(), url = $form.attr("action");
+    var categorias = document.getElementById("AlumnoCategoriaEDIT");
     var nombreCategoria = categorias.options[categorias.selectedIndex].text;
-    var posting = $.post(url, {AlumnoCodigo: AlumnoCodigo, AlumnoNombre: AlumnoNombre, AlumnoMail: AlumnoMail, AlumnoFijo: AlumnoFijo, AlumnoMovil: AlumnoMovil, AlumnoDir: AlumnoDir, AlumnoDUI: AlumnoDUI, AlumnoFNac: AlumnoFNac, AlumnoCarrera: AlumnoCarrera, AlumnoNivel: AlumnoNivel, AlumnoNEncargado: AlumnoNEncargado, AlumnoCategoria: AlumnoCategoria, AlumnoDescripcion: AlumnoDescripcion, AlumnoComentario: AlumnoComentario});
-    posting.done(function(data) {
+    var posting = $.post(url, {AlumnoCodigo: AlumnoCodigo, AlumnoNombre: AlumnoNombre, AlumnoMail: AlumnoMail, AlumnoFijo: AlumnoFijo, AlumnoMovil: AlumnoMovil, AlumnoDir: AlumnoDir, AlumnoDUI: AlumnoDUI, AlumnoFNac: AlumnoFNac, AlumnoCarrera: AlumnoCarrera, AlumnoNivel: AlumnoNivel, AlumnoNEncargado: AlumnoNEncargado, AlumnoCategoria: AlumnoCategoria, AlumnoDescripcion: AlumnoDescripcion, AlumnoComentario: AlumnoComentario, AlumnoGenero: AlumnoGenero});
+    posting.done(function (data) {
         if (data !== null) {
             var obj = jQuery.parseJSON(data);
             var fila;
-  //          console.log(obj);
+            //          console.log(obj);
 //console.log($('#tableAlumnos > tbody').find('#alum'+obj.CodigoParticipante).html());
             fila = fila + '<td class="Mail_Alumno">' + obj.CorreoElectronico + '</td>';
             fila = fila + '<td class="TelefonoFijo_Alumno" style="display: none">' + obj.TelefonoFijo + '</td>';
             fila = fila + '<td class="TelefonoMovil_Alumno" style="display: none">' + obj.TelefonoCelular + '</td>';
             fila = fila + '<td class="Direccion_Alumno" style="display: none">' + obj.Direccion + '</td>';
             fila = fila + '<td class="DUI_Alumno" style="display: none">' + obj.NumeroDUI + '</td>';
+            fila = fila + '<td class="Genero_Alumno" style="display: none">' + obj.Genero + '</td>';
             fila = fila + '<td class="Nombre_Alumno">' + obj.Nombre + '</td>';
             fila = fila + '<td class="FechaNac_Alumno" style="display: none">' + obj.FechaNacimiento + '</td>';
             fila = fila + '<td class="CodU_Alumno" style="display: none">' + obj.CodigoUniversidadProcedencia + '</td>';
@@ -269,35 +273,35 @@ $("#frmEditarAlumno").submit(function(event) {
 //    posting.fail(function(xhr, textStatus, errorThrown) {
 //         alert("error" + xhr.responseText);
 //     });
-    posting.fail(function() {
+    posting.fail(function () {
         alert("error");
     });
 });
 
 
 
-$("#frmDELAlumno").submit(function(event) {
+$("#frmDELAlumno").submit(function (event) {
     event.preventDefault();
     var $form = $(this), AlumnoCodigo = codigoParticipante.substring(7), url = $form.attr("action");
     var posting = $.post(url, {AlumnoCodigo: AlumnoCodigo});
-    posting.done(function(data) {
+    posting.done(function (data) {
         if (data) {
             $("#AlumnoEliminar").modal('toggle');
             $('#tableAlumnos').find('#alum' + AlumnoCodigo).fadeOut("slow");
             $('#tableAlumnos').find('#alum' + AlumnoCodigo).remove();
         }
     });
-    posting.fail(function() {
+    posting.fail(function () {
         alert("error");
     });
 });
 
 
-$("#frmFINDAlumno").submit(function(event) {
+$("#frmFINDAlumno").submit(function (event) {
     event.preventDefault();
     var $form = $(this), AlumnoNombre = $form.find("input[name='NombreBuscado']").val(), url = $form.attr("action");
     var posting = $.post(url, {NombreBuscado: AlumnoNombre});
-    posting.done(function(data) {
+    posting.done(function (data) {
         if (data) {
             $('#tableAlumnos').html(data);
         }
@@ -305,7 +309,7 @@ $("#frmFINDAlumno").submit(function(event) {
 //    posting.fail(function() {
 //        alert("error");
 //    });
-    posting.fail(function(xhr, textStatus, errorThrown) {
+    posting.fail(function (xhr, textStatus, errorThrown) {
         alert("error" + xhr.responseText);
     });
 });
