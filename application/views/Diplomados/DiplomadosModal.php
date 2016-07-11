@@ -142,7 +142,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="submit" id="btnEnviarDip" onclick="" class=" btn btn-default" name="Eliminar">Eliminar</button>
-                            <button type="reset" id="btnLimpiarDip" onclick="" class=" btn btn-default" name="Limpiar">Cancelar</button>
+                <!-- <button type="reset" id="btnLimpiarDip" onclick="" class=" btn btn-default" name="Limpiar">Cancelar</button> -->
                         </div>
                     </fieldset>
                 </form>
@@ -282,17 +282,7 @@
                             <label class="col-lg-3 control-label">Diplomado:</label>
                          
                            <div class="col-lg-9">
-                             <select class ="form-control" id="Diplomadoname" name="Diplomadoname" required>                                          
-                                    <?php
-                                    foreach ($Diplomados as $DipMo) { //Aqui para seleccionar el Turno a que Pertenece
-                                        ?>
-                                        <option value="<?= $DipMo->CodigoDiplomado ?>">
-                                            <?php echo $DipMo->NombreDiplomado?> <!-- Para imprimir El nombre en el select-->
-                                        </option>
-                                    <?php }
-                                    ?>
-
-                                </select>
+                            <input id="modDiplomadohidde" type= "hidden" name="CodigoDiplomado" value=""/>
                          </div>
                             </div>
                                              

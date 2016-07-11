@@ -36,7 +36,7 @@ class Diplomados extends CI_Model {
     }
     public function listarDiplomados() {
         try {
-            $consulta = $this->db->query('SELECT "d"."CodigoDiplomado", "d"."NombreDiplomado", "d"."Descripcion", "d"."Estado", "cd"."NombreCategoriaDiplomado", "d"."Comentarios" FROM "Diplomados" "d" JOIN "CategoriaDiplomados" "cd" ON "d"."CodigoCategoriaDiplomado" = "cd"."CodigoCategoriaDiplomado"');
+            $consulta = $this->db->query('SELECT "d"."CodigoDiplomado", "d"."NombreDiplomado", "d"."Descripcion", "d"."Estado", "cd"."NombreCategoriaDiplomado", "d"."Comentarios" FROM "Diplomados" "d" JOIN "CategoriaDiplomados" "cd" ON "d"."CodigoCategoriaDiplomado" = "cd"."CodigoCategoriaDiplomado" WHERE "d"."Estado" = TRUE');
             // $consulta = $this->db->query('SELECT d.CodigoDiplomado FROM Diplomados d');
             if ($consulta != null) {
                 $resultado = $consulta->result();

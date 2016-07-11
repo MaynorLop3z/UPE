@@ -6,52 +6,46 @@ var codigoDiplomado;
 var filaEdit;
 var codi;
 
+
+
+
+
+
+
+// boton  para  agregar  un nuevo diplomado//
 $("#BtnADDiplomado").on('click', function () {
     $("#DiplomadoNuevo").modal();
 });
 
-//$('.btnmoddi').on('click', function (event) {
-//codigoDiplomado = this.id;
-//codigoDiplomado = codigoDiplomado.substring(5); /// esto agregue recientemente 
-//$("#ModificarDiplomado").modal('show');
-//});
-
-
+//funcion para ver  la info  del modulo del diplomado//
 function ViewModDip(fila){
  codigoDiplomado = fila.id;
  filaEdit = fila;
- //codigoDiplomado = codigoDiplomado.substring(7);
+ codigoDiplomado = codigoDiplomado.substring(7);
     $("#ModuloView").modal();
     
 }
-
-//function AddMod(fila){
-//  $("#DiplomadoNuevo").modal();
-//}
-
-function AddModDip(){
- $("#NuevoModuloDip").modal();
+// funcion para   agregar  Modulos al diplomado
+function AddModDip(idDip){
+ $("#modDiplomadohidde").val(idDip);
+ 
+    
+    $("#NuevoModuloDip").modal('toggle');
 }
-
+//funcion para editar el diplomado
 function  editaDiplomado(fila){
     codigoDiplomado = fila.id;
     filaEdit = fila;
- codigoDiplomado = codigoDiplomado.substring(5);
+    codigoDiplomado = codigoDiplomado.substring(5);
     $("#ModificarDiplomado").modal('toggle');
 }
-
+//funcion para eliminar el diplomado
 function eliminarDiplomado(fila){
  codigoDiplomado = fila.id;
- codigoDiplomado = codigoDiplomado.substring(12);
+codigoDiplomado = codigoDiplomado.substring(12);
    $('#EliminarDiplomado').modal('toggle');
    
 }
-//$('.btndeldip').on('click', function(event){
-//    codigoDiplomado = this.id;
-//    codigoDiplomado = codigoDiplomado.substring(12);
-//    $('#EliminarDiplomado').modal('show');  
-//});
-// ESpacio solo por salud del git
 
 $('#ModificarDiplomado').on('show.bs.modal', function (event) {
     var dip = $('#dip' + codigoDiplomado);
@@ -150,6 +144,7 @@ $('#formgrdDiplomado').submit(function (event) {
 
 
 $("#ModuloView").on('show.bs.modal',function(event){
+    console.log(codigoDiplomado);
     var dip = $('#dip' + codigoDiplomado);
     var NombreDiplomadoView = dip.find(".nombre_Diplomado").html().toString().trim();
     $('#DipViewMod').html(NombreDiplomadoView);    
@@ -203,6 +198,8 @@ $("#formeditDiplomado").submit(function (event) {
             fila = fila + '<td style="text-aling:center"  class="gestion_dip">';
             fila = fila + '<button id="btnmo' + obj.CodigoDiplomado + '" onclick="editaDiplomado(this)" title="Editar Diplomado" class="btnmoddi btn btn-success" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-pencil"></span> </button>';
             fila = fila + '<button id="DELDiplomado' + obj.CodigoDiplomado + '" onclick="eliminarDiplomado(this)" title="Eliminar Diplomado" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>';
+            fila = fila + '<button id="Addmod'+ obj.CodigoDiplomado +'"onclick="AddModDip(this)"  title="Agregar Modulos" class="btnAddMod btn btn-info" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-plus"></span></button>';
+            fila = fila + '<button id="ModViewphp' + obj.CodigoDiplomado + '"onclick="ViewModDip(this)"  title="Ver modulos" class="btnVIewMod btn btn-warning" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-eye-open" ></span></button>';   
             fila = fila + '</td></tr>';
 //            var dipDip = $('#tableDiplomados > tbody').find("#dip" + obj.CodigoDiplomado);
 //            dipDip.find('.nombre_Diplomado').html(obj.NombreDiplomado);
