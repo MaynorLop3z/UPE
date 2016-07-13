@@ -146,7 +146,7 @@ $("#containerTablePaging").on("keypress", "#txtPagingSearchUsr", function (e) {
     //e.preventDefault();
     if (e.which === 13) {
 
-        var data_inic = $('#txtPagingSearchUsr').data("datainic");
+        //var data_in = $('#txtPagingSearchUsr').data("datainic");
         var data_in = $('#txtPagingSearchUsr').val();
 
         var url = 'UsuarioController/paginUsers/';
@@ -255,8 +255,8 @@ $("#containerTablePaging").on("click", "#aLastPag", function (e) {
 
 $("#containerTablePaging").on("click", "#aPrevPag", function (e) {
     
-   var data_inic = $('#txtPagingSearchUsr').data("datainic");
-        var data_in = $('#txtPagingSearchUsr').val();
+   var data_in = $('#txtPagingSearchUsr').data("datainic");
+       // var data_in = $('#txtPagingSearchUsr').val();
         var url = 'UsuarioController/paginUsers/';
         var posting = $.post(url, {"data_inip": data_in});
 
@@ -276,8 +276,8 @@ $("#containerTablePaging").on("click", "#aPrevPag", function (e) {
 
 $("#containerTablePaging").on("click", "#aNextPag", function (e) {
     
-    var data_inic = $('#txtPagingSearchUsr').data("datainic");
-        var data_in = $('#txtPagingSearchUsr').val();
+    var data_in = $('#txtPagingSearchUsr').data("datainic");
+        //var data_in = $('#txtPagingSearchUsr').val();
      
         var url = 'UsuarioController/paginUsers/';
         var posting = $.post(url, {"data_inin": data_in});

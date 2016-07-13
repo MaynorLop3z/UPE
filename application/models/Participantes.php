@@ -167,5 +167,15 @@ class Participantes extends CI_Model {
         $resultado = $consulta->result();
         return $resultado;
     }
+    
+    public function listarParticipantesByLike($aproxWord){
+        $this->db->selec('CodigoParticipante,'.'Nombre');
+        $this->db->from('Participantes');
+        $this->db->like('title', $query);
+        $consulta = $this->db->get();
+        $resultado = $consulta->result();
+        return $resultado;
+        
+    }
 
 }

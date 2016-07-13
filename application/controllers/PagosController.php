@@ -6,7 +6,7 @@ include(APPPATH . 'libraries/simple_html_dom.php');
 
 //include(APPPATH . 'libraries/UtilidadesWeb.php');
 
-class Usuariocontroller extends CI_Controller {
+class PagosController extends CI_Controller {
 
     public function __construct() {
         try {
@@ -22,20 +22,22 @@ class Usuariocontroller extends CI_Controller {
 
     public function index() {
         try {
-            $data['Usuarios'] = $this->Usuarios->listarUsuarios(null, null);
-            $data['RolesList'] = $this->Rol->listarRoles();
+            //$data['Usuarios'] = $this->Usuarios->listarUsuarios(null, null);
+            //$data['RolesList'] = $this->Rol->listarRoles();
 
             $data['RowsPorPag'] = ROWS_PER_PAGE;
-            $data['ToTalRegistros'] = $this->Usuarios->countAllUsers();
+            $data['ToTalRegistros'] =0 ;
+//            $data['ToTalRegistros'] = $this->Usuarios->countAllUsers();
             $data['PagInicial'] = 1;
 
-            $data['totalPaginas'] = $this->getTotalPaginas();
+           // $data['totalPaginas'] = $this->getTotalPaginas();
+            $data['totalPaginas'] = 0;
 
-            $permisos = $this->session->userdata('permisosUsuer');
-            $this->analizarPermisos('views/Usuarios/UsuariosTab.php', 'views/Usuarios/UsuariosTabTmp.php', $permisos);
+           // $permisos = $this->session->userdata('permisosUsuer');
+            //$this->analizarPermisos('views/Usuarios/UsuariosTab.php', 'views/Usuarios/UsuariosTabTmp.php', $permisos);
 //           
-            $data['buttonsByUserRights'] = $this->analizarPermisosBotonesTablas("gestionUserBtn", $permisos);
-            $this->load->view('Usuario', $data);
+//            $data['buttonsByUserRights'] = $this->analizarPermisosBotonesTablas("gestionUserBtn", $permisos);
+            $this->load->view('Pagos',$data);
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }
@@ -246,7 +248,7 @@ class Usuariocontroller extends CI_Controller {
             $pagAct = 0;
             $cadena = '';
             $filas = '';
-            $Usuarios = array();
+            $Alumnos = array();
 
             if ($this->input->post()) {
                 if ($this->input->post('data_ini') != null) {
@@ -288,9 +290,9 @@ class Usuariocontroller extends CI_Controller {
             $final = ($final * ROWS_PER_PAGE) - ROWS_PER_PAGE;
             if ($Users != null) {
 
-                array_push($Usuarios, $Users);
+                array_push($Alumnos, $Users);
             } else {
-                $Usuarios = $this->Usuarios->listarUsuarios($inicio, $final);
+                $Alumnos = $this->Usuarios->listarUsuarios($inicio, $final);
             }
 
             $buttonsByUserRights = $this->analizarPermisosBotonesTablas("gestionUserBtn", $this->session->userdata('permisosUsuer'));
@@ -299,13 +301,11 @@ class Usuariocontroller extends CI_Controller {
             $cadena.='<thead>
                 <tr>
                     <th style="text-align:center">Nombre</th>
-                    <th style="text-align:center" >Correo</th>
-                    <th style="text-align:center" >Usuario</th>
-                    <th style="text-align:center" >Gestionar</th>
+                   
                 </tr>
             </thead> 
             <tbody>';
-            foreach ($Usuarios as $user) {
+            foreach ($Alumnos as $user) {
                 $filas.='<tr data-userd=' . ($user->CodigoUsuario) . ' id="tr' . $user->CodigoUsuario . '">';
                 $filas.=' <td class="nombre_Usuario" >' . $user->Nombre . '</td>';
                 $filas.=' <td class="correo_Usuario" >' . $user->CorreoUsuario . '</td>';
@@ -321,7 +321,7 @@ class Usuariocontroller extends CI_Controller {
                 <li><input data-datainic="' . $pagAct . '" type="text" value="' . $pagAct . '" id="txtPagingSearchUsr" name="txtNumberPag" size="5">/' . $this->getTotalPaginas() . '</li>
                  <li><button id="aNextPag">&gt;</button></li>
                 <li><button id="aLastPag" data-datainic="' . $this->getTotalPaginas() . '" >&gt;&gt;</button></li>
-                <li>[' . ($final + 1) . ' - ' . ($final + count($Usuarios)) . ' / ' . $this->Usuarios->countAllUsers() . ']</li></ul></div>';
+                <li>[' . ($final + 1) . ' - ' . ($final + count($Alumnos)) . ' / ' . $this->Usuarios->countAllUsers() . ']</li></ul></div>';
         } catch (Exception $e) {
             echo $e->getMessage();
         }

@@ -16,13 +16,13 @@
                                     </tr>
                                 </thead> 
                                 <tbody id="bodyTableUsrRol">
-                                 
+
                                 </tbody>
                             </table>
                         </div>
                         <div class="modal-footer">
+                            <button type="button"  data-dismiss="modal" class=" btn btn-default" name="Cancelar">Cancelar</button>
                             <button type="submit" id="btnEnviarUR" onclick="" class=" btn btn-default" name="Aceptar">Aceptar</button>
-                            <button type="reset" id="btnLimpiarUR" onclick="" class=" btn btn-default" name="Limpiar">Limpiar</button>
                         </div>
                     </fieldset>
                 </form>

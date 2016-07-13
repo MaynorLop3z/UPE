@@ -2,17 +2,28 @@
 <script src="../bootstrap/js/Usuarios.js"></script>
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title">Gestion de Usuarios</h3>
+        <h3 class="panel-title">Gestion de Pagos</h3>
     </div>
     <div class="panel-body">
         <div id="mensajes">
 
         </div>
-        <div  id="divBtnCrudUsr" class="well">
+        <div class="panel panel-default">
+            <form id="frmGuardarR"  action="PagosController/buscarAlumno" class="form-horizontal" method="post" >
+                <fieldset>
+                    <legend class="modal-header">Buscar Alumno:</legend> 
+                    <div class="form-group">
+                        <label for="txtNombAlum" class="col-lg-4 control-label">Escriba el nombre,carnet o el DUI del alumno:</label>
+                        <div class="col-lg-4">
+                            <input name="NameAlum" class="form-control" id="txtNombAlum" type="text" maxlength="50" required>
+                        </div>
+                        <div class="col-lg-4">
+                            <button type="submit" id="btnSearchAlum" onclick="" class=" btn btn-default" name="Buscar">Buscar</button>
+                        </div>
+                    </div>
 
-            <button id="btnUsuarioNuevo" class="btn btn-default decorateStyleCrud" ><span class="glyphicon glyphicon-plus"></span>Usuario Nuevo</button>
-            <button id="btnActualizarUsuarios" class="btn btn-default decorateStyleCrud" ><span class="glyphicon glyphicon-refresh"></span>Actualizar Lista</button> 
-
+                </fieldset>
+            </form>
         </div>
         <br>
         <div id="containerTablePaging">
@@ -20,16 +31,15 @@
                 <thead>
                     <tr>
                         <th style="text-align:center">Nombre</th>
-                        <th style="text-align:center" >Correo</th>
-                        <th style="text-align:center" >Usuario</th>
-                        <th style="text-align:center" >Gestionar</th>
+                        
+                        
                     </tr>
                 </thead> 
                 <tbody>
                     <?php
-                    foreach ($Usuarios as $user) {
+//                    foreach ($Usuarios as $user) {
                         ?>
-                        <tr data-userd='<?php echo($user->CodigoUsuario) ?>' id="tr<?php echo $user->CodigoUsuario ?>">
+                        <tr data-alum='<?php echo($user->CodigoUsuario) ?>' id="tr<?php echo $user->CodigoUsuario ?>">
                             <td class="nombre_Usuario" ><?= $user->Nombre ?></td>
                             <td class="correo_Usuario" ><?= $user->CorreoUsuario ?></td>
                             <td class="nickName_Usuario" ><?= $user->NombreUsuario ?></td>
@@ -38,7 +48,7 @@
                             </td>
                         </tr>
                         <?php
-                    }
+//                    }
                     ?>
                 </tbody>
             </table>
