@@ -19,7 +19,8 @@
                 <div class="col-md-10">
                     <h1>REPORTES</h1>
                     <button class="btn btn-default" onclick="ParticipantesCantidadShow()"><span class="glyphicon glyphicon-eye-open"></span>  Participantes por Categoria</button>
-                    <div id="piechart" style="width: 700px; height: 600px;"></div>
+                    <button class="btn btn-default" onclick="GeneroXDiplomadoShow()"><span class="glyphicon glyphicon-eye-open"></span>  Participantes por Categoria</button>
+                    <!--<div id="piechart" style="width: 700px; height: 600px;"></div>-->
                 </div>
                 <div class="col-md-1"></div>
             </div>
@@ -33,37 +34,29 @@
                             <h4 class="modal-title">Cantidad de Alumnos por Categoria</h4>
                         </div>
                         <div class="modal-body">
-                            <div id="piechartTEST"></div>
+                            <div id="AlumByCat"></div>
                         </div>
 
                     </div>
                 </div>
             </div>
         </div>
-        <script language="javascript">
-            google.charts.load('current', {'packages': ['corechart']});
-            google.charts.setOnLoadCallback(drawChart);
-            function drawChart() {
+        <div id="QuantityGenderCat" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog  modal-lg">
+                <div class="modal-content">
+                    <div class="container-fluid ">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Diplomados por Genero</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div id="GenderByCat"></div>
+                        </div>
 
-                var data = google.visualization.arrayToDataTable([
-                    ['Categoria', 'Cantidad']
-<?php
-foreach ($categorias as $cat) {
-    echo ",['" . $cat->NombreCategoriaParticipante . "'," . $cat->CantidadParticipantes . "]";
-}
-?>
-                ]);
-
-                var options = {
-                    title: 'Cantidad de Alumnos por Categoria',
-                    is3D: true,
-                };
-
-                var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-                chart.draw(data, options);
-            }
-        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
         <script src="../bootstrap/js/Graficos.js"></script>
     </body>
 </html>

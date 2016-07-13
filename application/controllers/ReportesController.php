@@ -12,11 +12,21 @@ class ReportesController extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+        $this->load->model('Reports');
     }
 
     public function index() {
-        $this->load->model('Reports');
+        
         $data['categorias'] = $this->Reports->getCategoriasQuantity();
         $this->load->view('Reportes',$data);
+    }
+    
+    public function getCategoriasCantidad(){
+        echo json_encode($this->Reports->getCategoriasQuantity());
+    }
+    
+    
+    public function getDiplomadosGenero(){
+        echo json_encode($this->Reports->countGenderCat());
     }
 }
