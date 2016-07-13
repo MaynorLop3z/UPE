@@ -23,8 +23,11 @@ $('#portfolioModal6').on('show.bs.modal', function (event) {
 });
 
 $('#btnSend').on('click', function (event) {
-    alert("Se abrira su gestor de correo electronico para enviar el mensaje.");
-    
+//    alert("Se abrira su gestor de correo electronico para enviar el mensaje.");
+    var select =document.getElementById('selectCategoria');
+    var indice = select.options[select.selectedIndex].value;
+//            document.contactForm.selectCategoria.selectedIndex ;
+    if (document.getElementById('name').value!==null && document.getElementById('message').value !== null){
     
     var link = "mailto:griss@hotmail.com"
 //             + "?cc=myCC"
@@ -33,16 +36,12 @@ $('#btnSend').on('click', function (event) {
           " + "Telefono de Contacto: " + escape(document.getElementById('phone').value);
 
     window.location.href = link;
-
+    }else{
+        alert('El noombre o el mensaje esta vacio.');
+    }
+        
 });
 
 $(document).ready(function (e) {
-    e.stopImmediatePropagation();
-    $('#btnpaginicio').on('click', function (egb) {
-               alert("vamos por buen camino");
-                
-    }
-
-
-    );
+    
 });

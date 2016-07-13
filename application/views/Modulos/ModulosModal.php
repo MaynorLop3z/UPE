@@ -1,4 +1,8 @@
 <?php $this->load->helper('url'); ?>
+
+<script>
+   
+</script>
 <!-- Modal para modificar Diplomados --------------------------------------------------------------------------------------------------------------------------------------->
 <div id="ModificarModulo" class="modal fade"  data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -7,7 +11,7 @@
                 <button type="button" class="close" id="btnCerrarMo"  data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>      
                 <form  id="formEditMod" action="<?php echo base_url()?>index.php/ModulosController/editarModulo/" class="form-horizontal" method="post" >
                     <fieldset>
-                        <legend class="modal-header">Nuevo Modulo:</legend> 
+                        <legend class="modal-header">Editar  Modulo:</legend> 
                         <div class="form-group">
                             <label for="nameModuloEdit" class="col-lg-3 control-label">Nombre Del Modulo:</label>
                             <div class="col-lg-9">
@@ -58,8 +62,8 @@
 
                                 </select>
                             </div>                 
-                        <div class="form-group">
-                            <label for="ComentarioDiplomado" class="col-lg-3 control-label">Comentarios:</label>
+                          <label class="col-lg-3 control-label">Comentario:</label>
+                            
                             <div class="col-lg-9">
                                 <textarea id="ComentarioModEdit" name="Comentarios"  type="text" class="form-control"  placeholder="Comentario Modulo" required></textarea>
                             </div>
@@ -78,14 +82,14 @@
     </div>
 </div>
 <!--Aqui empieza la modal para eliminar diplomados ----------------------------------------------------------------->
-<div id="EliminarModulo" data-backdrop="static"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+<div id="EliminarModulo"  name="divfinish"  data-backdrop="static"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="container-fluid ">
                 <button type="button" class="close btn-lg" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <form id="frmDelMod" action="<?php echo base_url() ?>index.php/ModulosController/EliminarModulo/" class="form-horizontal" method="post" >
                     <fieldset>
-                        <legend class="modal-header">Modulo:</legend> 
+                        <legend class="modal-header">Eliminar Modulo:</legend> 
                         <div class="form-group">
                             <div class="col-lg-9">
                                 <label>¿Realmente desea eliminar el modulo <mark id="nombreModuloDel"></mark>?</label>
@@ -93,7 +97,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="submit" id="btnEnviarMo" onclick="" class=" btn btn-default" name="Eliminar">Eliminar</button>
-                            <button type="reset" id="btnLimpiarMo" onclick="" class=" btn btn-default" name="Limpiar">Cancelar</button>
+              <!--              <button type="button" id="btnLimpiarMo" onclick="" class="btn btn-default" name="Cancelar">Cancelar</button> -->
                         </div>
                     </fieldset>
                 </form>

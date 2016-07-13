@@ -4,6 +4,8 @@
 <script src="../bootstrap/js/Publicaciones.js"></script>
 <link href="../bootstrap/css/publicacioncss.css" rel="stylesheet">
 
+
+<!---------Modal nueva publicacion-------------------------->
 <div id="NuevaPublicacion" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -36,7 +38,7 @@
                                         <?php
                                         foreach ($listCategorias as $categorias) {
                                             ?>
-                                              <option value=<?php echo $categorias->CodigoCategoriaDiplomado ?>> <?php echo $categorias->NombreCategoriaDiplomado ?>  </option>
+                                            <option value=<?php echo $categorias->CodigoCategoriaDiplomado ?>> <?php echo $categorias->NombreCategoriaDiplomado ?>  </option>
                                             <?php
                                         }
                                         ?>
@@ -53,15 +55,15 @@
                                     <textarea  class="form-control"  placeholder="Contenido" name="contenido" id="pubtexarea" required></textarea>
                                     <br>
                                     <div class="modal-footer">
-                                        
+
                                         <button type="submit" id="btnAceptar" onclick="" class=" btn btn-default" name="aceptar"  disabled="true">Aceptar</button>
                                         <button type="reset" id="btnLimpiarPubli" onclick="" class=" btn btn-default" name="Limpiar" >Limpiar</button>
                                         <button type="reset" id="btnCancelarP" onclick="" class=" btn btn-default" name="cancelar" >Cancelar</button>
                                     </div>
                                 </fieldset>
                             </form>
-                            
-                            
+
+
                         </div>
 
                     </div>
@@ -71,4 +73,32 @@
         </div>
     </div>
 </div>
+<!--end modal nueva publicacion-->
 
+
+
+<!--Modal para eliminar publicaciones-->
+<div id="EliminarPublicacion" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="container-fluid ">
+                <button type="button" class="close btn-lg" data-dismiss="modal"  aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+                <form id="frmDELpub" action="<?php echo base_url() ?>index.php/PublicacionesController/EliminarPublicacion/" class="form-horizontal" class="form-horizontal" method="post" >
+                    <legend class="modal-header">Publicacion:</legend> 
+                    <div class="form-group">
+                        <div class="col-lg-9">
+                            <label>¿Realmente desea eliminar la Publicacion <mark id="nombreDipPub">?</mark></label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="btnEnviarPub" onclick="" class=" btn btn-default" name="Eliminar">Eliminar</button>
+                        <button type="reset" id="btnLimpiarPub" onclick="" class=" btn btn-default" name="Limpiar">Cancelar</button>
+                    </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>   
+    </div>
+</div>
+
+<!--------------------- End modal eliminar Publicaciones  ---------------------->

@@ -51,7 +51,7 @@
                     <td class="gestion_dip" >
             <button id="btnmo<?php echo $dip->CodigoDiplomado ?>" onclick="editaDiplomado(this)" title="Editar Diplomado" class="btnmoddi btn btn-success" class="btn btn-info btn-lg"><span class=" glyphicon glyphicon-pencil"></span></button>
             <button id="DELDiplomado<?php echo $dip->CodigoDiplomado ?>" onclick="eliminarDiplomado(this)"  title="Eliminar Diplomado" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>
-            <button id="Addmod<?php echo $dip->CodigoDiplomado ?>" onclick="AddModDip(this)"  title="Agregar Modulos" class="btnAddMod btn btn-info" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-plus"></span></button>
+            <button id="Addmod<?php echo $dip->CodigoDiplomado ?>" onclick="AddModDip(<?= $dip->CodigoDiplomado ?>)"  title="Agregar Modulos" class="btnAddMod btn btn-info" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-plus"></span></button>
             <button id="ModView<?php echo $dip->CodigoDiplomado?>" onclick="ViewModDip(this)"  title="Ver modulos" class="btnVIewMod btn btn-warning" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-eye-open" ></span></button>       
                     
                     

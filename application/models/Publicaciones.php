@@ -10,23 +10,31 @@ class Publicaciones extends CI_Model {
         parent::__construct();
         $this->load->database();
     }
+
     public function listarPublicaciones() {
-        $this->db->select('CodigoPublicacion, '
-                . 'UsuarioPublica, '
-                . 'FechaPublicacion, '
-                . 'Titulo, '
-                . 'Contenido, '
-                . 'ParticipantePublica, '
-                . 'Estado, '
-                . 'CodigoGrupoPeriodo, '
-                . 'CodigoGrupoParticipantes, '
-                . 'CodigoGrupoPeriodoUsuario, '
-                . 'CodigoTipoPublicacion, '
-                . 'CodigoCategoriaDiplomado'
-        );
-        $this->db->from('Publicaciones');
-        $this->db->order_by("FechaPublicacion", "desc");
-        $consulta = $this->db->get();
+        $consulta = $this->db->query('SELECT 
+  "Publicaciones"."CodigoPublicacion", 
+  "Publicaciones"."UsuarioPublica", 
+  "Publicaciones"."FechaPublicacion", 
+  "Publicaciones"."Titulo", 
+  "Publicaciones"."Contenido", 
+  "Publicaciones"."ParticipantePublica", 
+  "Publicaciones"."Estado", 
+  "Publicaciones"."CodigoGrupoPeriodo", 
+  "Publicaciones"."CodigoGrupoParticipantes", 
+  "Publicaciones"."CodigoGrupoPeriodoUsuario", 
+  "Publicaciones"."CodigoTipoPublicacion", 
+  "Publicaciones"."CodigoCategoriaDiplomado", 
+  "CategoriaDiplomados"."NombreCategoriaDiplomado"
+FROM 
+  public."CategoriaDiplomados", 
+  public."Publicaciones"
+ORDER BY
+"Publicaciones"."FechaPublicacion" DESC; 
+');
+//        $this->db->from('Publicaciones');
+//        $this->db->order_by("FechaPublicacion", "desc");
+       
         $resultado = $consulta->result();
         return $resultado;
     }
@@ -137,7 +145,7 @@ class Publicaciones extends CI_Model {
         //Hay que verificar si existen publicaciones de ser asi no eliminar o cambiar a una
         //por defecto
     }
-    
+
     public function EliminarArchivosPublicacion($CodigoPublicaciones) {
         $this->db->delete('Archivos', array('CodigoPublicaciones' => $CodigoPublicaciones));
     }
@@ -192,7 +200,6 @@ class Publicaciones extends CI_Model {
         return $resultado;
     }
 
-    
     public function MostrarDatosPublicacion($id) {
         try {
             $stringQuery = 'SELECT "Publicaciones"."CodigoPublicacion","Publicaciones"."Titulo","Publicaciones"."Contenido","Publicaciones"."FechaPublicacion", "Publicaciones"."CodigoCategoriaDiplomado","Archivos"."Ruta" FROM public."Publicaciones",public."Archivos" WHERE "Publicaciones"."CodigoPublicacion" = "Archivos"."CodigoPublicaciones" AND "Publicaciones"."CodigoPublicacion" =';

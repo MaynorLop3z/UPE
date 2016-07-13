@@ -74,12 +74,12 @@ $("#EliminarModulo").on('show.bs.modal',function(event){
 $("#formgrdMo").submit(function (event) {
     console.log(codigoDiplomado);
     event.preventDefault();
-    console.log(codigoDiplomado);
+    
     var $form = $(this), ModuloNombre = $form.find("input[name='NombreModulo']").val(),
             ModuloOrden = $form.find("textarea[name='ordenM']").val(),
             Estado = $form.find("input[name='Activo']").prop('checked'),
             Turno = $form.find("select[name='Turno']").val(),
-            CodDiplomado = $form.find("select[name='Diplomadoname']").val(),
+            CodDiplomado = $form.find("input[name='CodigoDiplomado']").val(),
             ComentarioMod = $form.find("textarea[name='Comentarios']").val(),
             url = $form.attr("action");
             //console.log(Estado);

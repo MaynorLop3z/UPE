@@ -10,7 +10,7 @@ class PublicacionesController extends CI_Controller {
         parent::__construct();
 
         $this->load->database();
-//$this->load->helper(array('form', 'url'));
+        //$this->load->helper(array('form', 'url'));
         $this->load->model('Publicaciones');
         //  $this->load->model('CategoriaDiplomados');
     }
@@ -84,10 +84,32 @@ class PublicacionesController extends CI_Controller {
     function borrarImgCarpeta() {
         $nombreImg = $this->input->post('Nombre');
         if ($nombreImg != NULL) {
-            $nombreImg="./bootstrap/images/publicaciones/". $nombreImg;
+            $nombreImg = "./bootstrap/images/publicaciones/" . $nombreImg;
             unlink($nombreImg);
         } else {
             return false;
+        }
+    }
+
+    //begin of delete Publicaciones 
+    public function eliminarPubliacion() {
+        //$eliminar = false;
+        try {
+            if ($this->input->post()) {
+                $codigoPublicacion = $this->input->post('CodigoPublicacion');
+                if ($codigoPublicacion != null) {
+                    $this->Publicaciones->EliminarArchivosPublicacion($codigoPublicacion);
+                    $arrayData = $this->Publicaciones->EliminarPublicacion($codigoPublicacion);
+                    // $ip,$userModifica
+                    echo json_encode($arrayData);
+                }
+//          
+            }
+        } catch (Exception $ex) {
+            $data = array(
+                'Error' => $ex->getMessage()
+            );
+            echo json_encode($data);
         }
     }
 

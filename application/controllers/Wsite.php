@@ -59,11 +59,12 @@ class Wsite extends CI_Controller {
 //                    $this->load->view('Dashboard', $data);
                     Redirect('Dashboard');
                 } else {
-                    
+
                     $data['publicacionesMostrar'] = count($this->listarPublicaciones());
                     $data['PagInicial'] = 1;
                     $data['PubporPag'] = PUBLICACIONES_X_PAG;
                     $data['TotalPaginacion'] = $this->publicaciones->ListarPublicacionesPaginacion(NULL);
+                    $data['listCategorias'] = $this->publicaciones->listarCategoriasDiplomados();
 
 //            $data['publicacionesCargar'] = $this->mostrarPublicaciones();
 //            $data['mostrarUnaPublicacion']=  $this->mostrarPublicacion($id);
@@ -75,6 +76,7 @@ class Wsite extends CI_Controller {
             $data['PagInicial'] = 1;
             $data['PubporPag'] = PUBLICACIONES_X_PAG;
             $data['TotalPaginacion'] = $this->publicaciones->ListarPublicacionesPaginacion(NULL);
+            $data['listCategorias'] = $this->publicaciones->listarCategoriasDiplomados();
 
 //            $data['publicacionesCargar'] = $this->mostrarPublicaciones();
 //            $data['mostrarUnaPublicacion']=  $this->mostrarPublicacion($id);
