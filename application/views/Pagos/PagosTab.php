@@ -39,12 +39,9 @@
                     <?php
 //                    foreach ($Usuarios as $user) {
                         ?>
-                        <tr data-alum='<?php echo($user->CodigoUsuario) ?>' id="tr<?php echo $user->CodigoUsuario ?>">
-                            <td class="nombre_Usuario" ><?= $user->Nombre ?></td>
-                            <td class="correo_Usuario" ><?= $user->CorreoUsuario ?></td>
-                            <td class="nickName_Usuario" ><?= $user->NombreUsuario ?></td>
-                            <td style="text-align:center"  class="gestion_User">
-                                <?php echo $buttonsByUserRights ?>
+                        <tr data-alum='<?php echo('CodigoUsuario') ?>' id="tr<?php echo 'CodigoUsuario' ?>">
+                            <td class="nombre_Usuario" ><?= '' ?></td>
+                            
                             </td>
                         </tr>
                         <?php
@@ -61,7 +58,7 @@
                     <li><input data-datainic="1" type="text" value="1" id="txtPagingSearchUsr" name="txtNumberPag" size="5">/<?php echo $totalPaginas ?></li>
                     <li><button id="aNextPag">&gt;</button></li>
                     <li><button id="aLastPag" data-datainic="<?php echo $totalPaginas ?>" >&gt;&gt;</button></li>
-                    <li>[<?php echo $PagInicial . "-" . count($Usuarios) . "/" . $ToTalRegistros ?>]</li>
+                    <li>[<?php echo $PagInicial . "-" . count(0) . "/" . $ToTalRegistros ?>]</li>
                 </ul>
             </div>
 
