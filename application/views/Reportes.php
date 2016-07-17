@@ -11,6 +11,9 @@
         <link rel="icon" href="../bootstrap/minerva.jpg" type="image/x-icon" />
         <script src="../bootstrap/js/jquery.min.js"></script>
         <script src="../bootstrap/js/bootstrap.min.js"></script>
+        <script src="../Highcharts/highcharts.js"></script>
+        <script src="../Highcharts/modules/exporting.js"></script>
+        <!--<script src="../Highcharts/themes/dark-unica.js"></script>-->
     </head>
     <body>
         <div class="container-fluid">
@@ -18,9 +21,41 @@
                 <div class="col-md-1"></div>
                 <div class="col-md-10">
                     <h1>REPORTES</h1>
-                    <button class="btn btn-default" onclick="ParticipantesCantidadShow()"><span class="glyphicon glyphicon-eye-open"></span>  Participantes por Categoria</button>
-                    <button class="btn btn-default" onclick="GeneroXDiplomadoShow()"><span class="glyphicon glyphicon-eye-open"></span>  Participantes por Categoria</button>
+<!--                    <button class="btn btn-default" onclick="ParticipantesCantidadShow()"><span class="glyphicon glyphicon-eye-open"></span>  Participantes por Categoria</button>
+                    <button class="btn btn-default" onclick="GeneroXDiplomadoShow()"><span class="glyphicon glyphicon-eye-open"></span>  Participantes por Categoria</button>-->
                     <!--<div id="piechart" style="width: 700px; height: 600px;"></div>-->
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        Grafica de Alumnos por Categoria
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                <div class="panel-body">
+                                    <button class="btn btn-default" onclick="showGraphCatAlum()"><span class="glyphicon glyphicon-eye-open"></span> GENERAR</button>
+                                    <div id="showGraphCatAlum" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingTwo">
+                                <h4 class="panel-title">
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        Collapsible Group Item #2
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                <div class="panel-body">
+                                    <button class="btn btn-default" onclick="showGraphCatQuen()"><span class="glyphicon glyphicon-eye-open"></span> GENERAR</button>
+                                    <div id="showGraphCatQuen" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-1"></div>
             </div>
