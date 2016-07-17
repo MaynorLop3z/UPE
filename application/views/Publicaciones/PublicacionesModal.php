@@ -34,6 +34,7 @@
                                 <!--en las lineas de abajo esta el cuerpo de la publicacion-->
                                 <fieldset> 
                                     <label for="categoriasl" class=" control-label">Seleccione una categoria: </label> 
+                                    <!--Listamos las categorias de las publicaciones-->
                                     <select name="categoriasl" onchange="" id="selectCategoria">
                                         <?php
                                         foreach ($listCategorias as $categorias) {
@@ -48,6 +49,7 @@
                                     <br>
                                     <label for="titulo" class="col-lg-3 control-label">Titulo:</label> 
                                     <input type="text" class="form-control"  placeholder="Titulo de la publicacion"  name="titulo" required>
+                                    <!--Los input tipo hidden son para obtener el nombre y la extension de la imagen de la publicacion,-->
                                     <input type="hidden" id="nombreImg" name="nombreImg" value="" readonly>
                                     <input type="hidden" id="extImg" name="extImg" value="" readonly>
                                     <br>
@@ -94,7 +96,7 @@
                         <button type="submit" id="btnEnviarPub" onclick="" class=" btn btn-default" name="Eliminar">Eliminar</button>
                         <button type="reset" id="btnLimpiarPub" onclick="" class=" btn btn-default" name="Limpiar">Cancelar</button>
                     </div>
-                    </fieldset>
+                    
                 </form>
             </div>
         </div>   

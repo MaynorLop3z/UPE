@@ -33,6 +33,7 @@ class PublicacionesController extends CI_Controller {
 
                 //comprobamos si existe un directorio para subir el archivo
                 //si no es así, lo creamos
+                //direccion de la carpeta donde se va a subir la imagen o archivo
                 if (!is_dir("./bootstrap/images/publicaciones/"))
                     mkdir("./bootstrap/images/publicaciones/", 0777);
 

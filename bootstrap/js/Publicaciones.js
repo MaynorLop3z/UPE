@@ -72,7 +72,7 @@ $(document).ready(function () {
                         var sizeImg = new Image();
                         //obtenemos el tamaño de la imagen para redirmensionarla si no es del tamaño adecuado
                         sizeImg.src = "/UPE/bootstrap/images/publicaciones/" + fileName;
-
+//damos un tamaño fijo a la imagen para que no se desconfigure la modal
                         $(".showImage").html("<img width ='300' heigth='300' src='/UPE/bootstrap/images/publicaciones/" + fileName + "' />");
                         $('#nombreImg').val(fileName);
                         $('#extImg').val(fileExtension);
@@ -80,7 +80,7 @@ $(document).ready(function () {
                         showMessage(message);
 
                     }
-//                    botones.btnAceptar.disable = false;
+//                    El boton aceptar solo se pone enable cuando la imagen se ha subido correctamente.
                     document.getElementById("btnAceptar").disabled = false;
                 },
                 //si ha ocurrido un error
@@ -108,7 +108,7 @@ $(document).ready(function () {
 
 //comprobamos si el archivo a subir es una imagen
 //para visualizarla una vez haya subido
-//si no es una img devuelve error
+//si no cumple  con alguna de las extensiones del case  devuelve error
     function isImage(extension)
     {
         switch (extension.toLowerCase())
@@ -131,6 +131,9 @@ $(document).ready(function () {
         }
     }
 });
+
+
+//metodo que lleva el post a la base de datos
 
 $('#botones').submit(function (event)
 {
@@ -173,7 +176,7 @@ $('#botones').submit(function (event)
     });
 });
 
-
+//boton que elimina el archivo de ala carpeta y limpia el form al dar cancelar, cierra la modal depues de dar cancelar
 $('#btnCancelarP').on('click', function (e) {
     e.preventDefault();
     var $form = $(this);
@@ -196,6 +199,7 @@ $('#btnCancelarP').on('click', function (e) {
     $('#NuevaPublicacion').modal("toggle");
 });
 
+//boton que elimina el archivo de ala carpeta y limpia el form al dar cancelar, NO cierra la modal depues de dar limpiar
 $('#btnLimpiarPubli').on('click', function (e) {
     e.preventDefault();
     var Nombre = $('#botones').find("input[name='nombreImg']").val();
@@ -216,6 +220,8 @@ $('#btnLimpiarPubli').on('click', function (e) {
     document.getElementById("btnAceptar").disabled = true;
 });
 
+
+//_________________________ from here doesn't work yet ______________________________
 function eliminarPublicacion(fila) {
     codigoPublicacion = fila.id;
     codigoPublicacion = codigoPublicacion.substring(12);
@@ -224,11 +230,11 @@ function eliminarPublicacion(fila) {
 }
 
 
-$("#EliminarPublicacion").on('show.bs.modal',function(event){
+$("#EliminarPublicacion").on('show.bs.modal', function (event) {
     var dip = $('#dip' + codigoPublicacion);
-    
+
     var NombreDiplomadoE = dip.find(".titulo").html().toString().trim();
-    $('#nombreDipPub').html(TituloDiplomado);    
+    $('#nombreDipPub').html(TituloDiplomado);
 });
 
 

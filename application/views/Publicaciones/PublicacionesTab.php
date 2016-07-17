@@ -8,9 +8,10 @@
         <button href="#NuevaPublicacion"  class="btn btn-default btn-default" data-toggle="modal">Nueva Publicacion</button>
 
     </div>
+    <!--tabla de publicaciones solo muestra el titulo y la categoria-->
     <table id="tableTitulo"  class="table table-bordered table-striped table-hover table-responsive">
         <thead>
-            <tr><!--Agregar  Mas informacion acerca de los modulos -->
+            <tr><!--Informacion a mostrar de las publicaciones-->
                 <th>Titulo</th>
                 <th>Categoria</th>
                 <th>Gestionar</th>
