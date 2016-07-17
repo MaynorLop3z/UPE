@@ -94,5 +94,6 @@ define('MENU_PPAL_RIGHT', 'MenuPpal');
 define('ELIMINA_REG', 'del');
 define('AGREGA_REG', 'add');
 define('PUBLICACIONES_X_PAG', 6);
-
+define('TIPO_PUBLICACION_WEB',1);
+define('TIPO_PUBLICACION_GRUPO',2);
 

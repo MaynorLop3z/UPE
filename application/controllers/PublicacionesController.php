@@ -22,7 +22,7 @@ class PublicacionesController extends CI_Controller {
         $this->load->view('Publicaciones', $data);
     }
 
-    //Esta funcion sube la imagen a la carpeta destinada
+    //Esta funcion sube la imagen o el archivo  a la carpeta destinada
     function do_upload() {
         try {
             //comprobamos que sea una petición ajax
@@ -67,8 +67,10 @@ class PublicacionesController extends CI_Controller {
                 $Estado = True;
                 $CodigoUsuarios = $this->session->userdata("codigoUserLogin");
                 $ipPublica = $this->session->userdata("ipUserLogin");
+                
+                //comprobacion de campos diferentes a NULL
                 if ($tituloP != NULL && $contenidoP != NULL && $nambre != NULL) {
-                    $arrayDataPublicacion = $this->Publicaciones->CrearPublicacion($usuarioPublica, $FechaPublicacion, $tituloP, $contenidoP, TRUE, null, null, null, 1, null, $categoria);
+                    $arrayDataPublicacion = $this->Publicaciones->CrearPublicacion($usuarioPublica, $FechaPublicacion, $tituloP, $contenidoP, TRUE, null, null, null, TIPO_PUBLICACION_WEB, null, $categoria);
                     $CodigoPublicaciones = $arrayDataPublicacion['CodigoPublicacion'];
                     $this->Publicaciones->CrearArchivo($Ruta, $test, $ext, $Estado, $CodigoUsuarios, $CodigoPublicaciones, $usuarioPublica, $ipPublica, $FechaPublicacion);
 
@@ -82,10 +84,12 @@ class PublicacionesController extends CI_Controller {
         }
     }
 
+    
+    //este metodo borra una archivo o imagen  de la carpeta del servidor
     function borrarImgCarpeta() {
         $nombreImg = $this->input->post('Nombre');
         if ($nombreImg != NULL) {
-            $nombreImg = "./bootstrap/images/publicaciones/" . $nombreImg;
+            $nombreImg = "./bootstrap/images/publicaciones/" . $nombreImg; //ruta de la carpeta donde esta guardado el archivo o imagen
             unlink($nombreImg);
         } else {
             return false;
@@ -93,6 +97,7 @@ class PublicacionesController extends CI_Controller {
     }
 
     //begin of delete Publicaciones 
+    //still in progress , doesn't  work yet :(
     public function eliminarPubliacion() {
         //$eliminar = false;
         try {

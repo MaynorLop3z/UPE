@@ -19,35 +19,16 @@
         <tbody>
 
             <?php
-            foreach ($allPublicaciones as $dip) {
+            foreach ($allPublicaciones as $publi) {
                 ?>
 
-                <tr  data-dipd='<?php echo json_encode($dip) ?>' 
-                     id="dip<?php echo $dip->CodigoPublicacion ?>">
-                    <td class="Titulo"><?php echo $dip->Titulo ?></td>
-                    <?php
-                    // foreach($listNombreCategoria as $categorialist){
-                    $contador = 0;
-                    $catPub = "";
-                    $categodiplo = $dip->CodigoCategoriaDiplomado;
-//                    foreach ($listNombreCategoria as $name) {
-//                        $nameCategoriaPubli = $name->CodigoCategoriaDiplomado;
-//                        if ($contador == 0) {
-//                            if ($categodiplo == $nameCategoriaPubli) {
-//                                $catPub = $name->NombreCategoriaDiplomado;
-//                                $contador++;
-//                                break;
-//                            }
-//                        }
-//                        else {
-//                            break;
-//                        }
-//                    }
-                    ?>
-                    <td class=" Categoria"><?php echo $dip->NombreCategoriaDiplomado ?></td>
+                <tr  data-dipd='<?php echo json_encode($publi) ?>' 
+                     id="dip<?php echo $publi->CodigoPublicacion ?>">
+                    <td class="Titulo"><?php echo $publi->Titulo ?></td>
+                    <td class=" Categoria"><?php echo $publi->NombreCategoriaDiplomado ?></td>
                     <td class="gestion_dip" >
-                        <button id="editPublicacion<?php echo $dip->CodigoPublicacion ?>" title="Editar Publicacion" class="btnmoddi btn btn-success"><span class=" glyphicon glyphicon-pencil"></span></button>
-                        <button id="delPub<?php echo $dip->CodigoPublicacion ?>" onclick=""  title="Eliminar Publicacion" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>
+                        <button id="editPublicacion<?php echo $publi->CodigoPublicacion ?>" title="Editar Publicacion" class="btnmoddi btn btn-success"><span class=" glyphicon glyphicon-pencil"></span></button>
+                        <button id="delPub<?php echo $publi->CodigoPublicacion ?>" onclick=""  title="Eliminar Publicacion" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>
                     </td>
                 </tr>
 

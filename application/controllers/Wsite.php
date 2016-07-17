@@ -17,7 +17,7 @@ if (!defined('BASEPATH')) {
 //controlador de la pagina principal, permite logear a los usuarios
 include './application/models/dto/UsuariosDTO.php';
 include './application/controllers/Listar.php';
-
+//
 class Wsite extends CI_Controller {
 
     public $usuarioDTO;
@@ -29,8 +29,8 @@ class Wsite extends CI_Controller {
     public function index() {
         // $this->load->view('wsite');
         $this->load->model('publicaciones');
-        $this->load->model('archivos');
-        $this->load->model('categoriadiplomados');
+//        $this->load->model('archivos');
+       
         $user = $this->input->post('user');
 
         if ($user) {
@@ -60,7 +60,7 @@ class Wsite extends CI_Controller {
                     Redirect('Dashboard');
                 } else {
 
-                    $data['publicacionesMostrar'] = count($this->listarPublicaciones());
+                    $data['publicacionesMostrar'] = count($this->listarPublicaciones2());
                     $data['PagInicial'] = 1;
                     $data['PubporPag'] = PUBLICACIONES_X_PAG;
                     $data['TotalPaginacion'] = $this->publicaciones->ListarPublicacionesPaginacion(NULL);
@@ -72,7 +72,7 @@ class Wsite extends CI_Controller {
                 }
             }
         } else {
-            $data['publicacionesMostrar'] = count($this->listarPublicaciones());
+            $data['publicacionesMostrar'] = count($this->listarPublicaciones2());
             $data['PagInicial'] = 1;
             $data['PubporPag'] = PUBLICACIONES_X_PAG;
             $data['TotalPaginacion'] = $this->publicaciones->ListarPublicacionesPaginacion(NULL);
@@ -84,7 +84,7 @@ class Wsite extends CI_Controller {
         }
     }
 
-    public function listarPublicaciones() {
+    public function listarPublicaciones2() {
         try {
             $contadora = 0;
             $listaPublicacionesArchivos = array();
@@ -93,7 +93,7 @@ class Wsite extends CI_Controller {
             $listaPublicaciones = $this->publicaciones->listarPublicaciones();
             foreach ($listaPublicaciones as $publicacion) {
 
-                $archivos = $this->archivos->listarArchivosPublicacion($publicacion->CodigoPublicacion);
+                $archivos = $this->publicaciones->listarArchivosPublicacion($publicacion->CodigoPublicacion);
                 //$categoria = $this->categoriadiplomado->listarCategoriasDiplomados();
                 foreach ($archivos as $archivo) {
                     $publicacionArchivo = array(
@@ -129,7 +129,7 @@ class Wsite extends CI_Controller {
             $listaPublicaciones = array();
             $listaPublicaciones = $this->publicaciones->listarPublicaciones();
             foreach ($listaPublicaciones as $publicacion) {
-                $archivos2 = $this->archivos->listarArchivosPublicacion($publicacion->CodigoPublicacion);
+                $archivos2 = $this->publicaciones->listarArchivosPublicacion($publicacion->CodigoPublicacion);
                 foreach ($archivos2 as $archivo) {
                     $publicacionArchivo = array(
                         'CodigoPublicacion' => $publicacion->CodigoPublicacion,

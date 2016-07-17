@@ -4,6 +4,9 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 //include('ModeloBase.php');
+
+//Codigo de publicacion web =1 constante TIPO_PUBLICACION_WEB
+//Codigo de publicacion grupo =2 constante TIPO_PUBLICACION_GRUPO
 class Publicaciones extends CI_Model {
 
     public function __construct() {
@@ -31,12 +34,14 @@ FROM
   public."Publicaciones"
 WHERE
 "CategoriaDiplomados"."CodigoCategoriaDiplomado"  = public."Publicaciones"."CodigoCategoriaDiplomado"   
+AND 
+"Publicaciones"."CodigoTipoPublicacion" =' . TIPO_PUBLICACION_WEB . ' 
 ORDER BY
 "Publicaciones"."FechaPublicacion" DESC; 
 ');
 //        $this->db->from('Publicaciones');
 //        $this->db->order_by("FechaPublicacion", "desc");
-       
+
         $resultado = $consulta->result();
         return $resultado;
     }
@@ -56,6 +61,7 @@ ORDER BY
         );
         $this->db->from('Publicaciones');
         $this->db->where('UsuarioPublica', $UsuarioPublica);
+        $this->db->where('CodigoTipoPublicaciones', 1);
         $consulta = $this->db->get();
         $resultado = $consulta->result();
         return $resultado;
@@ -76,6 +82,7 @@ ORDER BY
         );
         $this->db->from('Publicaciones');
         $this->db->where('CodigoGrupoPeriodo', $CodigoGrupoPeriodo);
+        $this->db->where('CodigoTipoPublicaciones', 1);
         $consulta = $this->db->get();
         $resultado = $consulta->result();
         return $resultado;
@@ -96,6 +103,7 @@ ORDER BY
         );
         $this->db->from('Publicaciones');
         $this->db->where('CodigoGrupoParticipantes', $GrupoParticipantes);
+        $this->db->where('CodigoTipoPublicaciones', 1);
         $consulta = $this->db->get();
         $resultado = $consulta->result();
         return $resultado;
@@ -115,7 +123,7 @@ ORDER BY
                 . 'CodigoCategoriaDiplomado'
         );
         $this->db->from('Publicaciones');
-        $this->db->where('CodigoTipoPublicacion', $CodigoTipoPublicacion);
+        $this->db->where('CodigoTipoPublicacion', 1);
         $consulta = $this->db->get();
         $resultado = $consulta->result();
         return $resultado;
@@ -190,6 +198,22 @@ ORDER BY
         $this->db->insert('Archivos', $data);
     }
 
+    public function listarArchivosPublicacion($CodigoPublicaciones) {
+        $this->db->select('CodigoArchivos, '
+                . 'Ruta, '
+                . 'Nombre, '
+                . 'Extension, '
+                . 'Estado, '
+                . 'CodigoUsuarios'
+        );
+        $this->db->from('Archivos');
+        $this->db->where('CodigoPublicaciones', $CodigoPublicaciones);
+
+        $consulta = $this->db->get();
+        $resultado = $consulta->result();
+        return $resultado;
+    }
+
     public function listarCategoriasDiplomados() {
         $this->db->select('CodigoCategoriaDiplomado, '
                 . 'NombreCategoriaDiplomado, '
@@ -204,7 +228,8 @@ ORDER BY
 
     public function MostrarDatosPublicacion($id) {
         try {
-            $stringQuery = 'SELECT "Publicaciones"."CodigoPublicacion","Publicaciones"."Titulo","Publicaciones"."Contenido","Publicaciones"."FechaPublicacion", "Publicaciones"."CodigoCategoriaDiplomado","Archivos"."Ruta" FROM public."Publicaciones",public."Archivos" WHERE "Publicaciones"."CodigoPublicacion" = "Archivos"."CodigoPublicaciones" AND "Publicaciones"."CodigoPublicacion" =';
+            $stringQuery = 'SELECT "Publicaciones"."CodigoPublicacion","Publicaciones"."Titulo","Publicaciones"."Contenido","Publicaciones"."FechaPublicacion", "Publicaciones"."CodigoCategoriaDiplomado","Archivos"."Ruta" FROM public."Publicaciones",public."Archivos" WHERE "Publicaciones"."CodigoPublicacion" = "Archivos"."CodigoPublicaciones" AND 
+"Publicaciones"."CodigoTipoPublicacion" =' . TIPO_PUBLICACION_WEB . '';
             $stringQuery = $stringQuery . $id;
             $consulta = $this->db->query($stringQuery);
             if ($consulta != null) {
@@ -230,7 +255,7 @@ ORDER BY
             }
             $limit = PUBLICACIONES_X_PAG;
             $varLimit = ' limit ' . $limit . ' offset ' . $offset;
-            $stringQuery = 'SELECT "Publicaciones"."CodigoPublicacion","Publicaciones"."Titulo","Publicaciones"."Contenido","Publicaciones"."FechaPublicacion","Publicaciones"."CodigoCategoriaDiplomado","Archivos"."Ruta" FROM public."Publicaciones",public."Archivos" WHERE "Publicaciones"."CodigoPublicacion" = "Archivos"."CodigoPublicaciones" ORDER BY "FechaPublicacion" desc';
+            $stringQuery = 'SELECT "Publicaciones"."CodigoPublicacion","Publicaciones"."Titulo","Publicaciones"."Contenido","Publicaciones"."FechaPublicacion","Publicaciones"."CodigoCategoriaDiplomado","Archivos"."Ruta" FROM public."Publicaciones",public."Archivos" WHERE "Publicaciones"."CodigoPublicacion" = "Archivos"."CodigoPublicaciones"  AND "Publicaciones"."CodigoTipoPublicacion" ='.TIPO_PUBLICACION_WEB.' ORDER BY "FechaPublicacion" desc';
             $stringQuery = $stringQuery . $varLimit;
             $consulta = $this->db->query($stringQuery);
             if ($consulta != null) {
