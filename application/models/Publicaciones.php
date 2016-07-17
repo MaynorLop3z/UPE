@@ -29,6 +29,8 @@ class Publicaciones extends CI_Model {
 FROM 
   public."CategoriaDiplomados", 
   public."Publicaciones"
+WHERE
+"CategoriaDiplomados"."CodigoCategoriaDiplomado"  = public."Publicaciones"."CodigoCategoriaDiplomado"   
 ORDER BY
 "Publicaciones"."FechaPublicacion" DESC; 
 ');
