@@ -11,6 +11,14 @@ class Archivos extends CI_Model {
         $this->load->database();
     }
 
+    public function listarTodos(){
+        $this->db->select('Nombre, Ruta');
+        $this->db->from('Archivos');
+        $consulta = $this->db->get();
+        $resultado = $consulta->result();
+        return $resultado;
+    }
+
     public function listarArchivosPublicacion($CodigoPublicaciones) {
         $this->db->select('CodigoArchivos, '
                 . 'Ruta, '

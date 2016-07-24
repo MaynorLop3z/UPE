@@ -9,15 +9,15 @@
         <?php $this->load->helper('url'); ?>
 
         <title>PAESIS</title>
-        <link rel="icon" href="../bootstrap/minerva.jpg" type="image/x-icon" />
+        <link rel="icon" href="bootstrap/minerva.jpg" type="image/x-icon" />
         <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
-        <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Custom CSS -->
-        <link href="../bootstrap/css/freelancer.css" rel="stylesheet">
+        <link href="bootstrap/css/freelancer.css" rel="stylesheet">
 
         <!-- Custom Fonts -->
-        <link href="../bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
@@ -70,7 +70,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <img class="img-responsive" src="../bootstrap/images/profile.png" alt="">
+                        <img class="img-responsive" src="bootstrap/images/profile.png" alt="">
                         <div class="intro-text">
                             <span class="name">Unidad de Proyectos Academicos Especiales</span>
                             <hr class="star-light">
@@ -114,7 +114,7 @@
                                             <i class="fa fa-search-plus fa-3x"></i>
                                         </div>
                                     </div>
-                                    <img  src="<?php echo '../bootstrap' . $publicacion->Ruta ?>" class="img-responsive" alt="" style="height:500px; width: 500px;">
+                                    <img  src="<?php echo 'bootstrap' . $publicacion->Ruta ?>" class="img-responsive" alt="" style="height:500px; width: 500px;">
                                 </a>
 
 
@@ -255,7 +255,7 @@
                             <h3>Telefono de Contacto</h3>
                             <p>Universidad de El Salvador Facultad Multidiciplinaria de Occidente<br>
                                 Tel: (+503) 2484 0824<br>
-                                <img  src="../bootstrap/images/minervaVerde.png" width="50" height="50"  /></p>
+                                <img  src="bootstrap/images/minervaVerde.png" width="50" height="50"  /></p>
                         </div>
                         <div class="footer-col col-md-6">
                             <h3>Sitios Universitarios</h3>
@@ -386,23 +386,23 @@
         </div>
 
         <!-- jQuery -->
-        <script src="../bootstrap/js/jquery.js"></script>
+        <script src="bootstrap/js/jquery.js"></script>
 
         <!-- Bootstrap Core JavaScript -->
-        <script src="../bootstrap/js/bootstrap.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
 
         <!-- Plugin JavaScript -->
         <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-        <script src="../bootstrap/js/classie.js"></script>
-        <script src="../bootstrap/js/cbpAnimatedHeader.js"></script>
-        <script src="../bootstrap/js/websitejs.js"></script>
+        <script src="bootstrap/js/classie.js"></script>
+        <script src="bootstrap/js/cbpAnimatedHeader.js"></script>
+        <script src="bootstrap/js/websitejs.js"></script>
 
         <!-- Contact Form JavaScript -->
-        <script src="../bootstrap/js/jqBootstrapValidation.js"></script>
-        <script src="../bootstrap/js/contact_me.js"></script>
+        <script src="bootstrap/js/jqBootstrapValidation.js"></script>
+        <script src="bootstrap/js/contact_me.js"></script>
 
         <!-- Custom Theme JavaScript -->
-        <script src="../bootstrap/js/freelancer.js"></script>
+        <script src="bootstrap/js/freelancer.js"></script>
 
     </body>
 

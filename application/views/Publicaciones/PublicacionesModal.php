@@ -1,5 +1,5 @@
 
-<?php $this->load->helper('url'); ?>
+<?php $this->load->helper('url'); ?> 
 <!--Llamada a la hoja de estilo y al js (abajo)-->
 <script src="../bootstrap/js/Publicaciones.js"></script>
 <link href="../bootstrap/css/publicacioncss.css" rel="stylesheet">

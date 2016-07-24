@@ -16,7 +16,7 @@ if (!defined('BASEPATH')) {
 }
 //controlador de la pagina principal, permite logear a los usuarios
 include './application/models/dto/UsuariosDTO.php';
-include './application/controllers/Listar.php';
+//include './application/controllers/Listar.php';
 //
 class Wsite extends CI_Controller {
 

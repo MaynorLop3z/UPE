@@ -18,7 +18,7 @@ class PublicacionesController extends CI_Controller {
     public function index() {
         $data['allPublicaciones'] = $this->Publicaciones->listarPublicaciones();
         $data['listCategorias'] = $this->Publicaciones->listarCategoriasDiplomados();
-        $data['listNombreCategoria']= $this->Publicaciones->listarCategoriasDiplomados();
+        $data['listNombreCategoria']= $this->Publicaciones->listarCategoriasDiplomados(NULL);
         $this->load->view('Publicaciones', $data);
     }
 
