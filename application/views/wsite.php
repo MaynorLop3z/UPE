@@ -49,6 +49,14 @@
                             <a href="#page-top"></a>
                         </li>
                         <li class="page-scroll">
+                            <a href="" class="portfolio-link btn   dropdown-toggle"  title="Buscar Publicaciones" data-toggle="dropdown"><i class="fa fa-fw fa-search"></i></a>
+                            <ul class="dropdown-menu" id="scrollBuscar">
+                                <li value="1"> <a href="#">Por Categoria</a> </li>
+                                <li value="2"> <a href="#">Por Fecha</a> </li>
+                                <li value="3"> <a href="#">Por Nombre</a> </li>
+                            </ul>
+                        </li>
+                        <li class="page-scroll">
                             <a href="#portfolio">Mas recientes</a>
                         </li>
                         <li class="page-scroll">
@@ -93,6 +101,7 @@
                 </div>
                 <div class="row">
 
+                    
                     <!--Aqui empieza las publicaciones--> 
                     <?php
                     //$publicacionesMostrar=null;
@@ -198,15 +207,15 @@
                                 <label>Categoria de la Consulta</label>
 
                                 <select name="categoriasl" onchange="" id="selectCategoria">
-                                        <?php
-                                        foreach ($listCategorias as $categorias) {
-                                            ?>
-                                              <option value=<?php echo $categorias->CodigoCategoriaDiplomado ?>> <?php echo $categorias->NombreCategoriaDiplomado ?>  </option>
-                                            <?php
-                                        }
+                                    <?php
+                                    foreach ($listCategorias as $categorias) {
                                         ?>
+                                        <option value=<?php echo $categorias->CodigoCategoriaDiplomado ?>> <?php echo $categorias->NombreCategoriaDiplomado ?>  </option>
+                                        <?php
+                                    }
+                                    ?>
 
-                                    </select>
+                                </select>
                             </div>
 
                             <div class="row control-group">
@@ -323,7 +332,7 @@
                                     <table class="table list-inline col-sm-4" >
                                         <!--<ul class="list-unstyled item-details ">-->
                                         <tr > <td class="text-justify">
-                                               Usuario:                                            </td>
+                                                Usuario:                                            </td>
                                             <td>
                                                 <strong> <input type="text" id="user" name="user"  placeholder="Email address" required autofocus>
                                                 </strong>
