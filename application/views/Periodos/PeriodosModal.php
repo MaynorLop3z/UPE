@@ -217,7 +217,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Modal title</h4>
+                <h4 class="modal-title" id="gestionGrupoModalTitle"></h4>
             </div>
             <div class="modal-body">
                 <div role="tabpanel">
@@ -232,7 +232,6 @@
                                     <thead>
                                         <tr>
                                             <th>Nombre</th>
-                                            <th>Descripcion</th>
                                             <th>Asignar/Desasignar</th>
                                         </tr>
                                     </thead>
@@ -243,7 +242,6 @@
                         </div>
                         <div role="tabpanel" class="tab-pane" id="Alumnos">
                             <div class="contendor">
-                                Alumnos
                                 <table class="table table-hover table-bordered">
                                     <thead>
                                         <tr>
@@ -254,17 +252,8 @@
                                             <th>Asignar/Desasignar</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
+                                    <tbody id="EstudiantesGrupoPeriodo">
+                                        
                                     </tbody>
                                 </table>
                             </div>

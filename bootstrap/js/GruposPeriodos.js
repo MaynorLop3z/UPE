@@ -140,6 +140,7 @@ $('#PeriodoGestion').on('show.bs.modal', function(event) {
     var idPeriodo = codigoPeriodo.substring(10);
     //var url = "PeriodosController/listarGrupos/";
     $('#bodytablaPeriodosGruposO').html('');
+    //console.log(idPeriodo);
     var posting = $.post("PeriodosController/listarGrupos/", {idPeriodo: idPeriodo});
     posting.done(function(data) {
         if (data !== null) {
@@ -167,24 +168,22 @@ $('#gestionGrupoModal').on('show.bs.modal', function(event) {
    var posting = $.post("PeriodosController/listarDocentes/", {idPeriodoGrupo: idPeriodoGrupo});
    posting.done(function(data) {
         if (data !== null) {
-            var obj = jQuery.parseJSON(data);
-            var tabla = "";
-            for (var x in obj) {
-                tabla += '<tr id="GrupoUser' + obj[x].codigousuario + '">\n';
-                tabla += '<td class="DocenteIdUsuario">' + obj[x].codigousuario + '</td>\n';
-                tabla += '<td class="DocenteUsuario">' + obj[x].nombre + '</td>\n';
-                tabla += '<td class="DocenteInscrito">' + obj[x].inscrito + '</td>\n';
-                tabla += '</tr>\n';
-
-        }
-        
-            $('#DocentesGrupoPeriodo').html(tabla);
+            $('#gestionGrupoModalTitle').html('Grupo #'+idPeriodoGrupo);
+            $('#DocentesGrupoPeriodo').html(data);
         }
     });
     posting.fail(function(xhr, textStatus, errorThrown) {
         alert("error" + xhr.responseText);
     });
-    
+    var posting2 = $.post("PeriodosController/listarEstudiantes/", {idPeriodoGrupo: idPeriodoGrupo});
+   posting2.done(function(data) {
+        if (data !== null) {
+            $('#EstudiantesGrupoPeriodo').html(data);
+        }
+    });
+    posting2.fail(function(xhr, textStatus, errorThrown) {
+        alert("error" + xhr.responseText);
+    });
 });
 function NuevoPeriodoModalShow() {
     $("#PeriodoNuevo").modal();

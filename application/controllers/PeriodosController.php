@@ -128,12 +128,40 @@ class PeriodosController extends CI_Controller {
         try {
             if ($this->input->post()) {
                 $Codigo = $this->input->post('idPeriodoGrupo');
-                $arrayData = $this->Periodos->listarDocentesGrupos($Codigo);
-                echo json_encode($arrayData);
+                $docentes = $this->Periodos->getMasters($Codigo);
+                $result = '';
+                foreach ($docentes as $docente) {
+                    $result .= '<tr id="GrupoUser' . $docente->CodigoUsuario . '">\n';
+                    $result .= '<td class="DocenteUsuario">' . $docente->Nombre . '</td>\n';
+                    $result .= '<td class="DocenteInscrito">' . $docente->Inscrito . '</td>\n';
+                    $result .= '</tr>\n';
+                }
+                echo $result;
             }
         } catch (Exception $ex) {
             echo json_encode($ex);
         }
     }
 
+    public function listarEstudiantes() {
+        try {
+            if ($this->input->post()) {
+                $Codigo = $this->input->post('idPeriodoGrupo');
+                $estudiantes = $this->Periodos->getStudents($Codigo);
+                $result = '';
+                foreach ($estudiantes as $estudiante) {
+                    $result .= '<tr id="GrupoEstudiante' . $estudiante->CodigoParticipante . '">\n';
+                    $result .= '<td class="NombreEstudiante">' . $estudiante->Nombre . '</td>\n';
+                    $result .= '<td class="DUIEstudiante">' . $estudiante->NumeroDUI . '</td>\n';
+                    $result .= '<td class="CategoriaEstudiante">' . $estudiante->NombreCategoriaParticipante . '</td>\n';
+                    $result .= '<td class="ComentariosEstudiante">' . $estudiante->Comentarios . '</td>\n';
+                    $result .= '<td class="EstudianteInscrito">' . $estudiante->Inscrito . '</td>\n';
+                    $result .= '</tr>\n';
+                }
+                echo $result;
+            }
+        } catch (Exception $ex) {
+            echo json_encode($ex);
+        }
+    }
 }
