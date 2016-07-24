@@ -1,4 +1,5 @@
 var codigoUsuario;
+var postSend=false;
 $("#btnUsuarioNuevo").on('click', function () {
     $("#usuarioNuevo").modal();
 });
@@ -64,29 +65,35 @@ $('#usuarioRoles').on('show.bs.modal', function (event) {
 
 $("#frmGuardarUSer").submit(function (event) {
     event.preventDefault();
+//    if(!postSend){
+//        postSend=true;
     var $form = $(this), UsuarioNombre = $form.find("input[name='UsuarioNombre']").val(),
             UsuarioPassword = $form.find("input[name='UsuarioPassword']").val(),
             UsuarioEmail = $form.find("input[name='UsuarioEmail']").val(),
             UsuarioNombreReal = $form.find("input[name='UsuarioNombreReal']").val(),
             Comentarios = $form.find("textarea[name='Comentarios']").val(),
-            url = $form.attr("action");
+            url = 'UsuarioController/guardarUsuario/';
     var posting = $.post(url, {UsuarioNombre: UsuarioNombre,
         UsuarioPassword: UsuarioPassword,
         UsuarioEmail: UsuarioEmail,
         Comentarios: Comentarios,
         UsuarioNombreReal: UsuarioNombreReal});
     posting.done(function (data) {
+    
         if (data !== null) {
+            
             $('#containerTablePaging').empty();
             $('#containerTablePaging').html(data);
-
             $("#usuarioNuevo").modal('toggle');
+
+//            $("#usuarioNuevo").modal().hide();
         }
     });
     posting.fail(function (data) {
         var obj = jQuery.parseJSON(data);
         alert(obj.Error);
     });
+//    }
 });
 
 $("#frmEditarUser").submit(function (event) {
