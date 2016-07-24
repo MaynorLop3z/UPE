@@ -46,7 +46,9 @@ $(document).ready(function (e) {
 });
 
 $('#scrollBuscar').on('click', function (event) {
-    var slect = document.getElementById('scrollBuscar').value;
-    alert(slect);
+//    var slect = document.getElementById('scrollBuscar').value ;
+//    alert(slect);
+    var test=$('#scrollBuscar :selected').text();
+    alert (test);
 
 });

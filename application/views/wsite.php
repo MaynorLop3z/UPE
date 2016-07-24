@@ -49,7 +49,7 @@
                             <a href="#page-top"></a>
                         </li>
                         <li class="page-scroll">
-                            <a href="" class="portfolio-link btn   dropdown-toggle"  title="Buscar Publicaciones" data-toggle="dropdown"><i class="fa fa-fw fa-search"></i></a>
+                            <a href="" class="portfolio-link btn   dropdown-toggle"  title="Buscar Publicaciones" data-toggle="dropdown" id="test3"><i class="fa fa-fw fa-search"></i></a>
                             <ul class="dropdown-menu" id="scrollBuscar">
                                 <li value="1"> <a href="#">Por Categoria</a> </li>
                                 <li value="2"> <a href="#">Por Fecha</a> </li>
