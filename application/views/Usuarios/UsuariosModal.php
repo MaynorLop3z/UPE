@@ -5,7 +5,7 @@
         <div class="modal-content">
             <div class="container-fluid ">
                 <button type="button" class="close btn-lg" id="btnCerrarModalNewUser" data-dismiss="modal" aria-hidden="true">X</button>
-                <form id="frmGuardarUSer" action="<?php echo base_url() ?>index.php/UsuarioController/guardarUsuario/" class="form-horizontal" method="post" >
+                <form id="frmGuardarUSer" action="" class="form-horizontal" method="post" >
                     <fieldset>
                         <legend class="modal-header">Agregar Usuario:</legend>
 
@@ -67,7 +67,7 @@
                         </div>
 
                         <div class="modal-footer">
-                            <input type="submit" id="btnEnviar" value="Guardar" class=" btn btn-default" name="Aceptar"/>
+                            <input type="submit" id="btnEnviarUsuarioSave" value="Guardar" class=" btn btn-default" name="Aceptar"/>
                             <button type="reset" id="btnLimpiar" onclick="" class=" btn btn-default"  name="Limpiar">Limpiar</button>
                         </div>
                     </fieldset>

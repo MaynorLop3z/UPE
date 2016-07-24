@@ -136,7 +136,8 @@ class Usuariocontroller extends CI_Controller {
                 $user = $this->Usuarios->guardarUsuario(null, $nombreUsuario, $contraseniaUsuario, $nombrePersonaUsuario, $correo, $userModifica, $ip, $comentarios);
 
                 if ($user != null) {
-                    echo $this->paginUsers(null);
+                    echo 'Exito';
+//                    echo $this->paginUsers(null);
                 }
             }
         } catch (Exception $ex) {

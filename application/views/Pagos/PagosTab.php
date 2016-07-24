@@ -1,5 +1,5 @@
 <?php $this->load->helper('url'); ?>
-<script src="../bootstrap/js/Usuarios.js"></script>
+
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">Gestion de Pagos</h3>
@@ -9,29 +9,32 @@
 
         </div>
         <div class="panel panel-default">
-            <form id="frmGuardarR"  action="PagosController/buscarAlumno" class="form-horizontal" method="post" >
+            <form id="frmSearchAlum"  action="PagosController/buscarAlumno" class="form-horizontal" method="post" >
                 <fieldset>
                     <legend class="modal-header">Buscar Alumno:</legend> 
                     <div class="form-group">
-                        <label for="txtNombAlum" class="col-lg-4 control-label">Escriba el nombre,carnet o el DUI del alumno:</label>
                         <div class="col-lg-4">
-                            <input name="NameAlum" class="form-control" id="txtNombAlum" type="text" maxlength="50" required>
+                            <input name="NombreParticipan" class="form-control form-inline" placeholder="Nombre" id="txtNombAlum" type="text" maxlength="50" >
+                        </div>
+                        <div class="col-lg-4">
+                            <input name="CarnetParticipan" class="form-control form-inline" placeholder="Carnet" id="txtCarnetAlum" type="text" maxlength="50" >
+                        </div>
+                        <div class="col-lg-4">
+                            <input name="DuiParticipan" class="form-control form-inline" placeholder="DUI" id="txtDuiAlum" type="text" maxlength="50" >
                         </div>
                         <div class="col-lg-4">
                             <button type="submit" id="btnSearchAlum" onclick="" class=" btn btn-default" name="Buscar">Buscar</button>
                         </div>
                     </div>
-
                 </fieldset>
             </form>
         </div>
         <br>
         <div id="containerTablePaging">
-            <table id="tableUsers" class="table table-bordered table-striped table-hover table-responsive">
+            <table id="tableParticipantesPag" class="table table-bordered table-striped table-hover table-responsive">
                 <thead>
                     <tr>
                         <th style="text-align:center">Nombre</th>
-                        
                         
                     </tr>
                 </thead> 
@@ -42,7 +45,7 @@
                         <tr data-alum='<?php echo('CodigoUsuario') ?>' id="tr<?php echo 'CodigoUsuario' ?>">
                             <td class="nombre_Usuario" ><?= '' ?></td>
                             
-                            </td>
+                            
                         </tr>
                         <?php
 //                    }
