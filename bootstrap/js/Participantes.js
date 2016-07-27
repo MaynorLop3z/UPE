@@ -32,16 +32,76 @@ $("#btnADDAlumno").on('click', function () {
 function mostrarEditAlumno(fila) {
     codigoParticipante = fila.id;
     filaEdit = fila;
+    var alum = $('#alum' + codigoParticipante.substring(5));
+    var Mail_Alumno = alum.find('.Mail_Alumno').html().toString().trim();
+    var TelefonoFijo_Alumno = alum.find('.TelefonoFijo_Alumno').html().toString().trim();
+    var TelefonoMovil_Alumno = alum.find('.TelefonoMovil_Alumno').html().toString().trim();
+    var DUI_Alumno = alum.find('.DUI_Alumno').html().toString().trim();
+    var Nombre_Alumno = alum.find('.Nombre_Alumno').html().toString().trim();
+    var FechaNac_Alumno = alum.find('.FechaNac_Alumno').html().toString().trim();
+    var Carrera_Alumno = alum.find('.Carrera_Alumno').html().toString().trim();
+    var NivelAcad_Alumno = alum.find('.NivelAcad_Alumno').html().toString().trim();
+    var DNombreEncargado_Alumno = alum.find('.NombreEncargado_Alumno').html().toString().trim();
+    var CodPart_Alumno = alum.find('.CodCat_Alumno').html().toString().trim();
+    var Descripcion_Alumno = alum.find('.Descripcion_Alumno').html().toString().trim();
+    var Comentarios_Alumno = alum.find('.Comentarios_Alumno').html().toString().trim();
+    var Direccion_Alumno = alum.find('.Direccion_Alumno').html().toString().trim();
+    var Genero_Alumno = alum.find('.Genero_Alumno').html().toString().trim();
+    $('#AlumnoNombreEDIT').val(Nombre_Alumno);
+    $('#AlumnoMailEDIT').val(Mail_Alumno);
+    $('#AlumnoFijoEDIT').val(TelefonoFijo_Alumno);
+    $('#AlumnoMovilEDIT').val(TelefonoMovil_Alumno);
+    $('#AlumnoDirEDIT').val(Direccion_Alumno);
+    $('#AlumnoFNacEDIT').val(FechaNac_Alumno);
+    $('#AlumnoCarreraEDIT').val(Carrera_Alumno);
+    $('#AlumnoNivelEDIT').val(NivelAcad_Alumno);
+    $('#AlumnoNEncargadoEDIT').val(DNombreEncargado_Alumno);
+    $('#AlumnoCategoriaEDIT').val(CodPart_Alumno);
+    $('#AlumnoDescripcionEDIT').val(Descripcion_Alumno);
+    $('#AlumnoComentarioEDIT').val(Comentarios_Alumno);
+    $('#AlumnoDUIEDIT').val(DUI_Alumno);
+    $('#AlumnoGeneroEDIT').val(Genero_Alumno);
     $("#AlumnoEditar").modal('toggle');
 }
 
 function mostrarInfoAlumno(fila) {
     codigoParticipante = fila.id;
+    var alum = $('#alum' + codigoParticipante.substring(8));
+    //console.log(alum);
+    var Mail_Alumno = alum.find('.Mail_Alumno').html().toString().trim();
+    var TelefonoFijo_Alumno = alum.find('.TelefonoFijo_Alumno').html().toString().trim();
+    var TelefonoMovil_Alumno = alum.find('.TelefonoMovil_Alumno').html().toString().trim();
+    var DUI_Alumno = alum.find('.DUI_Alumno').html().toString().trim();
+    var Nombre_Alumno = alum.find('.Nombre_Alumno').html().toString().trim();
+    var FechaNac_Alumno = alum.find('.FechaNac_Alumno').html().toString().trim();
+    var Carrera_Alumno = alum.find('.Carrera_Alumno').html().toString().trim();
+    var NivelAcad_Alumno = alum.find('.NivelAcad_Alumno').html().toString().trim();
+    var DNombreEncargado_Alumno = alum.find('.NombreEncargado_Alumno').html().toString().trim();
+    var Descripcion_Alumno = alum.find('.Descripcion_Alumno').html().toString().trim();
+    var Comentarios_Alumno = alum.find('.Comentarios_Alumno').html().toString().trim();
+    var Direccion_Alumno = alum.find('.Direccion_Alumno').html().toString().trim();
+    var CodPart_Alumno = alum.find('.NameCat_Alumno').html().toString().trim();
+    $('#AlumViewNombre').html(Nombre_Alumno);
+    $('#AlumViewEmail').html(Mail_Alumno);
+    $('#AlumViewTFijo').html(TelefonoFijo_Alumno);
+    $('#AlumViewTMovil').html(TelefonoMovil_Alumno);
+    $('#AlumViewDireccion').html(Direccion_Alumno);
+    $('#AlumViewFNac').html(FechaNac_Alumno);
+    $('#AlumViewCarrera').html(Carrera_Alumno);
+    $('#AlumViewNivelAcad').html(NivelAcad_Alumno);
+    $('#AlumViewEncargado').html(DNombreEncargado_Alumno);
+    $('#AlumViewCategoria').html(CodPart_Alumno);
+    $('#AlumViewDescripcion').html(Descripcion_Alumno);
+    $('#AlumViewComentarios').html(Comentarios_Alumno);
+    $('#AlumViewDUI').html(DUI_Alumno);
     $("#AlumnoVIEWDATA").modal('toggle');
 }
 
 function mostrarDelAlumno(fila) {
     codigoParticipante = fila.id;
+    var alum = $('#alum' + codigoParticipante.substring(7));
+    var Nombre_Alumno = alum.find('.Nombre_Alumno').html().toString().trim();
+    $('#nombreAlumEliminar').html(Nombre_Alumno);
     $("#AlumnoEliminar").modal('toggle');
 }
 function mostrarGruposPeriodos(fila) {
@@ -92,81 +152,17 @@ function inscribirUsaurio(fila) {
 //    $("#AlumnoEliminar").modal('toggle');
 //});
 
-$('#AlumnoVIEWDATA').on('show.bs.modal', function (event) {
-    var alum = $('#alum' + codigoParticipante.substring(8));
-    //console.log(alum);
-    var Mail_Alumno = alum.find('.Mail_Alumno').html().toString().trim();
-    var TelefonoFijo_Alumno = alum.find('.TelefonoFijo_Alumno').html().toString().trim();
-    var TelefonoMovil_Alumno = alum.find('.TelefonoMovil_Alumno').html().toString().trim();
-    var DUI_Alumno = alum.find('.DUI_Alumno').html().toString().trim();
-    var Nombre_Alumno = alum.find('.Nombre_Alumno').html().toString().trim();
-    var FechaNac_Alumno = alum.find('.FechaNac_Alumno').html().toString().trim();
-    var Carrera_Alumno = alum.find('.Carrera_Alumno').html().toString().trim();
-    var NivelAcad_Alumno = alum.find('.NivelAcad_Alumno').html().toString().trim();
-    var DNombreEncargado_Alumno = alum.find('.NombreEncargado_Alumno').html().toString().trim();
-    var Descripcion_Alumno = alum.find('.Descripcion_Alumno').html().toString().trim();
-    var Comentarios_Alumno = alum.find('.Comentarios_Alumno').html().toString().trim();
-    var Direccion_Alumno = alum.find('.Direccion_Alumno').html().toString().trim();
-    var CodPart_Alumno = alum.find('.NameCat_Alumno').html().toString().trim();
-    $('#AlumViewNombre').html(Nombre_Alumno);
-    $('#AlumViewEmail').html(Mail_Alumno);
-    $('#AlumViewTFijo').html(TelefonoFijo_Alumno);
-    $('#AlumViewTMovil').html(TelefonoMovil_Alumno);
-    $('#AlumViewDireccion').html(Direccion_Alumno);
-    $('#AlumViewFNac').html(FechaNac_Alumno);
-    $('#AlumViewCarrera').html(Carrera_Alumno);
-    $('#AlumViewNivelAcad').html(NivelAcad_Alumno);
-    $('#AlumViewEncargado').html(DNombreEncargado_Alumno);
-    $('#AlumViewCategoria').html(CodPart_Alumno);
-    $('#AlumViewDescripcion').html(Descripcion_Alumno);
-    $('#AlumViewComentarios').html(Comentarios_Alumno);
-    $('#AlumViewDUI').html(DUI_Alumno);
-});
-
-$('#AlumnoEditar').on('show.bs.modal', function (event) {
-//                codigoUsuario = (event.target.id);
-    //console.log(codigoParticipante);
-    var alum = $('#alum' + codigoParticipante.substring(5));
-    //console.log(alum);
-    var Mail_Alumno = alum.find('.Mail_Alumno').html().toString().trim();
-    var TelefonoFijo_Alumno = alum.find('.TelefonoFijo_Alumno').html().toString().trim();
-    var TelefonoMovil_Alumno = alum.find('.TelefonoMovil_Alumno').html().toString().trim();
-    var DUI_Alumno = alum.find('.DUI_Alumno').html().toString().trim();
-    var Nombre_Alumno = alum.find('.Nombre_Alumno').html().toString().trim();
-    var FechaNac_Alumno = alum.find('.FechaNac_Alumno').html().toString().trim();
-    //var DCodU_Alumno = alum.find('.DCodU_Alumno').html().toString().trim();
-    var Carrera_Alumno = alum.find('.Carrera_Alumno').html().toString().trim();
-    var NivelAcad_Alumno = alum.find('.NivelAcad_Alumno').html().toString().trim();
-    var DNombreEncargado_Alumno = alum.find('.NombreEncargado_Alumno').html().toString().trim();
-    var CodPart_Alumno = alum.find('.CodCat_Alumno').html().toString().trim();
-    var Descripcion_Alumno = alum.find('.Descripcion_Alumno').html().toString().trim();
-    var Comentarios_Alumno = alum.find('.Comentarios_Alumno').html().toString().trim();
-    var Direccion_Alumno = alum.find('.Direccion_Alumno').html().toString().trim();
-    var Genero_Alumno = alum.find('.Genero_Alumno').html().toString().trim();
-//    $('#lblCodigoUser').html(codigoParticipante);
-    $('#AlumnoNombreEDIT').val(Nombre_Alumno);
-    $('#AlumnoMailEDIT').val(Mail_Alumno);
-    $('#AlumnoFijoEDIT').val(TelefonoFijo_Alumno);
-    $('#AlumnoMovilEDIT').val(TelefonoMovil_Alumno);
-    $('#AlumnoDirEDIT').val(Direccion_Alumno);
-    $('#AlumnoFNacEDIT').val(FechaNac_Alumno);
-    $('#AlumnoCarreraEDIT').val(Carrera_Alumno);
-    $('#AlumnoNivelEDIT').val(NivelAcad_Alumno);
-    $('#AlumnoNEncargadoEDIT').val(DNombreEncargado_Alumno);
-    $('#AlumnoCategoriaEDIT').val(CodPart_Alumno);
-    $('#AlumnoDescripcionEDIT').val(Descripcion_Alumno);
-    $('#AlumnoComentarioEDIT').val(Comentarios_Alumno);
-    $('#AlumnoDUIEDIT').val(DUI_Alumno);
-    $('#AlumnoGeneroEDIT').val(Genero_Alumno);
-    // alert(codigoUsuario);
-});
-
-$('#AlumnoEliminar').on('show.bs.modal', function (event) {
-    console.log("Eliminar Alumno se muestra");
-    var alum = $('#alum' + codigoParticipante.substring(7));
-    var Nombre_Alumno = alum.find('.Nombre_Alumno').html().toString().trim();
-    $('#nombreAlumEliminar').html(Nombre_Alumno);
-});
+//$('#AlumnoVIEWDATA').on('show.bs.modal', function (event) {
+//    
+//});
+//
+//$('#AlumnoEditar').on('show.bs.modal', function (event) {
+//
+//});
+//
+//$('#AlumnoEliminar').on('show.bs.modal', function (event) {
+//    
+//});
 
 
 $("#frmADDAlumno").submit(function (event) {

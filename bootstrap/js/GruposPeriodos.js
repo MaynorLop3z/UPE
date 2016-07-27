@@ -1,49 +1,31 @@
 var codigoPeriodo;
 var codigoGrupoPeriodo;
-$("#frmADDPeriodo").submit(function(event) {
+$("#frmADDPeriodo").submit(function (event) {
     event.preventDefault();
     var $form = $(this), idModulo = $form.find("select[name='CodigoModulo']").val(), FechaInicio = $form.find("input[name='FechaInicioPeriodo']").val(), FechaFin = $form.find("input[name='FechaFinPeriodo']").val(), ComentariosPeriodo = $form.find("textarea[name=ComentariosPeriodo]").val(), url = $form.attr("action"), estadoPeriodo = true;
     console.log(idModulo);
     var posting = $.post(url, {idModulo: idModulo, FechaInicio: FechaInicio, FechaFin: FechaFin, ComentariosPeriodo: ComentariosPeriodo, estadoPeriodo: estadoPeriodo});
-    posting.done(function(data) {
+    posting.done(function (data) {
         if (data !== null) {
             $("#PeriodoNuevo").modal('toggle');
         }
     });
-    posting.fail(function() {
+    posting.fail(function () {
         alert("error");
     });
 });
-$('#PeriodoEliminar').on('show.bs.modal', function(event) {
-    var perio = $('#Periodo' + codigoPeriodo.substring(10));
-    var Fecha_Inicio = perio.find('.fip').html().toString().trim();
-    var Fecha_Fin = perio.find('.fip').html().toString().trim();
-    $('#nombrePeriodoEliminar').html(Fecha_Inicio + " al " + Fecha_Fin);
-});
-$('#PeriodoModificar').on('show.bs.modal', function(event) {
-    var perio = $('#Periodo' + codigoPeriodo.substring(8));
-    var Fecha_Inicio = perio.find('.fip').html().toString().trim();
-    var Fecha_Fin = perio.find('.ffp').html().toString().trim();
-    var Comentarios = perio.find('.cp').html().toString().trim();
-    var Estado = perio.find('.ep').html().toString().trim();
-    //console.log(Estado);
-    //console.log((Estado === "Activado"));
-    if (Estado === "Activo") {
-        $("#EstadoPeriodoE").prop("checked", true);
-    } else {
-        $("#EstadoPeriodoE").prop("checked", false);
-    }
-//                $('#nombrePeriodoEliminar').html(Fecha_Inicio + " al " + Fecha_Fin);
-    $('#FechaInicioPeriodoE').val(Fecha_Inicio);
-    $('#FechaFinPeriodoE').val(Fecha_Fin);
-    $('#ComentariosPeriodoE').val(Comentarios);
-});
-$("#frmDELPeriodo").submit(function(event) {
+//$('#PeriodoEliminar').on('show.bs.modal', function (event) {
+//
+//});
+//$('#PeriodoModificar').on('show.bs.modal', function (event) {
+//
+//});
+$("#frmDELPeriodo").submit(function (event) {
     event.preventDefault();
     var $form = $(this), PeriodoCodigo = codigoPeriodo.substring(10), url = $form.attr("action");
     console.log(PeriodoCodigo);
     var posting = $.post(url, {PeriodoCodigo: PeriodoCodigo});
-    posting.done(function(data) {
+    posting.done(function (data) {
         //console.log(data);
         if (data) {
             //console.log(data);
@@ -52,16 +34,16 @@ $("#frmDELPeriodo").submit(function(event) {
             $('#tablaPeriodos').find('#Periodo' + PeriodoCodigo).remove();
         }
     });
-    posting.fail(function() {
+    posting.fail(function () {
         $("#PeriodoEliminar").modal('toggle');
         var msj = "<div class='alert alert-danger alert-dismissible fade in' role='alert' >";
-            msj += "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
-            msj +=  "<strong>Error!</strong> Existen grupos asociados al periodo, debe eliminarlos antes de continuar.</div>";
-            $('#MsjErrorPeriodo').html(msj);
+        msj += "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
+        msj += "<strong>Error!</strong> Existen grupos asociados al periodo, debe eliminarlos antes de continuar.</div>";
+        $('#MsjErrorPeriodo').html(msj);
 //        alert("error, existen grupos asociados al periodo, elimine todos los grupos del periodo");
     });
 });
-$("#frmEditPeriodo").submit(function(event) {
+$("#frmEditPeriodo").submit(function (event) {
     event.preventDefault();
     var $form = $(this), idPeriodo = codigoPeriodo.substring(8)
             , FechaInicio = $form.find("input[name='FechaInicioPeriodo']").val()
@@ -76,7 +58,7 @@ $("#frmEditPeriodo").submit(function(event) {
                 , FechaFinal: FechaFinal
                 , Comentarios: Comentarios
                 , Estado: (Estado) ? 1 : 0});
-    posting.done(function(data) {
+    posting.done(function (data) {
         if (data !== null) {
             var obj = jQuery.parseJSON(data);
             var trPeriodo = $('#bodytablaPeriodos').find("#Periodo" + obj.CodigoPeriodo);
@@ -94,11 +76,11 @@ $("#frmEditPeriodo").submit(function(event) {
             $("#PeriodoModificar").modal('toggle');
         }
     });
-    posting.fail(function(xhr, textStatus, errorThrown) {
+    posting.fail(function (xhr, textStatus, errorThrown) {
         alert("error" + xhr.responseText);
     });
 });
-$("#frmGrupoAdd").submit(function(event) {
+$("#frmGrupoAdd").submit(function (event) {
     event.preventDefault();
     var $form = $(this), idPeriodo = codigoPeriodo.substring(10)
             , HoraEntrada = $form.find("input[name='HoraEntradaGrupo']").val()
@@ -112,7 +94,7 @@ $("#frmGrupoAdd").submit(function(event) {
                 , HoraEntrada: HoraEntrada
                 , HoraSalida: HoraSalida
                 , Aula: Aula});
-    posting.done(function(data) {
+    posting.done(function (data) {
         if (data !== null) {
             var obj = jQuery.parseJSON(data);
             var fila = "";
@@ -132,17 +114,55 @@ $("#frmGrupoAdd").submit(function(event) {
             //$("#PeriodoGestion").modal('toggle');
         }
     });
-    posting.fail(function(xhr, textStatus, errorThrown) {
+    posting.fail(function (xhr, textStatus, errorThrown) {
         alert("error" + xhr.responseText);
     });
 });
-$('#PeriodoGestion').on('show.bs.modal', function(event) {
+//$('#PeriodoGestion').on('show.bs.modal', function (event) {
+//
+//});
+//$('#gestionGrupoModal').on('show.bs.modal', function (event) {
+//
+//});
+function NuevoPeriodoModalShow() {
+    $("#PeriodoNuevo").modal();
+}
+function DeletePeriodoShow(fila) {
+    codigoPeriodo = fila.id;
+    var perio = $('#Periodo' + codigoPeriodo.substring(10));
+    var Fecha_Inicio = perio.find('.fip').html().toString().trim();
+    var Fecha_Fin = perio.find('.fip').html().toString().trim();
+    $('#nombrePeriodoEliminar').html(Fecha_Inicio + " al " + Fecha_Fin);
+    $("#PeriodoEliminar").modal('toggle');
+}
+function EditPeriodoShow(fila) {
+    codigoPeriodo = fila.id;
+    var perio = $('#Periodo' + codigoPeriodo.substring(8));
+    var Fecha_Inicio = perio.find('.fip').html().toString().trim();
+    var Fecha_Fin = perio.find('.ffp').html().toString().trim();
+    var Comentarios = perio.find('.cp').html().toString().trim();
+    var Estado = perio.find('.ep').html().toString().trim();
+    //console.log(Estado);
+    //console.log((Estado === "Activado"));
+    if (Estado === "Activo") {
+        $("#EstadoPeriodoE").prop("checked", true);
+    } else {
+        $("#EstadoPeriodoE").prop("checked", false);
+    }
+//                $('#nombrePeriodoEliminar').html(Fecha_Inicio + " al " + Fecha_Fin);
+    $('#FechaInicioPeriodoE').val(Fecha_Inicio);
+    $('#FechaFinPeriodoE').val(Fecha_Fin);
+    $('#ComentariosPeriodoE').val(Comentarios);
+    $("#PeriodoModificar").modal('toggle');
+}
+function GestionPeriodoShow(fila) {
+    codigoPeriodo = fila.id;
     var idPeriodo = codigoPeriodo.substring(10);
     //var url = "PeriodosController/listarGrupos/";
     $('#bodytablaPeriodosGruposO').html('');
     //console.log(idPeriodo);
     var posting = $.post("PeriodosController/listarGrupos/", {idPeriodo: idPeriodo});
-    posting.done(function(data) {
+    posting.done(function (data) {
         if (data !== null) {
             var obj = jQuery.parseJSON(data);
             var tabla = "";
@@ -156,51 +176,36 @@ $('#PeriodoGestion').on('show.bs.modal', function(event) {
                 tabla += '</tr>\n';
             }
             $('#bodytablaPeriodosGruposO').html(tabla);
+            $("#PeriodoGestion").modal('toggle');
+        }
+    });
+    posting.fail(function (xhr, textStatus, errorThrown) {
+        alert("error" + xhr.responseText);
+    });
 
-        }
-    });
-    posting.fail(function(xhr, textStatus, errorThrown) {
-        alert("error" + xhr.responseText);
-    });
-});
-$('#gestionGrupoModal').on('show.bs.modal', function(event) {
-   var idPeriodoGrupo = codigoGrupoPeriodo.substring(7);
-   var posting = $.post("PeriodosController/listarDocentes/", {idPeriodoGrupo: idPeriodoGrupo});
-   posting.done(function(data) {
-        if (data !== null) {
-            $('#gestionGrupoModalTitle').html('Grupo #'+idPeriodoGrupo);
-            $('#DocentesGrupoPeriodo').html(data);
-        }
-    });
-    posting.fail(function(xhr, textStatus, errorThrown) {
-        alert("error" + xhr.responseText);
-    });
-    var posting2 = $.post("PeriodosController/listarEstudiantes/", {idPeriodoGrupo: idPeriodoGrupo});
-   posting2.done(function(data) {
-        if (data !== null) {
-            $('#EstudiantesGrupoPeriodo').html(data);
-        }
-    });
-    posting2.fail(function(xhr, textStatus, errorThrown) {
-        alert("error" + xhr.responseText);
-    });
-});
-function NuevoPeriodoModalShow() {
-    $("#PeriodoNuevo").modal();
-}
-function DeletePeriodoShow(fila) {
-    codigoPeriodo = fila.id;
-    $("#PeriodoEliminar").modal('toggle');
-}
-function EditPeriodoShow(fila) {
-    codigoPeriodo = fila.id;
-    $("#PeriodoModificar").modal('toggle');
-}
-function GestionPeriodoShow(fila) {
-    codigoPeriodo = fila.id;
-    $("#PeriodoGestion").modal('toggle');
 }
 function testShow(fila) {
     codigoGrupoPeriodo = fila.id;
-    $("#gestionGrupoModal").modal('toggle');
+    var idPeriodoGrupo = codigoGrupoPeriodo.substring(7);
+    var posting = $.post("PeriodosController/listarDocentes/", {idPeriodoGrupo: idPeriodoGrupo});
+    posting.done(function (data) {
+        if (data !== null) {
+            $('#gestionGrupoModalTitle').html('Grupo #' + idPeriodoGrupo);
+            $('#DocentesGrupoPeriodo').html(data);
+        }
+    });
+    posting.fail(function (xhr, textStatus, errorThrown) {
+        alert("error" + xhr.responseText);
+    });
+    var posting2 = $.post("PeriodosController/listarEstudiantes/", {idPeriodoGrupo: idPeriodoGrupo});
+    posting2.done(function (data) {
+        if (data !== null) {
+            $('#EstudiantesGrupoPeriodo').html(data);
+            $("#gestionGrupoModal").modal('toggle');
+        }
+    });
+    posting2.fail(function (xhr, textStatus, errorThrown) {
+        alert("error" + xhr.responseText);
+    });
+
 }
