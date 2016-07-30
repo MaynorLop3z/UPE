@@ -206,5 +206,20 @@ WHERE
             return $exc->getTraceAsString();
         }
     }
+    
+    public function inscribirDocente( $grupoperiodo, $usuario) {
+        try {
+            $consulta = $this->db->query('SELECT agregardocentegrupo('.$grupoperiodo.','.$usuario.') AS "Inscripcion"');
+            if ($consulta != null) {
+                $resultado = $consulta->result();
+            } else {
+                
+            }
+
+            return $resultado;
+        } catch (Exception $exc) {
+            return $exc->getTraceAsString();
+        }
+    }
 
 }

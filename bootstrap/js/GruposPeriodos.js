@@ -209,3 +209,25 @@ function inscribirAlumnoGrupo(fila) {
     });
 }
 ;
+
+function asignarDocente(fila) {
+    var idUsuario = fila.id.substring(15);
+    var idGrupoPeriodo = $('#gestionGrupoModalTitle').html().substring(7);
+    var url = "PeriodosController/inscribirDocente/";
+    var posting = $.post(url, {idUsuario: idUsuario, idGrupoPeriodo: idGrupoPeriodo});
+    posting.done(function (data) {
+        var property = document.getElementById(fila.id);
+        var obj = jQuery.parseJSON(data);
+        if (obj[0].Inscripcion === "3") {
+            property.className = "btn_agregar_docente btn btn-success";
+            property.title = "Asignar docente al periodo";
+            $("#" + fila.id).html('<span class="glyphicon glyphicon-ok"></span>');
+        }
+        else {
+            property.className = "btn_agregar_docente btn btn-danger";
+            property.title = "Desasignar docente al periodo";
+            $("#" + fila.id).html('<span class="glyphicon glyphicon-remove"></span>');
+        }
+    });
+}
+;

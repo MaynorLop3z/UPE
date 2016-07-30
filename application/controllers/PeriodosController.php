@@ -174,5 +174,16 @@ class PeriodosController extends CI_Controller {
             echo json_encode($ex);
         }
     }
-
+public function inscribirDocente() {
+        try {
+            if ($this->input->post()) {
+                $idGrupoPeriodo = $this->input->post('idGrupoPeriodo');
+                $idUsuario = $this->input->post('idUsuario');
+                $arrayData = $this->Periodos->inscribirDocente($idGrupoPeriodo, $idUsuario);
+                echo json_encode($arrayData);
+            }
+        } catch (Exception $ex) {
+            echo json_encode($ex);
+        }
+    }
 }
