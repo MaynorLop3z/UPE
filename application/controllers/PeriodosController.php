@@ -133,8 +133,13 @@ class PeriodosController extends CI_Controller {
                 foreach ($docentes as $docente) {
                     $result .= '<tr id="GrupoUser' . $docente->CodigoUsuario . '">\n';
                     $result .= '<td class="DocenteUsuario">' . $docente->Nombre . '</td>\n';
-                    $result .= '<td class="DocenteInscrito">' . $docente->Inscrito . '</td>\n';
-                    $result .= '</tr>\n';
+                    $result .= '<td class="DocenteInscrito">';
+                    if ($docente->Inscrito > 0) {
+                        $result .= '<button id="GrupoDocenteADD' . $docente->CodigoUsuario . '" onclick="asignarDocente(this)" title="Desasignar docente al periodo" class="btn_agregar_docente btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </button>';
+                    } else {
+                        $result .= '<button id="GrupoDocenteADD' . $docente->CodigoUsuario . '" onclick="asignarDocente(this)" title="Asignar docente al periodo" class="btn_agregar_docente btn btn-success"><span class="glyphicon glyphicon-ok"></span> </button>';
+                    }
+                    $result .= '</td>\n</tr>\n';
                 }
                 echo $result;
             }
@@ -155,8 +160,13 @@ class PeriodosController extends CI_Controller {
                     $result .= '<td class="DUIEstudiante">' . $estudiante->NumeroDUI . '</td>\n';
                     $result .= '<td class="CategoriaEstudiante">' . $estudiante->NombreCategoriaParticipante . '</td>\n';
                     $result .= '<td class="ComentariosEstudiante">' . $estudiante->Comentarios . '</td>\n';
-                    $result .= '<td class="EstudianteInscrito">' . $estudiante->Inscrito . '</td>\n';
-                    $result .= '</tr>\n';
+                    $result .= '<td class="EstudianteInscrito">';
+                    if ($estudiante->Inscrito > 0) {
+                        $result .= '<button id="GrupoAlumnoADD' . $estudiante->CodigoParticipante . '" onclick="inscribirAlumnoGrupo(this)" title="Quitar alumno del periodo" class="btn_agregar_alumno btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </button>';
+                    } else {
+                        $result .= '<button id="GrupoAlumnoADD' . $estudiante->CodigoParticipante . '" onclick="inscribirAlumnoGrupo(this)" title="Agregar alumno al periodo" class="btn_agregar_alumno btn btn-success"><span class="glyphicon glyphicon-ok"></span> </button>';
+                    }
+                    $result .= '</td>\n</tr>\n';
                 }
                 echo $result;
             }
@@ -164,4 +174,5 @@ class PeriodosController extends CI_Controller {
             echo json_encode($ex);
         }
     }
+
 }

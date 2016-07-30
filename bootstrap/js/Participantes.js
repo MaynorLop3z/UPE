@@ -7,7 +7,6 @@ $("#DiplomadoP").change(function () {
         idDiplomado = $(this).val();
         var idParticipante = codigoParticipante.substring(9);
         var posting = $.post("ParticipantesController/listarGruposPeriodos/", {idDiplomado: idDiplomado, idParticipante: idParticipante}, function (data) {
-//                            console.log("EntroModulo");
             $("#bodytablaPeriodosGrupos").html(data);
         });
         posting.fail(function (xhr, textStatus, errorThrown) {
@@ -15,19 +14,10 @@ $("#DiplomadoP").change(function () {
         });
     });
 });
+
 $("#btnADDAlumno").on('click', function () {
-
     $("#AlumnoNuevo").modal();
-    //$("#myModal").modal('toggle')
 });
-
-//$('.btn_modificar_alum').on('click', function(event) {
-//    codigoParticipante = this.id;
-//    filaEdit = $(this);
-//    //console.log(filaEdit);
-//    //console.log('Clic en editar al codigo:' + codigoParticipante);
-//    $("#AlumnoEditar").modal('toggle');
-//});
 
 function mostrarEditAlumno(fila) {
     codigoParticipante = fila.id;
@@ -67,7 +57,6 @@ function mostrarEditAlumno(fila) {
 function mostrarInfoAlumno(fila) {
     codigoParticipante = fila.id;
     var alum = $('#alum' + codigoParticipante.substring(8));
-    //console.log(alum);
     var Mail_Alumno = alum.find('.Mail_Alumno').html().toString().trim();
     var TelefonoFijo_Alumno = alum.find('.TelefonoFijo_Alumno').html().toString().trim();
     var TelefonoMovil_Alumno = alum.find('.TelefonoMovil_Alumno').html().toString().trim();
@@ -104,17 +93,16 @@ function mostrarDelAlumno(fila) {
     $('#nombreAlumEliminar').html(Nombre_Alumno);
     $("#AlumnoEliminar").modal('toggle');
 }
+
 function mostrarGruposPeriodos(fila) {
     codigoParticipante = fila.id;
     $("#AlumnoGrupoPeriodo").modal('toggle');
 }
+
 function inscribirUsaurio(fila) {
     var codigoDiplomado = fila.id;
     var idGrupoPeriodo = codigoDiplomado.substring(15);
     var idParticipante = codigoParticipante.substring(9);
-//     console.log(idParticipante);
-//     console.log(idGrupoPeriodo);
-    //alert(codigoDiplomado);
     var url = "ParticipantesController/inscribirAlumno/";
     var posting = $.post(url, {idParticipante: idParticipante, idGrupoPeriodo: idGrupoPeriodo});
     posting.done(function (data) {
@@ -136,34 +124,7 @@ function inscribirUsaurio(fila) {
         alert("error" + xhr.responseText);
     });
 }
-//$('.btn_ver_alum').on('click', function(event) {
-//    codigoParticipante = this.id;
-//    //filaEdit = $(this);
-//    //console.log(filaEdit);
-//    //console.log('Clic en ver al codigo:' + codigoParticipante);
-//    $("#AlumnoVIEWDATA").modal('toggle');
-//});
-
-//$('.btn_eliminar_alum').on('click', function(event) {
-//    codigoParticipante = this.id;
-//    //filaEdit = $(this);
-//    //console.log(filaEdit);
-//    //console.log('Clic en eliminar al codigo:' + codigoParticipante);
-//    $("#AlumnoEliminar").modal('toggle');
-//});
-
-//$('#AlumnoVIEWDATA').on('show.bs.modal', function (event) {
-//    
-//});
-//
-//$('#AlumnoEditar').on('show.bs.modal', function (event) {
-//
-//});
-//
-//$('#AlumnoEliminar').on('show.bs.modal', function (event) {
-//    
-//});
-
+;
 
 $("#frmADDAlumno").submit(function (event) {
     event.preventDefault();
@@ -213,7 +174,6 @@ $("#frmADDAlumno").submit(function (event) {
         alert("error");
     });
 });
-
 
 $("#frmEditarAlumno").submit(function (event) {
     event.preventDefault();
@@ -274,8 +234,6 @@ $("#frmEditarAlumno").submit(function (event) {
     });
 });
 
-
-
 $("#frmDELAlumno").submit(function (event) {
     event.preventDefault();
     var $form = $(this), AlumnoCodigo = codigoParticipante.substring(7), url = $form.attr("action");
@@ -292,7 +250,6 @@ $("#frmDELAlumno").submit(function (event) {
     });
 });
 
-
 $("#frmFINDAlumno").submit(function (event) {
     event.preventDefault();
     var $form = $(this), AlumnoNombre = $form.find("input[name='NombreBuscado']").val(), url = $form.attr("action");
@@ -302,9 +259,6 @@ $("#frmFINDAlumno").submit(function (event) {
             $('#tableAlumnos').html(data);
         }
     });
-//    posting.fail(function() {
-//        alert("error");
-//    });
     posting.fail(function (xhr, textStatus, errorThrown) {
         alert("error" + xhr.responseText);
     });
