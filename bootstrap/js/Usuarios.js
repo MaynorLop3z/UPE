@@ -9,24 +9,6 @@ $("#containerTablePaging").on("click", ".btn_modificar_user", function (e) {
     var dataU = tr.data("userd");
     codigoUsuario = dataU;
     $("#usuarioModifica").modal('show');
-});
-
-$("#containerTablePaging").on("click", ".btn_eliminar_user", function (e) {
-    var tr = $(this).parent().parent().parent();
-    var dataU = tr.data("userd");
-    codigoUsuario = dataU;
-    $("#usuarioElimina").modal('show');
-});
-
-$("#containerTablePaging").on("click", ".btn_rls_user", function (e) {
-    var tr = $(this).parent().parent().parent();
-    var dataU = tr.data("userd");
-    codigoUsuario = dataU;
-    $("#usuarioRoles").modal('show');
-});
-
-$('#usuarioModifica').on('show.bs.modal', function (event) {
-
     var url = 'UsuarioController/getUsrByCod/';
     var posting = $.post(url, {codUser: codigoUsuario});
 
@@ -45,11 +27,24 @@ $('#usuarioModifica').on('show.bs.modal', function (event) {
     posting.fail(function (data) {
         alert("error");
     });
-
 });
 
-$('#usuarioRoles').on('show.bs.modal', function (event) {
-    var url = 'UsuarioController/rolByUsr/';
+$("#containerTablePaging").on("click", ".btn_eliminar_user", function (e) {
+    var tr = $(this).parent().parent().parent();
+    var dataU = tr.data("userd");
+    codigoUsuario = dataU;
+    $("#usuarioElimina").modal('show');
+       var tr = $('#tr' + codigoUsuario);
+    var dataU = tr.data("userd");
+    $('#nombreUserEliminar').html(dataU.Nombre);
+});
+
+$("#containerTablePaging").on("click", ".btn_rls_user", function (e) {
+    var tr = $(this).parent().parent().parent();
+    var dataU = tr.data("userd");
+    codigoUsuario = dataU;
+    $("#usuarioRoles").modal('show');
+     var url = 'UsuarioController/rolByUsr/';
     var posting = $.post(url, {cod_usr: codigoUsuario});
 
     posting.done(function (data) {
@@ -61,6 +56,16 @@ $('#usuarioRoles').on('show.bs.modal', function (event) {
         alert("error");
     });
 });
+
+//$('#usuarioModifica').on('show.bs.modal', function (event) {
+//
+//    
+//
+//});
+
+//$('#usuarioRoles').on('show.bs.modal', function (event) {
+//   
+//});
 
 
 $("#frmGuardarUSer").submit(function (event) {
@@ -86,7 +91,7 @@ $("#frmGuardarUSer").submit(function (event) {
             $('#containerTablePaging').html(data);
             $("#usuarioNuevo").modal('toggle');
 
-//            $("#usuarioNuevo").modal().hide();
+//          $("#usuarioNuevo").modal().hide();
         }
     });
     posting.fail(function (data) {
@@ -141,12 +146,10 @@ $("#frmEliminarUser").submit(function (event) {
     });
 });
 
-$('#usuarioElimina').on('show.bs.modal', function (event) {
-
-    var tr = $('#tr' + codigoUsuario);
-    var dataU = tr.data("userd");
-    $('#nombreUserEliminar').html(dataU.Nombre);
-});
+//$('#usuarioElimina').on('show.bs.modal', function (event) {
+//
+// 
+//});
 
 $("#containerTablePaging").on("keypress", "#txtPagingSearchUsr", function (e) {
     e.stopImmediatePropagation();

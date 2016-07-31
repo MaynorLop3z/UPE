@@ -54,8 +54,7 @@ class Usuarios extends CI_Model {
     }
 
     public function editarUsuario($codigoUsuario, $nombreUsuario, $contraseniaUsuario, $nombrePersonaUsuario, $correo, $userModifica, $ipModifica, $comentarios) {
-        try {
-            try {
+         try {
                 $data = array(
                     'NombreUsuario' => $nombreUsuario,
                     'ContraseniaUsuario' => $contraseniaUsuario,
@@ -73,10 +72,6 @@ class Usuarios extends CI_Model {
             } catch (Exception $ex) {
                 $ex->getMessage();
             }
-            
-        } catch (Exception $ex) {
-            $ex->getMessage();
-        }
     }
 
     public function eliminarUsuario($codigoUsuario) {
