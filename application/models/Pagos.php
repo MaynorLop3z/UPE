@@ -5,7 +5,7 @@ if (!defined('BASEPATH'))
 
 //include('ModeloBase.php');
 
-class Usuarios extends CI_Model {
+class Pagos extends CI_Model {
 
     public function __construct() {
         parent::__construct();
@@ -69,11 +69,10 @@ class Usuarios extends CI_Model {
                 $this->db->where('CodigoUsuario', $codigoUsuario);
                 $this->db->update('Usuarios', $data);
 //                $data['CodigoUsuario'] = $codigoUsuario;
-              return  $this->findUsuario($codigoUsuario);
+                return $this->findUsuario($codigoUsuario);
             } catch (Exception $ex) {
                 $ex->getMessage();
             }
-            
         } catch (Exception $ex) {
             $ex->getMessage();
         }
@@ -153,18 +152,18 @@ class Usuarios extends CI_Model {
             $codUser;
             $rolesUserDB;
             $rolEncontrado = FALSE;
-            $rolesUser=  $object = json_decode(json_encode(($rolesUsera)), FALSE);
+            $rolesUser = $object = json_decode(json_encode(($rolesUsera)), FALSE);
             if ($rolesUser != null && count($rolesUser) > 0) {
                 foreach ($rolesUser as $rolUsr) {
-                    $codUser=$rolUsr->CodigoUsuario;
+                    $codUser = $rolUsr->CodigoUsuario;
                 }
-                
-                
+
+
                 $rolesUserDB = $this->getRolesByUsr($codUser);
             }
 
             foreach ($rolesUser as $rolUsr) {
-                
+
                 if ($rolUsr->Sta == AGREGA_REG) {
                     //Comprobar que el usuario no tenga ese rol  
                     if ($rolesUserDB != null && count($rolesUserDB) > 0) {
@@ -176,8 +175,8 @@ class Usuarios extends CI_Model {
                                 $rolEncontrado = FALSE;
                             }
                         }
-                    }else{
-                       
+                    } else {
+                        
                     }
                     if ($rolEncontrado) {
                         
@@ -206,9 +205,54 @@ class Usuarios extends CI_Model {
             //Rutina para eliminar
             return $codUser;
         } catch (Exception $e) {
-           return $e->getMessage();
+            return $e->getMessage();
         }
-       
+    }
+
+    public function listarUsuariosPagosPorLike($nombreAlum, $carnetAlum, $duiAlum) {
+        try {
+            $query = 'SELECT par."Nombre" , gp."CodigoGruposParticipantes"  
+            FROM public."GruposParticipantes" gp join 
+            public."Participantes" par on gp."CodigoParticipante" = par."CodigoParticipante"  
+            join public."GrupoPeriodos" gper on 
+            gper."CodigoGrupoPeriodo"=gp."CodigoGrupoPeriodo" ';
+            
+           if($nombreAlum!=null){
+               $query.='WHERE  par."Nombre" LIKE \'%' . $nombreAlum . '%\'';
+           }
+               
+            
+            if ($duiAlum != null) {
+
+                if (strpos($query, 'WHERE') !== TRUE) {
+                    $query.=' AND ';
+                   
+                }else{
+                     $query.=' WHERE '; 
+                }
+                $query.=' par."NumeroDUI" LIKE  \'%' . $duiAlum . '%\'';
+            }
+            if ($carnetAlum != null) {
+                if (strpos($query, 'WHERE') !== TRUE) {
+                    $query.=' AND ';
+                   
+                }else{
+                     $query.=' WHERE '; 
+                }
+                
+                $query.='  par."CarnetAlumno" LIKE  \'%' . $carnetAlum . '%\'';
+            }
+
+            $consulta = $this->db->query($query);
+            if ($consulta != null) {
+                $resultado = $consulta->result();
+            } else {
+                
+            }
+            return $resultado;
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
     }
 
 }

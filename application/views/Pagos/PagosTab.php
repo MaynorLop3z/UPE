@@ -1,5 +1,5 @@
 <?php $this->load->helper('url'); ?>
-
+<script src="../bootstrap/js/Pagos.js"></script>
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">Gestion de Pagos</h3>
@@ -9,7 +9,7 @@
 
         </div>
         <div class="panel panel-default">
-            <form id="frmSearchAlum"  action="PagosController/buscarAlumno" class="form-horizontal" method="post" >
+            <form id="frmSearchAlum"  action="PagosController/buscarAlum" class="form-horizontal" method="post" >
                 <fieldset>
                     <legend class="modal-header">Buscar Alumno:</legend> 
                     <div class="form-group">
@@ -30,7 +30,7 @@
             </form>
         </div>
         <br>
-        <div id="containerTablePaging">
+        <div id="containerTablePagingPag">
             <table id="tableParticipantesPag" class="table table-bordered table-striped table-hover table-responsive">
                 <thead>
                     <tr>

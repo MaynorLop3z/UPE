@@ -12,8 +12,8 @@ class PagosController extends CI_Controller {
         try {
             parent::__construct();
             $this->load->database();
-            $this->load->model('Usuarios');
-            $this->load->model('Rol');
+            $this->load->model('Pagos');
+
             $this->load->library('utilidadesWeb');
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
@@ -26,18 +26,18 @@ class PagosController extends CI_Controller {
             //$data['RolesList'] = $this->Rol->listarRoles();
 
             $data['RowsPorPag'] = ROWS_PER_PAGE;
-            $data['ToTalRegistros'] =0 ;
+            $data['ToTalRegistros'] = 0;
 //            $data['ToTalRegistros'] = $this->Usuarios->countAllUsers();
             $data['PagInicial'] = 1;
 
-           // $data['totalPaginas'] = $this->getTotalPaginas();
+            // $data['totalPaginas'] = $this->getTotalPaginas();
             $data['totalPaginas'] = 0;
 
-           // $permisos = $this->session->userdata('permisosUsuer');
+            // $permisos = $this->session->userdata('permisosUsuer');
             //$this->analizarPermisos('views/Usuarios/UsuariosTab.php', 'views/Usuarios/UsuariosTabTmp.php', $permisos);
 //           
 //            $data['buttonsByUserRights'] = $this->analizarPermisosBotonesTablas("gestionUserBtn", $permisos);
-            $this->load->view('Pagos',$data);
+            $this->load->view('Pagos', $data);
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }
@@ -254,15 +254,14 @@ class PagosController extends CI_Controller {
                 if ($this->input->post('data_ini') != null) {
                     $pagAct = $this->input->post('data_ini');
                     $final = $this->input->post('data_ini');
-                    
+
                     if ($pagAct <= 0) {
                         $pagAct = 1;
                         $final = 1;
-                    }else if($pagAct > $this->getTotalPaginas()) {
-                        $pagAct =$this->getTotalPaginas();
-                        $final=$this->getTotalPaginas();
+                    } else if ($pagAct > $this->getTotalPaginas()) {
+                        $pagAct = $this->getTotalPaginas();
+                        $final = $this->getTotalPaginas();
                     }
-                    
                 } else if ($this->input->post('data_inip') != null) {
                     $pagAct = $this->input->post('data_inip') - 1;
                     $final = $this->input->post('data_inip') - 1;
@@ -276,9 +275,9 @@ class PagosController extends CI_Controller {
                     $final = $this->input->post('data_inin');
                     $final+=1;
                     if ($pagAct > $this->getTotalPaginas()) {
-                        $pagAct =$this->getTotalPaginas();
-                        $final=$this->getTotalPaginas();
-                    }  else {
+                        $pagAct = $this->getTotalPaginas();
+                        $final = $this->getTotalPaginas();
+                    } else {
                         
                     }
                 } else {
@@ -297,7 +296,7 @@ class PagosController extends CI_Controller {
 
             $buttonsByUserRights = $this->analizarPermisosBotonesTablas("gestionUserBtn", $this->session->userdata('permisosUsuer'));
 
-            $cadena .= '<table id=' . '"tableUsers"' . 'class="table table-bordered table-striped table-hover table-responsive"' . '>';
+            $cadena.='<table id=' . '"tableParticipantesPag"' . 'class="table table-bordered table-striped table-hover table-responsive"' . '>';
             $cadena.='<thead>
                 <tr>
                     <th style="text-align:center">Nombre</th>
@@ -345,6 +344,42 @@ class PagosController extends CI_Controller {
         } else if ($user != null && $this->input->post('codUser') == null) {
             return $user;
         }
+    }
+
+    public function buscarAlum() {
+        try {
+            if ($this->input->post()) {
+               
+                $nombre=$this->input->post('NombreParticipan');
+                $carnet=$this->input->post('CarnetParticipan');
+                $dui=$this->input->post('DuiParticipan');
+                $cadena='';
+                $Alumnos = $this->Pagos->listarUsuariosPagosPorLike($nombre,$carnet,$dui);
+//                foreach ($Usuarios as $user) {
+//                    array_push($Response, ($user));
+//                }
+
+                $cadena.='<table id=' . '"tableParticipantesPag"' . 'class="table table-bordered table-striped table-hover table-responsive"' . '>';
+                $cadena.='<thead>
+                <tr>
+                    <th style="text-align:center">Nombre</th>
+                   
+                </tr>
+                </thead> 
+                <tbody>';
+                foreach ($Alumnos as $alum) {
+                    $cadena.='<tr data-userpd=' . ($alum->CodigoGruposParticipantes) . ' id="tr' . $alum->CodigoGruposParticipantes . '">';
+                    $cadena.=' <td class="nombre_Usuario" >' . $alum->Nombre.'</td> </tr>';
+                }
+                
+                $cadena.='</tbody></table>';
+
+//                $responseDef = json_encode($Response);
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+        echo $cadena;
     }
 
 }
