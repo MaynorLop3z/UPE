@@ -310,7 +310,7 @@
 
         <!-- Ingresar Modals -->
         <div class="portfolio-modal modal fade" id="Login2" tabindex="-1" role="dialog" aria-hidden="true" >
-            <div class="modal-content" style="background:url(../bootstrap/images/profile2.png); background-repeat: no-repeat;   background-position: right bottom; background-color: white ">
+            <div class="modal-content" style="background:url(bootstrap/images/profile2.png); background-repeat: no-repeat;   background-position: right bottom; background-color: white ">
                 <div class="close-modal" data-dismiss="modal">
                     <div class="lr">
                         <div class="rl">

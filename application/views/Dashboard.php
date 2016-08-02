@@ -13,7 +13,7 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Bootstrap -->          
         <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="icon" href="../bootstrap/minerva.jpg" type="image/x-icon" />
+        <link rel="icon" href="../bootstrap/images/minerva.jpg" type="image/x-icon" />
         <script src="../bootstrap/js/jquery.min.js"></script>
         <script src="../bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -54,12 +54,12 @@ foreach ($Permisos as $p) {
                 <div class="col-md-10">
                     <nav class="navbar navbar-inverse">
                         <div class="navbar-header">
-                            <a class="navbar-brand" href="#">UPESYS</a>
+                            <a class="navbar-brand" href="#"><img src="../bootstrap/images/minervaB.png" style="height: 170%;display: inline">UPESYS</a>
                         </div>
                         <div>
                             <ul class="nav  navbar-right center-block ">
                                 <label id="labelpersona">Bienvenid@: <?= $this->session->userdata('nombreUserLogin'); ?></label>
-                                <button id="btnsalir" name="btnsalir" onclick="window.location.href = '<?php echo base_url(); ?>'" class="btn btn-default "><span class="glyphicon glyphicon-log-out"></span>Salir</button>
+                                <button id="btnsalir" name="btnsalir" onclick="window.location.href = '<?php echo base_url(); ?>#page-top'" class="btn btn-default "><span class="glyphicon glyphicon-log-out"></span>Salir</button>
                             </ul>
                         </div> 
 

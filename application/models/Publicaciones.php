@@ -269,6 +269,108 @@ ORDER BY
         return $resultado;
     }
 
+    
+    
+
+/****************************************************************************
+ *                                                                          *
+ *                       PARA LA TAB ARCHIVOS*                              *
+ *                                                                          *
+ *                                                                          *       
+ *                                                                          *
+ * *************************************************************************/
+
+    public function listarPublicacionesParaArchivo() { //LISTA TODAS LAS PUBLICACIOONES DE GRUPO
+           $consulta = $this->db->query('SELECT 
+            "Publicaciones"."CodigoPublicacion", 
+            "Publicaciones"."UsuarioPublica", 
+            "Publicaciones"."FechaPublicacion", 
+            "Publicaciones"."Titulo", 
+            "Publicaciones"."Contenido", 
+            "Publicaciones"."ParticipantePublica", 
+            "Publicaciones"."Estado", 
+            "Publicaciones"."CodigoGrupoPeriodo", 
+            "Publicaciones"."CodigoGrupoParticipantes", 
+            "Publicaciones"."CodigoGrupoPeriodoUsuario", 
+            "Publicaciones"."CodigoTipoPublicacion", 
+            "Publicaciones"."CodigoCategoriaDiplomado", 
+            "CategoriaDiplomados"."NombreCategoriaDiplomado",
+            "Archivos"."Extension"
+          FROM 
+            public."CategoriaDiplomados", 
+            public."Publicaciones",
+            public."Archivos"
+          WHERE
+          "CategoriaDiplomados"."CodigoCategoriaDiplomado"  = public."Publicaciones"."CodigoCategoriaDiplomado"
+          AND
+          "Archivos"."CodigoPublicaciones" = public."Publicaciones"."CodigoPublicacion"
+          AND 
+          "Publicaciones"."CodigoTipoPublicacion" ='.TIPO_PUBLICACION_GRUPO.' 
+          ORDER BY
+          "Publicaciones"."FechaPublicacion" DESC; 
+          ');
+
+           $resultado = $consulta->result();
+           return $resultado;
+       }
+
+       public function GruposPorMaestro($codigo){ //LISTA LOS GRUPOS DEL MAESTRO POR SU $codigo
+           $consulta= $this->db->query('SELECT
+                            "GruposMaestros"."CodigoGrupoPeriodo"
+                    FROM
+                            "GruposMaestros"
+                    WHERE
+                            "GruposMaestros"."CodigoUsuario" = '.$codigo.'
+                    AND	
+                            "GruposMaestros"."Estado" = 1');
+           $resultado = $consulta->result();
+           return $resultado;
+       }
+       
+       public function ListarArchivosDelMaestro($codigo){ //LISTA LOS ARCHIVOS DEL MAESTRO
+           $consulta= $this->db->query('SELECT "Publicaciones"."CodigoPublicacion",
+                        "Publicaciones"."UsuarioPublica", 
+                        "Publicaciones"."FechaPublicacion", 
+                        "Publicaciones"."Titulo",
+                        "Publicaciones"."Contenido",
+                        "Publicaciones"."ParticipantePublica",
+                        "Publicaciones"."Estado",
+                        "Publicaciones"."CodigoGrupoPeriodo",
+                        "Publicaciones"."CodigoGrupoPeriodoUsuario",
+                        "Publicaciones"."CodigoTipoPublicacion",
+                        "Publicaciones"."CodigoCategoriaDiplomado",
+                        "CategoriaDiplomados"."NombreCategoriaDiplomado",
+                        "Archivos"."Extension",
+                        "Archivos"."Ruta",
+                        "Archivos"."Nombre",
+                        "GruposMaestros"."CodigoUsuario"
+                        
+                 FROM   
+                         public."CategoriaDiplomados", 
+                         public."Publicaciones",
+                         public."Archivos",
+                         public."GruposMaestros"
+                 WHERE  	
+                         "Publicaciones"."CodigoGrupoPeriodoUsuario" = public."GruposMaestros"."CodigoGruposPeriodoUsuario"
+
+                 AND
+                         "GruposMaestros"."CodigoUsuario" = '.$codigo.'
+
+                 AND    
+                         "Publicaciones"."CodigoTipoPublicacion" = '.TIPO_PUBLICACION_GRUPO.'
+                 
+                 AND
+                        "CategoriaDiplomados"."CodigoCategoriaDiplomado"  = public."Publicaciones"."CodigoCategoriaDiplomado"
+          
+                AND
+                        "Archivos"."CodigoPublicaciones" = public."Publicaciones"."CodigoPublicacion"
+
+                 ORDER BY
+                           "Publicaciones"."FechaPublicacion" DESC; 
+                            ');
+           $resultado = $consulta->result();
+           return $resultado;
+       }
 }
 
 ?>
