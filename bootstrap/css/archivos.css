@@ -1,0 +1,42 @@
+/*
+    le da estilo a la modal de subir archivos
+*/
+
+.showImage{
+   
+    -ms-interpolation-mode: bicubic; //hack ie
+    max-width:500px;
+    max-height:500px;
+    height: 10%;
+    width: 10% ;
+    text-align: center;
+
+}
+.messages{
+    float: left;
+    font-family: sans-serif;
+    display: none;
+}
+.info{
+
+    font-size: 10px;
+    text-align: center;
+}
+.before{
+
+    font-size: 10px;
+    text-align: center;
+}
+.success{
+
+    font-size: 10px;
+    text-align: center;
+}
+.error{
+    padding: 10px;
+    border-radius: 10px;
+    background: red;
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+}
