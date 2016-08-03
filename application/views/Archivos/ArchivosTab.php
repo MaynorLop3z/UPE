@@ -8,8 +8,8 @@
     <?php foreach ($gruposMaestro as $grup) { //Lista cada grupo como tabs
         ?>
      <li >
-         <a href="#grupo<?=$grup->CodigoGrupoPeriodo?>" data-toggle="tab" >
-             Grupo <?php echo $grup->CodigoGrupoPeriodo?> 
+         <a href="#grupo<?=$grup->CodigoGrupoPeriodo?>" data-toggle="tab" title="<?php echo $grup->NombreCategoriaDiplomado?> " >
+             Grupo <?php echo $grup->CodigoGrupoPeriodo."(".str_split($grup->FechaInicioPeriodo,7)[0].")" ?> - <?php echo $grup->NombreModulo?> 
              <span class="badge">
              <?php 
                 $total=0;
@@ -51,6 +51,7 @@
                 <th>Titulo</th>
                 <th>Fecha de Publicación</th>
                 <th>Tipo de Archivo</th>
+                <th>Tamaño</th>
                 <th>Acción</th>
             </tr>
         </thead> 
@@ -58,13 +59,23 @@
   
     <?php $principal=0;
         foreach ($archivosMaestro as $arch) { //Listar cada archivo
-         if($arch->CodigoGrupoPeriodo== $grup->CodigoGrupoPeriodo){
+         if($arch->CodigoGrupoPeriodo== $grup->CodigoGrupoPeriodo){ 
+             $tamar=filesize('bootstrap'.$arch->Ruta);
+             if($tamar>=1024 & $tamar<1048576){
+                 $tamar = round($tamar/1024, 0)." Kb";
+             }  else if($tamar >= 1048576) {
+                 $tamar = round($tamar/1048576, 2)." Mb";
+             }else{
+                 $tamar = $tamar." B";
+             }
+        
              ?>
             <tr  data-dipd='<?php echo json_encode($arch) ?>' 
                      id="dip<?php echo $arch->CodigoPublicacion ?>">
                     <td class="Titulo"><?php echo $arch->Titulo ?></td>
                     <td class="Publicado"><?php echo $arch->FechaPublicacion ?></td>
                     <td class="TipoArchivo"><?php echo strtoupper($arch->Extension) ?></td>
+                    <td class="TipoArchivo"><?php echo $tamar; ?></td>
                     <td class="gestion_dip" >
                         <button id="downArc<?php echo $arch->CodigoPublicacion ?>" onclick="<?php echo base_url() ?>index.php/ArchivosController/downloads/<?php echo $arch->Nombre?>"  title="Descargar Archivo" class="btndeldip btn btn-warning" class="btn btn-info btn-lg"><span class=" glyphicon glyphicon-download-alt"></span></button>
                         <button id="deleArc<?php echo $arch->CodigoPublicacion ?>" onclick=""  title="Eliminar Archivo" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>

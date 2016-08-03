@@ -16,6 +16,8 @@ class ArchivosController extends CI_Controller {
         $data['allArchivos'] = $this->Publicaciones->listarPublicacionesParaArchivo();
         $data['gruposMaestro'] = $this->Publicaciones->GruposPorMaestro($this->session->userdata("codigoUserLogin"));
         $data['archivosMaestro'] = $this->Publicaciones->ListarArchivosDelMaestro($this->session->userdata("codigoUserLogin"));
+        $data['gruposAlumno'] = $this->Publicaciones->ListarGruposAlumno($this->session->userdata("codigoUserLogin"));
+        $data['archivosAlumno'] = $this->Publicaciones->ListarArchivosParaAlumno($this->session->userdata("codigoUserLogin"));
         //$data['listCategorias'] = $this->Publicaciones->listarCategoriasDiplomados();
         //$data['listNombreCategoria']= $this->Publicaciones->listarCategoriasDiplomados(NULL);
         //$data['PagInicial'] = 1;
@@ -131,4 +133,17 @@ class ArchivosController extends CI_Controller {
            force_download($name,$data);
 
     }
+    
+    /************ CALCULA SIZE DE ARCHIVO EN BYTES, KB O MB*******/
+    public function get_tamanio($tamar){
+        if($tamar>=1024 & $tamar<1048576){
+                 $tamar = round($tamar/1024, 0)." Kb";
+             }  else if($tamar >= 1048576) {
+                 $tamar = round($tamar/1048576, 2)." Mb";
+             }else{
+                 $tamar = $tamar." B";
+             }
+        echo $tamar;
+    }
+    
 }

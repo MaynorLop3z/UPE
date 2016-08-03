@@ -22,7 +22,24 @@
         <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
 
+            <!-- jQuery -->
+        <script src="bootstrap/js/jquery.js"></script>
 
+        <!-- Bootstrap Core JavaScript -->
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+
+        <!-- Plugin JavaScript -->
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+        <script src="bootstrap/js/classie.js"></script>
+        <script src="bootstrap/js/cbpAnimatedHeader.js"></script>
+        <script src="bootstrap/js/websitejs.js"></script>
+
+        <!-- Contact Form JavaScript -->
+        <script src="bootstrap/js/jqBootstrapValidation.js"></script>
+        <script src="bootstrap/js/contact_me.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="bootstrap/js/freelancer.js"></script>
     </head>
 
 
@@ -394,24 +411,7 @@
             </div>
         </div>
 
-        <!-- jQuery -->
-        <script src="bootstrap/js/jquery.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-
-        <!-- Plugin JavaScript -->
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-        <script src="bootstrap/js/classie.js"></script>
-        <script src="bootstrap/js/cbpAnimatedHeader.js"></script>
-        <script src="bootstrap/js/websitejs.js"></script>
-
-        <!-- Contact Form JavaScript -->
-        <script src="bootstrap/js/jqBootstrapValidation.js"></script>
-        <script src="bootstrap/js/contact_me.js"></script>
-
-        <!-- Custom Theme JavaScript -->
-        <script src="bootstrap/js/freelancer.js"></script>
+    
 
     </body>
 
