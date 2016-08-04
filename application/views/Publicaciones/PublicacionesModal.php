@@ -7,7 +7,7 @@
 
 <!---------Modal nueva publicacion-------------------------->
 <div id="NuevaPublicacion" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog" >
         <div class="modal-content">
             <div class="container-fluid ">
                 <button type="button" class="close" id="btnCerrarDi"  data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -60,7 +60,7 @@
 
                                         <button type="submit" id="btnAceptar" onclick="" class=" btn btn-default" name="aceptar"  disabled="true">Aceptar</button>
                                         <button type="reset" id="btnLimpiarPubli" onclick="" class=" btn btn-default" name="Limpiar" >Limpiar</button>
-                                        <button type="reset" id="btnCancelarP" onclick="" class=" btn btn-default" name="cancelar" >Cancelar</button>
+                                        <button type="cancel" id="btnCancelarP" onclick="" class=" btn btn-default" name="cancelar" >Cancelar</button>
                                     </div>
                                 </fieldset>
                             </form>

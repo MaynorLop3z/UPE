@@ -321,11 +321,14 @@ ORDER BY
                             "GrupoPeriodos"."CodigoPeriodo",
                             "Periodos"."CodigoModulo",
                             "Periodos"."FechaInicioPeriodo",
-                            "Modulos"."NombreModulo"
+                            "Modulos"."NombreModulo",
+                            "Diplomados"."NombreDiplomado"
                             
                     FROM
-                            public."GruposMaestros", public."CategoriaDiplomados", public."Publicaciones", public."GrupoPeriodos",
-                            public."Periodos", public."Modulos"
+                            public."GruposMaestros", public."CategoriaDiplomados", 
+                            public."Publicaciones", public."GrupoPeriodos",
+                            public."Periodos", public."Modulos",
+                            public."Diplomados"
                     WHERE
                             "GruposMaestros"."CodigoUsuario" = '.$codigo.'
                                 
@@ -346,6 +349,9 @@ ORDER BY
 
 		    AND 
 			   public."Modulos"."CodigoModulo" = public."Periodos"."CodigoModulo"
+                    
+                    AND
+			   public."Modulos"."CodigoDiplomado" = public."Diplomados"."CodigoDiplomado"
                 ');
            $resultado = $consulta->result();
            return $resultado;
