@@ -32,7 +32,7 @@ class ArchivosController extends CI_Controller {
             if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
 
                 //obtenemos el archivo a subir
-                $file = $_FILES['archivo']['name'];
+                $file = $_FILES['archivoA']['name'];
 
                 //comprobamos si existe un directorio para subir el archivo
                 //si no es así, lo creamos
@@ -41,7 +41,7 @@ class ArchivosController extends CI_Controller {
                     mkdir("./bootstrap/images/publicaciones/", 0777);
 
                 //comprobamos si el archivo ha subido
-                if ($file && move_uploaded_file($_FILES['archivo']['tmp_name'], "./bootstrap/images/publicaciones/" . $file)) {
+                if ($file && move_uploaded_file($_FILES['archivoA']['tmp_name'], "./bootstrap/images/publicaciones/" . $file)) {
                     sleep(3); //retrasamos la petición 3 segundos
                     echo $file; //devolvemos el nombre del archivo para pintar la imagen
                 }
@@ -74,7 +74,7 @@ class ArchivosController extends CI_Controller {
                 
             //comprobacion de campos diferentes a NULL
                 if ($tituloP != NULL && $contenidoP != NULL && $nambre != NULL) {
-                    $arrayDataPublicacion = $this->Publicaciones->CrearPublicacion($usuarioPublica, $FechaPublicacion, $tituloP, $contenidoP, TRUE, null, null, null, TIPO_PUBLICACION_WEB, null, $categoria);
+                    $arrayDataPublicacion = $this->Publicaciones->CrearPublicacion($usuarioPublica, $FechaPublicacion, $tituloP, $contenidoP, TRUE, null, null, null, TIPO_PUBLICACION_GRUPO, null, $categoria);
                     $CodigoPublicaciones = $arrayDataPublicacion['CodigoPublicacion'];
                     $this->Publicaciones->CrearArchivo($Ruta, $test, $ext, $Estado, $CodigoUsuarios, $CodigoPublicaciones, $usuarioPublica, $ipPublica, $FechaPublicacion);
 

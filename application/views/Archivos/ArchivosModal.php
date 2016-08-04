@@ -17,7 +17,7 @@
                         <!--La linea de abajo abre el selector de imgs -->
                         <form class="formulario" enctype="multipart/form-data" method="post" action="<?php echo base_url() ?>index.php/ArchivosController/do_upload/" id="archivoform">
                             <fieldset> 
-                                <input type="file"  size="20" name="archivo" id= "fileArchivo" >
+                                <input type="file"  size="20" name="archivoA" id= "fileArchivo" >
                                 <!--div para visualizar mensajes-->
                                 <div class="messages"></div><br /><br />
                                 <input type="button" value="Subir el Archivo" class="btn btn-default" id="subirArchivo" />

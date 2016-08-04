@@ -36,11 +36,18 @@ $(document).ready(function () {
         //obtenemos el tamaño del archivo
         var fileSize = file.size;
         var labeltemp = "bytes";
-       
+        if (fileSize>=1024 & fileSize<1048576){
+            fileSize = fileSize/1024;
+            labeltemp= "Kb";
+        }else if(fileSize>=1048576){
+            fileSize = fileSize/1048576;
+            labeltemp= "Mb";
+        }
+        
         //obtenemos el tipo de archivo image/png ejemplo
         var fileType = file.type;
         //mensaje con la información del archivo
-        showMessage("<span class='info'>Archivo para subir: " + fileName + ", peso total: " + fileSize + " " + labeltemp +".</span>");
+        showMessage("<span class='info'>Archivo para subir: " + fileName + ", peso total: " + fileSize.toFixed(2) + " " + labeltemp +".</span>");
     });
 
     //al enviar el formulario
@@ -193,7 +200,7 @@ $('#botonesArchivo').submit(function (event)
             url = $form.attr("action"),
             Nombre = $form.find("input[name='nombreArchivo']").val(),
             Extension = $form.find("input[name='extArchivo']").val(),
-            categoria = $form.find("select[name='categoriasl']").val();
+            categoria = Categoria;
 
     var posting = $.post(url, {
         Titulo: Titulo,
