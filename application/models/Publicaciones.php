@@ -129,7 +129,9 @@ ORDER BY
         return $resultado;
     }
 
-    public function CrearPublicacion($UsuarioPublica, $FechaPublicacion, $Titulo, $Contenido, $Estado, $CodigoGrupoPeriodo, $CodigoGrupoPeriodoUsuario, $CodigoGrupoParticipantes, $CodigoTipoPublicacion, $ParticipantePublica, $CodigoCategoriaDiplomado) {
+    public function CrearPublicacion($UsuarioPublica, $FechaPublicacion, $Titulo, $Contenido, $Estado,
+                                    $CodigoGrupoPeriodo, $CodigoGrupoPeriodoUsuario, $CodigoGrupoParticipantes,
+                                    $CodigoTipoPublicacion, $ParticipantePublica, $CodigoCategoriaDiplomado) {
         $data = array(
             'UsuarioPublica' => $UsuarioPublica,
             'FechaPublicacion' => $FechaPublicacion,
@@ -151,20 +153,38 @@ ORDER BY
     }
 
     public function EliminarPublicacion($CodigoPublicacion) {
-        $this->db->delete('Publicaciones', array('CodigoPublicacion' => $CodigoPublicacion));
-        //Hay que verificar si existen publicaciones de ser asi no eliminar o cambiar a una
-        //por defecto
+        //$this->db->delete('Publicaciones', array('CodigoPublicacion' => $CodigoPublicacion));
+        try{
+            $updateData=array("Estado"=>"FALSE");
+            $this->db->where("CodigoPublicacion",$CodigoPublicacion);
+            $this->db->update("Publicaciones",$updateData);
+            return true;
+        }catch(Exception $e){
+            return false;
+        }
     }
 
     public function EliminarArchivosPublicacion($CodigoPublicaciones) {
         $this->db->delete('Archivos', array('CodigoPublicaciones' => $CodigoPublicaciones));
+    }
+    
+    public function ObtenerRutaArchivo($CodigoPublicaciones) {
+        $this->db->select('Ruta');
+        $this->db->from('Archivos');
+        $this->db->where('CodigoPublicaciones', $CodigoPublicaciones);
+        $consulta = $this->db->get();
+        $ret = $consulta->row();
+        return $ret->Ruta;
     }
 
     public function EliminarArchivo($CodigoArchivo) {
         $this->db->delete('Archivos', array('CodigoArchivos' => $CodigoArchivo));
     }
 
-    public function ModificarPublicacion($CodigoPublicacion, $UsuarioPublica, $FechaPublicacion, $Titulo, $Contenido, $Estado, $CodigoCodigoGrupoPeriodo, $CodigoGrupoPeriodoUsuario, $GrupoParticipantes, $CodigoTipoPublicacion, $CodigoCategoriaDiplomado, $ParticipantePublica = null) {
+    public function ModificarPublicacion($CodigoPublicacion, $UsuarioPublica, $FechaPublicacion, $Titulo, 
+                                        $Contenido, $Estado, $CodigoCodigoGrupoPeriodo, $CodigoGrupoPeriodoUsuario, 
+                                        $GrupoParticipantes, $CodigoTipoPublicacion, $CodigoCategoriaDiplomado, 
+                                        $ParticipantePublica = null) {
         $data = array(
             'UsuarioPublica' => $UsuarioPublica,
             'FechaPublicacion' => $FechaPublicacion,
@@ -315,14 +335,16 @@ ORDER BY
        }
 
        public function GruposPorMaestro($codigo){ //LISTA LOS GRUPOS DEL MAESTRO POR SU $codigo
-           $consulta= $this->db->query('SELECT
+           $consulta= $this->db->query('SELECT DISTINCT
                             "GruposMaestros"."CodigoGrupoPeriodo",
                             "CategoriaDiplomados"."NombreCategoriaDiplomado",
+                            "CategoriaDiplomados"."CodigoCategoriaDiplomado",
                             "GrupoPeriodos"."CodigoPeriodo",
                             "Periodos"."CodigoModulo",
                             "Periodos"."FechaInicioPeriodo",
                             "Modulos"."NombreModulo",
-                            "Diplomados"."NombreDiplomado"
+                            "Diplomados"."NombreDiplomado",
+                            "GruposMaestros"."CodigoGruposPeriodoUsuario"
                             
                     FROM
                             public."GruposMaestros", public."CategoriaDiplomados", 
@@ -352,6 +374,10 @@ ORDER BY
                     
                     AND
 			   public."Modulos"."CodigoDiplomado" = public."Diplomados"."CodigoDiplomado"
+                           
+                    ORDER BY
+                           
+                           public."GruposMaestros"."CodigoGruposPeriodoUsuario" DESC; 
                 ');
            $resultado = $consulta->result();
            return $resultado;
@@ -385,6 +411,9 @@ ORDER BY
 
                  AND
                          "GruposMaestros"."CodigoUsuario" = '.$codigo.'
+                 
+                 AND
+                         "Publicaciones"."Estado" = TRUE
 
                  AND    
                          "Publicaciones"."CodigoTipoPublicacion" = '.TIPO_PUBLICACION_GRUPO.'
@@ -396,7 +425,7 @@ ORDER BY
                         "Archivos"."CodigoPublicaciones" = public."Publicaciones"."CodigoPublicacion"
 
                  ORDER BY
-                           "Publicaciones"."FechaPublicacion" DESC; 
+                           "Publicaciones"."CodigoPublicacion" DESC; 
                             ');
            $resultado = $consulta->result();
            return $resultado;
@@ -469,6 +498,9 @@ ORDER BY
 
                  AND    
                          "Publicaciones"."CodigoTipoPublicacion" = '.TIPO_PUBLICACION_GRUPO.'
+                 
+                 AND
+                         "Publicaciones"."Estado" = TRUE
                  
                  AND
                         "CategoriaDiplomados"."CodigoCategoriaDiplomado"  = public."Publicaciones"."CodigoCategoriaDiplomado"

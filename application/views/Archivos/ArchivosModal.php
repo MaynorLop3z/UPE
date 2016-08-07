@@ -15,9 +15,10 @@
 
                     <div class="col-lg-9">
                         <!--La linea de abajo abre el selector de imgs -->
-                        <form class="formulario" enctype="multipart/form-data" method="post" action="<?php echo base_url() ?>index.php/ArchivosController/do_upload/" id="archivoform">
+                        <form class="formulario" enctype="multipart/form-data" method="post" action="<?php echo base_url() ?>index.php/ArchivosController/do_upload/" id="formArchivo">
                             <fieldset> 
-                                <input type="file"  size="20" name="archivoA" id= "fileArchivo" >
+                                <input type="file"  size="20" name="archivoArchivo" id= "fileArchivo" >
+                                <input type="hidden" id="nombremodArchivo" name="nombremodArchivo" value="" readonly>
                                 <!--div para visualizar mensajes-->
                                 <div class="messages"></div><br /><br />
                                 <input type="button" value="Subir el Archivo" class="btn btn-default" id="subirArchivo" />
@@ -64,26 +65,26 @@
         </div>
     </div>
 </div>
-<!--end modal nueva publicacion-->
+<!--end modal nuevo-->
 
 
 
 <!--Modal para eliminar publicaciones-->
-<div id="EliminarPublicacion" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="EliminarPublicacionGrupo" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="container-fluid ">
                 <button type="button" class="close btn-lg" data-dismiss="modal"  aria-label="Close" ><span aria-hidden="true">&times;</span></button>
-                <form id="frmDELpub" action="<?php echo base_url() ?>index.php/PublicacionesController/EliminarPublicacion/" class="form-horizontal" class="form-horizontal" method="post" >
-                    <legend class="modal-header">Publicacion:</legend> 
+                <form id="frmDELpubGr" action="" class="form-horizontal" class="form-horizontal" method="post" >
+                    <legend class="modal-header">Borrar Archivo:</legend> 
                     <div class="form-group">
                         <div class="col-lg-9">
-                            <label>¿Realmente desea eliminar la Publicacion <mark id="nombreDipPub">?</mark></label>
+                            <label>¿Realmente desea eliminar el Archivo <mark id="nombreDipPubGr"></mark>?</label>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" id="btnEnviarPub" onclick="" class=" btn btn-default" name="Eliminar">Eliminar</button>
-                        <button type="reset" id="btnLimpiarPub" onclick="" class=" btn btn-default" name="Limpiar">Cancelar</button>
+                        <button type="buton" id="btnEliminarPubGr" class=" btn btn-danger btn-ok" name="Eliminar"> SI </button>
+                        <button type="button" id="btnCancelarPubGr" class="btn btn-default" data-dismiss="modal" name="Limpiar">NO</button>
                     </div>
                     
                 </form>

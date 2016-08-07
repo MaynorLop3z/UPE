@@ -10,16 +10,15 @@
      <li >
          <a href="#grupo<?=$grup->CodigoGrupoPeriodo?>" data-toggle="tab" title="<?php echo $grup->NombreDiplomado?> " >
              Grupo <?php echo $grup->CodigoGrupoPeriodo."(".str_split($grup->FechaInicioPeriodo,7)[0].")" ?> - <?php echo $grup->NombreModulo?> 
-             <span class="badge">
              <?php 
                 $total=0;
                 foreach ($archivosMaestro as $arch) { //numero de archivos por grupo
                  if($arch->CodigoGrupoPeriodo== $grup->CodigoGrupoPeriodo){
                      $total++;
                  }
-                }
-                echo $total; //Total de archivos que se muestra en el tab
-              ?>     
+                }//Total de archivos que se muestra en el tab
+              ?> 
+             <span class="badge" id="badge-grupo<?php echo $grup->CodigoGrupoPeriodo?>"><?php echo $total?>
              </span>
          </a>
      </li>
@@ -42,10 +41,14 @@
       <h3>Administrar archivos del grupo</h3>
       <div <?php echo $idhome?>>
         <div class="btn btn-group">
-          <button onclick="setVarsOpenModal('<?php echo $grup->CodigoGrupoPeriodo?>','<?php echo $grup->NombreCategoriaDiplomado?>')"  class="btn btn-default btn-default" >Subir Nuevo Archivo</button>
+          <button onclick="setVarsOpenModal('<?php echo $grup->CodigoGrupoPeriodo?>',
+                      '<?php echo $grup->NombreCategoriaDiplomado?>',
+                      '<?php echo $grup->CodigoCategoriaDiplomado?>',
+                      '<?php echo $grup->CodigoGruposPeriodoUsuario?>'
+                      )" class="btn btn-default btn-default" >Subir Nuevo Archivo</button>
         </div>
       </div>  
-    <table id="tableTitulo"  class="table table-bordered table-striped table-hover table-responsive">
+    <table id="table-g<?php echo $grup->CodigoGrupoPeriodo?>"  class="table table-bordered table-striped table-hover table-responsive">
         <thead>
             <tr><!--Informacion a mostrar de las publicaciones-->
                 <th>Archivo</th>
@@ -77,10 +80,10 @@
                     <td class="Descripción"><?php echo ($arch->Contenido!= NULL ? $arch->Contenido: "No hay descripción") ?></td>
                     <td class="Publicado" ><?php echo $arch->FechaPublicacion ?></td>
                     <td class="TipoArchivo"><?php echo strtoupper($arch->Extension) ?></td>
-                    <td class="TamArchivo" style="width:70px;"><?php echo $tamar; ?></td>
+                    <td class="TamArchivo" style="width:100px;"><?php echo $tamar; ?></td>
                     <td class="gestion_dip" style="width:150px;">
                         <button id="downArc<?php echo $arch->CodigoPublicacion ?>" onclick="goArchivo('<?php echo base_url() ?>index.php/ArchivosController/downloads/<?php echo $arch->Nombre?>')"  title="Descargar Archivo" class="btndeldip btn btn-warning" class="btn btn-info btn-lg"><span class=" glyphicon glyphicon-download-alt"></span></button>
-                        <button id="deleArc<?php echo $arch->CodigoPublicacion ?>" onclick=""  title="Eliminar Archivo" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>
+                        <button id="deleArc<?php echo $arch->CodigoPublicacion ?>" onclick="delArchivo('<?php echo $arch->CodigoPublicacion ?>','<?php echo $arch->Titulo ?>','<?=$grup->CodigoGrupoPeriodo?>')"  title="Eliminar Archivo" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>
                     </td>
             </tr>
         <?php 

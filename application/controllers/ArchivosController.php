@@ -13,37 +13,35 @@ class ArchivosController extends CI_Controller {
     }
     
     public function index() {
-        $data['allArchivos'] = $this->Publicaciones->listarPublicacionesParaArchivo();
-        $data['gruposMaestro'] = $this->Publicaciones->GruposPorMaestro($this->session->userdata("codigoUserLogin"));
-        $data['archivosMaestro'] = $this->Publicaciones->ListarArchivosDelMaestro($this->session->userdata("codigoUserLogin"));
-        $data['gruposAlumno'] = $this->Publicaciones->ListarGruposAlumno($this->session->userdata("codigoUserLogin"));
-        $data['archivosAlumno'] = $this->Publicaciones->ListarArchivosParaAlumno($this->session->userdata("codigoUserLogin"));
-        //$data['listCategorias'] = $this->Publicaciones->listarCategoriasDiplomados();
-        //$data['listNombreCategoria']= $this->Publicaciones->listarCategoriasDiplomados(NULL);
-        //$data['PagInicial'] = 1;
+        $login=$this->session->userdata("codigoUserLogin");
+        //$data['allArchivos'] = $this->Publicaciones->listarPublicacionesParaArchivo();
+        $data['gruposMaestro'] = $this->Publicaciones->GruposPorMaestro($login);
+        $data['archivosMaestro'] = $this->Publicaciones->ListarArchivosDelMaestro($login);
+        $data['gruposAlumno'] = $this->Publicaciones->ListarGruposAlumno($login);
+        $data['archivosAlumno'] = $this->Publicaciones->ListarArchivosParaAlumno($login);
         $this->load->view('Archivos',$data);
-        
     }
 
-  //Esta funcion sube la imagen o el archivo  a la carpeta destinada
+  //sube el archivo  a la carpeta de publicaciones
     function do_upload() {
         try {
             //comprobamos que sea una petición ajax
-            if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+            if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && 
+                    strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
 
                 //obtenemos el archivo a subir
-                $file = $_FILES['archivoA']['name'];
+                $file = $_FILES['archivoArchivo']['name'];
+                $fileNom =$this->input->post('nombremodArchivo');
 
-                //comprobamos si existe un directorio para subir el archivo
-                //si no es así, lo creamos
                 //direccion de la carpeta donde se va a subir la imagen o archivo
                 if (!is_dir("./bootstrap/images/publicaciones/"))
                     mkdir("./bootstrap/images/publicaciones/", 0777);
 
                 //comprobamos si el archivo ha subido
-                if ($file && move_uploaded_file($_FILES['archivoA']['tmp_name'], "./bootstrap/images/publicaciones/" . $file)) {
-                    sleep(3); //retrasamos la petición 3 segundos
-                    echo $file; //devolvemos el nombre del archivo para pintar la imagen
+                if ($fileNom && move_uploaded_file($_FILES['archivoArchivo']['tmp_name'],
+                                        "./bootstrap/images/publicaciones/" . $fileNom)) {
+                    sleep(3);
+                    echo $file;
                 }
             } else {
                 throw new Exception("Error Processing Request", 1);
@@ -62,7 +60,10 @@ class ArchivosController extends CI_Controller {
                 $tituloP = $this->input->post('Titulo');
                 $contenidoP = $this->input->post('Contenido');
                 $nambre = $this->input->post('Nombre');
-                $categoria = $this->input->post('Categoria');
+                $categoria = $this->input->post('CCategoria');
+                
+                $codigoGrupoPeriodo = $this->input->post('CodGruPe');
+                $codigoGrupoPeriodoUsuario = $this->input->post('CodGruPeUs');
 
             //ingresar los datos del archivo a la bd
                 $test = $nambre;
@@ -74,46 +75,49 @@ class ArchivosController extends CI_Controller {
                 
             //comprobacion de campos diferentes a NULL
                 if ($tituloP != NULL && $contenidoP != NULL && $nambre != NULL) {
-                    $arrayDataPublicacion = $this->Publicaciones->CrearPublicacion($usuarioPublica, $FechaPublicacion, $tituloP, $contenidoP, TRUE, null, null, null, TIPO_PUBLICACION_GRUPO, null, $categoria);
+                    $arrayDataPublicacion = $this->Publicaciones->CrearPublicacion(
+                                            $usuarioPublica, $FechaPublicacion, $tituloP, $contenidoP, TRUE, 
+                                            $codigoGrupoPeriodo, $codigoGrupoPeriodoUsuario, null, 
+                                            TIPO_PUBLICACION_GRUPO, null, $categoria);
+                    
                     $CodigoPublicaciones = $arrayDataPublicacion['CodigoPublicacion'];
-                    $this->Publicaciones->CrearArchivo($Ruta, $test, $ext, $Estado, $CodigoUsuarios, $CodigoPublicaciones, $usuarioPublica, $ipPublica, $FechaPublicacion);
+                    $this->Publicaciones->CrearArchivo($Ruta, $test, $ext, $Estado, $CodigoUsuarios, 
+                                          $CodigoPublicaciones, $usuarioPublica, $ipPublica, $FechaPublicacion);
 
                     echo json_encode($CodigoPublicaciones);
                 } else {
-                    echo "Error algunas de los campos son nulos" + "titulo = " + $tituloP + "contenido = " + $contenidoP + "nombre = " + $nambre + $ext;
+                    echo "Error algunas de los campos son nulos" . "titulo = " . $tituloP 
+                            . "contenido = " . $contenidoP . "nombre = " . $nambre . $ext;
                 }
             }
         } catch (Exception $exc) {
             echo json_encode($exc);
         }
     }
-
     
-    //este metodo borra una archivo o imagen  de la carpeta del servidor
-    function borrarImgCarpeta() {
-        $nombreImg = $this->input->post('Nombre');
-        if ($nombreImg != NULL) {
-            $nombreImg = "./bootstrap/images/publicaciones/" . $nombreImg; //ruta de la carpeta donde esta guardado el archivo o imagen
-            unlink($nombreImg);
+    //borra una archivo de la carpeta del servidor
+    function borrarArchCarpeta() {
+        $archivo = $this->input->post('Nombre');
+        if ($archivo  != NULL) {
+            $archivo  = "./bootstrap/images/publicaciones/" . $archivo;
+            unlink($archivo);
         } else {
             return false;
         }
     }
 
-    //begin of delete Publicaciones 
-    //still in progress , doesn't  work yet :(
-    public function eliminarPubliacion() {
-        //$eliminar = false;
+    //************ ELIMINA PUBLICACION DE ARCHIVOS ***********************
+    public function eliminarPublicacion() {
         try {
-            if ($this->input->post()) {
-                $codigoPublicacion = $this->input->post('CodigoPublicacion');
-                if ($codigoPublicacion != null) {
-                    $this->Publicaciones->EliminarArchivosPublicacion($codigoPublicacion);
-                    $arrayData = $this->Publicaciones->EliminarPublicacion($codigoPublicacion);
-                    // $ip,$userModifica
-                    echo json_encode($arrayData);
-                }
-//          
+            //$codigoPublicacion = $cod;
+            $codigoPublicacion =$this->input->post('Cod');
+            if ($codigoPublicacion != null) {
+                $archivo = $this->Publicaciones->ObtenerRutaArchivo($codigoPublicacion);
+                $this->Publicaciones->EliminarArchivosPublicacion($codigoPublicacion);
+                $arrayData = $this->Publicaciones->EliminarPublicacion($codigoPublicacion);
+                $ruta = "./bootstrap" . $archivo;
+                unlink($ruta);
+                echo json_encode($arrayData);
             }
         } catch (Exception $ex) {
             $data = array(
@@ -124,14 +128,11 @@ class ArchivosController extends CI_Controller {
     }
 
 
-
     //************ DESCARGA DE ARCHIVOS ***********************
 
     public function downloads($name){
-
            $data = file_get_contents(base_url().'/bootstrap/images/publicaciones/'.$name);
            force_download($name,$data);
-
     }
     
     /************ CALCULA SIZE DE ARCHIVO EN BYTES, KB O MB*******/

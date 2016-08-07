@@ -35,8 +35,16 @@ $(document).ready(function () {
         var fileSize = file.size;
         //obtenemos el tipo de archivo image/png ejemplo
         var fileType = file.type;
+        var labeltemp = "bytes";
+        if (fileSize>=1024 & fileSize<1048576){
+            fileSize = fileSize/1024;
+            labeltemp= "Kb";
+        }else if(fileSize>=1048576){
+            fileSize = fileSize/1048576;
+            labeltemp= "Mb";
+        }
         //mensaje con la información del archivo
-        showMessage("<span class='info'>Archivo para subir: " + fileName + ", peso total: " + fileSize + " bytes.</span>");
+        showMessage("<span class='info'>Archivo para subir: " + fileName + ", peso total: " + fileSize + " "+labeltemp+".</span>");
     });
 
     //al enviar el formulario
