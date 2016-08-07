@@ -1,18 +1,16 @@
 //Variables globales 
-var codigoUsuario;
-var fileExtension = "";
-var fileName;
-var codigoPublicacion;
-var filaEdit;
-var fileSize;
-var codi;
+var codigoUsuarioArc;
+var fileExtensionArc = "";
+var fileNameArc;
+var codigoPubliArc;
+var fileSizeArc;
 var Grupo;
 var Categoria;
 var CCategoria;
 var CoGrPerUs;
 var CoDel;
 var gru;
-
+//prepara form para nueva publicacion
 function setVarsOpenModal(gru,cat,ccat,cgperu){
    Grupo = gru;
    Categoria=cat;
@@ -31,38 +29,38 @@ $(document).ready(function () {
         //generando un nombre con menos posibilidad de duplicado
         var d = new Date();
         var n = d.getTime();
-        fileName = n+ofileName;
+        fileNameArc = n+ofileName;
         //obtenemos la extensión del archivo
-        fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1);
-        $('#nombreArchivo').val(fileName);
-        $('#nombremodArchivo').val(fileName);
-        $('#extArchivo').val(fileExtension);
+        fileExtensionArc = fileNameArc.substring(fileNameArc.lastIndexOf('.') + 1);
+        $('#nombreArchivo').val(fileNameArc);
+        $('#nombremodArchivo').val(fileNameArc);
+        $('#extArchivo').val(fileExtensionArc);
 
         //obtenemos el size del archivo
-        fileSize= file.size;
-        var labeltemp = "bytes";
-        if (fileSize>=1024 & fileSize<1048576){
-            fileSize = fileSize/1024;
-            labeltemp= "Kb";
-        }else if(fileSize>=1048576){
-            fileSize = fileSize/1048576;
-            labeltemp= "Mb";
+        fileSizeArc= file.size;
+        
+        if (fileSizeArc>=1024 & fileSizeArc<1048576){
+            fileSizeArc = Math.round(fileSizeArc/1024) +" Kb";
+        }else if(fileSizeArc>=1048576){
+            fileSizeArc = (fileSizeArc/1048576).toFixed(2) +" Mb";
+        }else{
+            fileSizeArc=fileSizeArc+" bytes";
         }
         //obtenemos el tipo de archivo image/png ejemplo
         var fileType = file.type;
         //mensaje con la información del archivo
-        showMessage("<span class='info'>Archivo para subir: " + ofileName + ", peso total: " + fileSize.toFixed(2) + " " + labeltemp +".</span>");
+        showMessage("<span class='info'>Archivo para subir: " + ofileName + ", peso total: " + fileSizeArc +".</span>");
     });
 
     //al enviar el formulario
     $('#subirArchivo').click(function () {
         //información del formulario
-        var formData = new FormData($(".formulario")[0]);
+        var formData = new FormData($("#formArchivo")[0]);
         var message = "";
-        if (IsValidFormat(fileExtension) === true) {
+        if (IsValidFormat(fileExtensionArc) === true) {
             //hacemos la petición ajax  
             $.ajax({
-                url: $('.formulario').attr('action'),
+                url: $('#formArchivo').attr('action'),
                 type: 'POST',
                 //datos del formulario
                 data: formData,
@@ -76,11 +74,11 @@ $(document).ready(function () {
                 },
                 //una vez finalizado correctamente
                 success: function (data) {
-                    if (IsValidFormat(fileExtension) === true)
+                    if (IsValidFormat(fileExtensionArc) === true)
                     {
-                        $('#nombreArchivo').val(fileName);
-                        $('#extArchivo').val(fileExtension);
-                        message = $("<span class='success'>El archivo se ha subido correctamente.</span>");
+                        $('#nombreArchivo').val(fileNameArc);
+                        $('#extArchivo').val(fileExtensionArc);
+                        message = $("<span class='success' style='color:#00b33b;'>El archivo se ha subido correctamente.</span>");
                         showMessage(message);
                     }
 //                  habilitado si se ha subido correctamente.
@@ -180,29 +178,7 @@ $(document).ready(function () {
     }
 });
 
-function delArchivo(pub,nam, ur){
-    CoDel=pub;
-    gru=ur;
-    $('#nombreDipPubGr').html(nam);
-    $("#EliminarPublicacionGrupo").modal();
-}
-
-$('#btnEliminarPubGr').on("click", function(e){
-    e.preventDefault();
-    if (CoDel !== null) {
-        $.post("ArchivosController/eliminarPublicacion/", {Cod: CoDel});
-     }
-     var badge='#badge-grupo'+gru;
-     $(badge).hide();
-     var num = $(badge).text();
-     $(badge).html(parseInt(num)-1);
-     $(badge).show();
-     var eli='#dip'+CoDel;
-    $(eli).hide('slow');
-    $('#EliminarPublicacionGrupo').modal('toggle');
-});
-    
-//guarda el registro
+//guarda el registro nuevo y actualiza tabla
 $('#botonesArchivo').submit(function (event){
     event.preventDefault();
     var $form = $(this), Titulo = $form.find("input[name='tituloArchivo']").val(),
@@ -238,20 +214,29 @@ $('#botonesArchivo').submit(function (event){
             document.getElementById("formArchivo").reset();
             document.getElementById("archivotexarea").value = "";
             document.getElementById("btnAceptarArchivo").disabled = true;
-            $('#NuevoArchivo').modal("toggle");
             
             var tabla = '#table-g'+Grupo;
             var d = new Date();
-            var curr_date = d.getDate();
-            var curr_month = d.getMonth();
+            function pad(s) { return (s < 10) ? '0' + s : s; }
+            var curr_date = pad(d.getDate());
+            var curr_month = pad(d.getMonth()+1);
             var curr_year = d.getFullYear();
-            $(tabla+' tr:first').after('<tr> <td class="Archivo">'+Titulo+'</td>'+
+            $(tabla+' tr:first').after('<tr id="dip'+obj+'"> <td class="Archivo">'+Titulo+'</td>'+
                     '<td class="Descripción">'+Contenido+'</td>'+
                     '<td class="Publicado" >'+curr_year+'-'+curr_month+'-'+curr_date+'</td>'+
-                    '<td class="TipoArchivo">'+Extension.toLowerCase()+'</td>'+ 
-                    '<td class="TamArchivo" style="width:100px;">'+fileSize.toFixed(2)+'</td>'+
-                    '<td class="gestion_dip" style="width:150px;">Acciones se procesaran hasta refrescar la pagina</td>'+
-            '</tr>'); 
+                    '<td class="TipoArchivo">'+Extension.toUpperCase()+'</td>'+ 
+                    '<td class="TamArchivo" style="width:100px;">'+fileSizeArc+'</td>'+
+                    '<td class="gestion_dip" style="width:150px;">'+
+                        '<button id="downArc'+obj+'" onclick="goArchivo(\'ArchivosController/downloads/'+fileNameArc+'\')"  title="Descargar Archivo" class="btndeldip btn btn-warning" class="btn btn-info btn-lg"><span class=" glyphicon glyphicon-download-alt"></span></button> '+
+                        '<button id="deleArc'+obj+'" onclick="delArchivo(\''+obj+'\',\''+Titulo+'\',\''+Grupo+'\')"  title="Eliminar Archivo" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>'+
+                    '</td>'+
+            '</tr>');
+            var badge='#badge-grupo'+Grupo;
+            $(badge).hide();
+            var num = $(badge).text();
+            $(badge).html(parseInt(num)+1);
+            $(badge).show();
+            $('#NuevoArchivo').modal("toggle");
         }
     });
     posting.fail(function (xhr, textStatus, errorThrown) {
@@ -259,68 +244,64 @@ $('#botonesArchivo').submit(function (event){
     });
 });
 
-//boton que elimina el archivo de ala carpeta y limpia el form al dar cancelar, cierra la modal depues de dar cancelar
+// limpia el form al cancelar
 $('#btnCancelarPArchivo').on('click', function (e) {
     e.preventDefault();
     var $form = $(this);
     var Nombre = $('#botonesArchivo').find("input[name='nombreArchivo']").val();
-//   <?php echo base_url() ?>index.php/PublicacionesController/borrarImgCarpeta/
-    if (fileName !== null) {
-//        Nombre= "" + Nombre;
-        $.post("ArchivosController/borrarArchCarpeta/", {Nombre: fileName});
+    if (fileNameArc !== null) {
+        $.post("ArchivosController/borrarArchCarpeta/", {Nombre: fileNameArc});
     }
-//    alert(Nombre);
-   // $(".showImage").html("");
     $(":text").each(function () {
         $($(this)).val('');
     });
     $(".messages").html("").show();
-//    $('#subir').reset();
     document.getElementById("formArchivo").reset();
     document.getElementById("archivotexarea").value = "";
     document.getElementById("btnAceptarArchivo").disabled = true;
     $('#NuevoArchivo').modal("toggle");
 });
 
-//boton que elimina el archivo de ala carpeta y limpia el form al dar cancelar, NO cierra la modal depues de dar limpiar
+//limpia el form al resetear
 $('#btnLimpiarPubliArchivo').on('click', function (e) {
     e.preventDefault();
     var Nombre = $('#botonesArchivo').find("input[name='nombreArchivo']").val();
-//   <?php echo base_url() ?>index.php/PublicacionesController/borrarImgCarpeta/
-    if (fileName !== null) {
-//        Nombre= "" + Nombre;
-        $.post("ArchivosController/borrarArchCarpeta/", {Nombre: fileName});
+    if (fileNameArc !== null) {
+        $.post("ArchivosController/borrarArchCarpeta/", {Nombre: fileNameArc});
     }
-//    alert(Nombre);
-    //$(".showImage").html("");
     $(":text").each(function () {
         $($(this)).val('');
     });
     $(".messages").html("").show();
-//    $('#subir').reset();
     document.getElementById("formArchivo").reset();
     document.getElementById("archivotexarea").value = "";
     document.getElementById("btnAceptarArchivo").disabled = true;
 });
 
-
-//_________________________ from here doesn't work yet ______________________________
-function eliminarPublicacion(fila) {
-    codigoPublicacion = fila.id;
-    codigoPublicacion = codigoPublicacion.substring(12);
-    $('#EliminarPublicacion').modal('toggle');
-
+//prepara form para eliminar
+function delArchivo(pub,nam, ur){
+    CoDel=pub;
+    gru=ur;
+    $('#nombreDipPubGr').html(nam);
+    $("#EliminarPublicacionGrupo").modal();
 }
 
-
-$("#EliminarPublicacion").on('show.bs.modal', function (event) {
-    var dip = $('#dip' + codigoPublicacion);
-
-    var NombreDiplomadoE = dip.find(".titulo").html().toString().trim();
-    $('#nombreDipPub').html(TituloDiplomado);
+//elimina y actualiza tabla
+$('#btnEliminarPubGr').on("click", function(e){
+    e.preventDefault();
+    if (CoDel !== null) {
+        $.post("ArchivosController/eliminarPublicacion/", {Cod: CoDel});
+     }
+     var badge='#badge-grupo'+gru;
+     $(badge).hide();
+     var num = $(badge).text();
+     $(badge).html(parseInt(num)-1);
+     $(badge).show();
+     var eli='#dip'+CoDel;
+    $(eli).hide('slow');
+    $('#EliminarPublicacionGrupo').modal('toggle');
 });
-
-
+    
 //-----------------DESCARGAS------------------
 
 //function goArchivo(arch){

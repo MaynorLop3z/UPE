@@ -60,7 +60,7 @@
 
                                         <button type="submit" id="btnAceptar" onclick="" class=" btn btn-default" name="aceptar"  disabled="true">Aceptar</button>
                                         <button type="reset" id="btnLimpiarPubli" onclick="" class=" btn btn-default" name="Limpiar" >Limpiar</button>
-                                        <button type="cancel" id="btnCancelarP" onclick="" class=" btn btn-default" name="cancelar" >Cancelar</button>
+                                        <button type="reset" id="btnCancelarP" onclick="" class=" btn btn-default" name="cancelar" >Cancelar</button>
                                     </div>
                                 </fieldset>
                             </form>
