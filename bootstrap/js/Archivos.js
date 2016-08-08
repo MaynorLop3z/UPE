@@ -247,8 +247,8 @@ $('#botonesArchivo').submit(function (event){
 // limpia el form al cancelar
 $('#btnCancelarPArchivo').on('click', function (e) {
     e.preventDefault();
-    var $form = $(this);
-    var Nombre = $('#botonesArchivo').find("input[name='nombreArchivo']").val();
+//    var $form = $(this);
+//    var Nombre = $('#botonesArchivo').find("input[name='nombreArchivo']").val();
     if (fileNameArc !== null) {
         $.post("ArchivosController/borrarArchCarpeta/", {Nombre: fileNameArc});
     }
@@ -265,7 +265,7 @@ $('#btnCancelarPArchivo').on('click', function (e) {
 //limpia el form al resetear
 $('#btnLimpiarPubliArchivo').on('click', function (e) {
     e.preventDefault();
-    var Nombre = $('#botonesArchivo').find("input[name='nombreArchivo']").val();
+//    var Nombre = $('#botonesArchivo').find("input[name='nombreArchivo']").val();
     if (fileNameArc !== null) {
         $.post("ArchivosController/borrarArchCarpeta/", {Nombre: fileNameArc});
     }

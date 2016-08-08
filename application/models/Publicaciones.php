@@ -336,6 +336,7 @@ ORDER BY
 
        public function GruposPorMaestro($codigo){ //LISTA LOS GRUPOS DEL MAESTRO POR SU $codigo
            $consulta= $this->db->query('SELECT DISTINCT
+			"GruposMaestros"."CodigoGruposPeriodoUsuario",
                             "GruposMaestros"."CodigoGrupoPeriodo",
                             "CategoriaDiplomados"."NombreCategoriaDiplomado",
                             "CategoriaDiplomados"."CodigoCategoriaDiplomado",
@@ -343,8 +344,7 @@ ORDER BY
                             "Periodos"."CodigoModulo",
                             "Periodos"."FechaInicioPeriodo",
                             "Modulos"."NombreModulo",
-                            "Diplomados"."NombreDiplomado",
-                            "GruposMaestros"."CodigoGruposPeriodoUsuario"
+                            "Diplomados"."NombreDiplomado"
                             
                     FROM
                             public."GruposMaestros", public."CategoriaDiplomados", 
@@ -356,12 +356,9 @@ ORDER BY
                                 
                     AND	
                             "GruposMaestros"."Estado" = 1
-                            
-                    AND     
-                            public."Publicaciones"."CodigoGrupoPeriodoUsuario" = public."GruposMaestros"."CodigoGruposPeriodoUsuario"
-                            
-                    AND
-			   "CategoriaDiplomados"."CodigoCategoriaDiplomado"  = public."Publicaciones"."CodigoCategoriaDiplomado"
+
+                    AND	
+                            "GrupoPeriodos"."Estado" = TRUE
 
                     AND
 			   public."GruposMaestros"."CodigoGrupoPeriodo" = public."GrupoPeriodos"."CodigoGrupoPeriodo"
@@ -371,13 +368,16 @@ ORDER BY
 
 		    AND 
 			   public."Modulos"."CodigoModulo" = public."Periodos"."CodigoModulo"
-                    
+
+		    AND
+			   public."Diplomados"."CodigoDiplomado" = public."Modulos"."CodigoDiplomado"
+			                            
                     AND
-			   public."Modulos"."CodigoDiplomado" = public."Diplomados"."CodigoDiplomado"
+			   "CategoriaDiplomados"."CodigoCategoriaDiplomado"  = public."Diplomados"."CodigoCategoriaDiplomado"
                            
                     ORDER BY
                            
-                           public."GruposMaestros"."CodigoGruposPeriodoUsuario" DESC; 
+                           public."GruposMaestros"."CodigoGruposPeriodoUsuario" DESC;  
                 ');
            $resultado = $consulta->result();
            return $resultado;
@@ -442,13 +442,16 @@ ORDER BY
                             
                     FROM
                             public."GruposParticipantes", public."GrupoPeriodos",
-                            public."Periodos", public."Modulos", public."Diplomados"
+                            public."Periodos", public."Modulos", public."Diplomados", public."CategoriaDiplomados"
                             
                     WHERE
                             "GruposParticipantes"."CodigoParticipante" = '.$codigo.'
                              
                     AND	
                             "GruposParticipantes"."CodigoEstadosParticipacion" = 1
+                    
+                    AND	
+                            "GrupoPeriodos"."Estado" = TRUE
 
                     AND     
                             public."GrupoPeriodos"."CodigoGrupoPeriodo" = public."GruposParticipantes"."CodigoGrupoPeriodo"
@@ -460,7 +463,14 @@ ORDER BY
 			   public."Modulos"."CodigoModulo" = public."Periodos"."CodigoModulo"
 
 		    AND
-			   public."Modulos"."CodigoDiplomado" = public."Diplomados"."CodigoDiplomado"
+			   public."Diplomados"."CodigoDiplomado" = public."Modulos"."CodigoDiplomado"
+			                            
+                    AND
+			   "CategoriaDiplomados"."CodigoCategoriaDiplomado"  = public."Diplomados"."CodigoCategoriaDiplomado"
+                           
+                    ORDER BY
+                           
+                           "GruposParticipantes"."CodigoGrupoPeriodo" DESC;  
                 ');
            $resultado = $consulta->result();
            return $resultado;
