@@ -2,6 +2,7 @@
 if (!defined('BASEPATH')){
     exit('No direct script access allowed');
 }
+include(APPPATH . 'libraries/simple_html_dom.php');
 
 class ArchivosController extends CI_Controller {
 
@@ -9,18 +10,82 @@ class ArchivosController extends CI_Controller {
         parent::__construct();
         $this->load->database();
         $this->load->model('Publicaciones');
+        $this->load->library('utilidadesWeb');
         $this->load->helper(array('download', 'file', 'url', 'html', 'form'));
     }
     
     public function index() {
         $login=$this->session->userdata("codigoUserLogin");
+        $nombre=$this->session->userdata("nombreUserLogin");
+        $carnet=$this->session->userdata("nombreUserLogin"); //FALTA CARNET
         //$data['allArchivos'] = $this->Publicaciones->listarPublicacionesParaArchivo();
-        $data['gruposMaestro'] = $this->Publicaciones->GruposPorMaestro($login);
-        $data['archivosMaestro'] = $this->Publicaciones->ListarArchivosDelMaestro($login);
-        $data['gruposAlumno'] = $this->Publicaciones->ListarGruposAlumno($login);
-        $data['archivosAlumno'] = $this->Publicaciones->ListarArchivosParaAlumno($login);
+        
+        //if($this->Publicaciones->verificar_si_es_alumno($login, $carnet)==1){
+            $data['gruposAlumno'] = $this->Publicaciones->ListarGruposAlumno($login);
+            $data['archivosAlumno'] = $this->Publicaciones->ListarArchivosParaAlumno($login);
+        //}else if($this->Publicaciones->verificar_si_es_maestro($login,$nombre)==1){
+            $data['gruposMaestro'] = $this->Publicaciones->GruposPorMaestro($login);
+            $data['archivosMaestro'] = $this->Publicaciones->ListarArchivosDelMaestro($login);
+        //}
+        $permisos = $this->session->userdata('permisosUsuer');
+        $this->analizarPermisos('views/Archivos/ArchivosTab.php', 'views/Archivos/ArchivosTabTmp.php', $permisos);
         $this->load->view('Archivos',$data);
     }
+    
+     function analizarPermisos($pathView, $pathViewTmp, $permisos) {
+        $pathView = APPPATH . $pathView;
+        $pathViewTmp = APPPATH . $pathViewTmp;
+
+        $html = file_get_html($pathView, $use_include_path = false, $context = null, $offset = -1, $maxLen = -1, $lowercase = true, $forceTagsClosed = true, $target_charset = DEFAULT_TARGET_CHARSET, $stripRN = false, $defaultBRText = DEFAULT_BR_TEXT);
+        $elemsWithRights = $html->find(DEFINE_RIGHT_ALLOWED);
+        $encontrado = 0;
+        foreach ($elemsWithRights as $elem) {
+            foreach ($permisos as $right) {
+                if ($elem->id == $right->NombrePermiso) {
+                    $encontrado = 1;
+                    break;
+                } else {
+                    
+                }
+            }
+            if ($encontrado == 1) {
+                $encontrado = 0;
+                continue;
+            } else {
+                $elem->outertext = '';
+            }
+        }
+        $html->save($pathViewTmp);
+    }
+
+    function analizarPermisosBotonesTablas($idBtnsGestion, $permisos) {
+        $pathView = APPPATH . 'views/VistaAyudaView.php';
+        $html = file_get_html($pathView);
+        //param=gestionUserBtn
+        $elemsWithRights = $html->getElementById($idBtnsGestion);
+        $encontrado = 0;
+
+        foreach ($elemsWithRights->find('button') as $key) {
+            foreach ($permisos as $right) {
+//                $key = $elemsWithRights->find('button[class="' . $right->NombrePermiso . '"]');
+                if (explode(" ", $key->class)[0] == $right->NombrePermiso) {
+                    $encontrado = 1;
+                    break;
+                } else {
+                    
+                }
+            }
+            if ($encontrado == 1) {
+                $encontrado = 0;
+                continue;
+            } else {
+                $key->outertext = '';
+            }
+        }
+        //}
+        return str_get_html($elemsWithRights);
+    }
+
 
   //sube el archivo  a la carpeta de publicaciones
     function do_upload() {

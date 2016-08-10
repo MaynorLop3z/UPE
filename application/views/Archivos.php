@@ -1,3 +1,3 @@
-<?php require_once APPPATH.'views/Archivos/ArchivosTab.php'; 
+<?php require_once APPPATH.'views/Archivos/ArchivosTabTmp.php'; 
       require_once APPPATH.'views/Archivos/ArchivosModal.php';
 ?>

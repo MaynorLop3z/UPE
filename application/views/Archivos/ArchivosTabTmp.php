@@ -39,13 +39,9 @@
             }?>
   <div id="grupo<?php echo $grup->CodigoGrupoPeriodo?>" class="<?php echo $classgroup?>">
       <h3>Administrar archivos del grupo</h3>
-      <div <?php echo $idhome?>>
+      <div no numeric noise key 1029>
         <div class="btn btn-group" id="frmArchivoNuevo">
-          <button onclick="setVarsOpenModal('<?php echo $grup->CodigoGrupoPeriodo?>',
-                      '<?php echo $grup->NombreCategoriaDiplomado?>',
-                      '<?php echo $grup->CodigoCategoriaDiplomado?>',
-                      '<?php echo $grup->CodigoGruposPeriodoUsuario?>'
-                      )" class="btn btn-default btn-default" >Subir Nuevo Archivo</button>
+          <button onclick="setVarsOpenModal('<?php echo $grup->CodigoGrupoPeriodo?>',                      '<?php echo $grup->NombreCategoriaDiplomado?>',                      '<?php echo $grup->CodigoCategoriaDiplomado?>',                      '<?php echo $grup->CodigoGruposPeriodoUsuario?>'                      )" class="btn btn-default btn-default" >Subir Nuevo Archivo</button>
         </div>
       </div>  
     <table id="table-g<?php echo $grup->CodigoGrupoPeriodo?>"  class="table table-bordered table-striped table-hover table-responsive">
@@ -82,8 +78,8 @@
                     <td class="TipoArchivo"><?php echo strtoupper($arch->Extension) ?></td>
                     <td class="TamArchivo" style="width:100px;"><?php echo $tamar; ?></td>
                     <td class="gestion_dip" style="width:150px;">
-                        <button id="downArc<?php echo $arch->CodigoPublicacion ?>" onclick="goArchivo('<?php echo base_url() ?>index.php/ArchivosController/downloads/<?php echo $arch->Nombre?>')"  title="Descargar Archivo" class="btndeldip btn btn-warning" class="btn btn-info btn-lg"><span class=" glyphicon glyphicon-download-alt"></span></button>
-                        <button id="deleArc<?php echo $arch->CodigoPublicacion ?>" onclick="delArchivo('<?php echo $arch->CodigoPublicacion ?>','<?php echo $arch->Titulo ?>','<?=$grup->CodigoGrupoPeriodo?>')"  title="Eliminar Archivo" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>
+                        <button id="downArc<?php echo $arch->CodigoPublicacion ?>" onclick="goArchivo('<?php echo base_url() ?>index.php/ArchivosController/downloads/<?php echo $arch->Nombre?>')"  title="Descargar Archivo" class="btndeldip btn btn-warning"><span class="glyphicon glyphicon-download-alt"></span></button>
+                        <button id="deleArc<?php echo $arch->CodigoPublicacion ?>" onclick="delArchivo('<?php echo $arch->CodigoPublicacion ?>','<?php echo $arch->Titulo ?>','<?=$grup->CodigoGrupoPeriodo?>')"  title="Eliminar Archivo" class="btndeldip btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
                     </td>
             </tr>
         <?php 
@@ -106,7 +102,7 @@
             Año 2016
         </li>
         
-        <ul class=" tree node-treeview5">
+        <ul class="tree node-treeview5">
             
            <li  style="color:undefined;background-color:undefined;" data-nodeid="1" class="sub-tree-toggler list-group-item node-treeview5">
                 <span class="icon expand-icon glyphicon glyphicon-chevron-right"></span>
@@ -117,7 +113,7 @@
                 <li style="color:undefined;background-color:undefined;" data-nodeid="2" class="sub-tree list-group-item node-treeview5">
                     <span class="indent"></span>
                     <span class="icon glyphicon glyphicon-chevron-down"></span>
-                    <span class="icon node-icon "></span>
+                    <span class="icon node-icon"></span>
                     Grupo 1
                 </li>
         </ul>
@@ -128,7 +124,7 @@
             <span class="icon node-icon glyphicon glyphicon-bookmark"></span>
             Año 2015
         </li>
-        <ul class=" tree node-treeview5">
+        <ul class="tree node-treeview5">
             <li  style="color:undefined;background-color:undefined;" data-nodeid="4" class="sub-tree-toggler list-group-item node-treeview5">
                 <span class="icon expand-icon glyphicon glyphicon-chevron-right"></span>
                 <span class="icon node-icon glyphicon glyphicon-bookmark"></span>

@@ -520,7 +520,28 @@ ORDER BY
 
                  ORDER BY
                            "Publicaciones"."FechaPublicacion" DESC; ');
+            
+           $resultado = $consulta->result();
+           return $resultado;
        }
-}
 
+
+    public function verificar_si_es_maestro($codigo, $nombre){
+        $consulta = $this->db->query('SELECT COUNT(*) FROM public."Usuarios", public."UsuarioRoles"
+                        WHERE "Usuarios"."CodigoUsuario" = '.$codigo.'
+                        AND "Usuarios"."NombreUsuario" = '.$nombre.'
+                        AND "Usuarios"."CodigoUsuario" = "UsuarioRoles"."CodigoUsuario"
+                        AND "UsuarioRoles"."CodigoRol" = 4');
+        $resultado = $consulta->result();
+        return $resultado;
+    }
+
+    public function verificar_si_es_alumno($codigo, $carnet){
+        $consulta = $this->db->query('SELECT COUNT(*) FROM public."Participantes"
+                WHERE "Participantes"."CodigoParticipante" = '.$codigo.'
+                AND "Participantes""CarnetAlumno" = '.$carnet.';');
+        $resultado = $consulta->result();
+        return $resultado;
+    }
+}
 ?>

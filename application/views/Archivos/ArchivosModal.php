@@ -17,7 +17,7 @@
                         <!--La linea de abajo abre el selector de imgs -->
                         <form class="formulario" enctype="multipart/form-data" method="post" action="<?php echo base_url() ?>index.php/ArchivosController/do_upload/" id="formArchivo">
                             <fieldset> 
-                                <input type="file"  size="20" name="archivoArchivo" id= "fileArchivo" >
+                                <input type="file" size="20" name="archivoArchivo" id="fileArchivo" >
                                 <input type="hidden" id="nombremodArchivo" name="nombremodArchivo" value="" readonly>
                                 <!--div para visualizar mensajes-->
                                 <div class="messages"></div><br /><br />

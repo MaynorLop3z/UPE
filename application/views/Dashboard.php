@@ -31,6 +31,7 @@ and open the template in the editor.
 //                }, 2000);
 <?php
 $Permisos = $this->session->userdata('permisosUsuer');
+
 foreach ($Permisos as $p) {
 
     if ($p->systemPart == MENU_PPAL_RIGHT) {
