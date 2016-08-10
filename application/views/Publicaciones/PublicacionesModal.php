@@ -7,7 +7,7 @@
 
 <!---------Modal nueva publicacion-------------------------->
 <div id="NuevaPublicacion" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog" >
         <div class="modal-content">
             <div class="container-fluid ">
                 <button type="button" class="close" id="btnCerrarDi"  data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>

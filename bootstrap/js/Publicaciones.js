@@ -20,7 +20,7 @@ $(document).ready(function () {
     //queremos que esta variable sea global
 
 
-    $(':file').change(function ()
+    $('#imgform').change(function ()
     {
         //obtenemos un array con los datos del archivo
         var file = $("#imagen")[0].files[0];
@@ -44,12 +44,12 @@ $(document).ready(function () {
 
         //información del formulario
 
-        var formData = new FormData($(".formulario")[0]);
+        var formData = new FormData($("#imgform")[0]);
         var message = "";
         if (isImage(fileExtension) === true) {
             //hacemos la petición ajax  
             $.ajax({
-                url: $('.formulario').attr('action'),
+                url: $('#imgform').attr('action'),
                 type: 'POST',
                 // Form data
                 //datos del formulario

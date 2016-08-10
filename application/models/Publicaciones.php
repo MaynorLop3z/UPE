@@ -129,7 +129,9 @@ ORDER BY
         return $resultado;
     }
 
-    public function CrearPublicacion($UsuarioPublica, $FechaPublicacion, $Titulo, $Contenido, $Estado, $CodigoGrupoPeriodo, $CodigoGrupoPeriodoUsuario, $CodigoGrupoParticipantes, $CodigoTipoPublicacion, $ParticipantePublica, $CodigoCategoriaDiplomado) {
+    public function CrearPublicacion($UsuarioPublica, $FechaPublicacion, $Titulo, $Contenido, $Estado,
+                                    $CodigoGrupoPeriodo, $CodigoGrupoPeriodoUsuario, $CodigoGrupoParticipantes,
+                                    $CodigoTipoPublicacion, $ParticipantePublica, $CodigoCategoriaDiplomado) {
         $data = array(
             'UsuarioPublica' => $UsuarioPublica,
             'FechaPublicacion' => $FechaPublicacion,
@@ -151,20 +153,38 @@ ORDER BY
     }
 
     public function EliminarPublicacion($CodigoPublicacion) {
-        $this->db->delete('Publicaciones', array('CodigoPublicacion' => $CodigoPublicacion));
-        //Hay que verificar si existen publicaciones de ser asi no eliminar o cambiar a una
-        //por defecto
+        //$this->db->delete('Publicaciones', array('CodigoPublicacion' => $CodigoPublicacion));
+        try{
+            $updateData=array("Estado"=>"FALSE");
+            $this->db->where("CodigoPublicacion",$CodigoPublicacion);
+            $this->db->update("Publicaciones",$updateData);
+            return true;
+        }catch(Exception $e){
+            return false;
+        }
     }
 
     public function EliminarArchivosPublicacion($CodigoPublicaciones) {
         $this->db->delete('Archivos', array('CodigoPublicaciones' => $CodigoPublicaciones));
+    }
+    
+    public function ObtenerRutaArchivo($CodigoPublicaciones) {
+        $this->db->select('Ruta');
+        $this->db->from('Archivos');
+        $this->db->where('CodigoPublicaciones', $CodigoPublicaciones);
+        $consulta = $this->db->get();
+        $ret = $consulta->row();
+        return $ret->Ruta;
     }
 
     public function EliminarArchivo($CodigoArchivo) {
         $this->db->delete('Archivos', array('CodigoArchivos' => $CodigoArchivo));
     }
 
-    public function ModificarPublicacion($CodigoPublicacion, $UsuarioPublica, $FechaPublicacion, $Titulo, $Contenido, $Estado, $CodigoCodigoGrupoPeriodo, $CodigoGrupoPeriodoUsuario, $GrupoParticipantes, $CodigoTipoPublicacion, $CodigoCategoriaDiplomado, $ParticipantePublica = null) {
+    public function ModificarPublicacion($CodigoPublicacion, $UsuarioPublica, $FechaPublicacion, $Titulo, 
+                                        $Contenido, $Estado, $CodigoCodigoGrupoPeriodo, $CodigoGrupoPeriodoUsuario, 
+                                        $GrupoParticipantes, $CodigoTipoPublicacion, $CodigoCategoriaDiplomado, 
+                                        $ParticipantePublica = null) {
         $data = array(
             'UsuarioPublica' => $UsuarioPublica,
             'FechaPublicacion' => $FechaPublicacion,
@@ -269,6 +289,259 @@ ORDER BY
         return $resultado;
     }
 
-}
+    
+    
 
+/****************************************************************************
+ *                                                                          *
+ *                        PARA LA TAB ARCHIVOS                              *
+ *                      (Publicaciones de grupo)                            *
+ *                                                                          *       
+ *                                                                          *
+ * *************************************************************************/
+
+    public function listarPublicacionesParaArchivo() { //LISTA TODAS LAS PUBLICACIOONES DE GRUPO
+           $consulta = $this->db->query('SELECT 
+            "Publicaciones"."CodigoPublicacion", 
+            "Publicaciones"."UsuarioPublica", 
+            "Publicaciones"."FechaPublicacion", 
+            "Publicaciones"."Titulo", 
+            "Publicaciones"."Contenido", 
+            "Publicaciones"."ParticipantePublica", 
+            "Publicaciones"."Estado", 
+            "Publicaciones"."CodigoGrupoPeriodo", 
+            "Publicaciones"."CodigoGrupoParticipantes", 
+            "Publicaciones"."CodigoGrupoPeriodoUsuario", 
+            "Publicaciones"."CodigoTipoPublicacion", 
+            "Publicaciones"."CodigoCategoriaDiplomado", 
+            "CategoriaDiplomados"."NombreCategoriaDiplomado",
+            "Archivos"."Extension"
+          FROM 
+            public."CategoriaDiplomados", 
+            public."Publicaciones",
+            public."Archivos"
+          WHERE
+          "CategoriaDiplomados"."CodigoCategoriaDiplomado"  = public."Publicaciones"."CodigoCategoriaDiplomado"
+          AND
+          "Archivos"."CodigoPublicaciones" = public."Publicaciones"."CodigoPublicacion"
+          AND 
+          "Publicaciones"."CodigoTipoPublicacion" ='.TIPO_PUBLICACION_GRUPO.' 
+          ORDER BY
+          "Publicaciones"."FechaPublicacion" DESC; 
+          ');
+
+           $resultado = $consulta->result();
+           return $resultado;
+       }
+
+       public function GruposPorMaestro($codigo){ //LISTA LOS GRUPOS DEL MAESTRO POR SU $codigo
+           $consulta= $this->db->query('SELECT DISTINCT
+			"GruposMaestros"."CodigoGruposPeriodoUsuario",
+                            "GruposMaestros"."CodigoGrupoPeriodo",
+                            "CategoriaDiplomados"."NombreCategoriaDiplomado",
+                            "CategoriaDiplomados"."CodigoCategoriaDiplomado",
+                            "GrupoPeriodos"."CodigoPeriodo",
+                            "Periodos"."CodigoModulo",
+                            "Periodos"."FechaInicioPeriodo",
+                            "Modulos"."NombreModulo",
+                            "Diplomados"."NombreDiplomado"
+                            
+                    FROM
+                            public."GruposMaestros", public."CategoriaDiplomados", 
+                            public."Publicaciones", public."GrupoPeriodos",
+                            public."Periodos", public."Modulos",
+                            public."Diplomados"
+                    WHERE
+                            "GruposMaestros"."CodigoUsuario" = '.$codigo.'
+                                
+                    AND	
+                            "GruposMaestros"."Estado" = 1
+
+                    AND	
+                            "GrupoPeriodos"."Estado" = TRUE
+
+                    AND
+			   public."GruposMaestros"."CodigoGrupoPeriodo" = public."GrupoPeriodos"."CodigoGrupoPeriodo"
+
+		    AND 
+			   public."Periodos"."CodigoPeriodo" = public."GrupoPeriodos"."CodigoPeriodo"
+
+		    AND 
+			   public."Modulos"."CodigoModulo" = public."Periodos"."CodigoModulo"
+
+		    AND
+			   public."Diplomados"."CodigoDiplomado" = public."Modulos"."CodigoDiplomado"
+			                            
+                    AND
+			   "CategoriaDiplomados"."CodigoCategoriaDiplomado"  = public."Diplomados"."CodigoCategoriaDiplomado"
+                           
+                    ORDER BY
+                           
+                           public."GruposMaestros"."CodigoGruposPeriodoUsuario" DESC;  
+                ');
+           $resultado = $consulta->result();
+           return $resultado;
+       }
+       
+       public function ListarArchivosDelMaestro($codigo){ //LISTA LOS ARCHIVOS DEL MAESTRO
+           $consulta= $this->db->query('SELECT DISTINCT "Publicaciones"."CodigoPublicacion",
+                        "Publicaciones"."UsuarioPublica", 
+                        "Publicaciones"."FechaPublicacion", 
+                        "Publicaciones"."Titulo",
+                        "Publicaciones"."Contenido",
+                        "Publicaciones"."ParticipantePublica",
+                        "Publicaciones"."Estado",
+                        "Publicaciones"."CodigoGrupoPeriodo",
+                        "Publicaciones"."CodigoGrupoPeriodoUsuario",
+                        "Publicaciones"."CodigoTipoPublicacion",
+                        "Publicaciones"."CodigoCategoriaDiplomado",
+                        "CategoriaDiplomados"."NombreCategoriaDiplomado",
+                        "Archivos"."Extension",
+                        "Archivos"."Ruta",
+                        "Archivos"."Nombre",
+                        "GruposMaestros"."CodigoUsuario"
+                        
+                 FROM   
+                         public."CategoriaDiplomados", 
+                         public."Publicaciones",
+                         public."Archivos",
+                         public."GruposMaestros"
+                 WHERE  	
+                         "Publicaciones"."CodigoGrupoPeriodoUsuario" = public."GruposMaestros"."CodigoGruposPeriodoUsuario"
+
+                 AND
+                         "GruposMaestros"."CodigoUsuario" = '.$codigo.'
+                 
+                 AND
+                         "Publicaciones"."Estado" = TRUE
+
+                 AND    
+                         "Publicaciones"."CodigoTipoPublicacion" = '.TIPO_PUBLICACION_GRUPO.'
+                 
+                 AND
+                        "CategoriaDiplomados"."CodigoCategoriaDiplomado"  = public."Publicaciones"."CodigoCategoriaDiplomado"
+          
+                 AND
+                        "Archivos"."CodigoPublicaciones" = public."Publicaciones"."CodigoPublicacion"
+
+                 ORDER BY
+                           "Publicaciones"."CodigoPublicacion" DESC; 
+                            ');
+           $resultado = $consulta->result();
+           return $resultado;
+       }
+       
+       public function ListarGruposAlumno($codigo){//LISTA LOS GRUPOS DEL ALUMNO POR SU $codigo
+           $consulta= $this->db->query('SELECT DISTINCT
+                            "GruposParticipantes"."CodigoGrupoPeriodo",
+                            "GrupoPeriodos"."CodigoPeriodo",
+                            "Periodos"."CodigoModulo",
+                            "Periodos"."FechaInicioPeriodo",
+                            "Modulos"."NombreModulo",
+                            "Diplomados"."NombreDiplomado"
+                            
+                    FROM
+                            public."GruposParticipantes", public."GrupoPeriodos",
+                            public."Periodos", public."Modulos", public."Diplomados", public."CategoriaDiplomados"
+                            
+                    WHERE
+                            "GruposParticipantes"."CodigoParticipante" = '.$codigo.'
+                             
+                    AND	
+                            "GruposParticipantes"."CodigoEstadosParticipacion" = 1
+                    
+                    AND	
+                            "GrupoPeriodos"."Estado" = TRUE
+
+                    AND     
+                            public."GrupoPeriodos"."CodigoGrupoPeriodo" = public."GruposParticipantes"."CodigoGrupoPeriodo"
+
+                    AND 
+			   public."Periodos"."CodigoPeriodo" = public."GrupoPeriodos"."CodigoPeriodo"
+
+		    AND 
+			   public."Modulos"."CodigoModulo" = public."Periodos"."CodigoModulo"
+
+		    AND
+			   public."Diplomados"."CodigoDiplomado" = public."Modulos"."CodigoDiplomado"
+			                            
+                    AND
+			   "CategoriaDiplomados"."CodigoCategoriaDiplomado"  = public."Diplomados"."CodigoCategoriaDiplomado"
+                           
+                    ORDER BY
+                           
+                           "GruposParticipantes"."CodigoGrupoPeriodo" DESC;  
+                ');
+           $resultado = $consulta->result();
+           return $resultado;
+           
+       }
+       
+       public function ListarArchivosParaAlumno($codigo){ //LISTA LOS ARCHIVOS DE LOS GRUṔOS DEL ALUMNO
+           $consulta= $this->db->query('SELECT DISTINCT "Publicaciones"."CodigoPublicacion",
+                        "Publicaciones"."UsuarioPublica", 
+                        "Publicaciones"."FechaPublicacion", 
+                        "Publicaciones"."Titulo",
+                        "Publicaciones"."Contenido",
+                        "Publicaciones"."ParticipantePublica",
+                        "Publicaciones"."Estado",
+                        "Publicaciones"."CodigoGrupoPeriodo",
+                        "Publicaciones"."CodigoGrupoPeriodoUsuario",
+                        "Publicaciones"."CodigoTipoPublicacion",
+                        "Publicaciones"."CodigoCategoriaDiplomado",
+                        "CategoriaDiplomados"."NombreCategoriaDiplomado",
+                        "Archivos"."Extension",
+                        "Archivos"."Ruta",
+                        "Archivos"."Nombre",
+                        "GruposParticipantes"."CodigoUsuario"
+                        
+                 FROM   
+                         public."CategoriaDiplomados", 
+                         public."Publicaciones",
+                         public."Archivos",
+                         public."GruposParticipantes"
+                 WHERE  	
+                         "Publicaciones"."CodigoGrupoPeriodo" = public."GruposParticipantes"."CodigoGrupoPeriodo"
+
+                 AND
+                         "GruposParticipantes"."CodigoUsuario" = '.$codigo.'
+
+                 AND    
+                         "Publicaciones"."CodigoTipoPublicacion" = '.TIPO_PUBLICACION_GRUPO.'
+                 
+                 AND
+                         "Publicaciones"."Estado" = TRUE
+                 
+                 AND
+                        "CategoriaDiplomados"."CodigoCategoriaDiplomado"  = public."Publicaciones"."CodigoCategoriaDiplomado"
+          
+                 AND
+                        "Archivos"."CodigoPublicaciones" = public."Publicaciones"."CodigoPublicacion"
+
+                 ORDER BY
+                           "Publicaciones"."FechaPublicacion" DESC; ');
+            
+           $resultado = $consulta->result();
+           return $resultado;
+       }
+
+
+    public function verificar_si_es_maestro($codigo, $nombre){
+        $consulta = $this->db->query('SELECT COUNT(*) FROM public."Usuarios", public."UsuarioRoles"
+                        WHERE "Usuarios"."CodigoUsuario" = '.$codigo.'
+                        AND "Usuarios"."NombreUsuario" = '.$nombre.'
+                        AND "Usuarios"."CodigoUsuario" = "UsuarioRoles"."CodigoUsuario"
+                        AND "UsuarioRoles"."CodigoRol" = 4');
+        $resultado = $consulta->result();
+        return $resultado;
+    }
+
+    public function verificar_si_es_alumno($codigo, $carnet){
+        $consulta = $this->db->query('SELECT COUNT(*) FROM public."Participantes"
+                WHERE "Participantes"."CodigoParticipante" = '.$codigo.'
+                AND "Participantes""CarnetAlumno" = '.$carnet.';');
+        $resultado = $consulta->result();
+        return $resultado;
+    }
+}
 ?>
