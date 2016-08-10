@@ -39,7 +39,7 @@
             }?>
   <div id="grupo<?php echo $grup->CodigoGrupoPeriodo?>" class="<?php echo $classgroup?>">
       <h3>Administrar archivos del grupo</h3>
-      <div no numeric noise key 1029>
+      <div no numeric noise key 1030>
         <div class="btn btn-group" id="frmArchivoNuevo">
           <button onclick="setVarsOpenModal('<?php echo $grup->CodigoGrupoPeriodo?>',                      '<?php echo $grup->NombreCategoriaDiplomado?>',                      '<?php echo $grup->CodigoCategoriaDiplomado?>',                      '<?php echo $grup->CodigoGruposPeriodoUsuario?>'                      )" class="btn btn-default btn-default" >Subir Nuevo Archivo</button>
         </div>
@@ -93,7 +93,7 @@
 </div>
 <!--Fin Lista de Archivos-->
 
-
+<!-------------------- PROBANDO VISTA PARA ALUMNOS--------------------->
 <div id="treeview5" class="treeview">
     <ul class="list-group">
         <li style="color:#FFFFFF;background-color:#428bca;" data-nodeid="0" class="tree-toggler list-group-item node-treeview5 node-selected">
