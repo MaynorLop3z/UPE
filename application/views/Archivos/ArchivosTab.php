@@ -97,7 +97,7 @@
 </div>
 <!--Fin Lista de Archivos-->
 
-
+<!-------------------- PROBANDO VISTA PARA ALUMNOS--------------------->
 <div id="treeview5" class="treeview">
     <ul class="list-group">
         <li style="color:#FFFFFF;background-color:#428bca;" data-nodeid="0" class="tree-toggler list-group-item node-treeview5 node-selected">
