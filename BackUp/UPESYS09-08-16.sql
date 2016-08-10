@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.3.13
 -- Dumped by pg_dump version 9.3.13
--- Started on 2016-08-01 22:22:13 CST
+-- Started on 2016-08-09 19:32:15 CST
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -1502,6 +1502,7 @@ COPY "Archivos" ("CodigoArchivos", "Ruta", "Nombre", "Extension", "Estado", "Usu
 20	/images/publicaciones/domosagua5.jpg	domosagua5.jpg	jpg	t	1	::1	2016-05-22	1	20
 21	/images/publicaciones/11.jpg	11.jpg	jpg	t	66	127.0.0.1	2016-08-01	66	21
 22	/images/publicaciones/Penguins.jpg	Penguins.jpg	jpg	t	66	127.0.0.1	2016-08-01	66	22
+29	/images/publicaciones/codeigniter_tutorial.pdf	codeigniter_tutorial.pdf	pdf	t	66	127.0.0.1	2016-08-06	66	29
 \.
 
 
@@ -1511,7 +1512,7 @@ COPY "Archivos" ("CodigoArchivos", "Ruta", "Nombre", "Extension", "Estado", "Usu
 -- Name: Archivos_CodigoArchivos_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('"Archivos_CodigoArchivos_seq"', 22, true);
+SELECT pg_catalog.setval('"Archivos_CodigoArchivos_seq"', 74, true);
 
 
 --
@@ -2011,7 +2012,7 @@ SELECT pg_catalog.setval('"GruposParticipantes_CodigoGruposParticipantes_seq"', 
 -- Name: GruposPeriodoUsuarios_CodigoGruposPeriodoUsuario_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('"GruposPeriodoUsuarios_CodigoGruposPeriodoUsuario_seq"', 5, true);
+SELECT pg_catalog.setval('"GruposPeriodoUsuarios_CodigoGruposPeriodoUsuario_seq"', 11, true);
 
 
 --
@@ -2123,7 +2124,6 @@ SELECT pg_catalog.setval('"Modulos_CodigoModulo_seq"', 97, true);
 --
 
 COPY "Participantes" ("CodigoParticipante", "CorreoElectronico", "TelefonoFijo", "TelefonoCelular", "Direccion", "NumeroDUI", "Nombre", "FechaNacimiento", "CodigoUniversidadProcedencia", "Carrera", "NivelAcademico", "NombreEncargado", "Descripcion", "UsuarioModifica", "IPModifica", "FechaModifica", "CodigoCategoriaParticipantes", "Comentarios", "Genero", "CarnetAlumno") FROM stdin;
-1	maynor.lopez@partsplussv.com	24414545	75982304	sdasda	04440101	Maynor Lopez	1991-04-18	0				test4	0	192.168.1.1	2016-04-30	2	test4	M	\N
 9	mari.gar@pp.com	1231-2312	1231-2312	Av. Las Flores, Residencial Constitucion, #15	98795384-7	Marisol Garcia	1991-11-20	0	Lic. en Idiomas	Bachiller		Desde cero	0	192.168.1.1	2016-07-05	2	cero	F	\N
 12	kevin.linares@paesis.com	2441-4545	7748-5984	1 AV. SUR CASA #6-9, BARRIO STA. CRUZ. AHUACHAPAN.	04160177-4	Kevin Linares	1998-07-22	0	Lic. En Idiomas Extrangeros	Estudiante	POLANCO MARTINEZ,  NELSON WILFREDO	 	2	192.168.0.2	2015-01-01	5	Ninguno.	M	\N
 13	roberto.leon@paesis.com	2441-4546	7748-5985	RESIDENCIAL EL TREBOL SENDA LOS PINOS PJE.#23 C#24	04160178-2	Roberto Leon	1993-12-15	4	Lic. En Contaduria Publica.	Tecnico		Reingreso 	2	192.168.0.3	2015-01-02	3	Ninguno.	M	\N
@@ -2227,6 +2227,7 @@ COPY "Participantes" ("CodigoParticipante", "CorreoElectronico", "TelefonoFijo",
 110	freddy.alvarez@paesis.com	2255-7838	7352-1938	URBANIZACION MAJUCLA, POLG.2 C#5 CALLE PRINC.CUS. 	04160275-0	Freddy Alvarez	1997-10-12	3	Lic. En Biologia	Profesional		Reingreso 	2	192.168.0.100	2015-04-16	3	Ninguno.	M	\N
 111	marcela.arroyo@paesis.com	2255-7839	7352-1939	RES. ALTO VERDE 2 SENDA LOS LAURELES POL. 7#52    	04160276-4	Marcela Arroyo	1984-03-22	1	Lic. En Mercadeo	Estudiante		Se retiro	2	192.168.0.101	2015-04-17	1	Ninguno.	F	\N
 112	evaldivieso@paesis.com	2445-4545	7854-1236	Residecial Escalon Av. Las flores Senda Maya	04452013-3	Enrique Valdivieso	1990-04-19	0	Ing Civil	Universitario	No	TEST	\N	\N	\N	3	TEST	M	\N
+1	maynor.lopez@partsplussv.com	24414545	75982304	sdasda	04440101	Maynor Lopez	1991-04-18	0				test4	0	192.168.1.1	2016-04-30	2	test4	M	1234
 \.
 
 
@@ -2381,6 +2382,7 @@ COPY "Permisos" ("CodigoPermisos", "NombrePermiso", "EstadoPermisos", "UsuarioMo
 14	btn_rls_user	t	1	1.1.1.1	2015-01-01	gestionUserBtn		ModulosController		\N
 8	Pagos	t	1	192.168.1.1	2015-01-01	Pagos	\N	PagosController	MenuPpal	\N
 15	Archivos	t	1	1.1.1.1	2016-01-01	Archivos	\N	ArchivosController	MenuPpal	\N
+16	frmArchivoNuevo	t	1	1.1.1.1	2016-08-08	frmArchivoNuevo	\N	ArchivosController	\N	\N
 \.
 
 
@@ -2409,7 +2411,7 @@ SELECT pg_catalog.setval('"PermisosEventos_CodigoPermisosEventos_seq"', 1, false
 -- Name: Permisos_CodigoPermisos_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('"Permisos_CodigoPermisos_seq"', 15, true);
+SELECT pg_catalog.setval('"Permisos_CodigoPermisos_seq"', 16, true);
 
 
 --
@@ -2427,8 +2429,14 @@ COPY "Publicaciones" ("CodigoPublicacion", "UsuarioPublica", "FechaPublicacion",
 18	1	2016-05-22	you always fell ashame	i will undesrtand	\N	t	\N	\N	\N	1	1
 19	1	2016-05-22	jkkklklkflkglkkglfkkkkkk	.lkllkfglkdfkfdlkfdgflgkldg l	\N	t	\N	\N	\N	1	1
 20	1	2016-05-22	agua agua 	agua aguaagua aguaagua aguaagua aguaagua aguaagua aguaagua aguaagua aguaagua aguaagua agua\n\nagua aguaagua aguaagua aguaagua aguaagua aguaagua aguaagua aguaagua aguaagua aguaagua aguaagua agua\n\n	\N	t	\N	\N	\N	1	4
-21	2	2016-08-01	Diagrama de la base	Base del sistema	\N	t	2	\N	5	2	4
-22	2	2016-08-01	Background	imagen muestra	\N	t	2	\N	6	2	4
+74	66	2016-08-07	fdgfg	dfgdgfdgd	\N	f	2	\N	6	2	2
+21	66	2016-08-01	Diagrama de la base	Base del sistema	\N	t	2	\N	6	2	4
+40	66	2016-08-07	jhhujyuy	hghgh	\N	f	2	\N	6	2	4
+22	66	2016-08-01	Background	imagen muestra	\N	t	2	\N	6	2	4
+29	66	2016-08-06	Material de lectura	codeigniter	\N	t	6	\N	5	2	4
+71	66	2016-08-07	6ttyty	eeeee	\N	f	2	\N	6	2	4
+73	66	2016-08-07	ewew	erreee	\N	f	2	\N	6	2	4
+72	66	2016-08-07	gfgfg	dssdssd	\N	f	2	\N	6	2	4
 \.
 
 
@@ -2438,7 +2446,7 @@ COPY "Publicaciones" ("CodigoPublicacion", "UsuarioPublica", "FechaPublicacion",
 -- Name: Publicaciones_CodigoPublicacion_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('"Publicaciones_CodigoPublicacion_seq"', 22, true);
+SELECT pg_catalog.setval('"Publicaciones_CodigoPublicacion_seq"', 74, true);
 
 
 --
@@ -2494,8 +2502,10 @@ COPY "RolesPermisos" ("CodigoRolesPermisos", "Estado", "CodigoPermisos", "Codigo
 22	\N	13	1
 23	\N	14	1
 24	\N	15	1
-25	\N	8	4
 26	\N	15	4
+27	\N	3	4
+28	t	16	4
+29	\N	15	3
 \.
 
 
@@ -2505,7 +2515,7 @@ COPY "RolesPermisos" ("CodigoRolesPermisos", "Estado", "CodigoPermisos", "Codigo
 -- Name: RolesPermisos_CodigoRolesPermisos_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('"RolesPermisos_CodigoRolesPermisos_seq"', 26, true);
+SELECT pg_catalog.setval('"RolesPermisos_CodigoRolesPermisos_seq"', 29, true);
 
 
 --
@@ -3255,7 +3265,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2016-08-01 22:22:13 CST
+-- Completed on 2016-08-09 19:32:15 CST
 
 --
 -- PostgreSQL database dump complete
