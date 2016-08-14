@@ -169,7 +169,7 @@ class Participantes extends CI_Model {
     }
     
     public function listarParticipantesByLike($aproxWord){
-        $this->db->selec('CodigoParticipante,'.'Nombre');
+        $this->db->select('CodigoParticipante,'.'Nombre');
         $this->db->from('Participantes');
         $this->db->like('title', $query);
         $consulta = $this->db->get();
@@ -178,4 +178,50 @@ class Participantes extends CI_Model {
         
     }
 
+    /********************PAARA EL LOGIN DE PARTICIPANTE**************************/
+    
+    public function loginParticipante($usuario, $password){
+        try{
+        $consulta=$this->db->query('SELECT "Participantes"."CodigoParticipante", "Participantes"."CorreoElectronico", "Participantes"."Nombre" 
+            FROM public."Participantes"
+            WHERE "Participantes"."NombreParticipante" = \''.$usuario.'\'
+            AND "Participantes"."ContraseniaParticipante" = \''.$password.'\' LIMIT 1');
+//        $this->db->select('CodigoCategoriaParticipantes, ');
+//        $this->db->from('Participantes');
+//        $this->db->where('NombreParticipante', $usuario);
+//        $this->db->where('ContraseniaParticipante', $password);
+        //$consulta = $this->db->get();
+        $resultado = '';
+        if($consulta->num_rows() > 0){
+            $resultado=$consulta->row();
+            //$resultado = $consulta->result();
+        }
+        else{
+            $resultado=false;
+        }
+        return $resultado;
+         } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+    
+    
+    /********** PERMISOS PARA PARTICIPANTES (ALUMNOS)********************/
+    function permisosParticipantes(){
+        $consulta=$this->db->query('SELECT distinct "Permisos"."CodigoPermisos", "Permisos"."NombrePermiso",
+            "Permisos"."EstadoPermisos", "Permisos"."UsuarioModifica",
+            "Permisos"."IpModifica", "Permisos"."FechaModifica", 
+            "Permisos"."idContainer", "Permisos"."classContainer", 
+            "Permisos"."controllerContainer", "Permisos"."systemPart" 
+
+            FROM public."Permisos", public."RolesPermisos"
+
+             WHERE "Permisos"."CodigoPermisos" = "RolesPermisos"."CodigoPermisos" 
+             AND "RolesPermisos"."CodigoRol" = 3
+             AND "Permisos"."EstadoPermisos" = true
+    ');
+        $resultado = $consulta->result();
+        return $resultado;
+    }
+    
 }

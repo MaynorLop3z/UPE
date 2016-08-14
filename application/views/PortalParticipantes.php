@@ -2,7 +2,7 @@
     <head>
         <?php $this->load->helper('url'); ?>
         <meta charset="UTF-8">
-        <title>Portal Participantes - UPESYS</title>
+        <title>Portal Participantes - PAESIS</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Bootstrap -->          
@@ -11,6 +11,7 @@
         <script src="../bootstrap/js/jquery.min.js"></script>
         <script src="../bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script src="../bootstrap/js/LoginParticipantes.js"></script>
         <style>
             .vcenter {
                 
@@ -25,10 +26,11 @@
     </head>
   <body >
 
-<div class="container-fluid " style="max-width: 500px;margin-top: 50px;">
-    <h1 class="text-primary ">PORTAL PARA ESTUDIANTES</h1>
-    <form method="post" class="vcenter" action="LoginParticipante/enter">
-    <div class="login-form" id="frmLoginParticipantes">
+<div class="container-fluid " style="max-width: 500px;margin-top: 30px;">
+    <img src="../bootstrap/images/alumno-portal.png" >
+    <h2 class="text-primary ">PORTAL PARA ESTUDIANTES</h2>
+    <form method="post" class="vcenter" action="" id="frmLoginParticipantes">
+    <div class="login-form" >
         <div class="form-group">
             <input name="login_name" type="text" class="form-control login-field" value="" placeholder="Usuario" id="login-name" />
             <label class="login-field-icon fui-user" for="login-name"></label>
@@ -38,9 +40,11 @@
             <input  name="login_password" type="password" class="form-control login-field" value="" placeholder="Contraseña" id="login-pass" />
             <label class="login-field-icon fui-lock" for="login-pass"></label>
         </div>
-        <input class="btn btn-primary btn-lg btn-block" type="submit"  name="dlf_submit" value="ENTRAR" />
-</form>
-</div>
+        <input class="btn btn-primary btn-lg btn-block" type="submit" onclick="" name="dlf_submit" value="ENTRAR" id="btnEntrar"/>
+        <div class="messages"></div>
+   
+    </div>
+    </form>
 
     </div>
   </body>

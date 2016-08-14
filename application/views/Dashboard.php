@@ -20,6 +20,7 @@ and open the template in the editor.
 <!--        <script src="../bootstrap/js/Usuarios.js"></script>-->
         <script type="text/javascript">
             $(document).ready(function() {
+               
                 window.setTimeout(function() {
                     $(".alert").fadeTo(1500, 0).slideUp(500, function() {
                         $(this).remove();
@@ -31,7 +32,9 @@ and open the template in the editor.
 //                }, 2000);
 <?php
 $Permisos = $this->session->userdata('permisosUsuer');
-
+if ($Permisos==null){
+    header('location:'.base_url());
+}else{
 foreach ($Permisos as $p) {
 
     if ($p->systemPart == MENU_PPAL_RIGHT) {
@@ -44,8 +47,12 @@ foreach ($Permisos as $p) {
     }
 }
 ?>
-            });
+           $('#btnsalir').click(function(){$.post("Dashboard/logout");window.location.replace('<?php echo base_url();?>');});
+           
+       });
+            
         </script>
+        
     </head>
     <body>
         <div id="VistasAyuda" style='display:none;'></div>
@@ -60,7 +67,7 @@ foreach ($Permisos as $p) {
                         <div>
                             <ul class="nav  navbar-right center-block ">
                                 <label id="labelpersona">Bienvenid@: <?= $this->session->userdata('nombreUserLogin'); ?></label>
-                                <button id="btnsalir" name="btnsalir" onclick="window.location.href = '<?php echo base_url(); ?>#page-top'" class="btn btn-default "><span class="glyphicon glyphicon-log-out"></span>Salir</button>
+                                <button id="btnsalir" name="btnsalir" onclick="" class="btn btn-default "><span class="glyphicon glyphicon-log-out"></span>Salir</button>
                             </ul>
                         </div> 
 
@@ -112,7 +119,7 @@ foreach ($Permisos as $p) {
                                     //$iterator++;
                                 }
                             }
-                            ?>
+}?>
                         </div>
                     </div>
 

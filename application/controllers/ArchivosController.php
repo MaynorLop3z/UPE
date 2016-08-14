@@ -17,7 +17,7 @@ class ArchivosController extends CI_Controller {
     public function index() {
         $login=$this->session->userdata("codigoUserLogin");
         $nombre=$this->session->userdata("nombreUserLogin");
-        $carnet=$this->session->userdata("nombreUserLogin"); //FALTA CARNET
+        //$carnet=$this->session->userdata("nombreUserLogin"); //FALTA CARNET
         //$data['allArchivos'] = $this->Publicaciones->listarPublicacionesParaArchivo();
         
         //if($this->Publicaciones->verificar_si_es_alumno($login, $carnet)==1){
