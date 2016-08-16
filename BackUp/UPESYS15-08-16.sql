@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.3.13
 -- Dumped by pg_dump version 9.3.13
--- Started on 2016-08-16 00:09:29 CST
+-- Started on 2016-08-16 00:45:03 CST
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -22,7 +22,7 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- TOC entry 2307 (class 0 OID 0)
+-- TOC entry 2319 (class 0 OID 0)
 -- Dependencies: 1
 -- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
 --
@@ -33,7 +33,7 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 SET search_path = public, pg_catalog;
 
 --
--- TOC entry 231 (class 1255 OID 17675)
+-- TOC entry 233 (class 1255 OID 18085)
 -- Name: agregaralumnogrupo(numeric, numeric); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
@@ -71,7 +71,7 @@ END; $$;
 ALTER FUNCTION public.agregaralumnogrupo(grupo numeric, participante numeric) OWNER TO postgres;
 
 --
--- TOC entry 232 (class 1255 OID 17676)
+-- TOC entry 234 (class 1255 OID 18086)
 -- Name: agregaralumnogrupo(numeric, numeric, numeric); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
@@ -109,7 +109,7 @@ END; $$;
 ALTER FUNCTION public.agregaralumnogrupo(grupo numeric, participante numeric, usuario numeric) OWNER TO postgres;
 
 --
--- TOC entry 233 (class 1255 OID 17677)
+-- TOC entry 235 (class 1255 OID 18087)
 -- Name: agregardocentegrupo(numeric, numeric); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
@@ -147,7 +147,7 @@ END; $$;
 ALTER FUNCTION public.agregardocentegrupo(grupo numeric, usuario numeric) OWNER TO postgres;
 
 --
--- TOC entry 234 (class 1255 OID 17678)
+-- TOC entry 236 (class 1255 OID 18088)
 -- Name: getgruposactuales(); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
@@ -175,7 +175,7 @@ END; $$;
 ALTER FUNCTION public.getgruposactuales() OWNER TO postgres;
 
 --
--- TOC entry 235 (class 1255 OID 17679)
+-- TOC entry 237 (class 1255 OID 18089)
 -- Name: getgruposactuales(numeric); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
@@ -204,7 +204,7 @@ END; $$;
 ALTER FUNCTION public.getgruposactuales(diplomado numeric) OWNER TO postgres;
 
 --
--- TOC entry 236 (class 1255 OID 17680)
+-- TOC entry 238 (class 1255 OID 18090)
 -- Name: getgruposactuales(numeric, numeric); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
@@ -234,7 +234,7 @@ END; $$;
 ALTER FUNCTION public.getgruposactuales(diplomado numeric, participante numeric) OWNER TO postgres;
 
 --
--- TOC entry 237 (class 1255 OID 17681)
+-- TOC entry 239 (class 1255 OID 18091)
 -- Name: getgruposactualesbyalumno(numeric, numeric); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
@@ -270,7 +270,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- TOC entry 171 (class 1259 OID 17682)
+-- TOC entry 171 (class 1259 OID 18092)
 -- Name: Archivos; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -291,7 +291,7 @@ CREATE TABLE "Archivos" (
 ALTER TABLE public."Archivos" OWNER TO postgres;
 
 --
--- TOC entry 172 (class 1259 OID 17688)
+-- TOC entry 172 (class 1259 OID 18098)
 -- Name: Archivos_CodigoArchivos_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -306,7 +306,7 @@ CREATE SEQUENCE "Archivos_CodigoArchivos_seq"
 ALTER TABLE public."Archivos_CodigoArchivos_seq" OWNER TO postgres;
 
 --
--- TOC entry 2308 (class 0 OID 0)
+-- TOC entry 2320 (class 0 OID 0)
 -- Dependencies: 172
 -- Name: Archivos_CodigoArchivos_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -315,7 +315,7 @@ ALTER SEQUENCE "Archivos_CodigoArchivos_seq" OWNED BY "Archivos"."CodigoArchivos
 
 
 --
--- TOC entry 173 (class 1259 OID 17690)
+-- TOC entry 173 (class 1259 OID 18100)
 -- Name: Auditoria; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -333,7 +333,7 @@ CREATE TABLE "Auditoria" (
 ALTER TABLE public."Auditoria" OWNER TO postgres;
 
 --
--- TOC entry 174 (class 1259 OID 17696)
+-- TOC entry 174 (class 1259 OID 18106)
 -- Name: Auditoria_CodigoAuditoria_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -348,7 +348,7 @@ CREATE SEQUENCE "Auditoria_CodigoAuditoria_seq"
 ALTER TABLE public."Auditoria_CodigoAuditoria_seq" OWNER TO postgres;
 
 --
--- TOC entry 2309 (class 0 OID 0)
+-- TOC entry 2321 (class 0 OID 0)
 -- Dependencies: 174
 -- Name: Auditoria_CodigoAuditoria_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -357,7 +357,7 @@ ALTER SEQUENCE "Auditoria_CodigoAuditoria_seq" OWNED BY "Auditoria"."CodigoAudit
 
 
 --
--- TOC entry 175 (class 1259 OID 17698)
+-- TOC entry 175 (class 1259 OID 18108)
 -- Name: CategoriaDiplomados; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -375,7 +375,7 @@ CREATE TABLE "CategoriaDiplomados" (
 ALTER TABLE public."CategoriaDiplomados" OWNER TO postgres;
 
 --
--- TOC entry 176 (class 1259 OID 17704)
+-- TOC entry 176 (class 1259 OID 18114)
 -- Name: CategoriaDiplomados_CodigoCategoriaDiplomado_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -390,7 +390,7 @@ CREATE SEQUENCE "CategoriaDiplomados_CodigoCategoriaDiplomado_seq"
 ALTER TABLE public."CategoriaDiplomados_CodigoCategoriaDiplomado_seq" OWNER TO postgres;
 
 --
--- TOC entry 2310 (class 0 OID 0)
+-- TOC entry 2322 (class 0 OID 0)
 -- Dependencies: 176
 -- Name: CategoriaDiplomados_CodigoCategoriaDiplomado_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -399,7 +399,7 @@ ALTER SEQUENCE "CategoriaDiplomados_CodigoCategoriaDiplomado_seq" OWNED BY "Cate
 
 
 --
--- TOC entry 177 (class 1259 OID 17706)
+-- TOC entry 177 (class 1259 OID 18116)
 -- Name: CategoriasParticipante; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -415,7 +415,7 @@ CREATE TABLE "CategoriasParticipante" (
 ALTER TABLE public."CategoriasParticipante" OWNER TO postgres;
 
 --
--- TOC entry 178 (class 1259 OID 17712)
+-- TOC entry 178 (class 1259 OID 18122)
 -- Name: CategoriasParticipante_CodigoCategoriaParticipantes_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -430,7 +430,7 @@ CREATE SEQUENCE "CategoriasParticipante_CodigoCategoriaParticipantes_seq"
 ALTER TABLE public."CategoriasParticipante_CodigoCategoriaParticipantes_seq" OWNER TO postgres;
 
 --
--- TOC entry 2311 (class 0 OID 0)
+-- TOC entry 2323 (class 0 OID 0)
 -- Dependencies: 178
 -- Name: CategoriasParticipante_CodigoCategoriaParticipantes_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -439,7 +439,7 @@ ALTER SEQUENCE "CategoriasParticipante_CodigoCategoriaParticipantes_seq" OWNED B
 
 
 --
--- TOC entry 179 (class 1259 OID 17714)
+-- TOC entry 179 (class 1259 OID 18124)
 -- Name: Comentarios; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -460,7 +460,7 @@ CREATE TABLE "Comentarios" (
 ALTER TABLE public."Comentarios" OWNER TO postgres;
 
 --
--- TOC entry 180 (class 1259 OID 17720)
+-- TOC entry 180 (class 1259 OID 18130)
 -- Name: Comentarios_CodigoComentarios_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -475,7 +475,7 @@ CREATE SEQUENCE "Comentarios_CodigoComentarios_seq"
 ALTER TABLE public."Comentarios_CodigoComentarios_seq" OWNER TO postgres;
 
 --
--- TOC entry 2312 (class 0 OID 0)
+-- TOC entry 2324 (class 0 OID 0)
 -- Dependencies: 180
 -- Name: Comentarios_CodigoComentarios_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -484,7 +484,7 @@ ALTER SEQUENCE "Comentarios_CodigoComentarios_seq" OWNED BY "Comentarios"."Codig
 
 
 --
--- TOC entry 181 (class 1259 OID 17722)
+-- TOC entry 181 (class 1259 OID 18132)
 -- Name: Constantes; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -499,7 +499,7 @@ CREATE TABLE "Constantes" (
 ALTER TABLE public."Constantes" OWNER TO postgres;
 
 --
--- TOC entry 182 (class 1259 OID 17728)
+-- TOC entry 182 (class 1259 OID 18138)
 -- Name: Constantes_CodigoConstante_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -514,7 +514,7 @@ CREATE SEQUENCE "Constantes_CodigoConstante_seq"
 ALTER TABLE public."Constantes_CodigoConstante_seq" OWNER TO postgres;
 
 --
--- TOC entry 2313 (class 0 OID 0)
+-- TOC entry 2325 (class 0 OID 0)
 -- Dependencies: 182
 -- Name: Constantes_CodigoConstante_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -523,7 +523,7 @@ ALTER SEQUENCE "Constantes_CodigoConstante_seq" OWNED BY "Constantes"."CodigoCon
 
 
 --
--- TOC entry 183 (class 1259 OID 17730)
+-- TOC entry 183 (class 1259 OID 18140)
 -- Name: Diplomados; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -543,7 +543,7 @@ CREATE TABLE "Diplomados" (
 ALTER TABLE public."Diplomados" OWNER TO postgres;
 
 --
--- TOC entry 184 (class 1259 OID 17736)
+-- TOC entry 184 (class 1259 OID 18146)
 -- Name: Diplomados_CodigoDiplomado_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -558,7 +558,7 @@ CREATE SEQUENCE "Diplomados_CodigoDiplomado_seq"
 ALTER TABLE public."Diplomados_CodigoDiplomado_seq" OWNER TO postgres;
 
 --
--- TOC entry 2314 (class 0 OID 0)
+-- TOC entry 2326 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: Diplomados_CodigoDiplomado_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -567,7 +567,7 @@ ALTER SEQUENCE "Diplomados_CodigoDiplomado_seq" OWNED BY "Diplomados"."CodigoDip
 
 
 --
--- TOC entry 185 (class 1259 OID 17738)
+-- TOC entry 185 (class 1259 OID 18148)
 -- Name: EstadosParticipantes; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -584,7 +584,7 @@ CREATE TABLE "EstadosParticipantes" (
 ALTER TABLE public."EstadosParticipantes" OWNER TO postgres;
 
 --
--- TOC entry 186 (class 1259 OID 17744)
+-- TOC entry 186 (class 1259 OID 18154)
 -- Name: EstadosParticipantes_CodigoEstados_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -599,7 +599,7 @@ CREATE SEQUENCE "EstadosParticipantes_CodigoEstados_seq"
 ALTER TABLE public."EstadosParticipantes_CodigoEstados_seq" OWNER TO postgres;
 
 --
--- TOC entry 2315 (class 0 OID 0)
+-- TOC entry 2327 (class 0 OID 0)
 -- Dependencies: 186
 -- Name: EstadosParticipantes_CodigoEstados_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -608,7 +608,7 @@ ALTER SEQUENCE "EstadosParticipantes_CodigoEstados_seq" OWNED BY "EstadosPartici
 
 
 --
--- TOC entry 187 (class 1259 OID 17746)
+-- TOC entry 187 (class 1259 OID 18156)
 -- Name: GrupoPeriodos; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -625,7 +625,7 @@ CREATE TABLE "GrupoPeriodos" (
 ALTER TABLE public."GrupoPeriodos" OWNER TO postgres;
 
 --
--- TOC entry 188 (class 1259 OID 17749)
+-- TOC entry 188 (class 1259 OID 18159)
 -- Name: GrupoPeriodos_CodigoGrupoPeriodo_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -640,7 +640,7 @@ CREATE SEQUENCE "GrupoPeriodos_CodigoGrupoPeriodo_seq"
 ALTER TABLE public."GrupoPeriodos_CodigoGrupoPeriodo_seq" OWNER TO postgres;
 
 --
--- TOC entry 2316 (class 0 OID 0)
+-- TOC entry 2328 (class 0 OID 0)
 -- Dependencies: 188
 -- Name: GrupoPeriodos_CodigoGrupoPeriodo_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -649,7 +649,7 @@ ALTER SEQUENCE "GrupoPeriodos_CodigoGrupoPeriodo_seq" OWNED BY "GrupoPeriodos"."
 
 
 --
--- TOC entry 189 (class 1259 OID 17751)
+-- TOC entry 189 (class 1259 OID 18161)
 -- Name: GruposMaestros; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -664,7 +664,7 @@ CREATE TABLE "GruposMaestros" (
 ALTER TABLE public."GruposMaestros" OWNER TO postgres;
 
 --
--- TOC entry 190 (class 1259 OID 17755)
+-- TOC entry 190 (class 1259 OID 18165)
 -- Name: GruposParticipantes; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -681,7 +681,7 @@ CREATE TABLE "GruposParticipantes" (
 ALTER TABLE public."GruposParticipantes" OWNER TO postgres;
 
 --
--- TOC entry 191 (class 1259 OID 17758)
+-- TOC entry 191 (class 1259 OID 18168)
 -- Name: GruposParticipantes_CodigoGruposParticipantes_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -696,7 +696,7 @@ CREATE SEQUENCE "GruposParticipantes_CodigoGruposParticipantes_seq"
 ALTER TABLE public."GruposParticipantes_CodigoGruposParticipantes_seq" OWNER TO postgres;
 
 --
--- TOC entry 2317 (class 0 OID 0)
+-- TOC entry 2329 (class 0 OID 0)
 -- Dependencies: 191
 -- Name: GruposParticipantes_CodigoGruposParticipantes_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -705,7 +705,7 @@ ALTER SEQUENCE "GruposParticipantes_CodigoGruposParticipantes_seq" OWNED BY "Gru
 
 
 --
--- TOC entry 192 (class 1259 OID 17760)
+-- TOC entry 192 (class 1259 OID 18170)
 -- Name: GruposPeriodoUsuarios_CodigoGruposPeriodoUsuario_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -720,7 +720,7 @@ CREATE SEQUENCE "GruposPeriodoUsuarios_CodigoGruposPeriodoUsuario_seq"
 ALTER TABLE public."GruposPeriodoUsuarios_CodigoGruposPeriodoUsuario_seq" OWNER TO postgres;
 
 --
--- TOC entry 2318 (class 0 OID 0)
+-- TOC entry 2330 (class 0 OID 0)
 -- Dependencies: 192
 -- Name: GruposPeriodoUsuarios_CodigoGruposPeriodoUsuario_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -729,7 +729,7 @@ ALTER SEQUENCE "GruposPeriodoUsuarios_CodigoGruposPeriodoUsuario_seq" OWNED BY "
 
 
 --
--- TOC entry 193 (class 1259 OID 17762)
+-- TOC entry 193 (class 1259 OID 18172)
 -- Name: Modulos; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -750,7 +750,7 @@ CREATE TABLE "Modulos" (
 ALTER TABLE public."Modulos" OWNER TO postgres;
 
 --
--- TOC entry 194 (class 1259 OID 17768)
+-- TOC entry 194 (class 1259 OID 18178)
 -- Name: Modulos_CodigoModulo_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -765,7 +765,7 @@ CREATE SEQUENCE "Modulos_CodigoModulo_seq"
 ALTER TABLE public."Modulos_CodigoModulo_seq" OWNER TO postgres;
 
 --
--- TOC entry 2319 (class 0 OID 0)
+-- TOC entry 2331 (class 0 OID 0)
 -- Dependencies: 194
 -- Name: Modulos_CodigoModulo_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -774,7 +774,48 @@ ALTER SEQUENCE "Modulos_CodigoModulo_seq" OWNED BY "Modulos"."CodigoModulo";
 
 
 --
--- TOC entry 195 (class 1259 OID 17770)
+-- TOC entry 195 (class 1259 OID 18180)
+-- Name: PagosParticipantes; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "PagosParticipantes" (
+    "CodigoPagoParticipante" integer NOT NULL,
+    "TipoPago" character varying(20),
+    "CodigoGruposParticipantes" integer,
+    "MontoPago" double precision,
+    "FechaPago" time with time zone,
+    "NumeroRecibo" character varying(40)
+);
+
+
+ALTER TABLE public."PagosParticipantes" OWNER TO postgres;
+
+--
+-- TOC entry 196 (class 1259 OID 18183)
+-- Name: PagosParticipantes_CodigoPagoParticipante_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "PagosParticipantes_CodigoPagoParticipante_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."PagosParticipantes_CodigoPagoParticipante_seq" OWNER TO postgres;
+
+--
+-- TOC entry 2332 (class 0 OID 0)
+-- Dependencies: 196
+-- Name: PagosParticipantes_CodigoPagoParticipante_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "PagosParticipantes_CodigoPagoParticipante_seq" OWNED BY "PagosParticipantes"."CodigoPagoParticipante";
+
+
+--
+-- TOC entry 197 (class 1259 OID 18185)
 -- Name: Participantes; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -799,7 +840,7 @@ CREATE TABLE "Participantes" (
     "Comentarios" character varying,
     "Genero" character varying(10),
     "CarnetAlumno" character varying(12),
-    "NombreParticipante" character varying(30),
+    "NombreParticipante" character varying(50),
     "ContraseniaParticipante" character varying(50)
 );
 
@@ -807,7 +848,7 @@ CREATE TABLE "Participantes" (
 ALTER TABLE public."Participantes" OWNER TO postgres;
 
 --
--- TOC entry 196 (class 1259 OID 17776)
+-- TOC entry 198 (class 1259 OID 18191)
 -- Name: Participantes_CodigoParticipante_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -822,8 +863,8 @@ CREATE SEQUENCE "Participantes_CodigoParticipante_seq"
 ALTER TABLE public."Participantes_CodigoParticipante_seq" OWNER TO postgres;
 
 --
--- TOC entry 2320 (class 0 OID 0)
--- Dependencies: 196
+-- TOC entry 2333 (class 0 OID 0)
+-- Dependencies: 198
 -- Name: Participantes_CodigoParticipante_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -831,7 +872,7 @@ ALTER SEQUENCE "Participantes_CodigoParticipante_seq" OWNED BY "Participantes"."
 
 
 --
--- TOC entry 197 (class 1259 OID 17778)
+-- TOC entry 199 (class 1259 OID 18193)
 -- Name: Periodos; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -848,7 +889,7 @@ CREATE TABLE "Periodos" (
 ALTER TABLE public."Periodos" OWNER TO postgres;
 
 --
--- TOC entry 198 (class 1259 OID 17784)
+-- TOC entry 200 (class 1259 OID 18199)
 -- Name: Periodos_CodigoPeriodo_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -863,8 +904,8 @@ CREATE SEQUENCE "Periodos_CodigoPeriodo_seq"
 ALTER TABLE public."Periodos_CodigoPeriodo_seq" OWNER TO postgres;
 
 --
--- TOC entry 2321 (class 0 OID 0)
--- Dependencies: 198
+-- TOC entry 2334 (class 0 OID 0)
+-- Dependencies: 200
 -- Name: Periodos_CodigoPeriodo_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -872,7 +913,7 @@ ALTER SEQUENCE "Periodos_CodigoPeriodo_seq" OWNED BY "Periodos"."CodigoPeriodo";
 
 
 --
--- TOC entry 199 (class 1259 OID 17786)
+-- TOC entry 201 (class 1259 OID 18201)
 -- Name: Permisos; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -894,7 +935,7 @@ CREATE TABLE "Permisos" (
 ALTER TABLE public."Permisos" OWNER TO postgres;
 
 --
--- TOC entry 200 (class 1259 OID 17792)
+-- TOC entry 202 (class 1259 OID 18207)
 -- Name: PermisosEventos; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -909,7 +950,7 @@ CREATE TABLE "PermisosEventos" (
 ALTER TABLE public."PermisosEventos" OWNER TO postgres;
 
 --
--- TOC entry 201 (class 1259 OID 17798)
+-- TOC entry 203 (class 1259 OID 18213)
 -- Name: PermisosEventos_CodigoPermisosEventos_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -924,8 +965,8 @@ CREATE SEQUENCE "PermisosEventos_CodigoPermisosEventos_seq"
 ALTER TABLE public."PermisosEventos_CodigoPermisosEventos_seq" OWNER TO postgres;
 
 --
--- TOC entry 2322 (class 0 OID 0)
--- Dependencies: 201
+-- TOC entry 2335 (class 0 OID 0)
+-- Dependencies: 203
 -- Name: PermisosEventos_CodigoPermisosEventos_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -933,7 +974,7 @@ ALTER SEQUENCE "PermisosEventos_CodigoPermisosEventos_seq" OWNED BY "PermisosEve
 
 
 --
--- TOC entry 202 (class 1259 OID 17800)
+-- TOC entry 204 (class 1259 OID 18215)
 -- Name: Permisos_CodigoPermisos_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -948,8 +989,8 @@ CREATE SEQUENCE "Permisos_CodigoPermisos_seq"
 ALTER TABLE public."Permisos_CodigoPermisos_seq" OWNER TO postgres;
 
 --
--- TOC entry 2323 (class 0 OID 0)
--- Dependencies: 202
+-- TOC entry 2336 (class 0 OID 0)
+-- Dependencies: 204
 -- Name: Permisos_CodigoPermisos_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -957,7 +998,7 @@ ALTER SEQUENCE "Permisos_CodigoPermisos_seq" OWNED BY "Permisos"."CodigoPermisos
 
 
 --
--- TOC entry 203 (class 1259 OID 17802)
+-- TOC entry 205 (class 1259 OID 18217)
 -- Name: Publicaciones; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -980,8 +1021,8 @@ CREATE TABLE "Publicaciones" (
 ALTER TABLE public."Publicaciones" OWNER TO postgres;
 
 --
--- TOC entry 2324 (class 0 OID 0)
--- Dependencies: 203
+-- TOC entry 2337 (class 0 OID 0)
+-- Dependencies: 205
 -- Name: COLUMN "Publicaciones"."CodigoTipoPublicacion"; Type: COMMENT; Schema: public; Owner: postgres
 --
 
@@ -989,7 +1030,7 @@ COMMENT ON COLUMN "Publicaciones"."CodigoTipoPublicacion" IS 'Este campo contien
 
 
 --
--- TOC entry 204 (class 1259 OID 17808)
+-- TOC entry 206 (class 1259 OID 18223)
 -- Name: Publicaciones_CodigoPublicacion_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -1004,8 +1045,8 @@ CREATE SEQUENCE "Publicaciones_CodigoPublicacion_seq"
 ALTER TABLE public."Publicaciones_CodigoPublicacion_seq" OWNER TO postgres;
 
 --
--- TOC entry 2325 (class 0 OID 0)
--- Dependencies: 204
+-- TOC entry 2338 (class 0 OID 0)
+-- Dependencies: 206
 -- Name: Publicaciones_CodigoPublicacion_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -1013,7 +1054,7 @@ ALTER SEQUENCE "Publicaciones_CodigoPublicacion_seq" OWNED BY "Publicaciones"."C
 
 
 --
--- TOC entry 205 (class 1259 OID 17810)
+-- TOC entry 207 (class 1259 OID 18225)
 -- Name: Rol; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1031,7 +1072,7 @@ CREATE TABLE "Rol" (
 ALTER TABLE public."Rol" OWNER TO postgres;
 
 --
--- TOC entry 206 (class 1259 OID 17816)
+-- TOC entry 208 (class 1259 OID 18231)
 -- Name: Rol_CodigoRol_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -1046,8 +1087,8 @@ CREATE SEQUENCE "Rol_CodigoRol_seq"
 ALTER TABLE public."Rol_CodigoRol_seq" OWNER TO postgres;
 
 --
--- TOC entry 2326 (class 0 OID 0)
--- Dependencies: 206
+-- TOC entry 2339 (class 0 OID 0)
+-- Dependencies: 208
 -- Name: Rol_CodigoRol_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -1055,7 +1096,7 @@ ALTER SEQUENCE "Rol_CodigoRol_seq" OWNED BY "Rol"."CodigoRol";
 
 
 --
--- TOC entry 207 (class 1259 OID 17818)
+-- TOC entry 209 (class 1259 OID 18233)
 -- Name: RolesPermisos; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1070,7 +1111,7 @@ CREATE TABLE "RolesPermisos" (
 ALTER TABLE public."RolesPermisos" OWNER TO postgres;
 
 --
--- TOC entry 208 (class 1259 OID 17821)
+-- TOC entry 210 (class 1259 OID 18236)
 -- Name: RolesPermisos_CodigoRolesPermisos_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -1085,8 +1126,8 @@ CREATE SEQUENCE "RolesPermisos_CodigoRolesPermisos_seq"
 ALTER TABLE public."RolesPermisos_CodigoRolesPermisos_seq" OWNER TO postgres;
 
 --
--- TOC entry 2327 (class 0 OID 0)
--- Dependencies: 208
+-- TOC entry 2340 (class 0 OID 0)
+-- Dependencies: 210
 -- Name: RolesPermisos_CodigoRolesPermisos_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -1094,7 +1135,7 @@ ALTER SEQUENCE "RolesPermisos_CodigoRolesPermisos_seq" OWNED BY "RolesPermisos".
 
 
 --
--- TOC entry 209 (class 1259 OID 17823)
+-- TOC entry 211 (class 1259 OID 18238)
 -- Name: Tema; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1108,7 +1149,7 @@ CREATE TABLE "Tema" (
 ALTER TABLE public."Tema" OWNER TO postgres;
 
 --
--- TOC entry 210 (class 1259 OID 17829)
+-- TOC entry 212 (class 1259 OID 18244)
 -- Name: Tema_idTema_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -1123,8 +1164,8 @@ CREATE SEQUENCE "Tema_idTema_seq"
 ALTER TABLE public."Tema_idTema_seq" OWNER TO postgres;
 
 --
--- TOC entry 2328 (class 0 OID 0)
--- Dependencies: 210
+-- TOC entry 2341 (class 0 OID 0)
+-- Dependencies: 212
 -- Name: Tema_idTema_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -1132,7 +1173,7 @@ ALTER SEQUENCE "Tema_idTema_seq" OWNED BY "Tema"."idTema";
 
 
 --
--- TOC entry 211 (class 1259 OID 17831)
+-- TOC entry 213 (class 1259 OID 18246)
 -- Name: TiposPublicacion; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1145,7 +1186,7 @@ CREATE TABLE "TiposPublicacion" (
 ALTER TABLE public."TiposPublicacion" OWNER TO postgres;
 
 --
--- TOC entry 212 (class 1259 OID 17834)
+-- TOC entry 214 (class 1259 OID 18249)
 -- Name: TiposPublicacion_CodigoTiposPublicacion_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -1160,8 +1201,8 @@ CREATE SEQUENCE "TiposPublicacion_CodigoTiposPublicacion_seq"
 ALTER TABLE public."TiposPublicacion_CodigoTiposPublicacion_seq" OWNER TO postgres;
 
 --
--- TOC entry 2329 (class 0 OID 0)
--- Dependencies: 212
+-- TOC entry 2342 (class 0 OID 0)
+-- Dependencies: 214
 -- Name: TiposPublicacion_CodigoTiposPublicacion_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -1169,7 +1210,7 @@ ALTER SEQUENCE "TiposPublicacion_CodigoTiposPublicacion_seq" OWNED BY "TiposPubl
 
 
 --
--- TOC entry 213 (class 1259 OID 17836)
+-- TOC entry 215 (class 1259 OID 18251)
 -- Name: Turnos; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1189,7 +1230,7 @@ CREATE TABLE "Turnos" (
 ALTER TABLE public."Turnos" OWNER TO postgres;
 
 --
--- TOC entry 214 (class 1259 OID 17842)
+-- TOC entry 216 (class 1259 OID 18257)
 -- Name: Turnos_CodigoTurno_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -1204,8 +1245,8 @@ CREATE SEQUENCE "Turnos_CodigoTurno_seq"
 ALTER TABLE public."Turnos_CodigoTurno_seq" OWNER TO postgres;
 
 --
--- TOC entry 2330 (class 0 OID 0)
--- Dependencies: 214
+-- TOC entry 2343 (class 0 OID 0)
+-- Dependencies: 216
 -- Name: Turnos_CodigoTurno_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -1213,7 +1254,7 @@ ALTER SEQUENCE "Turnos_CodigoTurno_seq" OWNED BY "Turnos"."CodigoTurno";
 
 
 --
--- TOC entry 215 (class 1259 OID 17844)
+-- TOC entry 217 (class 1259 OID 18259)
 -- Name: UsuarioRoles; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1227,7 +1268,7 @@ CREATE TABLE "UsuarioRoles" (
 ALTER TABLE public."UsuarioRoles" OWNER TO postgres;
 
 --
--- TOC entry 216 (class 1259 OID 17847)
+-- TOC entry 218 (class 1259 OID 18262)
 -- Name: UsuarioRoles_CodigoUsuarioRoles_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -1242,8 +1283,8 @@ CREATE SEQUENCE "UsuarioRoles_CodigoUsuarioRoles_seq"
 ALTER TABLE public."UsuarioRoles_CodigoUsuarioRoles_seq" OWNER TO postgres;
 
 --
--- TOC entry 2331 (class 0 OID 0)
--- Dependencies: 216
+-- TOC entry 2344 (class 0 OID 0)
+-- Dependencies: 218
 -- Name: UsuarioRoles_CodigoUsuarioRoles_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -1251,7 +1292,7 @@ ALTER SEQUENCE "UsuarioRoles_CodigoUsuarioRoles_seq" OWNED BY "UsuarioRoles"."Co
 
 
 --
--- TOC entry 217 (class 1259 OID 17849)
+-- TOC entry 219 (class 1259 OID 18264)
 -- Name: Usuarios; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1272,7 +1313,7 @@ CREATE TABLE "Usuarios" (
 ALTER TABLE public."Usuarios" OWNER TO postgres;
 
 --
--- TOC entry 218 (class 1259 OID 17856)
+-- TOC entry 220 (class 1259 OID 18271)
 -- Name: Usuarios_CodigoUsuario_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -1287,8 +1328,8 @@ CREATE SEQUENCE "Usuarios_CodigoUsuario_seq"
 ALTER TABLE public."Usuarios_CodigoUsuario_seq" OWNER TO postgres;
 
 --
--- TOC entry 2332 (class 0 OID 0)
--- Dependencies: 218
+-- TOC entry 2345 (class 0 OID 0)
+-- Dependencies: 220
 -- Name: Usuarios_CodigoUsuario_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -1296,7 +1337,7 @@ ALTER SEQUENCE "Usuarios_CodigoUsuario_seq" OWNED BY "Usuarios"."CodigoUsuario";
 
 
 --
--- TOC entry 2024 (class 2604 OID 17858)
+-- TOC entry 2030 (class 2604 OID 18273)
 -- Name: CodigoArchivos; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1304,7 +1345,7 @@ ALTER TABLE ONLY "Archivos" ALTER COLUMN "CodigoArchivos" SET DEFAULT nextval('"
 
 
 --
--- TOC entry 2025 (class 2604 OID 17859)
+-- TOC entry 2031 (class 2604 OID 18274)
 -- Name: CodigoAuditoria; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1312,7 +1353,7 @@ ALTER TABLE ONLY "Auditoria" ALTER COLUMN "CodigoAuditoria" SET DEFAULT nextval(
 
 
 --
--- TOC entry 2026 (class 2604 OID 17860)
+-- TOC entry 2032 (class 2604 OID 18275)
 -- Name: CodigoCategoriaDiplomado; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1320,7 +1361,7 @@ ALTER TABLE ONLY "CategoriaDiplomados" ALTER COLUMN "CodigoCategoriaDiplomado" S
 
 
 --
--- TOC entry 2027 (class 2604 OID 17861)
+-- TOC entry 2033 (class 2604 OID 18276)
 -- Name: CodigoCategoriaParticipantes; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1328,7 +1369,7 @@ ALTER TABLE ONLY "CategoriasParticipante" ALTER COLUMN "CodigoCategoriaParticipa
 
 
 --
--- TOC entry 2028 (class 2604 OID 17862)
+-- TOC entry 2034 (class 2604 OID 18277)
 -- Name: CodigoComentarios; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1336,7 +1377,7 @@ ALTER TABLE ONLY "Comentarios" ALTER COLUMN "CodigoComentarios" SET DEFAULT next
 
 
 --
--- TOC entry 2029 (class 2604 OID 17863)
+-- TOC entry 2035 (class 2604 OID 18278)
 -- Name: CodigoConstante; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1344,7 +1385,7 @@ ALTER TABLE ONLY "Constantes" ALTER COLUMN "CodigoConstante" SET DEFAULT nextval
 
 
 --
--- TOC entry 2030 (class 2604 OID 17864)
+-- TOC entry 2036 (class 2604 OID 18279)
 -- Name: CodigoDiplomado; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1352,7 +1393,7 @@ ALTER TABLE ONLY "Diplomados" ALTER COLUMN "CodigoDiplomado" SET DEFAULT nextval
 
 
 --
--- TOC entry 2031 (class 2604 OID 17865)
+-- TOC entry 2037 (class 2604 OID 18280)
 -- Name: CodigoEstados; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1360,7 +1401,7 @@ ALTER TABLE ONLY "EstadosParticipantes" ALTER COLUMN "CodigoEstados" SET DEFAULT
 
 
 --
--- TOC entry 2032 (class 2604 OID 17866)
+-- TOC entry 2038 (class 2604 OID 18281)
 -- Name: CodigoGrupoPeriodo; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1368,7 +1409,7 @@ ALTER TABLE ONLY "GrupoPeriodos" ALTER COLUMN "CodigoGrupoPeriodo" SET DEFAULT n
 
 
 --
--- TOC entry 2034 (class 2604 OID 17867)
+-- TOC entry 2040 (class 2604 OID 18282)
 -- Name: CodigoGruposPeriodoUsuario; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1376,7 +1417,7 @@ ALTER TABLE ONLY "GruposMaestros" ALTER COLUMN "CodigoGruposPeriodoUsuario" SET 
 
 
 --
--- TOC entry 2035 (class 2604 OID 17868)
+-- TOC entry 2041 (class 2604 OID 18283)
 -- Name: CodigoGruposParticipantes; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1384,7 +1425,7 @@ ALTER TABLE ONLY "GruposParticipantes" ALTER COLUMN "CodigoGruposParticipantes" 
 
 
 --
--- TOC entry 2036 (class 2604 OID 17869)
+-- TOC entry 2042 (class 2604 OID 18284)
 -- Name: CodigoModulo; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1392,7 +1433,15 @@ ALTER TABLE ONLY "Modulos" ALTER COLUMN "CodigoModulo" SET DEFAULT nextval('"Mod
 
 
 --
--- TOC entry 2037 (class 2604 OID 17870)
+-- TOC entry 2043 (class 2604 OID 18285)
+-- Name: CodigoPagoParticipante; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "PagosParticipantes" ALTER COLUMN "CodigoPagoParticipante" SET DEFAULT nextval('"PagosParticipantes_CodigoPagoParticipante_seq"'::regclass);
+
+
+--
+-- TOC entry 2044 (class 2604 OID 18286)
 -- Name: CodigoParticipante; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1400,7 +1449,7 @@ ALTER TABLE ONLY "Participantes" ALTER COLUMN "CodigoParticipante" SET DEFAULT n
 
 
 --
--- TOC entry 2038 (class 2604 OID 17871)
+-- TOC entry 2045 (class 2604 OID 18287)
 -- Name: CodigoPeriodo; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1408,7 +1457,7 @@ ALTER TABLE ONLY "Periodos" ALTER COLUMN "CodigoPeriodo" SET DEFAULT nextval('"P
 
 
 --
--- TOC entry 2039 (class 2604 OID 17872)
+-- TOC entry 2046 (class 2604 OID 18288)
 -- Name: CodigoPermisos; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1416,7 +1465,7 @@ ALTER TABLE ONLY "Permisos" ALTER COLUMN "CodigoPermisos" SET DEFAULT nextval('"
 
 
 --
--- TOC entry 2040 (class 2604 OID 17873)
+-- TOC entry 2047 (class 2604 OID 18289)
 -- Name: CodigoPermisosEventos; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1424,7 +1473,7 @@ ALTER TABLE ONLY "PermisosEventos" ALTER COLUMN "CodigoPermisosEventos" SET DEFA
 
 
 --
--- TOC entry 2041 (class 2604 OID 17874)
+-- TOC entry 2048 (class 2604 OID 18290)
 -- Name: CodigoPublicacion; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1432,7 +1481,7 @@ ALTER TABLE ONLY "Publicaciones" ALTER COLUMN "CodigoPublicacion" SET DEFAULT ne
 
 
 --
--- TOC entry 2042 (class 2604 OID 17875)
+-- TOC entry 2049 (class 2604 OID 18291)
 -- Name: CodigoRol; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1440,7 +1489,7 @@ ALTER TABLE ONLY "Rol" ALTER COLUMN "CodigoRol" SET DEFAULT nextval('"Rol_Codigo
 
 
 --
--- TOC entry 2043 (class 2604 OID 17876)
+-- TOC entry 2050 (class 2604 OID 18292)
 -- Name: CodigoRolesPermisos; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1448,7 +1497,7 @@ ALTER TABLE ONLY "RolesPermisos" ALTER COLUMN "CodigoRolesPermisos" SET DEFAULT 
 
 
 --
--- TOC entry 2044 (class 2604 OID 17877)
+-- TOC entry 2051 (class 2604 OID 18293)
 -- Name: idTema; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1456,7 +1505,7 @@ ALTER TABLE ONLY "Tema" ALTER COLUMN "idTema" SET DEFAULT nextval('"Tema_idTema_
 
 
 --
--- TOC entry 2045 (class 2604 OID 17878)
+-- TOC entry 2052 (class 2604 OID 18294)
 -- Name: CodigoTiposPublicacion; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1464,7 +1513,7 @@ ALTER TABLE ONLY "TiposPublicacion" ALTER COLUMN "CodigoTiposPublicacion" SET DE
 
 
 --
--- TOC entry 2046 (class 2604 OID 17879)
+-- TOC entry 2053 (class 2604 OID 18295)
 -- Name: CodigoTurno; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1472,7 +1521,7 @@ ALTER TABLE ONLY "Turnos" ALTER COLUMN "CodigoTurno" SET DEFAULT nextval('"Turno
 
 
 --
--- TOC entry 2047 (class 2604 OID 17880)
+-- TOC entry 2054 (class 2604 OID 18296)
 -- Name: CodigoUsuarioRoles; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1480,7 +1529,7 @@ ALTER TABLE ONLY "UsuarioRoles" ALTER COLUMN "CodigoUsuarioRoles" SET DEFAULT ne
 
 
 --
--- TOC entry 2049 (class 2604 OID 17881)
+-- TOC entry 2056 (class 2604 OID 18297)
 -- Name: CodigoUsuario; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1488,7 +1537,7 @@ ALTER TABLE ONLY "Usuarios" ALTER COLUMN "CodigoUsuario" SET DEFAULT nextval('"U
 
 
 --
--- TOC entry 2252 (class 0 OID 17682)
+-- TOC entry 2262 (class 0 OID 18092)
 -- Dependencies: 171
 -- Data for Name: Archivos; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1509,7 +1558,7 @@ COPY "Archivos" ("CodigoArchivos", "Ruta", "Nombre", "Extension", "Estado", "Usu
 
 
 --
--- TOC entry 2333 (class 0 OID 0)
+-- TOC entry 2346 (class 0 OID 0)
 -- Dependencies: 172
 -- Name: Archivos_CodigoArchivos_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1518,7 +1567,7 @@ SELECT pg_catalog.setval('"Archivos_CodigoArchivos_seq"', 74, true);
 
 
 --
--- TOC entry 2254 (class 0 OID 17690)
+-- TOC entry 2264 (class 0 OID 18100)
 -- Dependencies: 173
 -- Data for Name: Auditoria; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1528,7 +1577,7 @@ COPY "Auditoria" ("CodigoAuditoria", "DatosAnteriores", "DatosPosteriores", "Usu
 
 
 --
--- TOC entry 2334 (class 0 OID 0)
+-- TOC entry 2347 (class 0 OID 0)
 -- Dependencies: 174
 -- Name: Auditoria_CodigoAuditoria_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1537,7 +1586,7 @@ SELECT pg_catalog.setval('"Auditoria_CodigoAuditoria_seq"', 1, false);
 
 
 --
--- TOC entry 2256 (class 0 OID 17698)
+-- TOC entry 2266 (class 0 OID 18108)
 -- Dependencies: 175
 -- Data for Name: CategoriaDiplomados; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1562,7 +1611,7 @@ COPY "CategoriaDiplomados" ("CodigoCategoriaDiplomado", "NombreCategoriaDiplomad
 
 
 --
--- TOC entry 2335 (class 0 OID 0)
+-- TOC entry 2348 (class 0 OID 0)
 -- Dependencies: 176
 -- Name: CategoriaDiplomados_CodigoCategoriaDiplomado_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1571,7 +1620,7 @@ SELECT pg_catalog.setval('"CategoriaDiplomados_CodigoCategoriaDiplomado_seq"', 1
 
 
 --
--- TOC entry 2258 (class 0 OID 17706)
+-- TOC entry 2268 (class 0 OID 18116)
 -- Dependencies: 177
 -- Data for Name: CategoriasParticipante; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1586,7 +1635,7 @@ COPY "CategoriasParticipante" ("CodigoCategoriaParticipantes", "NombreCategoriaP
 
 
 --
--- TOC entry 2336 (class 0 OID 0)
+-- TOC entry 2349 (class 0 OID 0)
 -- Dependencies: 178
 -- Name: CategoriasParticipante_CodigoCategoriaParticipantes_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1595,7 +1644,7 @@ SELECT pg_catalog.setval('"CategoriasParticipante_CodigoCategoriaParticipantes_s
 
 
 --
--- TOC entry 2260 (class 0 OID 17714)
+-- TOC entry 2270 (class 0 OID 18124)
 -- Dependencies: 179
 -- Data for Name: Comentarios; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1605,7 +1654,7 @@ COPY "Comentarios" ("CodigoComentarios", "FechaComentario", "CorreoPublica", "Cu
 
 
 --
--- TOC entry 2337 (class 0 OID 0)
+-- TOC entry 2350 (class 0 OID 0)
 -- Dependencies: 180
 -- Name: Comentarios_CodigoComentarios_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1614,7 +1663,7 @@ SELECT pg_catalog.setval('"Comentarios_CodigoComentarios_seq"', 1, false);
 
 
 --
--- TOC entry 2262 (class 0 OID 17722)
+-- TOC entry 2272 (class 0 OID 18132)
 -- Dependencies: 181
 -- Data for Name: Constantes; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1624,7 +1673,7 @@ COPY "Constantes" ("CodigoConstante", "NombreConstante", "ValorConstante", "Esta
 
 
 --
--- TOC entry 2338 (class 0 OID 0)
+-- TOC entry 2351 (class 0 OID 0)
 -- Dependencies: 182
 -- Name: Constantes_CodigoConstante_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1633,7 +1682,7 @@ SELECT pg_catalog.setval('"Constantes_CodigoConstante_seq"', 1, false);
 
 
 --
--- TOC entry 2264 (class 0 OID 17730)
+-- TOC entry 2274 (class 0 OID 18140)
 -- Dependencies: 183
 -- Data for Name: Diplomados; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1661,7 +1710,7 @@ COPY "Diplomados" ("CodigoDiplomado", "NombreDiplomado", "Descripcion", "Estado"
 
 
 --
--- TOC entry 2339 (class 0 OID 0)
+-- TOC entry 2352 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: Diplomados_CodigoDiplomado_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1670,7 +1719,7 @@ SELECT pg_catalog.setval('"Diplomados_CodigoDiplomado_seq"', 120, true);
 
 
 --
--- TOC entry 2266 (class 0 OID 17738)
+-- TOC entry 2276 (class 0 OID 18148)
 -- Dependencies: 185
 -- Data for Name: EstadosParticipantes; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1682,7 +1731,7 @@ COPY "EstadosParticipantes" ("CodigoEstados", "NombreEstado", "Estado", "Usuario
 
 
 --
--- TOC entry 2340 (class 0 OID 0)
+-- TOC entry 2353 (class 0 OID 0)
 -- Dependencies: 186
 -- Name: EstadosParticipantes_CodigoEstados_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1691,7 +1740,7 @@ SELECT pg_catalog.setval('"EstadosParticipantes_CodigoEstados_seq"', 2, true);
 
 
 --
--- TOC entry 2268 (class 0 OID 17746)
+-- TOC entry 2278 (class 0 OID 18156)
 -- Dependencies: 187
 -- Data for Name: GrupoPeriodos; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1842,7 +1891,7 @@ COPY "GrupoPeriodos" ("CodigoGrupoPeriodo", "CodigoPeriodo", "Estado", "HoraEntr
 
 
 --
--- TOC entry 2341 (class 0 OID 0)
+-- TOC entry 2354 (class 0 OID 0)
 -- Dependencies: 188
 -- Name: GrupoPeriodos_CodigoGrupoPeriodo_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1851,7 +1900,7 @@ SELECT pg_catalog.setval('"GrupoPeriodos_CodigoGrupoPeriodo_seq"', 43, true);
 
 
 --
--- TOC entry 2270 (class 0 OID 17751)
+-- TOC entry 2280 (class 0 OID 18161)
 -- Dependencies: 189
 -- Data for Name: GruposMaestros; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1867,7 +1916,7 @@ COPY "GruposMaestros" ("CodigoGruposPeriodoUsuario", "CodigoUsuario", "CodigoGru
 
 
 --
--- TOC entry 2271 (class 0 OID 17755)
+-- TOC entry 2281 (class 0 OID 18165)
 -- Dependencies: 190
 -- Data for Name: GruposParticipantes; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2000,7 +2049,7 @@ COPY "GruposParticipantes" ("CodigoGruposParticipantes", "CalificacionModulo", "
 
 
 --
--- TOC entry 2342 (class 0 OID 0)
+-- TOC entry 2355 (class 0 OID 0)
 -- Dependencies: 191
 -- Name: GruposParticipantes_CodigoGruposParticipantes_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -2009,7 +2058,7 @@ SELECT pg_catalog.setval('"GruposParticipantes_CodigoGruposParticipantes_seq"', 
 
 
 --
--- TOC entry 2343 (class 0 OID 0)
+-- TOC entry 2356 (class 0 OID 0)
 -- Dependencies: 192
 -- Name: GruposPeriodoUsuarios_CodigoGruposPeriodoUsuario_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -2018,7 +2067,7 @@ SELECT pg_catalog.setval('"GruposPeriodoUsuarios_CodigoGruposPeriodoUsuario_seq"
 
 
 --
--- TOC entry 2274 (class 0 OID 17762)
+-- TOC entry 2284 (class 0 OID 18172)
 -- Dependencies: 193
 -- Data for Name: Modulos; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2111,7 +2160,7 @@ COPY "Modulos" ("CodigoModulo", "NombreModulo", "OrdenModulo", "Estado", "Usuari
 
 
 --
--- TOC entry 2344 (class 0 OID 0)
+-- TOC entry 2357 (class 0 OID 0)
 -- Dependencies: 194
 -- Name: Modulos_CodigoModulo_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -2120,8 +2169,27 @@ SELECT pg_catalog.setval('"Modulos_CodigoModulo_seq"', 97, true);
 
 
 --
--- TOC entry 2276 (class 0 OID 17770)
+-- TOC entry 2286 (class 0 OID 18180)
 -- Dependencies: 195
+-- Data for Name: PagosParticipantes; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "PagosParticipantes" ("CodigoPagoParticipante", "TipoPago", "CodigoGruposParticipantes", "MontoPago", "FechaPago", "NumeroRecibo") FROM stdin;
+\.
+
+
+--
+-- TOC entry 2358 (class 0 OID 0)
+-- Dependencies: 196
+-- Name: PagosParticipantes_CodigoPagoParticipante_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"PagosParticipantes_CodigoPagoParticipante_seq"', 1, false);
+
+
+--
+-- TOC entry 2288 (class 0 OID 18185)
+-- Dependencies: 197
 -- Data for Name: Participantes; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2156,7 +2224,6 @@ COPY "Participantes" ("CodigoParticipante", "CorreoElectronico", "TelefonoFijo",
 40	jorge.diaz@paesis.com	2441-4573	7145-8762	BARRIO SAN ANTONIO COL. EL PROGRESO SECTOR#2 C#124-A, Santa ana	04160205-6	Jorge Diaz	1990-03-08	3	Lic. En Biologia	Profesional		entrada por estudios previos.	2	192.168.0.30	2015-02-01	5	Ninguno.	M	\N	\N	\N
 42	kare.medina@paesis.com	2441-4575	7145-8764	COL. BOSQUES DE ANCAR POLIG. "D", CASA #4, EL CONGO, SANTA ANA	04160207-4	Kare Medina	1996-12-15	0	Lic. En Biologia	Estudiante		 	2	192.168.0.32	2015-02-03	4	Ninguno.	F	\N	\N	\N
 43	daisy.lopez@paesis.com	2441-4576	7515-4923	BARRIO EL CALVARIO AV. BENJAMIN ESTRADA VALIENTE #31, METAPAN SANTA ANA.           	04160208-7	Daisy Lopez	1996-11-15	6	Lic. En Idiomas Extrangeros	Estudiante		Reingreso 	2	192.168.0.33	2015-02-04	2	Ninguno.	F	\N	\N	\N
-9	mari.gar@pp.com	1231-2312	1231-2312	Av. Las Flores, Residencial Constitucion, #15	98795384-7	Marisol Garcia	1991-11-20	0	Lic. en Idiomas	Bachiller		Desde cero	0	192.168.1.1	2016-07-05	2	cero	F	\N	MarisolG	1234
 44	jose.velado@paesis.com	2441-4577	7515-4924	Urb. El trebol, 3º etapa, pol. 19, casa #8, Santa Ana.             	04160209-1	Jose Velado	1994-04-17	2	Lic. En Idiomas Extrangeros	Tecnico		 	2	192.168.0.34	2015-02-05	2	Ninguno.	M	\N	\N	\N
 45	monica.melendez@paesis.com	2441-4578	7515-4925	URB. SANTA ANA NORTE, CALLE "E", POLIG.#4, CASA #35, SANTA ANA	04160210-5	Monica Melendez	1999-02-03	0	Por Determinar	Estudiante	RETANA CASTRO,  YENI LORENA	 	2	192.168.0.35	2015-02-06	2	Ninguno.	F	\N	\N	\N
 46	gabriela.castro@paesis.com	2441-4579	7515-4926	CANTON PRIMAVERA COL. SANTO TOMAS, LOTIF. EXCUELLAR, CALLE PRINCIPAL LOTE #23, SANTA ANA	04160211-6	Gabriela Castro	1981-07-15	4	Doctorado en Medicina	Estudiante		 	2	192.168.0.36	2015-02-07	5	Ninguno.	F	\N	\N	\N
@@ -2228,14 +2295,15 @@ COPY "Participantes" ("CodigoParticipante", "CorreoElectronico", "TelefonoFijo",
 110	freddy.alvarez@paesis.com	2255-7838	7352-1938	URBANIZACION MAJUCLA, POLG.2 C#5 CALLE PRINC.CUS. 	04160275-0	Freddy Alvarez	1997-10-12	3	Lic. En Biologia	Profesional		Reingreso 	2	192.168.0.100	2015-04-16	3	Ninguno.	M	\N	\N	\N
 111	marcela.arroyo@paesis.com	2255-7839	7352-1939	RES. ALTO VERDE 2 SENDA LOS LAURELES POL. 7#52    	04160276-4	Marcela Arroyo	1984-03-22	1	Lic. En Mercadeo	Estudiante		Se retiro	2	192.168.0.101	2015-04-17	1	Ninguno.	F	\N	\N	\N
 112	evaldivieso@paesis.com	2445-4545	7854-1236	Residecial Escalon Av. Las flores Senda Maya	04452013-3	Enrique Valdivieso	1990-04-19	0	Ing Civil	Universitario	No	TEST	\N	\N	\N	3	TEST	M	\N	\N	\N
-8	Johanna@hotmail.com	1231-2312	1231-2312	hghgjuykjhftgnvghbnn	02384759-1	Johanna  DE   GUERRERO	2015-11-20	0	Ing. sistemas			inicio en nivel 4	0	192.168.1.1	2016-05-02	1	Examen de ubicacion	F	\N	Johana	1234
 1	maynor.lopez@partsplussv.com	24414545	75982304	sdasda	04440101	Maynor Lopez	1991-04-18	0				test4	0	192.168.1.1	2016-04-30	2	test4	M	\N	Maynor	maynor
+8	Johanna@hotmail.com	1231-2312	1231-2312	hghgjuykjhftgnvghbnn	02384759-1	Johanna  DE   GUERRERO	2015-11-20	0	Ing. sistemas			inicio en nivel 4	0	192.168.1.1	2016-05-02	1	Examen de ubicacion	F	\N	Johana	1234
+9	mari.gar@pp.com	1231-2312	1231-2312	Av. Las Flores, Residencial Constitucion, #15	98795384-7	Marisol Garcia	1991-11-20	0	Lic. en Idiomas	Bachiller		Desde cero	0	192.168.1.1	2016-07-05	2	cero	F	\N	MarisolG	1234
 \.
 
 
 --
--- TOC entry 2345 (class 0 OID 0)
--- Dependencies: 196
+-- TOC entry 2359 (class 0 OID 0)
+-- Dependencies: 198
 -- Name: Participantes_CodigoParticipante_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2243,8 +2311,8 @@ SELECT pg_catalog.setval('"Participantes_CodigoParticipante_seq"', 112, true);
 
 
 --
--- TOC entry 2278 (class 0 OID 17778)
--- Dependencies: 197
+-- TOC entry 2290 (class 0 OID 18193)
+-- Dependencies: 199
 -- Data for Name: Periodos; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2252,7 +2320,6 @@ COPY "Periodos" ("CodigoPeriodo", "FechaInicioPeriodo", "FechaFinPeriodo", "Esta
 3	2016-02-01	2016-02-29	t	test	4
 4	2016-02-01	2016-02-07	t	test	4
 7	2016-02-01	2016-02-07	t	test2	5
-8	2016-02-01	2016-02-07	t	test2	6
 9	2016-02-01	2016-02-07	t	test2	7
 10	2016-02-01	2016-02-07	t	test2	8
 11	2016-02-01	2016-02-07	t	test2	9
@@ -2349,13 +2416,14 @@ COPY "Periodos" ("CodigoPeriodo", "FechaInicioPeriodo", "FechaFinPeriodo", "Esta
 104	2016-09-01	2016-09-30	t	test	49
 105	2016-08-01	2016-08-30	t	TEST	97
 106	2016-07-01	2016-07-30	t	asdfasdfaf	93
+8	2015-02-01	2015-02-07	t	test2	6
 5	2015-02-08	2015-02-14	t	test	4
 \.
 
 
 --
--- TOC entry 2346 (class 0 OID 0)
--- Dependencies: 198
+-- TOC entry 2360 (class 0 OID 0)
+-- Dependencies: 200
 -- Name: Periodos_CodigoPeriodo_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2363,8 +2431,8 @@ SELECT pg_catalog.setval('"Periodos_CodigoPeriodo_seq"', 106, true);
 
 
 --
--- TOC entry 2280 (class 0 OID 17786)
--- Dependencies: 199
+-- TOC entry 2292 (class 0 OID 18201)
+-- Dependencies: 201
 -- Data for Name: Permisos; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2385,14 +2453,14 @@ COPY "Permisos" ("CodigoPermisos", "NombrePermiso", "EstadoPermisos", "UsuarioMo
 8	Pagos	t	1	192.168.1.1	2015-01-01	Pagos	\N	PagosController	MenuPpal	\N
 15	Archivos	t	1	1.1.1.1	2016-01-01	Archivos	\N	ArchivosController	MenuPpal	\N
 16	ArchivoMaestro	t	1	1.1.1.1	2016-08-08	ArchivoMaestro	\N	ArchivosController	\N	\N
-18	HisArchivosAlumno	t	1	1.1.1.1	2016-08-12	HisArchivosAlumno	\N	ArchivosController	\N	\N
-17	NuevoArchivoMod	t	1	1.1.1.1	2016-08-08	NuevoArchivoMod	\N	ArchivosController	\N	\N
+17	NuevoArchivoMod	t	1	1.1.1.1	2016-08-14	NuevoArchivoMod	\N	ArchivosController	\N	\N
+18	HisArchivosAlumno	t	1	1.1.1.1	2016-08-10	HisArchivosAlumno	\N	ArchivosController	\N	\N
 \.
 
 
 --
--- TOC entry 2281 (class 0 OID 17792)
--- Dependencies: 200
+-- TOC entry 2293 (class 0 OID 18207)
+-- Dependencies: 202
 -- Data for Name: PermisosEventos; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2401,8 +2469,8 @@ COPY "PermisosEventos" ("CodigoPermisosEventos", "NombreEvento", "CodigoPermiso"
 
 
 --
--- TOC entry 2347 (class 0 OID 0)
--- Dependencies: 201
+-- TOC entry 2361 (class 0 OID 0)
+-- Dependencies: 203
 -- Name: PermisosEventos_CodigoPermisosEventos_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2410,17 +2478,17 @@ SELECT pg_catalog.setval('"PermisosEventos_CodigoPermisosEventos_seq"', 1, false
 
 
 --
--- TOC entry 2348 (class 0 OID 0)
--- Dependencies: 202
+-- TOC entry 2362 (class 0 OID 0)
+-- Dependencies: 204
 -- Name: Permisos_CodigoPermisos_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('"Permisos_CodigoPermisos_seq"', 19, true);
+SELECT pg_catalog.setval('"Permisos_CodigoPermisos_seq"', 16, true);
 
 
 --
--- TOC entry 2284 (class 0 OID 17802)
--- Dependencies: 203
+-- TOC entry 2296 (class 0 OID 18217)
+-- Dependencies: 205
 -- Data for Name: Publicaciones; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2445,8 +2513,8 @@ COPY "Publicaciones" ("CodigoPublicacion", "UsuarioPublica", "FechaPublicacion",
 
 
 --
--- TOC entry 2349 (class 0 OID 0)
--- Dependencies: 204
+-- TOC entry 2363 (class 0 OID 0)
+-- Dependencies: 206
 -- Name: Publicaciones_CodigoPublicacion_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2454,8 +2522,8 @@ SELECT pg_catalog.setval('"Publicaciones_CodigoPublicacion_seq"', 74, true);
 
 
 --
--- TOC entry 2286 (class 0 OID 17810)
--- Dependencies: 205
+-- TOC entry 2298 (class 0 OID 18225)
+-- Dependencies: 207
 -- Data for Name: Rol; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2468,8 +2536,8 @@ COPY "Rol" ("CodigoRol", "NombreRol", "Estado", "VersionRol", "UsuarioModifica",
 
 
 --
--- TOC entry 2350 (class 0 OID 0)
--- Dependencies: 206
+-- TOC entry 2364 (class 0 OID 0)
+-- Dependencies: 208
 -- Name: Rol_CodigoRol_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2477,8 +2545,8 @@ SELECT pg_catalog.setval('"Rol_CodigoRol_seq"', 4, true);
 
 
 --
--- TOC entry 2288 (class 0 OID 17818)
--- Dependencies: 207
+-- TOC entry 2300 (class 0 OID 18233)
+-- Dependencies: 209
 -- Data for Name: RolesPermisos; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2505,18 +2573,18 @@ COPY "RolesPermisos" ("CodigoRolesPermisos", "Estado", "CodigoPermisos", "Codigo
 22	\N	13	1
 23	\N	14	1
 24	\N	15	1
+26	\N	15	4
 27	\N	3	4
 28	t	16	4
 29	\N	15	3
-26	t	15	4
-30	t	18	3
-31	t	17	4
+30	t	17	4
+31	t	18	3
 \.
 
 
 --
--- TOC entry 2351 (class 0 OID 0)
--- Dependencies: 208
+-- TOC entry 2365 (class 0 OID 0)
+-- Dependencies: 210
 -- Name: RolesPermisos_CodigoRolesPermisos_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2524,8 +2592,8 @@ SELECT pg_catalog.setval('"RolesPermisos_CodigoRolesPermisos_seq"', 31, true);
 
 
 --
--- TOC entry 2290 (class 0 OID 17823)
--- Dependencies: 209
+-- TOC entry 2302 (class 0 OID 18238)
+-- Dependencies: 211
 -- Data for Name: Tema; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2535,8 +2603,8 @@ COPY "Tema" ("idTema", "Nombre", path) FROM stdin;
 
 
 --
--- TOC entry 2352 (class 0 OID 0)
--- Dependencies: 210
+-- TOC entry 2366 (class 0 OID 0)
+-- Dependencies: 212
 -- Name: Tema_idTema_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2544,8 +2612,8 @@ SELECT pg_catalog.setval('"Tema_idTema_seq"', 1, true);
 
 
 --
--- TOC entry 2292 (class 0 OID 17831)
--- Dependencies: 211
+-- TOC entry 2304 (class 0 OID 18246)
+-- Dependencies: 213
 -- Data for Name: TiposPublicacion; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2556,8 +2624,8 @@ COPY "TiposPublicacion" ("CodigoTiposPublicacion", "NombrePublicacion") FROM std
 
 
 --
--- TOC entry 2353 (class 0 OID 0)
--- Dependencies: 212
+-- TOC entry 2367 (class 0 OID 0)
+-- Dependencies: 214
 -- Name: TiposPublicacion_CodigoTiposPublicacion_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2565,8 +2633,8 @@ SELECT pg_catalog.setval('"TiposPublicacion_CodigoTiposPublicacion_seq"', 1, fal
 
 
 --
--- TOC entry 2294 (class 0 OID 17836)
--- Dependencies: 213
+-- TOC entry 2306 (class 0 OID 18251)
+-- Dependencies: 215
 -- Data for Name: Turnos; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2576,8 +2644,8 @@ COPY "Turnos" ("CodigoTurno", "NombreTurno", "HoraInicio", "HoraFin", "UsuarioMo
 
 
 --
--- TOC entry 2354 (class 0 OID 0)
--- Dependencies: 214
+-- TOC entry 2368 (class 0 OID 0)
+-- Dependencies: 216
 -- Name: Turnos_CodigoTurno_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2585,8 +2653,8 @@ SELECT pg_catalog.setval('"Turnos_CodigoTurno_seq"', 1, true);
 
 
 --
--- TOC entry 2296 (class 0 OID 17844)
--- Dependencies: 215
+-- TOC entry 2308 (class 0 OID 18259)
+-- Dependencies: 217
 -- Data for Name: UsuarioRoles; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2605,8 +2673,8 @@ COPY "UsuarioRoles" ("CodigoUsuarioRoles", "CodigoRol", "CodigoUsuario") FROM st
 
 
 --
--- TOC entry 2355 (class 0 OID 0)
--- Dependencies: 216
+-- TOC entry 2369 (class 0 OID 0)
+-- Dependencies: 218
 -- Name: UsuarioRoles_CodigoUsuarioRoles_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2614,26 +2682,26 @@ SELECT pg_catalog.setval('"UsuarioRoles_CodigoUsuarioRoles_seq"', 12, true);
 
 
 --
--- TOC entry 2298 (class 0 OID 17849)
--- Dependencies: 217
+-- TOC entry 2310 (class 0 OID 18264)
+-- Dependencies: 219
 -- Data for Name: Usuarios; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY "Usuarios" ("CodigoUsuario", "NombreUsuario", "ContraseniaUsuario", "CorreoUsuario", "Nombre", "UsuarioModifica", "IPModifica", "FechaModifica", "Comentarios", "idTema") FROM stdin;
-2	Maynor	maynor	maynorLopez@gmail.com	Maynor Gabriel Lopez Jimenez                                                                                                                                                                            	1	192.168.1.12	2015-08-05	\N	1
 26	joha	ksdfjkl	sdf@kdjfk.com	johanna                                                                                                                                                                                                 	\N	\N	2015-11-15	klsdfjlkjsdfkjkj	1
-1	Luis	123	luisarrabi@gmail.sv	Luis Armando Ibarra Bonilla                                                                                                                                                                             	\N	\N	2015-11-15		1
 28	armando ibarra bonilla 	aaa	a@a	luis                                                                                                                                                                                                    	1	127.0.0.1	2015-12-25	s	1
 29	a	123	aaa@asd	l                                                                                                                                                                                                       	1	127.0.0.1	2015-12-26	2	1
 27	joh	123456	joh@nose	joh                                                                                                                                                                                                     	1	::1	2016-05-27	12345	1
 65	dfigueroa	1234	figueroa.diana@gmail.com	diana figueroa                                                                                                                                                                                          	2	::1	2016-07-24	test	1
 66	jose	1234	jose@usuario.com	Jose                                                                                                                                                                                                    	2	127.0.0.1	2016-08-01	Maestro	1
+1	Luis	123	luisarrabi@gmail.sv	Luis Armando Ibarra Bonilla                                                                                                                                                                             	\N	\N	2015-11-15		1
+2	Maynor	maynor	maynorLopez@gmail.com	Maynor Gabriel Lopez Jimenez                                                                                                                                                                            	1	192.168.1.12	2015-08-05	\N	1
 \.
 
 
 --
--- TOC entry 2356 (class 0 OID 0)
--- Dependencies: 218
+-- TOC entry 2370 (class 0 OID 0)
+-- Dependencies: 220
 -- Name: Usuarios_CodigoUsuario_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2641,7 +2709,7 @@ SELECT pg_catalog.setval('"Usuarios_CodigoUsuario_seq"', 66, true);
 
 
 --
--- TOC entry 2058 (class 2606 OID 17883)
+-- TOC entry 2065 (class 2606 OID 18299)
 -- Name: PKCodigoCategoriaParticipantes; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2650,7 +2718,7 @@ ALTER TABLE ONLY "CategoriasParticipante"
 
 
 --
--- TOC entry 2072 (class 2606 OID 17885)
+-- TOC entry 2079 (class 2606 OID 18301)
 -- Name: PKCodigoGruposPeriodoUsuario; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2659,7 +2727,7 @@ ALTER TABLE ONLY "GruposMaestros"
 
 
 --
--- TOC entry 2090 (class 2606 OID 17887)
+-- TOC entry 2099 (class 2606 OID 18303)
 -- Name: PKCodigoPeriodo; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2668,7 +2736,7 @@ ALTER TABLE ONLY "Periodos"
 
 
 --
--- TOC entry 2097 (class 2606 OID 17889)
+-- TOC entry 2106 (class 2606 OID 18305)
 -- Name: PKCodigoPublicacion; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2677,7 +2745,7 @@ ALTER TABLE ONLY "Publicaciones"
 
 
 --
--- TOC entry 2067 (class 2606 OID 17891)
+-- TOC entry 2074 (class 2606 OID 18307)
 -- Name: PKEstadosParticipacion; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2686,7 +2754,7 @@ ALTER TABLE ONLY "EstadosParticipantes"
 
 
 --
--- TOC entry 2087 (class 2606 OID 17893)
+-- TOC entry 2096 (class 2606 OID 18309)
 -- Name: PKParticipantes; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2695,7 +2763,7 @@ ALTER TABLE ONLY "Participantes"
 
 
 --
--- TOC entry 2102 (class 2606 OID 17895)
+-- TOC entry 2111 (class 2606 OID 18311)
 -- Name: PKRol; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2704,7 +2772,7 @@ ALTER TABLE ONLY "Rol"
 
 
 --
--- TOC entry 2117 (class 2606 OID 17897)
+-- TOC entry 2126 (class 2606 OID 18313)
 -- Name: PKUsuario; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2713,7 +2781,7 @@ ALTER TABLE ONLY "Usuarios"
 
 
 --
--- TOC entry 2113 (class 2606 OID 17899)
+-- TOC entry 2122 (class 2606 OID 18315)
 -- Name: PKUsuariosRoles; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2722,7 +2790,7 @@ ALTER TABLE ONLY "UsuarioRoles"
 
 
 --
--- TOC entry 2095 (class 2606 OID 17901)
+-- TOC entry 2104 (class 2606 OID 18317)
 -- Name: PK_Eventos_Permiso; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2731,7 +2799,7 @@ ALTER TABLE ONLY "PermisosEventos"
 
 
 --
--- TOC entry 2056 (class 2606 OID 17903)
+-- TOC entry 2063 (class 2606 OID 18319)
 -- Name: pkCategoriaDiplomados; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2740,7 +2808,7 @@ ALTER TABLE ONLY "CategoriaDiplomados"
 
 
 --
--- TOC entry 2052 (class 2606 OID 17905)
+-- TOC entry 2059 (class 2606 OID 18321)
 -- Name: pkCodigoArchivo; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2749,7 +2817,7 @@ ALTER TABLE ONLY "Archivos"
 
 
 --
--- TOC entry 2060 (class 2606 OID 17907)
+-- TOC entry 2067 (class 2606 OID 18323)
 -- Name: pkComentarios; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2758,7 +2826,7 @@ ALTER TABLE ONLY "Comentarios"
 
 
 --
--- TOC entry 2062 (class 2606 OID 17909)
+-- TOC entry 2069 (class 2606 OID 18325)
 -- Name: pkConstantes; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2767,7 +2835,7 @@ ALTER TABLE ONLY "Constantes"
 
 
 --
--- TOC entry 2065 (class 2606 OID 17911)
+-- TOC entry 2072 (class 2606 OID 18327)
 -- Name: pkDiplomados; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2776,7 +2844,7 @@ ALTER TABLE ONLY "Diplomados"
 
 
 --
--- TOC entry 2085 (class 2606 OID 17913)
+-- TOC entry 2092 (class 2606 OID 18329)
 -- Name: pkModulos; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2785,7 +2853,7 @@ ALTER TABLE ONLY "Modulos"
 
 
 --
--- TOC entry 2093 (class 2606 OID 17915)
+-- TOC entry 2102 (class 2606 OID 18331)
 -- Name: pkPermisos; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2794,7 +2862,7 @@ ALTER TABLE ONLY "Permisos"
 
 
 --
--- TOC entry 2105 (class 2606 OID 17917)
+-- TOC entry 2114 (class 2606 OID 18333)
 -- Name: pkRolesPermisos; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2803,7 +2871,7 @@ ALTER TABLE ONLY "RolesPermisos"
 
 
 --
--- TOC entry 2109 (class 2606 OID 17919)
+-- TOC entry 2118 (class 2606 OID 18335)
 -- Name: pkTiposPublicacion; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2812,7 +2880,7 @@ ALTER TABLE ONLY "TiposPublicacion"
 
 
 --
--- TOC entry 2111 (class 2606 OID 17921)
+-- TOC entry 2120 (class 2606 OID 18337)
 -- Name: pkTurnos; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2821,7 +2889,7 @@ ALTER TABLE ONLY "Turnos"
 
 
 --
--- TOC entry 2054 (class 2606 OID 17923)
+-- TOC entry 2061 (class 2606 OID 18339)
 -- Name: pk_Auditoria; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2830,7 +2898,7 @@ ALTER TABLE ONLY "Auditoria"
 
 
 --
--- TOC entry 2080 (class 2606 OID 17925)
+-- TOC entry 2087 (class 2606 OID 18341)
 -- Name: pk_GrupoParticipantes; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2839,7 +2907,7 @@ ALTER TABLE ONLY "GruposParticipantes"
 
 
 --
--- TOC entry 2070 (class 2606 OID 17927)
+-- TOC entry 2077 (class 2606 OID 18343)
 -- Name: pk_GrupoPeriodo; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2848,7 +2916,7 @@ ALTER TABLE ONLY "GrupoPeriodos"
 
 
 --
--- TOC entry 2107 (class 2606 OID 17929)
+-- TOC entry 2116 (class 2606 OID 18345)
 -- Name: pk_Tema; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2857,7 +2925,16 @@ ALTER TABLE ONLY "Tema"
 
 
 --
--- TOC entry 2088 (class 1259 OID 17930)
+-- TOC entry 2094 (class 2606 OID 18347)
+-- Name: pk_pago_Parti; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "PagosParticipantes"
+    ADD CONSTRAINT "pk_pago_Parti" PRIMARY KEY ("CodigoPagoParticipante");
+
+
+--
+-- TOC entry 2097 (class 1259 OID 18348)
 -- Name: fki_CategoriaParticipante; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2865,7 +2942,7 @@ CREATE INDEX "fki_CategoriaParticipante" ON "Participantes" USING btree ("Codigo
 
 
 --
--- TOC entry 2063 (class 1259 OID 17931)
+-- TOC entry 2070 (class 1259 OID 18349)
 -- Name: fki_CaterogiaDiplomados; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2873,7 +2950,7 @@ CREATE INDEX "fki_CaterogiaDiplomados" ON "Diplomados" USING btree ("CodigoCateg
 
 
 --
--- TOC entry 2081 (class 1259 OID 17932)
+-- TOC entry 2088 (class 1259 OID 18350)
 -- Name: fki_Diplomado; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2881,7 +2958,7 @@ CREATE INDEX "fki_Diplomado" ON "Modulos" USING btree ("CodigoDiplomado");
 
 
 --
--- TOC entry 2075 (class 1259 OID 17933)
+-- TOC entry 2082 (class 1259 OID 18351)
 -- Name: fki_EstadosParticipantes; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2889,7 +2966,7 @@ CREATE INDEX "fki_EstadosParticipantes" ON "GruposParticipantes" USING btree ("C
 
 
 --
--- TOC entry 2098 (class 1259 OID 17934)
+-- TOC entry 2107 (class 1259 OID 18352)
 -- Name: fki_GrupoParticipantesP; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2897,7 +2974,7 @@ CREATE INDEX "fki_GrupoParticipantesP" ON "Publicaciones" USING btree ("CodigoGr
 
 
 --
--- TOC entry 2076 (class 1259 OID 17935)
+-- TOC entry 2083 (class 1259 OID 18353)
 -- Name: fki_GrupoPeriodo; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2905,7 +2982,7 @@ CREATE INDEX "fki_GrupoPeriodo" ON "GruposParticipantes" USING btree ("CodigoGru
 
 
 --
--- TOC entry 2073 (class 1259 OID 17936)
+-- TOC entry 2080 (class 1259 OID 18354)
 -- Name: fki_GrupoPeriodoGPU; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2913,7 +2990,7 @@ CREATE INDEX "fki_GrupoPeriodoGPU" ON "GruposMaestros" USING btree ("CodigoGrupo
 
 
 --
--- TOC entry 2099 (class 1259 OID 17937)
+-- TOC entry 2108 (class 1259 OID 18355)
 -- Name: fki_GrupoPeriodoP; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2921,7 +2998,7 @@ CREATE INDEX "fki_GrupoPeriodoP" ON "Publicaciones" USING btree ("CodigoGrupoPer
 
 
 --
--- TOC entry 2100 (class 1259 OID 17938)
+-- TOC entry 2109 (class 1259 OID 18356)
 -- Name: fki_GrupoPeriodoUsuarioP; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2929,7 +3006,7 @@ CREATE INDEX "fki_GrupoPeriodoUsuarioP" ON "Publicaciones" USING btree ("CodigoG
 
 
 --
--- TOC entry 2082 (class 1259 OID 17939)
+-- TOC entry 2089 (class 1259 OID 18357)
 -- Name: fki_ModuloModulo; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2937,7 +3014,7 @@ CREATE INDEX "fki_ModuloModulo" ON "Modulos" USING btree ("CodigoModulo");
 
 
 --
--- TOC entry 2091 (class 1259 OID 17940)
+-- TOC entry 2100 (class 1259 OID 18358)
 -- Name: fki_Modulos; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2945,7 +3022,7 @@ CREATE INDEX "fki_Modulos" ON "Periodos" USING btree ("CodigoModulo");
 
 
 --
--- TOC entry 2077 (class 1259 OID 17941)
+-- TOC entry 2084 (class 1259 OID 18359)
 -- Name: fki_Participantes; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2953,7 +3030,7 @@ CREATE INDEX "fki_Participantes" ON "GruposParticipantes" USING btree ("CodigoPa
 
 
 --
--- TOC entry 2068 (class 1259 OID 17942)
+-- TOC entry 2075 (class 1259 OID 18360)
 -- Name: fki_Periodo; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2961,7 +3038,7 @@ CREATE INDEX "fki_Periodo" ON "GrupoPeriodos" USING btree ("CodigoPeriodo");
 
 
 --
--- TOC entry 2103 (class 1259 OID 17943)
+-- TOC entry 2112 (class 1259 OID 18361)
 -- Name: fki_Permisos; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2969,7 +3046,7 @@ CREATE INDEX "fki_Permisos" ON "RolesPermisos" USING btree ("CodigoPermisos");
 
 
 --
--- TOC entry 2050 (class 1259 OID 17944)
+-- TOC entry 2057 (class 1259 OID 18362)
 -- Name: fki_PublicacionesA; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2977,7 +3054,7 @@ CREATE INDEX "fki_PublicacionesA" ON "Archivos" USING btree ("CodigoPublicacione
 
 
 --
--- TOC entry 2114 (class 1259 OID 17945)
+-- TOC entry 2123 (class 1259 OID 18363)
 -- Name: fki_Rol; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2985,7 +3062,7 @@ CREATE INDEX "fki_Rol" ON "UsuarioRoles" USING btree ("CodigoRol");
 
 
 --
--- TOC entry 2083 (class 1259 OID 17946)
+-- TOC entry 2090 (class 1259 OID 18364)
 -- Name: fki_Turno; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2993,7 +3070,7 @@ CREATE INDEX "fki_Turno" ON "Modulos" USING btree ("CodigoTurno");
 
 
 --
--- TOC entry 2115 (class 1259 OID 17947)
+-- TOC entry 2124 (class 1259 OID 18365)
 -- Name: fki_Usuario; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -3001,7 +3078,7 @@ CREATE INDEX "fki_Usuario" ON "UsuarioRoles" USING btree ("CodigoUsuario");
 
 
 --
--- TOC entry 2074 (class 1259 OID 17948)
+-- TOC entry 2081 (class 1259 OID 18366)
 -- Name: fki_UsuarioGPU; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -3009,7 +3086,7 @@ CREATE INDEX "fki_UsuarioGPU" ON "GruposMaestros" USING btree ("CodigoUsuario");
 
 
 --
--- TOC entry 2118 (class 1259 OID 17949)
+-- TOC entry 2127 (class 1259 OID 18367)
 -- Name: fki_Usuario_Tema; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -3017,7 +3094,7 @@ CREATE INDEX "fki_Usuario_Tema" ON "Usuarios" USING btree ("idTema");
 
 
 --
--- TOC entry 2078 (class 1259 OID 17950)
+-- TOC entry 2085 (class 1259 OID 18368)
 -- Name: fki_Usuarios; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -3025,7 +3102,7 @@ CREATE INDEX "fki_Usuarios" ON "GruposParticipantes" USING btree ("CodigoUsuario
 
 
 --
--- TOC entry 2134 (class 2606 OID 17951)
+-- TOC entry 2144 (class 2606 OID 18369)
 -- Name: FK_Permiso_Evento; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3034,7 +3111,7 @@ ALTER TABLE ONLY "PermisosEventos"
 
 
 --
--- TOC entry 2120 (class 2606 OID 17956)
+-- TOC entry 2129 (class 2606 OID 18374)
 -- Name: Fk_Publicaciones_Comentarios; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3043,7 +3120,7 @@ ALTER TABLE ONLY "Comentarios"
 
 
 --
--- TOC entry 2133 (class 2606 OID 17961)
+-- TOC entry 2143 (class 2606 OID 18379)
 -- Name: fkPermisoPadre; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3052,7 +3129,7 @@ ALTER TABLE ONLY "Permisos"
 
 
 --
--- TOC entry 2131 (class 2606 OID 17966)
+-- TOC entry 2141 (class 2606 OID 18384)
 -- Name: fk_CategoriaParticipante; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3061,7 +3138,7 @@ ALTER TABLE ONLY "Participantes"
 
 
 --
--- TOC entry 2121 (class 2606 OID 17971)
+-- TOC entry 2130 (class 2606 OID 18389)
 -- Name: fk_CaterogiaDiplomados; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3070,7 +3147,16 @@ ALTER TABLE ONLY "Diplomados"
 
 
 --
--- TOC entry 2135 (class 2606 OID 17976)
+-- TOC entry 2140 (class 2606 OID 18394)
+-- Name: fk_Cod_grupos_participantes; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "PagosParticipantes"
+    ADD CONSTRAINT "fk_Cod_grupos_participantes" FOREIGN KEY ("CodigoGruposParticipantes") REFERENCES "GruposParticipantes"("CodigoGruposParticipantes");
+
+
+--
+-- TOC entry 2145 (class 2606 OID 18399)
 -- Name: fk_CodigoCategoriaDiplomado; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3079,7 +3165,7 @@ ALTER TABLE ONLY "Publicaciones"
 
 
 --
--- TOC entry 2129 (class 2606 OID 17981)
+-- TOC entry 2138 (class 2606 OID 18404)
 -- Name: fk_Diplomado; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3088,7 +3174,7 @@ ALTER TABLE ONLY "Modulos"
 
 
 --
--- TOC entry 2125 (class 2606 OID 17986)
+-- TOC entry 2134 (class 2606 OID 18409)
 -- Name: fk_EstadosParticipantes; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3097,7 +3183,7 @@ ALTER TABLE ONLY "GruposParticipantes"
 
 
 --
--- TOC entry 2136 (class 2606 OID 17991)
+-- TOC entry 2146 (class 2606 OID 18414)
 -- Name: fk_GrupoParticipantesP; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3106,7 +3192,7 @@ ALTER TABLE ONLY "Publicaciones"
 
 
 --
--- TOC entry 2126 (class 2606 OID 17996)
+-- TOC entry 2135 (class 2606 OID 18419)
 -- Name: fk_GrupoPeriodo; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3115,7 +3201,7 @@ ALTER TABLE ONLY "GruposParticipantes"
 
 
 --
--- TOC entry 2123 (class 2606 OID 18001)
+-- TOC entry 2132 (class 2606 OID 18424)
 -- Name: fk_GrupoPeriodoGPU; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3124,7 +3210,7 @@ ALTER TABLE ONLY "GruposMaestros"
 
 
 --
--- TOC entry 2137 (class 2606 OID 18006)
+-- TOC entry 2147 (class 2606 OID 18429)
 -- Name: fk_GrupoPeriodoP; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3133,7 +3219,7 @@ ALTER TABLE ONLY "Publicaciones"
 
 
 --
--- TOC entry 2138 (class 2606 OID 18011)
+-- TOC entry 2148 (class 2606 OID 18434)
 -- Name: fk_GrupoPeriodoUsuarioP; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3142,7 +3228,7 @@ ALTER TABLE ONLY "Publicaciones"
 
 
 --
--- TOC entry 2132 (class 2606 OID 18016)
+-- TOC entry 2142 (class 2606 OID 18439)
 -- Name: fk_Modulos; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3151,7 +3237,7 @@ ALTER TABLE ONLY "Periodos"
 
 
 --
--- TOC entry 2127 (class 2606 OID 18021)
+-- TOC entry 2136 (class 2606 OID 18444)
 -- Name: fk_Participantes; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3160,7 +3246,7 @@ ALTER TABLE ONLY "GruposParticipantes"
 
 
 --
--- TOC entry 2122 (class 2606 OID 18026)
+-- TOC entry 2131 (class 2606 OID 18449)
 -- Name: fk_Periodo; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3169,7 +3255,7 @@ ALTER TABLE ONLY "GrupoPeriodos"
 
 
 --
--- TOC entry 2140 (class 2606 OID 18031)
+-- TOC entry 2150 (class 2606 OID 18454)
 -- Name: fk_Permisos; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3178,7 +3264,7 @@ ALTER TABLE ONLY "RolesPermisos"
 
 
 --
--- TOC entry 2119 (class 2606 OID 18036)
+-- TOC entry 2128 (class 2606 OID 18459)
 -- Name: fk_PublicacionesA; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3187,7 +3273,7 @@ ALTER TABLE ONLY "Archivos"
 
 
 --
--- TOC entry 2139 (class 2606 OID 18041)
+-- TOC entry 2149 (class 2606 OID 18464)
 -- Name: fk_Publilcacion_TipoPublicacion; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3196,7 +3282,7 @@ ALTER TABLE ONLY "Publicaciones"
 
 
 --
--- TOC entry 2142 (class 2606 OID 18046)
+-- TOC entry 2152 (class 2606 OID 18469)
 -- Name: fk_Rol; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3205,7 +3291,7 @@ ALTER TABLE ONLY "UsuarioRoles"
 
 
 --
--- TOC entry 2130 (class 2606 OID 18051)
+-- TOC entry 2139 (class 2606 OID 18474)
 -- Name: fk_Turno; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3214,7 +3300,7 @@ ALTER TABLE ONLY "Modulos"
 
 
 --
--- TOC entry 2143 (class 2606 OID 18056)
+-- TOC entry 2153 (class 2606 OID 18479)
 -- Name: fk_Usuario; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3223,7 +3309,7 @@ ALTER TABLE ONLY "UsuarioRoles"
 
 
 --
--- TOC entry 2124 (class 2606 OID 18061)
+-- TOC entry 2133 (class 2606 OID 18484)
 -- Name: fk_UsuarioGPU; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3232,7 +3318,7 @@ ALTER TABLE ONLY "GruposMaestros"
 
 
 --
--- TOC entry 2144 (class 2606 OID 18066)
+-- TOC entry 2154 (class 2606 OID 18489)
 -- Name: fk_Usuario_Tema; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3241,7 +3327,7 @@ ALTER TABLE ONLY "Usuarios"
 
 
 --
--- TOC entry 2128 (class 2606 OID 18071)
+-- TOC entry 2137 (class 2606 OID 18494)
 -- Name: fk_Usuarios; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3250,7 +3336,7 @@ ALTER TABLE ONLY "GruposParticipantes"
 
 
 --
--- TOC entry 2141 (class 2606 OID 18076)
+-- TOC entry 2151 (class 2606 OID 18499)
 -- Name: fk_roles; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3259,7 +3345,7 @@ ALTER TABLE ONLY "RolesPermisos"
 
 
 --
--- TOC entry 2306 (class 0 OID 0)
+-- TOC entry 2318 (class 0 OID 0)
 -- Dependencies: 7
 -- Name: public; Type: ACL; Schema: -; Owner: postgres
 --
@@ -3270,7 +3356,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2016-08-16 00:09:29 CST
+-- Completed on 2016-08-16 00:45:03 CST
 
 --
 -- PostgreSQL database dump complete
