@@ -40,3 +40,6 @@
     font-size: 18px;
     text-align: center;
 }
+li.sub-tree-toggler:hover{
+    background: #ccc;
+}

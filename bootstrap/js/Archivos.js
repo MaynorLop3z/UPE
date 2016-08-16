@@ -17,7 +17,7 @@ function setVarsOpenModal(gru,cat,ccat,cgperu){
    CCategoria=ccat;
    CoGrPerUs=cgperu;
    $("#CategoriaArchivo").html(Categoria);
-   $("#NuevoArchivo").modal();
+   $("#NuevoArchivoMod").modal();
 }
 
 $(document).ready(function () {

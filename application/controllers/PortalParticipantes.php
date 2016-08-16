@@ -31,7 +31,8 @@ class PortalParticipantes extends CI_Controller {
                         'nombreRealUserLogin' => $resultado->Nombre,
                         // 'temaUserLogin' => $usuario->codigoTemaVista,
                         'permisosUsuer' => $permisos,
-                        'logueado' => TRUE);
+                        'logueado' => TRUE,
+                        'nivel' => 'Participante');//el nivel permite listar el historial de archivos del participante
                     
                     $this->session->set_userdata($usuario_data);
                    echo '1';

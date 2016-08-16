@@ -16,23 +16,22 @@ class ArchivosController extends CI_Controller {
     
     public function index() {
         $login=$this->session->userdata("codigoUserLogin");
-        $nombre=$this->session->userdata("nombreUserLogin");
-        //$carnet=$this->session->userdata("nombreUserLogin"); //FALTA CARNET
+        $nivel=$this->session->userdata("nivel");
         //$data['allArchivos'] = $this->Publicaciones->listarPublicacionesParaArchivo();
         
-        //if($this->Publicaciones->verificar_si_es_alumno($login, $carnet)==1){
+        if($nivel=='Participante'){
             $data['gruposAlumno'] = $this->Publicaciones->ListarGruposAlumno($login);
             $data['archivosAlumno'] = $this->Publicaciones->ListarArchivosParaAlumno($login);
-        //}else if($this->Publicaciones->verificar_si_es_maestro($login,$nombre)==1){
+        }else if($nivel==''){
             $data['gruposMaestro'] = $this->Publicaciones->GruposPorMaestro($login);
             $data['archivosMaestro'] = $this->Publicaciones->ListarArchivosDelMaestro($login);
-        //}
+        }
         $permisos = $this->session->userdata('permisosUsuer');
-        $this->analizarPermisos('views/Archivos/ArchivosTab.php', 'views/Archivos/ArchivosTabTmp.php', $permisos);
+        $this->analizarPermisos('views/Archivos/ArchivosTab.php', 'views/Archivos/ArchivosTabTmp.php', $permisos, $nivel);
         $this->load->view('Archivos',$data);
     }
     
-     function analizarPermisos($pathView, $pathViewTmp, $permisos) {
+     function analizarPermisos($pathView, $pathViewTmp, $permisos, $nivel) {
         $pathView = APPPATH . $pathView;
         $pathViewTmp = APPPATH . $pathViewTmp;
 
@@ -52,13 +51,18 @@ class ArchivosController extends CI_Controller {
                 $encontrado = 0;
                 continue;
             } else {
-                $elem->outertext = '';
+                if($elem->id == "HisArchivosAlumno" & $nivel == 'Participane'){
+                    $encontrado = 0;
+                    continue;
+                }else{
+                    $elem->outertext = '';
+                }
             }
         }
         $html->save($pathViewTmp);
     }
 
-    function analizarPermisosBotonesTablas($idBtnsGestion, $permisos) {
+    function analizarPermisosHistorial($idBtnsGestion, $permisos) {
         $pathView = APPPATH . 'views/VistaAyudaView.php';
         $html = file_get_html($pathView);
         //param=gestionUserBtn

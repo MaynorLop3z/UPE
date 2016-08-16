@@ -53,7 +53,8 @@ class Wsite extends CI_Controller {
                         'nombreRealUserLogin' => $usuario->Nombre,
                         'ipUserLogin' => $this->input->ip_address(),
                         'permisosUsuer' => $permisos,
-                        'logueado' => TRUE);
+                        'logueado' => TRUE,
+                        'nivel' => ''); //el nivel es auxiliar para diferenciar del login del PortalParticipante
                     $this->session->set_userdata($usuario_data);
                     // redirect('Dashboard');
 //                    $this->load->view('Dashboard', $data);

@@ -5,7 +5,7 @@
 
 
 <!---------Modal para nuevo archivo-------------------------->
-<div id="NuevoArchivo" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="NuevoArchivoMod" class="modal fade decorateStyleCrud" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="container-fluid ">

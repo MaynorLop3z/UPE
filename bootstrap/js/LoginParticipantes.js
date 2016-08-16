@@ -24,7 +24,6 @@ $(document).ready(function () {
            // alert(data);
                 //var obj = jQuery.parseJSON(data);
                 if (data!='0'){
-                    alert('entro a la accion')
                     window.location.replace('Dashboard');
 //                    message = $("<span class='success' style='color:#00b33b;'>Bienvenid@. "+obj+" </span>");
 //                    showMessage(message);

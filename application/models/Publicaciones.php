@@ -437,6 +437,7 @@ ORDER BY
                             "GrupoPeriodos"."CodigoPeriodo",
                             "Periodos"."CodigoModulo",
                             "Periodos"."FechaInicioPeriodo",
+                            "Periodos"."FechaFinPeriodo",
                             "Modulos"."NombreModulo",
                             "Diplomados"."NombreDiplomado"
                             
@@ -470,7 +471,7 @@ ORDER BY
                            
                     ORDER BY
                            
-                           "GruposParticipantes"."CodigoGrupoPeriodo" DESC;  
+                           "Periodos"."FechaInicioPeriodo" DESC;  
                 ');
            $resultado = $consulta->result();
            return $resultado;
@@ -524,7 +525,10 @@ ORDER BY
            $resultado = $consulta->result();
            return $resultado;
        }
-
+       
+    public function obtenerAniosAlumno($codigo){
+        
+    }
 
     public function verificar_si_es_maestro($codigo, $nombre){
         $consulta = $this->db->query('SELECT COUNT(*) FROM public."Usuarios", public."UsuarioRoles"

@@ -82,7 +82,7 @@ foreach ($Permisos as $p) {
                     <div role="tabpanel">
                         <!-- Nav tabs -->
 
-                        <ul class="nav nav-tabs" role="tablist">
+                        <ul class="nav nav-tabs" role="tablist" id="pmenulist">
                             <?php
                             //$iterator = 0;
 
