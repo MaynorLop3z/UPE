@@ -236,7 +236,7 @@ $('#botonesArchivo').submit(function (event){
             var num = $(badge).text();
             $(badge).html(parseInt(num)+1);
             $(badge).show();
-            $('#NuevoArchivo').modal("toggle");
+            $('#NuevoArchivoMod').modal("toggle");
         }
     });
     posting.fail(function (xhr, textStatus, errorThrown) {
@@ -259,7 +259,7 @@ $('#btnCancelarPArchivo').on('click', function (e) {
     document.getElementById("formArchivo").reset();
     document.getElementById("archivotexarea").value = "";
     document.getElementById("btnAceptarArchivo").disabled = true;
-    $('#NuevoArchivo').modal("toggle");
+    $('#NuevoArchivoMod').modal("toggle");
 });
 
 //limpia el form al resetear

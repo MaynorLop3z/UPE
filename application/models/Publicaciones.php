@@ -3,8 +3,6 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-//include('ModeloBase.php');
-
 //Codigo de publicacion web =1 constante TIPO_PUBLICACION_WEB
 //Codigo de publicacion grupo =2 constante TIPO_PUBLICACION_GRUPO
 class Publicaciones extends CI_Model {
@@ -16,28 +14,30 @@ class Publicaciones extends CI_Model {
 
     public function listarPublicaciones() {
         $consulta = $this->db->query('SELECT 
-  "Publicaciones"."CodigoPublicacion", 
-  "Publicaciones"."UsuarioPublica", 
-  "Publicaciones"."FechaPublicacion", 
-  "Publicaciones"."Titulo", 
-  "Publicaciones"."Contenido", 
-  "Publicaciones"."ParticipantePublica", 
-  "Publicaciones"."Estado", 
-  "Publicaciones"."CodigoGrupoPeriodo", 
-  "Publicaciones"."CodigoGrupoParticipantes", 
-  "Publicaciones"."CodigoGrupoPeriodoUsuario", 
-  "Publicaciones"."CodigoTipoPublicacion", 
-  "Publicaciones"."CodigoCategoriaDiplomado", 
-  "CategoriaDiplomados"."NombreCategoriaDiplomado"
-FROM 
-  public."CategoriaDiplomados", 
-  public."Publicaciones"
-WHERE
-"CategoriaDiplomados"."CodigoCategoriaDiplomado"  = public."Publicaciones"."CodigoCategoriaDiplomado"   
-AND 
-"Publicaciones"."CodigoTipoPublicacion" =' . TIPO_PUBLICACION_WEB . ' 
-ORDER BY
-"Publicaciones"."FechaPublicacion" DESC; 
+        "Publicaciones"."CodigoPublicacion", 
+        "Publicaciones"."UsuarioPublica", 
+        "Publicaciones"."FechaPublicacion", 
+        "Publicaciones"."Titulo", 
+        "Publicaciones"."Contenido", 
+        "Publicaciones"."ParticipantePublica", 
+        "Publicaciones"."Estado", 
+        "Publicaciones"."CodigoGrupoPeriodo", 
+        "Publicaciones"."CodigoGrupoParticipantes", 
+        "Publicaciones"."CodigoGrupoPeriodoUsuario", 
+        "Publicaciones"."CodigoTipoPublicacion", 
+        "Publicaciones"."CodigoCategoriaDiplomado", 
+        "CategoriaDiplomados"."NombreCategoriaDiplomado"
+      FROM 
+        public."CategoriaDiplomados", 
+        public."Publicaciones"
+      WHERE
+      "CategoriaDiplomados"."CodigoCategoriaDiplomado"  = public."Publicaciones"."CodigoCategoriaDiplomado"   
+      AND 
+      "Publicaciones"."CodigoTipoPublicacion" =' . TIPO_PUBLICACION_WEB . '
+      AND
+      "Publicaciones"."Estado" = TRUE
+      ORDER BY
+      "Publicaciones"."FechaPublicacion" DESC; 
 ');
 //        $this->db->from('Publicaciones');
 //        $this->db->order_by("FechaPublicacion", "desc");
@@ -152,7 +152,7 @@ ORDER BY
         return $data;
     }
 
-    public function EliminarPublicacion($CodigoPublicacion) {
+    public function EliminarPublicacion($CodigoPublicacion) {//MODIFICA EL ESTADO DE LA PUBLICACION A FALSO
         //$this->db->delete('Publicaciones', array('CodigoPublicacion' => $CodigoPublicacion));
         try{
             $updateData=array("Estado"=>"FALSE");
@@ -164,7 +164,7 @@ ORDER BY
         }
     }
 
-    public function EliminarArchivosPublicacion($CodigoPublicaciones) {
+    public function EliminarArchivosPublicacion($CodigoPublicaciones) {//ELIMINA EL ARCHIVO DE LA PUBLICACION ELIMINADA
         $this->db->delete('Archivos', array('CodigoPublicaciones' => $CodigoPublicaciones));
     }
     
@@ -275,7 +275,15 @@ ORDER BY
             }
             $limit = PUBLICACIONES_X_PAG;
             $varLimit = ' limit ' . $limit . ' offset ' . $offset;
-            $stringQuery = 'SELECT "Publicaciones"."CodigoPublicacion","Publicaciones"."Titulo","Publicaciones"."Contenido","Publicaciones"."FechaPublicacion","Publicaciones"."CodigoCategoriaDiplomado","Archivos"."Ruta" FROM public."Publicaciones",public."Archivos" WHERE "Publicaciones"."CodigoPublicacion" = "Archivos"."CodigoPublicaciones"  AND "Publicaciones"."CodigoTipoPublicacion" ='.TIPO_PUBLICACION_WEB.' ORDER BY "FechaPublicacion" desc';
+            $stringQuery = 'SELECT "Publicaciones"."CodigoPublicacion",
+                "Publicaciones"."Titulo","Publicaciones"."Contenido",
+                "Publicaciones"."FechaPublicacion",
+                "Publicaciones"."CodigoCategoriaDiplomado",
+                "Archivos"."Ruta" FROM public."Publicaciones",
+                public."Archivos" 
+                WHERE "Publicaciones"."CodigoPublicacion" = "Archivos"."CodigoPublicaciones" 
+                AND "Publicaciones"."Estado" = TRUE 
+                AND "Publicaciones"."CodigoTipoPublicacion" ='.TIPO_PUBLICACION_WEB.' ORDER BY "FechaPublicacion" desc';
             $stringQuery = $stringQuery . $varLimit;
             $consulta = $this->db->query($stringQuery);
             if ($consulta != null) {
@@ -525,27 +533,23 @@ ORDER BY
            $resultado = $consulta->result();
            return $resultado;
        }
-       
-    public function obtenerAniosAlumno($codigo){
-        
-    }
-
-    public function verificar_si_es_maestro($codigo, $nombre){
-        $consulta = $this->db->query('SELECT COUNT(*) FROM public."Usuarios", public."UsuarioRoles"
-                        WHERE "Usuarios"."CodigoUsuario" = '.$codigo.'
-                        AND "Usuarios"."NombreUsuario" = '.$nombre.'
-                        AND "Usuarios"."CodigoUsuario" = "UsuarioRoles"."CodigoUsuario"
-                        AND "UsuarioRoles"."CodigoRol" = 4');
-        $resultado = $consulta->result();
-        return $resultado;
-    }
-
-    public function verificar_si_es_alumno($codigo, $carnet){
-        $consulta = $this->db->query('SELECT COUNT(*) FROM public."Participantes"
-                WHERE "Participantes"."CodigoParticipante" = '.$codigo.'
-                AND "Participantes""CarnetAlumno" = '.$carnet.';');
-        $resultado = $consulta->result();
-        return $resultado;
-    }
+//  
+//    public function verificar_si_es_maestro($codigo, $nombre){
+//        $consulta = $this->db->query('SELECT COUNT(*) FROM public."Usuarios", public."UsuarioRoles"
+//                        WHERE "Usuarios"."CodigoUsuario" = '.$codigo.'
+//                        AND "Usuarios"."NombreUsuario" = '.$nombre.'
+//                        AND "Usuarios"."CodigoUsuario" = "UsuarioRoles"."CodigoUsuario"
+//                        AND "UsuarioRoles"."CodigoRol" = 4');
+//        $resultado = $consulta->result();
+//        return $resultado;
+//    }
+//
+//    public function verificar_si_es_alumno($codigo, $carnet){
+//        $consulta = $this->db->query('SELECT COUNT(*) FROM public."Participantes"
+//                WHERE "Participantes"."CodigoParticipante" = '.$codigo.'
+//                AND "Participantes""CarnetAlumno" = '.$carnet.';');
+//        $resultado = $consulta->result();
+//        return $resultado;
+//    }
 }
 ?>

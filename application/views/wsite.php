@@ -6,8 +6,12 @@
 
     <head>
 
-        <?php $this->load->helper('url'); ?>
-
+        <?php $this->load->helper('url');
+            //si esta logueado redirecciona al Dashboard
+            if ($this->session->userdata("logueado")===TRUE){
+                 Redirect('Dashboard');    
+            }
+        ?>
         <title>PAESIS</title>
         <link rel="icon" href="bootstrap/minerva.jpg" type="image/x-icon" />
         <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
@@ -21,8 +25,7 @@
         <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
-
-            <!-- jQuery -->
+        <!-- jQuery -->
         <script src="bootstrap/js/jquery.js"></script>
 
         <!-- Bootstrap Core JavaScript -->
@@ -32,14 +35,7 @@
         <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
         <script src="bootstrap/js/classie.js"></script>
         <script src="bootstrap/js/cbpAnimatedHeader.js"></script>
-        <script src="bootstrap/js/websitejs.js"></script>
-
-        <!-- Contact Form JavaScript -->
-        <script src="bootstrap/js/jqBootstrapValidation.js"></script>
-        <script src="bootstrap/js/contact_me.js"></script>
-
-        <!-- Custom Theme JavaScript -->
-        <script src="bootstrap/js/freelancer.js"></script>
+           
     </head>
 
 
@@ -413,6 +409,14 @@
 
     
 
+        <script src="bootstrap/js/websitejs.js"></script>
+
+        <!-- Contact Form JavaScript -->
+        <script src="bootstrap/js/jqBootstrapValidation.js"></script>
+        <script src="bootstrap/js/contact_me.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="bootstrap/js/freelancer.js"></script>
     </body>
 
 </html>

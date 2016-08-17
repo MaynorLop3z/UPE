@@ -98,9 +98,10 @@
 
 <!------------------------------------------------------------------->
 
-    <!--end Archivos Alumno-->
+    
   
 <script type="text/javascript">
+    //eventos de arboles de archivos
     $(document).ready(function () {
         $('.sub-sub').toggle(false).css('cursor','pointer');
         $('.tree').toggle(false);
@@ -119,11 +120,10 @@
 	});
        
 });
+
     function openListaArchivos(mod){
         var modale="#ListArchivosAlumno"+mod;
-//        $('.sub-tree-toggler').click(function(){
             $(modale).modal();
-//        });
     }
 
     function goArchivo(arch){
