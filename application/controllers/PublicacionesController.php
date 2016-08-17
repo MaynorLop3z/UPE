@@ -98,19 +98,17 @@ class PublicacionesController extends CI_Controller {
     }
 
     //begin of delete Publicaciones 
-    //still in progress , doesn't  work yet :(
-    public function eliminarPubliacion() {
-        //$eliminar = false;
+    //it works now :)
+     public function eliminarPublicacion() {
         try {
-            if ($this->input->post()) {
-                $codigoPublicacion = $this->input->post('CodigoPublicacion');
-                if ($codigoPublicacion != null) {
-                    $this->Publicaciones->EliminarArchivosPublicacion($codigoPublicacion);
-                    $arrayData = $this->Publicaciones->EliminarPublicacion($codigoPublicacion);
-                    // $ip,$userModifica
-                    echo json_encode($arrayData);
-                }
-//          
+            $codigoPublicacion =$this->input->post('Cod');
+            if ($codigoPublicacion != null) {
+                $archivo = $this->Publicaciones->ObtenerRutaArchivo($codigoPublicacion);
+                $this->Publicaciones->EliminarArchivosPublicacion($codigoPublicacion);
+                $arrayData = $this->Publicaciones->EliminarPublicacion($codigoPublicacion);
+                $ruta = "./bootstrap" . $archivo;
+                unlink($ruta);
+                echo json_encode($arrayData);
             }
         } catch (Exception $ex) {
             $data = array(

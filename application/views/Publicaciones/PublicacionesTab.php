@@ -24,12 +24,12 @@
                 ?>
 
                 <tr  data-dipd='<?php echo json_encode($publi) ?>' 
-                     id="dip<?php echo $publi->CodigoPublicacion ?>">
+                     id="diplo<?php echo $publi->CodigoPublicacion ?>">
                     <td class="Titulo"><?php echo $publi->Titulo ?></td>
                     <td class=" Categoria"><?php echo $publi->NombreCategoriaDiplomado ?></td>
                     <td class="gestion_dip" >
                         <button id="editPublicacion<?php echo $publi->CodigoPublicacion ?>" title="Editar Publicacion" class="btnmoddi btn btn-success"><span class=" glyphicon glyphicon-pencil"></span></button>
-                        <button id="delPub<?php echo $publi->CodigoPublicacion ?>" onclick=""  title="Eliminar Publicacion" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>
+                        <button id="delPub<?php echo $publi->CodigoPublicacion ?>" onclick="eliminarPublicacion('<?php echo $publi->CodigoPublicacion ?>','<?php echo $publi->Titulo ?>')" title="Eliminar Publicacion" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>
                     </td>
                 </tr>
 

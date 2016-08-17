@@ -10,14 +10,13 @@ class ArchivosController extends CI_Controller {
         parent::__construct();
         $this->load->database();
         $this->load->model('Publicaciones');
-        $this->load->library('utilidadesWeb');
+//        $this->load->library('utilidadesWeb');
         $this->load->helper(array('download', 'file', 'url', 'html', 'form'));
     }
     
     public function index() {
         $login=$this->session->userdata("codigoUserLogin");
         $nivel=$this->session->userdata("nivel");
-        //$data['allArchivos'] = $this->Publicaciones->listarPublicacionesParaArchivo();
         
         if($nivel=='Participante'){
             $data['gruposAlumno'] = $this->Publicaciones->ListarGruposAlumno($login);
@@ -28,6 +27,7 @@ class ArchivosController extends CI_Controller {
         }
         $permisos = $this->session->userdata('permisosUsuer');
         $this->analizarPermisos('views/Archivos/ArchivosTab.php', 'views/Archivos/ArchivosTabTmp.php', $permisos, $nivel);
+        $this->analizarPermisos('views/Archivos/ArchivosModal.php', 'views/Archivos/ArchivosModalTmp.php', $permisos, $nivel);
         $this->load->view('Archivos',$data);
     }
     

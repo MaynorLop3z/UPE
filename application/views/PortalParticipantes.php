@@ -1,6 +1,10 @@
 <html lang="es">
     <head>
-        <?php $this->load->helper('url'); ?>
+        <?php $this->load->helper('url'); 
+         if ($this->session->userdata("logueado")===TRUE){
+                 Redirect('Dashboard');    
+            }
+        ?>
         <meta charset="UTF-8">
         <title>Portal Participantes - PAESIS</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">

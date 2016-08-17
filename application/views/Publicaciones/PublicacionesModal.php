@@ -85,7 +85,7 @@
         <div class="modal-content">
             <div class="container-fluid ">
                 <button type="button" class="close btn-lg" data-dismiss="modal"  aria-label="Close" ><span aria-hidden="true">&times;</span></button>
-                <form id="frmDELpub" action="<?php echo base_url() ?>index.php/PublicacionesController/EliminarPublicacion/" class="form-horizontal" class="form-horizontal" method="post" >
+                <form id="frmDELpub" action="" class="form-horizontal" class="form-horizontal" method="post" >
                     <legend class="modal-header">Publicacion:</legend> 
                     <div class="form-group">
                         <div class="col-lg-9">
@@ -93,7 +93,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" id="btnEnviarPub" onclick="" class=" btn btn-default" name="Eliminar">Eliminar</button>
+                        <button type="button" id="btnEliminarPub" onclick="" class=" btn btn-default" name="Eliminar">Eliminar</button>
                         <button type="reset" id="btnLimpiarPub" onclick="" class=" btn btn-default" name="Limpiar">Cancelar</button>
                     </div>
                     

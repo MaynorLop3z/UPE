@@ -11,7 +11,7 @@ var fileName;
 var codigoPublicacion;
 var filaEdit;
 var codi;
-
+var CoPubDel;
 
 $(document).ready(function () {
 //    document.getElementById('btnAceptar').disable=true;
@@ -221,20 +221,26 @@ $('#btnLimpiarPubli').on('click', function (e) {
 });
 
 
-//_________________________ from here doesn't work yet ______________________________
-function eliminarPublicacion(fila) {
-    codigoPublicacion = fila.id;
-    codigoPublicacion = codigoPublicacion.substring(12);
-    $('#EliminarPublicacion').modal('toggle');
-
+//_________________________ it works already :) ______________________________
+function eliminarPublicacion(pub,nam) {//prepara para la eliminacion
+    CoPubDel =pub;
+    $('#nombreDipPub').html(nam+pub);
+    $("#EliminarPublicacion").modal();
+    /////////////////////////////
 }
 
+//elimina la publicacion al confirmar
+$("#btnEliminarPub").on("click", function(e){
+    e.preventDefault();
+    if (CoPubDel !== null) {
+        alert("hey");
+        $.post("PublicacionesController/eliminarPublicacion/", {Cod: CoPubDel});
+        alert("hizo algo");
+     }
 
-$("#EliminarPublicacion").on('show.bs.modal', function (event) {
-    var dip = $('#dip' + codigoPublicacion);
-
-    var NombreDiplomadoE = dip.find(".titulo").html().toString().trim();
-    $('#nombreDipPub').html(TituloDiplomado);
+    var eli='#diplo'+CoPubDel;
+    $(eli).hide('slow');
+    $('#EliminarPublicacion').modal('toggle');
 });
 
 

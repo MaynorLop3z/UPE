@@ -107,13 +107,15 @@
     <?php 
     $Aniog='';
     foreach ($gruposAlumno as $grup) { //Lista cada grupo como tabs
-        if($Aniog!=str_split($grup->FechaInicioPeriodo,4)[0]){?>
+        $AnioPeriodo=str_split($grup->FechaInicioPeriodo,4)[0];
+        if($Aniog!=$AnioPeriodo){?>
      <li >
-         <a href="#grupo<?php echo str_split($grup->FechaInicioPeriodo,4)[0]?>" data-toggle="tab" >
-             Año <?php echo str_split($grup->FechaInicioPeriodo,4)[0]?>
+         <a href="#grupo<?php echo $AnioPeriodo?>" data-toggle="tab" >
+             Año <?php echo $AnioPeriodo?>
          </a>
      </li>
-    <?php $Aniog=str_split($grup->FechaInicioPeriodo,4)[0]; } }?> 
+    <?php $Aniog=$AnioPeriodo; } 
+    }?> 
  </ul> <!------ FIN MUESTRA EL TAB DE ANIOS---------->
    
  <!----LISTA POR ANIOS---->
@@ -132,7 +134,7 @@
                 $idhomeA ="id=\"home\" class=\"tab-pane fade in active\"";
             }?>
 
-    <div id="grupo<?php echo str_split($grupo->FechaInicioPeriodo,4)[0]?>" class="<?php echo $classgroupA?>" >
+    <div id="grupo<?php echo $AnioActual?>" class="<?php echo $classgroupA?>" >
         <div <?php echo $idhomeA;?> >
             <h3>Diplomados - Año <?php echo $AnioActual;?></h3>
          </div>
@@ -254,7 +256,6 @@
             }  ?> </div><?php
             
             $Aniogrupo=$AnioActual;
-            $anio=$AnioActual;
          $principal=0;   
         } 
          
@@ -262,11 +263,12 @@
      }
     ?>  <!---- FIN LISTA POR ANIOS---->
 </div>
-    
-    </div>
     <!--end Archivos Alumno-->
+    </div>
+    
   
 <script type="text/javascript">
+    //eventos de arboles de archivos
     $(document).ready(function () {
         $('.sub-sub').toggle(false).css('cursor','pointer');
         $('.tree').toggle(false);
@@ -285,11 +287,10 @@
 	});
        
 });
+
     function openListaArchivos(mod){
         var modale="#ListArchivosAlumno"+mod;
-//        $('.sub-tree-toggler').click(function(){
             $(modale).modal();
-//        });
     }
 
     function goArchivo(arch){
