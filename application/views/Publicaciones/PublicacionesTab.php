@@ -5,7 +5,7 @@
 </div>
 <div class="panel-body">
     <div class="btn btn-group">
-        <button href="#NuevaPublicacion"  class="btn btn-default btn-default" data-toggle="modal">Nueva Publicacion</button>
+        <button onclick="" id="openNuevaPublicacion" class="btn btn-default btn-default">Nueva Publicacion</button>
 
     </div>
     <!--tabla de publicaciones solo muestra el titulo y la categoria-->
@@ -28,7 +28,7 @@
                     <td class="Titulo"><?php echo $publi->Titulo ?></td>
                     <td class=" Categoria"><?php echo $publi->NombreCategoriaDiplomado ?></td>
                     <td class="gestion_dip" >
-                        <button id="editPublicacion<?php echo $publi->CodigoPublicacion ?>" title="Editar Publicacion" class="btnmoddi btn btn-success"><span class=" glyphicon glyphicon-pencil"></span></button>
+                        <button id="editPublicacion<?php echo $publi->CodigoPublicacion ?>" onclick="editarPublicacion('<?php echo $publi->CodigoPublicacion ?>')" title="Editar Publicacion" class="btnmoddi btn btn-success"><span class=" glyphicon glyphicon-pencil"></span></button>
                         <button id="delPub<?php echo $publi->CodigoPublicacion ?>" onclick="eliminarPublicacion('<?php echo $publi->CodigoPublicacion ?>','<?php echo $publi->Titulo ?>')" title="Eliminar Publicacion" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>
                     </td>
                 </tr>

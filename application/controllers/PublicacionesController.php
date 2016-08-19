@@ -117,5 +117,40 @@ class PublicacionesController extends CI_Controller {
             echo json_encode($data);
         }
     }
+    
+    //para modificar se obtiene la publicacion
+    public function obtenerPublicacion() {//obtiene publicacion para editar
+        $id=$this->input->post('idpub');
+        if($id!=null){
+            $datos=$this->Publicaciones->obtenerDatosDePublicacionPorId($id);
+            echo json_encode($datos);
+        }
+    }
+    
+    //Guarda los nuevos cambios
+    public function editar(){
+        try{
+            if ($this->input->post()) {
+                $id=$this->input->post('PId');
+                $tituloP = $this->input->post('Titulo');
+                $contenidoP = $this->input->post('Contenido');
+                $nombre = $this->input->post('Nombre');
+                $categoria = $this->input->post('Categoria');
+                $ext = $this->input->post('Extension');
+                $Ruta = "/images/publicaciones/" . $nombre;
+                if ($tituloP != NULL && $contenidoP != NULL ) {
+                    $rutaAntigua=$this->Publicaciones->ObtenerRutaArchivo($id);
+                    $this->Publicaciones->actualizaPublicacionWeb($id, $Ruta, $tituloP,$categoria, $contenidoP, $ext,$nombre);
+                    $rutaAntigua = "./bootstrap" . $rutaAntigua;
+                    //unlink($rutaAntigua);
+                    echo json_encode($id);
+                } else {
+                    echo "Error algunas de los campos son nulos" + "titulo = " + $tituloP + "contenido = " + $contenidoP + "nombre = " + $nombre + $ext;
+                }
+            }
+        } catch (Exception $ex) {
+             echo json_encode($ex);
+        }
+    }
 
 }

@@ -12,13 +12,19 @@ var codigoPublicacion;
 var filaEdit;
 var codi;
 var CoPubDel;
+var existeImgtemporal=false;
+var imgPublicada="";
+var idPublicacion="";
 
 $(document).ready(function () {
 //    document.getElementById('btnAceptar').disable=true;
 
     $(".messages").hide();
     //queremos que esta variable sea global
-
+    
+    $('#openNuevaPublicacion').click(function(){//se reemplazo para evitar doble modal al hacer clic en el enlace de "Nueva Publicacion"
+        $('#NuevaPublicacion').modal('toggle');
+    });
 
     $('#imgform').change(function ()
     {
@@ -43,7 +49,7 @@ $(document).ready(function () {
     $('#subir').click(function () {
 
         //información del formulario
-
+        
         var formData = new FormData($("#imgform")[0]);
         var message = "";
         if (isImage(fileExtension) === true) {
@@ -76,7 +82,7 @@ $(document).ready(function () {
                         $(".showImage").html("<img width ='300' heigth='300' src='/UPE/bootstrap/images/publicaciones/" + fileName + "' />");
                         $('#nombreImg').val(fileName);
                         $('#extImg').val(fileExtension);
-                        message = $("<span class='success'>La imagen ha subido correctamente.</span>");
+                        message = $("<span class='success' style='color:#00b33b;>La imagen ha subido correctamente.</span>");
                         showMessage(message);
 
                     }
@@ -98,14 +104,14 @@ $(document).ready(function () {
 
     });
 
-
-//como la utilizamos demasiadas veces, creamos una función para 
+    
+    //como la utilizamos demasiadas veces, creamos una función para 
 //evitar repetición de código
     function showMessage(message) {
         $(".messages").html("").show();
         $(".messages").html(message);
     }
-
+    
 //comprobamos si el archivo a subir es una imagen
 //para visualizarla una vez haya subido
 //si no cumple  con alguna de las extensiones del case  devuelve error
@@ -130,8 +136,68 @@ $(document).ready(function () {
                 break;
         }
     }
+    
+    
+    
+///***********MODIFICACION DE LA PUBLICACION**********//    
+//Para modificar la imagen de la publicacion
+    $('#imgformMod').change(function (){
+        if(existeImgtemporal){//verificamos que no exista una imagen temporal subida y no guardada
+            var Nombre = $('#botonesMod').find("input[name='nombreImgMod']").val();
+            $.post("PublicacionesController/borrarImgCarpeta/", {Nombre: Nombre});
+            existeImgtemporal=false;
+            $("#showImgMod").html("<img width ='300' heigth='300' src='" + imgPublicada + "' />").show();   
+        }
+        var file = $("#imagenMod")[0].files[0];
+        fileName = file.name;
+        fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1);
+        $('#nombreImgMod').val(fileName);
+        $('#extImgMod').val(fileExtension);
+        var fileSize = file.size;
+        $('#msgMod').html("<span class='info'>Archivo para subir: " + fileName
+                + ", peso total: " + fileSize + " bytes.</span>").show();
+        $("#subirMod").prop('disabled', false);
+        
+    });
+//Sube la imagen modificada
+    $('#subirMod').click(function () {
+        var formData = new FormData($("#imgformMod")[0]);
+        if (isImage(fileExtension) === true) {
+            $.ajax({
+                url: $('#imgformMod').attr('action'),
+                type: 'POST',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                beforeSend: function () {
+                    $('#msgMod').html("<span class='before'>Subiendo la imagen, por favor espere...</span>").show();
+                },
+                success: function (data) {
+                    if (isImage(fileExtension) === true)
+                    {
+                        var sizeImg = new Image();
+                        sizeImg.src = "/UPE/bootstrap/images/publicaciones/" + fileName;
+                        $("#showImgMod").html("<img width ='300' heigth='300' src='/UPE/bootstrap/images/publicaciones/" + fileName + "' />");
+                        existeImgtemporal=true;
+                        $('#nombreImgMod').val(fileName);
+                        $('#extImgMod').val(fileExtension);
+                        $('#msgMod').html("<span class='success' style='color:#00b33b;>La imagen ha subido correctamente.</span>");
+                    }
+                    $("#subirMod").prop('disabled', true);
+                },
+                error: function () {
+                    $('#msgMod').html("<span class='error'>Ha ocurrido un error.</span>").show();
+                }
+            });
+        }
+        else {
+            $('#msgMod').html("<span class='error'>Ha ocurrido un error, El archivo no es una Imagen.</span>");
+        }
+    });
+    
+///***********FIN MODIFICACION DE LA PUBLICACION**********//
 });
-
 
 //metodo que lleva el post a la base de datos
 
@@ -144,7 +210,8 @@ $('#botones').submit(function (event)
             url = $form.attr("action"),
             Nombre = $form.find("input[name='nombreImg']").val(),
             Extension = $form.find("input[name='extImg']").val(),
-            categoria = $form.find("select[name='categoriasl']").val();
+            categoria = $form.find("select[name='categoriasl']").val(),
+            cat= $form.find("select[name='categoriasl']").find(":selected").text();//obtiene el nombre de la categoria
 
     var posting = $.post(url, {
         Titulo: Titulo,
@@ -158,22 +225,30 @@ $('#botones').submit(function (event)
         if (data !== null) {
             var obj = jQuery.parseJSON(data);
             //dejamos todo en blanco  para la siguiente pulicacion
-            $(".showImage").html("");
+            $("#showImg").html("");
             $(":text").each(function () {
                 $($(this)).val('');
             });
             $(".messages").html("").show();
-//    $('#subir').reset();
+
             document.getElementById("imgform").reset();
             document.getElementById("pubtexarea").value = "";
-            document.getElementById("btnAceptar").disabled = true;
+            document.getElementById("btnAceptar").disabled = true
+            //Actualiza la tabla con la nueva publicacion
+            $('#tableTitulo tr:first').after('<tr id="diplo'+obj+'"> <td class="Titulo">'+Titulo+'</td>'+
+                    '<td class="Categoria">'+cat+'</td>'+
+                    '<td class="gestion_dip">'+
+                        '<button id="editPublicacion'+obj+'" onclick="editarPublicacion(\''+obj+'\)"  title="Editar Publicacion" class="btnmoddi btn btn-success"><span class=" glyphicon glyphicon-pencil"></span></button> '+
+                        '<button id="delPub'+obj+'" onclick="eliminarPublicacion(\''+obj+'\',\''+Titulo+'\')"  title="Eliminar Publicacion" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>'+
+                    '</td>'+
+            '</tr>');
             $('#NuevaPublicacion').modal("toggle");
-
         }
     });
     posting.fail(function (xhr, textStatus, errorThrown) {
         alert("error" + xhr.responseText);
     });
+
 });
 
 //boton que elimina el archivo de ala carpeta y limpia el form al dar cancelar, cierra la modal depues de dar cancelar
@@ -187,11 +262,12 @@ $('#btnCancelarP').on('click', function (e) {
         $.post("PublicacionesController/borrarImgCarpeta/", {Nombre: Nombre});
     }
 //    alert(Nombre);
-    $(".showImage").html("");
+    $("#showImg").html("");
     $(":text").each(function () {
         $($(this)).val('');
     });
     $(".messages").html("").show();
+    $('#imagen').val(null);
 //    $('#subir').reset();
     document.getElementById("imgform").reset();
     document.getElementById("pubtexarea").value = "";
@@ -209,11 +285,12 @@ $('#btnLimpiarPubli').on('click', function (e) {
         $.post("PublicacionesController/borrarImgCarpeta/", {Nombre: Nombre});
     }
 //    alert(Nombre);
-    $(".showImage").html("");
+    $("#showImg").html("");
     $(":text").each(function () {
         $($(this)).val('');
     });
     $(".messages").html("").show();
+    $('#imagen').val(null);
 //    $('#subir').reset();
     document.getElementById("imgform").reset();
     document.getElementById("pubtexarea").value = "";
@@ -224,21 +301,114 @@ $('#btnLimpiarPubli').on('click', function (e) {
 //_________________________ it works already :) ______________________________
 function eliminarPublicacion(pub,nam) {//prepara para la eliminacion
     CoPubDel =pub;
-    $('#nombreDipPub').html(nam+pub);
+    $('#nombreDipPub').html(nam);
     $("#EliminarPublicacion").modal();
-    /////////////////////////////
 }
 
-//elimina la publicacion al confirmar
+//elimina la publicacion al confirmar la advertencia
 $("#btnEliminarPub").on("click", function(e){
     e.preventDefault();
     if (CoPubDel !== null) {
         $.post("PublicacionesController/eliminarPublicacion/", {Cod: CoPubDel});
      }
-
+     //actualiza la tabla
     var elif='#diplo'+CoPubDel;
     $(elif).hide('slow');
     $('#EliminarPublicacion').modal('toggle');
 });
 
+// limpia el form de eliminar al cancelar
+$('#btnLimpiarPub').on('click', function (e) {
+    e.preventDefault();
+    $('#EliminarPublicacion').modal("toggle");
+});
 
+//////////////PARA MODIFICAR///////////////////////////
+//carga la publicacion para ser modificada
+function editarPublicacion(id){
+    var postmod=$.post("PublicacionesController/obtenerPublicacion/", {idpub: id});
+    postmod.done(function(data){
+        var data=jQuery.parseJSON(data);
+        $('#showImgMod').html('<img  width =\'300\' heigth=\'300\' src="/UPE/bootstrap'+data.Ruta+'">');
+        $('#selectCategoriaMod option[value="'+data.CodigoCategoriaDiplomado+'"]').attr('selected', 'selected');
+        $('#tituloModPub').val(data.Titulo);
+        $('#pubtexareaModificacionP').val(data.Contenido);
+        imgPublicada="/UPE/bootstrap"+data.Ruta;
+        idPublicacion=id;
+    });
+    $('#ModificarPublicacion').modal('toggle');
+}
+
+//limpia y cancela la modificacion
+$('#btnCancelarModificacionP').on('click', function (e) {
+    e.preventDefault();
+    var $form = $(this);
+    var Nombre = $('#botonesMod').find("input[name='nombreImgMod']").val();
+    if (Nombre !== null) {
+        $.post("PublicacionesController/borrarImgCarpeta/", {Nombre: Nombre});
+    }
+    $('#imagenMod').val('');
+    $("#showImgMod").html("");
+    $(":text").each(function () {
+        $($(this)).val('');
+    });
+    $("#msgMod").html("").show();
+    document.getElementById("imgformMod").reset();
+    document.getElementById("pubtexareaModificacionP").value = "";
+    $("#subirMod").prop('disabled', true);
+    $('#ModificarPublicacion').modal("toggle");
+});
+
+/////////////////ENVIO/////////////////
+ $('#botonesMod').submit(function (event){//////GUARDA CAMBIOS
+    event.preventDefault();
+    var $form = $(this), Titulo = $form.find("input[name='tituloMod']").val(),
+            Contenido = $form.find("textarea[name='contenidoMod']").val(),
+            url = $form.attr("action"),
+            Nombre = $form.find("input[name='nombreImgMod']").val(),
+            Extension = $form.find("input[name='extImgMod']").val(),
+            categoria = $form.find("select[name='categoriasl']").val(),
+            cat= $form.find("select[name='categoriasl']").find(":selected").text();//obtiene el nombre de la categoria
+    $('#btnAceptarModificacionP').prop('disabled',true);
+    var posting = $.post(url, {
+        PId: idPublicacion,
+        Titulo: Titulo,
+        Contenido: Contenido,
+        Nombre: Nombre,
+        Extension: Extension,
+        Categoria: categoria
+    });
+
+    posting.done(function (data) {
+        if (data !== null) {
+            var obj = jQuery.parseJSON(data);
+            $("#showImgMod").html("");
+            $(":text").each(function () {
+                $($(this)).val('');
+            });
+            $("#msgMod").html("").show();
+            $('#imagenMod').val(null);
+            $('#botonesMod').find("input[name='nombreImgMod']").val("");
+            var existeImgtemporal=false;
+            var idPublicacion="";
+            document.getElementById("imgformMod").reset();
+            document.getElementById("pubtexareaModificacionP").value = "";
+            $("#subirMod").prop('disabled', true);
+//            $('#tableTitulo tr:first').after('<tr id="diplo'+obj+'"> <td class="Titulo">'+Titulo+'</td>'+
+//                    '<td class="Categoria">'+cat+'</td>'+
+//                    '<td class="gestion_dip">'+
+//                        '<button id="editPublicacion'+obj+'" onclick="editarPublicacion(\''+obj+'\)"  title="Editar Publicacion" class="btnmoddi btn btn-success"><span class=" glyphicon glyphicon-pencil"></span></button> '+
+//                        '<button id="delPub'+obj+'" onclick="eliminarPublicacion(\''+obj+'\',\''+Titulo+'\')"  title="Eliminar Publicacion" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>'+
+//                    '</td>'+
+//            '</tr>');
+            
+            $('#btnAceptarModificacionP').prop('disabled',false);
+            $("#subirMod").prop('disabled', true);
+            $('#ModificarPublicacion').modal("toggle");
+        }
+    });
+    posting.fail(function (xhr, textStatus, errorThrown) {
+        $('#btnAceptarModificacionP').prop('disabled',false);
+        alert("error" + xhr.responseText);
+    });
+});

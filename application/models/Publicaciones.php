@@ -168,7 +168,7 @@ class Publicaciones extends CI_Model {
         $this->db->delete('Archivos', array('CodigoPublicaciones' => $CodigoPublicaciones));
     }
     
-    public function ObtenerRutaArchivo($CodigoPublicaciones) {
+    public function ObtenerRutaArchivo($CodigoPublicaciones) {//ruta de archivo por id
         $this->db->select('Ruta');
         $this->db->from('Archivos');
         $this->db->where('CodigoPublicaciones', $CodigoPublicaciones);
@@ -177,6 +177,26 @@ class Publicaciones extends CI_Model {
         return $ret->Ruta;
     }
 
+    public function obtenerDatosDePublicacionPorId($id) {//categoria, titulo y contenido por id
+        $consulta=$this->db->query('SELECT "Ruta", "CodigoCategoriaDiplomado", "Titulo", "Contenido" 
+                FROM "Publicaciones", "Archivos" WHERE 
+                "CodigoPublicacion"="CodigoArchivos" AND "CodigoPublicacion"='.$id);
+        $resultado = $consulta->row();
+        return $resultado;
+    }
+    
+    public function actualizaPublicacionWeb($id,$ruta,$titulo,$categoria,$contenido, $ext, $nom){
+        if($ruta!="" & $ruta!=null ){
+            $consulta=$this->db->query('UPDATE "Archivos" SET "Ruta"=\''.$ruta
+                    .'\', "Nombre"=\''.$nom.'\', "Extension"=\''.$ext.'\' WHERE "CodigoArchivos"='.$id);
+            
+        }
+        $consulta=$this->db->query('UPDATE "Publicaciones" SET "Titulo"=\''.$titulo
+                    .'\', "Contenido"=\''.$contenido.'\', "CodigoCategoriaDiplomado"='.
+                $categoria.' WHERE "CodigoPublicacion"='.$id);
+       
+    }
+    
     public function EliminarArchivo($CodigoArchivo) {
         $this->db->delete('Archivos', array('CodigoArchivos' => $CodigoArchivo));
     }
