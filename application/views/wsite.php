@@ -64,9 +64,9 @@
                         <li class="page-scroll">
                             <a href="" class="portfolio-link btn   dropdown-toggle"  title="Buscar Publicaciones" data-toggle="dropdown" id="test3"><i class="fa fa-fw fa-search"></i></a>
                             <ul class="dropdown-menu" id="scrollBuscar">
-                                <li value="1"> <a href="#">Por Categoria</a> </li>
-                                <li value="2"> <a href="#">Por Fecha</a> </li>
-                                <li value="3"> <a href="#">Por Nombre</a> </li>
+                                <li value="1" id="opccategoria"> <a href="#portfolio">Por Categoria</a> </li>
+                                <li value="2" id="opcFecha"> <a href="#portfolio">Por Fecha</a> </li>
+                                <li value="3" id="opcNombre"> <a href="#portfolio">Por Nombre</a> </li>
                             </ul>
                         </li>
                         <li class="page-scroll">
@@ -105,7 +105,7 @@
 
         <!-- Publicaciones  Grid Section -->
         <section id="portfolio">
-            <div class="container">
+            <div class="container" id="masRecientesDiv" >
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <h2>Publicaciones Recientes</h2>
@@ -177,6 +177,66 @@
                     </ul>
                 </div>
                 <!-- finish paginacion-->
+            </div>
+            
+            <!--comienza grid e publicacines con busqueda por categoria-->
+            <div class="container" id="categoriaDiv" style='display:none;'>
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h2>Seleccione la categoria</h2>
+                        <select name="categoriasl" onchange="" id="selectCategoriaBusqueda">
+                                    <?php
+                                    foreach ($listCategorias as $categorias) {
+                                        ?>
+                                        <option value=<?php echo $categorias->CodigoCategoriaDiplomado ?>> <?php echo $categorias->NombreCategoriaDiplomado ?>  </option>
+                                        <?php
+                                    }
+                                    ?>
+
+                                </select>
+                        <hr class="star-primary">
+                        
+                        
+                        <!--here-->
+                        <?php
+                    //$publicacionesMostrar=null;
+                    if ($PagCategoria != null && count($PagCategoria) > 0) {
+                        foreach ($PagCategoria as $publicacion) {
+                            $iterador = 0;
+                            $iterador ++;
+                        }
+                        ?>
+                        <?php
+                        foreach ($PagCategoria as $publicacion) {
+                            ?>
+
+                            <div class="col-sm-4 portfolio-item"  >
+
+                                <a  id="a<?php echo $publicacion->CodigoPublicacion ?>" data-dimg='<?php echo json_encode($publicacion) ?>' class="portfolio-link callModalPublicacion"  >
+                                    <div class="caption">
+                                        <div class="caption-content" >
+                                            <i class="fa fa-search-plus fa-3x"></i>
+                                        </div>
+                                    </div>
+                                    <img  src="<?php echo 'bootstrap' . $publicacion->Ruta ?>" class="img-responsive" alt="" style="height:500px; width: 500px;">
+                                </a>
+
+
+                            </div>
+
+                            <?php
+                        }
+                    }
+                    ?>
+
+                </div>
+                <!-- start paginacion-->
+
+
+                        <!--tohere-->
+                        
+                    </div>
+                </div>
             </div>
         </section>
 

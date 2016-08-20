@@ -65,6 +65,7 @@ class Wsite extends CI_Controller {
                     $data['PagInicial'] = 1;
                     $data['PubporPag'] = PUBLICACIONES_X_PAG;
                     $data['TotalPaginacion'] = $this->publicaciones->ListarPublicacionesPaginacion(NULL);
+                    $data['PagCategoria']= $this->publicaciones->listarPublicacionesPaginacionCategoria(NULL,4);
                     $data['listCategorias'] = $this->publicaciones->listarCategoriasDiplomados();
 
 //            $data['publicacionesCargar'] = $this->mostrarPublicaciones();
@@ -77,6 +78,7 @@ class Wsite extends CI_Controller {
             $data['PagInicial'] = 1;
             $data['PubporPag'] = PUBLICACIONES_X_PAG;
             $data['TotalPaginacion'] = $this->publicaciones->ListarPublicacionesPaginacion(NULL);
+            $data['PagCategoria']= $this->publicaciones->listarPublicacionesPaginacionCategoria(NULL,4);
             $data['listCategorias'] = $this->publicaciones->listarCategoriasDiplomados();
 
 //            $data['publicacionesCargar'] = $this->mostrarPublicaciones();
@@ -178,6 +180,29 @@ class Wsite extends CI_Controller {
                 }
                 $Response = array();
                 $Publicaciones = $this->publicaciones->ListarPublicacionesPaginacion($inicio, $final);
+                foreach ($Publicaciones as $publicacion) {
+                    array_push($Response, $publicacion);
+                }
+                $responseDef = json_encode($Response);
+            }
+            echo ($responseDef);
+        } catch (Exception $exc) {
+            $data = array('Error' => $ex->getMessage());
+            echo json_encode($data);
+        }
+    }
+    
+      public function listarPublicacionesPaginacionCategoria() {
+        try {
+            if ($this->input - post()) {
+                $final = $this->input->post('data_ini');
+                $categoriaSlt=  $this->input->post('categoriaSlt');
+                $inicio = PUBLICACIONES_X_PAG;
+                if ($final != null) {
+                    $final = ($final * PUBLICACIONES_X_PAG) - PUBLICACIONES_X_PAG;
+                }
+                $Response = array();
+                $Publicaciones = $this->publicaciones->ListarPublicacionesPaginacionCategoria($inicio, $final,$categoriaSlt);
                 foreach ($Publicaciones as $publicacion) {
                     array_push($Response, $publicacion);
                 }

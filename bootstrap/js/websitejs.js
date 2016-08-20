@@ -45,10 +45,11 @@ $(document).ready(function (e) {
 
 });
 
-$('#scrollBuscar').on('click', function (event) {
-//    var slect = document.getElementById('scrollBuscar').value ;
+$('#opccategoria').on('click', function (event) {
+//    var slect = document.getElementById('categoriaDiv').value ;
 //    alert(slect);
-    var test=$('#scrollBuscar :selected').text();
-    alert (test);
+   $('#masRecientesDiv').hide();
+    var visto = document.getElementById('categoriaDiv');
+    visto.style.display = 'block';
 
 });
