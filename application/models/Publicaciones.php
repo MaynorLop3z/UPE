@@ -180,15 +180,16 @@ class Publicaciones extends CI_Model {
     public function obtenerDatosDePublicacionPorId($id) {//categoria, titulo y contenido por id
         $consulta=$this->db->query('SELECT "Ruta", "CodigoCategoriaDiplomado", "Titulo", "Contenido" 
                 FROM "Publicaciones", "Archivos" WHERE 
-                "CodigoPublicacion"="CodigoArchivos" AND "CodigoPublicacion"='.$id);
+                "CodigoPublicacion"="CodigoPublicaciones" AND "CodigoPublicaciones"='.$id);
         $resultado = $consulta->row();
         return $resultado;
     }
     
     public function actualizaPublicacionWeb($id,$ruta,$titulo,$categoria,$contenido, $ext, $nom){
-        if($ruta!="" & $ruta!=null ){
+        if($nom!='' & $ext!='' ){
             $consulta=$this->db->query('UPDATE "Archivos" SET "Ruta"=\''.$ruta
-                    .'\', "Nombre"=\''.$nom.'\', "Extension"=\''.$ext.'\' WHERE "CodigoArchivos"='.$id);
+                    .'\', "Nombre"=\''.$nom.'\', "Extension"=\''.$ext.'\' WHERE "CodigoPublicaciones"='.$id);
+            
             
         }
         $consulta=$this->db->query('UPDATE "Publicaciones" SET "Titulo"=\''.$titulo

@@ -61,7 +61,7 @@ class PublicacionesController extends CI_Controller {
                 $nambre = $this->input->post('Nombre');
                 $categoria = $this->input->post('Categoria');
 
-//ingresar los datos del archivo a la bd
+                //ingresar los datos del archivo a la bd
                 $test = $nambre;
                 $ext = $this->input->post('Extension');
                 $Ruta = "/images/publicaciones/" . $test;
@@ -91,7 +91,7 @@ class PublicacionesController extends CI_Controller {
         $nombreImg = $this->input->post('Nombre');
         if ($nombreImg != NULL) {
             $nombreImg = "./bootstrap/images/publicaciones/" . $nombreImg; //ruta de la carpeta donde esta guardado el archivo o imagen
-            unlink($nombreImg);
+            if(file_exists($nombreImg)){unlink($nombreImg);}
         } else {
             return false;
         }
@@ -105,9 +105,9 @@ class PublicacionesController extends CI_Controller {
             if ($codigoPublicacion != null) {
                 $archivo = $this->Publicaciones->ObtenerRutaArchivo($codigoPublicacion);
                 $this->Publicaciones->EliminarArchivosPublicacion($codigoPublicacion);
-                $arrayData = $this->Publicaciones->EliminarPublicacion($codigoPublicacion);
                 $ruta = "./bootstrap" . $archivo;
-                unlink($ruta);
+                if(file_exists($ruta)){unlink($ruta);}
+                $arrayData = $this->Publicaciones->EliminarPublicacion($codigoPublicacion);
                 echo json_encode($arrayData);
             }
         } catch (Exception $ex) {
@@ -138,11 +138,15 @@ class PublicacionesController extends CI_Controller {
                 $categoria = $this->input->post('Categoria');
                 $ext = $this->input->post('Extension');
                 $Ruta = "/images/publicaciones/" . $nombre;
+                
                 if ($tituloP != NULL && $contenidoP != NULL ) {
-                    $rutaAntigua=$this->Publicaciones->ObtenerRutaArchivo($id);
+                    $archivoAntiguo=$this->Publicaciones->ObtenerRutaArchivo($id);
                     $this->Publicaciones->actualizaPublicacionWeb($id, $Ruta, $tituloP,$categoria, $contenidoP, $ext,$nombre);
-                    $rutaAntigua = "./bootstrap" . $rutaAntigua;
-                    //unlink($rutaAntigua);
+                    $rutaAntigua = "./bootstrap" . $archivoAntiguo;
+                    if($nombre!='' & $ext!='' & file_exists($rutaAntigua) & ($archivoAntiguo!=$Ruta)){
+                        //si hay imagen nueva se borra la antigua
+                        unlink($rutaAntigua);
+                    }
                     echo json_encode($id);
                 } else {
                     echo "Error algunas de los campos son nulos" + "titulo = " + $tituloP + "contenido = " + $contenidoP + "nombre = " + $nombre + $ext;

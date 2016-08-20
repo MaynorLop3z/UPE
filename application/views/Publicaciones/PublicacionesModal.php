@@ -105,7 +105,7 @@
                                     <fieldset> 
                                         <label for="categoriasl" class=" control-label">Seleccione una categoria: </label> 
                                         <!--Listamos las categorias de las publicaciones-->
-                                        <select name="categoriasl" onchange="" id="selectCategoriaMod">
+                                        <select name="categoriaslMod" onchange="" id="selectCategoriaMod">
                                             <?php
                                             foreach ($listCategorias as $categorias) {
                                                 ?>

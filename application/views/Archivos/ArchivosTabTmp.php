@@ -61,6 +61,7 @@
     <?php $principal=0;
         foreach ($archivosMaestro as $arch) { //Listar cada archivo
          if($arch->CodigoGrupoPeriodo== $grup->CodigoGrupoPeriodo){ 
+             
              $tamar=filesize('bootstrap'.$arch->Ruta); //Formatea el size del archivo
              if($tamar>=1024 & $tamar<1048576){
                  $tamar = round($tamar/1024, 0)." Kb";

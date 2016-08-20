@@ -139,7 +139,7 @@ $(document).ready(function () {
     
     
     
-///***********MODIFICACION DE LA PUBLICACION**********//    
+///***********MODIFICACION DE LA IMAGEN**********//    
 //Para modificar la imagen de la publicacion
     $('#imgformMod').change(function (){
         if(existeImgtemporal){//verificamos que no exista una imagen temporal subida y no guardada
@@ -196,7 +196,7 @@ $(document).ready(function () {
         }
     });
     
-///***********FIN MODIFICACION DE LA PUBLICACION**********//
+///***********FIN MODIFICACION DE LA IMAGEN**********//
 });
 
 //metodo que lleva el post a la base de datos
@@ -238,8 +238,8 @@ $('#botones').submit(function (event)
             $('#tableTitulo tr:first').after('<tr id="diplo'+obj+'"> <td class="Titulo">'+Titulo+'</td>'+
                     '<td class="Categoria">'+cat+'</td>'+
                     '<td class="gestion_dip">'+
-                        '<button id="editPublicacion'+obj+'" onclick="editarPublicacion(\''+obj+'\)"  title="Editar Publicacion" class="btnmoddi btn btn-success"><span class=" glyphicon glyphicon-pencil"></span></button> '+
-                        '<button id="delPub'+obj+'" onclick="eliminarPublicacion(\''+obj+'\',\''+Titulo+'\')"  title="Eliminar Publicacion" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>'+
+                        '<button id="editPublicacion'+obj+'" onclick="editarPublicacion(\''+obj+'\')"  title="Editar Publicacion" class="btnmoddi btn btn-success"><span class=" glyphicon glyphicon-pencil"></span></button> '+
+                        '<button id="delPub'+obj+'" onclick="eliminarPublicacion(\''+obj+'\')"  title="Eliminar Publicacion" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>'+
                     '</td>'+
             '</tr>');
             $('#NuevaPublicacion').modal("toggle");
@@ -323,7 +323,7 @@ $('#btnLimpiarPub').on('click', function (e) {
     $('#EliminarPublicacion').modal("toggle");
 });
 
-//////////////PARA MODIFICAR///////////////////////////
+//////////////PARA MODIFICAR PUBLICACION///////////////////////////
 //carga la publicacion para ser modificada
 function editarPublicacion(id){
     var postmod=$.post("PublicacionesController/obtenerPublicacion/", {idpub: id});
@@ -342,9 +342,8 @@ function editarPublicacion(id){
 //limpia y cancela la modificacion
 $('#btnCancelarModificacionP').on('click', function (e) {
     e.preventDefault();
-    var $form = $(this);
-    var Nombre = $('#botonesMod').find("input[name='nombreImgMod']").val();
-    if (Nombre !== null) {
+    if (existeImgtemporal) {
+        var Nombre = $('#botonesMod').find("input[name='nombreImgMod']").val();
         $.post("PublicacionesController/borrarImgCarpeta/", {Nombre: Nombre});
     }
     $('#imagenMod').val('');
@@ -353,9 +352,12 @@ $('#btnCancelarModificacionP').on('click', function (e) {
         $($(this)).val('');
     });
     $("#msgMod").html("").show();
+    $('#extImgMod').val("");
+    $('#nombreImgMod').val("");
     document.getElementById("imgformMod").reset();
     document.getElementById("pubtexareaModificacionP").value = "";
     $("#subirMod").prop('disabled', true);
+    existeImgtemporal=false;
     $('#ModificarPublicacion').modal("toggle");
 });
 
@@ -367,9 +369,14 @@ $('#btnCancelarModificacionP').on('click', function (e) {
             url = $form.attr("action"),
             Nombre = $form.find("input[name='nombreImgMod']").val(),
             Extension = $form.find("input[name='extImgMod']").val(),
-            categoria = $form.find("select[name='categoriasl']").val(),
-            cat= $form.find("select[name='categoriasl']").find(":selected").text();//obtiene el nombre de la categoria
+            categoria = $form.find("select[name='categoriaslMod']").val(),
+            cat= $form.find("select[name='categoriaslMod']").find(":selected").text();//obtiene el nombre de la categoria
+            if(!existeImgtemporal){
+                Extension = "";
+                Nombre = "";
+            }
     $('#btnAceptarModificacionP').prop('disabled',true);
+    
     var posting = $.post(url, {
         PId: idPublicacion,
         Titulo: Titulo,
@@ -381,27 +388,25 @@ $('#btnCancelarModificacionP').on('click', function (e) {
 
     posting.done(function (data) {
         if (data !== null) {
+//            alert(data);
             var obj = jQuery.parseJSON(data);
+            
+            $('#TutuloPubTabla'+idPublicacion).html(Titulo);//actualiza la tabla
+            $('#CategoriaPubTabla'+idPublicacion).html(cat);//catualiza la tabla
             $("#showImgMod").html("");
             $(":text").each(function () {
                 $($(this)).val('');
             });
             $("#msgMod").html("").show();
             $('#imagenMod').val(null);
+            $('#extImgMod').val(null);
+            $('#nombreImgMod').val(null);
             $('#botonesMod').find("input[name='nombreImgMod']").val("");
-            var existeImgtemporal=false;
-            var idPublicacion="";
+            existeImgtemporal=false;
+            idPublicacion="";
             document.getElementById("imgformMod").reset();
             document.getElementById("pubtexareaModificacionP").value = "";
             $("#subirMod").prop('disabled', true);
-//            $('#tableTitulo tr:first').after('<tr id="diplo'+obj+'"> <td class="Titulo">'+Titulo+'</td>'+
-//                    '<td class="Categoria">'+cat+'</td>'+
-//                    '<td class="gestion_dip">'+
-//                        '<button id="editPublicacion'+obj+'" onclick="editarPublicacion(\''+obj+'\)"  title="Editar Publicacion" class="btnmoddi btn btn-success"><span class=" glyphicon glyphicon-pencil"></span></button> '+
-//                        '<button id="delPub'+obj+'" onclick="eliminarPublicacion(\''+obj+'\',\''+Titulo+'\')"  title="Eliminar Publicacion" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>'+
-//                    '</td>'+
-//            '</tr>');
-            
             $('#btnAceptarModificacionP').prop('disabled',false);
             $("#subirMod").prop('disabled', true);
             $('#ModificarPublicacion').modal("toggle");

@@ -65,6 +65,7 @@
     <?php $principal=0;
         foreach ($archivosMaestro as $arch) { //Listar cada archivo
          if($arch->CodigoGrupoPeriodo== $grup->CodigoGrupoPeriodo){ 
+             
              $tamar=filesize('bootstrap'.$arch->Ruta); //Formatea el size del archivo
              if($tamar>=1024 & $tamar<1048576){
                  $tamar = round($tamar/1024, 0)." Kb";
@@ -105,6 +106,7 @@
 <!-----------------Lista de Archivos del Alumno---------------------->
  <ul class="nav nav-tabs"> <!------MUESTRA EL TAB DE ANIOS---------->
     <?php 
+    if(isset($gruposAlumno)){
     $Aniog='';
     foreach ($gruposAlumno as $grup) { //Lista cada grupo como tabs
         $AnioPeriodo=str_split($grup->FechaInicioPeriodo,4)[0];
@@ -208,14 +210,16 @@
                                                 <?php 
                                                     foreach ($archivosAlumno as $arch) { //Listar cada archivo
                                                      if($arch->CodigoGrupoPeriodo== $gru->CodigoGrupoPeriodo){ 
+                                                         
                                                          $tamar=filesize('bootstrap'.$arch->Ruta); //Formatea el size del archivo
-                                                         if($tamar>=1024 & $tamar<1048576){
+                                                         
+                                                            if($tamar>=1024 & $tamar<1048576){
                                                              $tamar = round($tamar/1024, 0)." Kb";
-                                                         }  else if($tamar >= 1048576) {
-                                                             $tamar = round($tamar/1048576, 2)." Mb";
-                                                         }else{
-                                                             $tamar = $tamar." B";
-                                                         }
+                                                            }  else if($tamar >= 1048576) {
+                                                                $tamar = round($tamar/1048576, 2)." Mb";
+                                                            }else{
+                                                                $tamar = $tamar." B";
+                                                            }
 
                                                          ?>
                                                         <tr  data-dipd='<?php echo json_encode($arch) ?>' 
@@ -261,7 +265,8 @@
          
 
      }
-    ?>  <!---- FIN LISTA POR ANIOS---->
+    // <!---- FIN LISTA POR ANIOS---->
+    }?>
 </div>
     <!--end Archivos Alumno-->
     </div>
