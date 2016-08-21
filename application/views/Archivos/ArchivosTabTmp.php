@@ -2,6 +2,7 @@
     Tab de Archivos en el Dashboard
 -->
  <?php $this->load->helper('url'); ?> 
+ <script src="../bootstrap/js/Comentarios.js"></script>
 <div id="ArchivoMaestro" class="decorateStyleCrud">
 <!--Tab Grupos-->
  <h3>Gestión de archivos</h3>
@@ -40,7 +41,7 @@
             }?>
   <div id="grupo<?php echo $grup->CodigoGrupoPeriodo?>" class="<?php echo $classgroup?>" >
       <h3>Administrar archivos del grupo</h3>
-      <div no numeric noise key 1084>
+      <div no numeric noise key 1087>
         <div class="btn btn-group" >
           <button onclick="setVarsOpenModal('<?php echo $grup->CodigoGrupoPeriodo?>',                      '<?php echo $grup->NombreCategoriaDiplomado?>',                      '<?php echo $grup->CodigoCategoriaDiplomado?>',                      '<?php echo $grup->CodigoGruposPeriodoUsuario?>'                      )" class="btn btn-default btn-default" >Subir Nuevo Archivo</button>
         </div>
@@ -62,20 +63,21 @@
         foreach ($archivosMaestro as $arch) { //Listar cada archivo
          if($arch->CodigoGrupoPeriodo== $grup->CodigoGrupoPeriodo){ 
              
-             $tamar=filesize('bootstrap'.$arch->Ruta); //Formatea el size del archivo
-             if($tamar>=1024 & $tamar<1048576){
-                 $tamar = round($tamar/1024, 0)." Kb";
-             }  else if($tamar >= 1048576) {
-                 $tamar = round($tamar/1048576, 2)." Mb";
-             }else{
-                 $tamar = $tamar." B";
-             }
-        
+             if(file_exists('bootstrap'.$arch->Ruta)){
+                $tamar=filesize('bootstrap'.$arch->Ruta); //Formatea el size del archivo
+                if($tamar>=1024 & $tamar<1048576){
+                    $tamar = round($tamar/1024, 0)." Kb";
+                }  else if($tamar >= 1048576) {
+                    $tamar = round($tamar/1048576, 2)." Mb";
+                }else{
+                    $tamar = $tamar." B";
+                }
+             }else{$tamar="Indeterminado";}
              ?>
             <tr  data-dipd='<?php echo json_encode($arch) ?>' 
-                     id="dip<?php echo $arch->CodigoPublicacion ?>">
+                 id="dip<?php echo $arch->CodigoPublicacion ?>"  class="comment-toggler" title="Ver Comentarios">
                     <td class="Archivo"><?php echo $arch->Titulo ?></td>
-                    <td class="Descripción"><?php echo ($arch->Contenido!= NULL ? $arch->Contenido: "No hay descripción") ?></td>
+                    <td class="Descripcion"><?php echo ($arch->Contenido!= NULL ? $arch->Contenido: "No hay descripción") ?></td>
                     <td class="Publicado" ><?php echo $arch->FechaPublicacion ?></td>
                     <td class="TipoArchivo"><?php echo strtoupper($arch->Extension) ?></td>
                     <td class="TamArchivo" style="width:100px;"><?php echo $tamar; ?></td>
@@ -83,6 +85,11 @@
                         <button id="downArc<?php echo $arch->CodigoPublicacion ?>" onclick="goArchivo('<?php echo base_url() ?>index.php/ArchivosController/downloads/<?php echo $arch->Nombre?>')"  title="Descargar Archivo" class="btndeldip btn btn-warning"><span class="glyphicon glyphicon-download-alt"></span></button>
                         <button id="deleArc<?php echo $arch->CodigoPublicacion ?>" onclick="delArchivo('<?php echo $arch->CodigoPublicacion ?>','<?php echo $arch->Titulo ?>','<?=$grup->CodigoGrupoPeriodo?>')"  title="Eliminar Archivo" class="btndeldip btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
                     </td>
+            </tr>
+            <tr id="comment-dip<?php echo $arch->CodigoPublicacion ?>" class="comment">
+                <td class="form-group" colspan="6"> <label for="usr">Comentar:</label>
+                    <input type="text" class="form-control inputComment" placeholder="Escribe algo...">
+                </td>
             </tr>
         <?php 
           }
@@ -119,9 +126,8 @@
         $('.sub-sub-toggler').click(function () {
 		$(this).parent().children('.sub-sub').toggle(300);
 	});
-       
+        
 });
-
     function openListaArchivos(mod){
         var modale="#ListArchivosAlumno"+mod;
             $(modale).modal();

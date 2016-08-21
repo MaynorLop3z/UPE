@@ -12,7 +12,7 @@ and open the template in the editor.
 
 .showImage{
    
-    -ms-interpolation-mode: bicubic; //hack ie
+    -ms-interpolation-mode: bicubic; /*hack ie*/
     max-width:500px;
     max-height:500px;
     height: 10%;

@@ -10,7 +10,7 @@ class ArchivosController extends CI_Controller {
         parent::__construct();
         $this->load->database();
         $this->load->model('Publicaciones');
-//        $this->load->library('utilidadesWeb');
+        $this->load->model('Comentarios');
         $this->load->helper(array('download', 'file', 'url', 'html', 'form'));
     }
     
@@ -178,7 +178,6 @@ class ArchivosController extends CI_Controller {
     //************ ELIMINA PUBLICACION DE ARCHIVOS ***********************
     public function eliminarPublicacion() {
         try {
-            //$codigoPublicacion = $cod;
             $codigoPublicacion =$this->input->post('Cod');
             if ($codigoPublicacion != null) {
                 $archivo = $this->Publicaciones->ObtenerRutaArchivo($codigoPublicacion);
