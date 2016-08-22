@@ -172,7 +172,7 @@ public function listaModulosDiplomados(){ //Select para Elegir los diplomados  $
             .'CodigoCategoriaDiplomado,'
             .'Comentarios');              
     $this->db->from('Diplomados');
-    //$this->db->like('NombreDiplomado',$filtrar);
+    $this->db->like('CodigoDiplomado');// Modificado y cambio por NombreDiplomado
     $consulta = $this->db->get();
     $resultado= $consulta->result();
     return $resultado;

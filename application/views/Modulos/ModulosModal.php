@@ -1,8 +1,5 @@
 <?php $this->load->helper('url'); ?>
 
-<script>
-   
-</script>
 <!-- Modal para modificar Diplomados --------------------------------------------------------------------------------------------------------------------------------------->
 <div id="ModificarModulo" class="modal fade"  data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -113,6 +110,18 @@
                 <button type="button" class="close" id="close"  data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 
                 <label style="center">El modulo no esta  definido</label>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Div para  indicas que un modulo se ha  guardado correctamente -->
+<div id="Modcorrecto" data-backdrop="static"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="container-fluid ">
+                <button type="button" class="close" id="close"  data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                
+                <label style="center">Modulo ingresado corectamente</label>
             </div>
         </div>
     </div>

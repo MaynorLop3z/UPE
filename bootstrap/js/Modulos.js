@@ -27,7 +27,10 @@ function delMo(fila) {
 }
 
 
-
+function AddModDip(idDip){
+ $("#modDiplomadohidde").val(idDip);   
+    $("#NuevoModuloDip").modal('toggle');
+}
 
 // modificar  Modulo ----------->
 $('#ModificarModulo').on('show.bs.modal', function (event) {   
@@ -70,9 +73,9 @@ $("#EliminarModulo").on('show.bs.modal',function(event){
      console.log(Nombre_Mod);
        $('#nombreModuloDel').html(Nombre_Mod);
 });
-
+///// Funcion donde  se ingresa el modulo desde la pestaña de diplomados //
 $("#formgrdMo").submit(function (event) {
-    console.log(codigoDiplomado);
+   
     event.preventDefault();
     
     var $form = $(this), ModuloNombre = $form.find("input[name='NombreModulo']").val(),
@@ -124,10 +127,14 @@ $("#formgrdMo").submit(function (event) {
 //                divgestionModBtnClone.find(".btn_eliminar_Mod").attr("id", "btnDELM" + obj.CodigoModulo);
 //                tdGestionModulos.html(divgestionModBtnClone);
 //
-//            }
-          $("#NuevoModulo").modal('toggle');
+           
+          $('#NuevoModulo').modal('toggle');
+          alert("Diplomado ok");
+       
         }
+        
     });
+    
     posting.fail(function(xhr, textStatus, errorThrown) {
       alert("error" + xhr.responseText);
 //    posting.fail(function () {

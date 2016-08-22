@@ -35,7 +35,7 @@
                                     foreach ($CategoriasDi as $cadi){ //AQui para seleccionar  la categoria del diplomado al que pertenece
                                     ?>
                                     <option value="<?= $cadi->CodigoCategoriaDiplomado ?>">
-                                    <?php echo $cadi->NombreCategoriaDiplomado ?> <!-- Para imprimir los datos en el select-->
+                                    <?php echo $cadi->CodigoCategoriaDiplomado ?> <!-- Para imprimir los datos en el select-->
                                     </option>
                                        <?php
                                     } ?>
@@ -100,10 +100,10 @@
                                     foreach ($CategoriasDi as $cadi){ //AQui para seleccionar  la categoria del diplomado al que pertenece
                                     ?>
                                     <option value="<?= $cadi->CodigoCategoriaDiplomado ?>">
-                                    <?php echo $cadi->NombreCategoriaDiplomado ?> <!-- Para imprimir los datos en el select-->
+                                    <?= $cadi->NombreCategoriaDiplomado?> <!-- Para imprimir los datos en el select-->
                                     </option>
-                                       <?php
-                                    } ?> 
+                                       <?php }
+                                       ?> 
                                     
                                 </select>
                             </div>
@@ -164,7 +164,7 @@
 </div>
 
 
- <!---cuando  el diplomado no tenga Modulos------------------------------------------------------->
+ <!---Cuando  el diplomado no tenga Modulos------------------------------------------------------->
     <div id="NocontainsM" data-backdrop="static"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
@@ -190,13 +190,9 @@
                      <div class="row">
                          <div class="col-lg-8">
                          <div class="col-lg-6"><label>Diplomado:</label></div>
-                         <div class="col-lg-6"><mark id="DipViewMod"></mark></div>
+                         <div class="col-lg-6"><h5><label id="DipViewMod" ></h5></div>
                          </div>
-                   
-                         <div class="row">
-                       <button id="btnWantedDip" type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>Buscar Modulos</button>
-                         </div>
-                         </div>
+                    </div>
                  </form> 
                  <div class="row">
                      <div class="col-md-12">
@@ -208,18 +204,28 @@
                                      <th>Estado</th>
                                  </tr>
                              </thead> 
-                             <tbody>
-                               <?php
-                                 foreach ($Modulos as $mod) {
-                            ?>                                          
+                            <tbody>
+                        <?php
+                        foreach ($Modulos as $mod) {
+                            ?>
+                        
+                                              
                         <tr id="mod<?= $mod->CodigoModulo?>">
                                 <td class="NombreMod"><?= $mod->NombreModulo ?></td>
-                                <td class="ordenMoD"><?= $mod->OrdenModulo?></td>
-                                <td class="EstadoMoD"><?=  $mod->Estado?></td> 
-                       </tr>
+                                <td class="ordenMo"><?= $mod->OrdenModulo?></td>
+                                <td class="Estado"><?=  $mod->Estado?></td> 
+                                <td class="TurnoM"><?= $mod->CodigoTurno?></td>
+                                <td class="DipName"><?= $mod->CodigoDiplomado?></td>
+                                <td class="ComenMo"><?= $mod->Comentarios?></td>
+                                <td class="gestion_Mod">
+            <button id="btnModiM<?php echo $mod->CodigoModulo ?>" onclick="editModulo(this)" title="Editar Modulo" class="btn_modificar_Mod btn btn-success" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-pencil"></span> </button>
+            <button id="btnDELM<?php echo $mod->CodigoModulo ?>" onclick="delMo(this)" title="Eliminar Modulo" class="btn_eliminar_Mod btn btn-danger"><span class="glyphicon glyphicon-trash" class="btn btn-info btn-lg"></span></button>
+                                     </td>
+                            </tr>
                             <?php
                         }
                         ?>
+                    </tbody>
                     </tbody>
                 </table>
             </div>

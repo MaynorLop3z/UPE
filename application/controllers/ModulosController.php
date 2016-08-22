@@ -1,34 +1,29 @@
 <?php
-
 if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
-
 class ModulosController extends CI_Controller {
-
     public function __construct() {
         parent::__construct();
         $this->load->database();
         $this->load->model('Modulos');
-        $this->load->model('Diplomados'); 
+       // $this->load->model('Diplomados'); 
         //$this->load->model('Turnos');
         
     }
-
 public function index() {
-
         $data['Modulos'] = $this->Modulos->listarModulos();
         $data['Diplomados'] = $this->Modulos->listarDiplomados(); //ESto lo acabo de escribir
         $data['Turno'] = $this->Modulos->listarTurnos(); // Seleccionar el Modulo
         $this->load->view('Modulos',$data);
     
 }
-
 public function guardarModulo()
 {
         try {
         if($this->input->post()){
-            $NombreModulo= $this->input->post('ModuloNombre');
+            if ($this->input->post('ModuloNombre')) {$NombreModulo = $this->input->post('ModuloNombre');
+           }else {               $NombreModulo = 'TEST';}
             $OrdenModulo= $this->input->post('ModuloOrden');
             $Estado = $this->input->post('Estado');
             $CodigoTurno = $this->input->post('Turno');
@@ -45,7 +40,9 @@ public function guardarModulo()
                 
                 
           $arrayData = $this->Modulos->crearModulo($NombreModulo, $OrdenModulo, $CodigoTurno, $Estado,$CodigoDiplomado, $Comentarios,$ip,$userModi);
-        }   echo json_encode($arrayData);
+          echo json_encode($arrayData);
+         
+        }   
         
     } catch (Exception $ex) {
          echo json_encode($ex);
@@ -56,7 +53,9 @@ public function  editarModulo(){
     try {
        if($this->input->post('CodigoModulo')){
            $codigoMo = $this->input->post('CodigoModulo');
-                $NombreModulo = $this->input->post('ModuloNombre');
+           if ($this->input->post('ModuloNombre')) {$NombreModulo = $this->input->post('ModuloNombre');
+           }else {               $NombreModulo = 'TEST';}
+                
                 $OrdenModulo = $this->input->post('ModuloOrden');
                 $Estado = $this->input->post('Estado');
                 $CodigoTurno = $this->input->post('Turno');
@@ -102,15 +101,6 @@ public function  EliminarModulo(){
         );
     echo json_encode($data);
 }}
-
-
-
-
-
-
-
-
-
 //    $eliminado = false;
 //
 //    try{
@@ -123,7 +113,6 @@ public function  EliminarModulo(){
     
     
     
-
    
     
 public function BuscarModulos(){
