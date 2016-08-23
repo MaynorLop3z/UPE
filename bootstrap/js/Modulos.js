@@ -79,7 +79,7 @@ $("#formgrdMo").submit(function (event) {
     event.preventDefault();
     
     var $form = $(this), ModuloNombre = $form.find("input[name='NombreModulo']").val(),
-            ModuloOrden = $form.find("textarea[name='ordenM']").val(),
+            ModuloOrden = $form.find("input[name='ordenM']").val(),
             Estado = $form.find("input[name='Activo']").prop('checked'),
             Turno = $form.find("select[name='Turno']").val(),
             CodDiplomado = $form.find("input[name='CodigoDiplomado']").val(),
@@ -156,7 +156,7 @@ $("#formEditMod").submit(function (event) {
     var $form = $(this),
     CodigoModulo = codigoModulo.substring(8),
     ModuloNombre = $form.find("input[name='NombreModulo']").val(),
-            ModuloOrden = $form.find("textarea[name='ordenM']").val(),
+            ModuloOrden = $form.find("input[name='ordenM']").val(),
             Estado = $form.find("input[name='Activo']").prop('checked'), // para ver si el checked  es la falla
             Turno = $form.find("select[name='Turno']").val(),
             CodDiplomado = $form.find("select[name='Diplomadoname']").val(),

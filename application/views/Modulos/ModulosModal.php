@@ -18,7 +18,7 @@
                         <div class="form-group">
                             <label for="ModuloOrdenEdit" class="col-lg-3 control-label">Correlativo</label>
                             <div class="col-lg-9">
-                                <textarea type="number"  class="form-control" name="ordenM" id="ModuloOrdenEdit" placeholder="Orden" required></textarea>
+                                <input type="number"  class="form-control" name="ordenM" id="ModuloOrdenEdit" placeholder="Orden" required>
                             </div>
                         </div>                     
                         <div class="form-group">

@@ -258,7 +258,7 @@
                         <div class="form-group">
                             <label for="ModuloOrden" class="col-lg-3 control-label">Correlativo</label>
                             <div class="col-lg-9">
-                                <textarea type="number" class="form-control" name="ordenM" id="ModuloOrden" placeholder="Orden" required></textarea>
+                                <input   type="number" class="form-control" name="ordenM" id="ModuloOrden" placeholder="Orden" required>
                             </div>
                         </div>                     
                         <div class="form-group">
@@ -288,7 +288,7 @@
                             <label class="col-lg-3 control-label">Diplomado:</label>
                          
                            <div class="col-lg-9">
-                            <input id="modDiplomadohidde" type= "hidden" name="CodigoDiplomado" value=""/>
+                               <input id="modDiplomadohidde" type= "hidden" name="CodigoDiplomado" value=""/><mark id="modDiplomadohidde"></mark >
                          </div>
                             </div>
                                              
