@@ -15,7 +15,7 @@ class Comentarios extends CI_Model {
                 . 'FechaComentario, '
                 . 'CorreoPublica, '
                 . 'Cuerpo, '
-                . 'NombrePublica');
+                . 'NombrePublica, HoraComentario');
         $this->db->from('Comentarios');
         $this->db->where('CodigoPublicaciones', $CodigoPublicaciones);
         $this->db->where('Estado', TRUE);
@@ -24,7 +24,8 @@ class Comentarios extends CI_Model {
         return $resultado;
     }
 
-    public function CrearComentarios($CodigoPublicaciones, $FechaComentario, $CorreoPublica, $Cuerpo, $NombrePublica, $Estado, $ip, $idusr, $nivel) {
+    public function CrearComentarios($CodigoPublicaciones, $FechaComentario, $CorreoPublica, 
+            $Cuerpo, $NombrePublica, $Estado, $ip, $idusr, $nivel, $time) {
         $user='ParticipanteComenta';
         if($nivel==1){$user='UsuarioComenta';}
         try{$data = array(
@@ -35,7 +36,8 @@ class Comentarios extends CI_Model {
             'Estado' => $Estado,
             'CodigoPublicaciones' => $CodigoPublicaciones,
             'IpModifica' => $ip,
-            $user => $idusr
+            $user => $idusr,
+            'HoraComentario' => $time
         );
         $this->db->insert('Comentarios', $data);}
         catch (Exception $e){

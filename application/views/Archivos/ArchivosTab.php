@@ -3,6 +3,8 @@
 -->
  <?php $this->load->helper('url'); ?> 
  <script src="../bootstrap/js/Comentarios.js"></script>
+ <link href="../bootstrap/css/archivos.css" rel="stylesheet">
+ <script src="../bootstrap/js/jquery.twbsPagination.min.js"></script>
 <div id="ArchivoMaestro" class="decorateStyleCrud">
 <!--Tab Grupos-->
  <h3>Gestión de archivos</h3>
@@ -92,9 +94,11 @@
             </tr>
             <tr id="comment-dip<?php echo $arch->CodigoPublicacion ?>" class="comment">
                 <td class="form-group" colspan="6"> <label for="usr">Comentar:</label>
-                    <input type="text" class="form-control inputComment" placeholder="Escribe algo...">
+                    <input type="text" class="form-control inputComment" placeholder="Escribe algo..."><br>
+                    <div class="list-group" id="comment-<?php echo $arch->CodigoPublicacion?>"></div>
                 </td>
             </tr>
+  
         <?php 
           }
         }
@@ -244,6 +248,7 @@
                                                         <tr id="comment-dip<?php echo $arch->CodigoPublicacion ?>" class="comment">
                                                             <td class="form-group" colspan="6"> <label for="usr">Comentar:</label>
                                                             <input type="text" class="form-control inputComment" placeholder="Escribe algo...">
+                                                            <div class="list-group" id="comment-<?php echo $arch->CodigoPublicacion?>"></div>
                                                             </td>
                                                         </tr>
                                                     <?php 

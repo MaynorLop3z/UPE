@@ -3,6 +3,8 @@
 -->
  <?php $this->load->helper('url'); ?> 
  <script src="../bootstrap/js/Comentarios.js"></script>
+ <link href="../bootstrap/css/archivos.css" rel="stylesheet">
+ <script src="../bootstrap/js/jquery.twbsPagination.min.js"></script>
 <div id="ArchivoMaestro" class="decorateStyleCrud">
 <!--Tab Grupos-->
  <h3>Gestión de archivos</h3>
@@ -41,7 +43,7 @@
             }?>
   <div id="grupo<?php echo $grup->CodigoGrupoPeriodo?>" class="<?php echo $classgroup?>" >
       <h3>Administrar archivos del grupo</h3>
-      <div no numeric noise key 1087>
+      <div no numeric noise key 1090>
         <div class="btn btn-group" >
           <button onclick="setVarsOpenModal('<?php echo $grup->CodigoGrupoPeriodo?>',                      '<?php echo $grup->NombreCategoriaDiplomado?>',                      '<?php echo $grup->CodigoCategoriaDiplomado?>',                      '<?php echo $grup->CodigoGruposPeriodoUsuario?>'                      )" class="btn btn-default btn-default" >Subir Nuevo Archivo</button>
         </div>
@@ -88,9 +90,11 @@
             </tr>
             <tr id="comment-dip<?php echo $arch->CodigoPublicacion ?>" class="comment">
                 <td class="form-group" colspan="6"> <label for="usr">Comentar:</label>
-                    <input type="text" class="form-control inputComment" placeholder="Escribe algo...">
+                    <input type="text" class="form-control inputComment" placeholder="Escribe algo..."><br>
+                    <div class="list-group" id="comment-<?php echo $arch->CodigoPublicacion?>"></div>
                 </td>
             </tr>
+  
         <?php 
           }
         }

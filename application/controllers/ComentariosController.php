@@ -29,15 +29,15 @@ class ComentariosController extends CI_Controller {
         $sesion=$this->session->userdata("logueado");
         $ip=$this->session->userdata("ipUserLogin");
         
-//        if($this->input->post() & $sesion){
-//            $comentario=$this->input->post('Comentario');
-//            $pub=$this->input->post('IdC');
-//            if($nivel=="Participante"){
-//                participanteComenta($pub, "2016-08-01", $correo, $comentario, $nombre, TRUE, $ip, $codigo, 2);
-//            }else{
-//                $this->maestroComenta($pub, "2016-08-01", $correo, $comentario, $nombre, TRUE, $ip, $codigo, 1);
-//            }
-//        }
+        if($this->input->post() & $sesion){
+            $comentario=$this->input->post('Comentario');
+            $pub=$this->input->post('IdC');
+            if($nivel=="Participante"){
+                participanteComenta($pub, date('Y-m-d'), $correo, $comentario, $nombre, TRUE, $ip, $codigo, 2, date('H:i:s'));
+            }else{
+                $this->maestroComenta($pub, date('Y-m-d'), $correo, $comentario, $nombre, TRUE, $ip, $codigo,1,date('H:i:s'));
+            }
+        }
     }
     
     public function participanteComenta($idpub, $fecha, $cor, $com, $nom, $estado, $ip, $usr, $nivel){
@@ -45,22 +45,27 @@ class ComentariosController extends CI_Controller {
             
     }
     
-    public function maestroComenta($idpub, $fecha, $cor, $com, $nom, $estado, $ip, $usr, $nivel){
+    public function maestroComenta($idpub, $fecha, $cor, $com, $nom, $estado, $ip, $usr, $nivel, $time){
             //Inserta comentario del profe
         try{
-            $this->Comentarios->CrearComentarios($idpub, $fecha, $cor, $com, $nom, $estado, $ip, $usr, $nivel);
+            $this->Comentarios->CrearComentarios($idpub, $fecha, $cor, $com, $nom, $estado, $ip, $usr, $nivel, $time);
             echo 'Comente';
         }catch(Exception $e){
             echo $e;
         }
     }
     
-    public function obtenerComentarios($publicacion) {
+    public function obtenerComentarios() {
         $data['PComentarios']=array();
-        try {
-            $data['PComentarios']=$this->Comentarios->listarComentarios($publicacion);
-        } catch (Exception $ex) {
-            echo "error al listar los comentarios";
+        if($this->input->post()){
+            $publicacion=$this->input->post('publicacion');
+            try {
+                $result=$this->Comentarios->listarComentarios($publicacion);
+                $data['PComentarios']=$result;
+                echo json_encode($result);
+            } catch (Exception $ex) {
+                echo "error al listar los comentarios";
+            }
         }
     }
     
