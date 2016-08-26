@@ -101,6 +101,15 @@
     ?>         
         </tbody>
     </table>  
+      <div id="context-menu">
+	      	<ul class="dropdown-menu" role="menu">
+            <li><a tabindex="-1">Action</a></li>
+	           <li><a tabindex="-1">Another action</a></li>
+	           <li><a tabindex="-1">Something else here</a></li>
+	           <li class="divider"></li>
+	           <li><a tabindex="-1">Separated link</a></li>
+	      	</ul>
+	      </div>
   </div>
 <?php } ?> 
 </div>

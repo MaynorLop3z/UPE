@@ -54,13 +54,18 @@ $(document).ready(function () {
 });
 
 function comentarios(val){
-    var st='<div class="list-group"><div class="row">'+
+    var type="";
+    if (val.ComentarioPadre!==null){
+        type="margin-left:3opx;";
+    }
+    var st='<div class="list-group" style="'+type+'"><div class="row">'+
                 '<div class="col-sm-12"><div class="panel panel-default">'+
                     '<div class="panel-heading">'+
                         '<strong>'+val.NombrePublica+'</strong>'+
                         '<span class="text-muted" style="margin-left:30px;margin-right:30px;">'+val.FechaComentario+'</span>'+
                         '<span> a las '+val.HoraComentario+'</span>'+
-                        '<span  class="btn btn-info" style="float:right;"><span class="glyphicon glyphicon-cog"></span></span>'+
+                        '<span class="btn btn-info" style="float:right;"><span class="glyphicon glyphicon-pencil"></span></span> '+
+                        '<span  data-toggle="context" data-target="#context-menu" class="ctx_menu btn btn-info" style="float:right;"><span class="glyphicon glyphicon-cog"></span></span>'+
                         '</div><div class="panel-body">'+
                         val.Cuerpo+
                         '</div><!-- /panel-body --></div><!-- /panel panel-default -->'+

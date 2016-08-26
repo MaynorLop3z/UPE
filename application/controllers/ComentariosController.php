@@ -33,20 +33,15 @@ class ComentariosController extends CI_Controller {
             $comentario=$this->input->post('Comentario');
             $pub=$this->input->post('IdC');
             if($nivel=="Participante"){
-                participanteComenta($pub, date('Y-m-d'), $correo, $comentario, $nombre, TRUE, $ip, $codigo, 2, date('H:i:s'));
+                $this->registrarComentario($pub, date('Y-m-d'), $correo, $comentario, $nombre, TRUE, $ip, $codigo, 2, date('H:i:s'));
             }else{
-                $this->maestroComenta($pub, date('Y-m-d'), $correo, $comentario, $nombre, TRUE, $ip, $codigo,1,date('H:i:s'));
+                $this->registrarComentario($pub, date('Y-m-d'), $correo, $comentario, $nombre, TRUE, $ip, $codigo,1,date('H:i:s'));
             }
         }
     }
     
-    public function participanteComenta($idpub, $fecha, $cor, $com, $nom, $estado, $ip, $usr, $nivel){
-            //Comentario del participante
-            
-    }
-    
-    public function maestroComenta($idpub, $fecha, $cor, $com, $nom, $estado, $ip, $usr, $nivel, $time){
-            //Inserta comentario del profe
+    public function registrarComentario($idpub, $fecha, $cor, $com, $nom, $estado, $ip, $usr, $nivel, $time){
+            //Inserta comentario a la base
         try{
             $this->Comentarios->CrearComentarios($idpub, $fecha, $cor, $com, $nom, $estado, $ip, $usr, $nivel, $time);
             echo 'Comente';

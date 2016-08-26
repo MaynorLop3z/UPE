@@ -15,7 +15,7 @@ class Comentarios extends CI_Model {
                 . 'FechaComentario, '
                 . 'CorreoPublica, '
                 . 'Cuerpo, '
-                . 'NombrePublica, HoraComentario');
+                . 'NombrePublica, HoraComentario, ComentarioPadre');
         $this->db->from('Comentarios');
         $this->db->where('CodigoPublicaciones', $CodigoPublicaciones);
         $this->db->where('Estado', TRUE);
