@@ -417,33 +417,24 @@ $('#btnCancelarModificacionP').on('click', function (e) {
 });
 
 ////////////PAGINACION DE PUBLICACIONES//////////////
-function paginadoPeriodos(data){
-        var actual=1,inicial=1;
-        if(data.totalPagPer===0){
-            actual=0;inicial=0;
-        }
-        $("#txtPagingSearchUsrPubWeb").val(actual);
-        $("#pagerBetweenPubWeb").html("/"+data.totalPagPer);
-        $("#pagerPubWeb").html("["+ inicial +"-" +data.periodosMos+ "/" +data.totalRegPer+"]");
-    }
     
     $("#TablaPublicacionesWeb").on("click", "#aFirstPagPubWeb", function (e) {
-        paginar("data_ini", $(this).data("datainic"));
+        paginarPublicaciones("data_ini", $(this).data("datainic"));
     });
 
     $("#TablaPublicacionesWeb").on("click", "#aLastPagPubWeb", function (e) {
-        paginar("data_ini", $(this).data("datainic"));
+        paginarPublicaciones("data_ini", $(this).data("datainic"));
     });
 
     $("#TablaPublicacionesWeb").on("click", "#aPrevPagPubWeb", function (e) {
-        paginar("data_inip", null);
+        paginarPublicaciones("data_inip", null);
     });
 
     $("#TablaPublicacionesWeb").on("click", "#aNextPagPubWeb", function (e) {
-        paginar("data_inin", null);
+        paginarPublicaciones("data_inin", null);
     });
     
-    function paginar(dat, op){
+    function paginarPublicaciones(dat, op){
         var data_in = $('#txtPagingSearchUsrPubWeb').data("datainic");     
         var url = 'PublicacionesController/paginPublicaciones/';
         var opcion="";

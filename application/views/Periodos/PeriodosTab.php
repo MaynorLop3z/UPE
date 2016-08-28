@@ -52,31 +52,31 @@
     }
     
     $("#tablaPeriodos").on("click", "#aFirstPagPeriodos", function (e) {
-        paginar("data_ini", $(this).data("datainic"));
+        paginarPeriodos("data_ini", $(this).data("datainic"));
     });
 
     $("#tablaPeriodos").on("click", "#aLastPagPeriodos", function (e) {
-        paginar("data_ini", $(this).data("datainic"));
+        paginarPeriodos("data_ini", $(this).data("datainic"));
     });
 
     $("#tablaPeriodos").on("click", "#aPrevPagPeriodos", function (e) {
-        paginar("data_inip", null);
+        paginarPeriodos("data_inip", null);
     });
 
     $("#tablaPeriodos").on("click", "#aNextPagPeriodos", function (e) {
-        paginar("data_inin", null);
+        paginarPeriodos("data_inin", null);
     });
     
-    function paginar(data, op){
+    function paginarPeriodos(datos, op){
         var mod=$('#Modulo').find(":selected").val();
         var data_in = $('#txtPagingSearchUsrPeriodos').data("datainic");     
         var url = 'PeriodosController/paginPeriodos/';
         var opcion="";
-        if(data==="data_inin"){
+        if(datos==="data_inin"){
              opcion={"data_inin":data_in, "modulo":mod}
-        }else if(data==="data_inip"){
+        }else if(datos==="data_inip"){
             opcion={"data_inip":data_in, "modulo":mod}
-        }else if(data==="data_ini"){
+        }else if(datos==="data_ini"){
             data_in= op;
             opcion={"data_ini":data_in, "modulo":mod}
         }
