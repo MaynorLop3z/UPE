@@ -439,12 +439,12 @@ $('#btnCancelarModificacionP').on('click', function (e) {
         var url = 'PublicacionesController/paginPublicaciones/';
         var opcion="";
         if(dat==="data_inin"){
-             opcion={"data_inin":data_in}
+             opcion={"data_inin":data_in};
         }else if(dat==="data_inip"){
-            opcion={"data_inip":data_in}
+            opcion={"data_inip":data_in};
         }else if(dat==="data_ini"){
             data_in= op;
-            opcion={"data_ini":data_in}
+            opcion={"data_ini":data_in};
         }
         var posting = $.post(url, opcion);
         posting.done(function (data) {

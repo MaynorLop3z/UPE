@@ -22,7 +22,7 @@
         <br>
        
 
-        
+        <div id="tablaDiplomadosContent">
         <table id="tableDiplomados"  class="table table-bordered table-striped table-hover table-responsive">
             <thead>
                 <tr><!--Agregar  Mas informacion acerca de los modulos -->
@@ -32,7 +32,7 @@
                     <th style="text-align:center">Categoria</th>
                    <th style="text-align:center">Comentarios</th>  <!-- Comentarios  sobre los diplomados  --> 
                    <th style="text-align:center">Gestionar</th>
-                <!--</tr>-->
+                </tr>
             </thead> 
             <tbody>
                 <?php
@@ -53,9 +53,6 @@
             <button id="DELDiplomado<?php echo $dip->CodigoDiplomado ?>" onclick="eliminarDiplomado(this)"  title="Eliminar Diplomado" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>
             <button id="Addmod<?php echo $dip->CodigoDiplomado ?>" onclick="AddModDip(<?= $dip->CodigoDiplomado ?>)"  title="Agregar Modulos" class="btnAddMod btn btn-info" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-plus"></span></button>
             <button id="ModView<?php echo $dip->CodigoDiplomado?>" onclick="ViewModDip(this)"  title="Ver modulos" class="btnVIewMod btn btn-warning" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-eye-open" ></span></button>       
-                    
-                    
-                    
                     </td>
                 </tr>
                 <?php
@@ -63,7 +60,22 @@
                 
                 ?>     
             </tbody>
-        </table>   
-
+        </table> 
+            <!--Paginacion-->
+             <div class="row">
+                <hr>
+                <ul class="pager" id="footpagerDiplomados">
+                    <li><button data-datainic="1" id="aFirstPagDiplomados" >&lt;&lt;</button></li>
+                    <li><button id="aPrevPagDiplomados" >&lt;</button></li>
+                    <li>
+                        <input data-datainic="1" type="text" value="1" id="txtPagingSearchDiplomados" name="txtNumberPag" size="5">/<?php echo $totalPaginasDiplomados ?>
+                    </li>
+                    <li><button id="aNextPagDiplomados">&gt;</button></li>
+                    <li><button id="aLastPagDiplomados" data-datainic="<?php echo $totalPaginasDiplomados ?>" >&gt;&gt;</button></li>
+                    <li id="pagerDiplomados">[<?php echo $PagInicialDiplomados . "-" . count($Diplomados) . "/" . $ToTalRegistrosDiplomados ?>]</li>
+                </ul>
+            </div>
+            <!--Fin Paginacion-->
+        </div>
     </div>
 </div>

@@ -6,11 +6,6 @@ var codigoDiplomado;
 var filaEdit;
 var codi;
 
-
-
-
-
-
 //Funcion  para abrir  el modal de  agrgar  diplomado 
 $("#BtnADDiplomado").on('click', function () {
     $("#DiplomadoNuevo").modal();
@@ -242,7 +237,8 @@ $("#frmfindDip").submit(function(event){
     var posting = $.post(url,{FindDiplomado:NombreDiplomado});
     posting.done(function(data){
         if(data){
-           $('#tableDiplomados').html(data); 
+//           $('#tableDiplomados').html(data);
+            $('#tablaDiplomadosContent').html(data);
         }else{
          $("#DipInd").modal('toggle');   
             
@@ -276,3 +272,47 @@ $("#ModDip").submit(function(event){
      
 });
 });
+
+////////////PAGINACION DE DIPLOMADOS//////////////
+    
+    $("#tablaDiplomadosContent").on("click", "#aFirstPagDiplomados", function (e) {
+        paginarDiplomados("data_ini", $(this).data("datainic"));
+    });
+
+    $("#tablaDiplomadosContent").on("click", "#aLastPagDiplomados", function (e) {
+        paginarDiplomados("data_ini", $(this).data("datainic"));
+    });
+
+    $("#tablaDiplomadosContent").on("click", "#aPrevPagDiplomados", function (e) {
+        paginarDiplomados("data_inip", null);
+    });
+
+    $("#tablaDiplomadosContent").on("click", "#aNextPagDiplomados", function (e) {
+        paginarDiplomados("data_inin", null);
+    });
+    
+    function paginarDiplomados(dat, op){
+
+        var data_in = $('#txtPagingSearchDiplomados').data("datainic");     
+        var url = 'DiplomadosController/paginDiplomados/';
+                
+        var opcion="";
+        if(dat==="data_inin"){
+             opcion={"data_inin":data_in};
+        }else if(dat==="data_inip"){
+            opcion={"data_inip":data_in};
+        }else if(dat==="data_ini"){
+            data_in= op;
+            opcion={"data_ini":data_in};
+        }
+        var posting = $.post(url, opcion);
+        posting.done(function (data) {
+            if (data !== null) {
+                $('#tablaDiplomadosContent').empty();
+                $('#tablaDiplomadosContent').html(data);
+            }
+        });
+        posting.fail(function (data) {
+            alert("Error");
+        });
+    }

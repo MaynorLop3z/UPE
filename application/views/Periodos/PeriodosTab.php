@@ -73,12 +73,12 @@
         var url = 'PeriodosController/paginPeriodos/';
         var opcion="";
         if(datos==="data_inin"){
-             opcion={"data_inin":data_in, "modulo":mod}
+             opcion={"data_inin":data_in, "modulo":mod};
         }else if(datos==="data_inip"){
-            opcion={"data_inip":data_in, "modulo":mod}
+            opcion={"data_inip":data_in, "modulo":mod};
         }else if(datos==="data_ini"){
             data_in= op;
-            opcion={"data_ini":data_in, "modulo":mod}
+            opcion={"data_ini":data_in, "modulo":mod};
         }
         var posting = $.post(url, opcion);
         posting.done(function (data) {

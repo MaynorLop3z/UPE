@@ -25,7 +25,7 @@ class PublicacionesController extends CI_Controller {
         $this->load->view('Publicaciones', $data);
     }
 
-    function getTotalPaginas() {
+    private function getTotalPaginas() {
         return $result = intval(ceil(count($this->Publicaciones->listarPublicaciones()) / ROWS_PER_PAGE));
     }
 
