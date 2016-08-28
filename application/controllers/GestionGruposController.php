@@ -9,7 +9,10 @@ if (!defined('BASEPATH')) {
 }
 
 class GestionGruposController extends CI_Controller {
-
+    private $totalPaginasPeriodos = 0;
+    private $ToTalRegistrosPeriodos=0;
+    private $periodosMostrados=0;
+    
     public function __construct() {
         parent::__construct();
         $this->load->model('Diplomados');
@@ -26,14 +29,20 @@ class GestionGruposController extends CI_Controller {
         $datos['Modulos'] = $this->Diplomados->listarModulos($idDiplomado);
         $mods = (array) $datos['Modulos'][0];
         $idModulo = $mods['CodigoModulo'];
-        $datos['Periodos'] = $this->Diplomados->listarPeriodosByModulo($idModulo);
+        $datos['Periodos'] = $this->Diplomados->listarPeriodosByModuloLimited($idModulo, null);
+        $datos['totalPaginasPeriodos'] =  $this->getTotalPaginasPeriodos($idModulo); //paginacion de periodos
+        $datos['PagInicialPeriodos'] = 1;
+        $datos['ToTalRegistrosPeriodos'] = $this->Diplomados->countAllPeriodos($idModulo);
         $this->load->view('Periodos', $datos);
     }
-
+    
     public function getDiplomados() {
+        $this->setVariablesDePaginacion(0,0,0);
+        
         $codigoCat = $this->input->post('idCategoria');
         $diplomados =''; $modulos =''; $periodos ='';
         $Ldiplomados = $this->Diplomados->listarDiplomadosCategoria($codigoCat);
+                
         foreach ($Ldiplomados as $dip){
             $diplomados .= '<option value="' . $dip->CodigoDiplomado . '">' . $dip->NombreDiplomado . '</option>';
         }
@@ -45,7 +54,10 @@ class GestionGruposController extends CI_Controller {
             }
             if (count($LModulos) > 0) {
                 $temp = (array)$LModulos[0];
-                $LPeriodos = $this->Diplomados->listarPeriodosByModulo($temp["CodigoModulo"]);
+                //***** PARA LA PAGINACION AL CAMBIAR CATEGORIA
+                $this->paginacionPorPeriodos($temp);
+                                
+                $LPeriodos = $this->Diplomados->listarPeriodosByModuloLimited($temp["CodigoModulo"], null);
                 foreach ($LPeriodos as $per) {
                     $periodos .= '<tr id="Periodo' . $per->CodigoPeriodo . '">';
                                    $periodos .= '<th class="fip">' . $per->FechaInicioPeriodo . '</th>';
@@ -68,8 +80,12 @@ class GestionGruposController extends CI_Controller {
         $data = array(
             "diplomados" => $diplomados,
             "modulos" => $modulos,
-            "periodos" => $periodos
+            "periodos" => $periodos,
+            "totalPagPer"=> $this->totalPaginasPeriodos,
+            "totalRegPer"=> $this->ToTalRegistrosPeriodos,
+            "periodosMos" => $this->periodosMostrados
         );
+
         echo json_encode($data);
     }
 public function getPeriodos($id){
@@ -77,6 +93,7 @@ public function getPeriodos($id){
 }
 
 public function getModulos() {
+    $this->setVariablesDePaginacion(0,0,0);
         if ($this->input->post('idDiplomado')) {
             $codigoDiplomado = $this->input->post('idDiplomado');
             $modulos = $this->Diplomados->listarModulos($codigoDiplomado);
@@ -88,7 +105,10 @@ public function getModulos() {
             }
             if (count($modulos) > 0) {
                 $temp = (array)$modulos[0];
-                $LPeriodos = $this->Diplomados->listarPeriodosByModulo($temp["CodigoModulo"]);
+                //***** PARA LA PAGINACION AL CAMBIAR DE MODULO
+                $this->paginacionPorPeriodos($temp);
+                
+                $LPeriodos = $this->Diplomados->listarPeriodosByModuloLimited($temp["CodigoModulo"], null);
                 foreach ($LPeriodos as $per) {
                     $periodos .= '<tr id="Periodo' . $per->CodigoPeriodo . '">';
                                    $periodos .= '<th class="fip">' . $per->FechaInicioPeriodo . '</th>';
@@ -109,7 +129,10 @@ public function getModulos() {
             }
             $data = array(
             "modulos" => $Lmodulos,
-            "periodos" => $periodos
+            "periodos" => $periodos,
+            "totalPagPer"=> $this->totalPaginasPeriodos,
+            "totalRegPer"=> $this->ToTalRegistrosPeriodos,
+            "periodosMos" => $this->periodosMostrados
         );
         echo json_encode($data);
         }
@@ -131,5 +154,23 @@ public function getModulos() {
             echo json_encode($ex);
         }
     }
-
+    
+    /////////////////   FUNCIONES DE PAGINACION //////////////////////////////
+    private function setVariablesDePaginacion($totpagper,$totrregper,$permos){
+        $this->totalPaginasPeriodos = $totpagper;
+        $this->ToTalRegistrosPeriodos = $totrregper;
+        $this->periodosMostrados = $permos;
+    }
+    
+    private function paginacionPorPeriodos($modulo){
+        $idMod = $modulo["CodigoModulo"];
+        $this->totalPaginasPeriodos = $this->getTotalPaginasPeriodos($idMod); 
+        $this->ToTalRegistrosPeriodos = $this->Diplomados->countAllPeriodos($idMod);
+        $this->periodosMostrados = count($this->Diplomados->listarPeriodosByModuloLimited($idMod, null));
+    }
+    
+    private function getTotalPaginasPeriodos($idModulo) {
+        return $result = intval(ceil($this->Diplomados->countAllPeriodos($idModulo) / ROWS_PER_PAGE));
+    }
+    ///////////////// FIN FUNCIONES DE PAGINACION ////////////////////////////
 }

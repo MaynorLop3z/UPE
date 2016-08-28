@@ -1,4 +1,5 @@
 <?php $this->load->helper('url'); ?>
+<script src="../bootstrap/js/paginacion.js"></script>
 <script language="javascript">
     $(document).ready(function() {
         $("#Categorias").change(function() {
@@ -10,6 +11,7 @@
                     $("#Modulo").html(diplomado.modulos);
                     $("#CodigoModulo").html(diplomado.modulos);
                     $("#bodytablaPeriodos").html(diplomado.periodos);
+                    paginadoPeriodos(diplomado);
                 });
             });
         });
@@ -22,6 +24,7 @@
                     $("#Modulo").html(modulo.modulos);
                     $("#CodigoModulo").html(modulo.modulos);
                     $("#bodytablaPeriodos").html(modulo.periodos);
+                    paginadoPeriodos(modulo);
                 });
             });
         });
@@ -29,11 +32,65 @@
             $("#Modulo option:selected").each(function() {
                 idModulo = $(this).val();
                 $.post("<?php echo base_url() ?>index.php/PeriodosController/listarByModulo/", {idModulo: idModulo}, function(data) {
-                    $("#bodytablaPeriodos").html(data);
+                    var datos = JSON.parse(data);
+                    $("#bodytablaPeriodos").html(datos.cadena);
+                    paginadoPeriodos(datos);
                 });
             });
         });
     });
+    
+
+    function paginadoPeriodos(data){
+        var actual=1,inicial=1;
+        if(data.totalPagPer===0){
+            actual=0;inicial=0;
+        }
+        $("#txtPagingSearchUsrPeriodos").val(actual);
+        $("#pagerBetweenPer").html("/"+data.totalPagPer);
+        $("#pagerPeriodos").html("["+ inicial +"-" +data.periodosMos+ "/" +data.totalRegPer+"]");
+    }
+    
+    $("#tablaPeriodos").on("click", "#aFirstPagPeriodos", function (e) {
+        paginar("data_ini", $(this).data("datainic"));
+    });
+
+    $("#tablaPeriodos").on("click", "#aLastPagPeriodos", function (e) {
+        paginar("data_ini", $(this).data("datainic"));
+    });
+
+    $("#tablaPeriodos").on("click", "#aPrevPagPeriodos", function (e) {
+        paginar("data_inip", null);
+    });
+
+    $("#tablaPeriodos").on("click", "#aNextPagPeriodos", function (e) {
+        paginar("data_inin", null);
+    });
+    
+    function paginar(data, op){
+        var mod=$('#Modulo').find(":selected").val();
+        var data_in = $('#txtPagingSearchUsrPeriodos').data("datainic");     
+        var url = 'PeriodosController/paginPeriodos/';
+        var opcion="";
+        if(data==="data_inin"){
+             opcion={"data_inin":data_in, "modulo":mod}
+        }else if(data==="data_inip"){
+            opcion={"data_inip":data_in, "modulo":mod}
+        }else if(data==="data_ini"){
+            data_in= op;
+            opcion={"data_ini":data_in, "modulo":mod}
+        }
+        var posting = $.post(url, opcion);
+        posting.done(function (data) {
+            if (data !== null) {
+                $('#tablaPeriodos').empty();
+                $('#tablaPeriodos').html(data);
+            }
+        });
+        posting.fail(function (data) {
+            alert("Error");
+        });
+    }
 </script>
 <div class="panel panel-default">
     <div class="panel-heading">
@@ -125,6 +182,22 @@
                     ?>
                 </tbody>
             </table>
+            <!--Paginacion-->
+             <div class="row">
+                <hr>
+                <ul class="pager" id="footpagerPeriodos">
+                    <li><button data-datainic="1" id="aFirstPagPeriodos" >&lt;&lt;</button></li>
+                    <li><button id="aPrevPagPeriodos" >&lt;</button></li>
+                    <li>
+                        <input data-datainic="1" type="text" value="1" id="txtPagingSearchUsrPeriodos" name="txtNumberPag" size="5">
+                        <span id="pagerBetweenPer" style="background: none;margin:0;padding:0;">/<?php echo $totalPaginasPeriodos ?></span>
+                    </li>
+                    <li><button id="aNextPagPeriodos">&gt;</button></li>
+                    <li><button id="aLastPagPeriodos" data-datainic="<?php echo $totalPaginasPeriodos ?>" >&gt;&gt;</button></li>
+                    <li id="pagerPeriodos">[<?php echo $PagInicialPeriodos . "-" . count($Periodos) . "/" . $ToTalRegistrosPeriodos ?>]</li>
+                </ul>
+            </div>
+            <!--Fin Paginacion-->
         </div>
     </div>
 </div>

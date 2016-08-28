@@ -51,9 +51,16 @@ class PeriodosController extends CI_Controller {
     }
 
     public function listarByModulo() {
+        $totalPaginasPeriodos = 0;
+        $ToTalRegistrosPeriodos=0;
+        $periodosMostrados=0;
         if ($this->input->post('idModulo')) {
             $idModulo = $this->input->post('idModulo');
-            $Periodos = $this->Periodos->listarPeriodosByModulo($idModulo);
+            $Periodos = $this->Periodos->listarPeriodosByModuloLimited($idModulo, null);
+
+            $totalPaginasPeriodos = intval(ceil($this->Periodos->countAllPeriodos($idModulo) / ROWS_PER_PAGE));
+            $ToTalRegistrosPeriodos = $this->Periodos->countAllPeriodos($idModulo);
+            $periodosMostrados = count($Periodos);
             $cadena = '';
             foreach ($Periodos as $period) {
                 $cadena .='<tr id="Periodo' . $period->CodigoPeriodo . '">';
@@ -69,7 +76,14 @@ class PeriodosController extends CI_Controller {
                 $cadena .= '<button id="PeriodoDEL' . $period->CodigoPeriodo . '" onclick="DeletePeriodoShow(this)" title="Eliminar Periodo" class="btn_eliminar_periodo btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>';
                 $cadena .= '<button id="PeriodoGES' . $period->CodigoPeriodo . '" onclick="GestionPeriodoShow(this)" title="Gestionar Periodo" class="btn_gestionar_periodo btn btn-info"><span class="glyphicon glyphicon-cog"></span></button></th></tr>';
             }
-            echo $cadena;
+//            echo $cadena;
+            $data = array(
+            "cadena" => $cadena,
+            "totalPagPer"=> $totalPaginasPeriodos,
+            "totalRegPer"=> $ToTalRegistrosPeriodos,
+            "periodosMos" => $periodosMostrados
+        );
+        echo json_encode($data);
         }
     }
 
@@ -186,4 +200,110 @@ public function inscribirDocente() {
             echo json_encode($ex);
         }
     }
+    
+    //PAGINAR
+    function getTotalPaginas($id) {
+        return $result = intval(ceil($this->Periodos->countAllPeriodos($id) / ROWS_PER_PAGE));
+    }
+    
+     public function paginPeriodos($Periodo = null) {
+        try {
+            $final = 0;
+            $pagAct = 0;
+            $cadena = '';
+            $filas = '';
+            $Periodos = array();
+            $idMo=$this->input->post('modulo');
+            if ($this->input->post()) {
+                if ($this->input->post('data_ini') != null) {
+                    $pagAct = $this->input->post('data_ini');
+                    $final = $this->input->post('data_ini');
+                    
+                    if ($pagAct <= 0) {
+                        $pagAct = 1;
+                        $final = 1;
+                    }else if($pagAct > $this->getTotalPaginas($idMo)) {
+                        $pagAct =$this->getTotalPaginas($idMo);
+                        $final=$this->getTotalPaginas($idMo);
+                    }
+                    
+                } else if ($this->input->post('data_inip') != null) {
+                    $pagAct = $this->input->post('data_inip') - 1;
+                    $final = $this->input->post('data_inip') - 1;
+                    if ($pagAct <= 0) {
+                        $pagAct = 1;
+                        $final = 1;
+                    }
+                } else if ($this->input->post('data_inin') != null) {
+                    $pagAct = $this->input->post('data_inin');
+                    $pagAct+=1;
+                    $final = $this->input->post('data_inin');
+                    $final+=1;
+                    if ($pagAct > $this->getTotalPaginas($idMo)) {
+                        $pagAct =$this->getTotalPaginas($idMo);
+                        $final=$this->getTotalPaginas($idMo);
+                    }  else {
+                        
+                    }
+                } else {
+                    $pagAct = 1;
+                    $final = 1;
+                }
+            }
+            $inicio = ROWS_PER_PAGE;
+            $final = ($final * ROWS_PER_PAGE) - ROWS_PER_PAGE;
+            if ($Periodo != null) {
+
+                array_push($Periodos, $Periodo);
+            } else {
+                $Periodos = $this->Periodos->listarPeriodosL($idMo, $inicio, $final);
+            }
+
+//            $buttonsByUserRights = $this->analizarPermisosBotonesTablas("gestionUserBtn", $this->session->userdata('permisosUsuer'));
+
+            $cadena .= '<table border="1" class="table table-bordered table-hover">';
+            $cadena.='<thead>
+                    <tr>
+                        <th>Fecha Inicio</th>
+                        <th>Fecha Fin</th>
+                        <th>Estado</th>
+                        <th>Comentarios</th>
+                        <th>Gestion</th>
+                    </tr>
+                </thead>
+            <tbody id="bodytablaPeriodos">';
+            foreach ($Periodos as $per) {
+                $filas.='<tr id="Periodo' . ($per->CodigoPeriodo) . '">';
+                $filas.='<th class="fip">'.$per->FechaInicioPeriodo.'</th>';
+                $filas.='<th class="ffp">'.$per->FechaFinPeriodo.'</th>';
+                $filas.='<th class="ep">'.(($per->Estado === 't') ? 'Activo' : 'Inactivo').'</th>';
+                $filas.='<th class="cp">'.$per->Comentario.'</th>';
+                $filas.='<th>
+                            <button id="PeriodoE'.$per->CodigoPeriodo.'" onclick="EditPeriodoShow(this)" title="Editar Periodo" class="btn_modificar_periodo btn btn-success"><span class="glyphicon glyphicon-pencil"></span> </button>
+                            <button id="PeriodoDEL'.$per->CodigoPeriodo.'" onclick="DeletePeriodoShow(this)" title="Eliminar Periodo" class="btn_eliminar_periodo btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
+                            <button id="PeriodoGES'.$per->CodigoPeriodo.'" onclick="GestionPeriodoShow(this)" title="Gestionar Periodo" class="btn_gestionar_periodo btn btn-info"><span class="glyphicon glyphicon-cog"></span></button>
+                        </th>
+                    </tr>';
+            }
+            $cadena.=$filas;
+            $cadena.='</tbody></table>';
+            $cadena.=' <div class="row"><hr>
+            <ul class="pager" id="footpagerPeriodos">
+               <li><button data-datainic="1" id="aFirstPagPeriodos" >&lt;&lt;</button></li>
+                <li><button id="aPrevPagPeriodos" >&lt;</button></li>
+                <li><input data-datainic="' . $pagAct . '" type="text" value="' . $pagAct . '" id="txtPagingSearchUsrPeriodos" name="txtNumberPag" size="5">'
+                    . '<span id="pagerBetweenPer" style="background: none;margin:0;padding:0;">/' . $this->getTotalPaginas($idMo) . '</span></li>
+                 <li><button id="aNextPagPeriodos">&gt;</button></li>
+                <li><button id="aLastPagPeriodos" data-datainic="' . $this->getTotalPaginas($idMo) . '" >&gt;&gt;</button></li>
+                <li id="pagerPeriodos">[' . ($final + 1) . ' - ' . ($final + count($Periodos)) . ' / ' . $this->Periodos->countAllPeriodos($idMo) . ']</li></ul></div>';
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+        if ($this->input->post('data_ini') || $this->input->post('data_inin') || $this->input->post('data_inip')) {
+            echo ($cadena);
+        } else {
+            return $cadena;
+        }
+    }
+
 }

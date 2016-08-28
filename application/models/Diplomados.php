@@ -74,6 +74,25 @@ class Diplomados extends CI_Model {
         $resultado = $consulta->result();
         return $resultado;
     }
+    public function listarPeriodosByModuloLimited($idModulo, $offset) {
+        if ($offset == null) {
+               $offset = 0;
+            }
+        $limit = ROWS_PER_PAGE;
+        $this->db->select('CodigoPeriodo, '
+                . 'FechaInicioPeriodo, '
+                . 'FechaFinPeriodo, '
+                . 'Estado, '
+                . 'Comentario, '
+                . 'CodigoModulo'
+        );
+        $this->db->from('Periodos');
+        $this->db->where('CodigoModulo', $idModulo);
+        $this->db->limit($limit, $offset);
+        $consulta = $this->db->get();
+        $resultado = $consulta->result();
+        return $resultado;
+    }
     public function listarPeriodosByModulo($idModulo) {
         $this->db->select('CodigoPeriodo, '
                 . 'FechaInicioPeriodo, '
@@ -212,4 +231,12 @@ class Diplomados extends CI_Model {
 //        $resultado = $consulta->result();
 //        return $resultado;
 //    }
+    
+    //FUNCIONES PARA PAGINACION DE PERIODOS
+    public function countAllPeriodos($di) {
+//        $num_rows = $this->db->count_all_results('Periodos');
+        $num_rows = count($this->listarPeriodosByModulo($di));
+        return $num_rows;
+    }
+
 }

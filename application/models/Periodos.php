@@ -57,6 +57,27 @@ class Periodos extends CI_Model {
         $resultado = $consulta->result();
         return $resultado;
     }
+     public function listarPeriodosL($mod, $limite=null, $offset=null) {
+         if ($offset == null) {
+               $offset = 0;
+            }
+         if($limite==null){
+             $limite=0;
+         }
+        $this->db->select('CodigoPeriodo, '
+                . 'FechaInicioPeriodo, '
+                . 'FechaFinPeriodo, '
+                . 'Estado, '
+                . 'Comentario, '
+                . 'CodigoModulo'
+        );
+        $this->db->from('Periodos');
+        $this->db->where('CodigoModulo', $mod);
+        $this->db->limit($limite, $offset);
+        $consulta = $this->db->get();
+        $resultado = $consulta->result();
+        return $resultado;
+    }
 
     public function listarGrupos($idPeriodo) {
         $this->db->select('CodigoGrupoPeriodo, '
@@ -101,6 +122,26 @@ class Periodos extends CI_Model {
         );
         $this->db->from('Periodos');
         $this->db->where('CodigoModulo', $idModulo);
+        $consulta = $this->db->get();
+        $resultado = $consulta->result();
+        return $resultado;
+    }
+    
+    public function listarPeriodosByModuloLimited($idModulo, $offset){
+         if ($offset == null) {
+               $offset = 0;
+            }
+        $limit = ROWS_PER_PAGE;
+        $this->db->select('CodigoPeriodo, '
+                . 'FechaInicioPeriodo, '
+                . 'FechaFinPeriodo, '
+                . 'Estado, '
+                . 'Comentario, '
+                . 'CodigoModulo'
+        );
+        $this->db->from('Periodos');
+        $this->db->where('CodigoModulo', $idModulo);
+        $this->db->limit($limit, $offset);
         $consulta = $this->db->get();
         $resultado = $consulta->result();
         return $resultado;
@@ -221,5 +262,9 @@ WHERE
             return $exc->getTraceAsString();
         }
     }
-
+    
+    public function countAllPeriodos($di) {
+        $num_rows = count($this->listarPeriodosByModulo($di));
+        return $num_rows;
+    }
 }
