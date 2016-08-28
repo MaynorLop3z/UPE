@@ -9,13 +9,14 @@
 
     </div>
     <!--tabla de publicaciones solo muestra el titulo y la categoria-->
+    <div id="TablaPublicacionesWeb">
     <table id="tableTitulo"  class="table table-bordered table-striped table-hover table-responsive">
         <thead>
             <tr><!--Informacion a mostrar de las publicaciones-->
                 <th>Titulo</th>
                 <th>Categoria</th>
                 <th>Gestionar</th>
-
+            </tr>
         </thead> 
         <tbody>
 
@@ -36,6 +37,23 @@
             <?php }
             ?>    
         </tbody>
-    </table>  
+    </table> 
+     <!--Paginacion-->
+             <div class="row">
+                <hr>
+                <ul class="pager" id="footpagerPubWeb">
+                    <li><button data-datainic="1" id="aFirstPagPubWeb" >&lt;&lt;</button></li>
+                    <li><button id="aPrevPagPubWeb" >&lt;</button></li>
+                    <li>
+                        <input data-datainic="1" type="text" value="1" id="txtPagingSearchUsrPubWeb" name="txtNumberPag" size="5">
+                        <span id="pagerBetweenPubWeb" style="background: none;margin:0;padding:0;">/<?php echo $totalPaginasPubWeb ?></span>
+                    </li>
+                    <li><button id="aNextPagPubWeb">&gt;</button></li>
+                    <li><button id="aLastPagPubWeb" data-datainic="<?php echo $totalPaginasPubWeb ?>" >&gt;&gt;</button></li>
+                    <li id="pagerPubWeb">[<?php echo $PagInicialPubWeb . "-" . count($allPublicaciones) . "/" . $ToTalRegistrosPubWeb ?>]</li>
+                </ul>
+            </div>
+            <!--Fin Paginacion-->
+    </div>
 </div>
 

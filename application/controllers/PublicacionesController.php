@@ -16,10 +16,17 @@ class PublicacionesController extends CI_Controller {
     }
 
     public function index() {
-        $data['allPublicaciones'] = $this->Publicaciones->listarPublicaciones();
+        $data['allPublicaciones'] = $this->Publicaciones->listarPubliWebDashboard(null, null);
         $data['listCategorias'] = $this->Publicaciones->listarCategoriasDiplomados();
         $data['listNombreCategoria']= $this->Publicaciones->listarCategoriasDiplomados(NULL);
+        $data['ToTalRegistrosPubWeb'] = count($this->Publicaciones->listarPublicaciones());
+        $data['PagInicialPubWeb'] = 1;
+        $data['totalPaginasPubWeb'] = $this->getTotalPaginas();
         $this->load->view('Publicaciones', $data);
+    }
+
+    function getTotalPaginas() {
+        return $result = intval(ceil(count($this->Publicaciones->listarPublicaciones()) / ROWS_PER_PAGE));
     }
 
     //Esta funcion sube la imagen o el archivo  a la carpeta destinada
@@ -156,5 +163,99 @@ class PublicacionesController extends CI_Controller {
              echo json_encode($ex);
         }
     }
+    
+    public function paginPublicaciones($Pubs = null) {
+        try {
+            $final = 0;
+            $pagAct = 0;
+            $cadena = '';
+            $filas = '';
+            $Publicaciones = array();
+
+            if ($this->input->post()) {
+                if ($this->input->post('data_ini') != null) {
+                    $pagAct = $this->input->post('data_ini');
+                    $final = $this->input->post('data_ini');
+                    
+                    if ($pagAct <= 0) {
+                        $pagAct = 1;
+                        $final = 1;
+                    }else if($pagAct > $this->getTotalPaginas()) {
+                        $pagAct =$this->getTotalPaginas();
+                        $final=$this->getTotalPaginas();
+                    }
+                    
+                } else if ($this->input->post('data_inip') != null) {
+                    $pagAct = $this->input->post('data_inip') - 1;
+                    $final = $this->input->post('data_inip') - 1;
+                    if ($pagAct <= 0) {
+                        $pagAct = 1;
+                        $final = 1;
+                    }
+                } else if ($this->input->post('data_inin') != null) {
+                    $pagAct = $this->input->post('data_inin');
+                    $pagAct+=1;
+                    $final = $this->input->post('data_inin');
+                    $final+=1;
+                    if ($pagAct > $this->getTotalPaginas()) {
+                        $pagAct =$this->getTotalPaginas();
+                        $final=$this->getTotalPaginas();
+                    }  else {
+                        
+                    }
+                } else {
+                    $pagAct = 1;
+                    $final = 1;
+                }
+            }
+            $inicio = ROWS_PER_PAGE;
+            $final = ($final * ROWS_PER_PAGE) - ROWS_PER_PAGE;
+            if ($Pubs != null) {
+
+                array_push($Publicaciones, $Pubs);
+            } else {
+                $Publicaciones = $this->Publicaciones->listarPubliWebDashboard($inicio, $final);
+            }
+
+            //$buttonsByUserRights = $this->analizarPermisosBotonesTablas("gestionUserBtn", $this->session->userdata('permisosUsuer'));
+
+            $cadena .= '<table id=' . '"tableTitulo"' . ' class="table table-bordered table-striped table-hover table-responsive"' . '>';
+            $cadena.='<thead>
+                <tr>
+                <th>Titulo</th>
+                <th>Categoria</th>
+                <th>Gestionar</th>
+                </tr>
+            </thead> 
+            <tbody>';
+            foreach ($Publicaciones as $pub) {
+                $filas.='<tr data-dipd="' . ($pub->CodigoPublicacion) . '" id="diplo' . $pub->CodigoPublicacion . '">';
+                $filas.=' <td class="Titulo" id="TutuloPubTabla' . $pub->CodigoPublicacion . '">' . $pub->Titulo .'</td>';
+                $filas.=' <td class="Categoria" id="CategoriaPubTabla'. $pub->CodigoPublicacion .'">'. $pub->NombreCategoriaDiplomado .'</td>';
+                $filas.=' <td class="gestion_dip" >'
+                        . '<button id="editPublicacion'. $pub->CodigoPublicacion . '" onclick="editarPublicacion(\''.  $pub->CodigoPublicacion .'\')" title="Editar Publicacion" class="btnmoddi btn btn-success"><span class=" glyphicon glyphicon-pencil"></span></button>'
+                        . '<button id="delPub'. $pub->CodigoPublicacion .'" onclick="eliminarPublicacion(\''. $pub->CodigoPublicacion .'\',\''. $pub->Titulo .'\')" title="Eliminar Publicacion" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>
+                    </td></tr>';
+            }
+            $cadena.=$filas;
+            $cadena.='</tbody></table>';
+            $cadena.=' <div class="row">
+            <ul class="pager">
+               <li><button data-datainic="1" id="aFirstPagPubWeb" >&lt;&lt;</button></li>
+                <li><button id="aPrevPagPubWeb" >&lt;</button></li>
+                <li><input data-datainic="' . $pagAct . '" type="text" value="' . $pagAct . '" id="txtPagingSearchUsrPubWeb" name="txtNumberPag" size="5">/' . $this->getTotalPaginas() . '</li>
+                 <li><button id="aNextPagPubWeb">&gt;</button></li>
+                <li><button id="aLastPagPubWeb" data-datainic="' . $this->getTotalPaginas() . '" >&gt;&gt;</button></li>
+                <li>[' . ($final + 1) . ' - ' . ($final + count($Publicaciones)) . ' / ' . count($this->Publicaciones->listarPublicaciones()) . ']</li></ul></div>';
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+        if ($this->input->post('data_ini') || $this->input->post('data_inin') || $this->input->post('data_inip')) {
+            echo ($cadena);
+        } else {
+            return $cadena;
+        }
+    }
+
 
 }

@@ -388,9 +388,7 @@ $('#btnCancelarModificacionP').on('click', function (e) {
 
     posting.done(function (data) {
         if (data !== null) {
-//            alert(data);
             var obj = jQuery.parseJSON(data);
-            
             $('#TutuloPubTabla'+idPublicacion).html(Titulo);//actualiza la tabla
             $('#CategoriaPubTabla'+idPublicacion).html(cat);//catualiza la tabla
             $("#showImgMod").html("");
@@ -417,3 +415,54 @@ $('#btnCancelarModificacionP').on('click', function (e) {
         alert("error" + xhr.responseText);
     });
 });
+
+////////////PAGINACION DE PUBLICACIONES//////////////
+function paginadoPeriodos(data){
+        var actual=1,inicial=1;
+        if(data.totalPagPer===0){
+            actual=0;inicial=0;
+        }
+        $("#txtPagingSearchUsrPubWeb").val(actual);
+        $("#pagerBetweenPubWeb").html("/"+data.totalPagPer);
+        $("#pagerPubWeb").html("["+ inicial +"-" +data.periodosMos+ "/" +data.totalRegPer+"]");
+    }
+    
+    $("#TablaPublicacionesWeb").on("click", "#aFirstPagPubWeb", function (e) {
+        paginar("data_ini", $(this).data("datainic"));
+    });
+
+    $("#TablaPublicacionesWeb").on("click", "#aLastPagPubWeb", function (e) {
+        paginar("data_ini", $(this).data("datainic"));
+    });
+
+    $("#TablaPublicacionesWeb").on("click", "#aPrevPagPubWeb", function (e) {
+        paginar("data_inip", null);
+    });
+
+    $("#TablaPublicacionesWeb").on("click", "#aNextPagPubWeb", function (e) {
+        paginar("data_inin", null);
+    });
+    
+    function paginar(dat, op){
+        var data_in = $('#txtPagingSearchUsrPubWeb').data("datainic");     
+        var url = 'PublicacionesController/paginPublicaciones/';
+        var opcion="";
+        if(dat==="data_inin"){
+             opcion={"data_inin":data_in}
+        }else if(dat==="data_inip"){
+            opcion={"data_inip":data_in}
+        }else if(dat==="data_ini"){
+            data_in= op;
+            opcion={"data_ini":data_in}
+        }
+        var posting = $.post(url, opcion);
+        posting.done(function (data) {
+            if (data !== null) {
+                $('#TablaPublicacionesWeb').empty();
+                $('#TablaPublicacionesWeb').html(data);
+            }
+        });
+        posting.fail(function (data) {
+            alert("Error");
+        });
+    }

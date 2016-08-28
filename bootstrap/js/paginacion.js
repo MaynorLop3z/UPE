@@ -3,12 +3,7 @@
  */
 var ContainerTable, firstPage, lastPage, prevPage, nextPage, urlAction, search;
 
-function hola(){
-    alert('hey');
-}
-
 function setVariablesPaginacion(cont,fpage,lpage,ppage,npage,urla,sea){
-    alert('entra');
     ContainerTable = cont;
     firstPage = fpage;
     lastPage = lpage;
@@ -19,8 +14,6 @@ function setVariablesPaginacion(cont,fpage,lpage,ppage,npage,urla,sea){
 }
 
 $(ContainerTable).on("click", firstPage, function (e) {
-    
-    
     var data_in= $(this).data("datainic");
        
         var url = urlAction;
