@@ -75,23 +75,25 @@ class Participantes extends CI_Model {
         }
     }
     public function listarParticipantesByName($filtro) {
-        $this->db->select('CodigoParticipante, '
-                . 'CorreoElectronico, '
-                . 'TelefonoFijo, '
-                . 'TelefonoCelular, '
-                . 'Direccion, '
-                . 'NumeroDUI, '
-                . 'Nombre, '
-                . 'FechaNacimiento, '
-                . 'CodigoUniversidadProcedencia, '
-                . 'Carrera, '
-                . 'NivelAcademico, '
-                . 'NombreEncargado, '
-                . 'Descripcion, '
-                . 'CodigoCategoriaParticipantes, '
-                . 'Comentarios, '
-                . 'Genero');
-        $this->db->from('Participantes');
+        $this->db->select('T0.CodigoParticipante, '
+                . 'T0.CorreoElectronico, '
+                . 'T0.TelefonoFijo, '
+                . 'T0.TelefonoCelular, '
+                . 'T0.Direccion, '
+                . 'T0.NumeroDUI, '
+                . 'T0.Nombre, '
+                . 'T0.FechaNacimiento, '
+                . 'T0.CodigoUniversidadProcedencia, '
+                . 'T0.Carrera, '
+                . 'T0.NivelAcademico, '
+                . 'T0.NombreEncargado, '
+                . 'T0.Descripcion, '
+                . 'T0.CodigoCategoriaParticipantes, '
+                . 'T0.Comentarios, '
+                . 'T0.Genero, '
+                . 'T1.NombreCategoriaParticipante');
+        $this->db->from('Participantes T0');
+        $this->db->join("CategoriasParticipante T1","T0.CodigoCategoriaParticipantes = T1.CodigoCategoriaParticipantes");
         $this->db->like('Nombre',$filtro);
         $consulta = $this->db->get();
         $resultado = $consulta->result();
@@ -178,6 +180,32 @@ class Participantes extends CI_Model {
         
     }
 
+    //////Para PAGINACION DE PARTICIPANTES EN DASHBOARD//////////
+    
+    
+    public function listarParticipantesLimited($limit, $offset) {
+        if ($limit == null && $offset == null) {
+                $limit = ROWS_PER_PAGE;
+                $offset = 0;
+            }
+        $this->db->select('T0.CodigoParticipante, T0.CorreoElectronico, '
+                . 'T0.TelefonoFijo, T0.TelefonoCelular, T0.Direccion, '
+                . 'T0.NumeroDUI, T0.Nombre, T0.FechaNacimiento, '
+                . 'T0.CodigoUniversidadProcedencia, T0.Carrera, '
+                . 'T0.NivelAcademico, T0.NombreEncargado, T0.Descripcion, '
+                . 'T0.CodigoCategoriaParticipantes, T0.Comentarios, '
+                . 'T0.Genero, T1.NombreCategoriaParticipante');
+        $this->db->from('Participantes T0');
+        $this->db->join("CategoriasParticipante T1",
+                "T0.CodigoCategoriaParticipantes = T1.CodigoCategoriaParticipantes");
+        $this->db->limit($limit, $offset);
+        $consulta = $this->db->get();
+        $resultado = $consulta->result();
+        return $resultado;
+    }
+    
+    
+    
     /********************PAARA EL LOGIN DE PARTICIPANTE**************************/
     
     public function loginParticipante($usuario, $password){

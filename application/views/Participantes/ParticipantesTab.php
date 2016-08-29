@@ -23,6 +23,7 @@
         <!-- DIv para la tabla  donde se muestran todos los usuario-->
         <div class="row">
             <div class="col-md-12">
+                <div id="tablaAlumnosContent">
                 <table id="tableAlumnos" class="table table-bordered table-striped table-hover table-responsive">
                     <thead>
                         <tr>
@@ -78,6 +79,22 @@
                         ?>
                     </tbody>
                 </table>
+                     <!--Paginacion-->
+             <div class="row">
+                <hr>
+                <ul class="pager" id="footpagerParticipantes">
+                    <li><button data-datainic="1" id="aFirstPagParticipantes" >&lt;&lt;</button></li>
+                    <li><button id="aPrevPagParticipantes" >&lt;</button></li>
+                    <li>
+                        <input data-datainic="1" type="text" value="1" id="txtPagingSearchParticipantes" name="txtNumberPag" size="5">/<?php echo $totalPaginasParticipantes?>
+                    </li>
+                    <li><button id="aNextPagParticipantes">&gt;</button></li>
+                    <li><button id="aLastPagParticipantes" data-datainic="<?php echo $totalPaginasParticipantes ?>" >&gt;&gt;</button></li>
+                    <li id="pagerParticipantes">[<?php echo $PagInicialParticipantes . "-" . count($Alumnos) . "/" . $ToTalRegistrosParticipantes ?>]</li>
+                </ul>
+            </div>
+            <!--Fin Paginacion-->
+                </div>
             </div>
         </div>
     </div>

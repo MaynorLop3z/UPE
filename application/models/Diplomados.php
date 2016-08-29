@@ -22,13 +22,15 @@ class Diplomados extends CI_Model {
     }
     
      public function listarDiplomadosNombre($filtro) {
-        $this->db->select('CodigoDiplomado, '
-                . 'NombreDiplomado,'
-                . 'Descripcion, '
-                . 'Estado, '
-                . 'CodigoCategoriaDiplomado, '
-                . 'Comentarios');
-        $this->db->from('Diplomados');
+        $this->db->select('D.CodigoDiplomado, '
+                . 'D.NombreDiplomado,'
+                . 'D.Descripcion, '
+                . 'D.Estado, '
+                . 'D.CodigoCategoriaDiplomado, '
+                . 'D.Comentarios, '
+                . 'CD.NombreCategoriaDiplomado');
+        $this->db->from('Diplomados D');
+        $this->db->join("CategoriaDiplomados CD","D.CodigoCategoriaDiplomado = CD.CodigoCategoriaDiplomado");
         $this->db->like('NombreDiplomado', $filtro);
         $consulta = $this->db->get();
         $resultado = $consulta->result();

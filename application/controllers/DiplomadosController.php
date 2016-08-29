@@ -119,7 +119,7 @@ class DiplomadosController extends CI_Controller {
                     $registro .= '<td class="nombre_Diplomado">' . $dip['NombreDiplomado'] . '</td>';
                     $registro .= '<td class="descripcionDiplomado">' . $dip['Descripcion'] . '</td>';
                     $registro .= '<td class="estado">' . $dip['Estado'] . '</td>';
-                    $registro .= '<td class="categoriaDi">' . $dip['CodigoCategoriaDiplomado'] . '</td>';
+                    $registro .= '<td class="categoriaDi">' . $dip['NombreCategoriaDiplomado'] . '</td>';
                     $registro .= '<td class="comentarioDi">' . $dip['Comentarios'] . '</td>';
                     $registro .= '<td class=gestion_dip>';
                     $registro .= '<button id="btnmo' . $dip['CodigoDiplomado'] . '" onclick="editaDiplomado(this)" title="Editar Diplomado" class="btnmoddi btn btn-success"><span class="glyphicon glyphicon-pencil"></span></button>';

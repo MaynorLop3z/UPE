@@ -255,11 +255,56 @@ $("#frmFINDAlumno").submit(function (event) {
     var $form = $(this), AlumnoNombre = $form.find("input[name='NombreBuscado']").val(), url = $form.attr("action");
     var posting = $.post(url, {NombreBuscado: AlumnoNombre});
     posting.done(function (data) {
-        if (data) {
-            $('#tableAlumnos').html(data);
+        if (data!==null) {
+//            $('#tableAlumnos').html(data);
+            $('#tablaAlumnosContent').html(data);
         }
     });
     posting.fail(function (xhr, textStatus, errorThrown) {
         alert("error" + xhr.responseText);
     });
 });
+
+////////////PAGINACION DE ALUMNOS//////////////
+    
+    $("#tablaAlumnosContent").on("click", "#aFirstPagParticipantes", function (e) {
+        paginarParticipantes("data_ini", $(this).data("datainic"));
+    });
+
+    $("#tablaAlumnosContent").on("click", "#aLastPagParticipantes", function (e) {
+        paginarParticipantes("data_ini", $(this).data("datainic"));
+    });
+
+    $("#tablaAlumnosContent").on("click", "#aPrevPagParticipantes", function (e) {
+        paginarParticipantes("data_inip", null);
+    });
+
+    $("#tablaAlumnosContent").on("click", "#aNextPagParticipantes", function (e) {
+        paginarParticipantes("data_inin", null);
+    });
+    
+    function paginarParticipantes(dat, op){
+
+        var data_in = $('#txtPagingSearchParticipantes').data("datainic");     
+        var url = 'ParticipantesController/paginParticipantes/';
+                
+        var opcion="";
+        if(dat==="data_inin"){
+             opcion={"data_inin":data_in};
+        }else if(dat==="data_inip"){
+            opcion={"data_inip":data_in};
+        }else if(dat==="data_ini"){
+            data_in= op;
+            opcion={"data_ini":data_in};
+        }
+        var posting = $.post(url, opcion);
+        posting.done(function (data) {
+            if (data !== null) {
+                $('#tablaAlumnosContent').empty();
+                $('#tablaAlumnosContent').html(data);
+            }
+        });
+        posting.fail(function (data) {
+            alert("Error");
+        });
+    }
