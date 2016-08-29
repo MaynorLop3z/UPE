@@ -6,15 +6,44 @@ var  filaEdit;
 //  $("#NuevoModuloDip").modal('toggle');
 //}
 
+$(document).ready(function(){
+    $('#FindModulo').on("keypress",function(event){
+       alert(event);
+    });
+});
+
 function editModulo(fila) {
     codigoModulo = fila.id;
     filaEdit = fila;
+     var mod = $('#mod'+ codigoModulo.substring(8));
+   // codigoModulo = codigoModulo.substring(8);
+   // var Mod = $('#Mod' + codigoModulo);
+    //    var dataM = Mod.data("ModM");
+    //    alert(Mod.ModuloNombre);
+    //    
+    var NombreMod = mod.find('.NombreMod').html().toString().trim();
+    var ordenMo = mod.find('.ordenMo').html().toString().trim();
+    var Estado = mod.find('.Estado').html().toString().trim();
+    var TurnoM = mod.find('.TurnoM').html().toString().trim();
+    var DipName = mod.find('.DipName').html().toString().trim();
+    var ComenMo = mod.find('.ComenMo').html().toString().trim();
+
+    $('#ModuloNombreEdit').val(NombreMod);
+    $('#ModuloOrdenEdit').val(ordenMo);
+    $('#EstadoE').val(Estado);
+    $('#TurnoEdit').val(TurnoM);
+    $('#DiplomadonameEdit').val(DipName);
+    $('#ComentarioModEdit').val(ComenMo);
      //codigoModulo = codigoModulo.substring(8);
      $("#ModificarModulo").modal('toggle');
 }
 
 function delMo(fila) {
     codigoModulo = fila.id;
+    var mod = $('#mod'+ codigoModulo.substring(7));
+    var Nombre_Mod = mod.find('.NombreMod').html().toString().trim();
+    console.log(Nombre_Mod);
+    $('#nombreModuloDel').html(Nombre_Mod);
    // codigoModulo = codigoModulo.substring(7);
     $("#EliminarModulo").modal('toggle');
 
@@ -26,46 +55,46 @@ function AddModDip(idDip){
 }
 
 // modificar  Modulo ----------->
-$('#ModificarModulo').on('show.bs.modal', function (event) {   
-    var mod = $('#mod'+ codigoModulo.substring(8));
-   // codigoModulo = codigoModulo.substring(8);
-   // var Mod = $('#Mod' + codigoModulo);
-//    var dataM = Mod.data("ModM");
-//    alert(Mod.ModuloNombre);
+//$('#ModificarModulo').on('show.bs.modal', function (event) {   
+//    var mod = $('#mod'+ codigoModulo.substring(8));
+//   // codigoModulo = codigoModulo.substring(8);
+//   // var Mod = $('#Mod' + codigoModulo);
+////    var dataM = Mod.data("ModM");
+////    alert(Mod.ModuloNombre);
+////    
+//var NombreMod = mod.find('.NombreMod').html().toString().trim();
+//var ordenMo = mod.find('.ordenMo').html().toString().trim();
+//var Estado = mod.find('.Estado').html().toString().trim();
+//var TurnoM = mod.find('.TurnoM').html().toString().trim();
+//var DipName = mod.find('.DipName').html().toString().trim();
+//var ComenMo = mod.find('.ComenMo').html().toString().trim();
+//
+//
+//
+//$('#ModuloNombreEdit').val(NombreMod);
+//$('#ModuloOrdenEdit').val(ordenMo);
+//$('#EstadoE').val(Estado);
+//$('#TurnoEdit').val(TurnoM);
+//$('#DiplomadonameEdit').val(DipName);
+//$('#ComentarioModEdit').val(ComenMo);
+//
+//
 //    
-var NombreMod = mod.find('.NombreMod').html().toString().trim();
-var ordenMo = mod.find('.ordenMo').html().toString().trim();
-var Estado = mod.find('.Estado').html().toString().trim();
-var TurnoM = mod.find('.TurnoM').html().toString().trim();
-var DipName = mod.find('.DipName').html().toString().trim();
-var ComenMo = mod.find('.ComenMo').html().toString().trim();
+////    $('#ModuloNombreEdit').val(dataM.NombreModulo);
+////    $('#ModuloOrdenEdit').val(dataM.OrdenModulo);
+////    $('#EstadoE').val(dataM.Estado);
+////    $('#TurnoEdit').val(dataM.CodigoTurnos);
+////    $('#DiplomadonameEdit').val(dataM.CodigoDiplomados);
+////    $('#ComentarioModEdit').val(dataM.Comentarios);
+//});
 
-
-
-$('#ModuloNombreEdit').val(NombreMod);
-$('#ModuloOrdenEdit').val(ordenMo);
-$('#EstadoE').val(Estado);
-$('#TurnoEdit').val(TurnoM);
-$('#DiplomadonameEdit').val(DipName);
-$('#ComentarioModEdit').val(ComenMo);
-
-
-    
-//    $('#ModuloNombreEdit').val(dataM.NombreModulo);
-//    $('#ModuloOrdenEdit').val(dataM.OrdenModulo);
-//    $('#EstadoE').val(dataM.Estado);
-//    $('#TurnoEdit').val(dataM.CodigoTurnos);
-//    $('#DiplomadonameEdit').val(dataM.CodigoDiplomados);
-//    $('#ComentarioModEdit').val(dataM.Comentarios);
-});
-
-$("#EliminarModulo").on('show.bs.modal',function(event){
-    
-     var mod = $('#mod'+ codigoModulo.substring(7));
-     var Nombre_Mod = mod.find('.NombreMod').html().toString().trim();
-     console.log(Nombre_Mod);
-       $('#nombreModuloDel').html(Nombre_Mod);
-});
+//$("#EliminarModulo").on('show.bs.modal',function(event){
+//    
+//     var mod = $('#mod'+ codigoModulo.substring(7));
+//     var Nombre_Mod = mod.find('.NombreMod').html().toString().trim();
+//     console.log(Nombre_Mod);
+//       $('#nombreModuloDel').html(Nombre_Mod);
+//});
 ///// Funcion donde  se ingresa el modulo desde la pestaña de diplomados //
 $("#formgrdMo").submit(function (event) {
    
