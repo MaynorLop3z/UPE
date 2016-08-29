@@ -23,6 +23,7 @@
 
         <div class="row">
             <div class="col-md-12">
+                <div id="tablaModulosContent">
                 <table id="tableModulos" class="table table-bordered table-striped table-hover table-responsive">
                     <thead>
                         <tr>
@@ -58,6 +59,22 @@
                         ?>
                     </tbody>
                 </table>
+                <!--Paginacion-->
+                <div class="row">
+                   <hr>
+                   <ul class="pager" id="footpagerModulos">
+                       <li><button data-datainic="1" id="aFirstPagModulos" >&lt;&lt;</button></li>
+                       <li><button id="aPrevPagModulos" >&lt;</button></li>
+                       <li>
+                           <input data-datainic="1" type="text" value="1" id="txtPagingSearchModulos" name="txtNumberPag" size="5">/<?php echo $totalPaginasModulos?>
+                       </li>
+                       <li><button id="aNextPagModulos">&gt;</button></li>
+                       <li><button id="aLastPagModulos" data-datainic="<?php echo $totalPaginasModulos ?>" >&gt;&gt;</button></li>
+                       <li id="pagerModulos">[<?php echo $PagInicialModulos . "-" . count($Modulos) . "/" . $ToTalRegistrosModulos ?>]</li>
+                   </ul>
+                </div>
+                <!--Fin Paginacion-->
+                </div>
             </div>
         </div>
     </div>

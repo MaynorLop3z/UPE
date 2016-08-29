@@ -2,15 +2,9 @@ var codigoModulo;
 var codigoDiplomado;
 var  filaEdit;
 
-
-
-
 //function AddMod(){
 //  $("#NuevoModuloDip").modal('toggle');
 //}
-
-
-
 
 function editModulo(fila) {
     codigoModulo = fila.id;
@@ -25,7 +19,6 @@ function delMo(fila) {
     $("#EliminarModulo").modal('toggle');
 
 }
-
 
 function AddModDip(idDip){
  $("#modDiplomadohidde").val(idDip);   
@@ -144,11 +137,6 @@ $("#formgrdMo").submit(function (event) {
 
 
 
-
-
-
-
-
 // modificar  Modulo ----------->
 $("#formEditMod").submit(function (event) {
     event.preventDefault();
@@ -242,8 +230,8 @@ $("#frmDelMod").submit(function(event) {
       var posting = $.post(url,{FindModulo:NombreModulo});
       posting.done(function(data){
           if(data){
-              $('#tableModulos').html(data);
-              
+//              $('#tableModulos').html(data);
+             $('#tablaModulosContent').html(data);
           }else{
              $("#ModInd").modal('toggle');
           }
@@ -253,3 +241,47 @@ $("#frmDelMod").submit(function(event) {
     });
      
  });
+ 
+ ////////////PAGINACION DE MODULOS//////////////
+    
+    $("#tablaModulosContent").on("click", "#aFirstPagModulos", function (e) {
+        paginarModulos("data_ini", $(this).data("datainic"));
+    });
+
+    $("#tablaModulosContent").on("click", "#aLastPagModulos", function (e) {
+        paginarModulos("data_ini", $(this).data("datainic"));
+    });
+
+    $("#tablaModulosContent").on("click", "#aPrevPagModulos", function (e) {
+        paginarModulos("data_inip", null);
+    });
+
+    $("#tablaModulosContent").on("click", "#aNextPagModulos", function (e) {
+        paginarModulos("data_inin", null);
+    });
+    
+    function paginarModulos(dat, op){
+
+        var data_in = $('#txtPagingSearchModulos').data("datainic");     
+        var url = 'ModulosController/paginModulos/';
+                
+        var opcion="";
+        if(dat==="data_inin"){
+             opcion={"data_inin":data_in};
+        }else if(dat==="data_inip"){
+            opcion={"data_inip":data_in};
+        }else if(dat==="data_ini"){
+            data_in= op;
+            opcion={"data_ini":data_in};
+        }
+        var posting = $.post(url, opcion);
+        posting.done(function (data) {
+            if (data !== null) {
+                $('#tablaModulosContent').empty();
+                $('#tablaModulosContent').html(data);
+            }
+        });
+        posting.fail(function (data) {
+            alert("Error");
+        });
+    }

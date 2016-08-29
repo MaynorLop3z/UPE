@@ -153,28 +153,50 @@ class Modulos extends CI_Model {
        }
        return $data;
     }
-public function listarDiplomados() {
-        $this->db->select('CodigoDiplomado, '
-                . 'NombreDiplomado, '
+    public function listarDiplomados() {
+            $this->db->select('CodigoDiplomado, '
+                    . 'NombreDiplomado, '
+                    . 'Estado, '
+                    . 'Comentarios'
+            );
+            $this->db->from('Diplomados');
+            $consulta = $this->db->get();
+            $resultado = $consulta->result();
+            return $resultado;
+    }
+    public function listaModulosDiplomados(){ //Select para Elegir los diplomados  $filtrar
+        $this->db->select('CodigoDiplomado,'
+                .'NombreDiplomado,'
+                .'Descripcion,'
+                .'Estado,'
+                .'CodigoCategoriaDiplomado,'
+                .'Comentarios');              
+        $this->db->from('Diplomados');
+        $this->db->like('CodigoDiplomado');// Modificado y cambio por NombreDiplomado
+        $consulta = $this->db->get();
+        $resultado= $consulta->result();
+        return $resultado;
+    }
+
+    //////////PARA PAGINACION DE MODULOS/////////////
+    public function listarModulosLimited($limit, $offset){
+        if ($limit == null && $offset == null) {
+                $limit = ROWS_PER_PAGE;
+                $offset = 0;
+            }
+         $this->db->select('CodigoModulo, '
+                . 'NombreModulo, '
+                . 'OrdenModulo, '
                 . 'Estado, '
+                . 'CodigoTurno, '
+                . 'CodigoDiplomado, '       
                 . 'Comentarios'
         );
-        $this->db->from('Diplomados');
-        $consulta = $this->db->get();
-        $resultado = $consulta->result();
-        return $resultado;
-}
-public function listaModulosDiplomados(){ //Select para Elegir los diplomados  $filtrar
-    $this->db->select('CodigoDiplomado,'
-            .'NombreDiplomado,'
-            .'Descripcion,'
-            .'Estado,'
-            .'CodigoCategoriaDiplomado,'
-            .'Comentarios');              
-    $this->db->from('Diplomados');
-    $this->db->like('CodigoDiplomado');// Modificado y cambio por NombreDiplomado
-    $consulta = $this->db->get();
-    $resultado= $consulta->result();
-    return $resultado;
-}
+        $this->db->from('Modulos');
+        $this->db->where('Estado',TRUE);
+        $this->db->limit($limit, $offset);
+        $consultaM = $this->db->get();
+        $resultadoM = $consultaM->result();
+         return $resultadoM;
+    }
 }
