@@ -87,7 +87,7 @@ define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 //
 //Aca estan las constantes del SISUPE
-define('ROWS_PER_PAGE', 4); //numero de filas que se veran en las tablas.
+define('ROWS_PER_PAGE', 5); //numero de filas que se veran en las tablas.
 define('CONTROLLER_TAP_PANEL_DEFAULT', 'Usuarios');
 define('DEFINE_RIGHT_ALLOWED', '.decorateStyleCrud');
 define('MENU_PPAL_RIGHT', 'MenuPpal');

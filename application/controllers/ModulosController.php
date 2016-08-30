@@ -3,6 +3,9 @@ if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
 class ModulosController extends CI_Controller {
+    private $final = 0;
+    private $pagAct = 0;
+    private $inicio = 0;
     public function __construct() {
         parent::__construct();
         $this->load->database();
@@ -93,12 +96,7 @@ class ModulosController extends CI_Controller {
                     $arrayData = $this->Modulos->inactivarModulo($codigoModulo,$ip,$userModifica);
                     echo json_encode($arrayData);
 
-
-
-
                     }
-
-
             }
 
         } catch (Exception $exc) {
@@ -120,24 +118,15 @@ class ModulosController extends CI_Controller {
         try {
         if($this->input->post()){
             $nombreMo = $this->input->post('FindModulo');
-            $Modulos = json_decode(json_encode($this->Modulos->listarModulosNombre($nombreMo)),true);     
+//            $this->AvRevPaginas();
+//            $Modulos = json_decode(json_encode($this->Modulos->listarModulosNombre($nombreMo)),true);
+            $Modulos = $this->Modulos->listarModulosNombre($nombreMo);   
             $registro = $this->EncabezadoTabla();
             foreach ($Modulos as $mod){
-                $registro .= '<tr id="mod' . $mod['CodigoModulo'] . '">';
-                $registro .= '<td class="NombreMod">' . $mod['NombreModulo'] . '</td>';
-                $registro .= '<td class="ordenMo">' . $mod['OrdenModulo'] . '</td>';
-                $registro .= '<td class="Estado">' . $mod['Estado'] . '</td>';
-                $registro .= '<td class="TurnoM">' . $mod['CodigoTurno'] .'</td>';
-                $registro .= '<td class="DipName">' . $mod['CodigoDiplomado'] .'</td>';
-                $registro .= '<td class="ComenMo">' . $mod['Comentarios'] .'</td>';
-                $registro.= '<td class=gestion_Mod>';
-                $registro .= '<button id="btnModiM' .$mod['CodigoModulo'] . '" onclick="editModulo(this)" title="Editar Modulo" class="btn_modificar_Mod btn btn-success"><span class="glyphicon glyphicon-pencil"></span></button>';
-                $registro .= '<button id="btnDELM' .$mod['CodigoModulo'] . '" onclick="delMo(this)" title="Eliminar Modulo" class="btn_eliminar_Mod btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>';
-                $registro .= '</td>';
-                $registro .= '</tr>';
+                  $registro .= $this->cuerpoTabla($mod);
 
             }
-            $registro .='</tbody></table>';
+//            $registro .=$this->PieTabla($Modulos);;
             echo $registro;
 
         }    
@@ -150,84 +139,27 @@ class ModulosController extends CI_Controller {
     /*********PAGINACION DE MODULOS EN DASHBOARD***/
     public function paginModulos($Mods= null) {
         try {
-            $final = 0;
-            $pagAct = 0;
+            
             $cadena = '';
             $filas = '';
             $Modulos = array();
 
-            if ($this->input->post()) {
-                if ($this->input->post('data_ini') != null) {
-                    $pagAct = $this->input->post('data_ini');
-                    $final = $this->input->post('data_ini');
-                    
-                    if ($pagAct <= 0) {
-                        $pagAct = 1;
-                        $final = 1;
-                    }else if($pagAct > $this->getTotalPaginas()) {
-                        $pagAct =$this->getTotalPaginas();
-                        $final=$this->getTotalPaginas();
-                    }
-                    
-                } else if ($this->input->post('data_inip') != null) {
-                    $pagAct = $this->input->post('data_inip') - 1;
-                    $final = $this->input->post('data_inip') - 1;
-                    if ($pagAct <= 0) {
-                        $pagAct = 1;
-                        $final = 1;
-                    }
-                } else if ($this->input->post('data_inin') != null) {
-                    $pagAct = $this->input->post('data_inin');
-                    $pagAct+=1;
-                    $final = $this->input->post('data_inin');
-                    $final+=1;
-                    if ($pagAct > $this->getTotalPaginas()) {
-                        $pagAct =$this->getTotalPaginas();
-                        $final=$this->getTotalPaginas();
-                    }  else {
-                        
-                    }
-                } else {
-                    $pagAct = 1;
-                    $final = 1;
-                }
-            }
-            $inicio = ROWS_PER_PAGE;
-            $final = ($final * ROWS_PER_PAGE) - ROWS_PER_PAGE;
+            $this->AvRevPaginas();
             if ($Mods != null) {
 
                 array_push($Modulos, $Mods);
             } else {
-                $Modulos = $this->Modulos->listarModulosLimited($inicio, $final);
+                $Modulos = $this->Modulos->listarModulosLimited($this->inicio, $this->final);
             }
 
 //            $buttonsByUserRights = $this->analizarPermisosBotonesTablas("gestionUserBtn", $this->session->userdata('permisosUsuer'));
 
             $cadena .= $this->EncabezadoTabla();
             foreach ($Modulos as $mod) {
-                $filas.='<tr id="mod' . $mod->CodigoModulo . '">';
-                $filas.='<td class="NombreMod">'. $mod->NombreModulo .'</td>';
-                $filas.='<td class="ordenMo">'. $mod->OrdenModulo .'</td>';
-                $filas.='<td class="Estado">'.  $mod->Estado .'</td> ';
-                $filas.='<td class="TurnoM">'. $mod->CodigoTurno .'</td>';
-                $filas.='<td class="DipName">'. $mod->CodigoDiplomado .'</td>';
-                $filas.='<td class="ComenMo">'. $mod->Comentarios .'</td>';
-                $filas.='<td class="gestion_Mod">
-                             <button id="btnModiM'. $mod->CodigoModulo .'" onclick="editModulo(this)" title="Editar Modulo" class="btn_modificar_Mod btn btn-success" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-pencil"></span> </button>
-            <button id="btnDELM'. $mod->CodigoModulo .'" onclick="delMo(this)" title="Eliminar Modulo" class="btn_eliminar_Mod btn btn-danger"><span class="glyphicon glyphicon-trash" class="btn btn-info btn-lg"></span></button>
-                        </td></tr>';
-//                $filas.=' <td style="text-align:center"  class="gestion_User">' . $buttonsByUserRights . '</td> </tr>';
+               $filas .= $this->cuerpoTabla($mod);
             }
             $cadena.=$filas;
-            $cadena.='</tbody></table>';
-            $cadena.=' <div class="row">
-            <ul class="pager" id="footpagerModulos">
-               <li><button data-datainic="1" id="aFirstPagModulos" >&lt;&lt;</button></li>
-                <li><button id="aPrevPagModulos" >&lt;</button></li>
-                <li><input data-datainic="' . $pagAct . '" type="text" value="' . $pagAct . '" id="txtPagingSearchModulos" name="txtNumberPag" size="5">/' . $this->getTotalPaginas() . '</li>
-                 <li><button id="aNextPagModulos">&gt;</button></li>
-                <li><button id="aLastPagModulos" data-datainic="' . $this->getTotalPaginas() . '" >&gt;&gt;</button></li>
-                <li>[' . ($final + 1) . ' - ' . ($final + count($Modulos)) . ' / ' . count($this->Modulos->listarModulos()) . ']</li></ul></div>';
+            $cadena.= $this->PieTabla($Modulos);
         } catch (Exception $e) {
             echo $e->getMessage();
         }
@@ -254,6 +186,76 @@ class ModulosController extends CI_Controller {
                     </thead> 
                     <tbody>';
         return $encabezado;
+    }
+    
+    private function cuerpoTabla($mod){
+         $filas='<tr id="mod' . $mod->CodigoModulo . '">';
+                $filas.='<td class="NombreMod">'. $mod->NombreModulo .'</td>';
+                $filas.='<td class="ordenMo">'. $mod->OrdenModulo .'</td>';
+                $filas.='<td class="Estado">'.  $mod->Estado .'</td> ';
+                $filas.='<td class="TurnoM">'. $mod->CodigoTurno .'</td>';
+                $filas.='<td class="DipName">'. $mod->CodigoDiplomado .'</td>';
+                $filas.='<td class="ComenMo">'. $mod->Comentarios .'</td>';
+                $filas.='<td class="gestion_Mod">
+                             <button id="btnModiM'. $mod->CodigoModulo .'" onclick="editModulo(this)" title="Editar Modulo" class="btn_modificar_Mod btn btn-success" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-pencil"></span> </button>
+            <button id="btnDELM'. $mod->CodigoModulo .'" onclick="delMo(this)" title="Eliminar Modulo" class="btn_eliminar_Mod btn btn-danger"><span class="glyphicon glyphicon-trash" class="btn btn-info btn-lg"></span></button>
+                        </td></tr>';
+//                $filas.=' <td style="text-align:center"  class="gestion_User">' . $buttonsByUserRights . '</td> </tr>';
+                return $filas;
+    }
+    
+    private function PieTabla($Modulos){
+        $pie='</tbody></table> <div class="row">
+            <ul class="pager" id="footpagerModulos">
+               <li><button data-datainic="1" id="aFirstPagModulos" >&lt;&lt;</button></li>
+                <li><button id="aPrevPagModulos" >&lt;</button></li>
+                <li><input data-datainic="' . $this->pagAct . '" type="text" value="' . $this->pagAct . '" id="txtPagingSearchModulos" name="txtNumberPag" size="5">/' . $this->getTotalPaginas() . '</li>
+                 <li><button id="aNextPagModulos">&gt;</button></li>
+                <li><button id="aLastPagModulos" data-datainic="' . $this->getTotalPaginas() . '" >&gt;&gt;</button></li>
+                <li>[' . ($this->final + 1) . ' - ' . ($this->final + count($Modulos)) . ' / ' . count($this->Modulos->listarModulos()) . ']</li></ul></div>';
+    
+        return $pie;
+    }
+    
+    private function AvRevPaginas(){
+         if ($this->input->post()) {
+                if ($this->input->post('data_ini') != null) {
+                    $this->pagAct = $this->input->post('data_ini');
+                    $this->final = $this->input->post('data_ini');
+                    
+                    if ($this->pagAct <= 0) {
+                        $this->pagAct = 1;
+                        $this->final = 1;
+                    }else if($this->pagAct > $this->getTotalPaginas()) {
+                        $this->pagAct =$this->getTotalPaginas();
+                        $this->final=$this->getTotalPaginas();
+                    }
+                    
+                } else if ($this->input->post('data_inip') != null) {
+                    $this->pagAct = $this->input->post('data_inip') - 1;
+                    $this->final = $this->input->post('data_inip') - 1;
+                    if ($this->pagAct <= 0) {
+                        $this->pagAct = 1;
+                        $this->final = 1;
+                    }
+                } else if ($this->input->post('data_inin') != null) {
+                    $this->pagAct = $this->input->post('data_inin');
+                    $this->pagAct+=1;
+                    $this->final = $this->input->post('data_inin');
+                    $this->final+=1;
+                    if ($this->pagAct > $this->getTotalPaginas()) {
+                        $this->pagAct =$this->getTotalPaginas();
+                        $this->final=$this->getTotalPaginas();
+                    }  else {
+                        
+                    }
+                } else {
+                    $this->pagAct = 1;
+                    $this->final = 1;
+                }
+            }
+            $this->inicio = ROWS_PER_PAGE;
+            $this->final = ($this->final * ROWS_PER_PAGE) - ROWS_PER_PAGE;
     }
            
 }

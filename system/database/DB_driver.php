@@ -328,15 +328,15 @@ abstract class CI_DB_driver {
 	 *
 	 * @var	string
 	 */
-	protected $_like_escape_str = " ESCAPE '%s' ";
-
+//	protected $_like_escape_str = " ESCAPE '%s' ";   //// SE CAMBIA POR ERRORES CON CONSULTAS LIKE CON ESPACIOS
+        protected $_like_escape_str = "";
 	/**
 	 * ESCAPE character
 	 *
 	 * @var	string
 	 */
-	protected $_like_escape_chr = '!';
-
+//	protected $_like_escape_chr = '!';//// SE CAMBIA POR ERRORES CON CONSULTAS LIKE CON ESPACIOS
+        protected $_like_escape_chr = '';
 	/**
 	 * ORDER BY random keyword
 	 *

@@ -7,8 +7,35 @@ var  filaEdit;
 //}
 
 $(document).ready(function(){
-    $('#FindModulo').on("keypress",function(event){
-       alert(event);
+    $('#FindModulo').keyup(function(event){
+        var actual=$(this).val();
+        var texto =actual;
+//        alert(escape(texto));
+        if(actual===""){
+            var posting = $.post("ModulosController/paginModulos/", {"data_ini":1});
+        posting.done(function (data) {
+            if (data !== null) {
+                $('#tablaModulosContent').empty();
+                $('#tablaModulosContent').html(data);
+            }
+        });
+        posting.fail(function (data) {
+            alert("Error");
+        });
+        }
+        else{
+        var posting = $.post("ModulosController/BuscarModulos/",{'FindModulo':texto});
+      posting.done(function(data){
+          if(data){
+//              $('#tableModulos').html(data);
+             $('#tablaModulosContent').html(data);
+          }else{
+             $("#ModInd").modal('toggle');
+          }
+      });
+      posting.fail(function(xhr, textStatus, errorThrown) {
+        alert("error" + xhr.responseText);
+    });}
     });
 });
 
@@ -27,10 +54,14 @@ function editModulo(fila) {
     var TurnoM = mod.find('.TurnoM').html().toString().trim();
     var DipName = mod.find('.DipName').html().toString().trim();
     var ComenMo = mod.find('.ComenMo').html().toString().trim();
-
+    
     $('#ModuloNombreEdit').val(NombreMod);
     $('#ModuloOrdenEdit').val(ordenMo);
-    $('#EstadoE').val(Estado);
+    if(Estado==='t'){
+        $('#EstadoE').prop( "checked", true );
+    }else{
+        $('#EstadoE').prop( "checked", false);
+    }
     $('#TurnoEdit').val(TurnoM);
     $('#DiplomadonameEdit').val(DipName);
     $('#ComentarioModEdit').val(ComenMo);
@@ -254,7 +285,7 @@ $("#frmDelMod").submit(function(event) {
  
  
  $("#frmfindMod").submit(function(event){
-      event.preventDefault();
+     event.preventDefault();
      var $form = $(this), NombreModulo = $form.find("input[name='FindModulo']").val(), url = $form.attr("action");
       var posting = $.post(url,{FindModulo:NombreModulo});
       posting.done(function(data){

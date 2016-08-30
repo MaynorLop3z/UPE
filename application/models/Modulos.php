@@ -18,8 +18,11 @@ class Modulos extends CI_Model {
                 . 'CodigoDiplomado, '       
                 . 'Comentarios');
         $this->db->from('Modulos');
-        $this->db->like('NombreModulo',$filtro);
+        $this->db->like('LOWER("NombreModulo")', strtolower($filtro));
+        $this->db->limit('10', 0);
         $consulta = $this->db->get();
+//        $consulta = $this->db->query('SELECT "CodigoModulo", "NombreModulo", "OrdenModulo", "Estado", "CodigoTurno", "CodigoDiplomado", "Comentarios"'
+//                . ' FROM "Modulos" WHERE LOWER("NombreModulo") LIKE \'%'. strtolower($filtro).'%\'');
         $resultado = $consulta->result();
         return $resultado;
         
@@ -41,9 +44,7 @@ class Modulos extends CI_Model {
 //      }
 //      
 //      }
-          
-      
-            $this->db->select('CodigoModulo, '
+        $this->db->select('CodigoModulo, '
                 . 'NombreModulo, '
                 . 'OrdenModulo, '
                 . 'Estado, '
@@ -57,10 +58,6 @@ class Modulos extends CI_Model {
         $resultadoM = $consultaM->result();
          return $resultadoM;
   }
-  
-
-  
-  
   
     public function crearModulo($NombreModulo, $OrdenModulo,$CodigoTurno, $Estado ,$CodigoDiplomado, $Comentarios,$IpUserModifica,$UserModifica) {
        try{
@@ -84,6 +81,7 @@ class Modulos extends CI_Model {
     }
     return $data;
     }
+    
     public function EliminarModulo($CodigoModulo) {
         $eliminar = false;
         try{
@@ -96,6 +94,7 @@ class Modulos extends CI_Model {
     }
     return $eliminar;
     }
+    
     public function listarTurnos() {
         $this->db->select('CodigoTurno, '
                 . 'NombreTurno, '
@@ -109,11 +108,10 @@ class Modulos extends CI_Model {
         $resultado = $consulta->result();
         return $resultado;
     }
+    
     public function EliminarModulos($CodigoModulo){  //
         $this->db->delete('Modulos', array('CodigoModulo' => $CodigoModulo));
     }
-   
-    
     
     
     public function inactivarModulo($CodigoModulo, $ipModifica, $usuarioModifica){
@@ -132,6 +130,7 @@ class Modulos extends CI_Model {
             $exc->getMessage();
         }        
     }
+    
     public function ModificarModulo($CodigoModulo, $NombreModulo, $OrdenModulo, $Estado, $CodigoTurnos,  $CodigoDiplomados, $Comentarios,  $IPModifica, $UsuarioModifica) {
        try{
         $data = array(
@@ -153,6 +152,7 @@ class Modulos extends CI_Model {
        }
        return $data;
     }
+    
     public function listarDiplomados() {
             $this->db->select('CodigoDiplomado, '
                     . 'NombreDiplomado, '
@@ -164,6 +164,7 @@ class Modulos extends CI_Model {
             $resultado = $consulta->result();
             return $resultado;
     }
+    
     public function listaModulosDiplomados(){ //Select para Elegir los diplomados  $filtrar
         $this->db->select('CodigoDiplomado,'
                 .'NombreDiplomado,'
