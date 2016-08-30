@@ -8,7 +8,7 @@
         <div class="row">
         <div class="col-md-6">
             <button id="BtnADDiplomado" class="btn btn-default btn-default" data-toggle="modal"><span class="glyphicon glyphicon-plus"></span>Nuevo Diplomado </button>
-            <button id="btnActualizarDi" class="btn btn-default" onclick="window.location.reload()"><span class="glyphicon glyphicon-refresh"></span>Actualizar</button>
+            <button id="btnActualizarDi" class="btn btn-default" onclick=""><span class="glyphicon glyphicon-refresh"></span>Actualizar</button>
         </div>
         <div class="col-md-6">
             <?php $this->load->helper('url'); ?>

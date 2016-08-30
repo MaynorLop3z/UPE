@@ -95,7 +95,7 @@
                         <div class="form-group">
                             <label for="CatgoriaDiplomadoEdit" class="col-lg-3 control-label">Categoria Diplomado:</label>
                             <div class="col-lg-9">
-                                <select class="form-control" id="CatgoriaDiplomadoEdit" name="CodigoCategoriaDiplomado" required>                                          
+                                <select class="form-control" id="CategoriaDiplomadoEdit" name="CodigoCategoriaDiplomado" required>                                          
                                     <?php
                                     foreach ($CategoriasDi as $cadi){ //AQui para seleccionar  la categoria del diplomado al que pertenece
                                     ?>
@@ -190,7 +190,7 @@
                      <div class="row">
                          <div class="col-lg-8">
                          <div class="col-lg-6"><label>Diplomado:</label></div>
-                         <div class="col-lg-6"><h5><label id="DipViewMod" ></h5></div>
+                         <div class="col-lg-6"><h5><mark id="DipViewMod" ></mark></h5></div>
                          </div>
                     </div>
                  </form> 

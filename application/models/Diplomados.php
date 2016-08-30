@@ -31,7 +31,7 @@ class Diplomados extends CI_Model {
                 . 'CD.NombreCategoriaDiplomado');
         $this->db->from('Diplomados D');
         $this->db->join("CategoriaDiplomados CD","D.CodigoCategoriaDiplomado = CD.CodigoCategoriaDiplomado");
-        $this->db->like('NombreDiplomado', $filtro);
+        $this->db->like('LOWER("NombreDiplomado")', strtolower($filtro));
         $consulta = $this->db->get();
         $resultado = $consulta->result();
         return $resultado;

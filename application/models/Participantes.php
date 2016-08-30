@@ -94,7 +94,7 @@ class Participantes extends CI_Model {
                 . 'T1.NombreCategoriaParticipante');
         $this->db->from('Participantes T0');
         $this->db->join("CategoriasParticipante T1","T0.CodigoCategoriaParticipantes = T1.CodigoCategoriaParticipantes");
-        $this->db->like('Nombre',$filtro);
+        $this->db->like('LOWER("Nombre")',strtolower($filtro));
         $consulta = $this->db->get();
         $resultado = $consulta->result();
         return $resultado;

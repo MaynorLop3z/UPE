@@ -2,6 +2,37 @@ var codigoParticipante;
 var filaEdit;
 var countColor = 1;
 
+
+$(document).ready(function(){
+    /////////////////busqueda///////////////////////
+    $('#tbNameBuscarAlum').keyup(function(event){
+        var actual=$(this).val();
+        var texto =actual;
+        if(actual===""){
+            var posting = $.post("ParticipantesController/paginParticipantes/", {"data_ini":1});
+        posting.done(function (data) {
+            if (data !== null) {
+                $('#tablaAlumnosContent').empty();
+                $('#tablaAlumnosContent').html(data);
+            }
+        });
+        posting.fail(function (data) {
+            alert("Error");
+        });
+        }
+        else{
+        var posting = $.post("ParticipantesController/buscar/",{'NombreBuscado':texto});
+      posting.done(function(data){
+          if(data){
+             $('#tablaAlumnosContent').html(data);
+          }
+      });
+      posting.fail(function(xhr, textStatus, errorThrown) {
+        alert("error" + xhr.responseText);
+    });}
+    });
+});
+
 $("#DiplomadoP").change(function () {
     $("#DiplomadoP option:selected").each(function () {
         idDiplomado = $(this).val();
@@ -308,3 +339,5 @@ $("#frmFINDAlumno").submit(function (event) {
             alert("Error");
         });
     }
+    
+    

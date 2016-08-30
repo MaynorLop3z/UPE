@@ -160,7 +160,6 @@ class ParticipantesController extends CI_Controller {
             if ($this->input->post()) {
                 $nombre = $this->input->post('NombreBuscado');
                 $result = json_decode(json_encode($this->Participantes->listarParticipantesByName($nombre)), true);
-                //echo $result;
                 $registros = $this->EncabezadoTabla();
                 foreach ($result as $req) {
                     $registros .= '<tr id="alum' . $req['CodigoParticipante'] . '">';
