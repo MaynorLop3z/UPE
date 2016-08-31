@@ -78,6 +78,7 @@ function eliminarDiplomado(fila){
 function ViewModDip(fila){
  codigoDiplomado = fila.id;
  filaEdit = fila;
+
  codigoDiplomado = codigoDiplomado.substring(7);
     var dip = $('#dip' + codigoDiplomado);
     var NombreDiplomadoView = dip.find(".nombre_Diplomado").html().toString().trim();

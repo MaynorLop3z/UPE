@@ -61,6 +61,7 @@
                 ?>     
             </tbody>
         </table> 
+            <?php if($ToTalRegistrosDiplomados!==0){ ?>
             <!--Paginacion-->
              <div class="row">
                 <hr>
@@ -76,6 +77,7 @@
                 </ul>
             </div>
             <!--Fin Paginacion-->
+            <?php } ?>
         </div>
     </div>
 </div>

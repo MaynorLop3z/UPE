@@ -42,9 +42,14 @@
     
 
     function paginadoPeriodos(data){
-        var actual=1,inicial=1;
+        var actual=0,inicial=0;
         if(data.totalPagPer===0){
             actual=0;inicial=0;
+        }
+        if(data.totalPagPer===0){
+            $('#footpagerPeriodos').hide(true);
+        }else{
+            $('#footpagerPeriodos').show(true);
         }
         $("#txtPagingSearchUsrPeriodos").val(actual);
         $("#pagerBetweenPer").html("/"+data.totalPagPer);
@@ -69,7 +74,8 @@
     
     function paginarPeriodos(datos, op){
         var mod=$('#Modulo').find(":selected").val();
-        var data_in = $('#txtPagingSearchUsrPeriodos').data("datainic");     
+        var data_in = $('#txtPagingSearchUsrPeriodos').data("datainic");
+        
         var url = 'PeriodosController/paginPeriodos/';
         var opcion="";
         if(datos==="data_inin"){
@@ -90,6 +96,7 @@
         posting.fail(function (data) {
             alert("Error");
         });
+    
     }
 </script>
 <div class="panel panel-default">
@@ -182,6 +189,7 @@
                     ?>
                 </tbody>
             </table>
+            <?php if($ToTalRegistrosPeriodos!==0){ ?>
             <!--Paginacion-->
              <div class="row">
                 <hr>
@@ -198,6 +206,7 @@
                 </ul>
             </div>
             <!--Fin Paginacion-->
+            <?php } ?>
         </div>
     </div>
 </div>

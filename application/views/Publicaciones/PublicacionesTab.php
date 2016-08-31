@@ -38,7 +38,8 @@
             ?>    
         </tbody>
     </table> 
-     <!--Paginacion-->
+        <?php if( $ToTalRegistrosPeriodos!==0){ ?>
+        <!--Paginacion-->
              <div class="row">
                 <hr>
                 <ul class="pager" id="footpagerPubWeb">
@@ -53,7 +54,8 @@
                     <li id="pagerPubWeb">[<?php echo $PagInicialPubWeb . "-" . count($allPublicaciones) . "/" . $ToTalRegistrosPubWeb ?>]</li>
                 </ul>
             </div>
-            <!--Fin Paginacion-->
+        <!--Fin Paginacion-->
+        <?php } ?>
     </div>
 </div>
 

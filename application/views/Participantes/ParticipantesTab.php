@@ -79,6 +79,7 @@
                         ?>
                     </tbody>
                 </table>
+                    <?php if($ToTalRegistrosModulos!==0){ ?>
                      <!--Paginacion-->
              <div class="row">
                 <hr>
@@ -94,6 +95,7 @@
                 </ul>
             </div>
             <!--Fin Paginacion-->
+                    <?php } ?>
                 </div>
             </div>
         </div>

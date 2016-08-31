@@ -115,7 +115,7 @@ class DiplomadosController extends CI_Controller {
                 $Diplomados = json_decode(json_encode($this->Diplomados->listarDiplomadosNombre($nombreDip)), true);
                 $registro = $this->EncabezadoTabla();
                 foreach ($Diplomados as $dip) {
-                    $registro .= '<tr id="' . $dip['CodigoDiplomado'] . '">';
+                    $registro .= '<tr id="dip' . $dip['CodigoDiplomado'] . '">';
                     $registro .= '<td class="nombre_Diplomado">' . $dip['NombreDiplomado'] . '</td>';
                     $registro .= '<td class="descripcionDiplomado">' . $dip['Descripcion'] . '</td>';
                     $registro .= '<td class="estado">' . $dip['Estado'] . '</td>';
@@ -125,7 +125,7 @@ class DiplomadosController extends CI_Controller {
                     $registro .= '<button id="btnmo' . $dip['CodigoDiplomado'] . '" onclick="editaDiplomado(this)" title="Editar Diplomado" class="btnmoddi btn btn-success"><span class="glyphicon glyphicon-pencil"></span></button>';
                     $registro .= '<button id="DELDiplomado' . $dip['CodigoDiplomado'] . '" onclick="eliminarDiplomado(this)" title="Eliminar Diplomado" class="btndeldip btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>';
                     $registro .= '<button id="Addmod'. $dip['CodigoDiplomado'] .'"onclick="AddModDip(this)"  title="Agregar Modulos" class="btnAddMod btn btn-info" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-plus"></span></button>';
-                    $registro .= '<button id="ModViewphp' . $dip['CodigoDiplomado'] . '"onclick="ViewModDip(this)"  title="Ver modulos" class="btnVIewMod btn btn-warning" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-eye-open" ></span></button>'; 
+                    $registro .= '<button id="ModView' . $dip['CodigoDiplomado'] . '"onclick="ViewModDip(this)"  title="Ver modulos" class="btnVIewMod btn btn-warning" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-eye-open" ></span></button>'; 
                     $registro .= '</td>';
                     $registro .= '</tr>';
                 }
