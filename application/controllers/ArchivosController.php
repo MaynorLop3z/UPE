@@ -10,6 +10,7 @@ class ArchivosController extends CI_Controller {
         parent::__construct();
         $this->load->database();
         $this->load->model('Publicaciones');
+        $this->load->model('Archivos');
         $this->load->model('Comentarios');
         $this->load->helper(array('download', 'file', 'url', 'html', 'form'));
     }
@@ -19,11 +20,11 @@ class ArchivosController extends CI_Controller {
         $nivel=$this->session->userdata("nivel");
         
         if($nivel=='Participante'){
-            $data['gruposAlumno'] = $this->Publicaciones->ListarGruposAlumno($login);
-            $data['archivosAlumno'] = $this->Publicaciones->ListarArchivosParaAlumno($login);
+            $data['gruposAlumno'] = $this->Archivos->ListarGruposAlumno($login);
+            $data['archivosAlumno'] = $this->Archivos->ListarArchivosParaAlumno($login);
         }else if($nivel==''){
-            $data['gruposMaestro'] = $this->Publicaciones->GruposPorMaestro($login);
-            $data['archivosMaestro'] = $this->Publicaciones->ListarArchivosDelMaestro($login);
+            $data['gruposMaestro'] = $this->Archivos->GruposPorMaestro($login);
+            $data['archivosMaestro'] = $this->Archivos->ListarArchivosDelMaestro($login);
         }
         $permisos = $this->session->userdata('permisosUsuer');
         $this->analizarPermisos('views/Archivos/ArchivosTab.php', 'views/Archivos/ArchivosTabTmp.php', $permisos, $nivel);
