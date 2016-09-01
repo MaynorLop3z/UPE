@@ -206,6 +206,7 @@
                              </span>
                         </li>
                             <!---------Modal Archivos Alumno-------------------------->
+                            
                             <div id="ListArchivosAlumno<?php echo $gru->CodigoGrupoPeriodo;?>" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
                                 
                                     <div class="modal-content">
@@ -271,6 +272,7 @@
                                             </div>
                                     </div>
                                 </div>
+                            
                             <!--Fin Lista de Archivos del Alumno-->
                         <?php }
                         $ModuloGrupo=$ModuloActual;
@@ -316,6 +318,7 @@
         $('.sub-sub-toggler').click(function () {
 		$(this).parent().children('.sub-sub').toggle(300);
 	});
+        $('.modal-content, .container-fluid, .table, .modal, .fade').css('cursor','default');
         
 });
     function openListaArchivos(mod){
