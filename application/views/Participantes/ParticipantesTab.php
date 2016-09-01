@@ -79,7 +79,7 @@
                         ?>
                     </tbody>
                 </table>
-                    <?php if($ToTalRegistrosModulos!==0){ ?>
+                    <?php if($ToTalRegistrosParticipantes!==0){ ?>
                      <!--Paginacion-->
              <div class="row">
                 <hr>

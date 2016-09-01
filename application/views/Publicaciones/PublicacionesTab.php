@@ -38,7 +38,7 @@
             ?>    
         </tbody>
     </table> 
-        <?php if( $ToTalRegistrosPeriodos!==0){ ?>
+        <?php if( $ToTalRegistrosPubWeb!==0){ ?>
         <!--Paginacion-->
              <div class="row">
                 <hr>
