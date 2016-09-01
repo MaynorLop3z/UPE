@@ -2,6 +2,9 @@
     Tab de Archivos en el Dashboard
 -->
  <?php $this->load->helper('url'); ?> 
+ <script src="../bootstrap/js/Comentarios.js"></script>
+ <link href="../bootstrap/css/archivos.css" rel="stylesheet">
+ <script src="../bootstrap/js/jquery.twbsPagination.min.js"></script>
 <div id="ArchivoMaestro" class="decorateStyleCrud">
 <!--Tab Grupos-->
  <h3>Gestión de archivos</h3>
@@ -66,20 +69,21 @@
         foreach ($archivosMaestro as $arch) { //Listar cada archivo
          if($arch->CodigoGrupoPeriodo== $grup->CodigoGrupoPeriodo){ 
              
-             $tamar=filesize('bootstrap'.$arch->Ruta); //Formatea el size del archivo
-             if($tamar>=1024 & $tamar<1048576){
-                 $tamar = round($tamar/1024, 0)." Kb";
-             }  else if($tamar >= 1048576) {
-                 $tamar = round($tamar/1048576, 2)." Mb";
-             }else{
-                 $tamar = $tamar." B";
-             }
-        
+             if(file_exists('bootstrap'.$arch->Ruta)){
+                $tamar=filesize('bootstrap'.$arch->Ruta); //Formatea el size del archivo
+                if($tamar>=1024 & $tamar<1048576){
+                    $tamar = round($tamar/1024, 0)." Kb";
+                }  else if($tamar >= 1048576) {
+                    $tamar = round($tamar/1048576, 2)." Mb";
+                }else{
+                    $tamar = $tamar." B";
+                }
+             }else{$tamar="Indeterminado";}
              ?>
             <tr  data-dipd='<?php echo json_encode($arch) ?>' 
-                     id="dip<?php echo $arch->CodigoPublicacion ?>">
+                 id="dip<?php echo $arch->CodigoPublicacion ?>"  class="comment-toggler" title="Ver Comentarios">
                     <td class="Archivo"><?php echo $arch->Titulo ?></td>
-                    <td class="Descripción"><?php echo ($arch->Contenido!= NULL ? $arch->Contenido: "No hay descripción") ?></td>
+                    <td class="Descripcion"><?php echo ($arch->Contenido!= NULL ? $arch->Contenido: "No hay descripción") ?></td>
                     <td class="Publicado" ><?php echo $arch->FechaPublicacion ?></td>
                     <td class="TipoArchivo"><?php echo strtoupper($arch->Extension) ?></td>
                     <td class="TamArchivo" style="width:100px;"><?php echo $tamar; ?></td>
@@ -88,12 +92,28 @@
                         <button id="deleArc<?php echo $arch->CodigoPublicacion ?>" onclick="delArchivo('<?php echo $arch->CodigoPublicacion ?>','<?php echo $arch->Titulo ?>','<?=$grup->CodigoGrupoPeriodo?>')"  title="Eliminar Archivo" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>
                     </td>
             </tr>
+            <tr id="comment-dip<?php echo $arch->CodigoPublicacion ?>" class="comment">
+                <td class="form-group" colspan="6"> <label for="usr">Comentar:</label>
+                    <input type="text" class="form-control inputComment" placeholder="Escribe algo..."><br>
+                    <div class="list-group" id="comment-<?php echo $arch->CodigoPublicacion?>"></div>
+                </td>
+            </tr>
+  
         <?php 
           }
         }
     ?>         
         </tbody>
     </table>  
+      <div id="context-menu">
+	      	<ul class="dropdown-menu" role="menu">
+            <li><a tabindex="-1">Action</a></li>
+	           <li><a tabindex="-1">Another action</a></li>
+	           <li><a tabindex="-1">Something else here</a></li>
+	           <li class="divider"></li>
+	           <li><a tabindex="-1">Separated link</a></li>
+	      	</ul>
+	      </div>
   </div>
 <?php } ?> 
 </div>
@@ -142,7 +162,7 @@
          </div>
             <?php 
             $DiplomadoGrupo='';
-            foreach($gruposAlumno as $grup){ 
+            foreach($gruposAlumno as $grup){ //lista los diplomados del anio seleccionado
                 $DiplomadoActual=$grup->NombreDiplomado;
                 
                 if($AnioActual==str_split($grup->FechaInicioPeriodo,4)[0] & $DiplomadoGrupo!=$DiplomadoActual){
@@ -161,7 +181,7 @@
                     <ul class="tree node-treeview5">
                         <?php 
                         $ModuloGrupo='';
-                        foreach($gruposAlumno as $gru){ 
+                        foreach($gruposAlumno as $gru){ //lista los grupos del diplomado seleccionado
                             $ModuloActual=$gru->NombreModulo;
 
                             if($AnioActual==str_split($gru->FechaInicioPeriodo,4)[0] & $DiplomadoActual==$gru->NombreDiplomado  ){
@@ -211,27 +231,34 @@
                                                     foreach ($archivosAlumno as $arch) { //Listar cada archivo
                                                      if($arch->CodigoGrupoPeriodo== $gru->CodigoGrupoPeriodo){ 
                                                          
-                                                         $tamar=filesize('bootstrap'.$arch->Ruta); //Formatea el size del archivo
-                                                         
+                                                         if(file_exists('bootstrap'.$arch->Ruta)){
+                                                            $tamar=filesize('bootstrap'.$arch->Ruta); //Formatea el size del archivo
                                                             if($tamar>=1024 & $tamar<1048576){
-                                                             $tamar = round($tamar/1024, 0)." Kb";
+                                                                $tamar = round($tamar/1024, 0)." Kb";
                                                             }  else if($tamar >= 1048576) {
                                                                 $tamar = round($tamar/1048576, 2)." Mb";
                                                             }else{
                                                                 $tamar = $tamar." B";
                                                             }
+                                                         }else{$tamar="Indeterminado";}
 
                                                          ?>
                                                         <tr  data-dipd='<?php echo json_encode($arch) ?>' 
-                                                                 id="dip<?php echo $arch->CodigoPublicacion ?>">
+                                                             id="dip<?php echo $arch->CodigoPublicacion ?>" title="Ver Comentarios" class="comment-toggler" >
                                                                 <td class="Archivo"><?php echo $arch->Titulo ?></td>
-                                                                <td class="Descripción"><?php echo ($arch->Contenido!= NULL ? $arch->Contenido: "No hay descripción") ?></td>
+                                                                <td class="Descripcion"><?php echo ($arch->Contenido!= NULL ? $arch->Contenido: "No hay descripción") ?></td>
                                                                 <td class="Publicado" ><?php echo $arch->FechaPublicacion ?></td>
                                                                 <td class="TipoArchivo"><?php echo strtoupper($arch->Extension) ?></td>
                                                                 <td class="TamArchivo" style="width:100px;"><?php echo $tamar; ?></td>
                                                                 <td class="gestion_dip" style="width:150px;">
                                                                     <button id="downArc<?php echo $arch->CodigoPublicacion ?>" onclick="goArchivo('<?php echo base_url() ?>index.php/ArchivosController/downloads/<?php echo $arch->Nombre?>')"  title="Descargar Archivo" class="btndeldip btn btn-warning" class="btn btn-info btn-lg"><span class=" glyphicon glyphicon-download-alt"></span></button>
                                                                 </td>
+                                                        </tr>
+                                                        <tr id="comment-dip<?php echo $arch->CodigoPublicacion ?>" class="comment">
+                                                            <td class="form-group" colspan="6"> <label for="usr">Comentar:</label>
+                                                            <input type="text" class="form-control inputComment" placeholder="Escribe algo...">
+                                                            <div class="list-group" id="comment-<?php echo $arch->CodigoPublicacion?>"></div>
+                                                            </td>
                                                         </tr>
                                                     <?php 
                                                       }
@@ -289,9 +316,8 @@
         $('.sub-sub-toggler').click(function () {
 		$(this).parent().children('.sub-sub').toggle(300);
 	});
-       
+        
 });
-
     function openListaArchivos(mod){
         var modale="#ListArchivosAlumno"+mod;
             $(modale).modal();

@@ -15,26 +15,34 @@ class Comentarios extends CI_Model {
                 . 'FechaComentario, '
                 . 'CorreoPublica, '
                 . 'Cuerpo, '
-                . 'NombrePublica, '
-                . 'Estado');
+                . 'NombrePublica, HoraComentario, ComentarioPadre');
         $this->db->from('Comentarios');
         $this->db->where('CodigoPublicaciones', $CodigoPublicaciones);
+        $this->db->where('Estado', TRUE);
         $consulta = $this->db->get();
         $resultado = $consulta->result();
         return $resultado;
     }
 
-    public function CrearComentarios($CodigoPublicaciones, $FechaComentario, $CorreoPublica, $Cuerpo, $NombrePublica, $Estado) {
-        $data = array(
-            //            'CodigoComentarios' => null,
+    public function CrearComentarios($CodigoPublicaciones, $FechaComentario, $CorreoPublica, 
+            $Cuerpo, $NombrePublica, $Estado, $ip, $idusr, $nivel, $time) {
+        $user='ParticipanteComenta';
+        if($nivel==1){$user='UsuarioComenta';}
+        try{$data = array(
             'FechaComentario' => $FechaComentario,
             'CorreoPublica' => $CorreoPublica,
             'Cuerpo' => $Cuerpo,
             'NombrePublica' => $NombrePublica,
             'Estado' => $Estado,
-            'CodigoPublicaciones' => $CodigoPublicaciones
+            'CodigoPublicaciones' => $CodigoPublicaciones,
+            'IpModifica' => $ip,
+            $user => $idusr,
+            'HoraComentario' => $time
         );
-        $this->db->insert('Comentarios', $data);
+        $this->db->insert('Comentarios', $data);}
+        catch (Exception $e){
+            echo "error en el insert";
+        }
     }
 
     public function EliminarComentario($CodigoComentarios) {

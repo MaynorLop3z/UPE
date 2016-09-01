@@ -1,6 +1,5 @@
 <?php $this->load->helper('url'); ?> 
 
-<link href="../bootstrap/css/archivos.css" rel="stylesheet">
 
 <div id="AdministrarArchivos" class="decorateStyleCrud">
     <script src="../bootstrap/js/Archivos.js"></script>
