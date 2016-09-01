@@ -1,8 +1,7 @@
 var idUser;
 var comment;
 
-$(document).ready(function () {
-    //ACCIONES VISUALES DE COMENTARIOS
+function cargar(){
     var claseListaCom='.comment-toggler .Archivo, .comment-toggler .Publicado, .comment-toggler .Descripcion';
     $(claseListaCom).css('cursor', 'pointer').click(function () {
         var pid=$(this).parent().attr('id');
@@ -29,6 +28,10 @@ $(document).ready(function () {
         );
 
     });
+}
+$(document).ready(function () {
+    //ACCIONES VISUALES DE COMENTARIOS
+    cargar();
     $('.comment').toggle(false).css('background','#ddd');
     
     //ENVIAR COMENTARIO

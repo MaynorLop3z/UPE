@@ -325,49 +325,52 @@ class Archivos extends CI_Model {
            return $resultado;
        }
 
-        public function ListarPublicacionesPaginacionCategoria($offset, $CodigoCategoriaDiplomado) {
-        try {
-            if ($offset == null) {
-                $limit = PUBLICACIONES_X_PAG;
-                $offset = 0;
-            }
-            $limit = PUBLICACIONES_X_PAG;
-            $varLimit = ' limit ' . $limit . ' offset ' . $offset;
-            $stringQuery = ' SELECT 
-                "Publicaciones"."CodigoPublicacion", 
-                "Publicaciones"."Titulo", 
-                "Publicaciones"."Contenido", 
-                "Publicaciones"."CodigoTipoPublicacion", 
-                "Publicaciones"."CodigoCategoriaDiplomado", 
-                "Publicaciones"."Estado", 
-                "Archivos"."CodigoArchivos", 
-                "Archivos"."Ruta", 
-                "Archivos"."Nombre", 
-                "Archivos"."Extension", 
-                "Archivos"."Estado", 
-                "Archivos"."CodigoPublicaciones"
-              FROM 
-                public."Publicaciones", 
-                public."Archivos"
-              WHERE 
-                "Publicaciones"."CodigoTipoPublicacion" =' . TIPO_PUBLICACION_WEB . ' AND 
-                "Publicaciones"."CodigoCategoriaDiplomado" = '.$CodigoCategoriaDiplomado.' AND 
-                "Publicaciones"."CodigoPublicacion" = "Archivos"."CodigoPublicaciones" AND 
-                "Publicaciones"."Estado" = True
-              ORDER BY
-                "Publicaciones"."FechaPublicacion" ASC';
+        public function listarArchivosPorGrupoAlumno($grupo){
+            $consulta= $this->db->query('SELECT DISTINCT "Publicaciones"."CodigoPublicacion",
+                        "Publicaciones"."UsuarioPublica", 
+                        "Publicaciones"."FechaPublicacion", 
+                        "Publicaciones"."Titulo",
+                        "Publicaciones"."Contenido",
+                        "Publicaciones"."ParticipantePublica",
+                        "Publicaciones"."Estado",
+                        "Publicaciones"."CodigoGrupoPeriodo",
+                        "Publicaciones"."CodigoGrupoPeriodoUsuario",
+                        "Publicaciones"."CodigoTipoPublicacion",
+                        "Publicaciones"."CodigoCategoriaDiplomado",
+                        "CategoriaDiplomados"."NombreCategoriaDiplomado",
+                        "Archivos"."Extension",
+                        "Archivos"."Ruta",
+                        "Archivos"."Nombre",
+                        "GruposParticipantes"."CodigoUsuario"
+                        
+                 FROM   
+                         public."CategoriaDiplomados", 
+                         public."Publicaciones",
+                         public."Archivos",
+                         public."GruposParticipantes"
+                 WHERE  	
+                         "Publicaciones"."CodigoGrupoPeriodo" = public."GruposParticipantes"."CodigoGrupoPeriodo"
 
-            $stringQuery = $stringQuery . $varLimit;
-            $consulta = $this->db->query($stringQuery);
-            if ($consulta != null) {
-                $resultado = $consulta->result();
-            } else {
-                
-            }
-        } catch (Exception $exc) {
-            echo $exc->getTraceAsString();
+                 AND
+                         "Publicaciones"."CodigoGrupoPeriodo" = '.$grupo.'
+
+                 AND    
+                         "Publicaciones"."CodigoTipoPublicacion" = '.TIPO_PUBLICACION_GRUPO.'
+                 
+                 AND
+                         "Publicaciones"."Estado" = TRUE
+                 
+                 AND
+                        "CategoriaDiplomados"."CodigoCategoriaDiplomado"  = public."Publicaciones"."CodigoCategoriaDiplomado"
+          
+                 AND
+                        "Archivos"."CodigoPublicaciones" = public."Publicaciones"."CodigoPublicacion"
+
+                 ORDER BY
+                           "Publicaciones"."FechaPublicacion" DESC; ');
+            
+           $resultado = $consulta->result();
+           return $resultado;
         }
-        return $resultado;
-    }
 
 }

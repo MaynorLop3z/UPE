@@ -226,7 +226,45 @@
                                                             <th>Descargar</th>
                                                         </tr>
                                                     </thead> 
-                                                    <tbody id="ArchivosGrupoAlumnoContent<?php echo $gru->CodigoGrupoPeriodo;?>">
+                                                    <tbody>
+
+                                                <?php 
+                                                    foreach ($archivosAlumno as $arch) { //Listar cada archivo
+                                                     if($arch->CodigoGrupoPeriodo== $gru->CodigoGrupoPeriodo){ 
+                                                         
+                                                         if(file_exists('bootstrap'.$arch->Ruta)){
+                                                            $tamar=filesize('bootstrap'.$arch->Ruta); //Formatea el size del archivo
+                                                            if($tamar>=1024 & $tamar<1048576){
+                                                                $tamar = round($tamar/1024, 0)." Kb";
+                                                            }  else if($tamar >= 1048576) {
+                                                                $tamar = round($tamar/1048576, 2)." Mb";
+                                                            }else{
+                                                                $tamar = $tamar." B";
+                                                            }
+                                                         }else{$tamar="Indeterminado";}
+
+                                                         ?>
+                                                        <tr  data-dipd='<?php echo json_encode($arch) ?>' 
+                                                             id="dip<?php echo $arch->CodigoPublicacion ?>" title="Ver Comentarios" class="comment-toggler" >
+                                                                <td class="Archivo"><?php echo $arch->Titulo ?></td>
+                                                                <td class="Descripcion"><?php echo ($arch->Contenido!= NULL ? $arch->Contenido: "No hay descripción") ?></td>
+                                                                <td class="Publicado" ><?php echo $arch->FechaPublicacion ?></td>
+                                                                <td class="TipoArchivo"><?php echo strtoupper($arch->Extension) ?></td>
+                                                                <td class="TamArchivo" style="width:100px;"><?php echo $tamar; ?></td>
+                                                                <td class="gestion_dip" style="width:150px;">
+                                                                    <button id="downArc<?php echo $arch->CodigoPublicacion ?>" onclick="goArchivo('<?php echo base_url() ?>index.php/ArchivosController/downloads/<?php echo $arch->Nombre?>')"  title="Descargar Archivo" class="btndeldip btn btn-warning" class="btn btn-info btn-lg"><span class=" glyphicon glyphicon-download-alt"></span></button>
+                                                                </td>
+                                                        </tr>
+                                                        <tr id="comment-dip<?php echo $arch->CodigoPublicacion ?>" class="comment">
+                                                            <td class="form-group" colspan="6"> <label for="usr">Comentar:</label>
+                                                            <input type="text" class="form-control inputComment" placeholder="Escribe algo...">
+                                                            <div class="list-group" id="comment-<?php echo $arch->CodigoPublicacion?>"></div>
+                                                            </td>
+                                                        </tr>
+                                                    <?php 
+                                                      }
+                                                    }
+                                                ?>         
                                                     </tbody>
                                                 </table>  
                                               </div>
@@ -284,19 +322,6 @@
         
 });
     function openListaArchivos(mod){
-        var posting = $.post("ArchivosController/ArchivosGrupoAlumno/", {opcion:mod});
-        posting.done(function (data) {
-            if (data !== null) {
-                
-                $('#ArchivosGrupoAlumnoContent'+mod+'').empty();
-                $('#ArchivosGrupoAlumnoContent'+mod+'').html(data);
-                $('.comment').toggle(false);
-                cargar();
-            }
-        });
-        posting.fail(function (data) {
-            alert("Error");
-        });
         var modale="#ListArchivosAlumno"+mod;
             $(modale).modal();
     }

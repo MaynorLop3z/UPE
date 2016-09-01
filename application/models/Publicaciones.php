@@ -362,7 +362,50 @@ class Publicaciones extends CI_Model {
     }
     
 
+    public function ListarPublicacionesPaginacionCategoria($offset, $CodigoCategoriaDiplomado) {
+        try {
+            if ($offset == null) {
+                $limit = PUBLICACIONES_X_PAG;
+                $offset = 0;
+            }
+            $limit = PUBLICACIONES_X_PAG;
+            $varLimit = ' limit ' . $limit . ' offset ' . $offset;
+            $stringQuery = ' SELECT 
+                "Publicaciones"."CodigoPublicacion", 
+                "Publicaciones"."Titulo", 
+                "Publicaciones"."Contenido", 
+                "Publicaciones"."CodigoTipoPublicacion", 
+                "Publicaciones"."CodigoCategoriaDiplomado", 
+                "Publicaciones"."Estado", 
+                "Archivos"."CodigoArchivos", 
+                "Archivos"."Ruta", 
+                "Archivos"."Nombre", 
+                "Archivos"."Extension", 
+                "Archivos"."Estado", 
+                "Archivos"."CodigoPublicaciones"
+              FROM 
+                public."Publicaciones", 
+                public."Archivos"
+              WHERE 
+                "Publicaciones"."CodigoTipoPublicacion" =' . TIPO_PUBLICACION_WEB . ' AND 
+                "Publicaciones"."CodigoCategoriaDiplomado" = '.$CodigoCategoriaDiplomado.' AND 
+                "Publicaciones"."CodigoPublicacion" = "Archivos"."CodigoPublicaciones" AND 
+                "Publicaciones"."Estado" = True
+              ORDER BY
+                "Publicaciones"."FechaPublicacion" ASC';
 
+            $stringQuery = $stringQuery . $varLimit;
+            $consulta = $this->db->query($stringQuery);
+            if ($consulta != null) {
+                $resultado = $consulta->result();
+            } else {
+                
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+        return $resultado;
+    }
 
 }
 ?>

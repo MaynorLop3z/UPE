@@ -216,4 +216,46 @@ class ArchivosController extends CI_Controller {
         echo $tamar;
     }
     
+    ////////////////////////////LISTAR ARCHIVOS POR GRUPO PARA ALUMNOS///////////////////////
+   public function ArchivosGrupoAlumno(){
+       try{
+           if($this->input->post('opcion') != null){
+                $grupo=$this->input->post('opcion');
+                $Archivos=$this->Archivos->listarArchivosPorGrupoAlumno($grupo);
+                $registro = "";
+                foreach ($Archivos as $arch){
+                    
+                    if(file_exists('bootstrap'.$arch->Ruta)){
+                        $tamar=filesize('bootstrap'.$arch->Ruta); //Formatea el size del archivo
+                        if($tamar>=1024 & $tamar<1048576){
+                            $tamar = round($tamar/1024, 0)." Kb";
+                        }  else if($tamar >= 1048576) {
+                            $tamar = round($tamar/1048576, 2)." Mb";
+                        }else{
+                            $tamar = $tamar." B";
+                        }
+                     }else{$tamar="Indeterminado";}
+                    $registro .= '<tr  data-dipd="'.json_encode($arch).'" id="dip'.$arch->CodigoPublicacion.'" title="Ver Comentarios" class="comment-toggler" >
+                                    <td class="Archivo">'.$arch->Titulo.'</td>
+                                    <td class="Descripcion">'. ($arch->Contenido!= NULL ? $arch->Contenido: "No hay descripción") .'</td>
+                                    <td class="Publicado" >'. $arch->FechaPublicacion .'</td>
+                                    <td class="TipoArchivo">'. strtoupper($arch->Extension).'</td>
+                                    <td class="TamArchivo" style="width:100px;">'.$tamar .'</td>
+                                    <td class="gestion_dip" style="width:150px;">
+                                        <button id="downArc'.$arch->CodigoPublicacion.'" onclick="goArchivo(\''.base_url().'index.php/ArchivosController/downloads/'.$arch->Nombre.'\')"  title="Descargar Archivo" class="btndeldip btn btn-warning" class="btn btn-info btn-lg"><span class=" glyphicon glyphicon-download-alt"></span></button>
+                                    </td>
+                            </tr>
+                            <tr id="comment-dip'.$arch->CodigoPublicacion.'" class="comment">
+                                <td class="form-group" colspan="6"> <label for="usr">Comentar:</label>
+                                <input type="text" class="form-control inputComment" placeholder="Escribe algo...">
+                                <div class="list-group" id="comment-'.$arch->CodigoPublicacion.'"></div>
+                                </td>
+                            </tr>';
+                }
+            echo $registro;
+           }echo "vacio";
+       } catch (Exception $ex) {
+           echo "nada";
+       }
+   }
 }
