@@ -242,7 +242,6 @@
                                               <!--</div>-->
 
                                             </div>
-                                        
                                     </div>
                                 </div>
                             <!--Fin Lista de Archivos del Alumno-->
