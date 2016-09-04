@@ -36,7 +36,10 @@
          $principal=1;                          //propiedades si es tab principal
          $classgroup="tab-pane fade in active";
          $idhome ="";
+         
     foreach ($gruposMaestro as $grup) { //Lista cada seccion de grupo
+        $numArch =0;
+        $grupom = $grup->CodigoGrupoPeriodo;
           if($principal!=1){
           $classgroup="tab-pane fade";     //propiedades para tabs ocultos
           $idhome ="id=\"home\" class=\"tab-pane fade in active\"";
@@ -63,12 +66,13 @@
                 <th>Acción</th>
             </tr>
         </thead> 
-        <tbody>
+        <tbody id="ArchivosGrupoMaestroContent<?php echo $grup->CodigoGrupoPeriodo;?>">
   
     <?php $principal=0;
         foreach ($archivosMaestro as $arch) { //Listar cada archivo
-         if($arch->CodigoGrupoPeriodo== $grup->CodigoGrupoPeriodo){ 
-             
+         if($arch->CodigoGrupoPeriodo== $grup->CodigoGrupoPeriodo){
+             $numArch++;
+             if($numArch<=ROWS_PER_PAGE){ //Limita lista al numero de paginacion establecido
              if(file_exists('bootstrap'.$arch->Ruta)){
                 $tamar=filesize('bootstrap'.$arch->Ruta); //Formatea el size del archivo
                 if($tamar>=1024 & $tamar<1048576){
@@ -98,11 +102,24 @@
                     <div class="list-group" id="comment-<?php echo $arch->CodigoPublicacion?>"></div>
                 </td>
             </tr>
-  
-        <?php 
+           <?php 
+             }
           }
         }
-    ?>         
+        $paginas =  intval(ceil($numArch/ ROWS_PER_PAGE));
+        if($numArch>ROWS_PER_PAGE){ //Evalua si paginador es necesario
+        ?>   
+            <tr id="pagerArchivosMaestroGrupo<?php echo $grupom ?>"><td colspan=6>
+                <div class="row">
+                <ul class="pager" id="footpagerArchivosMaestroGrupo<?php echo $grupom ?>">
+                <li><button data-datainic="1" id="aFirstPagArchivosMaestroGrupo<?php echo $grupom ?>" onclick="goFirstPaginMaestro('<?php echo $grupom ?>')" >&lt;&lt;</button></li>
+                <li><button id="aPrevPagArchivosMaestroGrupo<?php echo $grupom ?>" onclick="goBackPaginMaestro('<?php echo $grupom ?>')">&lt;</button></li>
+                <li><input data-datainic="1" type="text" value="1" id="txtPagingSearchArchivosMaestroGrupo<?php echo $grupom ?>" name="txtNumberPag" size="5">/ <?php echo $paginas ?></li>
+                <li><button id="aNextPagArchivosMaestroGrupo<?php echo $grupom ?>" onclick="goNextPaginMaestro('<?php echo $grupom ?>')">&gt;</button></li>
+                <li><button id="aLastPagArchivosMaestroGrupo<?php echo $grupom ?>" data-datainic=" <?php echo $paginas ?>" onclick="goLastPaginMaestro('<?php echo $grupom ?>')">&gt;&gt;</button></li>
+                <li>[1 -  <?php echo $paginas ?> / <?php echo $numArch ?> ]</li></ul></div>'
+            </td></tr>
+        <?php } ?>
         </tbody>
     </table>  
       <div id="context-menu">
@@ -117,6 +134,7 @@
   </div>
 <?php } ?> 
 </div>
+
 <!--Fin Lista de Archivos del Maestro-->
 </div>
 

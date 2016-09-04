@@ -104,39 +104,46 @@ function cargarPaginador(id, tcom, tpag, tota, top){
     return pie;
 }
 
-///paginar AlumnosArc
+///paginar AlumnosArchivosGrupo
 function goFirstPaginAlumno(group){
-    paginarArchivosAlumno("data_ini", $('#aFirstPagArchivosAlumnoGrupo'+group).data("datainic"), group);
+    paginarArchivosGrupo("data_ini", $('#aFirstPagArchivosAlumnoGrupo'+group).data("datainic"), group, null);
 }
 function goBackPaginAlumno(group){
-    paginarArchivosAlumno("data_inip", null, group);
+    paginarArchivosGrupo("data_inip", null, group, null);
 }
 function goNextPaginAlumno(group){
-    paginarArchivosAlumno("data_inin", null, group);
+    paginarArchivosGrupo("data_inin", null, group, null);
 }
 function goLastPaginAlumno(group){
-    paginarArchivosAlumno("data_ini", $('#aLastPagArchivosAlumnoGrupo'+group).data("datainic"), group);
+    paginarArchivosGrupo("data_ini", $('#aLastPagArchivosAlumnoGrupo'+group).data("datainic"), group, null);
 }
 
-function paginarArchivosAlumno(dat, op, group){
-
-    var data_in = $('#txtPagingSearchArchivosAlumnoGrupo'+group).data("datainic");
-    var url = 'ArchivosController/paginArchivosAlumnoGrupo/';
-
+//paginador de archivos por grupo
+function paginarArchivosGrupo(dat, op, group, who){
+    var content='', data_in='', url='', la=who;
+    if(who===null){
+        content = '#ArchivosGrupoAlumnoContent'+group;
+        data_in = $('#txtPagingSearchArchivosAlumnoGrupo'+group).data("datainic");
+        la = 'a'; //la: lavel access, a = Alumno
+    }else{
+        content = '#ArchivosGrupoMaestroContent'+group;
+        data_in = $('#txtPagingSearchArchivosMaestroGrupo'+group).data("datainic");
+    }
+    url = 'ArchivosController/paginArchivosGrupo/';
     var opcion="";
     if(dat==="data_inin"){
-         opcion={"data_inin":data_in, "grupo":group};
+         opcion={"data_inin":data_in, "grupo":group, "la": la}; 
     }else if(dat==="data_inip"){
-        opcion={"data_inip":data_in, "grupo":group};
+        opcion={"data_inip":data_in, "grupo":group, "la": la};
     }else if(dat==="data_ini"){
         data_in= op;
-        opcion={"data_ini":data_in, "grupo":group};
+        opcion={"data_ini":data_in, "grupo":group, "la": la};
     }
     var posting = $.post(url, opcion);
     posting.done(function (data) {
         if (data !== null) {
-            $('#ArchivosGrupoAlumnoContent'+group).empty();
-            $('#ArchivosGrupoAlumnoContent'+group).html(data);
+            $(content).empty();
+            $(content).html(data);
             $('.comment').toggle(false);
             cargarComentarios();
         }

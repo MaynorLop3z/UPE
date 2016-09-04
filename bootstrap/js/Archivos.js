@@ -308,3 +308,16 @@ $('#btnEliminarPubGr').on("click", function(e){
   //  location.href = arch;
 //}
 
+///PAGINAR ARCHIVOS MAESTROS
+function goFirstPaginMaestro(group){
+    paginarArchivosGrupo("data_ini", $('#aFirstPagArchivosMaestroGrupo'+group).data("datainic"), group, "prof");
+}
+function goBackPaginMaestro(group){
+    paginarArchivosGrupo("data_inip", null, group, "prof");
+}
+function goNextPaginMaestro(group){
+    paginarArchivosGrupo("data_inin", null, group, "prof");
+}
+function goLastPaginMaestro(group){
+    paginarArchivosGrupo("data_ini", $('#aLastPagArchivosMaestroGrupo'+group).data("datainic"), group, "prof");
+}
