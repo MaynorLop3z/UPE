@@ -52,16 +52,26 @@ class ComentariosController extends CI_Controller {
     
     public function obtenerComentarios() {
         $data['PComentarios']=array();
+        $data['CComentarios']=array();
         if($this->input->post()){
             $publicacion=$this->input->post('publicacion');
             try {
-                $result=$this->Comentarios->listarComentarios($publicacion);
+                $result=$this->Comentarios->listarComentariosLimited($publicacion, null, null);
+                $totalActual=count($result=$this->Comentarios->listarComentariosLimited($publicacion, null, null));
+                $totalComentarios = count($this->Comentarios->listarComentarios($publicacion));
+                $totalPaginas = $this->getTotalPaginas($publicacion);
                 $data['PComentarios']=$result;
-                echo json_encode($result);
+                $contadores=array("totalcom"=>$totalComentarios, "totalpag"=>$totalPaginas, "totact"=>$totalActual, "top"=>COMMENTS_PER_PUB);
+                array_push($data['CComentarios'],$contadores);
+                echo json_encode($data);
             } catch (Exception $ex) {
                 echo "error al listar los comentarios";
             }
         }
+    }
+    
+    private function getTotalPaginas($publicacion) {
+        return $result = intval(ceil(count($this->Comentarios->listarComentarios($publicacion)) / COMMENTS_PER_PUB));
     }
     
 }

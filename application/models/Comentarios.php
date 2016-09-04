@@ -23,6 +23,25 @@ class Comentarios extends CI_Model {
         $resultado = $consulta->result();
         return $resultado;
     }
+    
+    public function listarComentariosLimited($CodigoPublicaciones,$limit, $offset) {
+        if ($limit == null && $offset == null) {
+                $limit = COMMENTS_PER_PUB;
+                $offset = 0;
+            }
+        $this->db->select('CodigoComentarios, '
+                . 'FechaComentario, '
+                . 'CorreoPublica, '
+                . 'Cuerpo, '
+                . 'NombrePublica, HoraComentario, ComentarioPadre');
+        $this->db->from('Comentarios');
+        $this->db->where('CodigoPublicaciones', $CodigoPublicaciones);
+        $this->db->where('Estado', TRUE);
+        $this->db->limit($limit, $offset);
+        $consulta = $this->db->get();
+        $resultado = $consulta->result();
+        return $resultado;
+    }
 
     public function CrearComentarios($CodigoPublicaciones, $FechaComentario, $CorreoPublica, 
             $Cuerpo, $NombrePublica, $Estado, $ip, $idusr, $nivel, $time) {

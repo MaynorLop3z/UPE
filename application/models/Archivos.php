@@ -340,18 +340,14 @@ class Archivos extends CI_Model {
                         "CategoriaDiplomados"."NombreCategoriaDiplomado",
                         "Archivos"."Extension",
                         "Archivos"."Ruta",
-                        "Archivos"."Nombre",
-                        "GruposParticipantes"."CodigoUsuario"
+                        "Archivos"."Nombre"
                         
                  FROM   
                          public."CategoriaDiplomados", 
                          public."Publicaciones",
-                         public."Archivos",
-                         public."GruposParticipantes"
+                         public."Archivos"
                  WHERE  	
-                         "Publicaciones"."CodigoGrupoPeriodo" = public."GruposParticipantes"."CodigoGrupoPeriodo"
-
-                 AND
+                         
                          "Publicaciones"."CodigoGrupoPeriodo" = '.$grupo.'
 
                  AND    
@@ -368,6 +364,56 @@ class Archivos extends CI_Model {
 
                  ORDER BY
                            "Publicaciones"."FechaPublicacion" DESC; ');
+            
+           $resultado = $consulta->result();
+           return $resultado;
+        }
+        
+        public function listarArchivosPorGrupoAlumnoLimited($grupo, $limit, $offset){
+            if ($limit == null && $offset == null) {
+                $limit = ROWS_PER_PAGE;
+                $offset = 0;
+            }
+            $consulta= $this->db->query('SELECT DISTINCT "Publicaciones"."CodigoPublicacion",
+                        "Publicaciones"."UsuarioPublica", 
+                        "Publicaciones"."FechaPublicacion", 
+                        "Publicaciones"."Titulo",
+                        "Publicaciones"."Contenido",
+                        "Publicaciones"."ParticipantePublica",
+                        "Publicaciones"."Estado",
+                        "Publicaciones"."CodigoGrupoPeriodo",
+                        "Publicaciones"."CodigoGrupoPeriodoUsuario",
+                        "Publicaciones"."CodigoTipoPublicacion",
+                        "Publicaciones"."CodigoCategoriaDiplomado",
+                        "CategoriaDiplomados"."NombreCategoriaDiplomado",
+                        "Archivos"."Extension",
+                        "Archivos"."Ruta",
+                        "Archivos"."Nombre"
+                        
+                 FROM   
+                         public."CategoriaDiplomados", 
+                         public."Publicaciones",
+                         public."Archivos"
+                 WHERE  	
+                         
+                         "Publicaciones"."CodigoGrupoPeriodo" = '.$grupo.'
+
+                 AND    
+                         "Publicaciones"."CodigoTipoPublicacion" = '.TIPO_PUBLICACION_GRUPO.'
+                 
+                 AND
+                         "Publicaciones"."Estado" = TRUE
+                 
+                 AND
+                        "CategoriaDiplomados"."CodigoCategoriaDiplomado"  = public."Publicaciones"."CodigoCategoriaDiplomado"
+          
+                 AND
+                        "Archivos"."CodigoPublicaciones" = public."Publicaciones"."CodigoPublicacion"
+
+                 ORDER BY
+                           "Publicaciones"."FechaPublicacion" DESC
+                           
+                  LIMIT '. $limit . ' OFFSET ' . $offset . '; ');
             
            $resultado = $consulta->result();
            return $resultado;

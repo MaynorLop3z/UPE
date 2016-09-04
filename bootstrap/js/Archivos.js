@@ -301,7 +301,7 @@ $('#btnEliminarPubGr').on("click", function(e){
     $(eli).hide('slow');
     $('#EliminarPublicacionGrupo').modal('toggle');
 });
-    
+   
 //-----------------DESCARGAS------------------
 
 //function goArchivo(arch){

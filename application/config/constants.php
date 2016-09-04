@@ -87,7 +87,7 @@ define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 //
 //Aca estan las constantes del SISUPE
-define('ROWS_PER_PAGE', 1); //numero de filas que se veran en las tablas.
+define('ROWS_PER_PAGE', 2); //numero de filas que se veran en las tablas.
 define('CONTROLLER_TAP_PANEL_DEFAULT', 'Usuarios');
 define('DEFINE_RIGHT_ALLOWED', '.decorateStyleCrud');
 define('MENU_PPAL_RIGHT', 'MenuPpal');
@@ -96,4 +96,5 @@ define('AGREGA_REG', 'add');
 define('PUBLICACIONES_X_PAG', 6);
 define('TIPO_PUBLICACION_WEB',1);
 define('TIPO_PUBLICACION_GRUPO',2);
+define('COMMENTS_PER_PUB', 2); //numero de comentarios por publicacion
 

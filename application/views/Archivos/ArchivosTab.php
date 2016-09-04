@@ -192,7 +192,7 @@
                             <?php echo $gru->NombreModulo;?>
                             <span style="color: #18bc9c;margin-left:20px;"> 
                             Inicio: <?php echo str_split($gru->FechaInicioPeriodo,5)[1];?> - Fin: <?php echo str_split($gru->FechaFinPeriodo,5)[1];?>
-                            <span style="margin-left:20px;margin-right: 20px;">Grupo <?php echo $gru->CodigoGrupoPeriodo ?></span>
+                            <br /><span style="margin-left:20px;margin-right: 20px;">Grupo <?php echo $gru->CodigoGrupoPeriodo ?></span>
                             </span>
                             <?php 
                                 $total=0;
@@ -287,11 +287,10 @@
         var posting = $.post("ArchivosController/ArchivosGrupoAlumno/", {opcion:mod});
         posting.done(function (data) {
             if (data !== null) {
-                
                 $('#ArchivosGrupoAlumnoContent'+mod+'').empty();
                 $('#ArchivosGrupoAlumnoContent'+mod+'').html(data);
                 $('.comment').toggle(false);
-                cargar();
+                cargarComentarios();
             }
         });
         posting.fail(function (data) {
