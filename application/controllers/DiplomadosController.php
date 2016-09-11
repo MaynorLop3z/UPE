@@ -94,17 +94,23 @@ class DiplomadosController extends CI_Controller {
     
     
 
-    public function ModViewDip() {
+    public function listarModulosByDiplomado() {
         try {
+            $result='';
             if ($this->input->post()) {
-                $codigoDiplomado = $this->input->post('DipViewMod');
+                $codigoDiplomado = $this->input->post('codDip');
                 if ($codigoDiplomado != null) {
-                    $arrayData = $this->Modulos->listarModulosByDiplomado($codigoDiplomado);
-                    echo json_encode($arrayData);
+                    $arrayData = $this->Diplomados->listarModulosByDiplomado($codigoDiplomado);
+                   // echo json_encode($arrayData);
+                    foreach($arrayData as $obj) {
+                      $result.='<tr><td>'.$obj->OrdenModulo.'</td><td>'.$obj->NombreModulo.'</td><td>'.$obj->Comentarios.'</td>
+                                </tr>';  
+                    }
                 }
             }
+            echo $result;
         } catch (Exception $ex) {
-            
+            echo $ex->getMessage();
         }
     }
 
@@ -245,4 +251,6 @@ class DiplomadosController extends CI_Controller {
             <tbody>';
         return $encabezado;
     }
+    
+    
 }

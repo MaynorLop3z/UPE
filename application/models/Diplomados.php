@@ -8,13 +8,11 @@ class Diplomados extends CI_Model {
         $this->load->database();
     }
     public function listarModulosByDiplomado($codigoDiplomado=null) {
-        $this->db->select('CodigoDiplomado, '
-                . 'NombreDiplomado,'
-                . 'Descripcion, '
-                . 'Estado, '
-                . 'CodigoCategoriaDiplomado, '
+        $this->db->select('NombreModulo, '
+                .'OrdenModulo,'
                 . 'Comentarios');
-        $this->db->from('Diplomados');
+        $this->db->from('Modulos');
+        $this->db->order_by("OrdenModulo", "asc");
         $this->db->where('CodigoDiplomado', $codigoDiplomado);
         $consulta = $this->db->get();
         $resultado = $consulta->result();
@@ -265,5 +263,4 @@ class Diplomados extends CI_Model {
         $num_rows = count($this->listarPeriodosByModulo($di));
         return $num_rows;
     }
-
 }

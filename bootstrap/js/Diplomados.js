@@ -75,16 +75,36 @@ function eliminarDiplomado(fila){
    $('#EliminarDiplomado').modal('toggle'); 
 }
 //funcion para ver  la info  del modulo del diplomado
-function ViewModDip(fila){
+function listarModulosByDiplomado(fila){
  codigoDiplomado = fila.id;
  filaEdit = fila;
 
  codigoDiplomado = codigoDiplomado.substring(7);
     var dip = $('#dip' + codigoDiplomado);
     var NombreDiplomadoView = dip.find(".nombre_Diplomado").html().toString().trim();
-         console.log(NombreDiplomadoView);
+         //console.log(NombreDiplomadoView);
+    console.log(codigoDiplomado);
     $('#DipViewMod').html(NombreDiplomadoView);  
     $("#ModuloView").modal();
+    
+    
+    var posting = $.post('DiplomadosController/listarModulosByDiplomado/',{codDip:codigoDiplomado});
+    posting.done(function(data){
+        if(data!=null){
+            $('#bdModulosDip').empty(); 
+           $('#bdModulosDip').html(data); 
+        }else{
+         $("#NocontainsM").modal('toggle');   
+            
+        }
+               
+   });
+     posting.fail(function(xhr, textStatus, errorThrown) {
+        alert("error" + xhr.responseText);
+     
+});
+        
+    
 }
 
 
@@ -93,12 +113,12 @@ function ViewModDip(fila){
 //// cargar Datos en las modales para editar /////////////////////////////////////////////////////////////////
 
 //funcion para  ver los modulos agregados al Diplomado 
-$("#ModuloView").on('show.bs.modal',function(event){
-    console.log(codigoDiplomado);
-//    var dip = $('#dip' + codigoDiplomado);
-//    var NombreDiplomadoView = dip.find(".nombre_Diplomado").html().toString().trim();
-//    $('#DipViewMod').html(NombreDiplomadoView);    
-});
+//$("#ModuloView").on('show.bs.modal',function(event){
+//    console.log(codigoDiplomado);
+////    var dip = $('#dip' + codigoDiplomado);
+////    var NombreDiplomadoView = dip.find(".nombre_Diplomado").html().toString().trim();
+////    $('#DipViewMod').html(NombreDiplomadoView);    
+//});
 
 
 $('#ModificarDiplomado').on('click', function (event) {
@@ -308,26 +328,26 @@ $("#frmfindDip").submit(function(event){
 });
 
 
-// mostrar los Modulos AGregados al diplomado //
-$("#ModDip").submit(function(event){
-     
-    event.preventDefault();
-    var $form = $(this), NombreDiplomado = $form.find("input[name='DipViewMod']").val(), url = $form.attr("action");
-    var posting = $.post(url,{DipViewMod:NombreDiplomado});
-    posting.done(function(data){
-        if(data){
-           $('#tableMoVi').html(data); 
-        }else{
-         $("#NocontainsM").modal('toggle');   
-            
-        }
-               
-   });
-     posting.fail(function(xhr, textStatus, errorThrown) {
-        alert("error" + xhr.responseText);
-     
-});
-});
+// mostrar los Modulos AGregados al diplomado //////////////////////
+//$("#ModDip").submit(function(event){
+//     
+//    event.preventDefault();
+//    var $form = $(this), NombreDiplomado = $form.find("input[name='DipViewMod']").val(), url = $form.attr("action");
+//    var posting = $.post(url,{DipViewMod:NombreDiplomado});
+//    posting.done(function(data){
+//        if(data){
+//           $('#tableMoVi').html(data); 
+//        }else{
+//         $("#NocontainsM").modal('toggle');   
+//            
+//        }
+//               
+//   });
+//     posting.fail(function(xhr, textStatus, errorThrown) {
+//        alert("error" + xhr.responseText);
+//     
+//});
+//});
 
 ////////////PAGINACION DE DIPLOMADOS//////////////
     

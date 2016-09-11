@@ -5,8 +5,8 @@
         <div class="modal-content">
             <div class="container-fluid ">
                 <button type="button" class="close" id="btnCerrarDi"  data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <form  id="formgrdDiplomado" action="<?php echo base_url()?>index.php/DiplomadosController/guardarDiplomado/" class="form-horizontal" method="post" >
-                     <fieldset>
+                <form  id="formgrdDiplomado" action="<?php echo base_url() ?>index.php/DiplomadosController/guardarDiplomado/" class="form-horizontal" method="post" >
+                    <fieldset>
                         <legend class="modal-header">Nuevo Diplomado:</legend> 
                         <div class="form-group">
                             <label for="DiplomadoNombre" class="col-lg-3 control-label">Nombre Del Diplomado</label>
@@ -19,60 +19,60 @@
                             <div class="col-lg-9">
                                 <textarea type="text" class="form-control" name="Descripcion" id="DiplomadoDescripcion" placeholder="Descripcion del Diplomado" required></textarea>
                             </div>
-                       </div>
-                       <div class="form-group">
+                        </div>
+                        <div class="form-group">
                             <label class="col-lg-3 control-label">Estado</label>
                             <div class="col-lg-9">
                                 <input type="checkbox" id="Estado"  name="Activo" value="True" checked> Activo<br>
                             </div>
                         </div> 
-                                                                                                                   
+
                         <div class="form-group">
                             <label for="CatgoriaDiplomado" class="col-lg-3 control-label">Categoria Diplomado:</label>
                             <div class="col-lg-9">
                                 <select class="form-control" id="CatgoriaDiplomado" name="CodigoCategoriaDiplomado">                                          
                                     <?php
-                                    foreach ($CategoriasDi as $cadi){ //AQui para seleccionar  la categoria del diplomado al que pertenece
+                                    foreach ($CategoriasDi as $cadi) { //AQui para seleccionar  la categoria del diplomado al que pertenece
+                                        ?>
+                                        <option value="<?= $cadi->CodigoCategoriaDiplomado ?>">
+                                            <?php echo $cadi->CodigoCategoriaDiplomado ?> <!-- Para imprimir los datos en el select-->
+                                        </option>
+                                        <?php }
                                     ?>
-                                    <option value="<?= $cadi->CodigoCategoriaDiplomado ?>">
-                                    <?php echo $cadi->CodigoCategoriaDiplomado ?> <!-- Para imprimir los datos en el select-->
-                                    </option>
-                                       <?php
-                                    } ?>
-                                    
+
                                 </select>
                             </div>
-                       </div>
-                       <div class="form-group">
+                        </div>
+                        <div class="form-group">
                             <label for="ComentarioDiplomado" class="col-lg-3 control-label">Comentarios</label>
                             <div class="col-lg-9">
-                                <textarea id="ComentarioDiplomado" name="Comentarios"  type="text" class="form-control"  placeholder="Descripcion del Diplomado" required></textarea>
+                                <textarea id="ComentarioDiplomado" name="Comentarios"  type="text" class="form-control"  placeholder="Descripcion del Diplomado" ></textarea>
                             </div>
-                       </div>
-                        
+                        </div>
+
                         <div class="modal-footer">
                             <button type="submit" id="BtnAddDi" onclick="" class=" btn btn-default" name="Aceptar">Guardar</button>
                             <button type="reset" id="btncleanDi" onclick="" class=" btn btn-default" name="Limpiar">Limpiar</button>
-                           
+
                         </div>
-                        
-                      </fieldset>
-                 </form>
-              </div>
+
+                    </fieldset>
+                </form>
+            </div>
         </div>
     </div>
 </div>
 <!-- Modal paa modificar Diplomados --------------------------------------------------------------------------------------------------------------------------------------->
-    <div id="ModificarDiplomado" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="ModificarDiplomado" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="container-fluid ">
-                 <button type="button" class="close" id="btnCerrarDi"  data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                 <form  id="formeditDiplomado" action="<?php echo base_url()?>index.php/DiplomadosController/editarDiplomado/" class="form-horizontal" method="post" >
-                     <fieldset>
-                         
+                <button type="button" class="close" id="btnCerrarDi"  data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <form  id="formeditDiplomado" action="<?php echo base_url() ?>index.php/DiplomadosController/editarDiplomado/" class="form-horizontal" method="post" >
+                    <fieldset>
+
                         <legend class="modal-header">Editar Diplomado:</legend> 
-                     
+
                         <div class="form-group">
                             <label for="DiplomadoNombreEdit" class="col-lg-3 control-label">Nombre Del Diplomado</label>
                             <div class="col-lg-9">
@@ -84,49 +84,49 @@
                             <div class="col-lg-9">
                                 <textarea type="text" class="form-control" name="Descripcion" id="DiplomadoDescripcionEdit" placeholder="Descripcion del Diplomado" required></textarea>
                             </div>
-                       </div>
-                       <div class="form-group">
+                        </div>
+                        <div class="form-group">
                             <label class="col-lg-3 control-label">Estado</label>
                             <div class="col-lg-9">
                                 <input type="checkbox" id="EstadoEdit"  name="Activo" value="True" checked> Activo<br>
                             </div>
                         </div>                                                                              
-                        
+
                         <div class="form-group">
                             <label for="CatgoriaDiplomadoEdit" class="col-lg-3 control-label">Categoria Diplomado:</label>
                             <div class="col-lg-9">
                                 <select class="form-control" id="CategoriaDiplomadoEdit" name="CodigoCategoriaDiplomado" required>                                          
                                     <?php
-                                    foreach ($CategoriasDi as $cadi){ //AQui para seleccionar  la categoria del diplomado al que pertenece
-                                    ?>
-                                    <option value="<?= $cadi->CodigoCategoriaDiplomado ?>">
-                                    <?= $cadi->NombreCategoriaDiplomado?> <!-- Para imprimir los datos en el select-->
-                                    </option>
-                                       <?php }
-                                       ?> 
-                                    
+                                    foreach ($CategoriasDi as $cadi) { //AQui para seleccionar  la categoria del diplomado al que pertenece
+                                        ?>
+                                        <option value="<?= $cadi->CodigoCategoriaDiplomado ?>">
+                                            <?= $cadi->NombreCategoriaDiplomado ?> <!-- Para imprimir los datos en el select-->
+                                        </option>
+                                    <?php }
+                                    ?> 
+
                                 </select>
                             </div>
-                       </div>
-                       <div class="form-group">
+                        </div>
+                        <div class="form-group">
                             <label for="ComentarioDiplomadoEdit" class="col-lg-3 control-label">Comentarios</label>
                             <div class="col-lg-9">
-                                <textarea id="ComentarioDiplomadoEdit" name="Comentarios"  type="text" class="form-control"  placeholder="Descripcion del Diplomado" required></textarea>
+                                <textarea id="ComentarioDiplomadoEdit" name="Comentarios"  type="text" class="form-control"  placeholder="Descripcion del Diplomado" ></textarea>
                             </div>
-                       </div>
-                        
+                        </div>
+
                         <div class="modal-footer">
                             <button type="submit" id="BtneditDi" onclick="" class=" btn btn-default" name="Aceptar">Actualizar</button>
                             <button type="reset" id="btncleaneditDi" onclick="" class=" btn btn-default" name="Limpiar">Limpiar</button>
-                           
+
                         </div>
-                        
-                      </fieldset>
-                 </form>
+
+                    </fieldset>
+                </form>
             </div>
         </div>
     </div>
-    </div>
+</div>
 <!-- Eliminar Diplomado----->
 <div id="EliminarDiplomado" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -135,15 +135,15 @@
                 <button type="button" class="close btn-lg" data-dismiss="modal"  aria-label="Close" ><span aria-hidden="true">&times;</span></button>
                 <form id="frmDELdip" action="<?php echo base_url() ?>index.php/DiplomadosController/EliminarDiplomado/" class="form-horizontal" class="form-horizontal" method="post" >
                     <legend class="modal-header">Diplomado:</legend> 
-                        <div class="form-group">
-                            <div class="col-lg-9">
-                                <label>¿Realmente desea eliminar el Diplomado <mark id="nombreDipDel">?</mark></label>
-                            </div>
+                    <div class="form-group">
+                        <div class="col-lg-9">
+                            <label>¿Realmente desea eliminar el Diplomado <mark id="nombreDipDel">?</mark></label>
                         </div>
-                        <div class="modal-footer">
-                            <button type="submit" id="btnEnviarDip" onclick="" class=" btn btn-default" name="Eliminar">Eliminar</button>
-                <!-- <button type="reset" id="btnLimpiarDip" onclick="" class=" btn btn-default" name="Limpiar">Cancelar</button> -->
-                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="btnEnviarDip" onclick="" class=" btn btn-default" name="Eliminar">Eliminar</button>
+                        <!-- <button type="reset" id="btnLimpiarDip" onclick="" class=" btn btn-default" name="Limpiar">Cancelar</button> -->
+                    </div>
                     </fieldset>
                 </form>
             </div>
@@ -156,7 +156,7 @@
         <div class="modal-content">
             <div class="container-fluid ">
                 <button type="button" class="close" id="close"  data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                
+
                 <label style="center">El Diplomado no esta Definido</label>
             </div>
         </div>
@@ -164,83 +164,66 @@
 </div>
 
 
- <!---Cuando  el diplomado no tenga Modulos------------------------------------------------------->
-    <div id="NocontainsM" data-backdrop="static"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+<!---Cuando  el diplomado no tenga Modulos------------------------------------------------------->
+<div id="NocontainsM" data-backdrop="static"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="container-fluid ">
                 <button type="button" class="close" id="close"  data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                
+
                 <label style="center">No hay modulos agregados al Diplomados</label>
             </div>
         </div>
     </div>
 </div>
- 
- <!----Vista de  modulos por  diplomado    ------------------------------------------------------------------------------------------------------------>
- <div id="ModuloView" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-     <div class="modal-dialog  modal-lg">
-         <div class="modal-content ">
-             <div class="container-fluid ">
-                 <button type="button" class="close" id="btnCerrarMo"  data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
-                 <form id="ModDip" action="<?php echo base_url() ?>index.php/DiplomadosController/ModViewDip/" class="form-horizontal" class="form-horizontal" method="post" >
-                     <legend>Modulos Por Diplomado</legend>
+<!----Vista de  modulos por  diplomado    ------------------------------------------------------------------------------------------------------------>
+<div id="ModuloView" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-lg">
+        <div class="modal-content ">
+            <div class="container-fluid ">
+                <button type="button" class="close" id="btnCerrarMo"  data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
-                     <div class="row">
-                         <div class="col-lg-8">
-                         <div class="col-lg-6"><label>Diplomado:</label></div>
-                         <div class="col-lg-6"><h5><mark id="DipViewMod" ></mark></h5></div>
-                         </div>
+                <form id="ModDip" action="<?php echo base_url() ?>index.php/DiplomadosController/listarModulosByDiplomado/" class="form-horizontal" class="form-horizontal" method="post" >
+                    <legend>Modulos Por Diplomado</legend>
+
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="col-lg-6"><label>Diplomado:</label></div>
+                            <div class="col-lg-6"><h5><mark id="DipViewMod" ></mark></h5></div>
+                        </div>
                     </div>
-                 </form> 
-                 <div class="row">
-                     <div class="col-md-12">
-                         <table id="tableMoVi" class="table table-bordered table-striped table-hover table-responsive">
-                             <thead>
-                                 <tr>
-                                     <th>Modulo</th>
-                                     <th>Correlativo</th>
-                                     <th>Estado</th>
-                                 </tr>
-                             </thead> 
-                            <tbody>
-                        <?php
-                        foreach ($Modulos as $mod) {
-                            ?>
-                        
-                                              
-                        <tr id="mod<?= $mod->CodigoModulo?>">
-                                <td class="NombreMod"><?= $mod->NombreModulo ?></td>
-                                <td class="ordenMo"><?= $mod->OrdenModulo?></td>
-                                <td class="Estado"><?=  $mod->Estado?></td> 
-                                <td class="TurnoM"><?= $mod->CodigoTurno?></td>
-                                <td class="DipName"><?= $mod->CodigoDiplomado?></td>
-                                <td class="ComenMo"><?= $mod->Comentarios?></td>
-                                <td class="gestion_Mod">
-            <button id="btnModiM<?php echo $mod->CodigoModulo ?>" onclick="editModulo(this)" title="Editar Modulo" class="btn_modificar_Mod btn btn-success" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-pencil"></span> </button>
-            <button id="btnDELM<?php echo $mod->CodigoModulo ?>" onclick="delMo(this)" title="Eliminar Modulo" class="btn_eliminar_Mod btn btn-danger"><span class="glyphicon glyphicon-trash" class="btn btn-info btn-lg"></span></button>
-                                     </td>
-                            </tr>
-                            <?php
-                        }
-                        ?>
-                    </tbody>
-                    </tbody>
-                </table>
+                </form> 
+                <div class="row">
+                    <div class="col-md-12">
+                        <table id="tableMoVi" class="table table-bordered table-striped table-hover table-responsive">
+                            <thead>
+                                <tr>
+                                    <th>Correlativo</th>
+                                    <th>Modulo</th>
+                                    <th>Comentario</th>
+                                </tr>
+                            </thead> 
+                            <tbody id="bdModulosDip">                    
+                            </tbody>
+
+                        </table>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-                            
-            </div>
+
+
         </div>
-              
-          
-            </div>
-            </div>
-        </div>
+    </div>
 </div>
 </div>
-    
- <!--agregar modulos---------------------------------------------------------------------------------------------------------------------------------->
+</div>
+
+<!--agregar modulos---------------------------------------------------------------------------------------------------------------------------------->
 <div id="NuevoModuloDip" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -258,7 +241,7 @@
                         <div class="form-group">
                             <label for="ModuloOrden" class="col-lg-3 control-label">Correlativo</label>
                             <div class="col-lg-9">
-                                <input   type="number" class="form-control" name="ordenM" id="ModuloOrden" placeholder="Orden" required>
+                                <input   type="number" min="1" class="form-control" name="ordenM" id="ModuloOrden" placeholder="Orden" required>
                             </div>
                         </div>                     
                         <div class="form-group">
@@ -283,22 +266,22 @@
                                 </select>
                             </div>
                         </div>
-                         <!-- Se quita Diplomados ya que debe ser automatico-->
-                          <div class="form-group">
+                        <!-- Se quita Diplomados ya que debe ser automatico-->
+                        <div class="form-group">
                             <label class="col-lg-3 control-label">Diplomado:</label>
-                         
-                           <div class="col-lg-9">
-                               <input id="modDiplomadohidde" type= "hidden" name="CodigoDiplomado" value=""/><mark id="modDiplomadohidde"></mark >
-                         </div>
+
+                            <div class="col-lg-9">
+                                <input id="modDiplomadohidde" type= "hidden" name="CodigoDiplomado" value=""/><mark id="modDiplomadohidde"></mark >
                             </div>
-                                             
-                         
-                         
-                         
+                        </div>
+
+
+
+
                         <div class="form-group">
                             <label for="ComentarioDiplomado" class="col-lg-3 control-label">Comentarios:</label>
                             <div class="col-lg-9">
-                                <textarea id="ComentarioMod" name="Comentarios"  type="text" class="form-control"  placeholder="Comentario Modulo" required></textarea>
+                                <textarea id="ComentarioMod" name="Comentarios"  type="text" class="form-control"  placeholder="Comentario Modulo" ></textarea>
                             </div>
                         </div>
 

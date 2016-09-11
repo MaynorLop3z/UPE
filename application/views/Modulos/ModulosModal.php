@@ -18,7 +18,7 @@
                         <div class="form-group">
                             <label for="ModuloOrdenEdit" class="col-lg-3 control-label">Correlativo</label>
                             <div class="col-lg-9">
-                                <input type="number"  class="form-control" name="ordenM" id="ModuloOrdenEdit" placeholder="Orden" required>
+                                <input type="number"  min="1" class="form-control" name="ordenM" id="ModuloOrdenEdit" placeholder="Orden" required>
                             </div>
                         </div>                     
                         <div class="form-group">
@@ -62,7 +62,7 @@
                           <label class="col-lg-3 control-label">Comentario:</label>
                             
                             <div class="col-lg-9">
-                                <textarea id="ComentarioModEdit" name="Comentarios"  type="text" class="form-control"  placeholder="Comentario Modulo" required></textarea>
+                                <textarea id="ComentarioModEdit" name="Comentarios"  type="text" class="form-control"  placeholder="Comentario Modulo" ></textarea>
                             </div>
                         </div>
 
