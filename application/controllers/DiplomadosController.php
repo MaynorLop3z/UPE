@@ -131,7 +131,7 @@ class DiplomadosController extends CI_Controller {
                     $registro .= '<button id="btnmo' . $dip['CodigoDiplomado'] . '" onclick="editaDiplomado(this)" title="Editar Diplomado" class="btnmoddi btn btn-success"><span class="glyphicon glyphicon-pencil"></span></button>';
                     $registro .= '<button id="DELDiplomado' . $dip['CodigoDiplomado'] . '" onclick="eliminarDiplomado(this)" title="Eliminar Diplomado" class="btndeldip btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>';
                     $registro .= '<button id="Addmod'. $dip['CodigoDiplomado'] .'"onclick="AddModDip(this)"  title="Agregar Modulos" class="btnAddMod btn btn-info" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-plus"></span></button>';
-                    $registro .= '<button id="ModView' . $dip['CodigoDiplomado'] . '"onclick="ViewModDip(this)"  title="Ver modulos" class="btnVIewMod btn btn-warning" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-eye-open" ></span></button>'; 
+                    $registro .= '<button id="ModView' . $dip['CodigoDiplomado'] . '"onclick="listarModulosByDiplomado(this)"  title="Ver modulos" class="btnVIewMod btn btn-warning" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-eye-open" ></span></button>'; 
                     $registro .= '</td>';
                     $registro .= '</tr>';
                 }
@@ -211,7 +211,7 @@ class DiplomadosController extends CI_Controller {
             <button id="btnmo'. $dip->CodigoDiplomado .'" onclick="editaDiplomado(this)" title="Editar Diplomado" class="btnmoddi btn btn-success" class="btn btn-info btn-lg"><span class=" glyphicon glyphicon-pencil"></span></button>
             <button id="DELDiplomado'. $dip->CodigoDiplomado .'" onclick="eliminarDiplomado(this)"  title="Eliminar Diplomado" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>
             <button id="Addmod'. $dip->CodigoDiplomado .'" onclick="AddModDip('.$dip->CodigoDiplomado .')"  title="Agregar Modulos" class="btnAddMod btn btn-info" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-plus"></span></button>
-            <button id="ModView'. $dip->CodigoDiplomado .'" onclick="ViewModDip(this)"  title="Ver modulos" class="btnVIewMod btn btn-warning" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-eye-open" ></span></button>       
+            <button id="ModView'. $dip->CodigoDiplomado .'" onclick="listarModulosByDiplomado(this)"  title="Ver modulos" class="btnVIewMod btn btn-warning" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-eye-open" ></span></button>       
                     </td></tr>';
 //                $filas.=' <td style="text-align:center"  class="gestion_User">' . $buttonsByUserRights . '</td> </tr>';
             }

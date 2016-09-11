@@ -14,6 +14,7 @@ class Diplomados extends CI_Model {
         $this->db->from('Modulos');
         $this->db->order_by("OrdenModulo", "asc");
         $this->db->where('CodigoDiplomado', $codigoDiplomado);
+        //$this->db->where('Estado', TRUE); // Aqui puse esto 
         $consulta = $this->db->get();
         $resultado = $consulta->result();
         return $resultado;

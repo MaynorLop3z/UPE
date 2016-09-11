@@ -94,7 +94,8 @@ function listarModulosByDiplomado(fila){
             $('#bdModulosDip').empty(); 
            $('#bdModulosDip').html(data); 
         }else{
-         $("#NocontainsM").modal('toggle');   
+         //console.log("El diplomado no contiene modulos");
+            $("#NocontainsM").modal('toggle');   
             
         }
                
@@ -185,7 +186,7 @@ $('#formgrdDiplomado').submit(function (event) {
             fila = fila + '<button id="btnmo' + obj.CodigoDiplomado + '" onclick="editaDiplomado(this)" title="Editar Diplomado" class="btnmoddi btn btn-success" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-pencil"></span> </button>';
             fila = fila + '<button id="DELDiplomado' + obj.CodigoDiplomado + '" onclick="eliminarDiplomado(this)" title="Eliminar Diplomado" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>';
             fila = fila + '<button id="Addmod'+ obj.CodigoDiplomado +'"onclick="AddModDip(this)"  title="Agregar Modulos" class="btnAddMod btn btn-info" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-plus"></span></button>';
-            fila = fila + '<button id="ModViewphp' + obj.CodigoDiplomado + '"onclick="ViewModDip(this)"  title="Ver modulos" class="btnVIewMod btn btn-warning" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-eye-open" ></span></button>';   
+            fila = fila + '<button id="ModViewphp' + obj.CodigoDiplomado + '"onclick="listarModulosByDiplomado(this)"  title="Ver modulos" class="btnVIewMod btn btn-warning" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-eye-open" ></span></button>';   
             
             
             fila = fila + '</td></tr>';
@@ -257,7 +258,7 @@ $("#formeditDiplomado").submit(function (event) {
             fila = fila + '<button id="btnmo' + obj.CodigoDiplomado + '" onclick="editaDiplomado(this)" title="Editar Diplomado" class="btnmoddi btn btn-success" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-pencil"></span> </button>';
             fila = fila + '<button id="DELDiplomado' + obj.CodigoDiplomado + '" onclick="eliminarDiplomado(this)" title="Eliminar Diplomado" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>';
             fila = fila + '<button id="Addmod'+ obj.CodigoDiplomado +'"onclick="AddModDip(this)"  title="Agregar Modulos" class="btnAddMod btn btn-info" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-plus"></span></button>';
-            fila = fila + '<button id="ModViewphp' + obj.CodigoDiplomado + '"onclick="ViewModDip(this)"  title="Ver modulos" class="btnVIewMod btn btn-warning" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-eye-open" ></span></button>';   
+            fila = fila + '<button id="ModViewphp' + obj.CodigoDiplomado + '"onclick="listarModulosByDiplomado(this)"  title="Ver modulos" class="btnVIewMod btn btn-warning" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-eye-open" ></span></button>';   
             fila = fila + '</td></tr>';
 //            var dipDip = $('#tableDiplomados > tbody').find("#dip" + obj.CodigoDiplomado);
 //            dipDip.find('.nombre_Diplomado').html(obj.NombreDiplomado);
