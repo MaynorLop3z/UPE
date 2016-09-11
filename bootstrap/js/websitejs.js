@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  */
 var codigoPub;
-
-$('.callModalPublicacion').on('click', function (event) {
+$("#PubsCategoria").on("click", ".callModalPublicacion", function (e) {
+//$('.callModalPublicacion').on('click', function (event) {
+   
     codigoPub = this.id;
     $("#portfolioModal6").modal('show');
 
@@ -36,20 +37,43 @@ $('#btnSend').on('click', function (event) {
 
         window.location.href = link;
     } else {
-        alert('El noombre o el mensaje esta vacio.');
+        alert('El nombre o el mensaje esta vacio.');
     }
 
 });
 
-$(document).ready(function (e) {
-
+$('#opcReciente').on('click', function (event) {
+//$('#masRecientesDiv').style.display = 'block';
+    var visto = document.getElementById('categoriaDiv');
+    visto.style.display = 'none';
+    $('#masRecientesDiv').show();
 });
 
 $('#opccategoria').on('click', function (event) {
 //    var slect = document.getElementById('categoriaDiv').value ;
 //    alert(slect);
-   $('#masRecientesDiv').hide();
+    $('#masRecientesDiv').hide();
     var visto = document.getElementById('categoriaDiv');
     visto.style.display = 'block';
+   
+});
 
+$('#selectCategoriaBusqueda').on('change',function (event){
+     //post con la categoria
+    var select =document.getElementById('selectCategoriaBusqueda');
+    var categoria = select.options[select.selectedIndex].value;
+    var url = 'index.php/wsite/listar/';
+    var posting = $.post(url, {
+        Categoria: categoria
+    });
+
+    posting.done(function (data) {
+        if (data !== null) {
+           $('#PubsCategoria').empty();
+           $('#PubsCategoria').html(data);
+        }
+        else {
+        }
+       
+    });
 });

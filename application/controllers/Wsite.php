@@ -16,6 +16,7 @@ if (!defined('BASEPATH')) {
 }
 //controlador de la pagina principal, permite logear a los usuarios
 include './application/models/dto/UsuariosDTO.php';
+
 //include './application/controllers/Listar.php';
 //
 class Wsite extends CI_Controller {
@@ -27,10 +28,10 @@ class Wsite extends CI_Controller {
     }
 
     public function index() {
-        // $this->load->view('wsite');
+// $this->load->view('wsite');
         $this->load->model('publicaciones');
 //        $this->load->model('archivos');
-       
+
         $user = $this->input->post('user');
 
         if ($user) {
@@ -56,7 +57,7 @@ class Wsite extends CI_Controller {
                         'logueado' => TRUE,
                         'nivel' => ''); //el nivel es auxiliar para diferenciar del login del PortalParticipante
                     $this->session->set_userdata($usuario_data);
-                    // redirect('Dashboard');
+// redirect('Dashboard');
 //                    $this->load->view('Dashboard', $data);
                     Redirect('Dashboard');
                 } else {
@@ -65,7 +66,7 @@ class Wsite extends CI_Controller {
                     $data['PagInicial'] = 1;
                     $data['PubporPag'] = PUBLICACIONES_X_PAG;
                     $data['TotalPaginacion'] = $this->publicaciones->ListarPublicacionesPaginacion(NULL);
-                    $data['PagCategoria']= $this->publicaciones->listarPublicacionesPaginacionCategoria(NULL,4);
+                    $data['PagCategoria'] = $this->publicaciones->listarPublicacionesPaginacionCategoria(NULL, null, 4);
                     $data['listCategorias'] = $this->publicaciones->listarCategoriasDiplomados();
 
 //            $data['publicacionesCargar'] = $this->mostrarPublicaciones();
@@ -78,7 +79,7 @@ class Wsite extends CI_Controller {
             $data['PagInicial'] = 1;
             $data['PubporPag'] = PUBLICACIONES_X_PAG;
             $data['TotalPaginacion'] = $this->publicaciones->ListarPublicacionesPaginacion(NULL);
-            $data['PagCategoria']= $this->publicaciones->listarPublicacionesPaginacionCategoria(NULL,4);
+            $data['PagCategoria'] = $this->publicaciones->listarPublicacionesPaginacionCategoria(NULL, NULL, 4);
             $data['listCategorias'] = $this->publicaciones->listarCategoriasDiplomados();
 
 //            $data['publicacionesCargar'] = $this->mostrarPublicaciones();
@@ -97,7 +98,7 @@ class Wsite extends CI_Controller {
             foreach ($listaPublicaciones as $publicacion) {
 
                 $archivos = $this->publicaciones->listarArchivosPublicacion($publicacion->CodigoPublicacion);
-                //$categoria = $this->categoriadiplomado->listarCategoriasDiplomados();
+//$categoria = $this->categoriadiplomado->listarCategoriasDiplomados();
                 foreach ($archivos as $archivo) {
                     $publicacionArchivo = array(
                         'CodigoPublicacion' => $publicacion->CodigoPublicacion,
@@ -151,7 +152,7 @@ class Wsite extends CI_Controller {
         return $listaPublicacionesArchivos2;
     }
 
-    // funcion para listar una publicacion segun su id
+// funcion para listar una publicacion segun su id
 //    public function mostrarPublicacion($id) {
 //        $iterador = 0;
 //        $camposPublicacion = array();
@@ -191,27 +192,64 @@ class Wsite extends CI_Controller {
             echo json_encode($data);
         }
     }
-    
-      public function listarPublicacionesPaginacionCategoria() {
+
+    private function getTotalPaginas() {
+        return $result = intval(ceil(count($this->Publicaciones->listarPublicaciones()) / PUBLICACIONES_X_PAG));
+    }
+
+    public function listar() {
+         $this->load->model('publicaciones');
         try {
-            if ($this->input - post()) {
+            
+            $result='';
+            if ($this->input->post()) {
                 $final = $this->input->post('data_ini');
-                $categoriaSlt=  $this->input->post('categoriaSlt');
+                $categoriaSlt= $this->input->post('Categoria');
                 $inicio = PUBLICACIONES_X_PAG;
                 if ($final != null) {
                     $final = ($final * PUBLICACIONES_X_PAG) - PUBLICACIONES_X_PAG;
                 }
                 $Response = array();
-                $Publicaciones = $this->publicaciones->ListarPublicacionesPaginacionCategoria($inicio, $final,$categoriaSlt);
+                $Publicaciones = $this->publicaciones->ListarPublicacionesPaginacionCategoria($inicio, $final, $categoriaSlt);
+                if( $Publicaciones != NULL){
                 foreach ($Publicaciones as $publicacion) {
-                    array_push($Response, $publicacion);
+                    $result .='<div class="col-sm-4 portfolio-item" >
+
+                                        <a  id="a'.$publicacion->CodigoPublicacion .'" data-dimg="'.json_encode($publicacion). '" class=" portfolio-link callModalPublicacion"  >
+                                            <div class="caption">
+                                                <div class="caption-content" >
+                                                    <i class="fa fa-search-plus fa-3x"></i>
+                                                </div>
+                                            </div>
+                                            <img  src="'.'bootstrap' . $publicacion->Ruta . '" class="img-responsive" alt="" style="height:500px; width: 500px;">
+                                        </a>
+
+
+                                    </div> ' ;
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    /////
+                    
                 }
-                $responseDef = json_encode($Response);
+                
+                }
+                else{
+                    $result ='<h3 align="center">No existen Publicaciones en esta categoria</h3>';
+                }
+                
             }
-            echo ($responseDef);
+            echo $result;
         } catch (Exception $exc) {
             $data = array('Error' => $ex->getMessage());
-            echo json_encode($data);
+            
         }
     }
 

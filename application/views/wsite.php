@@ -6,11 +6,12 @@
 
     <head>
 
-        <?php $this->load->helper('url');
-            //si esta logueado redirecciona al Dashboard
-            if ($this->session->userdata("logueado")===TRUE){
-                 Redirect('Dashboard');    
-            }
+        <?php
+        $this->load->helper('url');
+        //si esta logueado redirecciona al Dashboard
+        if ($this->session->userdata("logueado") === TRUE) {
+            Redirect('Dashboard');
+        }
         ?>
         <title>PAESIS</title>
         <link rel="icon" href="bootstrap/minerva.jpg" type="image/x-icon" />
@@ -35,7 +36,7 @@
         <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
         <script src="bootstrap/js/classie.js"></script>
         <script src="bootstrap/js/cbpAnimatedHeader.js"></script>
-           
+
     </head>
 
 
@@ -69,7 +70,7 @@
                                 <li value="3" id="opcNombre"> <a href="#portfolio">Por Nombre</a> </li>
                             </ul>
                         </li>
-                        <li class="page-scroll">
+                        <li class="page-scroll" id="opcReciente">
                             <a href="#portfolio">Mas recientes</a>
                         </li>
                         <li class="page-scroll">
@@ -114,7 +115,7 @@
                 </div>
                 <div class="row">
 
-                    
+
                     <!--Aqui empieza las publicaciones--> 
                     <?php
                     //$publicacionesMostrar=null;
@@ -178,66 +179,70 @@
                 </div>
                 <!-- finish paginacion-->
             </div>
-            
+
             <!--comienza grid e publicacines con busqueda por categoria-->
             <div class="container" id="categoriaDiv" style='display:none;'>
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <h2>Seleccione la categoria</h2>
-                        <select name="categoriasl" onchange="" id="selectCategoriaBusqueda">
-                                    <?php
-                                    foreach ($listCategorias as $categorias) {
-                                        ?>
-                                        <option value=<?php echo $categorias->CodigoCategoriaDiplomado ?>> <?php echo $categorias->NombreCategoriaDiplomado ?>  </option>
-                                        <?php
-                                    }
-                                    ?>
-
-                                </select>
-                        <hr class="star-primary">
-                        
-                        
-                        <!--here-->
-                        <?php
-                    //$publicacionesMostrar=null;
-                    if ($PagCategoria != null && count($PagCategoria) > 0) {
-                        foreach ($PagCategoria as $publicacion) {
-                            $iterador = 0;
-                            $iterador ++;
-                        }
-                        ?>
-                        <?php
-                        foreach ($PagCategoria as $publicacion) {
+                        <select name="categoriasl" onchange="" id="selectCategoriaBusqueda" name="seltcate">
+                            <?php
+                            foreach ($listCategorias as $categorias) {
+                                ?>
+                                <option value=<?php echo $categorias->CodigoCategoriaDiplomado ?>> <?php echo $categorias->NombreCategoriaDiplomado ?>  </option>
+                                <?php
+                            }
                             ?>
 
-                            <div class="col-sm-4 portfolio-item"  >
-
-                                <a  id="a<?php echo $publicacion->CodigoPublicacion ?>" data-dimg='<?php echo json_encode($publicacion) ?>' class="portfolio-link callModalPublicacion"  >
-                                    <div class="caption">
-                                        <div class="caption-content" >
-                                            <i class="fa fa-search-plus fa-3x"></i>
-                                        </div>
-                                    </div>
-                                    <img  src="<?php echo 'bootstrap' . $publicacion->Ruta ?>" class="img-responsive" alt="" style="height:500px; width: 500px;">
-                                </a>
+                        </select>
+                        <hr class="star-primary">
 
 
-                            </div>
-
+                        <!--here-->
+                        <?php
+                        //$publicacionesMostrar=null;
+                        if ($PagCategoria != null && count($PagCategoria) > 0) {
+                            foreach ($PagCategoria as $publicacion) {
+                                $iterador = 0;
+                                $iterador ++;
+                            }
+                            ?>
+                         <div id="PubsCategoria">
                             <?php
-                        }
-                    }
-                    ?>
+                            
+                            foreach ($PagCategoria as $publicacion) {
+                                ?>
+                               
+                                    <div class="col-sm-4 portfolio-item" >
 
-                </div>
-                <!-- start paginacion-->
+                                        <a  id="a<?php echo $publicacion->CodigoPublicacion ?>" data-dimg='<?php echo json_encode($publicacion) ?>' class="portfolio-link callModalPublicacion"  >
+                                            <div class="caption">
+                                                <div class="caption-content" >
+                                                    <i class="fa fa-search-plus fa-3x"></i>
+                                                </div>
+                                            </div>
+                                            <img  src="<?php echo 'bootstrap' . $publicacion->Ruta ?>" class="img-responsive" alt="" style="height:500px; width: 500px;">
+                                        </a>
 
 
-                        <!--tohere-->
-                        
+                                    </div>
+
+                                    <?php
+                                }
+                            }
+                            ?>
+                            <!-- start paginacion-->
+
+
+                            <!--tohere-->
+
+                        </div>
+
                     </div>
+
                 </div>
             </div>
+
         </section>
 
 
@@ -467,7 +472,7 @@
             </div>
         </div>
 
-    
+
 
         <script src="bootstrap/js/websitejs.js"></script>
 

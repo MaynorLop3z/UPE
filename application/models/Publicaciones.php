@@ -596,15 +596,14 @@ class Publicaciones extends CI_Model {
            return $resultado;
        }
 
-        public function ListarPublicacionesPaginacionCategoria($offset, $CodigoCategoriaDiplomado) {
+        public function ListarPublicacionesPaginacionCategoria($limit, $offset, $CodigoCategoriaDiplomado) {
         try {
-            if ($offset == null) {
+            
+            if ($limit == null && $offset == null) {
                 $limit = PUBLICACIONES_X_PAG;
                 $offset = 0;
             }
-            $limit = PUBLICACIONES_X_PAG;
-            $varLimit = ' limit ' . $limit . ' offset ' . $offset;
-            $stringQuery = ' SELECT 
+           $consulta = $this->db->query( ' SELECT 
                 "Publicaciones"."CodigoPublicacion", 
                 "Publicaciones"."Titulo", 
                 "Publicaciones"."Contenido", 
@@ -621,25 +620,18 @@ class Publicaciones extends CI_Model {
                 public."Publicaciones", 
                 public."Archivos"
               WHERE 
-                "Publicaciones"."CodigoTipoPublicacion" =' . TIPO_PUBLICACION_WEB . ' AND 
-                "Publicaciones"."CodigoCategoriaDiplomado" = '.$CodigoCategoriaDiplomado.' AND 
+                "Publicaciones"."CodigoTipoPublicacion" = ' . TIPO_PUBLICACION_WEB . ' AND 
+                "Publicaciones"."CodigoCategoriaDiplomado" = '.$CodigoCategoriaDiplomado.'AND 
                 "Publicaciones"."CodigoPublicacion" = "Archivos"."CodigoPublicaciones" AND 
                 "Publicaciones"."Estado" = True
               ORDER BY
-                "Publicaciones"."FechaPublicacion" ASC';
-
-            $stringQuery = $stringQuery . $varLimit;
-            $consulta = $this->db->query($stringQuery);
-            if ($consulta != null) {
-                $resultado = $consulta->result();
-            } else {
-                
-            }
-        } catch (Exception $exc) {
-            echo $exc->getTraceAsString();
+                "Publicaciones"."FechaPublicacion" ASC');
+        $resultado = $consulta->result();
+        return $resultado;
+        } catch (Exception $e) {
+            $e->getMessage();
         }
         return $resultado;
     }
-
 }
 ?>
