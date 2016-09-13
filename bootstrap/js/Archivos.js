@@ -321,3 +321,64 @@ function goNextPaginMaestro(group){
 function goLastPaginMaestro(group){
     paginarArchivosGrupo("data_ini", $('#aLastPagArchivosMaestroGrupo'+group).data("datainic"), group, "prof");
 }
+
+
+///funciones administrativas de comentarios
+function adminC(pub){
+    $('.aprobCom').click(function(){
+        var id=$(this).parent().parent().parent().parent().parent().parent().attr('id').substring(5);
+        var borde=$(this).parent().parent().parent();
+        var texto=$(this).children();
+        if (id !== null) {
+            var aprobar = $.post("ComentariosController/aprobarComentario/", {"id": id});
+            aprobar.done(function(data){
+//                alert(data);
+                borde.css('border','1px solid #8BCCED');
+                texto.html('Aprobado');
+            });
+        } 
+    });
+    $('.elimCom').click(function(){
+        var id=$(this).parent().parent().parent().parent().parent().parent().attr('id').substring(5);
+        if (id !== null) {
+                var eliminar = $.post("ComentariosController/eliminarComentario/", {"id": id});
+                eliminar.done(function(data){
+                    //alert("eliminar "+id);
+                    alert(data);
+                    var n1=$('#num1'+pub).html();
+                    var n2=$('#num2'+pub).html();
+                    $('#num1'+pub).empty();
+                    $('#num2'+pub).empty();
+                    $('div').remove('#idcom'+id);
+                    $('#num1'+pub).html((n1-1));
+                    $('#num2'+pub).html((n2-1));
+                });
+            }    
+    });
+    $('.bloqUsu').click(function(){
+        var id=$(this).parent().parent().parent().parent().parent().parent().attr('id');
+        alert("bloquear "+id);
+    });
+}
+function MaestroAdminCom(opcion){
+    //opciones 1: aprobar, 2: eliminar, 3: bloqueat usuario
+//    var id=$(opcion).parent().parent().parent().parent().parent().parent().parent().attr('id');
+//    alert(id);
+//    switch (opcion){
+//        case 1:
+//            
+//            break;
+//        case 2:
+//            
+//            if (id !== null) {
+//                var eliminar = $.post("ComentariosController/eliminarComentario/", {"id": id});
+//                eliminar.done(function(){
+//                    
+//                });
+//            }
+//            break;
+//        case 3:
+//            break;
+//    }
+    
+}

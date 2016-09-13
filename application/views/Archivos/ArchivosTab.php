@@ -85,7 +85,7 @@
              }else{$tamar="Indeterminado";}
              ?>
             <tr  data-dipd='<?php echo json_encode($arch) ?>' 
-                 id="dip<?php echo $arch->CodigoPublicacion ?>"  class="comment-toggler" title="Ver Comentarios">
+                 id="dip<?php echo $arch->CodigoPublicacion ?>" onclick="cargarComentarios('dip<?php echo $arch->CodigoPublicacion ?>')" class="comment-toggler" title="Ver Comentarios">
                     <td class="Archivo"><?php echo $arch->Titulo ?></td>
                     <td class="Descripcion"><?php echo ($arch->Contenido!= NULL ? $arch->Contenido: "No hay descripción") ?></td>
                     <td class="Publicado" ><?php echo $arch->FechaPublicacion ?></td>
@@ -97,8 +97,8 @@
                     </td>
             </tr>
             <tr id="comment-dip<?php echo $arch->CodigoPublicacion ?>" class="comment">
-                <td class="form-group" colspan="6"> <label for="usr">Comentar:</label>
-                    <input type="text" class="form-control inputComment" placeholder="Escribe algo..."><br>
+                <td class="form-group" colspan="6"> <label for="usr">Comentarios:</label>
+                    <input type="text" class="form-control inputComment" placeholder="Escribe un comentario..." >
                     <div class="list-group" id="comment-<?php echo $arch->CodigoPublicacion?>"></div>
                 </td>
             </tr>
@@ -308,7 +308,7 @@
                 $('#ArchivosGrupoAlumnoContent'+mod+'').empty();
                 $('#ArchivosGrupoAlumnoContent'+mod+'').html(data);
                 $('.comment').toggle(false);
-                cargarComentarios();
+                prepararComentarios();
             }
         });
         posting.fail(function (data) {

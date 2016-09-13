@@ -49,6 +49,9 @@ li.sub-tree-toggler:hover{
 .thumbnail {
     padding:0px;
 }
+.inputComment{
+    margin-bottom: 10px;
+}
 .panel {
 	position:relative;
 }
@@ -73,4 +76,25 @@ li.sub-tree-toggler:hover{
 .panel>.panel-heading:before{
 	border-right-color:#ddd;
 	border-width:2px;
+}
+
+.comments-pager button{
+    /*background-color: #4CAF50; /* Green */
+    background-color: #8BCCED; /* Light Blue*/
+    border: none;
+    color: white;
+    padding: 2px 2px;
+    margin:5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    border-radius: 2px;
+}
+.button:hover {background-color: #3e8e41}
+
+.comments-pager button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 1px #666;
+  transform: translateY(1px);
 }

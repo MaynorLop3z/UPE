@@ -256,7 +256,7 @@ class ArchivosController extends CI_Controller {
                         $tam=filesize('bootstrap'.$arch->Ruta); 
                         $tamar=$this->get_tamanio($tam);//Formatea el size del archivo
                      }else{$tamar="Indeterminado";}
-                    $registro .= '<tr  data-dipd="'.json_encode($arch).'" id="dip'.$arch->CodigoPublicacion.'" title="Ver Comentarios" class="comment-toggler" >
+                    $registro .= '<tr  data-dipd=\''.json_encode($arch).'\' id="dip'.$arch->CodigoPublicacion.'" onclick="cargarComentarios(\'dip'.$arch->CodigoPublicacion.'\')" title="Ver Comentarios" class="comment-toggler" >
                                     <td class="Archivo">'.$arch->Titulo.'</td>
                                     <td class="Descripcion">'. ($arch->Contenido!= NULL ? $arch->Contenido: "No hay descripción") .'</td>
                                     <td class="Publicado" >'. $arch->FechaPublicacion .'</td>
@@ -268,8 +268,8 @@ class ArchivosController extends CI_Controller {
                                     '</td>
                             </tr>
                             <tr id="comment-dip'.$arch->CodigoPublicacion.'" class="comment">
-                                <td class="form-group" colspan="6"> <label for="usr">Comentar:</label>
-                                <input type="text" class="form-control inputComment" placeholder="Escribe algo...">
+                                <td class="form-group" colspan="6"> <label for="usr">Comentarios:</label>
+                                <input type="text" class="form-control inputComment" placeholder="Escribe un comentario...">
                                 <div class="list-group" id="comment-'.$arch->CodigoPublicacion.'"></div>
                                 </td>
                             </tr>';
