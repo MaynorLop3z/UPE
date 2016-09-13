@@ -1,12 +1,19 @@
 
-
+<?php $this->load->helper('url'); ?>
 <div class="panel-heading">
     <h3 class="panel-title">Gestion de Publicaciones</h3>
 </div>
 <div class="panel-body">
-    <div class="btn btn-group">
-        <button onclick="" id="openNuevaPublicacion" class="btn btn-default btn-default">Nueva Publicacion</button>
-
+    <div class="col-md-6">
+        <button onclick="" id="openNuevaPublicacion" class="btn btn-default btn-default"><span class="glyphicon glyphicon-plus"></span>Nueva Publicacion</button>
+    </div>
+    <div class="col-md-6">
+        
+        <form id="frmfindPublicacion" action="<?php echo base_url() ?>index.php/PublicacionesController/BuscarPublicaciones/"  method="post" class="form-inline">
+            <span>Publicación:</span>    
+            <input type="text" class="form-control" name="FindPublicacion" id="FindPublicacion" placeholder="Nombre de la Publicación" required>
+            <button id="btnFindPub" type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>Buscar</button>
+        </form>
     </div>
     <!--tabla de publicaciones solo muestra el titulo y la categoria-->
     <div id="TablaPublicacionesWeb">

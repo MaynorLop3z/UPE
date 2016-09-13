@@ -164,6 +164,51 @@ class PublicacionesController extends CI_Controller {
         }
     }
     
+    public function BuscarPublicaciones(){
+        try {
+            if($this->input->post()){
+                $nombrePu = $this->input->post('FindPublicacion');
+                $Publicaciones = $this->Publicaciones->listarPublicacionesNombre($nombrePu);   
+                $registro = $this->EncabezadoTabla();
+                if(count($Publicaciones)>0){
+                    foreach ($Publicaciones as $pub){
+                          $registro .= $this->cuerpoTabla($pub);
+                    }
+                }else{
+                    $registro = $this->EncabezadoTabla()."<tr><td colspan=3>No se encontraron coincidencias</td></tr>";
+                }
+                echo $registro.'</tbody></table>';
+            }    
+        } catch (Exception $ex) {
+           echo json_encode($ex);
+        }
+    }
+    
+     private function EncabezadoTabla(){
+        $encabezado='<table id="tableTitulo"  class="table table-bordered table-striped table-hover table-responsive">
+            <thead>
+                <tr>
+                <th>Titulo</th>
+                <th>Categoria</th>
+                <th>Gestionar</th>
+                </tr>
+            </thead> 
+            <tbody>';
+        return $encabezado;
+    }
+    
+    private function cuerpoTabla($pub){
+        $filas='';
+        $filas.='<tr data-dipd="' . ($pub->CodigoPublicacion) . '" id="diplo' . $pub->CodigoPublicacion . '">';
+        $filas.=' <td class="Titulo" id="TutuloPubTabla' . $pub->CodigoPublicacion . '">' . $pub->Titulo .'</td>';
+        $filas.=' <td class="Categoria" id="CategoriaPubTabla'. $pub->CodigoPublicacion .'">'. $pub->NombreCategoriaDiplomado .'</td>';
+        $filas.=' <td class="gestion_dip" >'
+                . '<button id="editPublicacion'. $pub->CodigoPublicacion . '" onclick="editarPublicacion(\''.  $pub->CodigoPublicacion .'\')" title="Editar Publicacion" class="btnmoddi btn btn-success"><span class=" glyphicon glyphicon-pencil"></span></button>'
+                . '<button id="delPub'. $pub->CodigoPublicacion .'" onclick="eliminarPublicacion(\''. $pub->CodigoPublicacion .'\',\''. $pub->Titulo .'\')" title="Eliminar Publicacion" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>
+            </td></tr>';
+        return $filas;
+    }
+    
     public function paginPublicaciones($Pubs = null) {
         try {
             $final = 0;
@@ -219,23 +264,9 @@ class PublicacionesController extends CI_Controller {
 
             //$buttonsByUserRights = $this->analizarPermisosBotonesTablas("gestionUserBtn", $this->session->userdata('permisosUsuer'));
 
-            $cadena .= '<table id=' . '"tableTitulo"' . ' class="table table-bordered table-striped table-hover table-responsive"' . '>';
-            $cadena.='<thead>
-                <tr>
-                <th>Titulo</th>
-                <th>Categoria</th>
-                <th>Gestionar</th>
-                </tr>
-            </thead> 
-            <tbody>';
+            $cadena .= $this->EncabezadoTabla();
             foreach ($Publicaciones as $pub) {
-                $filas.='<tr data-dipd="' . ($pub->CodigoPublicacion) . '" id="diplo' . $pub->CodigoPublicacion . '">';
-                $filas.=' <td class="Titulo" id="TutuloPubTabla' . $pub->CodigoPublicacion . '">' . $pub->Titulo .'</td>';
-                $filas.=' <td class="Categoria" id="CategoriaPubTabla'. $pub->CodigoPublicacion .'">'. $pub->NombreCategoriaDiplomado .'</td>';
-                $filas.=' <td class="gestion_dip" >'
-                        . '<button id="editPublicacion'. $pub->CodigoPublicacion . '" onclick="editarPublicacion(\''.  $pub->CodigoPublicacion .'\')" title="Editar Publicacion" class="btnmoddi btn btn-success"><span class=" glyphicon glyphicon-pencil"></span></button>'
-                        . '<button id="delPub'. $pub->CodigoPublicacion .'" onclick="eliminarPublicacion(\''. $pub->CodigoPublicacion .'\',\''. $pub->Titulo .'\')" title="Eliminar Publicacion" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>
-                    </td></tr>';
+                $filas .= $this->cuerpoTabla($pub);
             }
             $cadena.=$filas;
             $cadena.='</tbody></table>';

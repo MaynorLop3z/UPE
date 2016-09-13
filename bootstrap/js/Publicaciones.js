@@ -197,6 +197,43 @@ $(document).ready(function () {
     });
     
 ///***********FIN MODIFICACION DE LA IMAGEN**********//
+
+
+//BUSQUEDA
+    $('#frmfindPublicacion').submit(function(event){
+         event.preventDefault();
+    });
+    $('#FindPublicacion').keyup(function(event){
+        var actual=$(this).val();
+        var texto =actual;
+        if(event.which===13){}
+        if(actual===""){
+            var posting = $.post("PublicacionesController/paginPublicaciones/", {"data_ini":1});
+        posting.done(function (data) {
+            if (data !== null) {
+                $('#TablaPublicacionesWeb').empty();
+                $('#TablaPublicacionesWeb').html(data);
+            }
+        });
+        posting.fail(function (data) {
+            alert("Error");
+        });
+        }
+        else{
+        var posting = $.post("PublicacionesController/BuscarPublicaciones/",{'FindPublicacion':texto});
+      posting.done(function(data){
+          if(data){
+//              $('#tableModulos').html(data);
+             $('#TablaPublicacionesWeb').html(data);
+          }
+//          else{
+//             $("#ModInd").modal('toggle');
+//          }
+      });
+      posting.fail(function(xhr, textStatus, errorThrown) {
+        alert("error" + xhr.responseText);
+        });}
+    });
 });
 
 //metodo que lleva el post a la base de datos

@@ -400,5 +400,40 @@ class Publicaciones extends CI_Model {
         }
         return $resultado;
     }
+    
+    ///PARA BUSQUEDA DE PUBLICACIONES EN DASHBOARD
+    public function listarPublicacionesNombre($filtro){
+        $consulta = $this->db->query('SELECT 
+                    "Publicaciones"."CodigoPublicacion", 
+                    "Publicaciones"."UsuarioPublica", 
+                    "Publicaciones"."FechaPublicacion", 
+                    "Publicaciones"."Titulo", 
+                    "Publicaciones"."Contenido", 
+                    "Publicaciones"."ParticipantePublica", 
+                    "Publicaciones"."Estado", 
+                    "Publicaciones"."CodigoGrupoPeriodo", 
+                    "Publicaciones"."CodigoGrupoParticipantes", 
+                    "Publicaciones"."CodigoGrupoPeriodoUsuario", 
+                    "Publicaciones"."CodigoTipoPublicacion", 
+                    "Publicaciones"."CodigoCategoriaDiplomado", 
+                    "CategoriaDiplomados"."NombreCategoriaDiplomado"
+                  FROM 
+                    public."CategoriaDiplomados", 
+                    public."Publicaciones"
+                  WHERE LOWER("Titulo") LIKE  \'%'. strtolower($filtro).'%\' 
+                  AND
+                  "CategoriaDiplomados"."CodigoCategoriaDiplomado"  = public."Publicaciones"."CodigoCategoriaDiplomado"   
+                  AND 
+                  "Publicaciones"."CodigoTipoPublicacion" =' . TIPO_PUBLICACION_WEB . '
+                  AND
+                  "Publicaciones"."Estado" = TRUE
+                  ORDER BY
+                  "Publicaciones"."FechaPublicacion" DESC
+            ');
+
+        $resultado = $consulta->result();
+        return $resultado;
+        
+    }
 }
 ?>
