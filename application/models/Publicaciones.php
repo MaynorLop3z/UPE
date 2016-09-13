@@ -362,10 +362,8 @@ class Publicaciones extends CI_Model {
     }
     
 
-        public function ListarPublicacionesPaginacionCategoria($limit, $offset, $CodigoCategoriaDiplomado) {
-//=======
-//    public function ListarPublicacionesPaginacionCategoria($offset, $CodigoCategoriaDiplomado) {
-//>>>>>>> ClonPrincipal
+    public function ListarPublicacionesPaginacionCategoria($limit, $offset, $CodigoCategoriaDiplomado) {
+
         try {
             
             if ($limit == null && $offset == null) {
