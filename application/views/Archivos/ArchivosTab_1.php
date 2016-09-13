@@ -36,10 +36,7 @@
          $principal=1;                          //propiedades si es tab principal
          $classgroup="tab-pane fade in active";
          $idhome ="";
-         
     foreach ($gruposMaestro as $grup) { //Lista cada seccion de grupo
-        $numArch =0;
-        $grupom = $grup->CodigoGrupoPeriodo;
           if($principal!=1){
           $classgroup="tab-pane fade";     //propiedades para tabs ocultos
           $idhome ="id=\"home\" class=\"tab-pane fade in active\"";
@@ -66,13 +63,12 @@
                 <th>Acción</th>
             </tr>
         </thead> 
-        <tbody id="ArchivosGrupoMaestroContent<?php echo $grup->CodigoGrupoPeriodo;?>">
+        <tbody>
   
     <?php $principal=0;
         foreach ($archivosMaestro as $arch) { //Listar cada archivo
-         if($arch->CodigoGrupoPeriodo== $grup->CodigoGrupoPeriodo){
-             $numArch++;
-             if($numArch<=ROWS_PER_PAGE){ //Limita lista al numero de paginacion establecido
+         if($arch->CodigoGrupoPeriodo== $grup->CodigoGrupoPeriodo){ 
+             
              if(file_exists('bootstrap'.$arch->Ruta)){
                 $tamar=filesize('bootstrap'.$arch->Ruta); //Formatea el size del archivo
                 if($tamar>=1024 & $tamar<1048576){
@@ -85,7 +81,7 @@
              }else{$tamar="Indeterminado";}
              ?>
             <tr  data-dipd='<?php echo json_encode($arch) ?>' 
-                 id="dip<?php echo $arch->CodigoPublicacion ?>" onclick="cargarComentarios('dip<?php echo $arch->CodigoPublicacion ?>')" class="comment-toggler" title="Ver Comentarios">
+                 id="dip<?php echo $arch->CodigoPublicacion ?>"  class="comment-toggler" title="Ver Comentarios">
                     <td class="Archivo"><?php echo $arch->Titulo ?></td>
                     <td class="Descripcion"><?php echo ($arch->Contenido!= NULL ? $arch->Contenido: "No hay descripción") ?></td>
                     <td class="Publicado" ><?php echo $arch->FechaPublicacion ?></td>
@@ -97,29 +93,16 @@
                     </td>
             </tr>
             <tr id="comment-dip<?php echo $arch->CodigoPublicacion ?>" class="comment">
-                <td class="form-group" colspan="6"> <label for="usr">Comentarios:</label>
-                    <input type="text" class="form-control inputComment" placeholder="Escribe un comentario..." >
+                <td class="form-group" colspan="6"> <label for="usr">Comentar:</label>
+                    <input type="text" class="form-control inputComment" placeholder="Escribe algo..."><br>
                     <div class="list-group" id="comment-<?php echo $arch->CodigoPublicacion?>"></div>
                 </td>
             </tr>
-           <?php 
-             }
+  
+        <?php 
           }
         }
-        $paginas =  intval(ceil($numArch/ ROWS_PER_PAGE));
-        if($numArch>ROWS_PER_PAGE){ //Evalua si paginador es necesario
-        ?>   
-            <tr id="pagerArchivosMaestroGrupo<?php echo $grupom ?>"><td colspan=6>
-                <div class="row">
-                <ul class="pager" id="footpagerArchivosMaestroGrupo<?php echo $grupom ?>">
-                <li><button data-datainic="1" id="aFirstPagArchivosMaestroGrupo<?php echo $grupom ?>" onclick="goFirstPaginMaestro('<?php echo $grupom ?>')" >&lt;&lt;</button></li>
-                <li><button id="aPrevPagArchivosMaestroGrupo<?php echo $grupom ?>" onclick="goBackPaginMaestro('<?php echo $grupom ?>')">&lt;</button></li>
-                <li><input data-datainic="1" type="text" value="1" id="txtPagingSearchArchivosMaestroGrupo<?php echo $grupom ?>" name="txtNumberPag" size="5">/ <?php echo $paginas ?></li>
-                <li><button id="aNextPagArchivosMaestroGrupo<?php echo $grupom ?>" onclick="goNextPaginMaestro('<?php echo $grupom ?>')">&gt;</button></li>
-                <li><button id="aLastPagArchivosMaestroGrupo<?php echo $grupom ?>" data-datainic=" <?php echo $paginas ?>" onclick="goLastPaginMaestro('<?php echo $grupom ?>')">&gt;&gt;</button></li>
-                <li>[1 -  <?php echo $paginas ?> / <?php echo $numArch ?> ]</li></ul></div>'
-            </td></tr>
-        <?php } ?>
+    ?>         
         </tbody>
     </table>  
       <div id="context-menu">
@@ -134,7 +117,6 @@
   </div>
 <?php } ?> 
 </div>
-
 <!--Fin Lista de Archivos del Maestro-->
 </div>
 
@@ -210,7 +192,7 @@
                             <?php echo $gru->NombreModulo;?>
                             <span style="color: #18bc9c;margin-left:20px;"> 
                             Inicio: <?php echo str_split($gru->FechaInicioPeriodo,5)[1];?> - Fin: <?php echo str_split($gru->FechaFinPeriodo,5)[1];?>
-                            <br /><span style="margin-left:20px;margin-right: 20px;">Grupo <?php echo $gru->CodigoGrupoPeriodo ?></span>
+                            <span style="margin-left:20px;margin-right: 20px;">Grupo <?php echo $gru->CodigoGrupoPeriodo ?></span>
                             </span>
                             <?php 
                                 $total=0;
@@ -244,7 +226,45 @@
                                                             <th>Descargar</th>
                                                         </tr>
                                                     </thead> 
-                                                    <tbody id="ArchivosGrupoAlumnoContent<?php echo $gru->CodigoGrupoPeriodo;?>">
+                                                    <tbody>
+
+                                                <?php 
+                                                    foreach ($archivosAlumno as $arch) { //Listar cada archivo
+                                                     if($arch->CodigoGrupoPeriodo== $gru->CodigoGrupoPeriodo){ 
+                                                         
+                                                         if(file_exists('bootstrap'.$arch->Ruta)){
+                                                            $tamar=filesize('bootstrap'.$arch->Ruta); //Formatea el size del archivo
+                                                            if($tamar>=1024 & $tamar<1048576){
+                                                                $tamar = round($tamar/1024, 0)." Kb";
+                                                            }  else if($tamar >= 1048576) {
+                                                                $tamar = round($tamar/1048576, 2)." Mb";
+                                                            }else{
+                                                                $tamar = $tamar." B";
+                                                            }
+                                                         }else{$tamar="Indeterminado";}
+
+                                                         ?>
+                                                        <tr  data-dipd='<?php echo json_encode($arch) ?>' 
+                                                             id="dip<?php echo $arch->CodigoPublicacion ?>" title="Ver Comentarios" class="comment-toggler" >
+                                                                <td class="Archivo"><?php echo $arch->Titulo ?></td>
+                                                                <td class="Descripcion"><?php echo ($arch->Contenido!= NULL ? $arch->Contenido: "No hay descripción") ?></td>
+                                                                <td class="Publicado" ><?php echo $arch->FechaPublicacion ?></td>
+                                                                <td class="TipoArchivo"><?php echo strtoupper($arch->Extension) ?></td>
+                                                                <td class="TamArchivo" style="width:100px;"><?php echo $tamar; ?></td>
+                                                                <td class="gestion_dip" style="width:150px;">
+                                                                    <button id="downArc<?php echo $arch->CodigoPublicacion ?>" onclick="goArchivo('<?php echo base_url() ?>index.php/ArchivosController/downloads/<?php echo $arch->Nombre?>')"  title="Descargar Archivo" class="btndeldip btn btn-warning" class="btn btn-info btn-lg"><span class=" glyphicon glyphicon-download-alt"></span></button>
+                                                                </td>
+                                                        </tr>
+                                                        <tr id="comment-dip<?php echo $arch->CodigoPublicacion ?>" class="comment">
+                                                            <td class="form-group" colspan="6"> <label for="usr">Comentar:</label>
+                                                            <input type="text" class="form-control inputComment" placeholder="Escribe algo...">
+                                                            <div class="list-group" id="comment-<?php echo $arch->CodigoPublicacion?>"></div>
+                                                            </td>
+                                                        </tr>
+                                                    <?php 
+                                                      }
+                                                    }
+                                                ?>         
                                                     </tbody>
                                                 </table>  
                                               </div>
@@ -302,18 +322,6 @@
         
 });
     function openListaArchivos(mod){
-        var posting = $.post("ArchivosController/ArchivosGrupoAlumno/", {opcion:mod});
-        posting.done(function (data) {
-            if (data !== null) {
-                $('#ArchivosGrupoAlumnoContent'+mod+'').empty();
-                $('#ArchivosGrupoAlumnoContent'+mod+'').html(data);
-                $('.comment').toggle(false);
-                prepararComentarios();
-            }
-        });
-        posting.fail(function (data) {
-            alert("Error");
-        });
         var modale="#ListArchivosAlumno"+mod;
             $(modale).modal();
     }

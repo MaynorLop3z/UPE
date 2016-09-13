@@ -21,24 +21,9 @@ class Dashboard extends CI_Controller {
         }
     }
     public function logout(){
-//        if($this->input->post()){
+            //Elimina la session al salir
             $this->session->sess_destroy();
-//            $data['Permisos'] = null;
-//                    $usuario_data = array(
-//                        'codigoUserLogin' => null,
-//                        'nombreUserLogin' => null,
-//                        'correoUserLogin' => null,
-//                        'nombreRealUserLogin' =>null,
-//                        'ipUserLogin' => null,
-//                        'permisosUsuer' => null,
-//                        'logueado' => FALSE);
-//        $this->session->unset_userdata('permisosUser');
-//        $this->session->unset_userdata('codigoUserLogin');
-//        $this->session->unset_userdata('correoUserLogin');
-//        $this->session->unset_userdata('nombreUserLogin');
-//        $this->session->unset_userdata('logeado');
-            //redirect('wsite'); 
-//        }
+
     }
     
 }

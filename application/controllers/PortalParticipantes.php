@@ -29,6 +29,7 @@ class PortalParticipantes extends CI_Controller {
                         'nombreUserLogin' => $nombre,
                         'correoUserLogin' => $resultado->CorreoElectronico,
                         'nombreRealUserLogin' => $resultado->Nombre,
+                        'ipUserLogin' => $this->input->ip_address(),
                         // 'temaUserLogin' => $usuario->codigoTemaVista,
                         'permisosUsuer' => $permisos,
                         'logueado' => TRUE,

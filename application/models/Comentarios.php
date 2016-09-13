@@ -10,35 +10,83 @@ class Comentarios extends CI_Model {
         $this->load->database();
     }
 
-    public function listarComentarios($CodigoPublicaciones) {
+    public function listarComentarios($CodigoPublicaciones, $usr) {
         $this->db->select('CodigoComentarios, '
                 . 'FechaComentario, '
                 . 'CorreoPublica, '
                 . 'Cuerpo, '
-                . 'NombrePublica, '
-                . 'Estado');
+                . 'NombrePublica, HoraComentario, UsuarioComenta, ParticipanteComenta, Aprobado');
         $this->db->from('Comentarios');
         $this->db->where('CodigoPublicaciones', $CodigoPublicaciones);
+        $this->db->where('Estado', TRUE);
+        if($usr==='Participante'){
+            $this->db->where('Aprobado', TRUE);
+        }
+        $this->db->order_by("FechaComentario", "desc");
+        $this->db->order_by("HoraComentario", "desc");
+        $consulta = $this->db->get();
+        $resultado = $consulta->result();
+        return $resultado;
+    }
+    
+    public function listarComentariosLimited($CodigoPublicaciones,$limit, $offset, $usr) {
+        if ($limit == null && $offset == null) {
+                $limit = COMMENTS_PER_PUB;
+                $offset = 0;
+            }
+        $this->db->select('CodigoComentarios, '
+                . 'FechaComentario, '
+                . 'CorreoPublica, '
+                . 'Cuerpo, '
+                . 'NombrePublica, HoraComentario, UsuarioComenta, ParticipanteComenta, Aprobado');
+        $this->db->from('Comentarios');
+        $this->db->where('CodigoPublicaciones', $CodigoPublicaciones);
+        $this->db->where('Estado', TRUE);
+        if($usr==='Participante'){
+            $this->db->where('Aprobado', TRUE);
+        }
+        $this->db->order_by("FechaComentario", "desc");
+        $this->db->order_by("HoraComentario", "desc");
+        $this->db->limit($limit, $offset);
         $consulta = $this->db->get();
         $resultado = $consulta->result();
         return $resultado;
     }
 
-    public function CrearComentarios($CodigoPublicaciones, $FechaComentario, $CorreoPublica, $Cuerpo, $NombrePublica, $Estado) {
-        $data = array(
-            //            'CodigoComentarios' => null,
+    public function CrearComentarios($CodigoPublicaciones, $FechaComentario, $CorreoPublica, 
+            $Cuerpo, $NombrePublica, $Estado, $ip, $idusr, $nivel, $time) {
+        $user='ParticipanteComenta';$ap=FALSE;
+        if($nivel==1){$user='UsuarioComenta';$ap=TRUE;}
+        try{$data = array(
             'FechaComentario' => $FechaComentario,
             'CorreoPublica' => $CorreoPublica,
             'Cuerpo' => $Cuerpo,
             'NombrePublica' => $NombrePublica,
             'Estado' => $Estado,
-            'CodigoPublicaciones' => $CodigoPublicaciones
+            'CodigoPublicaciones' => $CodigoPublicaciones,
+            'IpModifica' => $ip,
+            'Aprobado' => $ap,
+            $user => $idusr,
+            'HoraComentario' => $time
         );
-        $this->db->insert('Comentarios', $data);
+        $this->db->insert('Comentarios', $data);}
+        catch (Exception $e){
+            echo "error en el insert";
+        }
     }
 
     public function EliminarComentario($CodigoComentarios) {
-        $this->db->delete('Comentarios', array('CodigoComentarios' => $CodigoComentarios));
+        $data = array('Estado'=>'FALSE');
+        $this->db->where('CodigoComentarios', $CodigoComentarios);
+        $this->db->update('Comentarios', $data);
+//        $this->db->delete('Comentarios', array('CodigoComentarios' => $CodigoComentarios));
+    }
+    
+    public function AprobarComentario($CodigoComentarios) {
+        $data = array('Aprobado'=>'TRUE');
+        $this->db->where('CodigoComentarios', $CodigoComentarios);
+        $this->db->update('Comentarios', $data);
+//        $this->db->delete('Comentarios', array('CodigoComentarios' => $CodigoComentarios));
     }
 
     public function EliminarComentariosPublicacion($CodigoPublicaciones) {
