@@ -11,8 +11,6 @@ class HorariosController extends CI_Controller {
     }
 
     public function index() {
- 
-        
         $this->load->view('Horarios');
     }
 
