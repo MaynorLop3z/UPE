@@ -12,7 +12,14 @@
 
             <button id="btnUsuarioNuevo" class="btn btn-default decorateStyleCrud" ><span class="glyphicon glyphicon-plus"></span>Usuario Nuevo</button>
             <button id="btnActualizarUsuarios" class="btn btn-default decorateStyleCrud" ><span class="glyphicon glyphicon-refresh"></span>Actualizar Lista</button> 
-
+            <div class="col-md-6" style="float:right;">
+        
+                <form id="frmfindUsuario" action="<?php echo base_url() ?>index.php/UsuarioController/BuscarUsuario/"  method="post" class="form-inline" style="float:right;" >
+                <span>Usuario:</span>    
+                <input type="text" class="form-control" name="FindUsuario" id="FindUsuario" placeholder="Nombre de Usuario" required>
+                <button id="btnFindUsuario" type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>Buscar</button>
+            </form>
+        </div>
         </div>
         <br>
         <div id="containerTablePaging">

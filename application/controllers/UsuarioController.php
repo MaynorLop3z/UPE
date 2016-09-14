@@ -294,24 +294,11 @@ class Usuariocontroller extends CI_Controller {
                 $Usuarios = $this->Usuarios->listarUsuarios($inicio, $final);
             }
 
-            $buttonsByUserRights = $this->analizarPermisosBotonesTablas("gestionUserBtn", $this->session->userdata('permisosUsuer'));
-
+//            $buttonsByUserRights = $this->analizarPermisosBotonesTablas("gestionUserBtn", $this->session->userdata('permisosUsuer'));
             $cadena .= '<table id=' . '"tableUsers"' . 'class="table table-bordered table-striped table-hover table-responsive"' . '>';
-            $cadena.='<thead>
-                <tr>
-                    <th style="text-align:center">Nombre</th>
-                    <th style="text-align:center" >Correo</th>
-                    <th style="text-align:center" >Usuario</th>
-                    <th style="text-align:center" >Gestionar</th>
-                </tr>
-            </thead> 
-            <tbody>';
+            $cadena.=$this->EncabezadoTabla();
             foreach ($Usuarios as $user) {
-                $filas.='<tr data-userd=' . ($user->CodigoUsuario) . ' id="tr' . $user->CodigoUsuario . '">';
-                $filas.=' <td class="nombre_Usuario" >' . $user->Nombre . '</td>';
-                $filas.=' <td class="correo_Usuario" >' . $user->CorreoUsuario . '</td>';
-                $filas.=' <td class="nickName_Usuario" >' . $user->NombreUsuario . '</td>';
-                $filas.=' <td style="text-align:center"  class="gestion_User">' . $buttonsByUserRights . '</td> </tr>';
+                $filas .=$this->cuerpoTabla($user);
             }
             $cadena.=$filas;
             $cadena.='</tbody></table>';
@@ -348,4 +335,50 @@ class Usuariocontroller extends CI_Controller {
         }
     }
 
+    public function BuscarUsuario(){
+        try {
+            if($this->input->post()){
+                $nombreUs = $this->input->post('FindUsuario');
+                $Usuarios = $this->Usuarios->listarUsuariosNombre($nombreUs);   
+                $registro = $this->EncabezadoTabla();
+                if(count($Usuarios)>0){
+                    foreach ($Usuarios as $user) {
+                       $registro .= $this->cuerpoTabla($user);
+                    }
+                }else{
+                    $registro = $this->EncabezadoTabla()."<tr><td colspan=3>No se encontraron coincidencias</td></tr>";
+                }
+                echo $registro.'</tbody></table>';
+            }    
+        } catch (Exception $ex) {
+           echo json_encode($ex);
+        }
+    }
+    
+     private function EncabezadoTabla(){
+        $encabezado=' <table id="tableUsers" class="table table-bordered table-striped table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <th style="text-align:center">Nombre</th>
+                        <th style="text-align:center" >Correo</th>
+                        <th style="text-align:center" >Usuario</th>
+                        <th style="text-align:center" >Gestionar</th>
+                    </tr>
+                </thead> 
+                <tbody>';
+        return $encabezado;
+    }
+    
+    private function cuerpoTabla($user){
+        $filas='';
+        $filas .='<tr data-userd="'. $user->CodigoUsuario .'" id="tr'. $user->CodigoUsuario .'">
+                    <td class="nombre_Usuario" >'. $user->Nombre .'</td>
+                    <td class="correo_Usuario" >'. $user->CorreoUsuario .'</td>
+                    <td class="nickName_Usuario" >'. $user->NombreUsuario .'</td>
+                    <td style="text-align:center"  class="gestion_User">
+                        '.$this->analizarPermisosBotonesTablas("gestionUserBtn", $this->session->userdata('permisosUsuer')).'
+                    </td>
+                </tr>';
+        return $filas;
+    }
 }

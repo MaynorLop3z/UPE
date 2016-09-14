@@ -206,4 +206,16 @@ class Usuarios extends CI_Model {
        
     }
 
+    public function listarUsuariosNombre($filtro) {
+        try {
+            $this->db->select('CodigoUsuario, Nombre, CorreoUsuario, NombreUsuario, ContraseniaUsuario, Comentarios');
+            $this->db->from('Usuarios');
+            $this->db->like('LOWER("Nombre")', strtolower($filtro));
+            $consulta = $this->db->get();
+            $resultado = $consulta->result();
+            return $resultado;
+        } catch (Exception $exc) {
+            return $exc->getTraceAsString();
+        }
+    }
 }

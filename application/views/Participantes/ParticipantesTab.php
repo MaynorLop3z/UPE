@@ -10,9 +10,9 @@
             <div class="col-md-6">
                 <button  id="btnADDAlumno" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Alumno Nuevo</button>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6" style="float:right;">
                 <?php $this->load->helper('url'); ?>
-                <form id="frmFINDAlumno" action="<?php echo base_url() ?>index.php/ParticipantesController/buscar/"  method="post" class="form-inline">
+                <form id="frmFINDAlumno" action="<?php echo base_url() ?>index.php/ParticipantesController/buscar/"  method="post" class="form-inline" style="float:right;">
                     <span>Nombre a buscar:</span>
                     <input type="text" class="form-control" id="tbNameBuscarAlum" name="NombreBuscado" placeholder="Escriba texto de busqueda aqui" required>                
                     <button id="btnFindAlum" type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Buscar Alumno</button>

@@ -42,7 +42,7 @@
     
 
     function paginadoPeriodos(data){
-        var actual=0,inicial=0;
+        var actual=1,inicial=1;
         if(data.totalPagPer===0){
             actual=0;inicial=0;
         }
@@ -104,8 +104,9 @@
         <h3 class="panel-title">Gestion de Grupos</h3>
     </div>
     <div class="panel-body">
+        <div class="row well">
         <form class="form-horizontal" name="PeriodoList" action="" method="POST">
-            <div class="row">
+            
                 <div class="form-group">
                     <label for="Categorias" class="col-lg-1 control-label">Categoria: </label> 
                     <div class="col-lg-9 ">
@@ -154,8 +155,9 @@
                         </select>
                     </div>
                 </div>
-            </div>
+           
         </form>
+         </div>
         <button  id="btnADDPeriodo" class="btn btn-default" onclick="NuevoPeriodoModalShow()"><span class="glyphicon glyphicon-plus"></span>Nuevo Periodo</button>
         <div id="MsjErrorPeriodo"></div>
         <div id="tablaPeriodos">
@@ -202,7 +204,7 @@
                     </li>
                     <li><button id="aNextPagPeriodos">&gt;</button></li>
                     <li><button id="aLastPagPeriodos" data-datainic="<?php echo $totalPaginasPeriodos ?>" >&gt;&gt;</button></li>
-                    <li id="pagerPeriodos">[<?php echo $PagInicialPeriodos . "-" . count($Periodos) . "/" . $ToTalRegistrosPeriodos ?>]</li>
+                    <li id="pagerPeriodos">[<?php echo $PagInicialPeriodos . " - " . count($Periodos) . " / " . $ToTalRegistrosPeriodos ?>]</li>
                 </ul>
             </div>
             <!--Fin Paginacion-->

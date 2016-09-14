@@ -7,7 +7,9 @@
  <script src="../bootstrap/js/jquery.twbsPagination.min.js"></script>
 <div id="ArchivoMaestro" class="decorateStyleCrud">
 <!--Tab Grupos-->
- <h3>Gestión de archivos</h3>
+ <div class="panel-heading well">
+    <h3 class="panel-title">Gestión de Archivos</h3>
+ </div>
  <ul class="nav nav-tabs">
     <?php foreach ($gruposMaestro as $grup) { //Lista cada grupo como tabs
         ?>

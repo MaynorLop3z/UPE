@@ -19,7 +19,7 @@ class Modulos extends CI_Model {
                 . 'Comentarios');
         $this->db->from('Modulos');
         $this->db->like('LOWER("NombreModulo")', strtolower($filtro));
-        $this->db->limit('10', 0);
+//        $this->db->limit('10', 0);
         $consulta = $this->db->get();
 //        $consulta = $this->db->query('SELECT "CodigoModulo", "NombreModulo", "OrdenModulo", "Estado", "CodigoTurno", "CodigoDiplomado", "Comentarios"'
 //                . ' FROM "Modulos" WHERE LOWER("NombreModulo") LIKE \'%'. strtolower($filtro).'%\'');

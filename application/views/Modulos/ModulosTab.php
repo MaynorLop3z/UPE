@@ -10,9 +10,9 @@
            <button  id="btnAddModulo" class="btn btn-default"  onclick="AddMod(this)" ><span class="glyphicon glyphicon-plus"></span> Nuevo Modulo</button> -->
                 <!--<button  id="btnActualizar" class="btn btn-default"><span class="glyphicon glyphicon-refresh"></span> Actualizar</button>
             </div>-->
-            <div class="col-md-6">
+            <div class="col-md-6" style="float:right;">
                 <?php $this->load->helper('url'); ?>
-                <form id="frmfindMod" action="<?php echo base_url() ?>index.php/ModulosController/BuscarModulos/"  method="post" class="form-inline">
+                <form id="frmfindMod" action="<?php echo base_url() ?>index.php/ModulosController/BuscarModulos/"  method="post" class="form-inline" style="float:right;">
                     <span>Modulo:</span>    
                     <input type="text" class="form-control" name="FindModulo" id="FindModulo" placeholder="Nombre del Modulo" required>
                     <button id="btnFindDip" type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>Buscar Modulo</button>

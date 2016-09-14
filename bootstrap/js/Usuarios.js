@@ -305,3 +305,38 @@ $("#containerTablePaging").on("click", "#aNextPag", function (e) {
         });
     
 });
+
+//BUSQUEDA
+$('#frmfindUsuario').submit(function(event){
+    event.preventDefault();
+});
+
+$('#FindUsuario').keyup(function(event){
+        var actual=$(this).val();
+        var texto =actual;
+        if(actual===""){
+            var posting = $.post("UsuarioController/paginUsers/", {"data_ini":1});
+        posting.done(function (data) {
+            if (data !== null) {
+                $('#containerTablePaging').empty();
+                $('#containerTablePaging').html(data);
+            }
+        });
+        posting.fail(function (data) {
+            alert("Error");
+        });
+        }
+        else{
+        var posting = $.post("UsuarioController/BuscarUsuario/",{'FindUsuario':texto});
+      posting.done(function(data){
+          if(data){
+             $('#containerTablePaging').html(data);
+          }
+//          else{
+//             $("#ModInd").modal('toggle');
+//          }
+      });
+      posting.fail(function(xhr, textStatus, errorThrown) {
+        alert("error" + xhr.responseText);
+        });}
+    });
