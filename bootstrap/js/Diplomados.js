@@ -368,6 +368,13 @@ $("#frmfindDip").submit(function(event){
         paginarDiplomados("data_inin", null);
     });
     
+    $("#tablaDiplomadosContent").on("keypress", "#txtPagingSearchDiplomados", function (e) {
+        e.stopImmediatePropagation();
+        if (e.which === 13 && ($(this).val()>0)) {
+             paginarDiplomados("data_ini", $(this).val());
+        }
+    });
+    
     function paginarDiplomados(dat, op){
 
         var data_in = $('#txtPagingSearchDiplomados').data("datainic");     

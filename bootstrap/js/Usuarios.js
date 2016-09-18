@@ -154,7 +154,7 @@ $("#frmEliminarUser").submit(function (event) {
 $("#containerTablePaging").on("keypress", "#txtPagingSearchUsr", function (e) {
     e.stopImmediatePropagation();
     //e.preventDefault();
-    if (e.which === 13) {
+    if (e.which === 13 && ($(this).val()>0)) {
 
         //var data_in = $('#txtPagingSearchUsr').data("datainic");
         var data_in = $('#txtPagingSearchUsr').val();

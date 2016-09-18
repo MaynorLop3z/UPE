@@ -320,6 +320,13 @@ $("#frmDelMod").submit(function(event) {
         paginarModulos("data_inin", null);
     });
     
+    $("#tablaModulosContent").on("keypress", "#txtPagingSearchModulos", function (e) {
+        e.stopImmediatePropagation();
+        if (e.which === 13 && ($(this).val()>0)) {
+             paginarModulos("data_ini", $(this).val());
+        }
+    });
+    
     function paginarModulos(dat, op){
 
         var data_in = $('#txtPagingSearchModulos').data("datainic");     

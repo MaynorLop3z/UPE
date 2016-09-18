@@ -471,6 +471,14 @@ $('#btnCancelarModificacionP').on('click', function (e) {
         paginarPublicaciones("data_inin", null);
     });
     
+    $("#TablaPublicacionesWeb").on("keypress", "#txtPagingSearchUsrPubWeb", function (e) {
+        e.stopImmediatePropagation();
+        if (e.which === 13 && ($(this).val()>0)) {
+             paginarPublicaciones("data_ini", $(this).val());
+        }
+    });
+    
+    
     function paginarPublicaciones(dat, op){
         var data_in = $('#txtPagingSearchUsrPubWeb').data("datainic");     
         var url = 'PublicacionesController/paginPublicaciones/';

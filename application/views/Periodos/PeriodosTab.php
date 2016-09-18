@@ -72,6 +72,13 @@
         paginarPeriodos("data_inin", null);
     });
     
+    $("#tablaPeriodos").on("keypress", "#txtPagingSearchUsrPeriodos", function (e) {
+        e.stopImmediatePropagation();
+        if (e.which === 13 && ($(this).val()>0)) {
+             paginarPeriodos("data_ini", $(this).val());
+        }
+    });
+    
     function paginarPeriodos(datos, op){
         var mod=$('#Modulo').find(":selected").val();
         var data_in = $('#txtPagingSearchUsrPeriodos').data("datainic");

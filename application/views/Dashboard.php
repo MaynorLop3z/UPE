@@ -16,6 +16,9 @@ and open the template in the editor.
         <link rel="icon" href="../bootstrap/images/minerva.jpg" type="image/x-icon" />
         <script src="../bootstrap/js/jquery.min.js"></script>
         <script src="../bootstrap/js/bootstrap.min.js"></script>
+          <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <!--        <script src="../bootstrap/js/Usuarios.js"></script>-->
         <script type="text/javascript">

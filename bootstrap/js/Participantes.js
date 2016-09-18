@@ -314,6 +314,13 @@ $("#frmFINDAlumno").submit(function (event) {
         paginarParticipantes("data_inin", null);
     });
     
+    $("#tablaAlumnosContent").on("keypress", "#txtPagingSearchParticipantes", function (e) {
+        e.stopImmediatePropagation();
+        if (e.which === 13 && ($(this).val()>0)) {
+             paginarParticipantes("data_ini", $(this).val());
+        }
+    });
+    
     function paginarParticipantes(dat, op){
 
         var data_in = $('#txtPagingSearchParticipantes').data("datainic");     
