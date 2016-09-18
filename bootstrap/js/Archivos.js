@@ -321,7 +321,13 @@ function goNextPaginMaestro(group){
 function goLastPaginMaestro(group){
     paginarArchivosGrupo("data_ini", $('#aLastPagArchivosMaestroGrupo'+group).data("datainic"), group, "prof");
 }
-
+function MaestroGoTo(e, group){
+    e.stopImmediatePropagation();
+    var th=$("#txtPagingSearchArchivosMaestroGrupo"+group).val();
+    if (e.which === 13 && (th>0)) {
+        paginarArchivosGrupo("data_ini", th, group, "prof");
+    }
+}
 
 ///funciones administrativas de comentarios
 function adminC(pub){

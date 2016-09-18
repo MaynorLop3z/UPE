@@ -209,7 +209,13 @@ function goNextPaginAlumno(group){
 function goLastPaginAlumno(group){
     paginarArchivosGrupo("data_ini", $('#aLastPagArchivosAlumnoGrupo'+group).data("datainic"), group, null);
 }
-
+function AlumnoGoTo(e, group){
+    e.stopImmediatePropagation();
+    var th=$("#txtPagingSearchArchivosAlumnoGrupo"+group).val();
+    if (e.which === 13 && (th>0)) {
+        paginarArchivosGrupo("data_ini", th, group, null);
+    }
+}
 //paginador de archivos por grupo
 function paginarArchivosGrupo(dat, op, group, who){
     var content='', data_in='', url='', la=who;
