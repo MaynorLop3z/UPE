@@ -367,24 +367,5 @@ function adminC(pub){
     });
 }
 function MaestroAdminCom(opcion){
-    //opciones 1: aprobar, 2: eliminar, 3: bloqueat usuario
-//    var id=$(opcion).parent().parent().parent().parent().parent().parent().parent().attr('id');
-//    alert(id);
-//    switch (opcion){
-//        case 1:
-//            
-//            break;
-//        case 2:
-//            
-//            if (id !== null) {
-//                var eliminar = $.post("ComentariosController/eliminarComentario/", {"id": id});
-//                eliminar.done(function(){
-//                    
-//                });
-//            }
-//            break;
-//        case 3:
-//            break;
-//    }
     
 }

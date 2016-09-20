@@ -231,3 +231,56 @@ function asignarDocente(fila) {
     });
 }
 ;
+
+////////////PAGINACION DE ALUMNOS INSCRIBIR//////////////
+    
+    $("#EstudiantesGrupoPeriodo").on("click", "#aFirstPagParticipantesInscribir", function (e) {
+        paginarParticipantes("data_ini", $(this).data("datainic"), codigoGrupoPeriodo.substring(7));
+    });
+
+    $("#EstudiantesGrupoPeriodo").on("click", "#aLastPagParticipantesInscribir", function (e) {
+        paginarParticipantes("data_ini", $(this).data("datainic"), codigoGrupoPeriodo.substring(7));
+    });
+
+    $("#EstudiantesGrupoPeriodo").on("click", "#aPrevPagParticipantesInscribir", function (e) {
+        paginarParticipantes("data_inip", null, codigoGrupoPeriodo.substring(7));
+    });
+
+    $("#EstudiantesGrupoPeriodo").on("click", "#aNextPagParticipantesInscribir", function (e) {
+        paginarParticipantes("data_inin", null, codigoGrupoPeriodo.substring(7));
+    });
+    
+    $("#EstudiantesGrupoPeriodo").on("keypress", "#txtPagingSearchParticipantesInscribir", function (e) {
+        e.stopImmediatePropagation();
+        if (e.which === 13 && ($(this).val()>0)) {
+             paginarParticipantes("data_ini", $(this).val(), codigoGrupoPeriodo.substring(7));
+        }
+    });
+    
+    function paginarParticipantes(dat, op, gr){
+
+        var data_in = $('#txtPagingSearchParticipantesInscribir').data("datainic");     
+        var url = 'PeriodosController/paginEstudiantes/';
+                
+        var opcion="";
+        if(dat==="data_inin"){
+             opcion={"data_inin":data_in, idPeriodoGrupo:gr};
+        }else if(dat==="data_inip"){
+            opcion={"data_inip":data_in, idPeriodoGrupo:gr};
+        }else if(dat==="data_ini"){
+            data_in= op;
+            opcion={"data_ini":data_in, idPeriodoGrupo:gr};
+        }
+        var posting = $.post(url, opcion);
+        posting.done(function (data) {
+            if (data !== null) {
+                $('#EstudiantesGrupoPeriodo').empty();
+                $('#EstudiantesGrupoPeriodo').html(data);
+            }
+        });
+        posting.fail(function (data) {
+            alert("Error");
+        });
+    }
+    
+    

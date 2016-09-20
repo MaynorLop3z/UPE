@@ -225,9 +225,9 @@ WHERE
         }
     }
 
-    public function getStudents($idPeriodo) {
+    public function getStudents($idPeriodo, $limit=0, $offset=0) {
         try {
-            $consulta = $this->db->query('SELECT 
+            $query='SELECT 
   "T0"."CodigoParticipante",               
   "T0"."Nombre", 
   "T0"."NumeroDUI", 
@@ -238,7 +238,12 @@ FROM
   "Participantes" "T0", 
   "CategoriasParticipante" "T1"
 WHERE 
-  "T0"."CodigoCategoriaParticipantes" = "T1"."CodigoCategoriaParticipantes";');
+  "T0"."CodigoCategoriaParticipantes" = "T1"."CodigoCategoriaParticipantes" ';
+            
+            if($limit>0){
+                $query.='LIMIT '.$limit.' OFFSET '.$offset.' ;';
+            }
+            $consulta = $this->db->query($query);
             if ($consulta != null) {
                 $resultado = $consulta->result();
             }
