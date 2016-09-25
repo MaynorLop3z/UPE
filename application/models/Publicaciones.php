@@ -435,5 +435,36 @@ class Publicaciones extends CI_Model {
         return $resultado;
         
     }
+    
+    //listar pu por categoria 
+      public function listarPublicacionesCategoria($categoria){
+        $consulta = $this->db->query('
+            SELECT 
+      "Publicaciones"."CodigoPublicacion", 
+    "Publicaciones"."Titulo", 
+    "Publicaciones"."ParticipantePublica", 
+       "Publicaciones"."Contenido", 
+    "Publicaciones"."CodigoTipoPublicacion", 
+    "Publicaciones"."CodigoCategoriaDiplomado", 
+    "Archivos"."Ruta", 
+    "Archivos"."Nombre", 
+    "Archivos"."Extension", 
+    "Archivos"."CodigoPublicaciones", 
+    "Archivos"."CodigoArchivos"
+FROM 
+    public."Archivos", 
+    public."Publicaciones"
+WHERE 
+    "Publicaciones"."CodigoPublicacion" = "Archivos"."CodigoPublicaciones" AND 
+    "Publicaciones"."Estado" = TRUE AND 
+    "Publicaciones"."CodigoTipoPublicacion" ='. TIPO_PUBLICACION_WEB .' AND 
+  "Publicaciones"."CodigoCategoriaDiplomado" ='. $categoria .';
+            ');
+
+        $resultado = $consulta->result();
+        return $resultado;
+        
+    }
+    
 }
 ?>

@@ -61,7 +61,7 @@ WHERE
     public function countGenderCat() {
         try {
             $consulta = $this->db->query('SELECT 
-	SUBSTRING("TX"."NombreDiplomado" from 0 for 10) AS "NombreDiplomado",
+	"TX"."NombreDiplomado",
 	"TX"."CodigoDiplomado",
 	(SELECT COUNT("T0"."Genero") FROM "Participantes" "T0" 
 		INNER JOIN  "GruposParticipantes" "T1" ON "T1"."CodigoParticipante" = "T0"."CodigoParticipante"
