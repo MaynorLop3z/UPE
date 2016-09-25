@@ -208,31 +208,55 @@
                             }
                             ?>
                          <div id="PubsCategoria">
-                            <?php
-                            
-                            foreach ($PagCategoria as $publicacion) {
-                                ?>
-                               
-                                    <div class="col-sm-4 portfolio-item" >
-
-                                        <a  id="a<?php echo $publicacion->CodigoPublicacion ?>" data-dimg='<?php echo json_encode($publicacion) ?>' class="portfolio-link callModalPublicacion"  >
-                                            <div class="caption">
-                                                <div class="caption-content" >
-                                                    <i class="fa fa-search-plus fa-3x"></i>
-                                                </div>
-                                            </div>
-                                            <img  src="<?php echo 'bootstrap' . $publicacion->Ruta ?>" class="img-responsive" alt="" style="height:500px; width: 500px;">
-                                        </a>
-
-
-                                    </div>
-
-                                    <?php
-                                }
-                            }
+                             <?php
+                        foreach ($TotalPaginacion as $publicacion) {
                             ?>
-                            <!-- start paginacion-->
 
+                            <div class="col-sm-4 portfolio-item"  >
+
+                                <a  id="a<?php echo $publicacion->CodigoPublicacion ?>" data-dimg='<?php echo json_encode($publicacion) ?>' class="portfolio-link callModalPublicacion"  >
+                                    <div class="caption">
+                                        <div class="caption-content" >
+                                            <i class="fa fa-search-plus fa-3x"></i>
+                                        </div>
+                                    </div>
+                                    <img  src="<?php echo 'bootstrap' . $publicacion->Ruta ?>" class="img-responsive" alt="" style="height:500px; width: 500px;">
+                                </a>
+
+
+                            </div>
+
+                            <?php
+                        }
+                    }
+                    ?>
+                            <!-- start paginacion-->
+ <div class="row" id="paginacionDiv2">
+
+                    <ul class="pager">
+                        <li><a  id="btnpaginicio">&laquo;</a></li>
+                        <?php
+                        $contador = 1;
+
+                        $totalpag = $publicacionesMostrar;
+
+                        if ((($totalpag % PUBLICACIONES_X_PAG) != 0) && (($totalpag / PUBLICACIONES_X_PAG) >= 1)) {
+                            $totalpag = intval(($totalpag / PUBLICACIONES_X_PAG) + 1);
+                            ?>
+                            <?php
+                        } else {
+                            $totalpag = intval(ceil(($totalpag / PUBLICACIONES_X_PAG)));
+                        }
+                        while ($contador <= $totalpag) {
+                            ?>
+                            <li><a id="<?php echo $contador ?>"><?php echo $contador ?></a></li>
+                            <?php
+                            $contador ++;
+                        }
+                        ?>
+                        <li><a id="btnpagfin2">&raquo;</a></li>
+                    </ul>
+                </div>
 
                             <!--tohere-->
 
