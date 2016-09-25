@@ -9,6 +9,7 @@
                             Agregar Periodo:
                         </legend> 
                         <div class="row">
+                            <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="Modulo" class="col-lg-3 control-label">Modulo: </label>
                                 <div class="col-lg-6 ">
@@ -28,7 +29,7 @@
                             <div class="form-group">
                                 <label for="FechaInicioPeriodo" class="col-lg-3 control-label text-left">Fecha de Inicio: </label>
                                 <div class="col-lg-6">
-                                    <input type="date" class="form-control" name="FechaInicioPeriodo" id="FechaInicioPeriodo" placeholder="Fecha de Inicio del Periodo" required>
+                                    <input type="date" class="form-control" name="FechaInicioPeriodo" id="FechaInicioPeriodo" data-mask="0000-00-00" placeholder="Año-Mes-Dia" required>
                                 </div>
                                 <div class="col-lg-3">
                                     <label class="warning"></label> <!-- Para  cuando el campo sea requerido-->
@@ -37,7 +38,7 @@
                             <div class="form-group">
                                 <label for="FechaFinPeriodo" class="col-lg-3 control-label">Fecha de Finalizacion: </label>
                                 <div class="col-lg-6">
-                                    <input type="date" class="form-control" name="FechaFinPeriodo" id="FechaFinPeriodo" placeholder="Fecha de Finalizacion del Periodo" required>
+                                    <input type="date" class="form-control" name="FechaFinPeriodo" id="FechaFinPeriodo" data-mask="0000-00-00" placeholder="Año-Mes-Dia" required>
                                 </div>
                                 <div class="col-lg-3">
                                     <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
@@ -46,7 +47,7 @@
                             <div class="form-group">
                                 <label for="ComentariosPeriodo" class="col-lg-3 control-label">Comentarios: </label>
                                 <div class="col-lg-6">
-                                    <textarea cols="40" rows="5" class="form-control" name="ComentariosPeriodo" id="ComentariosPeriodo" placeholder="Comentarios del Periodo"></textarea>
+                                    <textarea cols="40" rows="5" class="form-control" name="ComentariosPeriodo" id="ComentariosPeriodo" placeholder="Comentarios del Periodo" maxlength="200" ></textarea>
                                 </div>
                                 <div class="col-lg-3">
                                     <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
@@ -56,6 +57,7 @@
                                 <button type="submit" id="btnEnviarPeriodoADD" onclick="" class=" btn btn-default" name="Aceptar">Agregar</button>
                                 <button type="reset" id="btnLimpiarPeriodoADD" onclick="" class=" btn btn-default" name="Limpiar">Limpiar</button>
                                 <!--<button type="button" id="btnCerrar" data-dismiss="modal" class=" btn btn-default" name="Cerrar">Cerrar</button>-->
+                            </div>
                             </div>
                         </div>
                     </fieldset>
@@ -102,10 +104,11 @@
                             Modificar Periodo:
                         </legend> 
                         <div class="row">
+                            <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="FechaInicioPeriodo" class="col-lg-3 control-label text-left">Fecha de Inicio: </label>
                                 <div class="col-lg-6">
-                                    <input type="date" class="form-control" name="FechaInicioPeriodo" id="FechaInicioPeriodoE" placeholder="Fecha de Inicio del Periodo" required>
+                                    <input type="date" class="form-control" name="FechaInicioPeriodo" id="FechaInicioPeriodoE" data-mask="0000-00-00" placeholder="Año-Mes-Dia" required>
                                 </div>
                                 <div class="col-lg-3">
                                     <label class="warning"></label> <!-- Para  cuando el campo sea requerido-->
@@ -114,7 +117,7 @@
                             <div class="form-group">
                                 <label for="FechaFinPeriodo" class="col-lg-3 control-label">Fecha de Finalizacion: </label>
                                 <div class="col-lg-6">
-                                    <input type="date" class="form-control" name="FechaFinPeriodo" id="FechaFinPeriodoE" placeholder="Fecha de Finalizacion del Periodo" required>
+                                    <input type="date" class="form-control" name="FechaFinPeriodo" id="FechaFinPeriodoE" data-mask="0000-00-00" placeholder="Año-Mes-Dia" required>
                                 </div>
                                 <div class="col-lg-3">
                                     <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
@@ -122,7 +125,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="EstadoPeriodo" class="col-lg-3 control-label">Estado: </label>
-                                <div class="col-lg-6">
+                                <div class="col-lg-6" style="margin-left: 20px;">
                                     <label class="checkbox"><input type="checkbox" name="EstadoPeriodo" id="EstadoPeriodoE" value="1">Activado</label> 
                                 </div>
                                 <div class="col-lg-3">
@@ -132,7 +135,7 @@
                             <div class="form-group">
                                 <label for="ComentariosPeriodo" class="col-lg-3 control-label">Comentarios: </label>
                                 <div class="col-lg-6">
-                                    <textarea cols="40" rows="5" class="form-control" name="ComentariosPeriodo" id="ComentariosPeriodoE" placeholder="Comentarios del Periodo"></textarea>
+                                    <textarea cols="40" rows="5" class="form-control" name="ComentariosPeriodo" id="ComentariosPeriodoE" placeholder="Comentarios del Periodo" maxlength="200"></textarea>
                                 </div>
                                 <div class="col-lg-3">
                                     <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
@@ -141,6 +144,7 @@
                             <div class="modal-footer">
                                 <button type="submit" id="btnEnviarPeriodoEdit" onclick="" class=" btn btn-default" name="Aceptar">Actualizar</button>
                                 <button type="reset" id="btnLimpiarPeriodoEdit" onclick="" class=" btn btn-default" name="Limpiar">Limpiar</button>
+                            </div>
                             </div>
                         </div>
                     </fieldset>
@@ -167,23 +171,28 @@
                                 Agregar Grupo:
                             </h4>
                             <div class="row">
-                                <div class="form-group-sm">
-                                    <label for="Aula" class="col-md-1 control-label">Aula: </label>
-                                    <input type="text" class="col-md-2 form-control" name="Aula" id="AulaNombre" placeholder="Aula" maxlength="10" required>
-                                </div>
-                                <div class="form-group-sm">
-                                    <label for="HoraEntradaGrupo" class="col-md-1 control-label">Entrada: </label>
-                                    <input type="time" class="col-md-2 form-control" name="HoraEntradaGrupo" id="HoraEntradaGrupo" placeholder="Hora Inicializacion sesion" required>  
-                                </div>
+                                <table>
+                                <tr>
+                                    <td><label for="Aula" class="col-md-1 control-label">Aula: </label></td>
+                                    <td><input type="text" class="col-md-2 form-control" name="Aula" id="AulaNombre" placeholder="Aula" maxlength="10" required></td>
+                                </tr>
+                                <tr>
+                                    <td><label for="HoraEntradaGrupo" class="col-md-1 control-label">Entrada: </label></td>
+                                    <td><input type="time" class="col-md-2 form-control" name="HoraEntradaGrupo" id="HoraEntradaGrupo" placeholder="Hora Inicializacion sesion" data-mask="00:00:00:00" required> </td>
+                                </tr>
 
-                                <div class="form-group-sm">
-                                    <label for="HoraSalidaGrupo" class="col-md-1 control-label">Salida: </label>
-                                    <input type="time" class="col-md-2 form-control" name="HoraSalidaGrupo" id="HoraSalidaGrupo" placeholder="Hora finalizacion sesion" required>
-                                </div>
-                                <div class="form-group-sm">
-                                    <div class="col-md-1"></div>
-                                    <button type="submit" id="btnEnviarGrupoPeriodoAdd" onclick="" class="col-md-2 btn btn-default" name="Aceptar"><span class="glyphicon glyphicon-plus"></span>Agregar</button>
-                                </div>
+                                <tr>
+                                    <td><label for="HoraSalidaGrupo" class="col-md-1 control-label">Salida: </label></td>
+                                    <td><input type="time" class="col-md-2 form-control" name="HoraSalidaGrupo" id="HoraSalidaGrupo" placeholder="Hora finalizacion sesion" data-mask="00:00:00:00"  required></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="col-md-1" style="margin-top: 10px;">
+                                    <button type="submit" id="btnEnviarGrupoPeriodoAdd" onclick="" class="btn btn-default" name="Aceptar"><span class="glyphicon glyphicon-plus"></span>Agregar</button>
+                                    </div>
+                                    </td>
+                                </tr>
+                                </table>
                             </div>
                         </fieldset>
                     </form>

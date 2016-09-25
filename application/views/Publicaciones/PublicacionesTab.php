@@ -53,7 +53,7 @@
                     <li><button data-datainic="1" id="aFirstPagPubWeb" >&lt;&lt;</button></li>
                     <li><button id="aPrevPagPubWeb" >&lt;</button></li>
                     <li>
-                        <input data-datainic="1" type="text" value="1" id="txtPagingSearchUsrPubWeb" name="txtNumberPag" size="5">
+                        <input data-datainic="1" type="text" value="1" id="txtPagingSearchUsrPubWeb" name="txtNumberPag" data-mask="000000000" size="5">
                         <span id="pagerBetweenPubWeb" style="background: none;margin:0;padding:0;">/<?php echo $totalPaginasPubWeb ?></span>
                     </li>
                     <li><button id="aNextPagPubWeb">&gt;</button></li>

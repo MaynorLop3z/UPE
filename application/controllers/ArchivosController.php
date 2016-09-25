@@ -283,7 +283,7 @@ class ArchivosController extends CI_Controller {
                     <ul class="pager" id="footpagerArchivos'.$user.'Grupo'.$grupo.'">
                     <li><button data-datainic="1" id="aFirstPagArchivos'.$user.'Grupo'.$grupo.'" onclick="goFirstPagin'.$user.'('.$grupo.')" >&lt;&lt;</button></li>
                     <li><button id="aPrevPagArchivos'.$user.'Grupo'.$grupo.'" onclick="goBackPagin'.$user.'('.$grupo.')">&lt;</button></li>
-                    <li><input data-datainic="'.$this->pagAct.'" type="text" value="'.$this->pagAct.'" id="txtPagingSearchArchivos'.$user.'Grupo'.$grupo.'" onkeypress="'.$user.'GoTo(event, \''.$grupo.'\')" name="txtNumberPag" size="5">/' . $paginas . '</li>
+                    <li><input data-datainic="'.$this->pagAct.'" type="text" class="onlyNumbers" value="'.$this->pagAct.'" id="txtPagingSearchArchivos'.$user.'Grupo'.$grupo.'" onkeypress="'.$user.'GoTo(event, \''.$grupo.'\')" name="txtNumberPag" size="5">/' . $paginas . '</li>
                     <li><button id="aNextPagArchivos'.$user.'Grupo'.$grupo.'" onclick="goNextPagin'.$user.'('.$grupo.')">&gt;</button></li>
                     <li><button id="aLastPagArchivos'.$user.'Grupo'.$grupo.'" data-datainic="' . $paginas . '" onclick="goLastPagin'.$user.'('.$grupo.')">&gt;&gt;</button></li>
                     <li>['.($this->final + 1).' - ' . ($this->final + $numArchivos) . ' / ' . $totalArchivos . ']</li></ul></div>'

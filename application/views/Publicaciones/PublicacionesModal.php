@@ -48,13 +48,13 @@
                                     <br>
                                     <br>
                                     <label for="titulo" class="col-lg-3 control-label">Titulo:</label> 
-                                    <input type="text" class="form-control"  placeholder="Titulo de la publicacion"  name="titulo" required>
+                                    <input type="text" class="form-control"  placeholder="Titulo de la publicacion"  name="titulo" maxlength="300" required>
                                     <!--Los input tipo hidden son para obtener el nombre y la extension de la imagen de la publicacion,-->
                                     <input type="hidden" id="nombreImg" name="nombreImg" value="" readonly>
                                     <input type="hidden" id="extImg" name="extImg" value="" readonly>
                                     <br>
                                     <label for="contenido" class="col-lg-3 control-label">Contenido:</label>
-                                    <textarea  class="form-control"  placeholder="Contenido" name="contenido" id="pubtexarea" required></textarea>
+                                    <textarea  class="form-control"  placeholder="Contenido" name="contenido" id="pubtexarea" maxlength="500" required></textarea>
                                     <br>
                                     <div class="modal-footer">
 
@@ -118,13 +118,13 @@
                                         <br>
                                         <br>
                                         <label for="titulo" class="col-lg-3 control-label">Titulo:</label> 
-                                        <input type="text" class="form-control"  placeholder="Titulo de la publicacion" id="tituloModPub" name="tituloMod" required>
+                                        <input type="text" class="form-control"  placeholder="Titulo de la publicacion" id="tituloModPub" name="tituloMod"  maxlength="300" required>
                                         <!--Los input tipo hidden son para obtener el nombre y la extension de la imagen de la publicacion,-->
                                         <input type="hidden" id="nombreImgMod" name="nombreImgMod" value="" readonly>
                                         <input type="hidden" id="extImgMod" name="extImgMod" value="" readonly>
                                         <br>
                                         <label for="contenido" class="col-lg-3 control-label">Contenido:</label>
-                                        <textarea  class="form-control"  placeholder="Contenido" name="contenidoMod" id="pubtexareaModificacionP" required></textarea>
+                                        <textarea  class="form-control"  placeholder="Contenido" name="contenidoMod" id="pubtexareaModificacionP"  maxlength="500" required></textarea>
                                         <br>
                                         <div class="modal-footer">
 

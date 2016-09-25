@@ -306,7 +306,7 @@ class Usuariocontroller extends CI_Controller {
             <ul class="pager">
                <li><button data-datainic="1" id="aFirstPag" >&lt;&lt;</button></li>
                 <li><button id="aPrevPag" >&lt;</button></li>
-                <li><input data-datainic="' . $pagAct . '" type="text" value="' . $pagAct . '" id="txtPagingSearchUsr" name="txtNumberPag" size="5">/' . $this->getTotalPaginas() . '</li>
+                <li><input data-datainic="' . $pagAct . '" type="text" value="' . $pagAct . '" id="txtPagingSearchUsr" name="txtNumberPag" data-mask="000000000" size="5">/' . $this->getTotalPaginas() . '</li>
                  <li><button id="aNextPag">&gt;</button></li>
                 <li><button id="aLastPag" data-datainic="' . $this->getTotalPaginas() . '" >&gt;&gt;</button></li>
                 <li>[' . ($final + 1) . ' - ' . ($final + count($Usuarios)) . ' / ' . $this->Usuarios->countAllUsers() . ']</li></ul></div>';
@@ -339,7 +339,9 @@ class Usuariocontroller extends CI_Controller {
         try {
             if($this->input->post()){
                 $nombreUs = $this->input->post('FindUsuario');
-                $Usuarios = $this->Usuarios->listarUsuariosNombre($nombreUs);   
+                $correoUs = $this->input->post('Correo');
+                $nickUs = $this->input->post('Nick');
+                $Usuarios = $this->Usuarios->listarUsuariosNombre($nombreUs, $correoUs, $nickUs);
                 $registro = $this->EncabezadoTabla();
                 if(count($Usuarios)>0){
                     foreach ($Usuarios as $user) {

@@ -206,7 +206,7 @@
                     <li><button data-datainic="1" id="aFirstPagPeriodos" >&lt;&lt;</button></li>
                     <li><button id="aPrevPagPeriodos" >&lt;</button></li>
                     <li>
-                        <input data-datainic="1" type="text" value="1" id="txtPagingSearchUsrPeriodos" name="txtNumberPag" size="5">
+                        <input data-datainic="1" type="text" value="1" id="txtPagingSearchUsrPeriodos" name="txtNumberPag" data-mask = "000000000" size="5">
                         <span id="pagerBetweenPer" style="background: none;margin:0;padding:0;">/<?php echo $totalPaginasPeriodos ?></span>
                     </li>
                     <li><button id="aNextPagPeriodos">&gt;</button></li>

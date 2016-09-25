@@ -1,5 +1,10 @@
 var codigoUsuario;
 var postSend=false;
+
+$(document).ready(function(){
+    $('#txtNombrePersonaModificar').filter_input({regex:'[a-zA-Z_]'});
+});
+
 $("#btnUsuarioNuevo").on('click', function () {
     $("#usuarioNuevo").modal();
 });
@@ -310,33 +315,96 @@ $("#containerTablePaging").on("click", "#aNextPag", function (e) {
 $('#frmfindUsuario').submit(function(event){
     event.preventDefault();
 });
+$('#btnCleanSearchUsuarios').click(function(){
+     $('#FindUsuario').val('');
+     $('#FindUsuarioCorreo').val('');
+     $('#FindUsuarioNick').val('');
+     paginGeneral();
+});
 
-$('#FindUsuario').keyup(function(event){
+$('.FindUsuarioClass').keyup(function(event){ //BUSCA USUARIO AL EDITAR LA CAJA DE TEXTO 'NOMBRE'
         var actual=$(this).val();
-        var texto =actual;
-        if(actual===""){
-            var posting = $.post("UsuarioController/paginUsers/", {"data_ini":1});
-        posting.done(function (data) {
-            if (data !== null) {
-                $('#containerTablePaging').empty();
-                $('#containerTablePaging').html(data);
-            }
-        });
-        posting.fail(function (data) {
-            alert("Error");
-        });
+        var nombre =$('#FindUsuario').val();
+        var correo = $('#FindUsuarioCorreo').val();
+        var nick = $('#FindUsuarioNick').val();
+        if(nombre.length>0 && correo.length==0 && nick.length==0){ //FILTRA BUSQUEDA SOLO POR NOMBRE
+            buscarParametrosUsuario('FindByNombre', nombre, correo, nick);
+        }
+        if(nombre.length==0 && correo.length>0 && nick.length==0){ //FILTRA BUSQUEDA SOLO POR CORREO
+            buscarParametrosUsuario('FindByCorreo', nombre, correo, nick);
+        }
+        if(nombre.length==0 && correo.length==0 && nick.length>0){ //FILTRA BUSQUEDA SOLO POR NOMBRE DE USUARIO
+            buscarParametrosUsuario('FindByNick', nombre, correo, nick);
+        }
+        else if (nombre.length>0 && correo.length>0 && nick.length==0){ //FILTRA BUSQUEDA POR NOMBRE Y CORREO
+            buscarParametrosUsuario('FindByNombre+Correo', nombre, correo, nick);
+        }
+        else if (nombre.length>0 && correo.length==0 && nick.length>0){ //FILTRA BUSQUEDA POR NOMBRE Y NOMBRE DE USUARIO
+            buscarParametrosUsuario('FindByNombre+Nick', nombre, correo, nick);
+        }
+        else if (nombre.length==0 && correo.length>0 && nick.length>0){ //FILTRA BUSQUEDA POR CORREO Y NOMBRE DE USUARIO
+            buscarParametrosUsuario('FindByCorreo+Nick', nombre, correo, nick);
+        }
+        else if (nombre.length>0 && correo.length>0 && nick.length>0){ //FILTRA BUSQUEDA POR NOMBRE, CORREO Y NOMBRE DE USUARIO
+            buscarParametrosUsuario('FindByNombre+Correo+Nick', nombre, correo, nick);
+        }
+        else if(nombre.length==0 && correo.length==0 && nick.length==0){
+            buscarParametrosUsuario('Reset', null, null, null)
+        }
+    });
+
+    //BUSCA USUARIO SEGUN LOS PARAMETROS Y CAMPOS DE TEXTO RELLENADOS
+    function buscarParametrosUsuario(find, texto, correo, nick){
+        //REALIZA LA BUSQUEDA SEGUN EL TIPO DE FILTRO
+        if(find=='Reset'){
+            paginGeneral();
         }
         else{
-        var posting = $.post("UsuarioController/BuscarUsuario/",{'FindUsuario':texto});
-      posting.done(function(data){
-          if(data){
-             $('#containerTablePaging').html(data);
-          }
-//          else{
-//             $("#ModInd").modal('toggle');
-//          }
-      });
-      posting.fail(function(xhr, textStatus, errorThrown) {
-        alert("error" + xhr.responseText);
-        });}
-    });
+            var opcion='';
+            switch (find){
+                case "FindByNombre":
+                opcion={FindUsuario:texto};
+                break;
+            case "FindByCorreo": 
+                opcion={Correo:correo};
+                break;
+            case "FindByNick":
+                opcion={Nick:nick};
+                break;
+            case "FindByNombre+Correo":
+                opcion={FindUsuario:texto, Correo:correo};
+                break;
+            case 'FindByNombre+Nick':
+                opcion={FindUsuario:texto, Nick:nick};
+                break;
+            case 'FindByCorreo+Nick':
+                opcion={Correo:correo, Nick:nick};
+                break;
+            case "FindByNombre+Correo+Nick":
+                opcion={FindUsuario:texto, Correo:correo, Nick:nick};
+                break;
+            }
+            var posting = $.post("UsuarioController/BuscarUsuario/",opcion);
+            posting.done(function(data){
+                if(data){
+                   $('#containerTablePaging').html(data);
+                }
+            });
+            posting.fail(function(xhr, textStatus, errorThrown) {
+              alert("error" + xhr.responseText);
+            });
+        }
+    }
+    
+    function paginGeneral(){
+        var posting = $.post("UsuarioController/paginUsers/", {"data_ini":1});
+            posting.done(function (data) {
+                if (data !== null) {
+                    $('#containerTablePaging').empty();
+                    $('#containerTablePaging').html(data);
+                }
+            });
+            posting.fail(function (data) {
+                alert("Error");
+            });
+    }

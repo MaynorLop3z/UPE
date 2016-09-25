@@ -283,7 +283,7 @@ class ParticipantesController extends CI_Controller {
             <ul class="pager" id="footpagerParticipantes">
                <li><button data-datainic="1" id="aFirstPagParticipantes" >&lt;&lt;</button></li>
                 <li><button id="aPrevPagParticipantes" >&lt;</button></li>
-                <li><input data-datainic="' . $pagAct . '" type="text" value="' . $pagAct . '" id="txtPagingSearchParticipantes" name="txtNumberPag" size="5">/' . $this->getTotalPaginas() . '</li>
+                <li><input data-datainic="' . $pagAct . '" type="text" value="' . $pagAct . '" id="txtPagingSearchParticipantes" data-mask="000000000" class="onlyNumbers" name="txtNumberPag" size="5">/' . $this->getTotalPaginas() . '</li>
                  <li><button id="aNextPagParticipantes">&gt;</button></li>
                 <li><button id="aLastPagParticipantes" data-datainic="' . $this->getTotalPaginas() . '" >&gt;&gt;</button></li>
                 <li>[' . ($final + 1) . ' - ' . ($final + count($Alumnos)) . ' / ' . count($this->Participantes->listarParticipantes()) . ']</li></ul></div>';

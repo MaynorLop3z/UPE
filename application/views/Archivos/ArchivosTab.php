@@ -5,6 +5,7 @@
  <script src="../bootstrap/js/Comentarios.js"></script>
  <link href="../bootstrap/css/archivos.css" rel="stylesheet">
  <script src="../bootstrap/js/jquery.twbsPagination.min.js"></script>
+ <script src="../bootstrap/js/utils.js"></script>
 <div id="ArchivoMaestro" class="decorateStyleCrud">
 <!--Tab Grupos-->
  <div class="panel-heading well">
@@ -116,7 +117,7 @@
                 <ul class="pager" id="footpagerArchivosMaestroGrupo<?php echo $grupom ?>">
                 <li><button data-datainic="1" id="aFirstPagArchivosMaestroGrupo<?php echo $grupom ?>" onclick="goFirstPaginMaestro('<?php echo $grupom ?>')" >&lt;&lt;</button></li>
                 <li><button id="aPrevPagArchivosMaestroGrupo<?php echo $grupom ?>" onclick="goBackPaginMaestro('<?php echo $grupom ?>')">&lt;</button></li>
-                <li><input data-datainic="1" type="text" value="1" id="txtPagingSearchArchivosMaestroGrupo<?php echo $grupom ?>" onkeypress="MaestroGoTo(event, '<?php echo $grupom ?>')" name="txtNumberPag" size="5">/ <?php echo $paginas ?></li>
+                <li><input data-datainic="1" type="text" value="1" id="txtPagingSearchArchivosMaestroGrupo<?php echo $grupom ?>" onkeypress="MaestroGoTo(event, '<?php echo $grupom ?>')" name="txtNumberPag" data-mask="000000000" size="5">/ <?php echo $paginas ?></li>
                 <li><button id="aNextPagArchivosMaestroGrupo<?php echo $grupom ?>" onclick="goNextPaginMaestro('<?php echo $grupom ?>')">&gt;</button></li>
                 <li><button id="aLastPagArchivosMaestroGrupo<?php echo $grupom ?>" data-datainic=" <?php echo $paginas ?>" onclick="goLastPaginMaestro('<?php echo $grupom ?>')">&gt;&gt;</button></li>
                 <li>[1 -  <?php echo $paginas ?> / <?php echo $numArch ?> ]</li></ul></div>'

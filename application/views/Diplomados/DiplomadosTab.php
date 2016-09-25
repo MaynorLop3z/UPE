@@ -69,7 +69,7 @@
                     <li><button data-datainic="1" id="aFirstPagDiplomados" >&lt;&lt;</button></li>
                     <li><button id="aPrevPagDiplomados" >&lt;</button></li>
                     <li>
-                        <input data-datainic="1" type="text" value="1" id="txtPagingSearchDiplomados" name="txtNumberPag" size="5">/<?php echo $totalPaginasDiplomados ?>
+                        <input data-datainic="1" type="text" value="1" id="txtPagingSearchDiplomados" name="txtNumberPag" data-mask="000000000" size="5">/<?php echo $totalPaginasDiplomados ?>
                     </li>
                     <li><button id="aNextPagDiplomados">&gt;</button></li>
                     <li><button id="aLastPagDiplomados" data-datainic="<?php echo $totalPaginasDiplomados ?>" >&gt;&gt;</button></li>

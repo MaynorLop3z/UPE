@@ -37,13 +37,13 @@
                                     <br>
                                     <br>
                                     <label for="titulo" class="col-lg-3 control-label">Titulo:</label> 
-                                    <input type="text" class="form-control"  placeholder="Titulo o nombre del archivo"  name="tituloArchivo" required>
+                                    <input type="text" class="form-control"  placeholder="Titulo o nombre del archivo"  name="tituloArchivo" maxlength="300" required>
                                     <!--Los input tipo hidden son para obtener el nombre y la extension de la imagen de la publicacion,-->
                                     <input type="hidden" id="nombreArchivo" name="nombreArchivo" value="" readonly>
                                     <input type="hidden" id="extArchivo" name="extArchivo" value="" readonly>
                                     <br>
                                     <label for="contenidoArchivo" class="col-lg-3 control-label">Descripción:</label>
-                                    <textarea  class="form-control"  placeholder="Contenido" name="contenidoArchivo" id="archivotexarea" required></textarea>
+                                    <textarea  class="form-control"  placeholder="Contenido" name="contenidoArchivo" id="archivotexarea" maxlength="600" required></textarea>
                                     <br>
                                     <div class="modal-footer">
 

@@ -67,7 +67,7 @@
                        <li><button data-datainic="1" id="aFirstPagModulos" >&lt;&lt;</button></li>
                        <li><button id="aPrevPagModulos" >&lt;</button></li>
                        <li>
-                           <input data-datainic="1" type="text" value="1" id="txtPagingSearchModulos" name="txtNumberPag" size="5">/<?php echo $totalPaginasModulos?>
+                           <input data-datainic="1" type="text" value="1" id="txtPagingSearchModulos" name="txtNumberPag" data-mask="000000000" size="5">/<?php echo $totalPaginasModulos?>
                        </li>
                        <li><button id="aNextPagModulos">&gt;</button></li>
                        <li><button id="aLastPagModulos" data-datainic="<?php echo $totalPaginasModulos ?>" >&gt;&gt;</button></li>

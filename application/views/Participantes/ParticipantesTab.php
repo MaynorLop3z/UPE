@@ -87,7 +87,7 @@
                     <li><button data-datainic="1" id="aFirstPagParticipantes" >&lt;&lt;</button></li>
                     <li><button id="aPrevPagParticipantes" >&lt;</button></li>
                     <li>
-                        <input data-datainic="1" type="text" value="1" id="txtPagingSearchParticipantes" name="txtNumberPag" size="5">/<?php echo $totalPaginasParticipantes?>
+                        <input data-datainic="1" type="text" value="1" id="txtPagingSearchParticipantes" name="txtNumberPag" data-mask="000000000" size="5">/<?php echo $totalPaginasParticipantes?>
                     </li>
                     <li><button id="aNextPagParticipantes">&gt;</button></li>
                     <li><button id="aLastPagParticipantes" data-datainic="<?php echo $totalPaginasParticipantes ?>" >&gt;&gt;</button></li>

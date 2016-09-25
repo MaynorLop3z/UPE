@@ -31,7 +31,7 @@
 
         <!-- Bootstrap Core JavaScript -->
         <script src="bootstrap/js/bootstrap.min.js"></script>
-
+        <script src="bootstrap/js/jquery.mask.js"></script>
         <!-- Plugin JavaScript -->
         <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
         <script src="bootstrap/js/classie.js"></script>
@@ -301,7 +301,7 @@
 
 
                                     <label>Nombre</label>
-                                    <input type="text" class="form-control" placeholder="Nombre" id="name" required data-validation-required-message="Please enter your name.">
+                                    <input type="text" class="form-control" placeholder="Nombre" id="name" required maxlength="150" data-validation-required-message="Please enter your name.">
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
@@ -309,14 +309,14 @@
                             <div class="row control-group">
                                 <div class="form-group col-xs-12 floating-label-form-group controls">
                                     <label>Telefono</label>
-                                    <input type="tel" class="form-control" placeholder="Número Telefonico" id="phone" required data-validation-required-message="Please enter your phone number.">
+                                    <input type="tel" class="form-control" placeholder="Número Telefonico" id="phone" data-mask="0000-0000" required data-validation-required-message="Please enter your phone number.">
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
                             <div class="row control-group">
                                 <div class="form-group col-xs-12 floating-label-form-group controls">
                                     <label>Mensaje</label>
-                                    <textarea rows="5" class="form-control" placeholder="Mensaje" id="message" required data-validation-required-message="Please enter a message."></textarea>
+                                    <textarea rows="5" class="form-control" placeholder="Mensaje" id="message" maxlength="600" required data-validation-required-message="Please enter a message."></textarea>
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>

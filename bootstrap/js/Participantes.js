@@ -4,6 +4,7 @@ var countColor = 1;
 
 
 $(document).ready(function(){
+    
     /////////////////busqueda///////////////////////
     $('#tbNameBuscarAlum').keyup(function(event){
         var actual=$(this).val();

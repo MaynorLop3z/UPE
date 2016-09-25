@@ -209,7 +209,7 @@ class ModulosController extends CI_Controller {
             <ul class="pager" id="footpagerModulos">
                <li><button data-datainic="1" id="aFirstPagModulos" >&lt;&lt;</button></li>
                 <li><button id="aPrevPagModulos" >&lt;</button></li>
-                <li><input data-datainic="' . $this->pagAct . '" type="text" value="' . $this->pagAct . '" id="txtPagingSearchModulos" name="txtNumberPag" size="5">/' . $this->getTotalPaginas() . '</li>
+                <li><input data-datainic="' . $this->pagAct . '" type="text" value="' . $this->pagAct . '" data-mask="000000000" class="onlyNumbers" id="txtPagingSearchModulos" name="txtNumberPag" size="5">/' . $this->getTotalPaginas() . '</li>
                  <li><button id="aNextPagModulos">&gt;</button></li>
                 <li><button id="aLastPagModulos" data-datainic="' . $this->getTotalPaginas() . '" >&gt;&gt;</button></li>
                 <li>[' . ($this->final + 1) . ' - ' . ($this->final + count($Modulos)) . ' / ' . count($this->Modulos->listarModulos()) . ']</li></ul></div>';

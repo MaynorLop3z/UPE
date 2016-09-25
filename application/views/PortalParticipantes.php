@@ -36,12 +36,12 @@
     <form method="post" class="vcenter" action="" id="frmLoginParticipantes">
     <div class="login-form" >
         <div class="form-group">
-            <input name="login_name" type="text" class="form-control login-field" value="" placeholder="Usuario" id="login-name" />
+            <input name="login_name" type="text" class="form-control login-field" value="" placeholder="Usuario" maxlength="150" id="login-name" />
             <label class="login-field-icon fui-user" for="login-name"></label>
         </div>
  
         <div class="form-group">
-            <input  name="login_password" type="password" class="form-control login-field" value="" placeholder="Contraseña" id="login-pass" />
+            <input  name="login_password" type="password" class="form-control login-field" value="" placeholder="Contraseña" maxlength="50" id="login-pass" />
             <label class="login-field-icon fui-lock" for="login-pass"></label>
         </div>
         <input class="btn btn-primary btn-lg btn-block" type="submit" onclick="" name="dlf_submit" value="ENTRAR" id="btnEntrar"/>

@@ -1,4 +1,5 @@
 <?php $this->load->helper('url'); ?>
+
 <!------Modal para el boton Agregar Diplomados----------------------------------------------------------------------------------->
 <div id="DiplomadoNuevo" class="modal fade"  data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -11,13 +12,13 @@
                         <div class="form-group">
                             <label for="DiplomadoNombre" class="col-lg-3 control-label">Nombre Del Diplomado</label>
                             <div class="col-lg-9">
-                                <input type="text" class="form-control" name="NombreDiplomado" id="DiplomadoNombre" placeholder="Nombre del Diplomado" required>
+                                <input type="text" class="form-control" name="NombreDiplomado" id="DiplomadoNombre" placeholder="Nombre del Diplomado" maxlength="300" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="DiplomadoDescripcion" class="col-lg-3 control-label">Descripcion</label>
                             <div class="col-lg-9">
-                                <textarea type="text" class="form-control" name="Descripcion" id="DiplomadoDescripcion" placeholder="Descripcion del Diplomado" required></textarea>
+                                <textarea type="text" class="form-control" name="Descripcion" id="DiplomadoDescripcion" placeholder="Descripcion del Diplomado" maxlength="500" required></textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -46,7 +47,7 @@
                         <div class="form-group">
                             <label for="ComentarioDiplomado" class="col-lg-3 control-label">Comentarios</label>
                             <div class="col-lg-9">
-                                <textarea id="ComentarioDiplomado" name="Comentarios"  type="text" class="form-control"  placeholder="Descripcion del Diplomado" ></textarea>
+                                <textarea id="ComentarioDiplomado" name="Comentarios"  type="text" class="form-control"  placeholder="Descripcion del Diplomado" maxlength="500" ></textarea>
                             </div>
                         </div>
 
@@ -76,13 +77,13 @@
                         <div class="form-group">
                             <label for="DiplomadoNombreEdit" class="col-lg-3 control-label">Nombre Del Diplomado</label>
                             <div class="col-lg-9">
-                                <input type="text" class="form-control" name="NombreDiplomado" id="DiplomadoNombreEdit" placeholder="Nombre del Diplomado" required>
+                                <input type="text" class="form-control" name="NombreDiplomado" id="DiplomadoNombreEdit" placeholder="Nombre del Diplomado" maxlength="300" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="DiplomadoDescripcionEdit" class="col-lg-3 control-label">Descripcion</label>
                             <div class="col-lg-9">
-                                <textarea type="text" class="form-control" name="Descripcion" id="DiplomadoDescripcionEdit" placeholder="Descripcion del Diplomado" required></textarea>
+                                <textarea type="text" class="form-control" name="Descripcion" id="DiplomadoDescripcionEdit" placeholder="Descripcion del Diplomado" maxlength="500" required></textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -111,7 +112,7 @@
                         <div class="form-group">
                             <label for="ComentarioDiplomadoEdit" class="col-lg-3 control-label">Comentarios</label>
                             <div class="col-lg-9">
-                                <textarea id="ComentarioDiplomadoEdit" name="Comentarios"  type="text" class="form-control"  placeholder="Descripcion del Diplomado" ></textarea>
+                                <textarea id="ComentarioDiplomadoEdit" name="Comentarios"  type="text" class="form-control"  placeholder="Descripcion del Diplomado" maxlength="500" ></textarea>
                             </div>
                         </div>
 
@@ -235,13 +236,13 @@
                         <div class="form-group">
                             <label for="nameModulo" class="col-lg-3 control-label">Nombre Del Modulo:</label>
                             <div class="col-lg-9">
-                                <input type="text" class="form-control" name="NombreModulo" id="ModuloNombre" placeholder="Nombre del Modulo" required>
+                                <input type="text" class="form-control" name="NombreModulo" id="ModuloNombre" placeholder="Nombre del Modulo" maxlength="300" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="ModuloOrden" class="col-lg-3 control-label">Correlativo</label>
                             <div class="col-lg-9">
-                                <input   type="number" min="1" class="form-control" name="ordenM" id="ModuloOrden" placeholder="Orden" required>
+                                <input   type="number" min="1" class="onlyNumbers form-control" name="ordenM" id="ModuloOrden" placeholder="Orden" data-mask="000" required>
                             </div>
                         </div>                     
                         <div class="form-group">
@@ -281,7 +282,7 @@
                         <div class="form-group">
                             <label for="ComentarioDiplomado" class="col-lg-3 control-label">Comentarios:</label>
                             <div class="col-lg-9">
-                                <textarea id="ComentarioMod" name="Comentarios"  type="text" class="form-control"  placeholder="Comentario Modulo" ></textarea>
+                                <textarea id="ComentarioMod" name="Comentarios"  type="text" class="form-control"  placeholder="Comentario Modulo" maxlength="500" ></textarea>
                             </div>
                         </div>
 

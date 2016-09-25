@@ -1,6 +1,6 @@
 <?php $this->load->helper('url'); ?>
 
-<!-- Modal para modificar Diplomados --------------------------------------------------------------------------------------------------------------------------------------->
+<!-- Modal para modificar Modulos --------------------------------------------------------------------------------------------------------------------------------------->
 <div id="ModificarModulo" class="modal fade"  data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -12,13 +12,13 @@
                         <div class="form-group">
                             <label for="nameModuloEdit" class="col-lg-3 control-label">Nombre Del Modulo:</label>
                             <div class="col-lg-9">
-                                <input type="text" class="form-control" name="NombreModulo" id="ModuloNombreEdit" placeholder="Nombre del Modulo" required>
+                                <input type="text" class="form-control" name="NombreModulo" id="ModuloNombreEdit" placeholder="Nombre del Modulo" maxlength="300" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="ModuloOrdenEdit" class="col-lg-3 control-label">Correlativo</label>
                             <div class="col-lg-9">
-                                <input type="number"  min="1" class="form-control" name="ordenM" id="ModuloOrdenEdit" placeholder="Orden" required>
+                                <input type="number"  min="1" class="onlyNumbers form-control" name="ordenM" id="ModuloOrdenEdit" placeholder="Orden" data-mask="000" required>
                             </div>
                         </div>                     
                         <div class="form-group">
@@ -62,7 +62,7 @@
                           <label class="col-lg-3 control-label">Comentario:</label>
                             
                             <div class="col-lg-9">
-                                <textarea id="ComentarioModEdit" name="Comentarios"  type="text" class="form-control"  placeholder="Comentario Modulo" ></textarea>
+                                <textarea id="ComentarioModEdit" name="Comentarios"  type="text" class="form-control"  placeholder="Comentario Modulo" maxlength="500" ></textarea>
                             </div>
                         </div>
 

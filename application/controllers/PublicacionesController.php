@@ -274,7 +274,7 @@ class PublicacionesController extends CI_Controller {
             <ul class="pager">
                <li><button data-datainic="1" id="aFirstPagPubWeb" >&lt;&lt;</button></li>
                 <li><button id="aPrevPagPubWeb" >&lt;</button></li>
-                <li><input data-datainic="' . $pagAct . '" type="text" value="' . $pagAct . '" id="txtPagingSearchUsrPubWeb" name="txtNumberPag" size="5">/' . $this->getTotalPaginas() . '</li>
+                <li><input data-datainic="' . $pagAct . '" type="text" value="' . $pagAct . '" id="txtPagingSearchUsrPubWeb" name="txtNumberPag" data-mask="000000000" size="5">/' . $this->getTotalPaginas() . '</li>
                  <li><button id="aNextPagPubWeb">&gt;</button></li>
                 <li><button id="aLastPagPubWeb" data-datainic="' . $this->getTotalPaginas() . '" >&gt;&gt;</button></li>
                 <li>[' . ($final + 1) . ' - ' . ($final + count($Publicaciones)) . ' / ' . count($this->Publicaciones->listarPublicaciones()) . ']</li></ul></div>';

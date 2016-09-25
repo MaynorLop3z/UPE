@@ -221,7 +221,7 @@ class DiplomadosController extends CI_Controller {
             <ul class="pager" id="footpagerDiplomados">
                <li><button data-datainic="1" id="aFirstPagDiplomados" >&lt;&lt;</button></li>
                 <li><button id="aPrevPagDiplomados" >&lt;</button></li>
-                <li><input data-datainic="' . $pagAct . '" type="text" value="' . $pagAct . '" id="txtPagingSearchDiplomados" name="txtNumberPag" size="5">/' . $this->getTotalPaginas() . '</li>
+                <li><input data-datainic="' . $pagAct . '" type="text" value="' . $pagAct . '" class="onlyNumbers" id="txtPagingSearchDiplomados" name="txtNumberPag" data-mask="000000000" size="5">/' . $this->getTotalPaginas() . '</li>
                  <li><button id="aNextPagDiplomados">&gt;</button></li>
                 <li><button id="aLastPagDiplomados" data-datainic="' . $this->getTotalPaginas() . '" >&gt;&gt;</button></li>
                 <li>[' . ($final + 1) . ' - ' . ($final + count($Diplomados)) . ' / ' . count($this->Diplomados->listarDiplomados()) . ']</li></ul></div>';

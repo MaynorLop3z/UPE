@@ -276,8 +276,6 @@ class PeriodosController extends CI_Controller {
                 $estudiantes = $this->Periodos->getStudents($grupo, $inicio, $final);
             }
 
-//            $buttonsByUserRights = $this->analizarPermisosBotonesTablas("gestionUserBtn", $this->session->userdata('permisosUsuer'));
-
             foreach ($estudiantes as $estudiante) {
                     $result .= '<tr id="GrupoEstudiante' . $estudiante->CodigoParticipante . '">\n';
                     $result .= '<td class="NombreEstudiante">' . $estudiante->Nombre . '</td>\n';
@@ -299,11 +297,11 @@ class PeriodosController extends CI_Controller {
                                 <li><button data-datainic="1" id="aFirstPagParticipantesInscribir" >&lt;&lt;</button></li>
                                 <li><button id="aPrevPagParticipantesInscribir" >&lt;</button></li>
                                 <li>
-                                    <input data-datainic="' . $pagAct .'" type="text" value="' . $pagAct .'" id="txtPagingSearchParticipantesInscribir" name="txtNumberPag" size="5">/'.$totalPaginas.'
+                                    <input data-datainic="' . $pagAct .'" type="text" value="' . $pagAct .'" id="txtPagingSearchParticipantesInscribir" name="txtNumberPag" data-mask = "000000000" size="5">/'.$totalPaginas.'
                                 </li>
                                 <li><button id="aNextPagParticipantesInscribir">&gt;</button></li>
                                 <li><button id="aLastPagParticipantesInscribir" data-datainic="'.$totalPaginas.'" >&gt;&gt;</button></li>
-                                <li id="pagerParticipantesInscribir">[ '. ($final + 1) . ' - '.($final + count($estudiantes)). "/" . count($estudiantes). ']</li>
+                                <li id="pagerParticipantesInscribir">[ '. ($final + 1) . ' - '.($final + count($estudiantes)). "/" . count($this->Periodos->getStudents($grupo)). ']</li>
                             </ul>
                         </div></td>
                         </tr>';
@@ -408,7 +406,7 @@ class PeriodosController extends CI_Controller {
             <ul class="pager" id="footpagerPeriodos">
                <li><button data-datainic="1" id="aFirstPagPeriodos" >&lt;&lt;</button></li>
                 <li><button id="aPrevPagPeriodos" >&lt;</button></li>
-                <li><input data-datainic="' . $pagAct . '" type="text" value="' . $pagAct . '" id="txtPagingSearchUsrPeriodos" name="txtNumberPag" size="5">'
+                <li><input data-datainic="' . $pagAct . '" type="text" value="' . $pagAct . '" id="txtPagingSearchUsrPeriodos" data-mask = "000000000" name="txtNumberPag" size="5">'
                     . '<span id="pagerBetweenPer" style="background: none;margin:0;padding:0;">/' . $this->getTotalPaginas($idMo) . '</span></li>
                  <li><button id="aNextPagPeriodos">&gt;</button></li>
                 <li><button id="aLastPagPeriodos" data-datainic="' . $this->getTotalPaginas($idMo) . '" >&gt;&gt;</button></li>

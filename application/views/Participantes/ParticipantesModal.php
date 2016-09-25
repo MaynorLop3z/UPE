@@ -1,5 +1,5 @@
 <?php $this->load->helper('url'); ?>
-<script src="../bootstrap/js/jquery.mask.js"></script>
+<script src="../bootstrap/js/utils.js"></script>
 <!-- Modal Para el Alumno Nuevo  ------------------------------------------------------------------------------------>
 <div id="AlumnoNuevo" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog  modal-lg">
@@ -17,7 +17,7 @@
                                 <div class="form-group">
                                     <label for="AlumnoNombre" class="col-lg-3 control-label">Nombre:</label>
                                     <div class="col-lg-6 ">
-                                        <input type="text" class="form-control" name="Nombre" id="AlumnoNombre" placeholder="Nombre Alumno" maxlength="100" required>
+                                        <input type="text" class="onlyLettersS form-control"  name="Nombre" id="AlumnoNombre" placeholder="Nombre Alumno"  maxlength="100" required>
                                     </div>
                                     <div class="col-lg-3">
                                         <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
@@ -85,7 +85,7 @@
                                 <div class="form-group">
                                     <label for="AlumnoFNac" class="col-lg-3 control-label">Fecha Nacimiento:</label>
                                     <div class="col-lg-6">
-                                        <input type="date" class="form-control" name="FechaNacimiento" id="AlumnoFNac"  placeholder="Fecha de nacimiento del Alumno" required>
+                                        <input type="date" class="form-control" name="FechaNacimiento" id="AlumnoFNac"  placeholder="Año-Mes-Dia" data-mask="0000-00-00" required>
                                     </div>
                                     <div class="col-lg-3">
                                         <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
@@ -256,7 +256,7 @@
                                 <div class="form-group">
                                     <label for="AlumnoFNacEDIT" class="col-lg-3 control-label">Fecha Nacimiento:</label>
                                     <div class="col-lg-6">
-                                        <input type="date" class="form-control" name="FechaNacimiento" id="AlumnoFNacEDIT" placeholder="Fecha de nacimiento del Alumno" required>
+                                        <input type="date" class="form-control" name="FechaNacimiento" id="AlumnoFNacEDIT" placeholder="Año-Mes-Dia" data-mask="0000-00-00" required>
                                     </div>
                                     <div class="col-lg-3">
                                         <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
