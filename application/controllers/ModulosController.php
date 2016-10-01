@@ -118,9 +118,11 @@ class ModulosController extends CI_Controller {
         try {
         if($this->input->post()){
             $nombreMo = $this->input->post('FindModulo');
+            $turno = $this->input->post('Turno');
+            $diplomado= $this->input->post('Diplomado');
 //            $this->AvRevPaginas();
 //            $Modulos = json_decode(json_encode($this->Modulos->listarModulosNombre($nombreMo)),true);
-            $Modulos = $this->Modulos->listarModulosNombre($nombreMo);   
+            $Modulos = $this->Modulos->listarModulosNombre($nombreMo, $turno, $diplomado);   
             $registro = $this->EncabezadoTabla();
             foreach ($Modulos as $mod){
                   $registro .= $this->cuerpoTabla($mod);

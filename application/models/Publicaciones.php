@@ -402,8 +402,8 @@ class Publicaciones extends CI_Model {
     }
     
     ///PARA BUSQUEDA DE PUBLICACIONES EN DASHBOARD
-    public function listarPublicacionesNombre($filtro){
-        $consulta = $this->db->query('SELECT 
+    public function listarPublicacionesNombre($filtro1=null, $filtro2=null){
+        $query='SELECT 
                     "Publicaciones"."CodigoPublicacion", 
                     "Publicaciones"."UsuarioPublica", 
                     "Publicaciones"."FechaPublicacion", 
@@ -420,8 +420,19 @@ class Publicaciones extends CI_Model {
                   FROM 
                     public."CategoriaDiplomados", 
                     public."Publicaciones"
-                  WHERE LOWER("Titulo") LIKE  \'%'. strtolower($filtro).'%\' 
-                  AND
+                  WHERE ';
+            if($filtro1!=null && $filtro2!=null){
+               $query.='LOWER("Titulo") LIKE \'%'.strtolower($filtro1).'%\' ';
+               $query.='AND LOWER("NombreCategoriaDiplomado") LIKE \'%'.strtolower($filtro2).'%\' ';
+            }
+            else if($filtro2!=null && $filtro1==null){
+               $query.='LOWER("NombreCategoriaDiplomado") LIKE \'%'.strtolower($filtro2).'%\' ';
+            }
+            else if($filtro1!=null && $filtro2==null){
+                $query.='LOWER("Titulo") LIKE \'%'.strtolower($filtro1).'%\' ';
+            }
+                  
+            $query.=' AND
                   "CategoriaDiplomados"."CodigoCategoriaDiplomado"  = public."Publicaciones"."CodigoCategoriaDiplomado"   
                   AND 
                   "Publicaciones"."CodigoTipoPublicacion" =' . TIPO_PUBLICACION_WEB . '
@@ -429,7 +440,8 @@ class Publicaciones extends CI_Model {
                   "Publicaciones"."Estado" = TRUE
                   ORDER BY
                   "Publicaciones"."FechaPublicacion" DESC
-            ');
+            ';
+        $consulta = $this->db->query($query);
 
         $resultado = $consulta->result();
         return $resultado;

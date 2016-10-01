@@ -1,21 +1,33 @@
 
 <?php $this->load->helper('url'); ?>
-<div class="panel-heading well">
+<div class="panel panel-default">
+<div class="panel-heading">
     <h3 class="panel-title">Gestion de Publicaciones</h3>
 </div>
 <div class="panel-body">
-    <div class="col-md-6">
-        <button onclick="" id="openNuevaPublicacion" class="btn btn-default btn-default"><span class="glyphicon glyphicon-plus"></span>Nueva Publicacion</button>
-    </div>
-    <div class="col-md-6">
-        
-        <form id="frmfindPublicacion" action="<?php echo base_url() ?>index.php/PublicacionesController/BuscarPublicaciones/"  method="post" class="form-inline">
+    <div class="well">
+        <button onclick="" id="openNuevaPublicacion" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span>Nueva Publicacion</button>
+<!--        <form id="frmfindPublicacion" action="<?php echo base_url() ?>index.php/PublicacionesController/BuscarPublicaciones/"  method="post" class="form-inline" style="float:right;">
             <span>Publicación:</span>    
             <input type="text" class="form-control" name="FindPublicacion" id="FindPublicacion" placeholder="Nombre de la Publicación" required>
             <button id="btnFindPub" type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>Buscar</button>
-        </form>
+        </form>-->
     </div>
-    <!--tabla de publicaciones solo muestra el titulo y la categoria-->
+     <form id="frmfindPublicacion"  action="" class="form-horizontal" method="post" >
+        <fieldset>
+            <legend class="modal-header">Buscar Publicación:</legend> 
+            <div class="form-group">
+                <div class="col-lg-4">
+                    <input class="form-control form-inline FindPublicacionClass" placeholder="Nombre" name="FindUsuario" id="FindPublicacionNombre" type="text" maxlength="150" >
+                </div>
+                <div class="col-lg-4">
+                    <input class="form-control form-inline FindPublicacionClass" placeholder="Categoria" id="FindPublicacionCategoria" type="text" maxlength="150" >
+                </div>
+                <button id="btnCleanSearchPub" class="btn btn-default" style="float:right;margin-right: 20px;"><span class="glyphicon glyphicon-refresh"></span>Limpiar Búsqueda</button> 
+            </div>
+        </fieldset>
+    </form>
+       <!--tabla de publicaciones solo muestra el titulo y la categoria-->
     <div id="TablaPublicacionesWeb">
     <table id="tableTitulo"  class="table table-bordered table-striped table-hover table-responsive">
         <thead>
@@ -65,4 +77,4 @@
         <?php } ?>
     </div>
 </div>
-
+</div>

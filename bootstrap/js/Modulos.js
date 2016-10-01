@@ -7,36 +7,129 @@ var  filaEdit;
 //}
 
 $(document).ready(function(){
-    $('#FindModulo').keyup(function(event){
-        var actual=$(this).val();
-        var texto =actual;
-//        alert(escape(texto));
-        if(actual===""){
-            var posting = $.post("ModulosController/paginModulos/", {"data_ini":1});
-        posting.done(function (data) {
-            if (data !== null) {
-                $('#tablaModulosContent').empty();
-                $('#tablaModulosContent').html(data);
-            }
-        });
-        posting.fail(function (data) {
-            alert("Error");
-        });
+//    $('#FindModulo').keyup(function(event){
+//        var actual=$(this).val();
+//        var texto =actual;
+////        alert(escape(texto));
+//        if(actual===""){
+//            var posting = $.post("ModulosController/paginModulos/", {"data_ini":1});
+//        posting.done(function (data) {
+//            if (data !== null) {
+//                $('#tablaModulosContent').empty();
+//                $('#tablaModulosContent').html(data);
+//            }
+//        });
+//        posting.fail(function (data) {
+//            alert("Error");
+//        });
+//        }
+//        else{
+//        var posting = $.post("ModulosController/BuscarModulos/",{'FindModulo':texto});
+//      posting.done(function(data){
+//          if(data){
+////              $('#tableModulos').html(data);
+//             $('#tablaModulosContent').html(data);
+//          }else{
+//             $("#ModInd").modal('toggle');
+//          }
+//      });
+//      posting.fail(function(xhr, textStatus, errorThrown) {
+//        alert("error" + xhr.responseText);
+//    });}
+//    });
+/////////////NUEVA BUSQUEDA/////////////////
+$('#btnCleanSearchModulo').click(function(){
+     $('#FindModuloNombre').val('');
+     $('#FindModuloTurno').val('');
+     $('#FindModuloDiplomado').val('');
+     paginModulo();
+});
+
+$('.FindModuloClass').keyup(function(event){ //BUSCA MODULO AL EDITAR 
+        var nombre =$('#FindModuloNombre').val();
+        var turno = $('#FindModuloTurno').val();
+        var diplomado = $('#FindModuloDiplomado').val();
+        if(nombre.length>0 && turno.length==0 && diplomado.length==0){ //FILTRA BUSQUEDA SOLO POR NOMBRE
+            buscarParametrosModulo('FindByNombre', nombre, turno, diplomado);
+        }
+        if(nombre.length==0 && turno.length>0 && diplomado.length==0){ //FILTRA BUSQUEDA SOLO POR CORREO
+            buscarParametrosModulo('FindByTurno', nombre, turno, diplomado);
+        }
+        if(nombre.length==0 && turno.length==0 && diplomado.length>0){ //FILTRA BUSQUEDA SOLO POR CATEGORIA
+            buscarParametrosModulo('FindByDiplomado', nombre, turno, diplomado);
+        }
+        else if (nombre.length>0 && turno.length>0 && diplomado.length==0){ //FILTRA BUSQUEDA POR NOMBRE Y CORREO
+            buscarParametrosModulo('FindByNombre+Turno', nombre, turno, diplomado);
+        }
+        else if (nombre.length>0 && turno.length==0 && diplomado.length>0){ //FILTRA BUSQUEDA POR NOMBRE Y CATEGORIA
+            buscarParametrosModulo('FindByNombre+Diplomado', nombre, turno, diplomado);
+        }
+        else if (nombre.length==0 && turno.length>0 && diplomado.length>0){ //FILTRA BUSQUEDA POR CORREO Y CATEGORIA
+            buscarParametrosModulo('FindByTurno+Diplomado', nombre, turno, diplomado);
+        }
+        else if (nombre.length>0 && turno.length>0 && diplomado.length>0){ //FILTRA BUSQUEDA POR NOMBRE, CORREO Y CATEGORIA
+            buscarParametrosModulo('FindByNombre+Turno+Diplomado', nombre, turno, diplomado);
+        }
+        else if(nombre.length==0 && turno.length==0 && diplomado.length==0){
+            buscarParametrosModulo('Reset', null, null, null)
+        }
+    });
+
+    //BUSCA MODULO SEGUN LOS PARAMETROS Y CAMPOS DE TEXTO RELLENADOS
+    function buscarParametrosModulo(find, nombre, turno, diplomado){
+        //REALIZA LA BUSQUEDA SEGUN EL TIPO DE FILTRO
+        if(find=='Reset'){
+            paginModulo();
         }
         else{
-        var posting = $.post("ModulosController/BuscarModulos/",{'FindModulo':texto});
-      posting.done(function(data){
-          if(data){
-//              $('#tableModulos').html(data);
-             $('#tablaModulosContent').html(data);
-          }else{
-             $("#ModInd").modal('toggle');
-          }
-      });
-      posting.fail(function(xhr, textStatus, errorThrown) {
-        alert("error" + xhr.responseText);
-    });}
-    });
+            var opcion='';
+            switch (find){
+                case "FindByNombre":
+                opcion={FindModulo:nombre};
+                break;
+            case "FindByTurno": 
+                opcion={Turno:turno};
+                break;
+            case "FindByDiplomado":
+                opcion={Diplomado:diplomado};
+                break;
+            case "FindByNombre+Turno":
+                opcion={FindModulo:nombre, Turno:turno};
+                break;
+            case 'FindByNombre+Diplomado':
+                opcion={FindModulo:nombre, Diplomado:diplomado};
+                break;
+            case 'FindByTurno+Diplomado':
+                opcion={Turno:turno, Diplomado:diplomado};
+                break;
+            case "FindByNombre+Turno+Diplomado":
+                opcion={FindModulo:nombre, Turno:turno, Diplomado:diplomado};
+                break;
+            }
+            var posting = $.post("ModulosController/BuscarModulos/",opcion);
+            posting.done(function(data){
+                if(data){
+                   $('#tablaModulosContent').html(data);
+                }
+            });
+            posting.fail(function(xhr, textStatus, errorThrown) {
+              alert("error" + xhr.responseText);
+            });
+        }
+    }
+    
+    function paginModulo(){
+        var posting = $.post("ModulosController/paginModulos/", {"data_ini":1});
+            posting.done(function (data) {
+                if (data !== null) {
+                    $('#tablaModulosContent').empty();
+                    $('#tablaModulosContent').html(data);
+                }
+            });
+            posting.fail(function (data) {
+                alert("Error");
+            });
+    }
 });
 
 function editModulo(fila) {

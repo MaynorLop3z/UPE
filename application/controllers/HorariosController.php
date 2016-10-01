@@ -13,8 +13,9 @@ class HorariosController extends CI_Controller {
     }
 
     public function index() {
-//        $data['Turnos'] = $this->Horarios->cargarTurnos();
-//        $data['Grupos'] = $his->Periodos->listarGruposPeriodos();
+        $data['nada']='';
+        $data['Turnos'] = $this->Horarios->cargarTurnos();
+//        $data['Grupos'] = $his->Periodos->listarHorariosGruposxTurno();
         $this->load->view('Horarios', $data);
     }
 

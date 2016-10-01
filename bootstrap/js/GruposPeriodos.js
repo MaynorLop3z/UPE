@@ -235,29 +235,29 @@ function asignarDocente(fila) {
 ////////////PAGINACION DE ALUMNOS INSCRIBIR//////////////
     
     $("#EstudiantesGrupoPeriodo").on("click", "#aFirstPagParticipantesInscribir", function (e) {
-        paginarParticipantes("data_ini", $(this).data("datainic"), codigoGrupoPeriodo.substring(7));
+        paginarParticipantesInscribir("data_ini", $(this).data("datainic"), codigoGrupoPeriodo.substring(7));
     });
 
     $("#EstudiantesGrupoPeriodo").on("click", "#aLastPagParticipantesInscribir", function (e) {
-        paginarParticipantes("data_ini", $(this).data("datainic"), codigoGrupoPeriodo.substring(7));
+        paginarParticipantesInscribir("data_ini", $(this).data("datainic"), codigoGrupoPeriodo.substring(7));
     });
 
     $("#EstudiantesGrupoPeriodo").on("click", "#aPrevPagParticipantesInscribir", function (e) {
-        paginarParticipantes("data_inip", null, codigoGrupoPeriodo.substring(7));
+        paginarParticipantesInscribir("data_inip", null, codigoGrupoPeriodo.substring(7));
     });
 
     $("#EstudiantesGrupoPeriodo").on("click", "#aNextPagParticipantesInscribir", function (e) {
-        paginarParticipantes("data_inin", null, codigoGrupoPeriodo.substring(7));
+        paginarParticipantesInscribir("data_inin", null, codigoGrupoPeriodo.substring(7));
     });
     
     $("#EstudiantesGrupoPeriodo").on("keypress", "#txtPagingSearchParticipantesInscribir", function (e) {
         e.stopImmediatePropagation();
         if (e.which === 13 && ($(this).val()>0)) {
-             paginarParticipantes("data_ini", $(this).val(), codigoGrupoPeriodo.substring(7));
+             paginarParticipantesInscribir("data_ini", $(this).val(), codigoGrupoPeriodo.substring(7));
         }
     });
     
-    function paginarParticipantes(dat, op, gr){
+    function paginarParticipantesInscribir(dat, op, gr){
 
         var data_in = $('#txtPagingSearchParticipantesInscribir').data("datainic");     
         var url = 'PeriodosController/paginEstudiantes/';

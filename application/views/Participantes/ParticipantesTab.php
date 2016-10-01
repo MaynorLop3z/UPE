@@ -10,16 +10,35 @@
             <div class="col-md-6">
                 <button  id="btnADDAlumno" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Alumno Nuevo</button>
             </div>
-            <div class="col-md-6" style="float:right;">
+             <button id="btnCleanSearchAlumno" class="btn btn-default" style="float:right;margin-right: 20px;"><span class="glyphicon glyphicon-refresh"></span>Limpiar Búsqueda</button> 
+<!--            <div class="col-md-6" style="float:right;">
                 <?php $this->load->helper('url'); ?>
                 <form id="frmFINDAlumno" action="<?php echo base_url() ?>index.php/ParticipantesController/buscar/"  method="post" class="form-inline" style="float:right;">
                     <span>Nombre a buscar:</span>
                     <input type="text" class="form-control" id="tbNameBuscarAlum" name="NombreBuscado" placeholder="Escriba texto de busqueda aqui" required>                
                     <button id="btnFindAlum" type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Buscar Alumno</button>
                 </form>
-            </div>
+            </div>-->
         </div>
         <br>
+        <div class="panel panel-default">
+            <form id="frmfindAlumno"  action="" class="form-horizontal" method="post" >
+                <fieldset>
+                    <legend class="modal-header">Buscar Alumno:</legend> 
+                    <div class="form-group">
+                        <div class="col-lg-4">
+                            <input class="form-control form-inline FindAlumnoClass" placeholder="Correo" id="FindAlumnoCorreo" type="text" maxlength="150" >
+                        </div>
+                        <div class="col-lg-4">
+                            <input class="form-control form-inline FindAlumnoClass" placeholder="Nombre" name="FindAlumno" id="FindAlumnoNombre" type="text" maxlength="150" >
+                        </div>
+                        <div class="col-lg-4">
+                            <input class="form-control form-inline FindAlumnoClass" placeholder="Categoria" id="FindAlumnoCategoria" type="text" maxlength="150" >
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
         <!-- DIv para la tabla  donde se muestran todos los usuario-->
         <div class="row">
             <div class="col-md-12">
@@ -79,7 +98,7 @@
                         ?>
                     </tbody>
                 </table>
-                    <?php if($ToTalRegistrosParticipantes!==0){ ?>
+                    <?php if($ToTalRegistrosParticipantes>ROWS_PER_PAGE){ ?>
                      <!--Paginacion-->
              <div class="row">
                 <hr>

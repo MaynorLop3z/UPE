@@ -118,7 +118,8 @@ class DiplomadosController extends CI_Controller {
         try {
             if ($this->input->post()) {
                 $nombreDip = $this->input->post('FindDiplomado');
-                $Diplomados = json_decode(json_encode($this->Diplomados->listarDiplomadosNombre($nombreDip)), true);
+                $categoria = $this->input->post('Categoria');
+                $Diplomados = json_decode(json_encode($this->Diplomados->listarDiplomadosNombre($nombreDip, $categoria)), true);
                 $registro = $this->EncabezadoTabla();
                 foreach ($Diplomados as $dip) {
                     $registro .= '<tr id="dip' . $dip['CodigoDiplomado'] . '">';

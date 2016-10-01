@@ -74,7 +74,7 @@ class Participantes extends CI_Model {
             return $exc->getTraceAsString();
         }
     }
-    public function listarParticipantesByName($filtro) {
+    public function listarParticipantesByName($filtro=null, $correo=null, $categoria=null) {
         $this->db->select('T0.CodigoParticipante, '
                 . 'T0.CorreoElectronico, '
                 . 'T0.TelefonoFijo, '
@@ -94,7 +94,15 @@ class Participantes extends CI_Model {
                 . 'T1.NombreCategoriaParticipante');
         $this->db->from('Participantes T0');
         $this->db->join("CategoriasParticipante T1","T0.CodigoCategoriaParticipantes = T1.CodigoCategoriaParticipantes");
-        $this->db->like('LOWER("Nombre")',strtolower($filtro));
+        if($filtro!=null){
+            $this->db->like('LOWER("Nombre")',strtolower($filtro));
+        }
+        if($correo!=null){
+            $this->db->like('LOWER("CorreoElectronico")',strtolower($correo));
+        }
+        if($categoria!=null){
+            $this->db->like('LOWER("NombreCategoriaParticipante")',strtolower($categoria));
+        }
         $consulta = $this->db->get();
         $resultado = $consulta->result();
         return $resultado;

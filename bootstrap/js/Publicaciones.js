@@ -1,8 +1,3 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 //Variables globales 
 var codigoUsuario;
@@ -198,44 +193,99 @@ $(document).ready(function () {
     
 ///***********FIN MODIFICACION DE LA IMAGEN**********//
 
-
-//BUSQUEDA
+//////////////////////////////////////////////////////////////
+//                       BUSQUEDA
     $('#frmfindPublicacion').submit(function(event){
          event.preventDefault();
     });
-    $('#FindPublicacion').keyup(function(event){
-        var actual=$(this).val();
-        var texto =actual;
-        if(event.which===13){}
-        if(actual===""){
-            var posting = $.post("PublicacionesController/paginPublicaciones/", {"data_ini":1});
-        posting.done(function (data) {
-            if (data !== null) {
-                $('#TablaPublicacionesWeb').empty();
-                $('#TablaPublicacionesWeb').html(data);
-            }
-        });
-        posting.fail(function (data) {
-            alert("Error");
-        });
+//    $('#FindPublicacion').keyup(function(event){
+//        var actual=$(this).val();
+//        var texto =actual;
+//        if(event.which===13){}
+//        if(actual===""){
+//            paginGeneralPub();
+//        }
+//        else{
+//        var posting = $.post("PublicacionesController/BuscarPublicaciones/",{'FindPublicacion':texto});
+//      posting.done(function(data){
+//          if(data){
+//             $('#TablaPublicacionesWeb').html(data);
+//          }
+//      });
+//      posting.fail(function(xhr, textStatus, errorThrown) {
+//        alert("error" + xhr.responseText);
+//        });}
+//    });
+});
+$('#btnCleanSearchPub').click(function(){
+    $('#FindPublicacionNombre').val('');
+    $('#FindPublicacionCategoria').val('');
+    paginGeneralPub();
+});
+$('.FindPublicacionClass').keyup(function(event){ //BUSCA PUBLICACION MODIFICAR LA CAJA DE TEXTO 'NOMBRE'
+        var nombre =$('#FindPublicacionNombre').val();
+        var categoria = $('#FindPublicacionCategoria').val();
+//        alert("Nombre "+nombre+" Categoria "+categoria)
+        if(nombre.length>0 && categoria.length==0){ //FILTRA BUSQUEDA SOLO POR NOMBRE
+            buscarParametrosPublicacion('FindByNombre', nombre, categoria);
+        }
+        if(nombre.length==0 && categoria.length>0 ){ //FILTRA BUSQUEDA SOLO POR CATEGORIA
+            buscarParametrosPublicacion('FindByCategoria', nombre, categoria);
+        }
+        if(nombre.length!=0 && categoria.length!=0){ //FILTRA BUSQUEDA POR NOMBRE Y CATEGORIA
+            buscarParametrosPublicacion('FindByNombre+Categoria', nombre, categoria);
+        }
+        else if(nombre.length==0 && categoria.length==0){
+            buscarParametrosPublicacion('Reset', null, null, null)
+        }
+    });
+
+    //BUSCA PUBLICACION SEGUN LOS PARAMETROS Y CAMPOS DE TEXTO RELLENADOS
+    function buscarParametrosPublicacion(find, nombre, categoria){
+        //REALIZA LA BUSQUEDA SEGUN EL TIPO DE FILTRO
+        if(find=='Reset'){
+            paginGeneralPub();
         }
         else{
-        var posting = $.post("PublicacionesController/BuscarPublicaciones/",{'FindPublicacion':texto});
-      posting.done(function(data){
-          if(data){
-//              $('#tableModulos').html(data);
-             $('#TablaPublicacionesWeb').html(data);
-          }
-//          else{
-//             $("#ModInd").modal('toggle');
-//          }
-      });
-      posting.fail(function(xhr, textStatus, errorThrown) {
-        alert("error" + xhr.responseText);
-        });}
-    });
-});
+            var opcion='';
+            switch (find){
+                case "FindByNombre":
+                opcion={FindPublicacion:nombre};
+                break;
+            case "FindByCategoria": 
+                opcion={Categoria:categoria};
+                break;
+            case 'FindByNombre+Categoria':
+                opcion={FindPublicacion:nombre, Categoria:categoria};
+                break;
+            }
+            var posting = $.post("PublicacionesController/BuscarPublicaciones/",opcion);
+            posting.done(function(data){
+                if(data){
+                   $('#TablaPublicacionesWeb').html(data);
+                }
+            });
+            posting.fail(function(xhr, textStatus, errorThrown) {
+              alert("error" + xhr.responseText);
+            });
+        }
+    }
+    
+    function paginGeneralPub(){
+        var posting = $.post("PublicacionesController/paginPublicaciones/", {"data_ini":1});
+            posting.done(function (data) {
+                if (data !== null) {
+                    $('#TablaPublicacionesWeb').empty();
+                    $('#TablaPublicacionesWeb').html(data);
+                }
+            });
+            posting.fail(function (data) {
+                alert("Error");
+            });
+    }
 
+///////////FIN DE BUSQUEDA //////////////////////
+ 
 //metodo que lleva el post a la base de datos
 
 $('#botones').submit(function (event)

@@ -31,18 +31,22 @@
                 <thead>
                     <tr>
                         <!--<th>Codigo</th>-->
-                        <th>Estado</th>
+                        <th>Grupo</th>
+                        <th>Modulo</th>
                         <th>Hora de Entrada</th>
                         <th>Hora de Salida</th>
                         <th>Aula</th>
+                        <th>Periodo</th>
                         <th>Configuracion</th>
                         <!--<th>Alumnos</th>-->
                     </tr>
                 </thead>
                 <tbody id="bodytablaGruposTurno">
-                    <?php foreach($Grupos as $grupo){
-                        
-                    }
+                    <?php //foreach($Grupos as $grupo){
+//                        echo '<tr id="grHor">
+//                                <td class="Mail_Alumno">'.$grupo->CodigoGrupoPeriodo.'</td>
+//                              </td>';
+                    //}
                     ?>
                 </tbody>
             </table>

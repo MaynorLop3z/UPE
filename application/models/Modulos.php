@@ -9,7 +9,7 @@ class Modulos extends CI_Model {
     }
     
     
-    public function listarModulosNombre($filtro){
+    public function listarModulosNombre($filtro=null, $turno=null, $diplomado=null){
         $this->db->select('CodigoModulo, '
                 . 'NombreModulo, '
                 . 'OrdenModulo, '
@@ -18,7 +18,15 @@ class Modulos extends CI_Model {
                 . 'CodigoDiplomado, '       
                 . 'Comentarios');
         $this->db->from('Modulos');
-        $this->db->like('LOWER("NombreModulo")', strtolower($filtro));
+        if($filtro!=null){
+            $this->db->like('LOWER("NombreModulo")', strtolower($filtro));
+        }
+        if($turno!=null){
+            $this->db->like('LOWER("CodigoTurno")', strtolower($turno));
+        }
+        if($diplomado!=null){
+            $this->db->like('LOWER("CodigoDiplomado")', strtolower($diplomado));
+        }
 //        $this->db->limit('10', 0);
         $consulta = $this->db->get();
 //        $consulta = $this->db->query('SELECT "CodigoModulo", "NombreModulo", "OrdenModulo", "Estado", "CodigoTurno", "CodigoDiplomado", "Comentarios"'

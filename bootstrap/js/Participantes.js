@@ -6,32 +6,127 @@ var countColor = 1;
 $(document).ready(function(){
     
     /////////////////busqueda///////////////////////
-    $('#tbNameBuscarAlum').keyup(function(event){
+//    $('#tbNameBuscarAlum').keyup(function(event){
+//        var actual=$(this).val();
+//        var texto =actual;
+//        if(actual===""){
+//            var posting = $.post("ParticipantesController/paginParticipantes/", {"data_ini":1});
+//        posting.done(function (data) {
+//            if (data !== null) {
+//                $('#tablaAlumnosContent').empty();
+//                $('#tablaAlumnosContent').html(data);
+//            }
+//        });
+//        posting.fail(function (data) {
+//            alert("Error");
+//        });
+//        }
+//        else{
+//        var posting = $.post("ParticipantesController/buscar/",{'NombreBuscado':texto});
+//      posting.done(function(data){
+//          if(data){
+//             $('#tablaAlumnosContent').html(data);
+//          }
+//      });
+//      posting.fail(function(xhr, textStatus, errorThrown) {
+//        alert("error" + xhr.responseText);
+//    });}
+//    });
+//
+/////////////NUEVA BUSQUEDA/////////////////
+$('#btnCleanSearchAlumno').click(function(){
+     $('#FindAlumnoNombre').val('');
+     $('#FindAlumnoCorreo').val('');
+     $('#FindAlumnoCategoria').val('');
+     paginAlum();
+});
+
+$('.FindAlumnoClass').keyup(function(event){ //BUSCA USUARIO AL EDITAR 
         var actual=$(this).val();
-        var texto =actual;
-        if(actual===""){
-            var posting = $.post("ParticipantesController/paginParticipantes/", {"data_ini":1});
-        posting.done(function (data) {
-            if (data !== null) {
-                $('#tablaAlumnosContent').empty();
-                $('#tablaAlumnosContent').html(data);
-            }
-        });
-        posting.fail(function (data) {
-            alert("Error");
-        });
+        var nombre =$('#FindAlumnoNombre').val();
+        var correo = $('#FindAlumnoCorreo').val();
+        var categoria = $('#FindAlumnoCategoria').val();
+        if(nombre.length>0 && correo.length==0 && categoria.length==0){ //FILTRA BUSQUEDA SOLO POR NOMBRE
+            buscarParametrosAlumno('FindByNombre', nombre, correo, categoria);
+        }
+        if(nombre.length==0 && correo.length>0 && categoria.length==0){ //FILTRA BUSQUEDA SOLO POR CORREO
+            buscarParametrosAlumno('FindByCorreo', nombre, correo, categoria);
+        }
+        if(nombre.length==0 && correo.length==0 && categoria.length>0){ //FILTRA BUSQUEDA SOLO POR CATEGORIA
+            buscarParametrosAlumno('FindByCategoria', nombre, correo, categoria);
+        }
+        else if (nombre.length>0 && correo.length>0 && categoria.length==0){ //FILTRA BUSQUEDA POR NOMBRE Y CORREO
+            buscarParametrosAlumno('FindByNombre+Correo', nombre, correo, categoria);
+        }
+        else if (nombre.length>0 && correo.length==0 && categoria.length>0){ //FILTRA BUSQUEDA POR NOMBRE Y CATEGORIA
+            buscarParametrosAlumno('FindByNombre+Categoria', nombre, correo, categoria);
+        }
+        else if (nombre.length==0 && correo.length>0 && categoria.length>0){ //FILTRA BUSQUEDA POR CORREO Y CATEGORIA
+            buscarParametrosAlumno('FindByCorreo+Categoria', nombre, correo, categoria);
+        }
+        else if (nombre.length>0 && correo.length>0 && categoria.length>0){ //FILTRA BUSQUEDA POR NOMBRE, CORREO Y CATEGORIA
+            buscarParametrosAlumno('FindByNombre+Correo+Categoria', nombre, correo, categoria);
+        }
+        else if(nombre.length==0 && correo.length==0 && categoria.length==0){
+            buscarParametrosAlumno('Reset', null, null, null)
+        }
+    });
+
+    //BUSCA ALUMNO SEGUN LOS PARAMETROS Y CAMPOS DE TEXTO RELLENADOS
+    function buscarParametrosAlumno(find, texto, correo, categoria){
+        //REALIZA LA BUSQUEDA SEGUN EL TIPO DE FILTRO
+        if(find=='Reset'){
+            paginAlum();
         }
         else{
-        var posting = $.post("ParticipantesController/buscar/",{'NombreBuscado':texto});
-      posting.done(function(data){
-          if(data){
-             $('#tablaAlumnosContent').html(data);
-          }
-      });
-      posting.fail(function(xhr, textStatus, errorThrown) {
-        alert("error" + xhr.responseText);
-    });}
-    });
+            var opcion='';
+            switch (find){
+                case "FindByNombre":
+                opcion={NombreBuscado:texto};
+                break;
+            case "FindByCorreo": 
+                opcion={Correo:correo};
+                break;
+            case "FindByCategoria":
+                opcion={Categoria:categoria};
+                break;
+            case "FindByNombre+Correo":
+                opcion={NombreBuscado:texto, Correo:correo};
+                break;
+            case 'FindByNombre+Categoria':
+                opcion={NombreBuscado:texto, Categoria:categoria};
+                break;
+            case 'FindByCorreo+Categoria':
+                opcion={Correo:correo, Categoria:categoria};
+                break;
+            case "FindByNombre+Correo+Categoria":
+                opcion={NombreBuscado:texto, Correo:correo, Categoria:categoria};
+                break;
+            }
+            var posting = $.post("ParticipantesController/buscar/",opcion);
+            posting.done(function(data){
+                if(data){
+                   $('#tablaAlumnosContent').html(data);
+                }
+            });
+            posting.fail(function(xhr, textStatus, errorThrown) {
+              alert("error" + xhr.responseText);
+            });
+        }
+    }
+    
+    function paginAlum(){
+        var posting = $.post("ParticipantesController/paginParticipantes/", {"data_ini":1});
+            posting.done(function (data) {
+                if (data !== null) {
+                    $('#tablaAlumnosContent').empty();
+                    $('#tablaAlumnosContent').html(data);
+                }
+            });
+            posting.fail(function (data) {
+                alert("Error");
+            });
+    }
 });
 
 $("#DiplomadoP").change(function () {

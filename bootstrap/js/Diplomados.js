@@ -8,33 +8,102 @@ var codi;
 
 $(document).ready(function(){
     ///////////////BUSQUEDA POR TECLADO ///////////////
-    $('#FindDiplomado').keyup(function(event){
-        var actual=$(this).val();
-        var texto =actual;
-        if(actual===""){
-            var posting = $.post("DiplomadosController/paginDiplomados/", {"data_ini":1});
-        posting.done(function (data) {
-            if (data !== null) {
-                $('#tablaDiplomadosContent').empty();
-                $('#tablaDiplomadosContent').html(data);
-            }
-        });
-        posting.fail(function (data) {
-            alert("Error");
-        });
+//    $('#FindDiplomado').keyup(function(event){
+//        var actual=$(this).val();
+//        var texto =actual;
+//        if(actual===""){
+//            var posting = $.post("DiplomadosController/paginDiplomados/", {"data_ini":1});
+//        posting.done(function (data) {
+//            if (data !== null) {
+//                $('#tablaDiplomadosContent').empty();
+//                $('#tablaDiplomadosContent').html(data);
+//            }
+//        });
+//        posting.fail(function (data) {
+//            alert("Error");
+//        });
+//        }
+//        else{
+//        var posting = $.post("DiplomadosController/BuscarDiplomados/",{'FindDiplomado':texto});
+//      posting.done(function(data){
+//          if(data){
+//             $('#tablaDiplomadosContent').html(data);
+//          }else{
+//          }
+//      });
+//      posting.fail(function(xhr, textStatus, errorThrown) {
+//        alert("error" + xhr.responseText);
+//    });}
+//    });
+    
+    $('#btnCleanSearchDip').click(function(e){
+        e.preventDefault();
+    $('#FindDiplomadoNombre').val('');
+    $('#FindDiplomadoCategoria').val('');
+    paginGeneralDip();
+});
+$('.FindDiplomadoClass').keyup(function(event){ //BUSCA PUBLICACION MODIFICAR LA CAJA DE TEXTO 'NOMBRE'
+        var nombre =$('#FindDiplomadoNombre').val();
+        var categoria = $('#FindDiplomadoCategoria').val();
+//        alert("Nombre "+nombre+" Categoria "+categoria)
+        if(nombre.length>0 && categoria.length==0){ //FILTRA BUSQUEDA SOLO POR NOMBRE
+            buscarParametrosDiplomado('FindByNombre', nombre, categoria);
+        }
+        if(nombre.length==0 && categoria.length>0 ){ //FILTRA BUSQUEDA SOLO POR CATEGORIA
+            buscarParametrosDiplomado('FindByCategoria', nombre, categoria);
+        }
+        if(nombre.length!=0 && categoria.length!=0){ //FILTRA BUSQUEDA POR NOMBRE Y CATEGORIA
+            buscarParametrosDiplomado('FindByNombre+Categoria', nombre, categoria);
+        }
+        else if(nombre.length==0 && categoria.length==0){
+            buscarParametrosDiplomado('Reset', null, null, null)
+        }
+    });
+
+    //BUSCA DIPLOMADO SEGUN LOS PARAMETROS Y CAMPOS DE TEXTO RELLENADOS
+    function buscarParametrosDiplomado(find, nombre, categoria){
+        //REALIZA LA BUSQUEDA SEGUN EL TIPO DE FILTRO
+        if(find=='Reset'){
+            paginGeneralDip();
         }
         else{
-        var posting = $.post("DiplomadosController/BuscarDiplomados/",{'FindDiplomado':texto});
-      posting.done(function(data){
-          if(data){
-             $('#tablaDiplomadosContent').html(data);
-          }else{
-          }
-      });
-      posting.fail(function(xhr, textStatus, errorThrown) {
-        alert("error" + xhr.responseText);
-    });}
-    });
+            var opcion='';
+            switch (find){
+                case "FindByNombre":
+                opcion={FindDiplomado:nombre};
+                break;
+            case "FindByCategoria": 
+                opcion={Categoria:categoria};
+                break;
+            case 'FindByNombre+Categoria':
+                opcion={FindDiplomado:nombre, Categoria:categoria};
+                break;
+            }
+            var posting = $.post("DiplomadosController/BuscarDiplomados/",opcion);
+            posting.done(function(data){
+                if(data){
+                   $('#tablaDiplomadosContent').html(data);
+                }
+            });
+            posting.fail(function(xhr, textStatus, errorThrown) {
+              alert("error" + xhr.responseText);
+            });
+        }
+    }
+    
+    function paginGeneralDip(){
+        var posting = $.post("DiplomadosController/paginDiplomados/", {"data_ini":1});
+            posting.done(function (data) {
+                if (data !== null) {
+                    $('#tablaDiplomadosContent').empty();
+                    $('#tablaDiplomadosContent').html(data);
+                }
+            });
+            posting.fail(function (data) {
+                alert("Error");
+            });
+    }
+
 });
 
 //Funcion  para abrir  el modal de  agrgar  diplomado 

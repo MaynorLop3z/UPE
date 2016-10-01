@@ -2,7 +2,6 @@
     Tab de Archivos en el Dashboard
 -->
  <?php $this->load->helper('url'); ?> 
-<<<<<<< Updated upstream
  <script src="../bootstrap/js/Comentarios.js"></script>
  <link href="../bootstrap/css/archivos.css" rel="stylesheet">
  <script src="../bootstrap/js/jquery.twbsPagination.min.js"></script>
@@ -137,9 +136,6 @@
 
 <!--Fin Lista de Archivos del Maestro-->
 </div>
-=======
-
->>>>>>> Stashed changes
 
 
 <!------------------------------------------------------------------->

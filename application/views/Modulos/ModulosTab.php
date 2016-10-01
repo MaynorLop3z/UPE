@@ -10,14 +10,36 @@
            <button  id="btnAddModulo" class="btn btn-default"  onclick="AddMod(this)" ><span class="glyphicon glyphicon-plus"></span> Nuevo Modulo</button> -->
                 <!--<button  id="btnActualizar" class="btn btn-default"><span class="glyphicon glyphicon-refresh"></span> Actualizar</button>
             </div>-->
-            <div class="col-md-6" style="float:right;">
+            <div class="panel panel-default col-lg-12">
+                <form id="frmfindAlumno"  action="" class="form-horizontal" method="post" >
+                    <fieldset>
+                        <legend class="modal-header">Buscar Modulo:</legend> 
+                        <div class="form-group">
+                            <div class="col-lg-3">
+                                <input class="form-control form-inline FindModuloClass" placeholder="Modulo" id="FindModuloNombre" type="text" maxlength="150" >
+                            </div>
+                            <div class="col-lg-3">
+                                <input type="hidden" class="form-control form-inline FindModuloClass" placeholder="Turno" name="FindModulo" id="FindModuloTurno" type="text" maxlength="150" >
+                            </div>
+                            <div class="col-lg-3">
+                                <input type="hidden" class="form-control form-inline FindModuloClass" placeholder="Diplomado" id="FindModuloDiplomado" type="text" maxlength="150" >
+                            </div>
+                            <div class="col-lg-3">
+                                <button id="btnCleanSearchModulo" class="btn btn-default" style="float:right;margin-right: 20px;"><span class="glyphicon glyphicon-refresh"></span>Limpiar Búsqueda</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+<!--            <div class="col-md-4" style="float:right;">
+                
                 <?php $this->load->helper('url'); ?>
                 <form id="frmfindMod" action="<?php echo base_url() ?>index.php/ModulosController/BuscarModulos/"  method="post" class="form-inline" style="float:right;">
                     <span>Modulo:</span>    
                     <input type="text" class="form-control" name="FindModulo" id="FindModulo" placeholder="Nombre del Modulo" required>
                     <button id="btnFindDip" type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>Buscar Modulo</button>
                 </form>
-            </div>
+            </div>-->
         </div>
         <br>
 

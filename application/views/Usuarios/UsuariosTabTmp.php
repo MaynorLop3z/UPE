@@ -26,7 +26,7 @@
         <div class="panel panel-default">
             <form id="frmfindUsuario"  action="<?php echo base_url() ?>index.php/UsuarioController/BuscarUsuario/" class="form-horizontal" method="post" >
                 <fieldset>
-                    <legend class="modal-header">Buscar Alumno:</legend> 
+                    <legend class="modal-header">Buscar Usuario:</legend> 
                     <div class="form-group">
                         <div class="col-lg-4">
                             <input class="form-control form-inline FindUsuarioClass" placeholder="Nombre" name="FindUsuario" id="FindUsuario" type="text" maxlength="150" >

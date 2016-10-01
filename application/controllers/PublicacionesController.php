@@ -168,7 +168,8 @@ class PublicacionesController extends CI_Controller {
         try {
             if($this->input->post()){
                 $nombrePu = $this->input->post('FindPublicacion');
-                $Publicaciones = $this->Publicaciones->listarPublicacionesNombre($nombrePu);   
+                $categoria = $this->input->post('Categoria');
+                $Publicaciones = $this->Publicaciones->listarPublicacionesNombre($nombrePu, $categoria);   
                 $registro = $this->EncabezadoTabla();
                 if(count($Publicaciones)>0){
                     foreach ($Publicaciones as $pub){

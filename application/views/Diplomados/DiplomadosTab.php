@@ -12,15 +12,28 @@
         </div>
         <div class="col-md-6">
             <?php $this->load->helper('url'); ?>
-            <form id="frmfindDip" action="<?php echo base_url() ?>index.php/DiplomadosController/BuscarDiplomados/"  method="post" class="form-inline">
+<!--            <form id="frmfindDip" action="<?php echo base_url() ?>index.php/DiplomadosController/BuscarDiplomados/"  method="post" class="form-inline">
                 <span>Diplomados:</span>    
                 <input type="text" class="form-control" name="FindDiplomado" id="FindDiplomado" placeholder="Nombre del Diplomado" required>
                 <button id="btnFindDip" type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>Buscar Diplomado</button>
-            </form>
+            </form>-->
         </div>
         </div>
         <br>
-       
+       <form id="frmfindDiplomado"  action="" class="form-horizontal" method="post" >
+            <fieldset>
+                <legend class="modal-header">Buscar Diplomado:</legend> 
+                <div class="form-group">
+                    <div class="col-lg-4">
+                        <input class="form-control form-inline FindDiplomadoClass" placeholder="Nombre del Diplomado" name="FindDiplomado" id="FindDiplomadoNombre" type="text" maxlength="150" >
+                    </div>
+                    <div class="col-lg-4">
+                        <input class="form-control form-inline FindDiplomadoClass" placeholder="Categoria" id="FindDiplomadoCategoria" type="text" maxlength="150" >
+                    </div>
+                    <button id="btnCleanSearchDip" class="btn btn-default" style="float:right;margin-right: 20px;"><span class="glyphicon glyphicon-refresh"></span>Limpiar Búsqueda</button> 
+                </div>
+            </fieldset>
+        </form>
 
         <div id="tablaDiplomadosContent">
         <table id="tableDiplomados"  class="table table-bordered table-striped table-hover table-responsive">

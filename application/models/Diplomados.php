@@ -20,7 +20,7 @@ class Diplomados extends CI_Model {
         return $resultado;
     }
     
-     public function listarDiplomadosNombre($filtro) {
+     public function listarDiplomadosNombre($filtro=null, $categoria=null) {
         $this->db->select('D.CodigoDiplomado, '
                 . 'D.NombreDiplomado,'
                 . 'D.Descripcion, '
@@ -30,7 +30,12 @@ class Diplomados extends CI_Model {
                 . 'CD.NombreCategoriaDiplomado');
         $this->db->from('Diplomados D');
         $this->db->join("CategoriaDiplomados CD","D.CodigoCategoriaDiplomado = CD.CodigoCategoriaDiplomado");
-        $this->db->like('LOWER("NombreDiplomado")', strtolower($filtro));
+        if($filtro!=null){
+            $this->db->like('LOWER("NombreDiplomado")', strtolower($filtro));
+        }
+        if($categoria!=null){
+            $this->db->like('LOWER("NombreCategoriaDiplomado")', strtolower($categoria));
+        }
         $consulta = $this->db->get();
         $resultado = $consulta->result();
         return $resultado;
