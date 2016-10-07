@@ -32,21 +32,34 @@
                     <tr>
                         <!--<th>Codigo</th>-->
                         <th>Grupo</th>
-                        <th>Modulo</th>
+                        <th>Codigo Aula</th>
                         <th>Hora de Entrada</th>
                         <th>Hora de Salida</th>
-                        <th>Aula</th>
-                        <th>Periodo</th>
+                        <th>Tipo Jornada</th>
+                        <th>Dia</th>
                         <th>Configuracion</th>
-                        <!--<th>Alumnos</th>-->
                     </tr>
                 </thead>
                 <tbody id="bodytablaGruposTurno">
-                    <?php //foreach($Grupos as $grupo){
-//                        echo '<tr id="grHor">
-//                                <td class="Mail_Alumno">'.$grupo->CodigoGrupoPeriodo.'</td>
+                    <?php foreach($Grupos as $grupo){
+                        echo '<tr id="grHor">
+                              <td class="Mail_Alumno">'.$grupo->CodigoGrupoPeriodo.'</td>';
+                        echo '<td class="Mail_Alumno">'.$grupo->CodigoAula.'</td>
+                              </td>';
+                        echo '<td class="Mail_Alumno">'.$grupo->HoraEntrada.'</td>
+                              </td>';
+                        echo '<td class="Mail_Alumno">'.$grupo->HoraSalida.'</td>
+                              </td>';
+                        echo '<td class="Mail_Alumno">'.$grupo->TipoJornada.'</td>
+                              </td>';
+                        echo '<td class="Mail_Alumno">'.$grupo->NombrDia.'</td>
+                              </td>';
+//                        echo '<td class="Mail_Alumno">'.$grupo->FechaInicioPeriodo.' - '.$grupo->FechaFinPeriodo.'</td>
 //                              </td>';
-                    //}
+                        echo '<td><button id="btnmo" onclick="" title="Editar Horario" class="btnmoddi btn btn-success" class="btn btn-info btn-lg"><span class=" glyphicon glyphicon-pencil"></span></button>
+                                <button id="DELD" onclick=""  title="Eliminar Horario" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>
+                                </td>';
+                    }
                     ?>
                 </tbody>
             </table>

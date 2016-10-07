@@ -6,4 +6,12 @@ $(document).ready(function(){
 
 $('#TurnosList').change(function(){
     $('#gruposListTurno').html("Grupos, Turno " + $(this).find(":selected").text());
+    var turno = $(this).find(":selected").val();
+    var posting = $.post("HorariosController/buscarxTurno/",{"Turno":turno});
+    posting.done(function(data){
+       if (data !== null) {
+           $('#bodytablaGruposTurno').empty();
+           $('#bodytablaGruposTurno').html(data);
+       }
+    });
 });

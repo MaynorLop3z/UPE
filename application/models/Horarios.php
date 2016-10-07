@@ -21,7 +21,22 @@ class Horarios extends CI_Model {
         }
     }
     
-    public function listarHorariosGruposxTurno(){
+    public function listarHorarios(){
+        try{
+            $consulta='SELECT * FROM "Horarios"';
+           
+//            $this->db->select('T.CodigoTurno, T.NombreTurno, M.NombreModulo,'
+//                    . 'P.FechaInicioPeriodo, R.FechaFinPeriodo, G.CodigoGrupoPeriodo,'
+//                    . 'G.HoraEntrada, G.HoraSalida, G.Aula');
+            $rc = $this->db->query($consulta);
+            $resultado = $rc->result();
+            return $resultado;
+        } catch (Exception $ex) {
+            return $e;
+        }
+    }
+    
+    public function listarHorariosGruposxTurno($turno=null){
         try{
             $consulta='SELECT "Turnos"."NombreTurno", "Modulos"."NombreModulo", 
             "Periodos"."FechaInicioPeriodo", "Periodos"."FechaFinPeriodo",
@@ -34,7 +49,10 @@ class Horarios extends CI_Model {
 
             AND "Modulos"."CodigoModulo" = "Periodos"."CodigoModulo"
 
-            AND "Periodos"."CodigoPeriodo" = "GrupoPeriodos"."CodigoPeriodo"';
+            AND "Periodos"."CodigoPeriodo" = "GrupoPeriodos"."CodigoPeriodo" ';
+            if($turno!=null){
+                $consulta.='AND "Turnos"."CodigoTurno"='.$turno;
+            }
 //            $this->db->select('T.CodigoTurno, T.NombreTurno, M.NombreModulo,'
 //                    . 'P.FechaInicioPeriodo, R.FechaFinPeriodo, G.CodigoGrupoPeriodo,'
 //                    . 'G.HoraEntrada, G.HoraSalida, G.Aula');

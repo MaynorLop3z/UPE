@@ -236,7 +236,7 @@ $('.FindPublicacionClass').keyup(function(event){ //BUSCA PUBLICACION MODIFICAR 
             buscarParametrosPublicacion('FindByNombre+Categoria', nombre, categoria);
         }
         else if(nombre.length==0 && categoria.length==0){
-            buscarParametrosPublicacion('Reset', null, null, null)
+            buscarParametrosPublicacion('Reset', null, null)
         }
     });
 

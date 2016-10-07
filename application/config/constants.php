@@ -97,4 +97,13 @@ define('PUBLICACIONES_X_PAG', 6);
 define('TIPO_PUBLICACION_WEB',1);
 define('TIPO_PUBLICACION_GRUPO',2);
 define('COMMENTS_PER_PUB', 2); //numero de comentarios por publicacion
+//para los horarios
+
+define('LUNES', 1);
+define('MARTES', 2);
+define('MIERCOLES',3);
+define('JUEVES',4);
+define('VIERNES', 5);
+define('SABADO', 6);
+define('DOMINGO',7);
 

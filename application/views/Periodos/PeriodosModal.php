@@ -1,3 +1,20 @@
+<script src="../bootstrap/js/jquery-ui.js"></script>
+<link href="../bootstrap/css/jquery-ui.css" rel="stylesheet">
+<script>
+    $('#iconFechaInicioPeriodo, #FechaInicioPeriodo').click(function(){
+        $('#dateFechaInicioPeriodo').show();
+        $('#dateFechaInicioPeriodo').datepicker({
+           // $.datepicker.formatDate( "yy-mm-dd", new Date( 2007, 1 - 1, 26 ) );
+            onSelect: function(date) {
+                $('#FechaInicioPeriodo').val( $(this).datepicker({ dateFormat: 'dd-mm-yy' }).val());
+                $(this).hide();
+            },
+            inline: true
+        });
+
+    });
+    
+</script>
 <div id="PeriodoNuevo" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog  modal-lg">
         <div class="modal-content">
@@ -28,12 +45,14 @@
                             </div>
                             <div class="form-group">
                                 <label for="FechaInicioPeriodo" class="col-lg-3 control-label text-left">Fecha de Inicio: </label>
-                                <div class="col-lg-6">
+                                <div class="col-lg-6 input-group" >
                                     <input type="date" class="form-control" name="FechaInicioPeriodo" id="FechaInicioPeriodo" data-mask="0000-00-00" placeholder="Año-Mes-Dia" required>
+                                    <span class="input-group-addon" id="iconFechaInicioPeriodo" ><span class="glyphicon glyphicon-calendar"></span></span>
                                 </div>
                                 <div class="col-lg-3">
                                     <label class="warning"></label> <!-- Para  cuando el campo sea requerido-->
                                 </div>
+                                <div id="dateFechaInicioPeriodo" style="position: absolute;left:100px;z-index: 1000"></div>
                             </div> 
                             <div class="form-group">
                                 <label for="FechaFinPeriodo" class="col-lg-3 control-label">Fecha de Finalizacion: </label>
@@ -43,6 +62,7 @@
                                 <div class="col-lg-3">
                                     <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
                                 </div>
+                                <div id="dateFechaFinPeriodo"></div>
                             </div>
                             <div class="form-group">
                                 <label for="ComentariosPeriodo" class="col-lg-3 control-label">Comentarios: </label>

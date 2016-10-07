@@ -1,5 +1,6 @@
 <?php $this->load->helper('url'); ?>
 <script src="../bootstrap/js/paginacion.js"></script>
+
 <script language="javascript">
     $(document).ready(function() {
         $("#Categorias").change(function() {
