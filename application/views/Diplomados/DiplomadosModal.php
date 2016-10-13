@@ -31,12 +31,13 @@
                         <div class="form-group">
                             <label for="CatgoriaDiplomado" class="col-lg-3 control-label">Categoria Diplomado:</label>
                             <div class="col-lg-9">
-                                <select class="form-control" id="CatgoriaDiplomado" name="CodigoCategoriaDiplomado">                                          
-                                    <?php
+                                <select class="form-control" id="CatgoriaDiplomado" name="CodigoCategoriaDiplomado"  >                                          
+                                    
+                                 <?php
                                     foreach ($CategoriasDi as $cadi) { //AQui para seleccionar  la categoria del diplomado al que pertenece
                                         ?>
                                         <option value="<?= $cadi->CodigoCategoriaDiplomado ?>">
-                                            <?php echo $cadi->CodigoCategoriaDiplomado ?> <!-- Para imprimir los datos en el select-->
+                                            <?php echo $cadi->NombreCategoriaDiplomado ?> <!-- Para imprimir los datos en el select-->
                                         </option>
                                         <?php }
                                     ?>
@@ -179,7 +180,7 @@
 </div>
 
 <!----Vista de  modulos por  diplomado    ------------------------------------------------------------------------------------------------------------>
-<div id="ModuloView" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="ModuloView" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="overflow-y:scroll;">
     <div class="modal-dialog  modal-lg">
         <div class="modal-content ">
             <div class="container-fluid ">
@@ -269,16 +270,12 @@
                         </div>
                         <!-- Se quita Diplomados ya que debe ser automatico-->
                         <div class="form-group">
-                            <label class="col-lg-3 control-label">Diplomado:</label>
+                            <label class="col-lg-3 control-label">Codigo del Diplomado:</label>
 
                             <div class="col-lg-9">
-                                <input id="modDiplomadohidde" type= "hidden" name="CodigoDiplomado" value=""/><mark id="modDiplomadohidde"></mark >
+                                <input id="modDiplomadohidde" type= "hidden" name="CodigoDiplomado" value=""/><mark id="prueba"></mark >
                             </div>
                         </div>
-
-
-
-
                         <div class="form-group">
                             <label for="ComentarioDiplomado" class="col-lg-3 control-label">Comentarios:</label>
                             <div class="col-lg-9">

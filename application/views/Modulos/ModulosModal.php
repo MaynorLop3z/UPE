@@ -30,7 +30,7 @@
                         <div class="form-group">
                             <label for="Turno" class="col-lg-3 control-label">Turno:</label>
                             <div class="col-lg-9">
-                                <select class ="form-control" id="TurnoEdit" name="Turno">                                          
+                                <select class ="form-control" id="TurnoEdit" name="Turno" placeholder="Seleecione un Turno">                                          
                                     <?php
                                     foreach ($Turno as $TurMo) { //Aqui para seleccionar el Turno a que Pertenece
                                         ?>

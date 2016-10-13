@@ -204,6 +204,7 @@ class DiplomadosController extends CI_Controller {
             foreach ($Diplomados as $dip) {
                 $filas.='<tr id="dip' . $dip->CodigoDiplomado . '">';
                 $filas.='<td class="nombre_Diplomado" >' . $dip->NombreDiplomado . '</td>';
+                $filas.='<td class="codigoDip" >' . $dip->CodigoDiplomado . '</td>';
                 $filas.='<td class="descripcionDiplomado" >' . $dip->Descripcion . '</td>';
                 $filas.='<td class="estado" >' . $dip->Estado . '</td>';
                 $filas.='<td class="categoriaDi" >' . $dip->NombreCategoriaDiplomado. '</td>';
@@ -242,6 +243,7 @@ class DiplomadosController extends CI_Controller {
                 <thead>
                 <tr>
                     <th style="text-align:center">Diplomado</th> <!-- Nombre de diplomado, Ponerlo que vaya al centro -->
+                    <th style="text-align:center">Codigo</th> <!-- codigo del diplomado, Ponerlo que vaya al centro -->
                     <th style="text-align:center">Descripcion</th><!-- Coordinador del  diplomado -->
                     <th style="text-align:center">Estado</th> <!-- Descripcion del modulo -->
                     <th style="text-align:center">Categoria</th>

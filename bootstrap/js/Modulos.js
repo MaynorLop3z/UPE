@@ -79,6 +79,7 @@ $('.FindModuloClass').keyup(function(event){ //BUSCA MODULO AL EDITAR
     function buscarParametrosModulo(find, nombre, turno, diplomado){
         //REALIZA LA BUSQUEDA SEGUN EL TIPO DE FILTRO
         if(find=='Reset'){
+           
             paginModulo();
         }
         else{
@@ -112,8 +113,8 @@ $('.FindModuloClass').keyup(function(event){ //BUSCA MODULO AL EDITAR
                    $('#tablaModulosContent').html(data);
                 }
             });
-            posting.fail(function(xhr, textStatus, errorThrown) {
-              alert("error" + xhr.responseText);
+             posting.fail(function (data) {
+            //alert("El modulo no esta  Definido ");
             });
         }
     }
@@ -174,7 +175,9 @@ function delMo(fila) {
 }
 
 function AddModDip(idDip){
- $("#modDiplomadohidde").val(idDip);   
+ console.log(idDip);
+   
+ $('#prueba').html(idDip);   
     $("#NuevoModuloDip").modal('toggle');
 }
 

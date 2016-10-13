@@ -40,6 +40,7 @@
             <thead>
                 <tr><!--Agregar  Mas informacion acerca de los modulos -->
                     <th style="text-align:center">Diplomado</th> <!-- Nombre de diplomado, Ponerlo que vaya al centro -->
+                     <th style="text-align:center">Codigo</th>
                     <th style="text-align:center">Descripcion</th><!-- Coordinador del  diplomado -->
                     <th style="text-align:center">Estado</th> <!-- Descripcion del modulo -->
                     <th style="text-align:center">Categoria</th>
@@ -57,6 +58,7 @@
                 
                 <tr id="dip<?=  $dip->CodigoDiplomado?>">
                     <td class="nombre_Diplomado"><?= $dip->NombreDiplomado ?></td>
+                     <td class="codigoDip"><?= $dip->CodigoDiplomado ?></td>
                     <td class="descripcionDiplomado"><?= $dip->Descripcion ?></td>
                     <td class="estado"><?php echo $dip->Estado ?></td>
                     <td class="categoriaDi"><?php echo $dip->NombreCategoriaDiplomado?></td>
