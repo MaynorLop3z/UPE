@@ -176,8 +176,8 @@ function delMo(fila) {
 
 function AddModDip(idDip){
  console.log(idDip);
-   
- $('#prueba').html(idDip);   
+ $("#modDiplomadohidde").val(idDip); 
+ $("#prueba").html(idDip);
     $("#NuevoModuloDip").modal('toggle');
 }
 
@@ -234,8 +234,8 @@ $("#formgrdMo").submit(function (event) {
             CodDiplomado = $form.find("input[name='CodigoDiplomado']").val(),
             ComentarioMod = $form.find("textarea[name='Comentarios']").val(),
             url = $form.attr("action");
-            //console.log(Estado);
-    //alert(CodDiplomado);
+          // console.log(ModuloNombre);
+          console.log(CodDiplomado);
     var posting = $.post(url, {
         ModuloNombre: ModuloNombre,
         ModuloOrden: ModuloOrden,

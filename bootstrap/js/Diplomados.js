@@ -319,6 +319,7 @@ $("#formeditDiplomado").submit(function (event) {
          
             var fila ;
             fila = fila + '<td class="nombre_Diplomado">' + obj.NombreDiplomado + '</td>';
+            fila = fila + '<td class="codigoDip">' + obj.CodigoDiplomado + '</td>';
             fila = fila + '<td class="descripcionDiplomado">' + obj.Descripcion + '</td>';
             fila = fila + '<td class="estado">' + obj.Estado + '</td>';
             fila = fila + '<td class="categoriaDi">' + obj.CodigoCategoriaDiplomado + '</td>';

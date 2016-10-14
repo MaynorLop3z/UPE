@@ -33,7 +33,8 @@ class ModulosController extends CI_Controller {
         try {
         if($this->input->post()){
             if ($this->input->post('ModuloNombre')) {$NombreModulo = $this->input->post('ModuloNombre');
-           }else {               $NombreModulo = 'TEST';}
+           }else {               
+            $NombreModulo = $this->input->post('ModuloNombre');}
             $OrdenModulo= $this->input->post('ModuloOrden');
             $Estado = $this->input->post('Estado');
             $CodigoTurno = $this->input->post('Turno');
