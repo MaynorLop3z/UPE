@@ -36,7 +36,7 @@ class ParticipantesController extends CI_Controller {
     private function getTotalPaginas() {
         return $result = intval(ceil(count($this->Participantes->listarParticipantes()) / ROWS_PER_PAGE));
     }
-    
+
     public function listarGruposPeriodos() {
         if ($this->input->post('idDiplomado')) {
             $idDiplomado = $this->input->post('idDiplomado');
@@ -52,19 +52,19 @@ class ParticipantesController extends CI_Controller {
                     <th class="hsgp"><?= $period->horasalida ?></th>
                     <th class="agp"><?= $period->aula ?></th>
                     <th>
-                        <?php
-                        if ($period->inscrito == 1) {
+                            <?php
+                            if ($period->inscrito == 1) {
+                                ?>
+                                <button id="GrupoPeriodoADD<?= $period->codigogrupoperiodo ?>" onclick="inscribirUsaurio(this)" title="Agregar alumno al periodo" class="btn_agregar_periodo btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </button>    
+
+
+                                <?php
+                            } else {
+                                ?> 
+                                <button id="GrupoPeriodoADD<?= $period->codigogrupoperiodo ?>" onclick="inscribirUsaurio(this)" title="Agregar alumno al periodo" class="btn_agregar_periodo btn btn-success"><span class="glyphicon glyphicon-ok"></span> </button>
+                                <?php
+                            }
                             ?>
-                            <button id="GrupoPeriodoADD<?= $period->codigogrupoperiodo ?>" onclick="inscribirUsaurio(this)" title="Agregar alumno al periodo" class="btn_agregar_periodo btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </button>    
-
-
-                            <?php
-                        } else {
-                            ?> 
-                            <button id="GrupoPeriodoADD<?= $period->codigogrupoperiodo ?>" onclick="inscribirUsaurio(this)" title="Agregar alumno al periodo" class="btn_agregar_periodo btn btn-success"><span class="glyphicon glyphicon-ok"></span> </button>
-                            <?php
-                        }
-                        ?>
                     </th>
                 </tr>
                 <?php
@@ -104,7 +104,7 @@ class ParticipantesController extends CI_Controller {
                 $comentarios = $this->input->post('AlumnoComentario');
                 $genero = $this->input->post('AlumnoGenero');
                 $universidad = 0;
-                $arrayData = $this->Participantes->CrearParticipante($nombre, $mail, $tfijo, $tcel, $direccion, $nacimiento, $categoria, $DUI, $universidad, $carrera, $nivelAcad, $encargado, $descripcion, $comentarios,$genero);
+                $arrayData = $this->Participantes->CrearParticipante($nombre, $mail, $tfijo, $tcel, $direccion, $nacimiento, $categoria, $DUI, $universidad, $carrera, $nivelAcad, $encargado, $descripcion, $comentarios, $genero);
                 echo json_encode($arrayData);
             }
         } catch (Exception $ex) {
@@ -134,7 +134,7 @@ class ParticipantesController extends CI_Controller {
                 $umodifica = 0;
                 $ipModifica = '192.168.1.1';
                 $fechaModifica = date('d/m/Y');
-                $arrayData = $this->Participantes->ModificarParticipante($codigo, $nombre, $mail, $tfijo, $tcel, $direccion, $nacimiento, $categoria, $umodifica, $ipModifica, $fechaModifica, $universidad,$genero, $DUI, $carrera, $nivelAcad, $encargado, $descripcion, $comentarios);
+                $arrayData = $this->Participantes->ModificarParticipante($codigo, $nombre, $mail, $tfijo, $tcel, $direccion, $nacimiento, $categoria, $umodifica, $ipModifica, $fechaModifica, $universidad, $genero, $DUI, $carrera, $nivelAcad, $encargado, $descripcion, $comentarios);
                 echo json_encode($arrayData);
             }
         } catch (Exception $ex) {
@@ -159,18 +159,18 @@ class ParticipantesController extends CI_Controller {
         try {
             if ($this->input->post()) {
                 $nombre = $this->input->post('NombreBuscado');
-                $correo= $this->input->post('Correo');
+                $correo = $this->input->post('Correo');
                 $categoria = $this->input->post('Categoria');
-                $result = json_decode(json_encode($this->Participantes->listarParticipantesByName($nombre,$correo,$categoria)), true);
+                $result = json_decode(json_encode($this->Participantes->listarParticipantesByName($nombre, $correo, $categoria)), true);
                 $registros = $this->EncabezadoTabla();
                 foreach ($result as $req) {
                     $registros .= '<tr id="alum' . $req['CodigoParticipante'] . '">';
-                    $registros .= '<td class="Mail_Alumno">'.$req['CorreoElectronico'].'</td>';
+                    $registros .= '<td class="Mail_Alumno">' . $req['CorreoElectronico'] . '</td>';
                     $registros .= '<td class="TelefonoFijo_Alumno" style="display: none">' . $req['TelefonoFijo'] . '</td>';
                     $registros .= '<td class="TelefonoMovil_Alumno" style="display: none">' . $req['TelefonoCelular'] . '</td>';
                     $registros .= '<td class="Direccion_Alumno" style="display: none">' . $req['Direccion'] . '</td>';
                     $registros .= '<td class="DUI_Alumno" style="display: none">' . $req['NumeroDUI'] . '</td>';
-                    $registros .= '<td class="Genero_Alumno" style="display: none">'. $req['Genero'] . '</td>';
+                    $registros .= '<td class="Genero_Alumno" style="display: none">' . $req['Genero'] . '</td>';
                     $registros .= '<td class="Nombre_Alumno">' . $req['Nombre'] . '</td>';
                     $registros .= '<td class="FechaNac_Alumno" style="display: none">' . $req['FechaNacimiento'] . '</td>';
                     $registros .= '<td class="CodU_Alumno" style="display: none">' . $req['CodigoUniversidadProcedencia'] . '</td>';
@@ -181,12 +181,12 @@ class ParticipantesController extends CI_Controller {
                     $registros .= '<td class="NameCat_Alumno">' . $req['NombreCategoriaParticipante'] . '</td>';
                     $registros .= '<td class="Descripcion_Alumno">' . $req['Descripcion'] . '</td>';
                     $registros .= '<td class="Comentarios_Alumno" style="display: none">' . $req['Comentarios'] . '</td>';
-                    $registros .= '<td class="gestion_Alumno">';
+                    $registros .= '<td class="gestion_Alumno"><div class="btn-group" role="group">';
                     $registros .= '<button id="alumE' . $req['CodigoParticipante'] . '" onclick="mostrarEditAlumno(this)" title="Editar Alumno" class="btn_modificar_alum btn btn-success"><span class="glyphicon glyphicon-pencil"></span> </button>';
                     $registros .= '<button id="alumDEL' . $req['CodigoParticipante'] . '" onclick="mostrarDelAlumno(this)" title="Eliminar Alumno" class="btn_eliminar_alum btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>';
                     $registros .= '<button id="alumVIEW' . $req['CodigoParticipante'] . '" onclick="mostrarInfoAlumno(this)" title="Ver Alumno" class="btn_ver_alum btn btn-info"><span class="glyphicon glyphicon-eye-open"></span></button>';
                     $registros .= '<button id="alumGROUP' . $req['CodigoParticipante'] . '" onclick="mostrarGruposPeriodos(this)" title="Agregar a Grupo" class="btn_group_add btn btn-warning"><span class="glyphicon glyphicon-list-alt"></span></button>';
-                    $registros .= '</td></tr>';
+                    $registros .= '</div></td></tr>';
                 }
                 $registros .='</tbody></table>';
                 echo $registros;
@@ -196,8 +196,9 @@ class ParticipantesController extends CI_Controller {
         }
     }
 
-    /*********PAGINACION DE PARTICIPANTES EN DASHBOARD***/
-    public function paginParticipantes($Parti= null) {
+    /*     * *******PAGINACION DE PARTICIPANTES EN DASHBOARD** */
+
+    public function paginParticipantes($Parti = null) {
         try {
             $final = 0;
             $pagAct = 0;
@@ -209,15 +210,14 @@ class ParticipantesController extends CI_Controller {
                 if ($this->input->post('data_ini') != null) {
                     $pagAct = $this->input->post('data_ini');
                     $final = $this->input->post('data_ini');
-                    
+
                     if ($pagAct <= 0) {
                         $pagAct = 1;
                         $final = 1;
-                    }else if($pagAct > $this->getTotalPaginas()) {
-                        $pagAct =$this->getTotalPaginas();
-                        $final=$this->getTotalPaginas();
+                    } else if ($pagAct > $this->getTotalPaginas()) {
+                        $pagAct = $this->getTotalPaginas();
+                        $final = $this->getTotalPaginas();
                     }
-                    
                 } else if ($this->input->post('data_inip') != null) {
                     $pagAct = $this->input->post('data_inip') - 1;
                     $final = $this->input->post('data_inip') - 1;
@@ -231,9 +231,9 @@ class ParticipantesController extends CI_Controller {
                     $final = $this->input->post('data_inin');
                     $final+=1;
                     if ($pagAct > $this->getTotalPaginas()) {
-                        $pagAct =$this->getTotalPaginas();
-                        $final=$this->getTotalPaginas();
-                    }  else {
+                        $pagAct = $this->getTotalPaginas();
+                        $final = $this->getTotalPaginas();
+                    } else {
                         
                     }
                 } else {
@@ -255,28 +255,28 @@ class ParticipantesController extends CI_Controller {
             $cadena .= $this->EncabezadoTabla();
             foreach ($Alumnos as $alum) {
                 $filas.='<tr id="alum' . $alum->CodigoParticipante . '">';
-                $filas.='<td class="Mail_Alumno">'.$alum->CorreoElectronico.'</td>';
-                $filas.='<td class="TelefonoFijo_Alumno" style="display: none">'.$alum->TelefonoFijo.'</td>';
-                $filas.='<td class="TelefonoMovil_Alumno" style="display: none">'. $alum->TelefonoCelular.'</td>';
-                $filas.='<td class="Direccion_Alumno" style="display: none">'.$alum->Direccion.'</td>';
-                $filas.='<td class="DUI_Alumno" style="display: none">'.$alum->NumeroDUI.'</td>';
-                $filas.='<td class="Genero_Alumno" style="display: none">'.$alum->Genero.'</td>';
-                $filas.='<td class="Nombre_Alumno">'.$alum->Nombre.'</td>';
-                $filas.='<td class="FechaNac_Alumno" style="display: none">'.$alum->FechaNacimiento.'</td>';
-                $filas.='<td class="CodU_Alumno" style="display: none">'.$alum->CodigoUniversidadProcedencia.'</td>';
-                $filas.='<td class="Carrera_Alumno" style="display: none">'.$alum->Carrera.'</td>';
-                $filas.='<td class="NivelAcad_Alumno" style="display: none">'.$alum->NivelAcademico.'</td>';
-                $filas.='<td class="NombreEncargado_Alumno" style="display: none">'.$alum->NombreEncargado.'</td>';
-                $filas.='<td class="CodCat_Alumno" style="display: none">'.$alum->CodigoCategoriaParticipantes.'</td>';
-                $filas.='<td class="NameCat_Alumno">'.$alum->NombreCategoriaParticipante.'</td>';
-                $filas.='<td class="Descripcion_Alumno">'.$alum->Descripcion.'</td>';
-                $filas.='<td class="Comentarios_Alumno" style="display: none">'.$alum->Comentarios.'</td>';
-                $filas.='<td class="gestion_Alumno">
-                            <button id="alumE'.$alum->CodigoParticipante.'" onclick="mostrarEditAlumno(this)" title="Editar Alumno" class="btn_modificar_alum btn btn-success"><span class="glyphicon glyphicon-pencil"></span> </button>
-                            <button id="alumDEL'.$alum->CodigoParticipante.'" onclick="mostrarDelAlumno(this)" title="Eliminar Alumno" class="btn_eliminar_alum btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
-                            <button id="alumVIEW'.$alum->CodigoParticipante.'" onclick="mostrarInfoAlumno(this)" title="Ver Alumno" class="btn_ver_alum btn btn-info"><span class="glyphicon glyphicon-eye-open"></span></button>
-                            <button id="alumGROUP'.$alum->CodigoParticipante.'" onclick="mostrarGruposPeriodos(this)" title="Agregar a Grupo" class="btn_group_add btn btn-warning"><span class="glyphicon glyphicon-list-alt"></span></button>
-                        </td></tr>';
+                $filas.='<td class="Mail_Alumno">' . $alum->CorreoElectronico . '</td>';
+                $filas.='<td class="TelefonoFijo_Alumno" style="display: none">' . $alum->TelefonoFijo . '</td>';
+                $filas.='<td class="TelefonoMovil_Alumno" style="display: none">' . $alum->TelefonoCelular . '</td>';
+                $filas.='<td class="Direccion_Alumno" style="display: none">' . $alum->Direccion . '</td>';
+                $filas.='<td class="DUI_Alumno" style="display: none">' . $alum->NumeroDUI . '</td>';
+                $filas.='<td class="Genero_Alumno" style="display: none">' . $alum->Genero . '</td>';
+                $filas.='<td class="Nombre_Alumno">' . $alum->Nombre . '</td>';
+                $filas.='<td class="FechaNac_Alumno" style="display: none">' . $alum->FechaNacimiento . '</td>';
+                $filas.='<td class="CodU_Alumno" style="display: none">' . $alum->CodigoUniversidadProcedencia . '</td>';
+                $filas.='<td class="Carrera_Alumno" style="display: none">' . $alum->Carrera . '</td>';
+                $filas.='<td class="NivelAcad_Alumno" style="display: none">' . $alum->NivelAcademico . '</td>';
+                $filas.='<td class="NombreEncargado_Alumno" style="display: none">' . $alum->NombreEncargado . '</td>';
+                $filas.='<td class="CodCat_Alumno" style="display: none">' . $alum->CodigoCategoriaParticipantes . '</td>';
+                $filas.='<td class="NameCat_Alumno">' . $alum->NombreCategoriaParticipante . '</td>';
+                $filas.='<td class="Descripcion_Alumno">' . $alum->Descripcion . '</td>';
+                $filas.='<td class="Comentarios_Alumno" style="display: none">' . $alum->Comentarios . '</td>';
+                $filas.='<td class="gestion_Alumno"><div class="btn-group" role="group">
+                            <button id="alumE' . $alum->CodigoParticipante . '" onclick="mostrarEditAlumno(this)" title="Editar Alumno" class="btn_modificar_alum btn btn-success"><span class="glyphicon glyphicon-pencil"></span> </button>
+                            <button id="alumDEL' . $alum->CodigoParticipante . '" onclick="mostrarDelAlumno(this)" title="Eliminar Alumno" class="btn_eliminar_alum btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
+                            <button id="alumVIEW' . $alum->CodigoParticipante . '" onclick="mostrarInfoAlumno(this)" title="Ver Alumno" class="btn_ver_alum btn btn-info"><span class="glyphicon glyphicon-eye-open"></span></button>
+                            <button id="alumGROUP' . $alum->CodigoParticipante . '" onclick="mostrarGruposPeriodos(this)" title="Agregar a Grupo" class="btn_group_add btn btn-warning"><span class="glyphicon glyphicon-list-alt"></span></button>
+                        </div></td></tr>';
 //                $filas.=' <td style="text-align:center"  class="gestion_User">' . $buttonsByUserRights . '</td> </tr>';
             }
             $cadena.=$filas;
@@ -298,10 +298,10 @@ class ParticipantesController extends CI_Controller {
             return $cadena;
         }
     }
-    
+
     ///ENCABEZADO DE LA TABLA ALUMNOS(para busqueda y paginado)
-    private function EncabezadoTabla(){
-        $encabezado='<table id="tableAlumnos" class="table table-bordered table-striped table-hover table-responsive">
+    private function EncabezadoTabla() {
+        $encabezado = '<table id="tableAlumnos" class="table table-bordered table-striped table-hover table-responsive">
                     <thead>
                         <tr>
                             <th>Mail</th>
@@ -326,4 +326,5 @@ class ParticipantesController extends CI_Controller {
                     <tbody>';
         return $encabezado;
     }
+
 }
