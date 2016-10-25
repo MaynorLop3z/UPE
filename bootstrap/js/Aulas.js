@@ -61,7 +61,7 @@ function errorPost(posting){
     });
 }
 
-////////////PAGINACION DE PUBLICACIONES//////////////
+////////////PAGINACION DE AULAS//////////////
     
 $("#AulasListContent").on("click", "#aFirstPagAulas", function (e) {
     paginarAulas("data_ini", $(this).data("datainic"));
@@ -135,7 +135,7 @@ $('.FindAulasClass').keyup(function(event){ //BUSCA AULA AL MODIFICAR LA CAJA DE
         }
     });
 
-    //BUSCA PUBLICACION SEGUN LOS PARAMETROS Y CAMPOS DE TEXTO RELLENADOS
+    //BUSCA AULAS SEGUN LOS PARAMETROS Y CAMPOS DE TEXTO RELLENADOS
     function buscarParametrosAula(find, nombre, categoria){
         //REALIZA LA BUSQUEDA SEGUN EL TIPO DE FILTRO
         if(find=='Reset'){
