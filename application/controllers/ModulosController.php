@@ -125,10 +125,15 @@ class ModulosController extends CI_Controller {
 //            $Modulos = json_decode(json_encode($this->Modulos->listarModulosNombre($nombreMo)),true);
             $Modulos = $this->Modulos->listarModulosNombre($nombreMo, $turno, $diplomado);   
             $registro = $this->EncabezadoTabla();
+           if(count($Modulos)>0){
             foreach ($Modulos as $mod){
                   $registro .= $this->cuerpoTabla($mod);
 
             }
+           }else{
+            $registro = $this->EncabezadoTabla()."<tr><td colspan=3>No se encontraron coincidencias</td></tr>";
+                   
+           }
 //            $registro .=$this->PieTabla($Modulos);;
             echo $registro;
 

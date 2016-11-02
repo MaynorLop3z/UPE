@@ -163,8 +163,8 @@ function listarModulosByDiplomado(fila){
             $('#bdModulosDip').empty(); 
            $('#bdModulosDip').html(data); 
         }else{
-         //console.log("El diplomado no contiene modulos");
-            $("#NocontainsM").modal('toggle');   
+         console.log("El diplomado no contiene modulos");
+           // $("#NocontainsM").modal('toggle');   
             
         }
                
