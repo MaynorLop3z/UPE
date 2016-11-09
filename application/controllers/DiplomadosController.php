@@ -101,13 +101,17 @@ class DiplomadosController extends CI_Controller {
                 $codigoDiplomado = $this->input->post('codDip');
                 if ($codigoDiplomado != null) {
                     $arrayData = $this->Diplomados->listarModulosByDiplomado($codigoDiplomado);
-                   // echo json_encode($arrayData);
+                  if($arrayData!=null){
+                    // echo json_encode($arrayData);
                     foreach($arrayData as $obj) {
                       $result.='<tr><td>'.$obj->OrdenModulo.'</td><td>'.$obj->NombreModulo.'</td><td>'.$obj->Comentarios.'</td>
                                 </tr>';  
                     }
-                }
-            }
+                  }else{
+                      $result.='<tr><td>'."Este Diplomado no contiene modulos".
+                                '</tr>';  
+                  }
+            }}
             echo $result;
         } catch (Exception $ex) {
             echo $ex->getMessage();
@@ -121,9 +125,11 @@ class DiplomadosController extends CI_Controller {
                 $categoria = $this->input->post('Categoria');
                 $Diplomados = json_decode(json_encode($this->Diplomados->listarDiplomadosNombre($nombreDip, $categoria)), true);
                 $registro = $this->EncabezadoTabla();
+              if(count($Diplomados)>0){
                 foreach ($Diplomados as $dip) {
                     $registro .= '<tr id="dip' . $dip['CodigoDiplomado'] . '">';
                     $registro .= '<td class="nombre_Diplomado">' . $dip['NombreDiplomado'] . '</td>';
+                    $registro .='<td class="codigoDip" >' . $dip['CodigoDiplomado']. '</td>';
                     $registro .= '<td class="descripcionDiplomado">' . $dip['Descripcion'] . '</td>';
                     $registro .= '<td class="estado">' . $dip['Estado'] . '</td>';
                     $registro .= '<td class="categoriaDi">' . $dip['NombreCategoriaDiplomado'] . '</td>';
@@ -136,6 +142,11 @@ class DiplomadosController extends CI_Controller {
                     $registro .= '</td>';
                     $registro .= '</tr>';
                 }
+                }else{
+                   $registro = $this->EncabezadoTabla()."<tr><td colspan=3>No se encontraron coincidencias</td></tr>"; 
+                
+                
+            }
                 $registro .= '</tbody></table></div>';
                 echo $registro;
             }

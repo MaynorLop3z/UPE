@@ -95,7 +95,7 @@
                         </div>                                                                              
 
                         <div class="form-group">
-                            <label for="CatgoriaDiplomadoEdit" class="col-lg-3 control-label">Categoria Diplomado:</label>
+                            <label for="CategoriaDiplomadoEdit" class="col-lg-3 control-label">Categoria Diplomado:</label>
                             <div class="col-lg-9">
                                 <select class="form-control" id="CategoriaDiplomadoEdit" name="CodigoCategoriaDiplomado" required>                                          
                                     <?php

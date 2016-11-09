@@ -176,8 +176,8 @@ function delMo(fila) {
 
 function AddModDip(idDip){
  console.log(idDip);
-   
- $('#prueba').html(idDip);   
+ $("#modDiplomadohidde").val(idDip); 
+ $("#prueba").html(idDip);
     $("#NuevoModuloDip").modal('toggle');
 }
 
@@ -234,8 +234,8 @@ $("#formgrdMo").submit(function (event) {
             CodDiplomado = $form.find("input[name='CodigoDiplomado']").val(),
             ComentarioMod = $form.find("textarea[name='Comentarios']").val(),
             url = $form.attr("action");
-            //console.log(Estado);
-    //alert(CodDiplomado);
+          // console.log(ModuloNombre);
+          console.log(ModuloOrden);
     var posting = $.post(url, {
         ModuloNombre: ModuloNombre,
         ModuloOrden: ModuloOrden,
@@ -278,8 +278,8 @@ $("#formgrdMo").submit(function (event) {
 //
            
           $('#NuevoModulo').modal('toggle');
-          alert("Diplomado ok");
-       
+          alert("Modulo Guardado");
+       console.log(obj.CodigoModulo);
         }
         
     });
@@ -392,8 +392,8 @@ $("#frmDelMod").submit(function(event) {
              $("#ModInd").modal('toggle');
           }
       });
-      posting.fail(function(xhr, textStatus, errorThrown) {
-        alert("error" + xhr.responseText);
+       posting.fail(function (data) {
+            alert("Error No se  encuetra es Modulo Buscado");
     });
      
  });
