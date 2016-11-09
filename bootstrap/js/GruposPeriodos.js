@@ -33,7 +33,6 @@ $("#frmDELPeriodo").submit(function (event) {
         msj += "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
         msj += "<strong>Error!</strong> Existen grupos asociados al periodo, debe eliminarlos antes de continuar.</div>";
         $('#MsjErrorPeriodo').html(msj);
-//        alert("error, existen grupos asociados al periodo, elimine todos los grupos del periodo");
     });
 });
 
