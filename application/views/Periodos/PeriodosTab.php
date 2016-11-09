@@ -104,7 +104,8 @@
         posting.fail(function (data) {
             alert("Error");
         });
-    
+                     
+                     
     }
 </script>
 <div class="panel panel-default">

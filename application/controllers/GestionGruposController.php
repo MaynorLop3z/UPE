@@ -9,6 +9,7 @@ if (!defined('BASEPATH')) {
 }
 
 class GestionGruposController extends CI_Controller {
+    private $dias=array("Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo");
     private $totalPaginasPeriodos = 0;
     private $ToTalRegistrosPeriodos=0;
     private $periodosMostrados=0;
@@ -16,7 +17,8 @@ class GestionGruposController extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('Diplomados');
-//        $this->load->model('usuarios');
+        $this->load->model('Aulas');
+        $this->load->model('Horarios');
     }
 
     public function index() {
@@ -30,12 +32,24 @@ class GestionGruposController extends CI_Controller {
         $mods = (array) $datos['Modulos'][0];
         $idModulo = $mods['CodigoModulo'];
         $datos['Periodos'] = $this->Diplomados->listarPeriodosByModuloLimited($idModulo, null);
+        //paginacion
         $datos['totalPaginasPeriodos'] =  $this->getTotalPaginasPeriodos($idModulo); //paginacion de periodos
         $datos['PagInicialPeriodos'] = 1;
         $datos['ToTalRegistrosPeriodos'] = $this->Diplomados->countAllPeriodos($idModulo);
+        //Horarios
+        $datos['Aulas'] = $this->Aulas->listarAulas();
+        $datos['Turnos'] = $this->Horarios->cargarTurnos();
+        $datos['Grupos'] = $this->Horarios->listarHorariosxTurno();
+        $datos['Dias'] = $this->dias;
+        $datos['GruposPëriodo'] = $this->Horarios->cargarGruposPeriodos();
+        $datos['HxGrupos'] = $this->Horarios->listarHorariosxTurno(null,$this->Horarios->cargar1GrupoPeriodo());
+        
         $this->load->view('Periodos', $datos);
     }
     
+    public function setGrupoPeriodo(){
+        $datos['HxGrupos']=$this->Horarios->listarHorariosxTurno(null, $this->input->post('g'));
+    }
     public function getDiplomados() {
         $this->setVariablesDePaginacion(0,0,0);
         

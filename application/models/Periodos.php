@@ -80,12 +80,13 @@ class Periodos extends CI_Model {
     }
 
     public function listarGrupos($idPeriodo) {
-        $this->db->select('CodigoGrupoPeriodo, '
-                . 'CodigoPeriodo, '
-                . 'Estado, '
-                . 'HoraEntrada, '
-                . 'HoraSalida, '
-                . 'Aula'
+        $this->db->select('*'
+//                . 'CodigoGrupoPeriodo, '
+//                . 'CodigoPeriodo, '
+//                . 'Estado, '
+//                . 'HoraEntrada, '
+//                . 'HoraSalida, '
+//                . 'Aula'
         );
         $this->db->from('GrupoPeriodos');
         $this->db->where('CodigoPeriodo', $idPeriodo);
@@ -93,6 +94,39 @@ class Periodos extends CI_Model {
         $resultado = $consulta->result();
         return $resultado;
     }
+    
+      public function listarGruposHorarios($idPeriodo) {
+        $comando = 'SELECT "GrupoPeriodos"."CodigoGrupoPeriodo", "GrupoPeriodos"."Estado", "Horarios"."HoraEntrada",
+	"Horarios"."HoraSalida", "Horarios"."Dia", "Aulas"."NombreAula"
+        FROM "GrupoPeriodos"
+        FULL OUTER JOIN "Horarios"
+        ON "Horarios"."CodigoGrupoPeriodo"="GrupoPeriodos"."CodigoGrupoPeriodo"
+        LEFT OUTER JOIN "Aulas"
+        ON "Horarios"."CodigoAula"="Aulas"."IdAula"
+
+        WHERE "GrupoPeriodos"."CodigoPeriodo" = '.$idPeriodo.' 
+        ORDER BY "GrupoPeriodos"."CodigoGrupoPeriodo" ASC';
+        $consulta = $this->db->query($comando);
+        $resultado = $consulta->result();
+        return $resultado;
+    }
+//    public function listarGruposHorarios($idGrupo) {
+//        $comando = 'SELECT "GrupoPeriodos"."CodigoGrupoPeriodo", "GrupoPeriodos"."Estado",
+//            "Aulas"."NombreAula", "Horarios"."HoraEntrada",  "Horarios"."HoraSalida", 
+//            "Horarios"."Dia"
+//            FROM "GrupoPeriodos", "Aulas", "Horarios"
+//
+//           WHERE "GrupoPeriodos"."Estado"=TRUE
+//
+//           AND "Aulas"."IdAula"= "Horarios"."CodigoAula"
+//
+//           AND "Horarios"."CodigoGrupoPeriodo"="GrupoPeriodos"."CodigoGrupoPeriodo"
+//
+//           AND "GrupoPeriodos"."CodigoGrupoPeriodo" = '.$idGrupo.'';
+//        $consulta = $this->db->query($comando);
+//        $resultado = $consulta->result();
+//        return $resultado;
+//    }
 
     public function crearGrupo($idPeriodo, $HoraEntrada, $HoraSalida, $Aula) {
         try {

@@ -485,6 +485,7 @@
                                 <th>Fecha Fin</th>
                                 <th>Hora de Entrada</th>
                                 <th>Hora de Salida</th>
+                                <th>Dia</th>
                                 <th>Aula</th>
                                 <th>Inscrito</th>
                             </tr>

@@ -260,4 +260,17 @@ class Participantes extends CI_Model {
         return $resultado;
     }
     
+    //listar horarios por grupo para participantes
+    function listarHorariosGrupoParticipante($idGrupo){
+        try{
+            $consulta = $this->db->query('SELECT "HoraEntrada", "HoraSalida", '
+                    . '"NombreAula","Dia" FROM "Horarios", "Aulas" '
+                    . 'WHERE "CodigoGrupoPeriodo" = '.$idGrupo.' AND '
+                    . '"Aulas"."IdAula"="Horarios"."CodigoAula"');
+            $resultado = $consulta->result();
+            return $resultado;
+        } catch (Exception $ex) {
+            echo $ex->getTraceAsString();
+        }
+    }
 }

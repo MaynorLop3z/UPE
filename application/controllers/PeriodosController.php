@@ -125,6 +125,18 @@ class PeriodosController extends CI_Controller {
             echo json_encode($ex);
         }
     }
+    
+        public function listarGruposHorarios() {
+        try {
+            if ($this->input->post()) {
+                $Codigo = $this->input->post('idPeriodo');
+                $arrayData = $this->Periodos->listarGruposHorarios($Codigo);
+                echo json_encode($arrayData);
+            }
+        } catch (Exception $ex) {
+            echo json_encode($ex);
+        }
+    }
 
     public function listarGruposPeriodos() {
         try {

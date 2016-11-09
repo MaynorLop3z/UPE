@@ -57,8 +57,8 @@
                         echo '<td class="horario">'.$grupo->NombreTurno.'</td>';
 //                        echo '<td class="horario">'.$grupo->FechaInicioPeriodo.' - '.$grupo->FechaFinPeriodo.'</td>
 //                              </td>';
-                        echo '<td><button id="btnmo" onclick="" title="Editar Horario" class="btnmoddi btn btn-success" class="btn btn-info btn-lg"><span class=" glyphicon glyphicon-pencil"></span></button>
-                                <button type="button" id="DELH" onclick="eliminarHorario('.$grupo->IdHorario.')"  title="Eliminar Horario" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>
+                        echo '<td>
+                            <button type="button" id="DELH" onclick="eliminarHorario('.$grupo->IdHorario.')"  title="Eliminar Horario" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>
                                 </td></tr>';
                     }
                     ?>

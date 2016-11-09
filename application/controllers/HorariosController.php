@@ -40,8 +40,7 @@ class HorariosController extends CI_Controller {
                               <td >'.$this->dias[$h->Dia-1].'</td>
                               <td >'.$h->NombreTurno.'</td>
                               <!--<td >'.$h->FechaInicioPeriodo.' - '.$h->FechaFinPeriodo.'</td>-->
-                              <td><button id="btnmo" onclick="" title="Editar Horario" class="btnmoddi btn btn-success" class="btn btn-info btn-lg"><span class=" glyphicon glyphicon-pencil"></span></button>
-                                <button id="DELH'.$h->IdHorario.'" onclick="eliminarHorario('.$h->IdHorario.')"  title="Eliminar Horario" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>
+                              <td><button id="DELH'.$h->IdHorario.'" onclick="eliminarHorario('.$h->IdHorario.')"  title="Eliminar Horario" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>
                               </td></tr>';
                 }
                 echo $cadena;
@@ -78,15 +77,17 @@ class HorariosController extends CI_Controller {
             $grupo=$this->input->post('Grupo');
             $dia=$this->input->post('Dia');
             $h = $this->Horarios->agregarHorario($hEntrada,$hSalida,$aula,$jornada,$grupo,$dia);
-            
+            $del='eliminarHorario';
+            $grupoA=$this->input->post('GA');//si proviene de adminGrupos
+            if($grupoA=="GA"){$del='eliminarHorarioGrupo';}
             if(count($h)>0){
                 $cadena='';
-                $cadena.='<tr id="horario'.$h->IdHorario.'"><td >'.$this->dias[$h->Dia-1].'</td>
-                          <td >'.$h->NombreAula.'</td>
-                          <td >'.$h->HoraEntrada.'</td>
-                          <td >'.$h->HoraSalida.'</td>
-                          <td><button id="btnmo" onclick="" title="Editar Horario" class="btnmoddi btn btn-success" class="btn btn-info btn-lg"><span class=" glyphicon glyphicon-pencil"></span></button>
-                            <button id="DELH'.$h->IdHorario.'" onclick="eliminarHorario('.$h->IdHorario.')"  title="Eliminar Horario" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>
+                $cadena.='<tr id="horario'.$h['IdHorario'].'"><td >'.$this->dias[$h['Dia']-1].'</td>
+                          <td >'.$this->input->post('naula').'</td>
+                          <td >'.$h['HoraEntrada'].'</td>
+                          <td >'.$h['HoraSalida'].'</td>
+                          <td>
+                          <button id="DELH'.$h['IdHorario'].'" onclick="'.$del.'('.$h['IdHorario'].')"  title="Eliminar Horario" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>
                           </td></tr>';
 //                    $cadena.='<tr id="HorarioFila">
 //                              <td id="grHorario" >'.$Horarios['CodigoGrupoPeriodo'].'</td>
@@ -124,7 +125,10 @@ class HorariosController extends CI_Controller {
         if($this->input->post()){
             $turno=$this->input->post('Turno');
             $grupo=$this->input->post('Grupo');
+            $grupoA=$this->input->post('GA');//si proviene de adminGrupos
+            $del='eliminarHorario';
             if($turno=="NULL"){$turno=null;}
+            if($grupoA=="GA"){$del='eliminarHorarioGrupo';}
             $Horarios = $this->Horarios->listarHorariosxTurno($turno,$grupo);
             if(count($Horarios)>0){
                 $cadena='';
@@ -133,13 +137,27 @@ class HorariosController extends CI_Controller {
                           <td >'.$h->NombreAula.'</td>
                           <td >'.$h->HoraEntrada.'</td>
                           <td >'.$h->HoraSalida.'</td>
-                          <td><<button id="DELH'.$h->IdHorario.'" onclick="eliminarHorario('.$h->IdHorario.')"  title="Eliminar Horario" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>
+                          <td><button id="DELH'.$h->IdHorario.'" onclick="'.$del.'('.$h->IdHorario.')"  title="Eliminar Horario" class="btndeldip btn btn-danger" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-trash"></span></button>
                           </td></tr>';
                 }
                 echo $cadena;
             }else{
                 return null;
             }
+        }
+    }
+    
+    public function cargarAulas(){
+        if($this->input->post()){
+            $cadena='';
+            $aulas = $this->Aulas->listarAulas();
+            if($this->input->post('Aulas')){
+                foreach ($aulas as $aula) {
+                    $cadena.='<option value="'.$aula->IdAula.'">
+                    '.$aula->NombreAula.'</option>';
+                }
+            }
+            echo $cadena;
         }
     }
 }

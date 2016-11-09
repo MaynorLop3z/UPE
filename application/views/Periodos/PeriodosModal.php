@@ -2,7 +2,7 @@
 <link href="../bootstrap/css/jquery-ui.css" rel="stylesheet">
 <script>
     $('#iconFechaInicioPeriodo, #FechaInicioPeriodo').click(function(){
-        $('#dateFechaInicioPeriodo').show();
+        $('#dateFechaInicioPeriodo');
         $('#dateFechaInicioPeriodo').datepicker({
            // $.datepicker.formatDate( "yy-mm-dd", new Date( 2007, 1 - 1, 26 ) );
             onSelect: function(date) {
@@ -186,13 +186,14 @@
                 </div> 
                 <div>
                     <form id="frmGrupoAdd" action="<?php echo base_url() ?>index.php/PeriodosController/insertGrupo/" class="form-inline" method="post" >
+                    <!--<form id="frmGrupoAddG" action="<?php echo base_url() ?>index.php/GestionGruposController/setGrupoPeriodo/" class="form-inline" method="post" >-->
                         <fieldset>
                             <h4>
                                 Agregar Grupo:
                             </h4>
                             <div class="row">
                                 <table>
-                                <tr>
+<!--                                <tr>
                                     <td><label for="Aula" class="col-md-1 control-label">Aula: </label></td>
                                     <td><input type="text" class="col-md-2 form-control" name="Aula" id="AulaNombre" placeholder="Aula" maxlength="10" required></td>
                                 </tr>
@@ -204,7 +205,7 @@
                                 <tr>
                                     <td><label for="HoraSalidaGrupo" class="col-md-1 control-label">Salida: </label></td>
                                     <td><input type="time" class="col-md-2 form-control" name="HoraSalidaGrupo" id="HoraSalidaGrupo" placeholder="Hora finalizacion sesion" data-mask="00:00:00:00"  required></td>
-                                </tr>
+                                </tr>-->
                                 <tr>
                                     <td colspan="2">
                                         <div class="col-md-1" style="margin-top: 10px;">
@@ -220,11 +221,12 @@
                     <table border="1" class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <!--<th>Codigo</th>-->
+                                <th>GT</th>
                                 <th>Estado</th>
                                 <th>Hora de Entrada</th>
                                 <th>Hora de Salida</th>
                                 <th>Aula</th>
+                                <th>Dia</th>
                                 <th>Configuracion</th>
                                 <!--<th>Alumnos</th>-->
                             </tr>
@@ -253,6 +255,7 @@
                     <ul class="nav nav-tabs" role="tablist">
                         <li role="presentation" class="active"><a href="#Maestros" aria-controls="Maestros" role="tab" data-toggle="tab">Maestros</a></li>
                         <li role="presentation"><a href="#Alumnos" aria-controls="Alumnos" role="tab" data-toggle="tab">Alumnos</a></li>
+                        <li role="presentation"><a href="#HorarioDelGrupo" aria-controls="Horario" role="tab" data-toggle="tab">Horario</a></li>
                     </ul>
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="Maestros">
@@ -287,6 +290,26 @@
                                 </table>
                             </div>
                         </div>
+                        <div role="tabpanel" class="tab-pane" id="HorarioDelGrupo">
+                            <div class="contendor">
+                                <table class="table table-hover table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Dia</th>
+                                            <th>Aula</th>
+                                            <th>Entrada</th>
+                                            <th>Salida</th>
+                                            <th>Acción</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="HorarioDelGrupoPeriodo">
+                                        
+                                    </tbody>
+                                </table>
+                                <button type="submit" id="btnEnviarGrupoPeriodoAddH" onclick="" class="btn btn-default" name="Aceptar"><span class="glyphicon glyphicon-plus"></span>Agregar Horario</button>
+                                    
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -297,3 +320,193 @@
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <script src="../bootstrap/js/GruposPeriodos.js"></script>
+
+<!--MODAL PARA AGREGAR HORARIOS-->
+<script>
+    var it='A.M.';var ft='A.M.';
+    $(function(){
+    var hIH = $('#HorarioInicioHoraGrupo').spinner({ max: 12, min:1, stop: function( event, ui ) {
+//           if($('#HorarioFinHora').val()<$('#HorarioInicioHora').val()){
+//               $('#HorarioFinHora').val($('#HorarioInicioHora').val());
+//           }
+        }});
+    $("#HorarioInicioHoraGrupo").spinner( "option", "numberFormat", "nn" );
+    var hFH = $('#HorarioFinHoraGrupo').spinner({ max: 12, min:1,  stop: function( event, ui ) {
+        }});
+    var hIM = $('#HorarioInicioMinutosGrupo').spinner({ max: 55, min: 0, step: 5});
+    var hFM = $('#HorarioFinMinutosGrupo').spinner({ max: 55, min: 0, step: 5});
+    var hAPI = $('#HoraInicioAmPmGrupo').spinner({star: function( event, ui ) {
+            it=$(this).val();
+    },
+    spin: function( event, ui ) { event.preventDefault(); ui.value='';} ,
+        stop: function( event, ui ) {
+            if(it=='A.M.'){
+                $(this).val('P.M.');
+                it='P.M.';
+            }else{
+                it='A.M.';
+                $(this).val('A.M.');
+            }
+    }});
+   
+    var hAPF = $('#HoraFinAmPmGrupo').spinner({star: function( event, ui ) {
+            ft=$(this).val();
+    },
+    spin: function( event, ui ) { event.preventDefault(); ui.value='';} ,
+        stop: function( event, ui ) {
+            if(ft=='A.M.'){
+                $(this).val('P.M.');
+                ft='P.M.';
+            }else{
+                ft='A.M.';
+                $(this).val('A.M.');
+            }
+    }});
+
+      $('#btnEnviarGrupoPeriodoAddH').click(function(){
+    $('#ModalHorarioNuevoGrupo').modal();
+});
+  $('#frmGrupoAddG').submit(function(){
+    var idPeriodo = codigoPeriodo.substring(10);
+    alert(idPeriodo);
+      //var posting=$.post($(this).attr('action'),{'g':idPeriodo});
+  });
+    });
+
+
+</script>
+<!------Modal para Agregar Horarios--------->
+<div id="ModalHorarioNuevoGrupo" class="modal fade"  data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="container-fluid ">
+                <button type="button" class="close" id="btnCerrarHorarioNuevoGrupo"  data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <form  id="formAgregarHorarioGrupo" action="<?php echo base_url() ?>index.php/HorariosController/agregarHorario/" class="form-horizontal" method="post" >
+                    <fieldset>
+                        <legend class="modal-header">Nuevo Horario:</legend> 
+                         <div class="form-group">
+                            <label class="col-lg-3 control-label">Turno:</label>
+                            <div class="col-lg-4">
+                                      <select class="form-control col-lg-4" name="TurnoHorarioGrupo" id="TurnoHorarioGrupo">
+                                        <?php
+                                        foreach ($Turnos as $t) {
+                                            ?>
+                                            <option value="<?= $t->CodigoTurno?>">
+                                                <?= $t->NombreTurno?>
+                                            </option>
+                                            <?php
+                                        }
+                                        ?>   
+                                    </select>
+                            </div>
+                         </div>
+                        
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Dia:</label>
+                            <div class="col-lg-4">
+                                <select class="form-control col-lg-4" name="DiaHorarioGrupo" id="DiaHorarioGrupo">
+                                    <?php
+                                    $dias=array("LUNES"=> LUNES,"MARTES"=>MARTES,"MIÉRCOLES"=>MIERCOLES,
+                                        "JUEVES"=>JUEVES,"VIERNES"=>VIERNES,"SÁBADO"=>SABADO,"DOMINGO"=>DOMINGO);
+                                    
+                                    foreach ($dias as $dia => $i) {
+                                        ?>
+                                        <option value="<?= $i?>">
+                                            <?= $dia ?>
+                                        </option>
+                                        <?php
+                                    }
+                                    ?>   
+                                </select>
+                                 
+                            </div>
+                        </div> 
+
+                        <div class="form-group">
+                            <label for="HorarioInicioGrupo" class="col-lg-3 control-label">Inicio</label>
+                            <div class="col-lg-9">
+                                <!--<input type="text" class="form-control" name="AulaNombre" id="AulaNombre" placeholder="Nombre del Aula" maxlength="50" required>-->
+                                <p>
+                                    <input id="HorarioInicioHoraGrupo" name="value" placeholder="Horas" value="6" size="4"> : 
+                                    <input id="HorarioInicioMinutosGrupo" name="value" placeholder="Minutos" value="0" size="4">
+                                    <input id="HoraInicioAmPmGrupo" value="A.M." size="3">
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="HorarioFinGrupo" class="col-lg-3 control-label">Fin</label>
+                            <div class="col-lg-9">
+                                <p>
+                                    <input id="HorarioFinHoraGrupo" name="value" placeholder="Horas" value="8" size="4"> : 
+                                    <input id="HorarioFinMinutosGrupo" name="value" placeholder="Minutos" value="0" size="4">
+                                    <input id="HoraFinAmPmGrupo" value="A.M." size="3">
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Aula</label>
+                            <div class="col-lg-4">
+                                <select class="form-control col-lg-4" name="AulaHorarioGrupo" id="AulaHorarioGrupo">
+  
+                                </select>
+                            </div>
+                        </div> 
+                        
+                        <div class="modal-footer">
+                            <button type="submit" id="btnAgregarHorarioGrupo" onclick="" class=" btn btn-default" name="AceptarGrupo">Agregar este horario</button>
+<!--                            <button type="button" id="btnCancelarHorarioGrupo" onclick=""class=" btn btn-default" data-dismiss="modal">Listo</button>-->
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--//Eliminar horarios-->
+<div id="frmEliminarHorario" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="container-fluid ">
+                <button type="button" class="close" id="btnCerrarModalDELPeriodo" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <legend class="modal-header">
+                            Eliminar Horario
+                        </legend>
+                        <p class="text-center">¿Desea eliminar este horario?: <mark id="nombreHorarioEliminar"></mark> ?</p>
+                        <input type="hidden" class="form-control" name="onlyFor">
+                        <div class="modal-footer">
+                            <button type="button" id="btnEliminarHorarioDeGrupo" onclick="" class="btn btn-default" name="Eliminar">Eliminar</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Cancelar">Cancelar</button>
+                        </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Nuevo Grupo-->
+<div id="modalNuevoGrupo" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="container-fluid ">
+                <button type="button" class="close" id="btnCerrarModalNewGrupo" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <form id="frmNuevoGrupo" action="<?php echo base_url() ?>index.php/PeriodosController/insertGrupo/" class="form-horizontal" method="post" >
+                    <fieldset>
+                        <legend class="modal-header">
+                            Agregar Grupo:
+                        </legend> 
+                        <div class="row">
+                            <div class="col-lg-9">
+                            ¿Desea agregar un nuevo grupo a este periodo?
+                            <div class="modal-footer">
+                                <button type="button" id="btnEnviarGrupoHADD" onclick="" class=" btn btn-default" name="Aceptar">Agregar</button>
+                                <!--<button type="reset" id="btnLimpiarGrupoADD" onclick="" class=" btn btn-default" name="Limpiar">Limpiar</button>-->
+                                <button type="button" id="btnCerrar" data-dismiss="modal" class=" btn btn-default" name="Cerrar">Cerrar</button>
+                            </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

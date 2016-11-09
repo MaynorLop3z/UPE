@@ -42,15 +42,41 @@ class ParticipantesController extends CI_Controller {
             $idDiplomado = $this->input->post('idDiplomado');
             $idParticipante = $this->input->post('idParticipante');
             $Periodos = $this->Participantes->listarGruposPeriodos($idDiplomado, $idParticipante);
+            
             foreach ($Periodos as $period) {
+                $Horarios = $this->Participantes->listarHorariosGrupoParticipante($period->codigogrupoperiodo);
+                $hE='';$hS='';$au='';$dia='';
+                $dias=array(1=>"Lunes",2=>"Martes",3=>"Miércoles",4=>"Jueves",5=>"Viernes",6=>"Sábado",7=>"Domingo");
                 ?>
                 <tr id="GrupoPeriodo<?= $period->codigogrupoperiodo ?>">
                     <th class="nmgp"><?= $period->nombremodulo ?></th>
                     <th class="ffgp"><?= $period->fechafinperiodo ?></th>
                     <th class="figp"><?= $period->fechainicioperiodo ?></th>
-                    <th class="hegp"><?= $period->horaentrada ?></th>
+                                       
+                    <?php
+                    foreach($Horarios as $h){
+                        $hE.=$h->HoraEntrada."<br>";
+                        $hS.=$h->HoraSalida."<br>";
+                        $dia.=$dias[$h->Dia]."<br>";
+                        $au.=$h->NombreAula."<br>";
+                    }
+                    if($hE!=''&&$hS!=''&&$au!=''){
+                    ?>
+                        <th class="hegp"><?= $hE; ?></th>
+                        <th class="hsgp"><?= $hS; ?></th>
+                        <th class="dgp"><?= $dia; ?></th>
+                        <th class="agp"><?= $au; ?></th>
+                    <?php
+                    }else{
+                    ?>
+                        <th colspan="4" >Horario no asignado a este grupo</th>
+                    <?php
+                    }
+                    ?>
+<!--                    <th class="hegp"><?= $period->horaentrada ?></th>
                     <th class="hsgp"><?= $period->horasalida ?></th>
-                    <th class="agp"><?= $period->aula ?></th>
+                    <th class="dgp"><?="hola"?></th>
+                    <th class="agp"><?= $period->aula ?></th>-->
                     <th>
                             <?php
                             if ($period->inscrito == 1) {

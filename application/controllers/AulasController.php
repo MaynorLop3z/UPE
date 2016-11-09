@@ -16,7 +16,7 @@ class AulasController extends CI_Controller {
 
     public function index() {
         $data['nada']='';
-        $data['Aulas'] = $this->Aulas->listarAulas(ROWS_PER_PAGE, 1);
+        $data['Aulas'] = $this->Aulas->listarAulas(ROWS_PER_PAGE);
         $data['totalAulas'] = count($this->Aulas->listarAulas());
         $data['totalPaginasAulas'] = $this->getTotalPaginas();
         $this->load->view('Aulas', $data);
@@ -115,7 +115,7 @@ class AulasController extends CI_Controller {
                     $ini=ROWS_PER_PAGE;
                 }
                 if($fin<1){
-                    $fin=1;
+                    $fin=null;
                 }
                 $Aulas = $this->Aulas->listarAulas($ini, $fin);
             }

@@ -26,6 +26,7 @@ $('#formAgregarHorario').submit(function(e){
     var inicio=horaFormateada($("#HorarioInicioHora").val(),$('#HoraInicioAmPm').val(), $('#HorarioInicioMinutos').val());
     var fin=horaFormateada($("#HorarioFinHora").val(),$('#HoraFinAmPm').val(), $('#HorarioFinMinutos').val());
     var aula=$('#AulaHorario').find(':selected').val();
+    var naula=$('#AulaHorario').find(':selected').text();
     var turno=$('#TurnoHorario').find(':selected').val();
     var dia=$('#DiaHorario').find(':selected').val();
     var grupo=$('#GrupoHorario').find(':selected').val();
@@ -45,7 +46,7 @@ $('#formAgregarHorario').submit(function(e){
                alert("No se puede agregar ese horario porque choca con el siguiente:\nHora Inicio:"+
                        formato12("May 01, 2016 "+choque[0].HoraEntrada)+"\nHora Fin: "+formato12("May 01, 2016  "+choque[0].HoraSalida));
            }else{
-                var pos=$.post($('#formAgregarHorario').attr('action'),{"Entrada":inicio, "Salida":fin, "Aula":aula, "Turno":turno, "Dia":dia, "Grupo":grupo });
+                var pos=$.post($('#formAgregarHorario').attr('action'),{"Entrada":inicio, "Salida":fin, "Aula":aula, "Turno":turno, "Dia":dia, "Grupo":grupo, naula:naula });
                pos.done(function(dat){
                if (dat !== "") {
                    $('#CuerpoTablaHorario').append(dat);

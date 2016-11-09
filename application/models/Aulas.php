@@ -16,6 +16,8 @@ class Aulas extends CI_Model {
             $this->db->order_by("NombreAula", "desc");
             if($offset!=null && $limit!=null){
                 $this->db->limit($limit, $offset);
+            }else if($limit!=null && $offset==null){
+                $this->db->limit($limit);
             }
             $consulta = $this->db->get();
             $resultado = $consulta->result();
