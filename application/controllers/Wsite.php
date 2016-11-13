@@ -244,39 +244,40 @@ class Wsite extends CI_Controller {
                     foreach ($Publicaciones as $publicacion) {
                         $result .='<div class="col-sm-4 portfolio-item" >
 
-                                        <a  id="a' . $publicacion->CodigoPublicacion . '" data-dimg="' . json_encode($publicacion) . '" class=" portfolio-link callModalPublicacion"  >
-                                            <div class="caption">
+                                         <a  id="a' . $publicacion->CodigoPublicacion . '" data-dimg=\'' .  json_encode($publicacion). '\' class=" portfolio-link callModalPublicacion"  >
+                                           
+<div class="caption">
                                                 <div class="caption-content" >
                                                     <i class="fa fa-search-plus fa-3x"></i>
                                                 </div>
                                             </div>
                                             <img  src="' . 'bootstrap' . $publicacion->Ruta . '" class="img-responsive" alt="" style="height:500px; width: 500px;">
-                                        </a> </div>  ' ;
-                                            }
+                                        </a> </div>  ';
+                    }
 
-                                  $result .=
-                                '<div class="row" id="paginacionDivcat">'
-                                . '<ul class="pager">'
-                                . '<li><a  id="btnpaginicio">&laquo;</a></li>';
-                        $contador = 1;
+                    $result .=
+                            '<div class="row" id="paginacionDivcat">'
+                            . '<ul class="pager">'
+                            . '<li><a  id="btnpaginicio">&laquo;</a></li>';
+                    $contador = 1;
 
-                        $totalpag2 = $this->listarPublicacionesCAT($categoriaSlt);
-                        $totalpag=count($totalpag2);
-                         if ((($totalpag % PUBLICACIONES_X_PAG) != 0) && (($totalpag / PUBLICACIONES_X_PAG) >= 1)) {
-                            $totalpag = intval(($totalpag / PUBLICACIONES_X_PAG) + 1);
-                             } else {
-                            $totalpag = intval(ceil(($totalpag / PUBLICACIONES_X_PAG)));
-                        }
-                        while ($contador <= $totalpag) {
-                            $result .= '<li><a id="'.$contador .'"'.$contador .'</a></li>';
-                                           $contador ++;
-                        }
-                         $result .='<li><a id="btnpagfin">&raquo;</a></li> '
-                                 . '</ul>'
-                                 . ' </div>';
+                    $totalpag2 = $this->listarPublicacionesCAT($categoriaSlt);
+                    $totalpag = count($totalpag2);
+                    if ((($totalpag % PUBLICACIONES_X_PAG) != 0) && (($totalpag / PUBLICACIONES_X_PAG) >= 1)) {
+                        $totalpag = intval(($totalpag / PUBLICACIONES_X_PAG) + 1);
+                    } else {
+                        $totalpag = intval(ceil(($totalpag / PUBLICACIONES_X_PAG)));
+                    }
+                    while ($contador <= $totalpag) {
+                        $result .= '<li><a id="' . $contador . '"' . $contador . '</a></li>';
+                        $contador ++;
+                    }
+                    $result .='<li><a id="btnpagfin">&raquo;</a></li> '
+                            . '</ul>'
+                            . ' </div>';
 
-                        //
-                        /////
+                    //
+                    /////
                 } else {
                     $result = '<h3 align="center">No existen Publicaciones en esta categoria</h3>';
                 }

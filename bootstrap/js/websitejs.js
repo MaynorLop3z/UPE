@@ -5,22 +5,76 @@
 var codigoPub;
 $("#PubsCategoria").on("click", ".callModalPublicacion", function (e) {
 //$('.callModalPublicacion').on('click', function (event) {
-   
+
+    alert("show modal");
     codigoPub = this.id;
-    $("#portfolioModal6").modal('show');
+    alert(codigoPub);
+    var pub = $('#' + codigoPub);
+
+    var dataP = pub.data("dimg");
+    alert(dataP);
+    if (dataP) {
+        $("#portfolioModal6").modal('show');
+        $('#h2TituloPub').text(dataP.Titulo);
+        $('#imgPub').attr("src", 'bootstrap' + dataP.Ruta);
+        $('#pContenidoPub').text(dataP.Contenido);
+    }
+    else {
+        alert("something went wrong!!!!!!!");
+    }
+
 
 });
 
 
-$('#portfolioModal6').on('show.bs.modal', function (event) {
+
+//Pubsrecie
+$("#Pubsrecie").on("click", ".callModalPublicacion", function (e) {
+//$('.callModalPublicacion').on('click', function (event) {
+
+    alert("show modal");
+    codigoPub = this.id;
     var pub = $('#' + codigoPub);
     var dataP = pub.data("dimg");
 
+    $("#portfolioModal6").modal('show');
 
     $('#h2TituloPub').text(dataP.Titulo);
     $('#imgPub').attr("src", 'bootstrap' + dataP.Ruta);
     $('#pContenidoPub').text(dataP.Contenido);
+
+
+    alert("something went wrong!!!!!!!");
+
+
 });
+
+$("#PubsDate").on("click", ".callModalPublicacion", function (e) {
+//$('.callModalPublicacion').on('click', function (event) {
+
+    alert("show modal");
+    codigoPub = this.id;
+    var pub = $('#' + codigoPub);
+    var dataP = pub.data("dimg");
+    if (typeof dataP !== undefined) {
+        $("#portfolioModal6").modal('show');
+        $('#h2TituloPub').text(dataP.Titulo);
+        $('#imgPub').attr("src", 'bootstrap' + dataP.Ruta);
+        $('#pContenidoPub').text(dataP.Contenido);
+    }
+    else {
+        alert("something went wrong!!!!!!!");
+    }
+
+});
+
+//$('#portfolioModal6').on('show.bs.modal', function (event) {
+//
+//    $('#h2TituloPub').text(dataP.Titulo);
+//    $('#imgPub').attr("src", 'bootstrap' + dataP.Ruta);
+//    $('#pContenidoPub').text(dataP.Contenido);
+//});
+
 
 $('#btnSend').on('click', function (event) {
 //    alert("Se abrira su gestor de correo electronico para enviar el mensaje.");
@@ -44,36 +98,63 @@ $('#btnSend').on('click', function (event) {
 
 $('#opcReciente').on('click', function (event) {
 //$('#masRecientesDiv').style.display = 'block';
+    $('#masRecientesDiv').show();
     var visto = document.getElementById('categoriaDiv');
     visto.style.display = 'none';
-    $('#masRecientesDiv').show();
+    var vistodate = document.getElementById('DateDiv');
+    vistodate.style.display = 'none';
+
 });
 
 $('#opccategoria').on('click', function (event) {
 //    var slect = document.getElementById('categoriaDiv').value ;
 //    alert(slect);
     $('#masRecientesDiv').hide();
+    var vistodate = document.getElementById('DateDiv');
+    vistodate.style.display = 'none';
     var visto = document.getElementById('categoriaDiv');
     visto.style.display = 'block';
-   
+
 });
 
-$('#selectCategoriaBusqueda').on('change',function (event){
-     //post con la categoria
-    var select =document.getElementById('selectCategoriaBusqueda');
+$('#opcDate').on('click', function (e) {
+
+    var visto = document.getElementById('DateDiv');
+    visto.style.display = 'block';
+    $('#masRecientesDiv').hide();
+    var vistocat = document.getElementById('categoriaDiv');
+    vistocat.style.display = 'none';
+    var fecha = document.getElementById('fechastart').type;
+
+    if (fecha !== "date") {
+        $fecha = $('#fechastart');
+
+        
+        $fecha.datepicker();
+        $fechaend = $('#fechaend');
+        $fechaend.datepicker();
+
+    }
+
+});
+
+$('#selectCategoriaBusqueda').on('change', function (event) {
+    //post con la categoria
+    var select = document.getElementById('selectCategoriaBusqueda');
     var categoria = select.options[select.selectedIndex].value;
     var url = 'index.php/wsite/listar/';
+
     var posting = $.post(url, {
         Categoria: categoria
     });
 
     posting.done(function (data) {
         if (data !== null) {
-           $('#PubsCategoria').empty();
-           $('#PubsCategoria').html(data);
+            $('#PubsCategoria').empty();
+            $('#PubsCategoria').html(data);
         }
         else {
         }
-       
+
     });
 });

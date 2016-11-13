@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--i was here :P-->
 
 
 <html lang="en">
@@ -26,6 +26,8 @@
         <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
+        <!--<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">-->
+        <!--        <link rel="stylesheet" href="/resources/demos/style.css">-->
         <!-- jQuery -->
         <script src="bootstrap/js/jquery.js"></script>
 
@@ -56,7 +58,7 @@
                     <a class="navbar-brand" href="#page-top">PAESIS</a>
                 </div>
 
-                <!-- Nav con opciones principales(login, mas recientes, about) -->
+                <!-- Nav con opciones principales(login, mas recientes, about,etc.) -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li class="hidden">
@@ -66,7 +68,7 @@
                             <a href="" class="portfolio-link btn   dropdown-toggle"  title="Buscar Publicaciones" data-toggle="dropdown" id="test3"><i class="fa fa-fw fa-search"></i></a>
                             <ul class="dropdown-menu" id="scrollBuscar">
                                 <li value="1" id="opccategoria"> <a href="#portfolio">Por Categoria</a> </li>
-                                <li value="2" id="opcFecha"> <a href="#portfolio">Por Fecha</a> </li>
+                                <li value="2" id="opcDate"> <a href="#portfolio">Por Fecha</a> </li>
                                 <li value="3" id="opcNombre"> <a href="#portfolio">Por Nombre</a> </li>
                             </ul>
                         </li>
@@ -113,41 +115,39 @@
                         <hr class="star-primary">
                     </div>
                 </div>
-                <div class="row">
-
-
+                <div class="row" id="pubRecientes">
                     <!--Aqui empieza las publicaciones--> 
-                    <?php
-                    //$publicacionesMostrar=null;
-                    if ($TotalPaginacion != null && count($TotalPaginacion) > 0) {
-                        foreach ($TotalPaginacion as $publicacion) {
-                            $iterador = 0;
-                            $iterador ++;
+                    <div id="Pubsrecie">
+                        <?php
+                        if ($TotalPaginacion != null && count($TotalPaginacion) > 0) {
+                            foreach ($TotalPaginacion as $publicacion) {
+                                $iterador = 0;
+                                $iterador ++;
+                            }
+                            ?>
+                            <?php
+                            foreach ($TotalPaginacion as $publicacion) {
+                                ?>
+
+                                <div class="col-sm-4 portfolio-item"  >
+
+                                    <a  id="a<?php echo $publicacion->CodigoPublicacion ?>" data-dimg='<?php echo json_encode($publicacion) ?>' class="portfolio-link callModalPublicacion"  >
+                                        <div class="caption">
+                                            <div class="caption-content" >
+                                                <i class="fa fa-search-plus fa-3x"></i>
+                                            </div>
+                                        </div>
+                                        <img  src="<?php echo 'bootstrap' . $publicacion->Ruta ?>" class="img-responsive" alt="" style="height:500px; width: 500px;">
+                                    </a>
+
+
+                                </div>
+
+                                <?php
+                            }
                         }
                         ?>
-                        <?php
-                        foreach ($TotalPaginacion as $publicacion) {
-                            ?>
-
-                            <div class="col-sm-4 portfolio-item"  >
-
-                                <a  id="a<?php echo $publicacion->CodigoPublicacion ?>" data-dimg='<?php echo json_encode($publicacion) ?>' class="portfolio-link callModalPublicacion"  >
-                                    <div class="caption">
-                                        <div class="caption-content" >
-                                            <i class="fa fa-search-plus fa-3x"></i>
-                                        </div>
-                                    </div>
-                                    <img  src="<?php echo 'bootstrap' . $publicacion->Ruta ?>" class="img-responsive" alt="" style="height:500px; width: 500px;">
-                                </a>
-
-
-                            </div>
-
-                            <?php
-                        }
-                    }
-                    ?>
-
+                    </div>
                 </div>
                 <!-- start paginacion-->
 
@@ -180,15 +180,18 @@
                 <!-- finish paginacion-->
             </div>
 
+
             <!--comienza grid e publicacines con busqueda por categoria-->
             <div class="container" id="categoriaDiv" style='display:none;'>
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <h2>Seleccione la categoria</h2>
                         <select name="categoriasl" onchange="" id="selectCategoriaBusqueda" name="seltcate">
+
                             <?php
                             foreach ($listCategorias as $categorias) {
                                 ?>
+
                                 <option value=<?php echo $categorias->CodigoCategoriaDiplomado ?>> <?php echo $categorias->NombreCategoriaDiplomado ?>  </option>
                                 <?php
                             }
@@ -207,58 +210,144 @@
                                 $iterador ++;
                             }
                             ?>
-                         <div id="PubsCategoria">
-                             <?php
-                        foreach ($TotalPaginacion as $publicacion) {
-                            ?>
+                            <div id="PubsCategoria">
+                                <?php
+                                foreach ($TotalPaginacion as $publicacion) {
+                                    ?>
 
-                            <div class="col-sm-4 portfolio-item"  >
+                                    <div class="col-sm-4 portfolio-item"  >
 
-                                <a  id="a<?php echo $publicacion->CodigoPublicacion ?>" data-dimg='<?php echo json_encode($publicacion) ?>' class="portfolio-link callModalPublicacion"  >
-                                    <div class="caption">
-                                        <div class="caption-content" >
-                                            <i class="fa fa-search-plus fa-3x"></i>
-                                        </div>
+                                        <a  id="a<?php echo $publicacion->CodigoPublicacion ?>" data-dimg='<?php echo json_encode($publicacion) ?>' class="portfolio-link callModalPublicacion"  >
+                                            <div class="caption">
+                                                <div class="caption-content" >
+                                                    <i class="fa fa-search-plus fa-3x"></i>
+                                                </div>
+                                            </div>
+                                            <img  src="<?php echo 'bootstrap' . $publicacion->Ruta ?>" class="img-responsive" alt="" style="height:500px; width: 500px;">
+                                        </a>
+
+
                                     </div>
-                                    <img  src="<?php echo 'bootstrap' . $publicacion->Ruta ?>" class="img-responsive" alt="" style="height:500px; width: 500px;">
-                                </a>
+
+                                    <?php
+                                }
+                            }
+                            ?>
+                            <!-- start paginacion-->
+                            <div class="row" id="paginacionDiv2">
+
+                                <ul class="pager">
+                                    <li><a  id="btnpaginicio2 ">&laquo;</a></li>
+                                    <?php
+                                    $contador = 1;
+
+                                    $totalpag = $publicacionesMostrar;
+
+                                    if ((($totalpag % PUBLICACIONES_X_PAG) != 0) && (($totalpag / PUBLICACIONES_X_PAG) >= 1)) {
+                                        $totalpag = intval(($totalpag / PUBLICACIONES_X_PAG) + 1);
+                                        ?>
+                                        <?php
+                                    } else {
+                                        $totalpag = intval(ceil(($totalpag / PUBLICACIONES_X_PAG)));
+                                    }
+                                    while ($contador <= $totalpag) {
+                                        ?>
+                                        <li><a id="<?php echo $contador ?>"><?php echo $contador ?></a></li>
+                                        <?php
+                                        $contador ++;
+                                    }
+                                    ?>
+                                    <li><a id="btnpagfin2">&raquo;</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--tohere-->
 
 
+            <!--comienza grid e publicacines con busqueda por fecha-->
+            <div class="container" id="DateDiv" style='display:none;'>
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h2>Seleccione el rango de  fechas</h2>
+                        <label for="fechastart">Fecha Inicio : </label>
+                        <input type="date" id="fechastart"  />
+
+                        <label for="fechaend"> &nbsp;  &nbsp;  &nbsp; Fecha Fin: </label>
+                        <input type="date" id="fechaend"  />
+
+
+                        <input type="button" id="btndate" class="btn btn-primary small" value="Buscar"/>
+
+                        <hr class="star-primary">
+
+
+                        <!--here-->
+                        <?php
+                        //$publicacionesMostrar=null;
+                        if ($PagCategoria != null && count($PagCategoria) > 0) {
+                            foreach ($PagCategoria as $publicacion) {
+                                $iterador = 0;
+                                $iterador ++;
+                            }
+                            ?>
+                            <div id= "PubsDate">
+                                <?php
+                                foreach ($TotalPaginacion as $publicacion) {
+                                    ?>
+
+                                    <div class="col-sm-4 portfolio-item"  >
+
+                                        <a  id="a<?php echo $publicacion->CodigoPublicacion ?>" data-dimg='<?php echo json_encode($publicacion) ?>' class="portfolio-link callModalPublicacion"  >
+                                            <div class="caption">
+                                                <div class="caption-content" >
+                                                    <i class="fa fa-search-plus fa-3x"></i>
+                                                </div>
+                                            </div>
+                                            <img  src="<?php echo 'bootstrap' . $publicacion->Ruta ?>" class="img-responsive" alt="" style="height:500px; width: 500px;">
+                                        </a>
+
+
+                                    </div>
+
+                                    <?php
+                                }
+                            }
+                            ?>
+                            <!-- start paginacion-->
+                            <div class="row" id="paginacionDiv3">
+
+                                <ul class="pager">
+                                    <li><a  id="btnpaginicio3">&laquo;</a></li>
+                                    <?php
+                                    $contador = 1;
+
+                                    $totalpag = $publicacionesMostrar;
+
+                                    if ((($totalpag % PUBLICACIONES_X_PAG) != 0) && (($totalpag / PUBLICACIONES_X_PAG) >= 1)) {
+                                        $totalpag = intval(($totalpag / PUBLICACIONES_X_PAG) + 1);
+                                        ?>
+                                        <?php
+                                    } else {
+                                        $totalpag = intval(ceil(($totalpag / PUBLICACIONES_X_PAG)));
+                                    }
+                                    while ($contador <= $totalpag) {
+                                        ?>
+                                        <li><a id="<?php echo $contador ?>"><?php echo $contador ?></a></li>
+                                        <?php
+                                        $contador ++;
+                                    }
+                                    ?>
+                                    <li><a id="btnpagfin3">&raquo;</a></li>
+                                </ul>
                             </div>
 
-                            <?php
-                        }
-                    }
-                    ?>
-                            <!-- start paginacion-->
- <div class="row" id="paginacionDiv2">
-
-                    <ul class="pager">
-                        <li><a  id="btnpaginicio">&laquo;</a></li>
-                        <?php
-                        $contador = 1;
-
-                        $totalpag = $publicacionesMostrar;
-
-                        if ((($totalpag % PUBLICACIONES_X_PAG) != 0) && (($totalpag / PUBLICACIONES_X_PAG) >= 1)) {
-                            $totalpag = intval(($totalpag / PUBLICACIONES_X_PAG) + 1);
-                            ?>
-                            <?php
-                        } else {
-                            $totalpag = intval(ceil(($totalpag / PUBLICACIONES_X_PAG)));
-                        }
-                        while ($contador <= $totalpag) {
-                            ?>
-                            <li><a id="<?php echo $contador ?>"><?php echo $contador ?></a></li>
-                            <?php
-                            $contador ++;
-                        }
-                        ?>
-                        <li><a id="btnpagfin2">&raquo;</a></li>
-                    </ul>
-                </div>
-
                             <!--tohere-->
+
+                            <!--termia p por fecha-->
 
                         </div>
 
@@ -266,6 +355,7 @@
 
                 </div>
             </div>
+
 
         </section>
 
@@ -496,7 +586,13 @@
             </div>
         </div>
 
-
+        <style>
+            .ui-datepicker
+            {
+               width:auto;
+                background: whitesmoke;
+            }
+        </style>
 
         <script src="bootstrap/js/websitejs.js"></script>
 
@@ -506,6 +602,10 @@
 
         <!-- Custom Theme JavaScript -->
         <script src="bootstrap/js/freelancer.js"></script>
+
+ <!--<script src="https://code.jquery.com/jquery-1.12.1.js"></script
+ 
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     </body>
 
 </html>
