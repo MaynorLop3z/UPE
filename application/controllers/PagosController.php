@@ -345,41 +345,40 @@ class PagosController extends CI_Controller {
             return $user;
         }
     }
-
+//para pagos
     public function buscarAlum() {
         try {
             if ($this->input->post()) {
-               
-                $nombre=$this->input->post('NombreParticipan');
-                $carnet=$this->input->post('CarnetParticipan');
-                $dui=$this->input->post('DuiParticipan');
-                $cadena='';
-                $Alumnos = $this->Pagos->listarUsuariosPagosPorLike($nombre,$carnet,$dui);
-//                foreach ($Usuarios as $user) {
-//                    array_push($Response, ($user));
-//                }
 
-                $cadena.='<table id=' . '"tableParticipantesPag"' . 'class="table table-bordered table-striped table-hover table-responsive"' . '>';
-                $cadena.='<thead>
-                <tr>
-                    <th style="text-align:center">Nombre</th>
-                   
-                </tr>
-                </thead> 
-                <tbody>';
+                $nombre  = $this->input->post('NombreParticipan');
+                $carnet  = $this->input->post('CarnetParticipan');
+                $dui     = $this->input->post('DuiParticipan');
+                $anio     = $this->input->post('AnioParticipan');
+                $listaAlum  = '';
+                $Alumnos = $this->Pagos->listarUsuariosPagosPorLike($nombre, $carnet, $dui, $anio);
+
+                $listaAlum.='<table id=' . '"tableParticipantesPag"' . 'class="table table-bordered table-striped table-hover table-responsive"' . '>';
+                $listaAlum.='<thead><tr>
+                          <th style="text-align:center;font-size: large">Nombre</th>
+                          <th style="text-align:center;font-size: large">Diplomado</th>
+                          <th style="text-align:center;font-size: large">Modulo</th>
+                          </tr>
+                          </thead> 
+                          <tbody>';
                 foreach ($Alumnos as $alum) {
-                    $cadena.='<tr data-userpd=' . ($alum->CodigoGruposParticipantes) . ' id="tr' . $alum->CodigoGruposParticipantes . '">';
-                    $cadena.=' <td class="nombre_Usuario" >' . $alum->Nombre.'</td> </tr>';
-                }
-                
-                $cadena.='</tbody></table>';
+                    $listaAlum.='<tr data-userpd=' . ($alum->CodigoGruposParticipantes) . ' id="trAlum' . $alum->CodigoGruposParticipantes . '">';
+                    $listaAlum.=' <td style="font-size: large;cursor:pointer" class="nombre_Usuario" >' . $alum->Nombre . '</td> ';
+                    $listaAlum.=' <td style="font-size: large;cursor:pointer" class="nombre_Usuario" >' . $alum->NombreDiplomado . '</td> ';
+                    $listaAlum.=' <td style="font-size: large;cursor:pointer" class="nombre_Usuario" >' . $alum->NombreModulo . '</td> </tr>';
+               
+                    }
 
-//                $responseDef = json_encode($Response);
+                $listaAlum.='</tbody></table>';
             }
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }
-        echo $cadena;
+        echo $listaAlum;
     }
 
 }

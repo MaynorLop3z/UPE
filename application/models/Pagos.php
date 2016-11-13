@@ -209,40 +209,45 @@ class Pagos extends CI_Model {
         }
     }
 
-    public function listarUsuariosPagosPorLike($nombreAlum, $carnetAlum, $duiAlum) {
+    public function listarUsuariosPagosPorLike($nombreAlum, $carnetAlum, $duiAlum, $anio) {
         try {
-            $query = 'SELECT par."Nombre" , gp."CodigoGruposParticipantes"  
-            FROM public."GruposParticipantes" gp join 
-            public."Participantes" par on gp."CodigoParticipante" = par."CodigoParticipante"  
-            join public."GrupoPeriodos" gper on 
-            gper."CodigoGrupoPeriodo"=gp."CodigoGrupoPeriodo" ';
-            
-           if($nombreAlum!=null){
-               $query.='WHERE  par."Nombre" LIKE \'%' . $nombreAlum . '%\'';
-           }
-               
-            
-            if ($duiAlum != null) {
+            $query = 'SELECT par."Nombre" , gp."CodigoGruposParticipantes",p."FechaInicioPeriodo" 
+                    ,mod."NombreModulo" ,dip."NombreDiplomado"
+                     FROM public."GruposParticipantes" gp join 
+                     public."Participantes" par on gp."CodigoParticipante" = par."CodigoParticipante"  
+                     join public."GrupoPeriodos" gper on 
+                     gper."CodigoGrupoPeriodo"=gp."CodigoGrupoPeriodo" 
+                     join "Periodos" p on p."CodigoPeriodo"=gper."CodigoPeriodo"
+                     join "Modulos" mod on mod."CodigoModulo"=p."CodigoModulo"
+                     join "Diplomados" dip on dip."CodigoDiplomado"=mod."CodigoDiplomado"';
 
+            if ($nombreAlum != null) {
+                $query.='WHERE  par."Nombre" ILIKE \'%' . $nombreAlum . '%\'';
+            }
+            if ($duiAlum != null) {
                 if (strpos($query, 'WHERE') !== TRUE) {
                     $query.=' AND ';
-                   
-                }else{
-                     $query.=' WHERE '; 
+                } else {
+                    $query.=' WHERE ';
                 }
                 $query.=' par."NumeroDUI" LIKE  \'%' . $duiAlum . '%\'';
             }
             if ($carnetAlum != null) {
                 if (strpos($query, 'WHERE') !== TRUE) {
                     $query.=' AND ';
-                   
-                }else{
-                     $query.=' WHERE '; 
+                } else {
+                    $query.=' WHERE ';
                 }
-                
-                $query.='  par."CarnetAlumno" LIKE  \'%' . $carnetAlum . '%\'';
+                $query.='  par."CarnetAlumno" ILIKE  \'%' . $carnetAlum . '%\'';
             }
-
+            if($anio!=null && $anio!=0){
+                 if (strpos($query, 'WHERE') !== TRUE) {
+                    $query.=' AND ';
+                } else {
+                    $query.=' WHERE ';
+                }
+                $query.='  EXTRACT(YEAR FROM p."FechaInicioPeriodo") = '.$anio.'';
+            }
             $consulta = $this->db->query($query);
             if ($consulta != null) {
                 $resultado = $consulta->result();
@@ -250,6 +255,14 @@ class Pagos extends CI_Model {
                 
             }
             return $resultado;
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+
+    public function listarPagosPorParticipacion($codGrupoParticipante) {
+        try {
+            
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }
