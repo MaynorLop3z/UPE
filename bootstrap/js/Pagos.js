@@ -42,3 +42,17 @@ $("#txtDuiAlum").on("keypress", function (e) {
         searchParticipante(e);
     }
 });
+function detallarPago(codGpart){
+   var posting = $.post('PagosController/buscarPagoDet/',  {codUser: codGpart});
+    posting.done(function (data) {
+        if (data !== null) {
+            $('#containerDetPag').empty();
+            $('#containerDetPag').html(data);
+
+        }
+    });
+    posting.fail(function (data) {
+        
+        alert(data);
+    });  
+}
