@@ -45,22 +45,24 @@
         </div>
         <br>
         <div id="containerTablePagingPag">
+                <table id="tableParticipantesPag" class="table table-bordered table-striped table-hover table-responsive">
+                    <thead>
+                        <tr>
+                            <th style="text-align:center;font-size: large">Nombre</th>
+                            <th style="text-align:center;font-size: large">Diplomado</th>
+                            <th style="text-align:center;font-size: large">Modulo</th>
+                            <th style="text-align:center;font-size: large">Estado</th>
+                        </tr>
+                    </thead> 
+                    <tbody>
 
-            <table id="tableParticipantesPag" class="table table-bordered table-striped table-hover table-responsive">
-                <thead>
-                    <tr>
-                        <th style="text-align:center;font-size: large">Nombre</th>
-                        <th style="text-align:center;font-size: large">Diplomado</th>
-                        <th style="text-align:center;font-size: large">Modulo</th>
-
-                    </tr>
-                </thead> 
-                <tbody>
-
-                </tbody>
-            </table>
-
+                    </tbody>
+                </table>
+            
             <!--<div class="panel-footer">Panel footer</div>-->
         </div><!--Fin container table paging-->
+        <div id="containerDetPag">
+            
+        </div>
     </div>
 </div>

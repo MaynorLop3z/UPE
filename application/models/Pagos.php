@@ -212,14 +212,15 @@ class Pagos extends CI_Model {
     public function listarUsuariosPagosPorLike($nombreAlum, $carnetAlum, $duiAlum, $anio) {
         try {
             $query = 'SELECT par."Nombre" , gp."CodigoGruposParticipantes",p."FechaInicioPeriodo" 
-                    ,mod."NombreModulo" ,dip."NombreDiplomado"
+                    ,mod."NombreModulo" ,dip."NombreDiplomado",pag."NumeroRecibo"
                      FROM public."GruposParticipantes" gp join 
                      public."Participantes" par on gp."CodigoParticipante" = par."CodigoParticipante"  
                      join public."GrupoPeriodos" gper on 
                      gper."CodigoGrupoPeriodo"=gp."CodigoGrupoPeriodo" 
                      join "Periodos" p on p."CodigoPeriodo"=gper."CodigoPeriodo"
                      join "Modulos" mod on mod."CodigoModulo"=p."CodigoModulo"
-                     join "Diplomados" dip on dip."CodigoDiplomado"=mod."CodigoDiplomado"';
+                     join "Diplomados" dip on dip."CodigoDiplomado"=mod."CodigoDiplomado"
+                     left join "PagosParticipantes" pag on pag."CodigoGruposParticipantes"=gp."CodigoGruposParticipantes"';
 
             if ($nombreAlum != null) {
                 $query.='WHERE  par."Nombre" ILIKE \'%' . $nombreAlum . '%\'';
@@ -260,7 +261,7 @@ class Pagos extends CI_Model {
         }
     }
 
-    public function listarPagosPorParticipacion($codGrupoParticipante) {
+    public function detallarPagoPorParticipacion($codGrupoParticipante) {
         try {
             
         } catch (Exception $exc) {

@@ -345,16 +345,17 @@ class PagosController extends CI_Controller {
             return $user;
         }
     }
+
 //para pagos
     public function buscarAlum() {
         try {
             if ($this->input->post()) {
 
-                $nombre  = $this->input->post('NombreParticipan');
-                $carnet  = $this->input->post('CarnetParticipan');
-                $dui     = $this->input->post('DuiParticipan');
-                $anio     = $this->input->post('AnioParticipan');
-                $listaAlum  = '';
+                $nombre = $this->input->post('NombreParticipan');
+                $carnet = $this->input->post('CarnetParticipan');
+                $dui = $this->input->post('DuiParticipan');
+                $anio = $this->input->post('AnioParticipan');
+                $listaAlum = '';
                 $Alumnos = $this->Pagos->listarUsuariosPagosPorLike($nombre, $carnet, $dui, $anio);
 
                 $listaAlum.='<table id=' . '"tableParticipantesPag"' . 'class="table table-bordered table-striped table-hover table-responsive"' . '>';
@@ -362,16 +363,21 @@ class PagosController extends CI_Controller {
                           <th style="text-align:center;font-size: large">Nombre</th>
                           <th style="text-align:center;font-size: large">Diplomado</th>
                           <th style="text-align:center;font-size: large">Modulo</th>
+                          <th style="text-align:center;font-size: large">Estado</th>
                           </tr>
                           </thead> 
                           <tbody>';
                 foreach ($Alumnos as $alum) {
-                    $listaAlum.='<tr data-userpd=' . ($alum->CodigoGruposParticipantes) . ' id="trAlum' . $alum->CodigoGruposParticipantes . '">';
+                    $listaAlum.='<tr onclick="detallarPago('.$alum->CodigoGruposParticipantes.')" data-userpd=' . ($alum->CodigoGruposParticipantes) . ' id="trAlum' . $alum->CodigoGruposParticipantes . '">';
                     $listaAlum.=' <td style="font-size: large;cursor:pointer" class="nombre_Usuario" >' . $alum->Nombre . '</td> ';
                     $listaAlum.=' <td style="font-size: large;cursor:pointer" class="nombre_Usuario" >' . $alum->NombreDiplomado . '</td> ';
-                    $listaAlum.=' <td style="font-size: large;cursor:pointer" class="nombre_Usuario" >' . $alum->NombreModulo . '</td> </tr>';
-               
+                    $listaAlum.=' <td style="font-size: large;cursor:pointer" class="nombre_Usuario" >' . $alum->NombreModulo . '</td>';
+                    if ($alum->NumeroRecibo != null) {
+                     $listaAlum.=' <td style="font-size: large;cursor:pointer" class="nombre_Usuario" >CANCELADO</td> </tr>';   
+                    }else{
+                     $listaAlum.=' <td style="font-size: large;cursor:pointer" class="nombre_Usuario" >PENDIENTE</td> </tr>';   
                     }
+                }
 
                 $listaAlum.='</tbody></table>';
             }
@@ -379,6 +385,20 @@ class PagosController extends CI_Controller {
             echo $exc->getTraceAsString();
         }
         echo $listaAlum;
+    }
+    
+    public function buscarPagoDet() {
+        try {
+           if($this->input->post()) {
+             $codGpart = $this->input->post('codUser');  
+             $data['codAlm']=$codGpart;
+               $response=$this->load->view('Pagos/PagosModal','',TRUE);
+               echo $response;
+           }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+            
     }
 
 }
