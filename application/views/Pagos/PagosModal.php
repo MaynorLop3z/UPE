@@ -44,7 +44,7 @@
                     <button type="button" id="btnRegistrPago" onclick="ejecutarPago()" class=" btn btn-default" name="btnRegistrPago">Registrar</button>                 
                 </div>
                 <div class="col-lg-2">
-                    <button type="reset" id="btnCerrarDePag" onclick="" class=" btn btn-default" name="Limpiar">Cerrar</button>
+                    <button type="reset" id="btnCerrarDePag" onclick="cerrarDivPagosDet()" class=" btn btn-default" name="Limpiar">Cerrar</button>
                 </div>
                 <!--<button type="button" id="btnCerrar" data-dismiss="modal" class=" btn btn-default" name="Cerrar">Cerrar</button>-->
             </div>

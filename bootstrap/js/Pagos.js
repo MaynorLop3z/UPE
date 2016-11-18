@@ -57,18 +57,22 @@ function detallarPago(codGpart) {
     });
 }
 
-    function ejecutarPago() {
+function ejecutarPago() {
 
-        var posting = $.post($("#frmPago").attr("action"), $("#frmPago").serializeArray());
-        posting.done(function (data) {
-            if (data !== null) {
-                $('#containerDetPag').empty();
-                $('#containerDetPag').html(data);
-            }
-        });
-        posting.fail(function (data) {
-            var obj = jQuery.parseJSON(data);
-            alert(obj.Error);
-        });
+    var posting = $.post($("#frmPago").attr("action"), $("#frmPago").serializeArray());
+    posting.done(function (data) {
+        if (data !== null) {
+            $('#containerDetPag').empty();
+            $('#containerDetPag').html(data);
+        }
+    });
+    posting.fail(function (data) {
+        var obj = jQuery.parseJSON(data);
+        alert(obj.Error);
+    });
 
-    }
+}
+
+function cerrarDivPagosDet() {
+    $('#containerDetPag').empty();
+}
