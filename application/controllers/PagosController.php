@@ -368,14 +368,14 @@ class PagosController extends CI_Controller {
                           </thead> 
                           <tbody>';
                 foreach ($Alumnos as $alum) {
-                    $listaAlum.='<tr onclick="detallarPago('.$alum->CodigoGruposParticipantes.')" data-userpd=' . ($alum->CodigoGruposParticipantes) . ' id="trAlum' . $alum->CodigoGruposParticipantes . '">';
+                    $listaAlum.='<tr onclick="detallarPago(' . $alum->CodigoGruposParticipantes . ')" data-userpd=' . ($alum->CodigoGruposParticipantes) . ' id="trAlum' . $alum->CodigoGruposParticipantes . '">';
                     $listaAlum.=' <td style="font-size: large;cursor:pointer" class="nombre_Usuario" >' . $alum->Nombre . '</td> ';
                     $listaAlum.=' <td style="font-size: large;cursor:pointer" class="nombre_Usuario" >' . $alum->NombreDiplomado . '</td> ';
                     $listaAlum.=' <td style="font-size: large;cursor:pointer" class="nombre_Usuario" >' . $alum->NombreModulo . '</td>';
                     if ($alum->NumeroRecibo != null) {
-                     $listaAlum.=' <td style="font-size: large;cursor:pointer" class="nombre_Usuario" >CANCELADO</td> </tr>';   
-                    }else{
-                     $listaAlum.=' <td style="font-size: large;cursor:pointer" class="nombre_Usuario" >PENDIENTE</td> </tr>';   
+                        $listaAlum.=' <td style="font-size: large;cursor:pointer" class="nombre_Usuario" >CANCELADO</td> </tr>';
+                    } else {
+                        $listaAlum.=' <td style="font-size: large;cursor:pointer" class="nombre_Usuario" >PENDIENTE</td> </tr>';
                     }
                 }
 
@@ -386,19 +386,30 @@ class PagosController extends CI_Controller {
         }
         echo $listaAlum;
     }
-    
+
     public function buscarPagoDet() {
         try {
-           if($this->input->post()) {
-             $codGpart = $this->input->post('codUser');  
-             $data['codAlm']=$codGpart;
-               $response=$this->load->view('Pagos/PagosModal','',TRUE);
-               echo $response;
-           }
+            if ($this->input->post()) {
+                $codGpart = $this->input->post('codUser');
+
+                $Resultado = $this->Pagos->buscarPagoDet($codGpart);
+                foreach ($Resultado as $resul) {
+
+                    $data['FechaIniP'] = $resul->FechaInicioPeriodo;
+                    $data['FechaFinP'] = $resul->FechaFinPeriodo;
+                    $data['MontoPago'] = $resul->MontoPago;
+                    $data['NumeroRecibo'] = $resul->NumeroRecibo;
+                    $data['Aula'] = $resul->Aula;
+                    $data['HoraEntrada'] = $resul->HoraEntrada;
+                    $data['HoraSalida'] = $resul->HoraSalida;
+                }
+               
+                $response = $this->load->view('Pagos/PagosModal', $data, TRUE);
+                echo $response;
+            }
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }
-            
     }
 
 }

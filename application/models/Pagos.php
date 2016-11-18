@@ -241,13 +241,13 @@ class Pagos extends CI_Model {
                 }
                 $query.='  par."CarnetAlumno" ILIKE  \'%' . $carnetAlum . '%\'';
             }
-            if($anio!=null && $anio!=0){
-                 if (strpos($query, 'WHERE') !== TRUE) {
+            if ($anio != null && $anio != 0) {
+                if (strpos($query, 'WHERE') !== TRUE) {
                     $query.=' AND ';
                 } else {
                     $query.=' WHERE ';
                 }
-                $query.='  EXTRACT(YEAR FROM p."FechaInicioPeriodo") = '.$anio.'';
+                $query.='  EXTRACT(YEAR FROM p."FechaInicioPeriodo") = ' . $anio . '';
             }
             $consulta = $this->db->query($query);
             if ($consulta != null) {
@@ -261,9 +261,20 @@ class Pagos extends CI_Model {
         }
     }
 
-    public function detallarPagoPorParticipacion($codGrupoParticipante) {
+    public function buscarPagoDet($codGrupoParticipante) {
         try {
-            
+            $query = 'SELECT per."FechaInicioPeriodo",per."FechaFinPeriodo",TO_CHAR(gper."HoraEntrada", \' hh12:mi AM\') as "HoraEntrada" ,TO_CHAR(gper."HoraSalida", \' hh12:mi AM\') as "HoraSalida",UPPER(gper."Aula") as "Aula",pagpar."MontoPago",pagpar."NumeroRecibo" 
+            FROM "public"."Periodos" AS per
+            INNER JOIN "public"."GrupoPeriodos" AS gper ON gper."CodigoPeriodo" = per."CodigoPeriodo"
+            INNER JOIN "public"."GruposParticipantes" AS gpar ON gpar."CodigoGrupoPeriodo" = gper."CodigoGrupoPeriodo"
+            LEFT JOIN "public"."PagosParticipantes" AS pagpar ON pagpar."CodigoGruposParticipantes" = gpar."CodigoGruposParticipantes"
+            WHERE gpar."CodigoGruposParticipantes"=' . $codGrupoParticipante;
+
+            $consulta = $this->db->query($query);
+            if ($consulta != null) {
+                $resultado = $consulta->result();
+            }
+            return $resultado;
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }

@@ -13,6 +13,7 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Bootstrap -->          
         <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../bootstrap/css/main.css" rel="stylesheet"><!--personalizado-->
         <link rel="icon" href="../bootstrap/images/minerva.jpg" type="image/x-icon" />
         <script src="../bootstrap/js/jquery.min.js"></script>
         <script src="../bootstrap/js/bootstrap.min.js"></script>
