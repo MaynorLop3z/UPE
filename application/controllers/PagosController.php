@@ -387,25 +387,54 @@ class PagosController extends CI_Controller {
         echo $listaAlum;
     }
 
-    public function buscarPagoDet() {
+    public function buscarPagoDet($codUser = null) {
+        try {
+            if ($codUser == null) {
+                $codGpart = $this->input->post('codUser');
+            } else {
+                $codGpart = $codUser;
+            }
+            $Resultado = $this->Pagos->buscarPagoDet($codGpart);
+            foreach ($Resultado as $resul) {
+
+                $data['FechaIniP'] = $resul->FechaInicioPeriodo;
+                $data['FechaFinP'] = $resul->FechaFinPeriodo;
+                $data['MontoPago'] = $resul->MontoPago;
+                $data['NumeroRecibo'] = $resul->NumeroRecibo;
+                $data['Aula'] = $resul->Aula;
+                $data['HoraEntrada'] = $resul->HoraEntrada;
+                $data['HoraSalida'] = $resul->HoraSalida;
+                $data['CodGrupPar'] = $resul->CodigoGruposParticipantes;
+            }
+
+            $response = $this->load->view('Pagos/PagosModal', $data, TRUE);
+
+            if ($codUser == null) {
+                echo $response;
+            } else {
+                return $response;
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+
+    public function registrarPago() {
         try {
             if ($this->input->post()) {
-                $codGpart = $this->input->post('codUser');
+                $noRecibo = $this->input->post('NoRecibo');
+                $montoPago = $this->input->post('MontoPago');
+                $codGrupPar = $this->input->post('CodGrupPar');
+                $ip = $this->session->userdata('ipUserLogin');
+                $userReg = $this->session->userdata('codigoUserLogin');
+                //La fecha de modificaciòn del registro se coloca en el modelo para evitar enviar mas parametros.
 
-                $Resultado = $this->Pagos->buscarPagoDet($codGpart);
-                foreach ($Resultado as $resul) {
+                $pago = $this->Pagos->registrarPago($codGrupPar, $montoPago, $noRecibo, $userReg, $ip);
 
-                    $data['FechaIniP'] = $resul->FechaInicioPeriodo;
-                    $data['FechaFinP'] = $resul->FechaFinPeriodo;
-                    $data['MontoPago'] = $resul->MontoPago;
-                    $data['NumeroRecibo'] = $resul->NumeroRecibo;
-                    $data['Aula'] = $resul->Aula;
-                    $data['HoraEntrada'] = $resul->HoraEntrada;
-                    $data['HoraSalida'] = $resul->HoraSalida;
+                if ($pago != null) {
+                    $response = $this->buscarPagoDet($codGrupPar);
+                    echo $response;
                 }
-               
-                $response = $this->load->view('Pagos/PagosModal', $data, TRUE);
-                echo $response;
             }
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();

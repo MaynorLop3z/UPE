@@ -42,8 +42,8 @@ $("#txtDuiAlum").on("keypress", function (e) {
         searchParticipante(e);
     }
 });
-function detallarPago(codGpart){
-   var posting = $.post('PagosController/buscarPagoDet/',  {codUser: codGpart});
+function detallarPago(codGpart) {
+    var posting = $.post('PagosController/buscarPagoDet/', {codUser: codGpart});
     posting.done(function (data) {
         if (data !== null) {
             $('#containerDetPag').empty();
@@ -52,7 +52,23 @@ function detallarPago(codGpart){
         }
     });
     posting.fail(function (data) {
-        
+
         alert(data);
-    });  
+    });
 }
+
+    function ejecutarPago() {
+
+        var posting = $.post($("#frmPago").attr("action"), $("#frmPago").serializeArray());
+        posting.done(function (data) {
+            if (data !== null) {
+                $('#containerDetPag').empty();
+                $('#containerDetPag').html(data);
+            }
+        });
+        posting.fail(function (data) {
+            var obj = jQuery.parseJSON(data);
+            alert(obj.Error);
+        });
+
+    }

@@ -263,7 +263,7 @@ class Pagos extends CI_Model {
 
     public function buscarPagoDet($codGrupoParticipante) {
         try {
-            $query = 'SELECT per."FechaInicioPeriodo",per."FechaFinPeriodo",TO_CHAR(gper."HoraEntrada", \' hh12:mi AM\') as "HoraEntrada" ,TO_CHAR(gper."HoraSalida", \' hh12:mi AM\') as "HoraSalida",UPPER(gper."Aula") as "Aula",pagpar."MontoPago",pagpar."NumeroRecibo" 
+            $query = 'SELECT gpar."CodigoGruposParticipantes", TO_CHAR(per."FechaInicioPeriodo",\'dd/mm/YYYY\') "FechaInicioPeriodo",TO_CHAR(per."FechaFinPeriodo",\'dd/mm/YYYY\') "FechaFinPeriodo",TO_CHAR(gper."HoraEntrada", \' hh12:mi AM\') as "HoraEntrada" ,TO_CHAR(gper."HoraSalida", \' hh12:mi AM\') as "HoraSalida",UPPER(gper."Aula") as "Aula",pagpar."MontoPago",pagpar."NumeroRecibo" 
             FROM "public"."Periodos" AS per
             INNER JOIN "public"."GrupoPeriodos" AS gper ON gper."CodigoPeriodo" = per."CodigoPeriodo"
             INNER JOIN "public"."GruposParticipantes" AS gpar ON gpar."CodigoGrupoPeriodo" = gper."CodigoGrupoPeriodo"
@@ -278,6 +278,25 @@ class Pagos extends CI_Model {
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }
+    }
+
+    public function registrarPago($codGrupoParticipante, $monto, $recibo, $userRegistra, $ipModifica) {
+        try {
+            $data = array(
+                'NumeroRecibo' => $recibo,
+                'CodigoGruposParticipantes' => $codGrupoParticipante,
+                'MontoPago' => $monto,
+                'FechaPago' => date("Y-m-d H:i:s"),
+                'UsuarioRegistra' => $userRegistra,
+                'IpModifica' => $ipModifica
+            );
+            $this->db->insert('PagosParticipantes', $data);
+            $insert_id = $this->db->insert_id();
+            $data['codPagoPart'] = $insert_id;
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+        return $data;
     }
 
 }

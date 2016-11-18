@@ -108,13 +108,13 @@ $("#frmGuardarUSer").submit(function (event) {
 
 $("#frmEditarUser").submit(function (event) {
     event.preventDefault();
-    var $form = $(this), UsuarioNombre = $form.find("input[name='UsuarioNombre']").val(),
+    var form = $(this), UsuarioNombre = form.find("input[name='UsuarioNombre']").val(),
             CodigoUsuario = codigoUsuario,
-            UsuarioPassword = $form.find("input[name='UsuarioPassword']").val(),
-            UsuarioEmail = $form.find("input[name='UsuarioEmail']").val(),
-            UsuarioNombreReal = $form.find("input[name='UsuarioNombreReal']").val(),
-            Comentarios = $form.find("textarea[name='Comentarios']").val(),
-            url = $form.attr("action");
+            UsuarioPassword = form.find("input[name='UsuarioPassword']").val(),
+            UsuarioEmail = form.find("input[name='UsuarioEmail']").val(),
+            UsuarioNombreReal = form.find("input[name='UsuarioNombreReal']").val(),
+            Comentarios = form.find("textarea[name='Comentarios']").val(),
+            url = form.attr("action");
     var posting = $.post(url, {CodigoUsuario: CodigoUsuario, UsuarioNombre: UsuarioNombre,
         UsuarioPassword: UsuarioPassword,
         UsuarioEmail: UsuarioEmail,
