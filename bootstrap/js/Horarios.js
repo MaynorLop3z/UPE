@@ -1,3 +1,4 @@
+var turno="NULL"
 $(document).ready(function(){
     $nomTurno=$('#TurnosList').find(":selected").text();
     $listTitle = $('#gruposListTurno').html();
@@ -6,7 +7,8 @@ $(document).ready(function(){
 
 $('#TurnosList').change(function(){
     $('#gruposListTurno').html("Grupos, Turno " + $(this).find(":selected").text());
-    var turno = $(this).find(":selected").val();
+    var tur = $(this).find(":selected").val();
+    turno=tur;
     var posting = $.post("HorariosController/buscarxTurno/",{"Turno":turno});
     posting.done(function(data){
        if (data !== null) {
@@ -127,5 +129,58 @@ function eliminarHorario(id){
        if (data !== null) {
            $('#CuerpoTablaHorario').remove('#horario'+id)
        }
+    });
+}
+
+
+////////////PAGINACION /////////////
+    
+$("#bodytablaGruposTurno").on("click", "#aFirstPagHorarios", function (e) {
+    paginarHorarios("data_ini", $(this).data("datainic"));
+});
+
+$("#bodytablaGruposTurno").on("click", "#aLastPagHorarioas", function (e) {
+    paginarHorarios("data_ini", $(this).data("datainic"));
+});
+
+$("#bodytablaGruposTurno").on("click", "#aPrevPagHorarios", function (e) {
+    paginarHorarios("data_inip", null);
+});
+
+$("#bodytablaGruposTurno").on("click", "#aNextPagHorarios", function (e) {
+//    alert("hey");
+    paginarHorarios("data_inin", null);
+});
+
+$("#bodytablaGruposTurno").on("keypress", "#txtPagingSearchHorarios", function (e) {
+    e.stopImmediatePropagation();
+    if (e.which === 13 && ($(this).val()>0)) {
+         paginarAulas("data_ini", $(this).val());
+    }
+});
+
+
+function paginarHorarios(dat, op){
+    var data_in = $('#txtPagingSearchHorarios').data("datainic");     
+    var url = 'HorariosController/paginHorarios/';
+    var opcion="";
+
+    if(dat==="data_inin"){
+         opcion={"data_inin":data_in, "Turno":turno};
+    }else if(dat==="data_inip"){
+        opcion={"data_inip":data_in, "Turno":turno};
+    }else if(dat==="data_ini"){
+        data_in= op;
+        opcion={"data_ini":data_in, "Turno":turno};
+    }
+    var posting = $.post(url, opcion);
+    posting.done(function (data) {
+        if (data !== null) {
+            $('#bodytablaGruposTurno').empty();
+            $('#bodytablaGruposTurno').html(data);
+        }
+    });
+    posting.fail(function (data) {
+        alert("Error");
     });
 }

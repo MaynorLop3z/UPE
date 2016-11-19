@@ -48,7 +48,11 @@ class ComentariosController extends CI_Controller {
             //Inserta comentario a la base
         try{
             $this->Comentarios->CrearComentarios($idpub, $fecha, $cor, $com, $nom, $estado, $ip, $usr, $nivel, $time);
-            echo 'Comente';
+            if($this->session->userdata("nivel")==='Participante'){
+            echo "Comentario enviado exitosamente \n Esperando Aprobación";
+            }else{
+                echo 'Comentario enviado exitosamente';
+            }
         }catch(Exception $e){
             echo $e;
         }
@@ -76,6 +80,7 @@ class ComentariosController extends CI_Controller {
                         "f3"=>'<li class="elimCom"><a  onclick="MaestroAdminCom(2)">Eliminar comentario</a></li>',
                         "f4"=>'<li class="bloqUsu"><a onclick="MaestroAdminCom(3)">Bloquear comentarios para este alumno</a></li>',
                         "f5"=>'</ul>'));
+                    ///funcion de Bloquear no implementada, habria que cambiar estructura de la base
                 }
                 array_push($data['CComentarios'],$contadores, $data['MComentarios']);
                 echo json_encode($data);
@@ -121,12 +126,14 @@ class ComentariosController extends CI_Controller {
             $data['MComentarios']=array();
             $Comentarios= array();
 
-            $this->AvRevPaginas();
+//            $this->AvRevPaginas();
+            $this->publicacion=$this->input->post('pub');
+            $ini=$this->input->post('data_inin');
             if ($Coms != null) {
 
                 array_push($Comentarios, $Coms);
             } else {
-                $Comentarios= $this->Comentarios->listarComentariosLimited($this->publicacion, $this->inicio, $this->final, $this->usuario);
+                $Comentarios= $this->Comentarios->listarComentariosLimited($this->publicacion, 2, $ini, $this->usuario);
             }
 
 //            $buttonsByUserRights = $this->analizarPermisosBotonesTablas("gestionUserBtn", $this->session->userdata('permisosUsuer'));
@@ -142,7 +149,7 @@ class ComentariosController extends CI_Controller {
                         "f3"=>'<li class="elimCom"><a  onclick="MaestroAdminCom(2)">Eliminar comentario</a></li>',
                         "f4"=>'<li class="bloqUsu"><a onclick="MaestroAdminCom(3)">Bloquear comentarios para este alumno</a></li>',
                         "f5"=>'</ul>'));
-                    
+                    //funcion de Bloquear no implementada, habria que cambiar estructura de la base
                 }
                 array_push($data['CComentarios'],$contadores, $data['MComentarios']);
                

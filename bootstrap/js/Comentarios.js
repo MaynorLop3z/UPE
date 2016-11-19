@@ -1,5 +1,6 @@
 var idUser;
 var comment;
+var pager=0;
 
 function prepararComentarios(){
     var claseListaCom='.comment-toggler .Archivo, .comment-toggler .Publicado, .comment-toggler .Descripcion';
@@ -40,6 +41,62 @@ function cargarComentarios(pid){
 //                            alert(json_obj.CComentarios[0].totalcom+" "+json_obj.CComentarios[0].top);
                         $('#comment-'+id).html(str);
                         if(p!==''){adminC(id)};
+                        pager=2;
+                        //cargar acciones de comentarios
+                        $(".inputComment").keypress(function(e) {
+                            
+                            if(e.which === 13) {
+
+                                if ($(this).val() !== "") {
+                                    var id=$(this).parent().parent().attr('id').substring(11);
+//                                    
+//                                    $('#comment-'+id+' tr:first').append('<tr><td style="color:#FFFFFF;background-color:#428bca;" class="tree list-group-item">'+$(this).val()+'</td></tr>');
+                                    var envio = $.post("ComentariosController/comentar/", {Comentario: $(this).val(),IdC: id});
+                                    
+                                    envio.done(function (data) {
+                                       $('#comment-'+id).html('');
+                                       $('#'+pid).css('background','#8BCCED');
+                                            $('#comment-'+id).html('<center><img src="../bootstrap/images/loading.gif" width=100 ></center>');
+                                            var load=$.post("ComentariosController/obtenerComentarios/",{publicacion:id});
+                                            $('.comment').css('background','#ddd');
+                                            load.done(function (data){
+                                                str = "No hay comentarios";
+                                                var p='';
+
+                                                if(data!==null){
+                        //                            alert(data);
+                                                    var json_obj = $.parseJSON(data);
+                                                    $('#comment-'+id).html('');
+                                                    var str='';
+
+                                                    if(json_obj.MComentarios[0]!==undefined){
+                                                        p=json_obj.MComentarios[0];
+                                                    }
+                                                    $.each( json_obj.PComentarios, function( key, val ) {
+                                                        str=str+comentarios(val,p);
+                                                    });
+                            //                        alert("comentarios = "+json_obj.CComentarios[0].totalcom+" Paginas="+json_obj.CComentarios[0].totalpag)
+                                                    str+=cargarPaginador(id,json_obj.CComentarios[0].totalcom, 
+                                                        json_obj.CComentarios[0].totalpag, 
+                                                        json_obj.CComentarios[0].totact, json_obj.CComentarios[0].top);
+                                                }
+                                                $('#comment-'+id).html(str);
+                                                if(p!==''){adminC(id)};
+                                       $('.inputComment').val('');
+                                       pager=2;
+                                        });
+                                       alert(data);
+                                    });
+                                    
+                                    //cargarComentarios(pid);
+                                    envio.fail(function (xhr, textStatus, errorThrown) {
+                                        alert("error" + xhr.responseText);
+                                    });
+                                }else{
+                                    $(this).blur();
+                                }
+                            }
+                        });
                         
                     });
                     load.fail(function(xhr, textStatus, errorThrown){
@@ -59,24 +116,7 @@ $(document).ready(function () {
     //CARGAR LOS COMENTARIOS
     prepararComentarios();
     //ENVIAR COMENTARIO
-    $(".inputComment").keypress(function(e) {
-        if(e.which === 13) {
-            if ($(this).val() !== "") {
-                var id=$(this).parent().parent().attr('id').substring(11);
-                $('#comment-'+id).last().after('<ul><li style="color:#FFFFFF;background-color:#428bca;" class="tree list-group-item node-treeview5 node-selected">'+$(this).val()+'</li></ul>');
-                var envio = $.post("ComentariosController/comentar/", {Comentario: $(this).val(),IdC: id});
-                envio.done(function (data) {           
-                   $(this).val('');
-                   alert(data);
-                });
-                envio.fail(function (xhr, textStatus, errorThrown) {
-                    alert("error" + xhr.responseText);
-                });
-            }else{
-                $(this).blur();
-            }
-        }
-    });
+    
     
 });
 
@@ -140,7 +180,7 @@ function cargarMas(pid){
 //    var id=pid.substring(3);
 //alert(pid)
     var data_in = $("#txtPagingSearchCommentsPub"+pid).data("datainic");
-    var posting = $.post("ComentariosController/paginComentarios", {"data_inin":data_in,"pub":pid});
+    var posting = $.post("ComentariosController/paginComentarios", {"data_inin":pager,"pub":pid});
         posting.done(function (data) {
             if (data !== null) {
 //                $('#tablaModulosContent').empty();
@@ -175,6 +215,7 @@ function cargarMas(pid){
                         
                         if(p!==''){adminC(pid)};
             }
+            pager=pager+2;
         });
         posting.fail(function (data) {
             alert("Error");

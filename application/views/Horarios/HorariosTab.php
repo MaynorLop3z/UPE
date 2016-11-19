@@ -62,8 +62,23 @@
                                 </td></tr>';
                     }
                     ?>
+                    <?php if($Grupos>ROWS_PER_PAGE){?>
+                    <tr><td colspan="7">
+                            <ul class="pager" id="footpagerHorarios">
+                            <li><button data-datainic="1" id="aFirstPagHorarios" >&lt;&lt;</button></li>
+                            <li><button id="aPrevPagHorarios" >&lt;</button></li>
+                            <li><input data-datainic="1" type="text" value="1" data-mask="000000000" class="onlyNumbers" id="txtPagingSearchHorarios" name="txtNumberPag" size="5">/<?= $totalPaginasHorarios?>'</li>
+                            <li><button id="aNextPagHorarios">&gt;</button></li>
+                            <li><button id="aLastPagHorarios" data-datainic="<?=$totalPaginasHorarios?>" >&gt;&gt;</button></li>
+                            <li>[1 - <?= (count($Grupos)) ?> / <?= $total?>]</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <?php }
+                    ?>
                 </tbody>
             </table>
+            
         </div>
      </div>
 </div>

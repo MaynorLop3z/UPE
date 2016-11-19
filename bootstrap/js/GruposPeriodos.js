@@ -1,5 +1,6 @@
 var codigoPeriodo;
 var codigoGrupoPeriodo;
+var FI, FF;
 $("#frmADDPeriodo").submit(function (event) {
     event.preventDefault();
     var $form = $(this), idModulo = $form.find("select[name='CodigoModulo']").val(), FechaInicio = $form.find("input[name='FechaInicioPeriodo']").val(), FechaFin = $form.find("input[name='FechaFinPeriodo']").val(), ComentariosPeriodo = $form.find("textarea[name=ComentariosPeriodo]").val(), url = $form.attr("action"), estadoPeriodo = true;
@@ -137,7 +138,12 @@ function EditPeriodoShow(fila) {
 }
 
 function GestionPeriodoShow(fila) {
+    
     codigoPeriodo = fila.id;
+    var perio = $('#Periodo' + codigoPeriodo.substring(10));
+    FI = perio.find('.fip').html().toString().trim();
+    FF=perio.find('.ffp').html().toString().trim();
+
     var idPeriodo = codigoPeriodo.substring(10);
     $('#bodytablaPeriodosGruposO').html('');
 //    var posting = $.post("PeriodosController/listarGrupos/", {idPeriodo: idPeriodo});
@@ -383,6 +389,7 @@ $('#btnEnviarGrupoHADD').click(function(e){
 });
 $('#formAgregarHorarioGrupo').submit(function(e){
     e.preventDefault();
+//        alert(FI+" - "+FF);
     var add=false;
     var inicio=horaFormateada($("#HorarioInicioHoraGrupo").val(),$('#HoraInicioAmPmGrupo').val(), $('#HorarioInicioMinutosGrupo').val());
     var fin=horaFormateada($("#HorarioFinHoraGrupo").val(),$('#HoraFinAmPmGrupo').val(), $('#HorarioFinMinutosGrupo').val());
@@ -400,7 +407,7 @@ $('#formAgregarHorarioGrupo').submit(function(e){
     var HfinComp=tiempo.getHours() + ':' +tiempo.getMinutes() + ':' + tiempo.getSeconds();
     
     if((new Date("2016-01-01 "+fin))>(new Date("2016-01-01 "+inicio))){
-        var posting=$.post("HorariosController/comprobarHorario/",{"H1":HinicioComp, "H2":HfinComp, "Aula":aula, "Turno":turno, "Dia":dia, "Grupo":grupo });
+        var posting=$.post("HorariosController/comprobarHorario/",{"H1":HinicioComp, "H2":HfinComp, "Aula":aula, "Turno":turno, "Dia":dia, "Grupo":grupo, "FI":FI, "FF":FF });
         posting.done(function(data){
            if (data !== "") {
                var choque = $.parseJSON(data);

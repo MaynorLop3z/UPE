@@ -32,7 +32,7 @@ class Horarios extends CI_Model {
         }
     }
     
-    public function listarHorariosGruposxTurno($turno=null){
+    public function listarHorariosGruposxTurno($turno=null, $limit=null, $offset=null){
         try{
             $consulta='SELECT "Turnos"."NombreTurno", "Modulos"."NombreModulo", 
             "Periodos"."FechaInicioPeriodo", "Periodos"."FechaFinPeriodo",
@@ -47,7 +47,12 @@ class Horarios extends CI_Model {
 
             AND "Periodos"."CodigoPeriodo" = "GrupoPeriodos"."CodigoPeriodo" ';
             if($turno!=null){
-                $consulta.='AND "Turnos"."CodigoTurno"='.$turno;
+                $consulta.='AND "Turnos"."CodigoTurno"='.$turno.' ';
+            }
+            if($offset!=null && $limit!=null){
+                $consulta.='LIMIT '.$limit.' OFFSET '.$offset.' ';
+            }else if($limit!=null && $offset==null){
+                $consulta.='LIMIT '.$limit.' ';
             }
 //            $this->db->select('T.CodigoTurno, T.NombreTurno, M.NombreModulo,'
 //                    . 'P.FechaInicioPeriodo, R.FechaFinPeriodo, G.CodigoGrupoPeriodo,'
@@ -60,7 +65,7 @@ class Horarios extends CI_Model {
         }
     }
     
-       public function listarHorariosxTurno($turno=null, $grupo=null){
+       public function listarHorariosxTurno($turno=null, $grupo=null,$limit=null, $offset=null){
         try{
             $consulta='SELECT "Turnos"."NombreTurno", "Horarios"."HoraEntrada", 
             "Horarios"."HoraSalida","Horarios"."Dia","Aulas"."NombreAula", 
@@ -84,6 +89,13 @@ class Horarios extends CI_Model {
             if($grupo!=null){
                 $consulta.=' AND "Horarios"."CodigoGrupoPeriodo"='.$grupo;
             }
+            $consulta.=' ORDER BY "GrupoPeriodos"."CodigoGrupoPeriodo", "Horarios"."HoraEntrada" ASC ';
+            if($offset!=null && $limit!=null){
+                $consulta.=' LIMIT '.$limit.' OFFSET '.$offset.' ';
+            }else if($limit!=null && $offset==null){
+                $consulta.=' LIMIT '.$limit.' ';
+            }
+            
             $rc = $this->db->query($consulta);
             $resultado = $rc->result();
             return $resultado;
@@ -92,34 +104,59 @@ class Horarios extends CI_Model {
         }
     }
     
-    public function verificarHorario($dia, $entrada, $salida, $aula, $Gperiodo,$turno){
+    public function verificarHorario($dia, $entrada, $salida, $aula, $Gperiodo, $turno, $fi, $ff){
         try{
             $consulta='SELECT "Turnos"."NombreTurno", "Horarios"."HoraEntrada", 
             "Horarios"."HoraSalida","Horarios"."Dia","Aulas"."NombreAula", 
-            "Periodos"."FechaInicioPeriodo", "Periodos"."FechaFinPeriodo",
-            "GrupoPeriodos"."CodigoGrupoPeriodo", "Horarios"."IdHorario"
+            "Periodos"."FechaInicioPeriodo", "Periodos"."FechaFinPeriodo", 
+            "GrupoPeriodos"."CodigoGrupoPeriodo", "Horarios"."IdHorario" 
 
-            FROM "Turnos", "Aulas", "Periodos", "GrupoPeriodos", "Horarios"
+            FROM "Turnos", "Aulas", "Periodos", "GrupoPeriodos", "Horarios" 
             
-            WHERE "Turnos"."CodigoTurno" = "Horarios"."TipoJornada"
+            WHERE "Turnos"."CodigoTurno" = "Horarios"."TipoJornada" 
 
             AND "Horarios"."CodigoGrupoPeriodo" = "GrupoPeriodos"."CodigoGrupoPeriodo" 
             
-            AND "Periodos"."CodigoPeriodo" = "GrupoPeriodos"."CodigoPeriodo"
+            AND "Periodos"."CodigoPeriodo" = "GrupoPeriodos"."CodigoPeriodo" 
             
             AND "Horarios"."CodigoAula" = "Aulas"."IdAula" 
 
             AND "Periodos"."Estado" = TRUE 
-            AND "Dia"= '.$dia.'
+            AND "Dia"= '.$dia.' 
             AND "Horarios"."CodigoAula" = '.$aula.'  
-            AND "Horarios"."CodigoGrupoPeriodo" = '.$Gperiodo.' 
             AND (( "Horarios"."HoraEntrada"<=\''.$entrada.'\' AND "Horarios"."HoraSalida">=\''.$salida.'\' ) 
                 OR ( "Horarios"."HoraEntrada" BETWEEN \''.$entrada.'\' AND \''.$salida.'\' ) 
                 OR ( "Horarios"."HoraSalida" BETWEEN \''.$entrada.'\' AND \''.$salida.'\' )) 
-            ';
-            if($turno!=null){
-                $consulta.='AND "Turnos"."CodigoTurno"='.$turno;
-            }
+            AND (("Periodos"."FechaInicioPeriodo"<=\''.$fi.'\' AND "Periodos"."FechaFinPeriodo">=\''.$ff.'\' ) 
+                OR ( "Periodos"."FechaInicioPeriodo" BETWEEN \''.$fi.'\' AND \''.$ff.'\' ) 
+                OR ( "Periodos"."FechaFinPeriodo" BETWEEN \''.$fi.'\' AND \''.$ff.'\' )) ';
+        
+//            $consulta='SELECT "Turnos"."NombreTurno", "Horarios"."HoraEntrada", 
+//            "Horarios"."HoraSalida","Horarios"."Dia","Aulas"."NombreAula", 
+//            "Periodos"."FechaInicioPeriodo", "Periodos"."FechaFinPeriodo",
+//            "GrupoPeriodos"."CodigoGrupoPeriodo", "Horarios"."IdHorario"
+//
+//            FROM "Turnos", "Aulas", "Periodos", "GrupoPeriodos", "Horarios"
+//            
+//            WHERE "Turnos"."CodigoTurno" = "Horarios"."TipoJornada"
+//
+//            AND "Horarios"."CodigoGrupoPeriodo" = "GrupoPeriodos"."CodigoGrupoPeriodo" 
+//            
+//            AND "Periodos"."CodigoPeriodo" = "GrupoPeriodos"."CodigoPeriodo"
+//            
+//            AND "Horarios"."CodigoAula" = "Aulas"."IdAula" 
+//
+//            AND "Periodos"."Estado" = TRUE 
+//            AND "Dia"= '.$dia.'
+//            AND "Horarios"."CodigoAula" = '.$aula.'  
+//            AND "Horarios"."CodigoGrupoPeriodo" = '.$Gperiodo.' 
+//            AND (( "Horarios"."HoraEntrada"<=\''.$entrada.'\' AND "Horarios"."HoraSalida">=\''.$salida.'\' ) 
+//                OR ( "Horarios"."HoraEntrada" BETWEEN \''.$entrada.'\' AND \''.$salida.'\' ) 
+//                OR ( "Horarios"."HoraSalida" BETWEEN \''.$entrada.'\' AND \''.$salida.'\' )) 
+//            ';
+//            if($turno!=null){
+//                $consulta.='AND "Turnos"."CodigoTurno"='.$turno;
+//            }
             $rc = $this->db->query($consulta);
             $resultado = $rc->result();
             return $resultado;

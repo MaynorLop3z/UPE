@@ -344,20 +344,21 @@ function adminC(pub){
             });
         } 
     });
-    $('.elimCom').click(function(){
+    $('.elimCom').click(function(e){
+        e.preventDefault();
         var id=$(this).parent().parent().parent().parent().parent().parent().attr('id').substring(5);
         if (id !== null) {
                 var eliminar = $.post("ComentariosController/eliminarComentario/", {"id": id});
                 eliminar.done(function(data){
                     //alert("eliminar "+id);
-                    alert(data);
-                    var n1=$('#num1'+pub).html();
-                    var n2=$('#num2'+pub).html();
-                    $('#num1'+pub).empty();
-                    $('#num2'+pub).empty();
+//                    alert(data);
+                    var n1=$('#num1'+pub).html().trim();
+                    var n2=$('#num2'+pub).html().trim();
+//                    $('#num1'+pub).empty();
+//                    $('#num2'+pub).empty();
                     $('div').remove('#idcom'+id);
-                    $('#num1'+pub).html((n1-1));
-                    $('#num2'+pub).html((n2-1));
+                    $('#num1'+pub).html(Number(n1)-1);
+                    $('#num2'+pub).html(Number(n2)-1);
                 });
             }    
     });

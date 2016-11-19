@@ -105,7 +105,7 @@ class Periodos extends CI_Model {
         ON "Horarios"."CodigoAula"="Aulas"."IdAula"
 
         WHERE "GrupoPeriodos"."CodigoPeriodo" = '.$idPeriodo.' 
-        ORDER BY "GrupoPeriodos"."CodigoGrupoPeriodo" ASC';
+        ORDER BY "GrupoPeriodos"."CodigoGrupoPeriodo", "Horarios"."Dia", "Horarios"."HoraEntrada" ASC';
         $consulta = $this->db->query($comando);
         $resultado = $consulta->result();
         return $resultado;
