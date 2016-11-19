@@ -7,6 +7,7 @@ $("#frmSearchAlum").submit(function (event) {
 
 function searchParticipante(event) {
     event.preventDefault();
+    $('#containerDetPag').empty();
     var posting = $.post('PagosController/buscarAlum/', $('#frmSearchAlum').serializeArray());
     posting.done(function (data) {
         if (data !== null) {
@@ -64,6 +65,7 @@ function ejecutarPago() {
         if (data !== null) {
             $('#containerDetPag').empty();
             $('#containerDetPag').html(data);
+             $('#tableParticipantesPag').find('#trAlum' + $('#codGrupPar').val()).find('.estadoPag').html('CANCELADO');
         }
     });
     posting.fail(function (data) {

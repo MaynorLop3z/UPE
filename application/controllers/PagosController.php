@@ -367,16 +367,20 @@ class PagosController extends CI_Controller {
                           </tr>
                           </thead> 
                           <tbody>';
+                if(count($Alumnos)>0){
                 foreach ($Alumnos as $alum) {
                     $listaAlum.='<tr onclick="detallarPago(' . $alum->CodigoGruposParticipantes . ')" data-userpd=' . ($alum->CodigoGruposParticipantes) . ' id="trAlum' . $alum->CodigoGruposParticipantes . '">';
                     $listaAlum.=' <td style="font-size: large;cursor:pointer" class="nombre_Usuario" >' . $alum->Nombre . '</td> ';
                     $listaAlum.=' <td style="font-size: large;cursor:pointer" class="nombre_Usuario" >' . $alum->NombreDiplomado . '</td> ';
                     $listaAlum.=' <td style="font-size: large;cursor:pointer" class="nombre_Usuario" >' . $alum->NombreModulo . '</td>';
                     if ($alum->NumeroRecibo != null) {
-                        $listaAlum.=' <td style="font-size: large;cursor:pointer" class="nombre_Usuario" >CANCELADO</td> </tr>';
+                        $listaAlum.=' <td style="font-size: large;cursor:pointer" class="estadoPag" >CANCELADO</td> </tr>';
                     } else {
-                        $listaAlum.=' <td style="font-size: large;cursor:pointer" class="nombre_Usuario" >PENDIENTE</td> </tr>';
+                        $listaAlum.=' <td style="font-size: large;cursor:pointer" class="estadoPag" >PENDIENTE</td> </tr>';
                     }
+                }
+                }else{
+                       $listaAlum.='<tr><td colspan=4>No se encontraron coincidencias</td></tr>';
                 }
 
                 $listaAlum.='</tbody></table>';

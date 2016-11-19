@@ -220,10 +220,16 @@ class Pagos extends CI_Model {
                      join "Periodos" p on p."CodigoPeriodo"=gper."CodigoPeriodo"
                      join "Modulos" mod on mod."CodigoModulo"=p."CodigoModulo"
                      join "Diplomados" dip on dip."CodigoDiplomado"=mod."CodigoDiplomado"
-                     left join "PagosParticipantes" pag on pag."CodigoGruposParticipantes"=gp."CodigoGruposParticipantes"';
+                     left join "PagosParticipantes" pag on pag."CodigoGruposParticipantes"=gp."CodigoGruposParticipantes" WHERE gp."Estado"=TRUE ';
 
             if ($nombreAlum != null) {
-                $query.='WHERE  par."Nombre" ILIKE \'%' . $nombreAlum . '%\'';
+                
+                 if (strpos($query, 'WHERE') !== TRUE) {
+                    $query.=' AND ';
+                } else {
+                    $query.=' WHERE ';
+                }
+                $query.='  par."Nombre" ILIKE \'%' . $nombreAlum . '%\'';
             }
             if ($duiAlum != null) {
                 if (strpos($query, 'WHERE') !== TRUE) {
