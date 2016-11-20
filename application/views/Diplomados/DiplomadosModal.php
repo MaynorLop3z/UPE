@@ -295,6 +295,17 @@
         </div>
     </div>
 </div>
+<!---------------------------------Cuando Diplomado ya tiene modulos------------------------------------------------------------------------------------------------------>
+<div id="DipCont" data-backdrop="static"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="container-fluid ">
+                <button onclick="verificarContenido()">El diplomado contiene modulos realmente desea eliminarlo?</button>
+                <label style="center">El Diplomado no esta Definido</label>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 

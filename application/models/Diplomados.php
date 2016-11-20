@@ -40,6 +40,30 @@ class Diplomados extends CI_Model {
         $resultado = $consulta->result();
         return $resultado;
     }
+    
+    //Nov 16 2016
+    public function verificarDipVacio($codigoDiplomado){
+        try{
+            $consulta = $this->db->query('SELECT count("CodigoModulo") AS "cantResult"  FROM "Modulos" WHERE "CodigoDiplomado"='.$codigoDiplomado.' AND "Estado"=TRUE');
+            
+                $resultado = $consulta->row();
+                if ($resultado != null) {
+               $cantResult=$resultado->cantResult;
+            } else {
+             $cantResult=0;   
+            }
+            return $cantResult;
+        } catch (Exception $exc) {
+            return $exc->getTraceAsString();
+        }
+    
+        
+        
+    }
+    
+    
+    
+    
     public function listarDiplomados() {
         try {
             $consulta = $this->db->query('SELECT "d"."CodigoDiplomado", "d"."NombreDiplomado", "d"."Descripcion", "d"."Estado", "cd"."NombreCategoriaDiplomado", "d"."Comentarios" FROM "Diplomados" "d" JOIN "CategoriaDiplomados" "cd" ON "d"."CodigoCategoriaDiplomado" = "cd"."CodigoCategoriaDiplomado" WHERE "d"."Estado" = TRUE');

@@ -69,7 +69,7 @@ class DiplomadosController extends CI_Controller {
         }
     }
 
-    public function eliminarDiplomado() {
+     public function eliminarDiplomado() {
         //$eliminar = false;
         try {
             if ($this->input->post()) {
@@ -77,9 +77,10 @@ class DiplomadosController extends CI_Controller {
                 if ($codigoDiplomado != null) {
 //                 $ip = $this->session->userdata('ipUserLogin');
 //                $userModifica = $this->session->userdata('codigoDiplomado');
+                    
                     $arrayData = $this->Diplomados->inactivarDiplomado($codigoDiplomado);
                     // $ip,$userModifica
-                    echo json_encode($arrayData);
+                    echo json_encode($cantResult);
                 }
 //                $eliminar = $this->Diplomados->EliminarDiplomado($codigo);
 //                echo $eliminar;
@@ -92,6 +93,30 @@ class DiplomadosController extends CI_Controller {
         }
     }
     
+    
+    public  function VerificarDip(){
+        try {
+            if ($this->input->post()) {
+                $codigoDiplomado = $this->input->post('CodigoDiplomado');
+                if ($codigoDiplomado != null) {
+//                 $ip = $this->session->userdata('ipUserLogin');
+//                $userModifica = $this->session->userdata('codigoDiplomado');
+                    $cantResult = $this->Diplomados->verificarDipVacio($codigoDiplomado);
+                   
+                    // $ip,$userModifica
+                    echo $cantResult;
+                }
+//                $eliminar = $this->Diplomados->EliminarDiplomado($codigo);
+//                echo $eliminar;
+            }
+        } catch (Exception $ex) {
+            $data = array(
+                'Error' => $ex->getMessage()
+            );
+            echo json_encode($data);
+        }
+        
+    }
     
 
     public function listarModulosByDiplomado() {
