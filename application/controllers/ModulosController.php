@@ -187,6 +187,7 @@ class ModulosController extends CI_Controller {
                             <th>Correlativo</th>
                             <th>Estado</th>
                             <th>Turno</th>
+                            <th style="display:none;">Diplomado</th>
                             <th>Diplomado</th>
                             <th>Comentario</th>
                             <th>Gestion</th>
@@ -202,7 +203,8 @@ class ModulosController extends CI_Controller {
                 $filas.='<td class="ordenMo">'. $mod->OrdenModulo .'</td>';
                 $filas.='<td class="Estado">'.  $mod->Estado .'</td> ';
                 $filas.='<td class="TurnoM">'. $mod->CodigoTurno .'</td>';
-                $filas.='<td class="DipName">'. $mod->CodigoDiplomado .'</td>';
+                $filas.='<td style="display:none;" class="DipName">'. $mod->CodigoDiplomado .'</td>';
+                $filas.='<td  class="DipName">'. $mod->NombreDiplomado .'</td>';
                 $filas.='<td class="ComenMo">'. $mod->Comentarios .'</td>';
                 $filas.='<td class="gestion_Mod">
                              <button id="btnModiM'. $mod->CodigoModulo .'" onclick="editModulo(this)" title="Editar Modulo" class="btn_modificar_Mod btn btn-success" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-pencil"></span> </button>

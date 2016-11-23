@@ -53,6 +53,7 @@
                             <th>Correlativo</th>
                             <th>Estado</th>
                             <th>Turno</th>
+                            <th style="display:none;">Diplomado</th>
                             <th>Diplomado</th>
                             <th>Comentario</th>
                             <th>Gestion</th>
@@ -69,7 +70,8 @@
                                 <td class="ordenMo"><?= $mod->OrdenModulo?></td>
                                 <td class="Estado"><?=  $mod->Estado?></td> 
                                 <td class="TurnoM"><?= $mod->CodigoTurno?></td>
-                                <td class="DipName"><?= $mod->CodigoDiplomado?></td>
+                                <td style="display:none;" class="DipName"><?= $mod->CodigoDiplomado?></td>
+                                <td  class="DipName"><?= $mod->NombreDiplomado?></td>
                                 <td class="ComenMo"><?= $mod->Comentarios?></td>
                                 <td class="gestion_Mod">
             <button id="btnModiM<?php echo $mod->CodigoModulo ?>" onclick="editModulo(this)" title="Editar Modulo" class="btn_modificar_Mod btn btn-success" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-pencil"></span> </button>

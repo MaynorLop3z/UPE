@@ -193,16 +193,10 @@ class Modulos extends CI_Model {
                 $limit = ROWS_PER_PAGE;
                 $offset = 0;
             }
-         $this->db->select('CodigoModulo, '
-                . 'NombreModulo, '
-                . 'OrdenModulo, '
-                . 'Estado, '
-                . 'CodigoTurno, '
-                . 'CodigoDiplomado, '       
-                . 'Comentarios'
-        );
-        $this->db->from('Modulos');
-        $this->db->where('Estado',TRUE);
+         $this->db->select('*');
+        $this->db->from('Modulos m');
+        $this->db->join('Diplomados d','d.CodigoDiplomado=m.CodigoDiplomado');
+        $this->db->where('m.Estado',TRUE);
         $this->db->limit($limit, $offset);
         $consultaM = $this->db->get();
         $resultadoM = $consultaM->result();
