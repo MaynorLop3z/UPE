@@ -10,14 +10,10 @@ class Modulos extends CI_Model {
     
     
     public function listarModulosNombre($filtro=null, $turno=null, $diplomado=null){
-        $this->db->select('CodigoModulo, '
-                . 'NombreModulo, '
-                . 'OrdenModulo, '
-                . 'Estado, '
-                . 'CodigoTurno, '
-                . 'CodigoDiplomado, '       
-                . 'Comentarios');
-        $this->db->from('Modulos');
+        $this->db->select('*');
+        $this->db->from('Modulos m');
+        $this->db->join('Diplomados d','d.CodigoDiplomado=m.CodigoDiplomado');
+        $this->db->where('m.Estado',TRUE);
         if($filtro!=null){
             $this->db->like('LOWER("NombreModulo")', strtolower($filtro));
         }
