@@ -202,7 +202,8 @@ class ModulosController extends CI_Controller {
                 $filas.='<td class="NombreMod">'. $mod->NombreModulo .'</td>';
                 $filas.='<td class="ordenMo">'. $mod->OrdenModulo .'</td>';
                 $filas.='<td class="Estado">'.  $mod->Estado .'</td> ';
-                $filas.='<td class="TurnoM">'. $mod->CodigoTurno .'</td>';
+                $filas.='<td style="display:none;" class="CodigoTurno">'. $mod->CodigoDiplomado .'</td>';
+                $filas.='<td class="TurnoM">'. $mod->NombreTurno .'</td>';
                 $filas.='<td style="display:none;" class="DipName">'. $mod->CodigoDiplomado .'</td>';
                 $filas.='<td  class="DipName">'. $mod->NombreDiplomado .'</td>';
                 $filas.='<td class="ComenMo">'. $mod->Comentarios .'</td>';

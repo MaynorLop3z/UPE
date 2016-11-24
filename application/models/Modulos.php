@@ -13,6 +13,7 @@ class Modulos extends CI_Model {
         $this->db->select('*');
         $this->db->from('Modulos m');
         $this->db->join('Diplomados d','d.CodigoDiplomado=m.CodigoDiplomado');
+        $this->db->join('Turnos t','m.CodigoTurno= t.CodigoTurno');
         $this->db->where('m.Estado',TRUE);
         if($filtro!=null){
             $this->db->like('LOWER("NombreModulo")', strtolower($filtro));
@@ -192,6 +193,7 @@ class Modulos extends CI_Model {
          $this->db->select('*');
         $this->db->from('Modulos m');
         $this->db->join('Diplomados d','d.CodigoDiplomado=m.CodigoDiplomado');
+        $this->db->join('Turnos t','m.CodigoTurno= t.CodigoTurno');
         $this->db->where('m.Estado',TRUE);
         $this->db->limit($limit, $offset);
         $consultaM = $this->db->get();

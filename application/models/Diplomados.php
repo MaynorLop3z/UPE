@@ -14,7 +14,7 @@ class Diplomados extends CI_Model {
         $this->db->from('Modulos');
         $this->db->order_by("OrdenModulo", "asc");
         $this->db->where('CodigoDiplomado', $codigoDiplomado);
-        //$this->db->where('Estado', TRUE); // Aqui puse esto 
+        $this->db->where('Estado', TRUE); // Aqui puse esto 
         $consulta = $this->db->get();
         $resultado = $consulta->result();
         return $resultado;
@@ -30,6 +30,7 @@ class Diplomados extends CI_Model {
                 . 'CD.NombreCategoriaDiplomado');
         $this->db->from('Diplomados D');
         $this->db->join("CategoriaDiplomados CD","D.CodigoCategoriaDiplomado = CD.CodigoCategoriaDiplomado");
+        $this->db->where('D.Estado',TRUE);
         if($filtro!=null){
             $this->db->like('LOWER("NombreDiplomado")', strtolower($filtro));
         }

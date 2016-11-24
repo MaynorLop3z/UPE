@@ -52,7 +52,8 @@
                             <th>Modulo</th>
                             <th>Correlativo</th>
                             <th>Estado</th>
-                            <th>Turno</th>
+                            <th style="display:none;">Turno</th>
+                            <th> Turno</th>
                             <th style="display:none;">Diplomado</th>
                             <th>Diplomado</th>
                             <th>Comentario</th>
@@ -69,7 +70,8 @@
                                 <td class="NombreMod"><?= $mod->NombreModulo ?></td>
                                 <td class="ordenMo"><?= $mod->OrdenModulo?></td>
                                 <td class="Estado"><?=  $mod->Estado?></td> 
-                                <td class="TurnoM"><?= $mod->CodigoTurno?></td>
+                                <td style="display:none;" class="TurnoM"><?= $mod->CodigoTurno?></td>
+                                <td class="TurnoM"><?= $mod->NombreTurno?></td>
                                 <td style="display:none;" class="DipName"><?= $mod->CodigoDiplomado?></td>
                                 <td  class="DipName"><?= $mod->NombreDiplomado?></td>
                                 <td class="ComenMo"><?= $mod->Comentarios?></td>

@@ -30,11 +30,11 @@
                         <div class="form-group">
                             <label for="Turno" class="col-lg-3 control-label">Turno:</label>
                             <div class="col-lg-9">
-                                <select class ="form-control" id="TurnoEdit" name="Turno" placeholder="Seleecione un Turno">                                          
+                                <select class ="form-control" id="TurnoEdit" name="Turno" placeholder="Seleecione un Turno" required>                                          
                                     <?php
                                     foreach ($Turno as $TurMo) { //Aqui para seleccionar el Turno a que Pertenece
                                         ?>
-                                        <option value="<?= $TurMo->CodigoTurno ?>">
+                                        <option value="<?= $TurMo->CodigoTurno ?>" >
                                             <?php echo $TurMo->NombreTurno ?> <!-- Para imprimir El nombre en el select-->
                                         </option>
                                     <?php }
