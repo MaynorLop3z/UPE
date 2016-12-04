@@ -125,15 +125,15 @@
         <?php } ?>
         </tbody>
     </table>  
-      <div id="context-menu">
-	      	<ul class="dropdown-menu" role="menu">
+<!--      <div id="context-menu">
+        <ul class="dropdown-menu" role="menu">
             <li><a tabindex="-1">Action</a></li>
-	           <li><a tabindex="-1">Another action</a></li>
-	           <li><a tabindex="-1">Something else here</a></li>
-	           <li class="divider"></li>
-	           <li><a tabindex="-1">Separated link</a></li>
-	      	</ul>
-	      </div>
+           <li><a tabindex="-1">Another action</a></li>
+           <li><a tabindex="-1">Something else here</a></li>
+           <li class="divider"></li>
+           <li><a tabindex="-1">Separated link</a></li>
+        </ul>
+      </div>-->
   </div>
 <?php } ?> 
 </div>
@@ -149,7 +149,7 @@
     <?php 
     if(isset($gruposAlumno)){
     $Aniog='';
-    foreach ($gruposAlumno as $grup) { //Lista cada grupo como tabs
+    foreach ($gruposAlumno as $grup) { //Lista cada grupo
         $AnioPeriodo=str_split($grup->FechaInicioPeriodo,4)[0];
         if($Aniog!=$AnioPeriodo){?>
      <li >
@@ -168,7 +168,7 @@
         $principalA=1;                          //propiedades si es tab principal
         $classgroupA="tab-pane fade in ";
         $idhomeA ="";
-    foreach ($gruposAlumno as $grupo) { //Lista cada grupo como tabs
+    foreach ($gruposAlumno as $grupo) { //Lista cada grupo
         
         $AnioActual=str_split($grupo->FechaInicioPeriodo,4)[0];
         if($Aniogrupo!=$AnioActual){
@@ -179,7 +179,7 @@
 
     <div id="grupo<?php echo $AnioActual?>" class="<?php echo $classgroupA?>" >
         <div <?php echo $idhomeA;?> >
-            <h3>Diplomados - Año <?php echo $AnioActual;?></h3>
+            <h3>Archivos del Año <?php echo $AnioActual;?></h3>
          </div>
             <?php 
             $DiplomadoGrupo='';
@@ -223,7 +223,12 @@
                                  }
                                 }//Total de archivos que se muestra en el tab
                               ?> 
-                             <span class="badge" id="badge-grupo<?php echo $gru->CodigoGrupoPeriodo?>"><?php echo $total?> Archivos
+                             <span class="badge" id="badge-grupo<?php echo $gru->CodigoGrupoPeriodo?>"><?php 
+                                $mensaje="Archivos";
+                                if($total==1){
+                                    $mensaje="Archivo";
+                                }
+                                echo $total." ".$mensaje?> 
                              </span>
                         </li>
                             <!---------Modal Archivos Alumno-------------------------->
@@ -235,7 +240,7 @@
                                              <button type="button" class="close btn-lg" data-dismiss="modal"  aria-label="Close" ><span aria-hidden="true">&times;</span></button>
                                              <!--Lista de Archivos del Alumno-->
                                             <div id="ArchivosAlumnosContent" class="tab-content ">
-                                            <h3>Archivos subidos al grupo</h3>
+                                            <h3>Archivos agregados al grupo</h3>
                                                 <table id="table-ga<?php echo $gru->CodigoGrupoPeriodo?>"  class="table table-bordered table-striped table-hover table-responsive">
                                                     <thead>
                                                         <tr><!--Informacion a mostrar de las publicaciones-->
@@ -290,7 +295,11 @@
         $('.tree').toggle(false);
         $('.tree').css('cursor', 'pointer');
         $('.sub-tree').toggle(false).css('cursor','pointer');
-        $('.tree-toggler').css('cursor', 'pointer');
+        $('.tree-toggler').css('cursor', 'pointer').hover(function(){
+            $(this).css('background','#0066ae');
+        },function(){
+            $(this).css('background','rgb(66, 139, 202)');
+        });
         
 	$('.tree-toggler').click(function () {
 		$(this).parent().children('.tree').toggle(300);

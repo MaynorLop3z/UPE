@@ -29,6 +29,7 @@ function cargarComentarios(pid){
                             
                             if(json_obj.MComentarios[0]!==undefined){
                                 p=json_obj.MComentarios[0];
+                                alert(p.actions);
                             }
                             $.each( json_obj.PComentarios, function( key, val ) {
                                 str=str+comentarios(val,p);
