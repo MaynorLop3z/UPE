@@ -5,14 +5,10 @@
 var codigoPub;
 $("#PubsCategoria").on("click", ".callModalPublicacion", function (e) {
 //$('.callModalPublicacion').on('click', function (event) {
-
-    alert("show modal");
     codigoPub = this.id;
-    alert(codigoPub);
     var pub = $('#' + codigoPub);
 
     var dataP = pub.data("dimg");
-    alert(dataP);
     if (dataP) {
         $("#portfolioModal6").modal('show');
         $('#h2TituloPub').text(dataP.Titulo);
@@ -26,13 +22,11 @@ $("#PubsCategoria").on("click", ".callModalPublicacion", function (e) {
 
 });
 
-
-
 //Pubsrecie
 $("#Pubsrecie").on("click", ".callModalPublicacion", function (e) {
 //$('.callModalPublicacion').on('click', function (event) {
 
-    alert("show modal");
+
     codigoPub = this.id;
     var pub = $('#' + codigoPub);
     var dataP = pub.data("dimg");
@@ -44,15 +38,12 @@ $("#Pubsrecie").on("click", ".callModalPublicacion", function (e) {
     $('#pContenidoPub').text(dataP.Contenido);
 
 
-    alert("something went wrong!!!!!!!");
-
 
 });
 
 $("#PubsDate").on("click", ".callModalPublicacion", function (e) {
 //$('.callModalPublicacion').on('click', function (event) {
 
-    alert("show modal");
     codigoPub = this.id;
     var pub = $('#' + codigoPub);
     var dataP = pub.data("dimg");
@@ -77,19 +68,18 @@ $("#PubsDate").on("click", ".callModalPublicacion", function (e) {
 
 
 $('#btnSend').on('click', function (event) {
-//    alert("Se abrira su gestor de correo electronico para enviar el mensaje.");
-    var select = document.getElementById('selectCategoria');
-    var indice = select.options[select.selectedIndex].value;
+    
 //            document.contactForm.selectCategoria.selectedIndex ;
-    if (document.getElementById('name').value !== null && document.getElementById('message').value !== null) {
+    if (document.getElementById('name').value && document.getElementById('message').value ) {
 
-        var link = "mailto:griss@hotmail.com"
+        var link = "mailto:rinabes@yahoo.com"
 //             + "?cc=myCC"
                 + "&subject= Consulta de: " + escape(document.getElementById('name').value)
                 + "&body=" + escape(document.getElementById('message').value) + "\n\
           " + "Telefono de Contacto: " + escape(document.getElementById('phone').value);
 
         window.location.href = link;
+        alert("Se abrira su gestor de correo electronico para enviar el mensaje.");
     } else {
         alert('El nombre o el mensaje esta vacio.');
     }
@@ -108,7 +98,6 @@ $('#opcReciente').on('click', function (event) {
 
 $('#opccategoria').on('click', function (event) {
 //    var slect = document.getElementById('categoriaDiv').value ;
-//    alert(slect);
     $('#masRecientesDiv').hide();
     var vistodate = document.getElementById('DateDiv');
     vistodate.style.display = 'none';
@@ -129,7 +118,7 @@ $('#opcDate').on('click', function (e) {
     if (fecha !== "date") {
         $fecha = $('#fechastart');
 
-        
+
         $fecha.datepicker();
         $fechaend = $('#fechaend');
         $fechaend.datepicker();
@@ -157,4 +146,69 @@ $('#selectCategoriaBusqueda').on('change', function (event) {
         }
 
     });
+});
+
+//esta funcion valida y cambia el formato de fecha para navegarodes que no soportan el tipo date de html5
+function validarFechafire(date) {
+    var x;
+    fecha = date.split("/");
+    var dia = fecha[0];
+    var mes = fecha[1];
+    var ano = fecha[2];
+    x = new Date(ano, mes, dia);
+    return  x;
+}
+
+
+$('#btndate').on('click', function (event) {
+    var start = document.getElementById('fechastart').value;
+    var end = document.getElementById('fechaend').value;
+
+    if ($("#fechastart").val().trim() === '' || $("#fechaend").val().trim() === '') {
+        alert('Ingrese las fechas solicitadas!!!');
+    } else {
+        var txtdate = document.getElementById('fechastart').type;
+        if (txtdate !== "date") {
+            start = validarFechafire(start);
+            end = validarFechafire(end);
+        } else {
+            start = new Date(start);
+            
+            end = new Date(end);
+            
+        }
+        var i = start.getTime();
+        var e = end.getTime();
+        var today= new Date();
+                today= today.getTime();
+        if (e >= i) {
+            var url = 'index.php/wsite/listarFecha/';
+            var posting = $.post(url, {
+                Start: start,
+                End: end
+            });
+        }else{
+        if(e >= today ){
+            alert('Ingrese una Fecha Valida');
+        }
+        else {
+            alert("La Fecha Final debe ser mayor que la Inicial!!!");
+        }}
+        ;
+
+
+
+    }
+    ;
+    posting.done(function (data) {
+        if (data !== null) {
+            $('#PubsCategoria').empty();
+            $('#PubsCategoria').html(data);
+        }
+        else {
+        }
+
+    });
+
+
 });

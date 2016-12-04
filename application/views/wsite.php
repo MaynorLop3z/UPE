@@ -78,10 +78,17 @@
                         <li class="page-scroll">
                             <a href="#about">¿Quienes Somos?</a>
                         </li>
-                        <li class="page-scroll "  >
+                        <li class="page-scroll">
+                            <a href="" class="portfolio-link btn   dropdown-toggle"  title="Buscar Publicaciones" data-toggle="dropdown" id="test3"><i class="fa fa-fw fa-step-forward"></i></a>
+                        <ul class="dropdown-menu" id="log">
+                        <li class="page-scroll " value="1" >
                             <a href="#Login2" class="portfolio-link" data-toggle="modal">Ingresar</a>
-
                         </li>
+                        <li class="page-scroll " value="2" >
+                            <a href='index.php/PortalParticipantes' class="portfolio-link" data-toggle="modal">Alumnos</a>
+                        </li>
+                        </ul></li>
+
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -395,20 +402,7 @@
                         <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
                         <form name="sentMessage" id="contactForm" novalidate>
 
-                            <div class="row control-group">
-                                <label>Categoria de la Consulta</label>
-
-                                <select name="categoriasl" onchange="" id="selectCategoria">
-                                    <?php
-                                    foreach ($listCategorias as $categorias) {
-                                        ?>
-                                        <option value=<?php echo $categorias->CodigoCategoriaDiplomado ?>> <?php echo $categorias->NombreCategoriaDiplomado ?>  </option>
-                                        <?php
-                                    }
-                                    ?>
-
-                                </select>
-                            </div>
+                        
 
                             <div class="row control-group">
                                 <div class="form-group col-xs-12 floating-label-form-group controls">
@@ -423,7 +417,7 @@
                             <div class="row control-group">
                                 <div class="form-group col-xs-12 floating-label-form-group controls">
                                     <label>Telefono</label>
-                                    <input type="tel" class="form-control" placeholder="Número Telefonico" id="phone" data-mask="0000-0000" required data-validation-required-message="Please enter your phone number.">
+                                    <input type="tel" class="form-control" placeholder="Número Telefonico" id="phone" data-mask="0000-0000" >
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
@@ -542,7 +536,7 @@
                                         </tr>
                                         <!--</ul>-->
                                     </table>
-                                    <b><a href="#">Olvido su contraseña</a></b>
+                                    <b><a>En caso de olvido su contraseña debe de comunicarse con el administrador</a></b>
                                     <ul class="list-inline item-details">
                                         <li><button type="button" class="btn btn-default center-block " data-dismiss="modal">Cancelar</button></li>
                                         <li><button type="submit" class="btn btn-default center-block  " >Aceptar</button></li>
@@ -591,6 +585,7 @@
             {
                width:auto;
                 background: whitesmoke;
+                
             }
         </style>
 
@@ -603,7 +598,7 @@
         <!-- Custom Theme JavaScript -->
         <script src="bootstrap/js/freelancer.js"></script>
 
- <!--<script src="https://code.jquery.com/jquery-1.12.1.js"></script
+
  
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     </body>
