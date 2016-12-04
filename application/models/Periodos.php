@@ -326,5 +326,30 @@ WHERE
             echo $exc->getTraceAsString();
         }
     }
-
+public function getStudentsFilter($idPeriodo, $filter, $limit = 0, $offset = 0) {
+        try {
+            $query = 'SELECT 
+  "T0"."CodigoParticipante",               
+  "T0"."Nombre", 
+  "T0"."NumeroDUI", 
+  "T1"."NombreCategoriaParticipante", 
+  "T0"."Comentarios",
+  (SELECT COUNT("T2"."CodigoGruposParticipantes") FROM "GruposParticipantes" "T2" WHERE "T2"."CodigoGrupoPeriodo" = ' . $idPeriodo . ' AND "T2"."CodigoParticipante" = "T0"."CodigoParticipante") AS "Inscrito"
+FROM 
+  "Participantes" "T0", 
+  "CategoriasParticipante" "T1"
+WHERE 
+  "T0"."CodigoCategoriaParticipantes" = "T1"."CodigoCategoriaParticipantes" AND LOWER("Nombre") LIKE \'%' . $filter . '%\'';
+ if ($limit > 0) {
+                $query.='LIMIT ' . $limit . ' OFFSET ' . $offset . ' ;';
+            }
+            $consulta = $this->db->query($query);
+            if ($consulta != null) {
+                $resultado = $consulta->result();
+            }
+            return $resultado;
+        } catch (Exception $exc) {
+            return $exc->getTraceAsString();
+        }
+    }
 }

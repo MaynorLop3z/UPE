@@ -480,5 +480,50 @@ class PeriodosController extends CI_Controller {
         $pdf->Output('detAlumnos.pdf',"D");
         //echo 'DetalleG.pdf';
     }
-
+    
+    public function listarEstudiantesFiltrados() {
+        try {
+            if ($this->input->post()) {
+                $Codigo = $this->input->post('idPeriodoGrupo');
+                $filtro = $this->input->post('filtro');
+                $estudiantes = $this->Periodos->getStudentsFilter($Codigo,$filtro, ROWS_PER_PAGE);
+                $Nestudiantes = count($this->Periodos->getStudentsFilter($Codigo, $filtro));
+                $result = '';
+                foreach ($estudiantes as $estudiante) {
+                    $result .= '<tr id="GrupoEstudiante' . $estudiante->CodigoParticipante . '">\n';
+                    $result .= '<td class="NombreEstudiante">' . $estudiante->Nombre . '</td>\n';
+                    $result .= '<td class="DUIEstudiante">' . $estudiante->NumeroDUI . '</td>\n';
+                    $result .= '<td class="CategoriaEstudiante">' . $estudiante->NombreCategoriaParticipante . '</td>\n';
+                    $result .= '<td class="ComentariosEstudiante">' . $estudiante->Comentarios . '</td>\n';
+                    $result .= '<td class="EstudianteInscrito">';
+                    if ($estudiante->Inscrito > 0) {
+                        $result .= '<button id="GrupoAlumnoADD' . $estudiante->CodigoParticipante . '" onclick="inscribirAlumnoGrupo(this)" title="Quitar alumno del periodo" class="btn_agregar_alumno btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </button>';
+                    } else {
+                        $result .= '<button id="GrupoAlumnoADD' . $estudiante->CodigoParticipante . '" onclick="inscribirAlumnoGrupo(this)" title="Agregar alumno al periodo" class="btn_agregar_alumno btn btn-success"><span class="glyphicon glyphicon-ok"></span> </button>';
+                    }
+                    $result .= '</td>\n</tr>\n';
+                }
+                if($Nestudiantes>ROWS_PER_PAGE){
+                $result.='<tr>
+                        <td colspan=6 ><div class="row">
+                            <hr>
+                            <ul class="pager" id="footpagerParticipantesInscribir">
+                                <li><button data-datainic="1" id="aFirstPagParticipantesInscribir" >&lt;&lt;</button></li>
+                                <li><button id="aPrevPagParticipantesInscribir" >&lt;</button></li>
+                                <li>
+                                    <input data-datainic="1" type="text" value="1" id="txtPagingSearchParticipantesInscribir" name="txtNumberPag" size="5">/'.intval(ceil($Nestudiantes/ ROWS_PER_PAGE)).'
+                                </li>
+                                <li><button id="aNextPagParticipantesInscribir">&gt;</button></li>
+                                <li><button id="aLastPagParticipantesInscribir" data-datainic="'.intval(ceil($Nestudiantes/ ROWS_PER_PAGE)).'" >&gt;&gt;</button></li>
+                                <li id="pagerParticipantesInscribir">[ 1 - '.ROWS_PER_PAGE . "/" . $Nestudiantes. ']</li>
+                            </ul>
+                        </div></td>
+                        </tr>';
+                }
+                echo $result;
+            }
+        } catch (Exception $ex) {
+            echo json_encode($ex);
+        }
+    }
 }

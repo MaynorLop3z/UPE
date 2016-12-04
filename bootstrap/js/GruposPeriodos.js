@@ -138,11 +138,11 @@ function EditPeriodoShow(fila) {
 }
 
 function GestionPeriodoShow(fila) {
-    
+
     codigoPeriodo = fila.id;
     var perio = $('#Periodo' + codigoPeriodo.substring(10));
     FI = perio.find('.fip').html().toString().trim();
-    FF=perio.find('.ffp').html().toString().trim();
+    FF = perio.find('.ffp').html().toString().trim();
 
     var idPeriodo = codigoPeriodo.substring(10);
     $('#bodytablaPeriodosGruposO').html('');
@@ -151,45 +151,50 @@ function GestionPeriodoShow(fila) {
     posting.done(function (data) {
         if (data !== null) {
             var obj = jQuery.parseJSON(data);
-            var tabla = "", acumHE='', acumHS='', acumA='', acumD='';
-            var dias=["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"];
-            var gactual='';
-            for (var x=0; x<obj.length; x++) {
-                                
-                if(gactual!=obj[x].CodigoGrupoPeriodo){
-                    acumHE=obj[x].HoraEntrada, acumHS=obj[x].HoraSalida, acumA=obj[x].NombreAula, acumD=dias[obj[x].Dia-1];
-                    var y=Number(x)+1,z=Number(obj.length)-1;
+            var tabla = "", acumHE = '', acumHS = '', acumA = '', acumD = '';
+            var dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
+            var gactual = '';
+            for (var x = 0; x < obj.length; x++) {
 
-                    for(var i=y; i<obj.length; i++ ){
+                if (gactual != obj[x].CodigoGrupoPeriodo) {
+                    acumHE = obj[x].HoraEntrada, acumHS = obj[x].HoraSalida, acumA = obj[x].NombreAula, acumD = dias[obj[x].Dia - 1];
+                    var y = Number(x) + 1, z = Number(obj.length) - 1;
 
-                        if(i<obj.length && obj[i].CodigoGrupoPeriodo==obj[x].CodigoGrupoPeriodo){
-                            gactual=obj[i].CodigoGrupoPeriodo;
-                            acumHE=acumHE+"<br>"+obj[i].HoraEntrada;
-                            acumHS=acumHS+"<br>"+obj[i].HoraSalida;
-                            acumA=acumA+"<br>"+obj[i].NombreAula;
-                            acumD=acumD+"<br>"+dias[obj[i].Dia-1];
+                    for (var i = y; i < obj.length; i++) {
+
+                        if (i < obj.length && obj[i].CodigoGrupoPeriodo == obj[x].CodigoGrupoPeriodo) {
+                            gactual = obj[i].CodigoGrupoPeriodo;
+                            acumHE = acumHE + "<br>" + obj[i].HoraEntrada;
+                            acumHS = acumHS + "<br>" + obj[i].HoraSalida;
+                            acumA = acumA + "<br>" + obj[i].NombreAula;
+                            acumD = acumD + "<br>" + dias[obj[i].Dia - 1];
                         }
                     }
 //                   
                     tabla += '<tr id="GrupoPeriodo' + obj[x].CodigoGrupoPeriodo + '">\n';
                     tabla += '<td class="Codigo_Grupo">' + obj[x].CodigoGrupoPeriodo + '</td>\n';
                     tabla += '<td class="Estado_Grupo">' + ((obj[x].Estado === 't') ? 'Activo' : 'Inactivo') + '</td>\n';
-                   
-                    if(acumHS!=null || acumHS!=null){
+
+                    if (acumHS != null || acumHS != null) {
                         tabla += '<td class="Hora_Entrada">' + acumHE + '</td>\n';
                         tabla += '<td class="Hora_Salida">' + acumHS + '</td>\n';
                         tabla += '<td class="Aula">' + acumA + '</td>\n';
                         tabla += '<td class="Dia">' + acumD + '</td>\n';
-                    }else{
-                        tabla+="<td colspan=4>Sin horario asignado</td>"
+                    } else {
+                        tabla += "<td colspan=4>Sin horario asignado</td>"
                     }
+//<<<<<<< Updated upstream
                     
                     tabla += '<td class="GestionButton"><button id="gestion' + obj[x].CodigoGrupoPeriodo + '" onclick="testShow(this)" title="Gestionar Grupo" class="btn_gestionar_periodo btn btn-info"><span class="glyphicon glyphicon-cog"></span></button>\n\
                                                         <button id="impr' + obj[x].CodigoGrupoPeriodo + '" onclick="printDetailGrupo(this)" title="Imprimir detalle" class="btn_gestionar_periodo btn btn-info"><span class="glyphicon glyphicon-print"></span></button></td>';
                     
+//=======
+//
+//                    tabla += '<td class="GestionButton"><button id="gestion' + obj[x].CodigoGrupoPeriodo + '" onclick="testShow(this)" title="Gestionar Periodo" class="btn_gestionar_periodo btn btn-info"><span class="glyphicon glyphicon-cog"></span></button></td>';
+//>>>>>>> Stashed changes
                     tabla += '</tr>\n';
-               }
-               
+                }
+
 //                tabla += '<tr id="GrupoPeriodo' + obj[x].CodigoGrupoPeriodo + '">\n';
 //                tabla += '<td class="Codigo_Grupo">' + obj[x].CodigoGrupoPeriodo + '</td>\n';
 //                tabla += '<td class="Estado_Grupo">' + ((obj[x].Estado === 't') ? 'Activo' : 'Inactivo') + '</td>\n';
@@ -247,7 +252,7 @@ function testShow(fila) {
     posting2.fail(function (xhr, textStatus, errorThrown) {
         alert("error" + xhr.responseText);
     });
-    var postinga = $.post("HorariosController/cargarAulas/", {Aulas:"Aulas"});
+    var postinga = $.post("HorariosController/cargarAulas/", {Aulas: "Aulas"});
     postinga.done(function (data) {
         if (data !== null) {
             $('#AulaHorarioGrupo').html(data);
@@ -256,19 +261,34 @@ function testShow(fila) {
     postinga.fail(function (xhr, textStatus, errorThrown) {
         alert("error" + xhr.responseText);
     });
-    var posting3 = $.post("HorariosController/cargarxGrupo/", {Grupo: idPeriodoGrupo, GA:"GA"});
+    var posting3 = $.post("HorariosController/cargarxGrupo/", {Grupo: idPeriodoGrupo, GA: "GA"});
     posting3.done(function (data) {
         if (data !== null) {
             $('#HorarioDelGrupoPeriodo').html(data);
             $('#PeriodoGestion').modal('hide')
             $("#gestionGrupoModal").modal('toggle');
-            
+
         }
     });
     posting2.fail(function (xhr, textStatus, errorThrown) {
         alert("error" + xhr.responseText);
     });
 }
+$('#FindAlumnoNombre').keyup(function (event) { //BUSCA USUARIO AL EDITAR 
+    var actual = $(this).val();
+    var filtro = $('#FindAlumnoNombre').val();
+    //console.log(filtro);
+    var idPeriodoGrupo = codigoGrupoPeriodo.substring(7);
+    var posting2 = $.post("PeriodosController/listarEstudiantesFiltrados/", {idPeriodoGrupo: idPeriodoGrupo, filtro: filtro});
+    posting2.done(function (data) {
+        if (data !== null) {
+            $('#EstudiantesGrupoPeriodo').html(data);
+        }
+    });
+    posting2.fail(function (xhr, textStatus, errorThrown) {
+        alert("error" + xhr.responseText);
+    });
+});
 function inscribirAlumnoGrupo(fila) {
     var idParticipante = fila.id.substring(14);
     var idGrupoPeriodo = $('#gestionGrupoModalTitle').html().substring(7);
@@ -281,8 +301,7 @@ function inscribirAlumnoGrupo(fila) {
             property.className = "btn_agregar_alumno btn btn-success";
             property.title = "Agregar alumno al periodo";
             $("#" + fila.id).html('<span class="glyphicon glyphicon-ok"></span>');
-        }
-        else {
+        } else {
             property.className = "btn_agregar_alumno btn btn-danger";
             property.title = "Quitar alumno al periodo";
             $("#" + fila.id).html('<span class="glyphicon glyphicon-remove"></span>');
@@ -303,8 +322,7 @@ function asignarDocente(fila) {
             property.className = "btn_agregar_docente btn btn-success";
             property.title = "Asignar docente al periodo";
             $("#" + fila.id).html('<span class="glyphicon glyphicon-ok"></span>');
-        }
-        else {
+        } else {
             property.className = "btn_agregar_docente btn btn-danger";
             property.title = "Desasignar docente al periodo";
             $("#" + fila.id).html('<span class="glyphicon glyphicon-remove"></span>');
@@ -314,69 +332,69 @@ function asignarDocente(fila) {
 ;
 
 ////////////PAGINACION DE ALUMNOS INSCRIBIR//////////////
-    
-    $("#EstudiantesGrupoPeriodo").on("click", "#aFirstPagParticipantesInscribir", function (e) {
-        paginarParticipantesInscribir("data_ini", $(this).data("datainic"), codigoGrupoPeriodo.substring(7));
-    });
 
-    $("#EstudiantesGrupoPeriodo").on("click", "#aLastPagParticipantesInscribir", function (e) {
-        paginarParticipantesInscribir("data_ini", $(this).data("datainic"), codigoGrupoPeriodo.substring(7));
-    });
+$("#G").on("click", "#aFirstPagParticipantesInscribir", function (e) {
+    paginarParticipantesInscribir("data_ini", $(this).data("datainic"), codigoGrupoPeriodo.substring(7));
+});
 
-    $("#EstudiantesGrupoPeriodo").on("click", "#aPrevPagParticipantesInscribir", function (e) {
-        paginarParticipantesInscribir("data_inip", null, codigoGrupoPeriodo.substring(7));
-    });
+$("#EstudiantesGrupoPeriodo").on("click", "#aLastPagParticipantesInscribir", function (e) {
+    paginarParticipantesInscribir("data_ini", $(this).data("datainic"), codigoGrupoPeriodo.substring(7));
+});
 
-    $("#EstudiantesGrupoPeriodo").on("click", "#aNextPagParticipantesInscribir", function (e) {
-        paginarParticipantesInscribir("data_inin", null, codigoGrupoPeriodo.substring(7));
-    });
-    
-    $("#EstudiantesGrupoPeriodo").on("keypress", "#txtPagingSearchParticipantesInscribir", function (e) {
-        e.stopImmediatePropagation();
-        if (e.which === 13 && ($(this).val()>0)) {
-             paginarParticipantesInscribir("data_ini", $(this).val(), codigoGrupoPeriodo.substring(7));
-        }
-    });
-    
-    function paginarParticipantesInscribir(dat, op, gr){
-        var data_in = $('#txtPagingSearchParticipantesInscribir').data("datainic");     
-        var url = 'PeriodosController/paginEstudiantes/';
-        var opcion="";
-        if(dat==="data_inin"){
-             opcion={"data_inin":data_in, idPeriodoGrupo:gr};
-        }else if(dat==="data_inip"){
-            opcion={"data_inip":data_in, idPeriodoGrupo:gr};
-        }else if(dat==="data_ini"){
-            data_in= op;
-            opcion={"data_ini":data_in, idPeriodoGrupo:gr};
-        }
-        var posting = $.post(url, opcion);
-        posting.done(function (data) {
-            if (data !== null) {
-                $('#EstudiantesGrupoPeriodo').empty();
-                $('#EstudiantesGrupoPeriodo').html(data);
-            }
-        });
-        posting.fail(function (data) {
-            alert("Error");
-        });
+$("#EstudiantesGrupoPeriodo").on("click", "#aPrevPagParticipantesInscribir", function (e) {
+    paginarParticipantesInscribir("data_inip", null, codigoGrupoPeriodo.substring(7));
+});
+
+$("#EstudiantesGrupoPeriodo").on("click", "#aNextPagParticipantesInscribir", function (e) {
+    paginarParticipantesInscribir("data_inin", null, codigoGrupoPeriodo.substring(7));
+});
+
+$("#EstudiantesGrupoPeriodo").on("keypress", "#txtPagingSearchParticipantesInscribir", function (e) {
+    e.stopImmediatePropagation();
+    if (e.which === 13 && ($(this).val() > 0)) {
+        paginarParticipantesInscribir("data_ini", $(this).val(), codigoGrupoPeriodo.substring(7));
     }
-    var idGrupoPer
-    //para horarios
-function eliminarHorarioGrupo(id){
-    idGrupoPer=id;
+});
+
+function paginarParticipantesInscribir(dat, op, gr) {
+    var data_in = $('#txtPagingSearchParticipantesInscribir').data("datainic");
+    var url = 'PeriodosController/paginEstudiantes/';
+    var opcion = "";
+    if (dat === "data_inin") {
+        opcion = {"data_inin": data_in, idPeriodoGrupo: gr};
+    } else if (dat === "data_inip") {
+        opcion = {"data_inip": data_in, idPeriodoGrupo: gr};
+    } else if (dat === "data_ini") {
+        data_in = op;
+        opcion = {"data_ini": data_in, idPeriodoGrupo: gr};
+    }
+    var posting = $.post(url, opcion);
+    posting.done(function (data) {
+        if (data !== null) {
+            $('#EstudiantesGrupoPeriodo').empty();
+            $('#EstudiantesGrupoPeriodo').html(data);
+        }
+    });
+    posting.fail(function (data) {
+        alert("Error");
+    });
+}
+var idGrupoPer
+//para horarios
+function eliminarHorarioGrupo(id) {
+    idGrupoPer = id;
     $('#frmEliminarHorario').modal();
 }
-$('#btnEliminarHorarioDeGrupo').click(function(){
-    var posting = $.post("HorariosController/eliminarHorario/",{"Id":idGrupoPer});
-    posting.done(function(data){
-       if (data !== null) {
-           $('#horario'+idGrupoPer).hide();
-           $('#frmEliminarHorario').modal('toggle');
-       }
+$('#btnEliminarHorarioDeGrupo').click(function () {
+    var posting = $.post("HorariosController/eliminarHorario/", {"Id": idGrupoPer});
+    posting.done(function (data) {
+        if (data !== null) {
+            $('#horario' + idGrupoPer).hide();
+            $('#frmEliminarHorario').modal('toggle');
+        }
     });
 });
-$('#btnEnviarGrupoHADD').click(function(e){
+$('#btnEnviarGrupoHADD').click(function (e) {
     e.preventDefault();
     var $form = $(this), idPeriodo = codigoPeriodo.substring(10)
             , HoraEntrada = '00:00:00'
@@ -405,63 +423,63 @@ $('#btnEnviarGrupoHADD').click(function(e){
         alert("error" + xhr.responseText);
     });
 });
-$('#formAgregarHorarioGrupo').submit(function(e){
+$('#formAgregarHorarioGrupo').submit(function (e) {
     e.preventDefault();
 //        alert(FI+" - "+FF);
-    var add=false;
-    var inicio=horaFormateada($("#HorarioInicioHoraGrupo").val(),$('#HoraInicioAmPmGrupo').val(), $('#HorarioInicioMinutosGrupo').val());
-    var fin=horaFormateada($("#HorarioFinHoraGrupo").val(),$('#HoraFinAmPmGrupo').val(), $('#HorarioFinMinutosGrupo').val());
-    var aula=$('#AulaHorarioGrupo').find(':selected').val();
-    var naula=$('#AulaHorarioGrupo').find(':selected').text();
-    var turno=$('#TurnoHorarioGrupo').find(':selected').val();
-    var dia=$('#DiaHorarioGrupo').find(':selected').val();
-    var grupo=codigoGrupoPeriodo.substring(7);
-    
-    var tiempo = new Date("2016-01-01 "+inicio);
+    var add = false;
+    var inicio = horaFormateada($("#HorarioInicioHoraGrupo").val(), $('#HoraInicioAmPmGrupo').val(), $('#HorarioInicioMinutosGrupo').val());
+    var fin = horaFormateada($("#HorarioFinHoraGrupo").val(), $('#HoraFinAmPmGrupo').val(), $('#HorarioFinMinutosGrupo').val());
+    var aula = $('#AulaHorarioGrupo').find(':selected').val();
+    var naula = $('#AulaHorarioGrupo').find(':selected').text();
+    var turno = $('#TurnoHorarioGrupo').find(':selected').val();
+    var dia = $('#DiaHorarioGrupo').find(':selected').val();
+    var grupo = codigoGrupoPeriodo.substring(7);
+
+    var tiempo = new Date("2016-01-01 " + inicio);
     tiempo.setSeconds(tiempo.getSeconds() + 1);
-    var HinicioComp=tiempo.getHours() + ':' +tiempo.getMinutes() + ':' + tiempo.getSeconds();
-    tiempo = new Date("2016-01-01 "+fin);
+    var HinicioComp = tiempo.getHours() + ':' + tiempo.getMinutes() + ':' + tiempo.getSeconds();
+    tiempo = new Date("2016-01-01 " + fin);
     tiempo.setSeconds(tiempo.getSeconds() - 1);
-    var HfinComp=tiempo.getHours() + ':' +tiempo.getMinutes() + ':' + tiempo.getSeconds();
-    
-    if((new Date("2016-01-01 "+fin))>(new Date("2016-01-01 "+inicio))){
-        var posting=$.post("HorariosController/comprobarHorario/",{"H1":HinicioComp, "H2":HfinComp, "Aula":aula, "Turno":turno, "Dia":dia, "Grupo":grupo, "FI":FI, "FF":FF });
-        posting.done(function(data){
-           if (data !== "") {
-               var choque = $.parseJSON(data);
-               alert("No se puede agregar ese horario porque choca con el siguiente:\nHora Inicio:"+
-                       formato12("May 01, 2016 "+choque[0].HoraEntrada)+"\nHora Fin: "+formato12("May 01, 2016  "+choque[0].HoraSalida));
-           }else{
-                var pos=$.post($('#formAgregarHorarioGrupo').attr('action'),{"Entrada":inicio, "Salida":fin, "Aula":aula, "Turno":turno, "Dia":dia, "Grupo":grupo, naula:naula, GA:"GA" });
-               pos.done(function(dat){
-               if (dat !== "") {
-                   $('#HorarioDelGrupoPeriodo').append(dat);
-                   $('#ModalHorarioNuevoGrupo').modal('toggle');
-                   
-               }else{
-                   alert("No se pudo agregar");
-               }
-               });
-               pos.fail(function(xhr, textStatus, errorThrown) {
-                alert("error al intentar agregar");
-               });
-           }
+    var HfinComp = tiempo.getHours() + ':' + tiempo.getMinutes() + ':' + tiempo.getSeconds();
+
+    if ((new Date("2016-01-01 " + fin)) > (new Date("2016-01-01 " + inicio))) {
+        var posting = $.post("HorariosController/comprobarHorario/", {"H1": HinicioComp, "H2": HfinComp, "Aula": aula, "Turno": turno, "Dia": dia, "Grupo": grupo, "FI": FI, "FF": FF});
+        posting.done(function (data) {
+            if (data !== "") {
+                var choque = $.parseJSON(data);
+                alert("No se puede agregar ese horario porque choca con el siguiente:\nHora Inicio:" +
+                        formato12("May 01, 2016 " + choque[0].HoraEntrada) + "\nHora Fin: " + formato12("May 01, 2016  " + choque[0].HoraSalida));
+            } else {
+                var pos = $.post($('#formAgregarHorarioGrupo').attr('action'), {"Entrada": inicio, "Salida": fin, "Aula": aula, "Turno": turno, "Dia": dia, "Grupo": grupo, naula: naula, GA: "GA"});
+                pos.done(function (dat) {
+                    if (dat !== "") {
+                        $('#HorarioDelGrupoPeriodo').append(dat);
+                        $('#ModalHorarioNuevoGrupo').modal('toggle');
+
+                    } else {
+                        alert("No se pudo agregar");
+                    }
+                });
+                pos.fail(function (xhr, textStatus, errorThrown) {
+                    alert("error al intentar agregar");
+                });
+            }
         });
-        posting.fail(function(xhr, textStatus, errorThrown) {
+        posting.fail(function (xhr, textStatus, errorThrown) {
             alert("error" + xhr.responseText);
         });
-    }else{
+    } else {
         alert("La hora de finalización debe ser mayor que la hora de inicio");
     }
 });
 
-function horaFormateada(inicio,turno, minutos){
-    var ini=Number(inicio);
-    var Horas = (turno=="P.M." && ini<12)?(ini+12):ini;
-    Horas = (Horas==12 && turno=="A.M.")?"0":Horas;
-    Horas = (Number(Horas)<10)?"0"+Horas:Horas;
-    var Minutos = (Number(minutos)<10)?"0"+minutos:minutos;
-    var format = Horas+":"+Minutos+":00";
+function horaFormateada(inicio, turno, minutos) {
+    var ini = Number(inicio);
+    var Horas = (turno == "P.M." && ini < 12) ? (ini + 12) : ini;
+    Horas = (Horas == 12 && turno == "A.M.") ? "0" : Horas;
+    Horas = (Number(Horas) < 10) ? "0" + Horas : Horas;
+    var Minutos = (Number(minutos) < 10) ? "0" + minutos : minutos;
+    var format = Horas + ":" + Minutos + ":00";
     return format;
 }
 
@@ -473,18 +491,29 @@ function formato12(date) {
     var dd = "AM";
     var h = hh;
     if (h >= 12) {
-        h = hh-12;
+        h = hh - 12;
         dd = "PM";
     }
     if (h == 0) {
         h = 12;
     }
-    m = m<10?"0"+m:m;
-    s = s<10?"0"+s:s;
-    h = h<10?"0"+h:h; 
-    var patron = new RegExp("0?"+hh+":"+m+":"+s);
-    var reemplazo = h+":"+m;
-    reemplazo += " "+dd;    
+    m = m < 10 ? "0" + m : m;
+    s = s < 10 ? "0" + s : s;
+    h = h < 10 ? "0" + h : h;
+    var patron = new RegExp("0?" + hh + ":" + m + ":" + s);
+    var reemplazo = h + ":" + m;
+    reemplazo += " " + dd;
 
-    return date.replace(patron,reemplazo).substring(12); 
+    return date.replace(patron, reemplazo).substring(12);
 }
+//
+//$('.FindAlumnoClass').keyup(function(event){
+//    var idPeriodoGrupo = codigoGrupoPeriodo.substring(7);
+//    var posting2 = $.post("PeriodosController/listarEstudiantes/", {idPeriodoGrupo: idPeriodoGrupo});
+//    posting2.done(function (data) {
+//        if (data !== null) {
+//            $('#EstudiantesGrupoPeriodo').html(data);
+//            //$("#gestionGrupoModal").modal('toggle');
+//        }
+//    });
+//});
