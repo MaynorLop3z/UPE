@@ -65,7 +65,8 @@ function ejecutarPago() {
         if (data !== null) {
             $('#containerDetPag').empty();
             $('#containerDetPag').html(data);
-             $('#tableParticipantesPag').find('#trAlum' + $('#codGrupPar').val()).find('.estadoPag').html('CANCELADO');
+            $('#tableParticipantesPag').find('#trAlum' + $('#codGrupPar').val()).find('.estadoPag').html('CANCELADO');
+        $('#divMsgExito').html('<p>Pago Ingresado correctamente</p>')
         }
     });
     posting.fail(function (data) {

@@ -8,7 +8,7 @@
 if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
-
+include(APPPATH . 'libraries/fpdf181/PDF.php');
 class PeriodosController extends CI_Controller {
 
     public function __construct() {
@@ -20,6 +20,7 @@ class PeriodosController extends CI_Controller {
     public function insertPeriodo() {
         try {
             if ($this->input->post('idModulo')) {
+                     $this->load->library('pdf');
                 $FechaInico = $this->input->post('FechaInicio');
                 $FechaFin = $this->input->post('FechaFin');
                 $Estado = $this->input->post('estadoPeriodo');
@@ -52,8 +53,8 @@ class PeriodosController extends CI_Controller {
 
     public function listarByModulo() {
         $totalPaginasPeriodos = 0;
-        $ToTalRegistrosPeriodos=0;
-        $periodosMostrados=0;
+        $ToTalRegistrosPeriodos = 0;
+        $periodosMostrados = 0;
         if ($this->input->post('idModulo')) {
             $idModulo = $this->input->post('idModulo');
             $Periodos = $this->Periodos->listarPeriodosByModuloLimited($idModulo, null);
@@ -78,12 +79,12 @@ class PeriodosController extends CI_Controller {
             }
 //            echo $cadena;
             $data = array(
-            "cadena" => $cadena,
-            "totalPagPer"=> $totalPaginasPeriodos,
-            "totalRegPer"=> $ToTalRegistrosPeriodos,
-            "periodosMos" => $periodosMostrados
-        );
-        echo json_encode($data);
+                "cadena" => $cadena,
+                "totalPagPer" => $totalPaginasPeriodos,
+                "totalRegPer" => $ToTalRegistrosPeriodos,
+                "periodosMos" => $periodosMostrados
+            );
+            echo json_encode($data);
         }
     }
 
@@ -125,8 +126,8 @@ class PeriodosController extends CI_Controller {
             echo json_encode($ex);
         }
     }
-    
-        public function listarGruposHorarios() {
+
+    public function listarGruposHorarios() {
         try {
             if ($this->input->post()) {
                 $Codigo = $this->input->post('idPeriodo');
@@ -186,7 +187,7 @@ class PeriodosController extends CI_Controller {
             echo json_encode($ex);
         }
     }
-    
+
     public function listarEstudiantes() {
         try {
             if ($this->input->post()) {
@@ -208,19 +209,19 @@ class PeriodosController extends CI_Controller {
                     }
                     $result .= '</td>\n</tr>\n';
                 }
-                if($Nestudiantes>ROWS_PER_PAGE){
-                $result.='<tr>
+                if ($Nestudiantes > ROWS_PER_PAGE) {
+                    $result.='<tr>
                         <td colspan=6 ><div class="row">
                             <hr>
                             <ul class="pager" id="footpagerParticipantesInscribir">
                                 <li><button data-datainic="1" id="aFirstPagParticipantesInscribir" >&lt;&lt;</button></li>
                                 <li><button id="aPrevPagParticipantesInscribir" >&lt;</button></li>
                                 <li>
-                                    <input data-datainic="1" type="text" value="1" id="txtPagingSearchParticipantesInscribir" name="txtNumberPag" size="5">/'.intval(ceil($Nestudiantes/ ROWS_PER_PAGE)).'
+                                    <input data-datainic="1" type="text" value="1" id="txtPagingSearchParticipantesInscribir" name="txtNumberPag" size="5">/' . intval(ceil($Nestudiantes / ROWS_PER_PAGE)) . '
                                 </li>
                                 <li><button id="aNextPagParticipantesInscribir">&gt;</button></li>
-                                <li><button id="aLastPagParticipantesInscribir" data-datainic="'.intval(ceil($Nestudiantes/ ROWS_PER_PAGE)).'" >&gt;&gt;</button></li>
-                                <li id="pagerParticipantesInscribir">[ 1 - '.ROWS_PER_PAGE . "/" . $Nestudiantes. ']</li>
+                                <li><button id="aLastPagParticipantesInscribir" data-datainic="' . intval(ceil($Nestudiantes / ROWS_PER_PAGE)) . '" >&gt;&gt;</button></li>
+                                <li id="pagerParticipantesInscribir">[ 1 - ' . ROWS_PER_PAGE . "/" . $Nestudiantes . ']</li>
                             </ul>
                         </div></td>
                         </tr>';
@@ -231,7 +232,7 @@ class PeriodosController extends CI_Controller {
             echo json_encode($ex);
         }
     }
-    
+
     public function paginEstudiantes($Estudian = null) {
         try {
             $final = 0;
@@ -242,20 +243,19 @@ class PeriodosController extends CI_Controller {
             $result = '';
             $estudiantes = array();
             if ($this->input->post()) {
-                $grupo=$this->input->post('idPeriodoGrupo');
-                $totalPaginas=intval(ceil(count($this->Periodos->getStudents($grupo))/ ROWS_PER_PAGE));
+                $grupo = $this->input->post('idPeriodoGrupo');
+                $totalPaginas = intval(ceil(count($this->Periodos->getStudents($grupo)) / ROWS_PER_PAGE));
                 if ($this->input->post('data_ini') != null) {
                     $pagAct = $this->input->post('data_ini');
                     $final = $this->input->post('data_ini');
-                    
+
                     if ($pagAct <= 0) {
                         $pagAct = 1;
                         $final = 1;
-                    }else if($pagAct > $totalPaginas) {
-                        $pagAct =$totalPaginas;
-                        $final=$this->$totalPaginas;
+                    } else if ($pagAct > $totalPaginas) {
+                        $pagAct = $totalPaginas;
+                        $final = $this->$totalPaginas;
                     }
-                    
                 } else if ($this->input->post('data_inip') != null) {
                     $pagAct = $this->input->post('data_inip') - 1;
                     $final = $this->input->post('data_inip') - 1;
@@ -269,9 +269,9 @@ class PeriodosController extends CI_Controller {
                     $final = $this->input->post('data_inin');
                     $final+=1;
                     if ($pagAct > $totalPaginas) {
-                        $pagAct =$totalPaginas;
-                        $final=$totalPaginas;
-                    }  else {
+                        $pagAct = $totalPaginas;
+                        $final = $totalPaginas;
+                    } else {
                         
                     }
                 } else {
@@ -283,37 +283,37 @@ class PeriodosController extends CI_Controller {
             $final = ($final * ROWS_PER_PAGE) - ROWS_PER_PAGE;
             if ($Estudian != null) {
 
-                array_push($estudiantes, $Estudian );
+                array_push($estudiantes, $Estudian);
             } else {
                 $estudiantes = $this->Periodos->getStudents($grupo, $inicio, $final);
             }
 
             foreach ($estudiantes as $estudiante) {
-                    $result .= '<tr id="GrupoEstudiante' . $estudiante->CodigoParticipante . '">\n';
-                    $result .= '<td class="NombreEstudiante">' . $estudiante->Nombre . '</td>\n';
-                    $result .= '<td class="DUIEstudiante">' . $estudiante->NumeroDUI . '</td>\n';
-                    $result .= '<td class="CategoriaEstudiante">' . $estudiante->NombreCategoriaParticipante . '</td>\n';
-                    $result .= '<td class="ComentariosEstudiante">' . $estudiante->Comentarios . '</td>\n';
-                    $result .= '<td class="EstudianteInscrito">';
-                    if ($estudiante->Inscrito > 0) {
-                        $result .= '<button id="GrupoAlumnoADD' . $estudiante->CodigoParticipante . '" onclick="inscribirAlumnoGrupo(this)" title="Quitar alumno del periodo" class="btn_agregar_alumno btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </button>';
-                    } else {
-                        $result .= '<button id="GrupoAlumnoADD' . $estudiante->CodigoParticipante . '" onclick="inscribirAlumnoGrupo(this)" title="Agregar alumno al periodo" class="btn_agregar_alumno btn btn-success"><span class="glyphicon glyphicon-ok"></span> </button>';
-                    }
-                    $result .= '</td>\n</tr>\n';
+                $result .= '<tr id="GrupoEstudiante' . $estudiante->CodigoParticipante . '">\n';
+                $result .= '<td class="NombreEstudiante">' . $estudiante->Nombre . '</td>\n';
+                $result .= '<td class="DUIEstudiante">' . $estudiante->NumeroDUI . '</td>\n';
+                $result .= '<td class="CategoriaEstudiante">' . $estudiante->NombreCategoriaParticipante . '</td>\n';
+                $result .= '<td class="ComentariosEstudiante">' . $estudiante->Comentarios . '</td>\n';
+                $result .= '<td class="EstudianteInscrito">';
+                if ($estudiante->Inscrito > 0) {
+                    $result .= '<button id="GrupoAlumnoADD' . $estudiante->CodigoParticipante . '" onclick="inscribirAlumnoGrupo(this)" title="Quitar alumno del periodo" class="btn_agregar_alumno btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </button>';
+                } else {
+                    $result .= '<button id="GrupoAlumnoADD' . $estudiante->CodigoParticipante . '" onclick="inscribirAlumnoGrupo(this)" title="Agregar alumno al periodo" class="btn_agregar_alumno btn btn-success"><span class="glyphicon glyphicon-ok"></span> </button>';
                 }
-                $result.='<tr>
+                $result .= '</td>\n</tr>\n';
+            }
+            $result.='<tr>
                         <td colspan=6 ><div class="row">
                             <hr>
                             <ul class="pager" id="footpagerParticipantesInscribir">
                                 <li><button data-datainic="1" id="aFirstPagParticipantesInscribir" >&lt;&lt;</button></li>
                                 <li><button id="aPrevPagParticipantesInscribir" >&lt;</button></li>
                                 <li>
-                                    <input data-datainic="' . $pagAct .'" type="text" value="' . $pagAct .'" id="txtPagingSearchParticipantesInscribir" name="txtNumberPag" data-mask = "000000000" size="5">/'.$totalPaginas.'
+                                    <input data-datainic="' . $pagAct . '" type="text" value="' . $pagAct . '" id="txtPagingSearchParticipantesInscribir" name="txtNumberPag" data-mask = "000000000" size="5">/' . $totalPaginas . '
                                 </li>
                                 <li><button id="aNextPagParticipantesInscribir">&gt;</button></li>
-                                <li><button id="aLastPagParticipantesInscribir" data-datainic="'.$totalPaginas.'" >&gt;&gt;</button></li>
-                                <li id="pagerParticipantesInscribir">[ '. ($final + 1) . ' - '.($final + count($estudiantes)). "/" . count($this->Periodos->getStudents($grupo)). ']</li>
+                                <li><button id="aLastPagParticipantesInscribir" data-datainic="' . $totalPaginas . '" >&gt;&gt;</button></li>
+                                <li id="pagerParticipantesInscribir">[ ' . ($final + 1) . ' - ' . ($final + count($estudiantes)) . "/" . count($this->Periodos->getStudents($grupo)) . ']</li>
                             </ul>
                         </div></td>
                         </tr>';
@@ -332,7 +332,7 @@ class PeriodosController extends CI_Controller {
     function getTotalPaginas($id) {
         return $result = intval(ceil($this->Periodos->countAllPeriodos($id) / ROWS_PER_PAGE));
     }
-    
+
     public function paginPeriodos($Periodo = null) {
         try {
             $final = 0;
@@ -340,20 +340,19 @@ class PeriodosController extends CI_Controller {
             $cadena = '';
             $filas = '';
             $Periodos = array();
-            $idMo=$this->input->post('modulo');
+            $idMo = $this->input->post('modulo');
             if ($this->input->post()) {
                 if ($this->input->post('data_ini') != null) {
                     $pagAct = $this->input->post('data_ini');
                     $final = $this->input->post('data_ini');
-                    
+
                     if ($pagAct <= 0) {
                         $pagAct = 1;
                         $final = 1;
-                    }else if($pagAct > $this->getTotalPaginas($idMo)) {
-                        $pagAct =$this->getTotalPaginas($idMo);
-                        $final=$this->getTotalPaginas($idMo);
+                    } else if ($pagAct > $this->getTotalPaginas($idMo)) {
+                        $pagAct = $this->getTotalPaginas($idMo);
+                        $final = $this->getTotalPaginas($idMo);
                     }
-                    
                 } else if ($this->input->post('data_inip') != null) {
                     $pagAct = $this->input->post('data_inip') - 1;
                     $final = $this->input->post('data_inip') - 1;
@@ -367,9 +366,9 @@ class PeriodosController extends CI_Controller {
                     $final = $this->input->post('data_inin');
                     $final+=1;
                     if ($pagAct > $this->getTotalPaginas($idMo)) {
-                        $pagAct =$this->getTotalPaginas($idMo);
-                        $final=$this->getTotalPaginas($idMo);
-                    }  else {
+                        $pagAct = $this->getTotalPaginas($idMo);
+                        $final = $this->getTotalPaginas($idMo);
+                    } else {
                         
                     }
                 } else {
@@ -401,14 +400,14 @@ class PeriodosController extends CI_Controller {
             <tbody id="bodytablaPeriodos">';
             foreach ($Periodos as $per) {
                 $filas.='<tr id="Periodo' . ($per->CodigoPeriodo) . '">';
-                $filas.='<th class="fip">'.$per->FechaInicioPeriodo.'</th>';
-                $filas.='<th class="ffp">'.$per->FechaFinPeriodo.'</th>';
-                $filas.='<th class="ep">'.(($per->Estado === 't') ? 'Activo' : 'Inactivo').'</th>';
-                $filas.='<th class="cp">'.$per->Comentario.'</th>';
+                $filas.='<th class="fip">' . $per->FechaInicioPeriodo . '</th>';
+                $filas.='<th class="ffp">' . $per->FechaFinPeriodo . '</th>';
+                $filas.='<th class="ep">' . (($per->Estado === 't') ? 'Activo' : 'Inactivo') . '</th>';
+                $filas.='<th class="cp">' . $per->Comentario . '</th>';
                 $filas.='<th>
-                            <button id="PeriodoE'.$per->CodigoPeriodo.'" onclick="EditPeriodoShow(this)" title="Editar Periodo" class="btn_modificar_periodo btn btn-success"><span class="glyphicon glyphicon-pencil"></span> </button>
-                            <button id="PeriodoDEL'.$per->CodigoPeriodo.'" onclick="DeletePeriodoShow(this)" title="Eliminar Periodo" class="btn_eliminar_periodo btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
-                            <button id="PeriodoGES'.$per->CodigoPeriodo.'" onclick="GestionPeriodoShow(this)" title="Gestionar Periodo" class="btn_gestionar_periodo btn btn-info"><span class="glyphicon glyphicon-cog"></span></button>
+                            <button id="PeriodoE' . $per->CodigoPeriodo . '" onclick="EditPeriodoShow(this)" title="Editar Periodo" class="btn_modificar_periodo btn btn-success"><span class="glyphicon glyphicon-pencil"></span> </button>
+                            <button id="PeriodoDEL' . $per->CodigoPeriodo . '" onclick="DeletePeriodoShow(this)" title="Eliminar Periodo" class="btn_eliminar_periodo btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
+                            <button id="PeriodoGES' . $per->CodigoPeriodo . '" onclick="GestionPeriodoShow(this)" title="Gestionar Periodo" class="btn_gestionar_periodo btn btn-info"><span class="glyphicon glyphicon-cog"></span></button>
                         </th>
                     </tr>';
             }
@@ -431,6 +430,55 @@ class PeriodosController extends CI_Controller {
         } else {
             return $cadena;
         }
+    }
+
+    public function crearReporteDetalleGrupo() {
+        try {
+          $codGrupoPeriodo=$this->input->get('idPeriodoGrupo') ;
+           if($codGrupoPeriodo!=null){
+               $this->obtenerDetalles($codGrupoPeriodo);
+               
+               
+           }
+            
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+    
+      public function obtenerDetalles($codGrupoPeriodo) {
+       
+       $this->load->model('Periodos');
+        
+        $pdf = new PDF('P', 'cm', array(21.5, 27.9));
+        $DetallesGrupo = $this->Periodos->listarDetallesGrupoPeriodo($codGrupoPeriodo);
+        foreach ($DetallesGrupo as $det) {
+            $pdf->setTotal($det->Aula);
+            $pdf->setClientName($det->FechaInicioPeriodo);
+            $pdf->setDateFac($det->FechaFinPeriodo);
+            $pdf->setDirection($det->HoraEntrada.'-'.$det->HoraSalida);
+            $pdf->AddPage();
+            $pdf->SetFont('Times', 'B', 10);
+//            $detalles = $this->MDelivery->getDetalleOrder($IdPedido);
+//            foreach ($detalles as $detalle) {
+//                $pdf->Cell(1, 2, $detalle->Quantity, 0, 0, 'L');
+//                $pdf->Cell(7, 2, $detalle->NameProduct, 0, 0, 'L');
+//                $pdf->Cell(2, 2, $detalle->UnitPrice, 0, 0, 'L');
+//                $pdf->Cell(2, 2, ($detalle->Quantity * $detalle->UnitPrice), 0, 0, 'L');
+//                $salsas = $this->MDelivery->getDetalleSalsas($detalle->IdDetail);
+//                foreach ($salsas as $salsa) {
+//                    $pdf->Ln(0.5);
+//                    $pdf->Cell(1, 2, '', 0, 0, 'L');
+//                    $pdf->Cell(7, 2, '--' . $salsa->NameSauce . ' - ' . $salsa->NameSpicy, 0, 0, 'L');
+//                    $pdf->Cell(2, 2, '', 0, 0, 'L');
+//                    $pdf->Cell(2, 2, '', 0, 0, 'L');
+//                }
+//                $pdf->Ln(0.5);
+//            }
+        }
+       
+        $pdf->Output('detAlumnos.pdf',"D");
+        //echo 'DetalleG.pdf';
     }
 
 }

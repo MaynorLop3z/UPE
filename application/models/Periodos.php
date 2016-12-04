@@ -57,13 +57,14 @@ class Periodos extends CI_Model {
         $resultado = $consulta->result();
         return $resultado;
     }
-     public function listarPeriodosL($mod, $limite=null, $offset=null) {
-         if ($offset == null) {
-               $offset = 0;
-            }
-         if($limite==null){
-             $limite=0;
-         }
+
+    public function listarPeriodosL($mod, $limite = null, $offset = null) {
+        if ($offset == null) {
+            $offset = 0;
+        }
+        if ($limite == null) {
+            $limite = 0;
+        }
         $this->db->select('CodigoPeriodo, '
                 . 'FechaInicioPeriodo, '
                 . 'FechaFinPeriodo, '
@@ -94,8 +95,8 @@ class Periodos extends CI_Model {
         $resultado = $consulta->result();
         return $resultado;
     }
-    
-      public function listarGruposHorarios($idPeriodo) {
+
+    public function listarGruposHorarios($idPeriodo) {
         $comando = 'SELECT "GrupoPeriodos"."CodigoGrupoPeriodo", "GrupoPeriodos"."Estado", "Horarios"."HoraEntrada",
 	"Horarios"."HoraSalida", "Horarios"."Dia", "Aulas"."NombreAula"
         FROM "GrupoPeriodos"
@@ -104,12 +105,13 @@ class Periodos extends CI_Model {
         LEFT OUTER JOIN "Aulas"
         ON "Horarios"."CodigoAula"="Aulas"."IdAula"
 
-        WHERE "GrupoPeriodos"."CodigoPeriodo" = '.$idPeriodo.' 
+        WHERE "GrupoPeriodos"."CodigoPeriodo" = ' . $idPeriodo . ' 
         ORDER BY "GrupoPeriodos"."CodigoGrupoPeriodo", "Horarios"."Dia", "Horarios"."HoraEntrada" ASC';
         $consulta = $this->db->query($comando);
         $resultado = $consulta->result();
         return $resultado;
     }
+
 //    public function listarGruposHorarios($idGrupo) {
 //        $comando = 'SELECT "GrupoPeriodos"."CodigoGrupoPeriodo", "GrupoPeriodos"."Estado",
 //            "Aulas"."NombreAula", "Horarios"."HoraEntrada",  "Horarios"."HoraSalida", 
@@ -160,11 +162,11 @@ class Periodos extends CI_Model {
         $resultado = $consulta->result();
         return $resultado;
     }
-    
-    public function listarPeriodosByModuloLimited($idModulo, $offset){
-         if ($offset == null) {
-               $offset = 0;
-            }
+
+    public function listarPeriodosByModuloLimited($idModulo, $offset) {
+        if ($offset == null) {
+            $offset = 0;
+        }
         $limit = ROWS_PER_PAGE;
         $this->db->select('CodigoPeriodo, '
                 . 'FechaInicioPeriodo, '
@@ -259,23 +261,23 @@ WHERE
         }
     }
 
-    public function getStudents($idPeriodo, $limit=0, $offset=0) {
+    public function getStudents($idPeriodo, $limit = 0, $offset = 0) {
         try {
-            $query='SELECT 
+            $query = 'SELECT 
   "T0"."CodigoParticipante",               
   "T0"."Nombre", 
   "T0"."NumeroDUI", 
   "T1"."NombreCategoriaParticipante", 
   "T0"."Comentarios",
-  (SELECT COUNT("T2"."CodigoGruposParticipantes") FROM "GruposParticipantes" "T2" WHERE "T2"."CodigoGrupoPeriodo" = '.$idPeriodo.' AND "T2"."CodigoParticipante" = "T0"."CodigoParticipante") AS "Inscrito"
+  (SELECT COUNT("T2"."CodigoGruposParticipantes") FROM "GruposParticipantes" "T2" WHERE "T2"."CodigoGrupoPeriodo" = ' . $idPeriodo . ' AND "T2"."CodigoParticipante" = "T0"."CodigoParticipante") AS "Inscrito"
 FROM 
   "Participantes" "T0", 
   "CategoriasParticipante" "T1"
 WHERE 
   "T0"."CodigoCategoriaParticipantes" = "T1"."CodigoCategoriaParticipantes" ';
-            
-            if($limit>0){
-                $query.='LIMIT '.$limit.' OFFSET '.$offset.' ;';
+
+            if ($limit > 0) {
+                $query.='LIMIT ' . $limit . ' OFFSET ' . $offset . ' ;';
             }
             $consulta = $this->db->query($query);
             if ($consulta != null) {
@@ -286,10 +288,10 @@ WHERE
             return $exc->getTraceAsString();
         }
     }
-    
-    public function inscribirDocente( $grupoperiodo, $usuario) {
+
+    public function inscribirDocente($grupoperiodo, $usuario) {
         try {
-            $consulta = $this->db->query('SELECT agregardocentegrupo('.$grupoperiodo.','.$usuario.') AS "Inscripcion"');
+            $consulta = $this->db->query('SELECT agregardocentegrupo(' . $grupoperiodo . ',' . $usuario . ') AS "Inscripcion"');
             if ($consulta != null) {
                 $resultado = $consulta->result();
             } else {
@@ -301,9 +303,28 @@ WHERE
             return $exc->getTraceAsString();
         }
     }
-    
+
     public function countAllPeriodos($di) {
         $num_rows = count($this->listarPeriodosByModulo($di));
         return $num_rows;
     }
+
+    public function listarDetallesGrupoPeriodo($codGrupoPeriodo) {
+        try {
+            $query = 'SELECT  TO_CHAR(per."FechaInicioPeriodo",\'dd/mm/YYYY\') "FechaInicioPeriodo",TO_CHAR(per."FechaFinPeriodo",\'dd/mm/YYYY\') "FechaFinPeriodo",TO_CHAR(h."HoraEntrada", \'hh12:mi AM\') as "HoraEntrada" ,TO_CHAR(h."HoraSalida", \'hh12:mi AM\') as "HoraSalida",UPPER(au."NombreAula") as "Aula" 
+            FROM "public"."Periodos" AS per
+            INNER JOIN "public"."GrupoPeriodos" AS gper ON gper."CodigoPeriodo" = per."CodigoPeriodo"
+            LEFT join "public"."Horarios" h on h."CodigoGrupoPeriodo"=gper."CodigoGrupoPeriodo"
+            LEFT join "Aulas" au on au."IdAula"=h."CodigoAula"
+            WHERE gper."CodigoGrupoPeriodo"=' . $codGrupoPeriodo;
+            $consulta = $this->db->query($query);
+            if ($consulta != null) {
+                $resultado = $consulta->result();
+            }
+            return $resultado;
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+
 }

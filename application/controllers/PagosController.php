@@ -391,7 +391,7 @@ class PagosController extends CI_Controller {
         echo $listaAlum;
     }
 
-    public function buscarPagoDet($codUser = null) {
+    public function buscarPagoDet($codUser = null,$editarPg=null) {
         try {
             if ($codUser == null) {
                 $codGpart = $this->input->post('codUser');
@@ -399,6 +399,7 @@ class PagosController extends CI_Controller {
                 $codGpart = $codUser;
             }
             $Resultado = $this->Pagos->buscarPagoDet($codGpart);
+            
             foreach ($Resultado as $resul) {
 
                 $data['FechaIniP'] = $resul->FechaInicioPeriodo;
@@ -409,6 +410,11 @@ class PagosController extends CI_Controller {
                 $data['HoraEntrada'] = $resul->HoraEntrada;
                 $data['HoraSalida'] = $resul->HoraSalida;
                 $data['CodGrupPar'] = $resul->CodigoGruposParticipantes;
+                if($editarPg!=null){
+                   $data['EditarPg'] = 'Edit'; 
+                }else{
+                    $data['EditarPg'] = null;  
+                }
             }
 
             $response = $this->load->view('Pagos/PagosModal', $data, TRUE);
@@ -426,6 +432,7 @@ class PagosController extends CI_Controller {
     public function registrarPago() {
         try {
             if ($this->input->post()) {
+                $editarPg=$this->input->post('editarPg');
                 $noRecibo = $this->input->post('NoRecibo');
                 $montoPago = $this->input->post('MontoPago');
                 $codGrupPar = $this->input->post('CodGrupPar');
@@ -436,7 +443,7 @@ class PagosController extends CI_Controller {
                 $pago = $this->Pagos->registrarPago($codGrupPar, $montoPago, $noRecibo, $userReg, $ip);
 
                 if ($pago != null) {
-                    $response = $this->buscarPagoDet($codGrupPar);
+                    $response = $this->buscarPagoDet($codGrupPar,$editarPg);
                     echo $response;
                 }
             }

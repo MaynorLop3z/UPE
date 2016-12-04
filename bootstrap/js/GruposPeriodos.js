@@ -184,7 +184,9 @@ function GestionPeriodoShow(fila) {
                         tabla+="<td colspan=4>Sin horario asignado</td>"
                     }
                     
-                    tabla += '<td class="GestionButton"><button id="gestion' + obj[x].CodigoGrupoPeriodo + '" onclick="testShow(this)" title="Gestionar Periodo" class="btn_gestionar_periodo btn btn-info"><span class="glyphicon glyphicon-cog"></span></button></td>';
+                    tabla += '<td class="GestionButton"><button id="gestion' + obj[x].CodigoGrupoPeriodo + '" onclick="testShow(this)" title="Gestionar Grupo" class="btn_gestionar_periodo btn btn-info"><span class="glyphicon glyphicon-cog"></span></button>\n\
+                                                        <button id="impr' + obj[x].CodigoGrupoPeriodo + '" onclick="printDetailGrupo(this)" title="Imprimir detalle" class="btn_gestionar_periodo btn btn-info"><span class="glyphicon glyphicon-print"></span></button></td>';
+                    
                     tabla += '</tr>\n';
                }
                
@@ -204,6 +206,22 @@ function GestionPeriodoShow(fila) {
     posting.fail(function (xhr, textStatus, errorThrown) {
         alert("error" + xhr.responseText);
     });
+}
+
+function printDetailGrupo(fila) {
+    codigoGrupoPeriodo = fila.id;
+    var idPeriodoGrupo = codigoGrupoPeriodo.substring(4);
+    
+//    var posting = $.post("PeriodosController/crearReporteDetalleGrupo/", {idPeriodoGrupo: idPeriodoGrupo}); 
+//    posting.done(function (data) {
+//        window.open(data);
+//    });
+//    posting.fail(function (xhr, textStatus, errorThrown) {
+//        alert("error" + xhr.responseText);
+//    });
+
+window.open('PeriodosController/crearReporteDetalleGrupo/?idPeriodoGrupo='+idPeriodoGrupo);
+    
 }
 
 function testShow(fila) {

@@ -40,21 +40,35 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <?php if($NumeroRecibo==null){ ?>
+                <?php
+                if ($NumeroRecibo != null) {
+                    echo '<input type="hidden" value="' . $NumeroRecibo . '" name="editarPg" id="editarPg"';
+                }
+                ?>
+                <!--?php if($NumeroRecibo==null){ ?-->
                 <div class="col-lg-2">
                     <button type="button" id="btnRegistrPago" onclick="ejecutarPago()" class=" btn btn-default" name="btnRegistrPago">Registrar</button>                 
                 </div>
                 <div class="col-lg-2">
-                <?php }else{ ?>
-                <div class="col-lg-12">
-                    <?php }?>
-                
-                    <button type="reset" id="btnCerrarDePag" onclick="cerrarDivPagosDet()" class=" btn btn-default" name="Limpiar">Cerrar</button>
+                    <!--?php }else{ ?-->
+                    <div class="col-lg-12">
+                        <!--?php }?-->
+
+                        <button type="reset" id="btnCerrarDePag" onclick="cerrarDivPagosDet()" class=" btn btn-default" name="Limpiar">Cerrar</button>
+                    </div>
+                    <!--<button type="button" id="btnCerrar" data-dismiss="modal" class=" btn btn-default" name="Cerrar">Cerrar</button>-->
                 </div>
-                <!--<button type="button" id="btnCerrar" data-dismiss="modal" class=" btn btn-default" name="Cerrar">Cerrar</button>-->
+                <?php
+                if ($EditarPg != null) {
+                    echo '<div style="color:blue;font-size:200%;">Pago editado correctamente</div>';
+                }else{
+                    echo'  <div  id="divMsgExito" style="color:blue;font-size:200%;"></div> ';
+                }
+                ?>
+                
             </div>
-        </div>
     </form>
 
 
+</div>
 </div>
