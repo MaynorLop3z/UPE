@@ -270,14 +270,14 @@ class Wsite extends CI_Controller {
                         $totalpag = intval(ceil(($totalpag / PUBLICACIONES_X_PAG)));
                     }
                     while ($contador <= $totalpag) {
-                        $result .= '<li><a id="' . $contador . '"' . $contador . '</a></li>';
+//                        $result .= '<li><a id="' . $contador . '"' . $contador . '</a></li>';
                         $contador ++;
                     }
-                    $result .='<li><a id="btnpagfin">&raquo;</a></li> '
-                            . '</ul>'
-                            . ' </div>';
-
-                    //
+//                    $result .='<li><a id="btnpagfin">&raquo;</a></li> '
+//                            . '</ul>'
+//                            . ' </div>';
+//
+//                    //
                     /////
                 } else {
                     $result = '<h3 align="center">No existen Publicaciones en ese Rango de Fecha</h3>';
@@ -321,10 +321,10 @@ class Wsite extends CI_Controller {
                                         </a> </div>  ';
                     }
 
-                    $result .=
-                            '<div class="row" id="paginacionDivcat">'
-                            . '<ul class="pager">'
-                            . '<li><a  id="btnpaginicio">&laquo;</a></li>';
+//                    $result .=
+//                            '<div class="row" id="paginacionDivcat">'
+//                            . '<ul class="pager">'
+//                            . '<li><a  id="btnpaginicio">&laquo;</a></li>';
                     $contador = 1;
 
                     $totalpag2 = $this->listarPublicacionesCAT($categoriaSlt);
@@ -335,15 +335,15 @@ class Wsite extends CI_Controller {
                         $totalpag = intval(ceil(($totalpag / PUBLICACIONES_X_PAG)));
                     }
                     while ($contador <= $totalpag) {
-                        $result .= '<li><a id="' . $contador . '"' . $contador . '</a></li>';
+//                        $result .= '<li><a id="' . $contador . '"' . $contador . '</a></li>';
                         $contador ++;
                     }
-                    $result .='<li><a id="btnpagfin">&raquo;</a></li> '
-                            . '</ul>'
-                            . ' </div>';
-
-                    //
-                    /////
+//                    $result .='<li><a id="btnpagfin">&raquo;</a></li> '
+//                            . '</ul>'
+//                            . ' </div>';
+//
+//                    //
+//                    /////
                 } else {
                     $result = '<h3 align="center">No existen Publicaciones en esta categoria</h3>';
                 }

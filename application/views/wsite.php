@@ -35,7 +35,7 @@
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="bootstrap/js/jquery.mask.js"></script>
         <!-- Plugin JavaScript -->
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+        <script src="bootstrap/js/Sjquery.easing.min.js"></script>
         <script src="bootstrap/js/classie.js"></script>
         <script src="bootstrap/js/cbpAnimatedHeader.js"></script>
 
@@ -79,13 +79,13 @@
                             <a href="#about">¿Quienes Somos?</a>
                         </li>
                         <li class="page-scroll">
-                            <a href="" class="portfolio-link btn   dropdown-toggle"  title="Buscar Publicaciones" data-toggle="dropdown" id="test3"><i class="fa fa-fw fa-step-forward"></i></a>
+                            <a href="" class="portfolio-link btn   dropdown-toggle"  title="Buscar Publicaciones" data-toggle="dropdown" id="test3"><i class="fa fa-fw fa-sign-in"></i></a>
                         <ul class="dropdown-menu" id="log">
-                        <li class="page-scroll " value="1" >
-                            <a href="#Login2" class="portfolio-link" data-toggle="modal">Ingresar</a>
-                        </li>
                         <li class="page-scroll " value="2" >
                             <a href='index.php/PortalParticipantes' class="portfolio-link" data-toggle="modal">Alumnos</a>
+                        </li>
+                        <li class="page-scroll " value="1" >
+                            <a href="#Login2" class="portfolio-link" data-toggle="modal">Institucionr</a>
                         </li>
                         </ul></li>
 
@@ -600,7 +600,8 @@
 
 
  
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
+        <script src="bootstrap/js/jquery-ui.js"></script>
     </body>
 
 </html>
