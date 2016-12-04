@@ -68,9 +68,9 @@ $("#PubsDate").on("click", ".callModalPublicacion", function (e) {
 
 
 $('#btnSend').on('click', function (event) {
-    
+
 //            document.contactForm.selectCategoria.selectedIndex ;
-    if (document.getElementById('name').value && document.getElementById('message').value ) {
+    if (document.getElementById('name').value && document.getElementById('message').value) {
 
         var link = "mailto:rinabes@yahoo.com"
 //             + "?cc=myCC"
@@ -93,6 +93,8 @@ $('#opcReciente').on('click', function (event) {
     visto.style.display = 'none';
     var vistodate = document.getElementById('DateDiv');
     vistodate.style.display = 'none';
+    var vistoname = document.getElementById('NameDiv');
+    vistoname.style.display = 'none';
 
 });
 
@@ -101,15 +103,34 @@ $('#opccategoria').on('click', function (event) {
     $('#masRecientesDiv').hide();
     var vistodate = document.getElementById('DateDiv');
     vistodate.style.display = 'none';
+    var vistoname = document.getElementById('NameDiv');
+    vistoname.style.display = 'none';
     var visto = document.getElementById('categoriaDiv');
     visto.style.display = 'block';
 
 });
 
+$('#opcNombre').on('click', function (event) {
+//    var slect = document.getElementById('categoriaDiv').value ;
+    var vistoname = document.getElementById('NameDiv');
+    vistoname.style.display = 'block';
+    $('#masRecientesDiv').hide();
+    var vistodate = document.getElementById('DateDiv');
+    vistodate.style.display = 'none';
+    var vistocat = document.getElementById('categoriaDiv');
+    vistocat.style.display = 'none';
+
+
+});
+
+
+
 $('#opcDate').on('click', function (e) {
 
     var visto = document.getElementById('DateDiv');
     visto.style.display = 'block';
+    var vistoname = document.getElementById('NameDiv');
+    vistoname.style.display = 'none';
     $('#masRecientesDiv').hide();
     var vistocat = document.getElementById('categoriaDiv');
     vistocat.style.display = 'none';
@@ -126,6 +147,7 @@ $('#opcDate').on('click', function (e) {
     }
 
 });
+
 
 $('#selectCategoriaBusqueda').on('change', function (event) {
     //post con la categoria
@@ -173,27 +195,28 @@ $('#btndate').on('click', function (event) {
             end = validarFechafire(end);
         } else {
             start = new Date(start);
-            
+
             end = new Date(end);
-            
+
         }
         var i = start.getTime();
         var e = end.getTime();
-        var today= new Date();
-                today= today.getTime();
+        var today = new Date();
+        today = today.getTime();
         if (e >= i) {
             var url = 'index.php/wsite/listarFecha/';
             var posting = $.post(url, {
                 Start: start,
                 End: end
             });
-        }else{
-        if(e >= today ){
-            alert('Ingrese una Fecha Valida');
+        } else {
+            if (e >= today) {
+                alert('Ingrese una Fecha Valida');
+            }
+            else {
+                alert('Ingrese una Fecha Valida');
+            }
         }
-        else {
-            alert("La Fecha Final debe ser mayor que la Inicial!!!");
-        }}
         ;
 
 

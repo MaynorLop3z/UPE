@@ -79,15 +79,15 @@
                             <a href="#about">¿Quienes Somos?</a>
                         </li>
                         <li class="page-scroll">
-                            <a href="" class="portfolio-link btn   dropdown-toggle"  title="Buscar Publicaciones" data-toggle="dropdown" id="test3"><i class="fa fa-fw fa-sign-in"></i></a>
-                        <ul class="dropdown-menu" id="log">
-                        <li class="page-scroll " value="2" >
-                            <a href='index.php/PortalParticipantes' class="portfolio-link" data-toggle="modal">Alumnos</a>
-                        </li>
-                        <li class="page-scroll " value="1" >
-                            <a href="#Login2" class="portfolio-link" data-toggle="modal">Institucionr</a>
-                        </li>
-                        </ul></li>
+                            <a href="" class="portfolio-link btn   dropdown-toggle"  title="Ingresar al Sistema" data-toggle="dropdown" id="test3"><i class="fa fa-fw fa-sign-in"></i></a>
+                            <ul class="dropdown-menu" id="log">
+                                <li class="page-scroll " value="2" >
+                                    <a href='index.php/PortalParticipantes' class="portfolio-link" data-toggle="modal">Alumnos</a>
+                                </li>
+                                <li class="page-scroll " value="1" >
+                                    <a href="#Login2" class="portfolio-link" data-toggle="modal">Institucion</a>
+                                </li>
+                            </ul></li>
 
                     </ul>
                 </div>
@@ -364,6 +364,85 @@
             </div>
 
 
+
+            <!--/comienza el grid de busqueda por nombre/-->
+            <div class="container" id="NameDiv" style='display:none;'>
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h3>Escriba el nombre del diplomado</h3>
+                        <input type=text id="nombreDiplomado"  />
+                         <input type="button" id="btname" class="btn btn-primary small" value="Buscar"/>
+
+                        <hr class="star-primary">
+
+
+                        <!--here-->
+                        <?php
+                        //$publicacionesMostrar=null;
+                        if ($PagCategoria != null && count($PagCategoria) > 0) {
+                            foreach ($PagCategoria as $publicacion) {
+                                $iterador = 0;
+                                $iterador ++;
+                            }
+                            ?>
+                            <div id="PubName">
+                                <?php
+                                foreach ($TotalPaginacion as $publicacion) {
+                                    ?>
+
+                                    <div class="col-sm-4 portfolio-item"  >
+
+                                        <a  id="a<?php echo $publicacion->CodigoPublicacion ?>" data-dimg='<?php echo json_encode($publicacion) ?>' class="portfolio-link callModalPublicacion"  >
+                                            <div class="caption">
+                                                <div class="caption-content" >
+                                                    <i class="fa fa-search-plus fa-3x"></i>
+                                                </div>
+                                            </div>
+                                            <img  src="<?php echo 'bootstrap' . $publicacion->Ruta ?>" class="img-responsive" alt="" style="height:500px; width: 500px;">
+                                        </a>
+
+
+                                    </div>
+
+                                    <?php
+                                }
+                            }
+                            ?>
+                            <!-- start paginacion-->
+                            <div class="row" id="paginacionDiv2">
+
+                                <ul class="pager">
+                                    <li><a  id="btnpaginicio2 ">&laquo;</a></li>
+                                    <?php
+                                    $contador = 1;
+
+                                    $totalpag = $publicacionesMostrar;
+
+                                    if ((($totalpag % PUBLICACIONES_X_PAG) != 0) && (($totalpag / PUBLICACIONES_X_PAG) >= 1)) {
+                                        $totalpag = intval(($totalpag / PUBLICACIONES_X_PAG) + 1);
+                                        ?>
+                                        <?php
+                                    } else {
+                                        $totalpag = intval(ceil(($totalpag / PUBLICACIONES_X_PAG)));
+                                    }
+                                    while ($contador <= $totalpag) {
+                                        ?>
+                                        <li><a id="<?php echo $contador ?>"><?php echo $contador ?></a></li>
+                                        <?php
+                                        $contador ++;
+                                    }
+                                    ?>
+                                    <li><a id="btnpagfin2">&raquo;</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--tohere-->
+            <!--termina el grid de busqueda por nombre-->
+
         </section>
 
 
@@ -402,7 +481,7 @@
                         <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
                         <form name="sentMessage" id="contactForm" novalidate>
 
-                        
+
 
                             <div class="row control-group">
                                 <div class="form-group col-xs-12 floating-label-form-group controls">
@@ -583,9 +662,9 @@
         <style>
             .ui-datepicker
             {
-               width:auto;
+                width:auto;
                 background: whitesmoke;
-                
+
             }
         </style>
 
@@ -599,8 +678,8 @@
         <script src="bootstrap/js/freelancer.js"></script>
 
 
- 
-        <!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
+
+       <!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
         <script src="bootstrap/js/jquery-ui.js"></script>
     </body>
 
