@@ -463,11 +463,12 @@ class PeriodosController extends CI_Controller {
             $pdf->SetFont('Times', 'B', 10);
             $detalles = $this->Periodos->listarAlumnosGrupoPeriodo($codGrupoPeriodo);
             $correlativo = 0;
+            
             foreach ($detalles as $detalle) {
-                $pdf->Cell(1, 2, $correlativo++, 0, 0, 'L');
+                $pdf->Cell(1, 2, ++$correlativo, 0, 0, 'L');
                 $pdf->Cell(7, 2, $detalle->Nombre, 0, 0, 'L');
-                $pdf->Cell(2, 2, $detalle->Categoria, 0, 0, 'L');
-                $pdf->Cell(2, 2, $detalle->Telefono , 0, 0, 'L');
+                $pdf->Cell(6, 2, $detalle->Categoria, 0, 0, 'L');
+                $pdf->Cell(6, 2, $detalle->Telefono , 0, 0, 'L');
                 $pdf->Ln(0.5);
             }
         }
