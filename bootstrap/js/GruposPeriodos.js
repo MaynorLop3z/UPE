@@ -274,9 +274,9 @@ function testShow(fila) {
         alert("error" + xhr.responseText);
     });
 }
-$('#FindAlumnoNombre').keyup(function (event) { //BUSCA USUARIO AL EDITAR 
+$('#FindAlumnoNombrePeriodo').keyup(function (event) { //BUSCA USUARIO AL EDITAR 
     var actual = $(this).val();
-    var filtro = $('#FindAlumnoNombre').val();
+    var filtro = $('#FindAlumnoNombrePeriodo').val();
     //console.log(filtro);
     var idPeriodoGrupo = codigoGrupoPeriodo.substring(7);
     var posting2 = $.post("PeriodosController/listarEstudiantesFiltrados/", {idPeriodoGrupo: idPeriodoGrupo, filtro: filtro});

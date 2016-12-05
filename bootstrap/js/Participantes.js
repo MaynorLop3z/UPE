@@ -3,8 +3,8 @@ var filaEdit;
 var countColor = 1;
 
 
-$(document).ready(function(){
-    
+$(document).ready(function () {
+
     /////////////////busqueda///////////////////////
 //    $('#tbNameBuscarAlum').keyup(function(event){
 //        var actual=$(this).val();
@@ -34,98 +34,92 @@ $(document).ready(function(){
 //    });
 //
 /////////////NUEVA BUSQUEDA/////////////////
-$('#btnCleanSearchAlumno').click(function(){
-     $('#FindAlumnoNombre').val('');
-     $('#FindAlumnoCorreo').val('');
-     $('#FindAlumnoCategoria').val('');
-     paginAlum();
-});
+    $('#btnCleanSearchAlumno').click(function () {
+        $('#FindAlumnoNombre').val('');
+        $('#FindAlumnoCorreo').val('');
+        $('#FindAlumnoCategoria').val('');
+        paginAlum();
+    });
 
-$('.FindAlumnoClass').keyup(function(event){ //BUSCA USUARIO AL EDITAR 
-        var actual=$(this).val();
-        var nombre =$('#FindAlumnoNombre').val();
+    $('.FindAlumnoClass').keyup(function (event) { //BUSCA USUARIO AL EDITAR 
+        var actual = $(this).val();
+        var nombre = $('#FindAlumnoNombre').val();
         var correo = $('#FindAlumnoCorreo').val();
         var categoria = $('#FindAlumnoCategoria').val();
-        if(nombre.length>0 && correo.length==0 && categoria.length==0){ //FILTRA BUSQUEDA SOLO POR NOMBRE
+        if (nombre.length > 0 && correo.length == 0 && categoria.length == 0) { //FILTRA BUSQUEDA SOLO POR NOMBRE
             buscarParametrosAlumno('FindByNombre', nombre, correo, categoria);
         }
-        if(nombre.length==0 && correo.length>0 && categoria.length==0){ //FILTRA BUSQUEDA SOLO POR CORREO
+        if (nombre.length == 0 && correo.length > 0 && categoria.length == 0) { //FILTRA BUSQUEDA SOLO POR CORREO
             buscarParametrosAlumno('FindByCorreo', nombre, correo, categoria);
         }
-        if(nombre.length==0 && correo.length==0 && categoria.length>0){ //FILTRA BUSQUEDA SOLO POR CATEGORIA
+        if (nombre.length == 0 && correo.length == 0 && categoria.length > 0) { //FILTRA BUSQUEDA SOLO POR CATEGORIA
             buscarParametrosAlumno('FindByCategoria', nombre, correo, categoria);
-        }
-        else if (nombre.length>0 && correo.length>0 && categoria.length==0){ //FILTRA BUSQUEDA POR NOMBRE Y CORREO
+        } else if (nombre.length > 0 && correo.length > 0 && categoria.length == 0) { //FILTRA BUSQUEDA POR NOMBRE Y CORREO
             buscarParametrosAlumno('FindByNombre+Correo', nombre, correo, categoria);
-        }
-        else if (nombre.length>0 && correo.length==0 && categoria.length>0){ //FILTRA BUSQUEDA POR NOMBRE Y CATEGORIA
+        } else if (nombre.length > 0 && correo.length == 0 && categoria.length > 0) { //FILTRA BUSQUEDA POR NOMBRE Y CATEGORIA
             buscarParametrosAlumno('FindByNombre+Categoria', nombre, correo, categoria);
-        }
-        else if (nombre.length==0 && correo.length>0 && categoria.length>0){ //FILTRA BUSQUEDA POR CORREO Y CATEGORIA
+        } else if (nombre.length == 0 && correo.length > 0 && categoria.length > 0) { //FILTRA BUSQUEDA POR CORREO Y CATEGORIA
             buscarParametrosAlumno('FindByCorreo+Categoria', nombre, correo, categoria);
-        }
-        else if (nombre.length>0 && correo.length>0 && categoria.length>0){ //FILTRA BUSQUEDA POR NOMBRE, CORREO Y CATEGORIA
+        } else if (nombre.length > 0 && correo.length > 0 && categoria.length > 0) { //FILTRA BUSQUEDA POR NOMBRE, CORREO Y CATEGORIA
             buscarParametrosAlumno('FindByNombre+Correo+Categoria', nombre, correo, categoria);
-        }
-        else if(nombre.length==0 && correo.length==0 && categoria.length==0){
+        } else if (nombre.length == 0 && correo.length == 0 && categoria.length == 0) {
             buscarParametrosAlumno('Reset', null, null, null)
         }
     });
 
     //BUSCA ALUMNO SEGUN LOS PARAMETROS Y CAMPOS DE TEXTO RELLENADOS
-    function buscarParametrosAlumno(find, texto, correo, categoria){
+    function buscarParametrosAlumno(find, texto, correo, categoria) {
         //REALIZA LA BUSQUEDA SEGUN EL TIPO DE FILTRO
-        if(find=='Reset'){
+        if (find == 'Reset') {
             paginAlum();
-        }
-        else{
-            var opcion='';
-            switch (find){
+        } else {
+            var opcion = '';
+            switch (find) {
                 case "FindByNombre":
-                opcion={NombreBuscado:texto};
-                break;
-            case "FindByCorreo": 
-                opcion={Correo:correo};
-                break;
-            case "FindByCategoria":
-                opcion={Categoria:categoria};
-                break;
-            case "FindByNombre+Correo":
-                opcion={NombreBuscado:texto, Correo:correo};
-                break;
-            case 'FindByNombre+Categoria':
-                opcion={NombreBuscado:texto, Categoria:categoria};
-                break;
-            case 'FindByCorreo+Categoria':
-                opcion={Correo:correo, Categoria:categoria};
-                break;
-            case "FindByNombre+Correo+Categoria":
-                opcion={NombreBuscado:texto, Correo:correo, Categoria:categoria};
-                break;
+                    opcion = {NombreBuscado: texto};
+                    break;
+                case "FindByCorreo":
+                    opcion = {Correo: correo};
+                    break;
+                case "FindByCategoria":
+                    opcion = {Categoria: categoria};
+                    break;
+                case "FindByNombre+Correo":
+                    opcion = {NombreBuscado: texto, Correo: correo};
+                    break;
+                case 'FindByNombre+Categoria':
+                    opcion = {NombreBuscado: texto, Categoria: categoria};
+                    break;
+                case 'FindByCorreo+Categoria':
+                    opcion = {Correo: correo, Categoria: categoria};
+                    break;
+                case "FindByNombre+Correo+Categoria":
+                    opcion = {NombreBuscado: texto, Correo: correo, Categoria: categoria};
+                    break;
             }
-            var posting = $.post("ParticipantesController/buscar/",opcion);
-            posting.done(function(data){
-                if(data){
-                   $('#tablaAlumnosContent').html(data);
-                }
-            });
-            posting.fail(function(xhr, textStatus, errorThrown) {
-              alert("error" + xhr.responseText);
-            });
-        }
-    }
-    
-    function paginAlum(){
-        var posting = $.post("ParticipantesController/paginParticipantes/", {"data_ini":1});
+            var posting = $.post("ParticipantesController/buscar/", opcion);
             posting.done(function (data) {
-                if (data !== null) {
-                    $('#tablaAlumnosContent').empty();
+                if (data) {
                     $('#tablaAlumnosContent').html(data);
                 }
             });
-            posting.fail(function (data) {
-                alert("Error");
+            posting.fail(function (xhr, textStatus, errorThrown) {
+                alert("error" + xhr.responseText);
             });
+        }
+    }
+
+    function paginAlum() {
+        var posting = $.post("ParticipantesController/paginParticipantes/", {"data_ini": 1});
+        posting.done(function (data) {
+            if (data !== null) {
+                $('#tablaAlumnosContent').empty();
+                $('#tablaAlumnosContent').html(data);
+            }
+        });
+        posting.fail(function (data) {
+            alert("Error");
+        });
     }
 });
 
@@ -164,6 +158,8 @@ function mostrarEditAlumno(fila) {
     var Comentarios_Alumno = alum.find('.Comentarios_Alumno').html().toString().trim();
     var Direccion_Alumno = alum.find('.Direccion_Alumno').html().toString().trim();
     var Genero_Alumno = alum.find('.Genero_Alumno').html().toString().trim();
+    var User_Alumno = alum.find('.User_Alumno').html().toString().trim();
+    var Pass_Alumno = alum.find('.Pass_Alumno').html().toString().trim();
     $('#AlumnoNombreEDIT').val(Nombre_Alumno);
     $('#AlumnoMailEDIT').val(Mail_Alumno);
     $('#AlumnoFijoEDIT').val(TelefonoFijo_Alumno);
@@ -178,6 +174,8 @@ function mostrarEditAlumno(fila) {
     $('#AlumnoComentarioEDIT').val(Comentarios_Alumno);
     $('#AlumnoDUIEDIT').val(DUI_Alumno);
     $('#AlumnoGeneroEDIT').val(Genero_Alumno);
+    $('#AlumnoUserEDIT').val(User_Alumno);
+    $('#AlumnoPassEDIT').val(Pass_Alumno);
     $("#AlumnoEditar").modal('toggle');
 }
 
@@ -197,6 +195,8 @@ function mostrarInfoAlumno(fila) {
     var Comentarios_Alumno = alum.find('.Comentarios_Alumno').html().toString().trim();
     var Direccion_Alumno = alum.find('.Direccion_Alumno').html().toString().trim();
     var CodPart_Alumno = alum.find('.NameCat_Alumno').html().toString().trim();
+    var User_Alumno = alum.find('.User_Alumno').html().toString().trim();
+    var Pass_Alumno = alum.find('.Pass_Alumno').html().toString().trim();
     $('#AlumViewNombre').html(Nombre_Alumno);
     $('#AlumViewEmail').html(Mail_Alumno);
     $('#AlumViewTFijo').html(TelefonoFijo_Alumno);
@@ -209,6 +209,8 @@ function mostrarInfoAlumno(fila) {
     $('#AlumViewCategoria').html(CodPart_Alumno);
     $('#AlumViewDescripcion').html(Descripcion_Alumno);
     $('#AlumViewComentarios').html(Comentarios_Alumno);
+    $('#AlumViewUserName').html(User_Alumno);
+    $('#AlumViewUserPass').html(Pass_Alumno);
     $('#AlumViewDUI').html(DUI_Alumno);
     $("#AlumnoVIEWDATA").modal('toggle');
 }
@@ -240,8 +242,7 @@ function inscribirUsaurio(fila) {
             property.className = "btn_agregar_periodo btn btn-success";
             property.title = "Agregar alumno al periodo";
             $("#" + codigoDiplomado).html('<span class="glyphicon glyphicon-ok"></span>');
-        }
-        else {
+        } else {
             property.className = "btn_agregar_periodo btn btn-danger";
             property.title = "Eliminar alumno al periodo";
             $("#" + codigoDiplomado).html('<span class="glyphicon glyphicon-remove"></span>');
@@ -255,10 +256,10 @@ function inscribirUsaurio(fila) {
 
 $("#frmADDAlumno").submit(function (event) {
     event.preventDefault();
-    var $form = $(this), AlumnoNombre = $form.find("input[name='Nombre']").val(), AlumnoMail = $form.find("input[name='CorreoElectronico']").val(), AlumnoFijo = $form.find("input[name='TelefonoFijo']").val(), AlumnoMovil = $form.find("input[name='TelefonoCelular']").val(), AlumnoDir = $form.find("textarea[name=Direccion]").val(), AlumnoDUI = $form.find("input[name='NumeroDUI']").val(), AlumnoFNac = $form.find("input[name='FechaNacimiento']").val(), AlumnoCarrera = $form.find("input[name='Carrera']").val(), AlumnoNivel = $form.find("input[name='NivelAcademico']").val(), AlumnoNEncargado = $form.find("input[name='NombreEncargado']").val(), AlumnoCategoria = $form.find("select[name=CodigoCategoriaParticipantes]").val(), AlumnoDescripcion = $form.find("textarea[name=Descripcion]").val(), AlumnoComentario = $form.find("textarea[name=Comentarios]").val(), AlumnoGenero = $form.find("select[name=GeneroParticipante]").val(), url = $form.attr("action");
+    var $form = $(this), AlumnoNombre = $form.find("input[name='Nombre']").val(), AlumnoMail = $form.find("input[name='CorreoElectronico']").val(), AlumnoUser = $form.find("input[name='UsuarioPortal']").val(), AlumnoPass = $form.find("input[name='Password']").val(), AlumnoFijo = $form.find("input[name='TelefonoFijo']").val(), AlumnoMovil = $form.find("input[name='TelefonoCelular']").val(), AlumnoDir = $form.find("textarea[name=Direccion]").val(), AlumnoDUI = $form.find("input[name='NumeroDUI']").val(), AlumnoFNac = $form.find("input[name='FechaNacimiento']").val(), AlumnoCarrera = $form.find("input[name='Carrera']").val(), AlumnoNivel = $form.find("input[name='NivelAcademico']").val(), AlumnoNEncargado = $form.find("input[name='NombreEncargado']").val(), AlumnoCategoria = $form.find("select[name=CodigoCategoriaParticipantes]").val(), AlumnoDescripcion = $form.find("textarea[name=Descripcion]").val(), AlumnoComentario = $form.find("textarea[name=Comentarios]").val(), AlumnoGenero = $form.find("select[name=GeneroParticipante]").val(), url = $form.attr("action");
     var categorias = document.getElementById("AlumnoCategoria");
     var nombreCategoria = categorias.options[categorias.selectedIndex].text;
-    var posting = $.post(url, {AlumnoNombre: AlumnoNombre, AlumnoMail: AlumnoMail, AlumnoFijo: AlumnoFijo, AlumnoMovil: AlumnoMovil, AlumnoDir: AlumnoDir, AlumnoDUI: AlumnoDUI, AlumnoFNac: AlumnoFNac, AlumnoCarrera: AlumnoCarrera, AlumnoNivel: AlumnoNivel, AlumnoNEncargado: AlumnoNEncargado, AlumnoCategoria: AlumnoCategoria, AlumnoDescripcion: AlumnoDescripcion, AlumnoComentario: AlumnoComentario, AlumnoGenero: AlumnoGenero});
+    var posting = $.post(url, {AlumnoNombre: AlumnoNombre, AlumnoMail: AlumnoMail, AlumnoFijo: AlumnoFijo, AlumnoMovil: AlumnoMovil, AlumnoDir: AlumnoDir, AlumnoDUI: AlumnoDUI, AlumnoFNac: AlumnoFNac, AlumnoCarrera: AlumnoCarrera, AlumnoNivel: AlumnoNivel, AlumnoNEncargado: AlumnoNEncargado, AlumnoCategoria: AlumnoCategoria, AlumnoDescripcion: AlumnoDescripcion, AlumnoComentario: AlumnoComentario, AlumnoGenero: AlumnoGenero, AlumnoUser: AlumnoUser, AlumnoPass: AlumnoPass});
     posting.done(function (data) {
         if (data !== null) {
 //console.log('No esta vacio');
@@ -282,6 +283,8 @@ $("#frmADDAlumno").submit(function (event) {
             fila = fila + '<td class="NameCat_Alumno">' + nombreCategoria + '</td>';
             fila = fila + '<td class="Descripcion_Alumno">' + obj.Descripcion + '</td>';
             fila = fila + '<td class="Comentarios_Alumno" style="display: none">' + obj.Comentarios + '</td>';
+            fila = fila + '<td class="User_Alumno" style="display: none">' + obj.NombreParticipante + '</td>';
+            fila = fila + '<td class="Pass_Alumno" style="display: none">' + obj.ContraseniaParticipante + '</td>';
             fila = fila + '<td class="gestion_Alumno">';
             fila = fila + '<button id="AlumE' + obj.CodigoParticipante + '"  onclick="mostrarEditAlumno(this)" title="Editar Alumno" class="btn_modificar_alum btn btn-success"><span class="glyphicon glyphicon-pencil"></span> </button>';
             fila = fila + '<button id="alumDEL' + obj.CodigoParticipante + '" onclick="mostrarDelAlumno(this)" title="Eliminar Alumno" class="btn_eliminar_alum btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>';
@@ -304,10 +307,10 @@ $("#frmADDAlumno").submit(function (event) {
 
 $("#frmEditarAlumno").submit(function (event) {
     event.preventDefault();
-    var $form = $(this), AlumnoCodigo = codigoParticipante.substring(5), AlumnoNombre = $form.find("input[name='Nombre']").val(), AlumnoMail = $form.find("input[name='CorreoElectronico']").val(), AlumnoFijo = $form.find("input[name='TelefonoFijo']").val(), AlumnoMovil = $form.find("input[name='TelefonoCelular']").val(), AlumnoDir = $form.find("textarea[name=Direccion]").val(), AlumnoDUI = $form.find("input[name='NumeroDUI']").val(), AlumnoFNac = $form.find("input[name='FechaNacimiento']").val(), AlumnoCarrera = $form.find("input[name='Carrera']").val(), AlumnoNivel = $form.find("input[name='NivelAcademico']").val(), AlumnoNEncargado = $form.find("input[name='NombreEncargado']").val(), AlumnoCategoria = $form.find("select[name=CodigoCategoriaParticipantes]").val(), AlumnoGenero = $form.find("select[name=GeneroParticipante]").val(), AlumnoDescripcion = $form.find("textarea[name=Descripcion]").val(), AlumnoComentario = $form.find("textarea[name=Comentarios]").val(), url = $form.attr("action");
+    var $form = $(this), AlumnoCodigo = codigoParticipante.substring(5), AlumnoNombre = $form.find("input[name='Nombre']").val(), AlumnoMail = $form.find("input[name='CorreoElectronico']").val(), AlumnoFijo = $form.find("input[name='TelefonoFijo']").val(), AlumnoMovil = $form.find("input[name='TelefonoCelular']").val(), AlumnoDir = $form.find("textarea[name=Direccion]").val(), AlumnoDUI = $form.find("input[name='NumeroDUI']").val(), AlumnoFNac = $form.find("input[name='FechaNacimiento']").val(), AlumnoCarrera = $form.find("input[name='Carrera']").val(), AlumnoNivel = $form.find("input[name='NivelAcademico']").val(), AlumnoNEncargado = $form.find("input[name='NombreEncargado']").val(), AlumnoCategoria = $form.find("select[name=CodigoCategoriaParticipantes]").val(), AlumnoGenero = $form.find("select[name=GeneroParticipante]").val(), AlumnoDescripcion = $form.find("textarea[name=Descripcion]").val(), AlumnoComentario = $form.find("textarea[name=Comentarios]").val(), AlumnoPassword = $form.find("input[name='Password']").val(), AlumnoUser = $form.find("input[name='UsuarioPortal']").val(), url = $form.attr("action");
     var categorias = document.getElementById("AlumnoCategoriaEDIT");
     var nombreCategoria = categorias.options[categorias.selectedIndex].text;
-    var posting = $.post(url, {AlumnoCodigo: AlumnoCodigo, AlumnoNombre: AlumnoNombre, AlumnoMail: AlumnoMail, AlumnoFijo: AlumnoFijo, AlumnoMovil: AlumnoMovil, AlumnoDir: AlumnoDir, AlumnoDUI: AlumnoDUI, AlumnoFNac: AlumnoFNac, AlumnoCarrera: AlumnoCarrera, AlumnoNivel: AlumnoNivel, AlumnoNEncargado: AlumnoNEncargado, AlumnoCategoria: AlumnoCategoria, AlumnoDescripcion: AlumnoDescripcion, AlumnoComentario: AlumnoComentario, AlumnoGenero: AlumnoGenero});
+    var posting = $.post(url, {AlumnoCodigo: AlumnoCodigo, AlumnoNombre: AlumnoNombre, AlumnoMail: AlumnoMail, AlumnoFijo: AlumnoFijo, AlumnoMovil: AlumnoMovil, AlumnoDir: AlumnoDir, AlumnoDUI: AlumnoDUI, AlumnoFNac: AlumnoFNac, AlumnoCarrera: AlumnoCarrera, AlumnoNivel: AlumnoNivel, AlumnoNEncargado: AlumnoNEncargado, AlumnoCategoria: AlumnoCategoria, AlumnoDescripcion: AlumnoDescripcion, AlumnoComentario: AlumnoComentario, AlumnoGenero: AlumnoGenero, AlumnoPassword: AlumnoPassword, AlumnoUser: AlumnoUser});
     posting.done(function (data) {
         if (data !== null) {
             var obj = jQuery.parseJSON(data);
@@ -330,6 +333,8 @@ $("#frmEditarAlumno").submit(function (event) {
             fila = fila + '<td class="NameCat_Alumno">' + nombreCategoria + '</td>';
             fila = fila + '<td class="Descripcion_Alumno">' + obj.Descripcion + '</td>';
             fila = fila + '<td class="Comentarios_Alumno" style="display: none">' + obj.Comentarios + '</td>';
+            fila = fila + ' <td class="User_Alumno" style="display: none">' + obj.NombreParticipante + '</td>';
+            fila = fila + '<td class="Pass_Alumno" style="display: none">' + obj.ContraseniaParticipante + '</td>';
             fila = fila + '<td class="gestion_Alumno">';
             fila = fila + '<button id="AlumE' + obj.CodigoParticipante + '" onclick="mostrarEditAlumno(this)" title="Editar Alumno" class="btn_modificar_alum btn btn-success"><span class="glyphicon glyphicon-pencil"></span> </button>';
             fila = fila + '<button id="alumDEL' + obj.CodigoParticipante + '" onclick="mostrarDelAlumno(this)" title="Eliminar Alumno" class="btn_eliminar_alum btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>';
@@ -382,7 +387,7 @@ $("#frmFINDAlumno").submit(function (event) {
     var $form = $(this), AlumnoNombre = $form.find("input[name='NombreBuscado']").val(), url = $form.attr("action");
     var posting = $.post(url, {NombreBuscado: AlumnoNombre});
     posting.done(function (data) {
-        if (data!==null) {
+        if (data !== null) {
 //            $('#tableAlumnos').html(data);
             $('#tablaAlumnosContent').html(data);
         }
@@ -393,54 +398,54 @@ $("#frmFINDAlumno").submit(function (event) {
 });
 
 ////////////PAGINACION DE ALUMNOS//////////////
-    
-    $("#tablaAlumnosContent").on("click", "#aFirstPagParticipantes", function (e) {
-        paginarParticipantes("data_ini", $(this).data("datainic"));
-    });
 
-    $("#tablaAlumnosContent").on("click", "#aLastPagParticipantes", function (e) {
-        paginarParticipantes("data_ini", $(this).data("datainic"));
-    });
+$("#tablaAlumnosContent").on("click", "#aFirstPagParticipantes", function (e) {
+    paginarParticipantes("data_ini", $(this).data("datainic"));
+});
 
-    $("#tablaAlumnosContent").on("click", "#aPrevPagParticipantes", function (e) {
-        paginarParticipantes("data_inip", null);
-    });
+$("#tablaAlumnosContent").on("click", "#aLastPagParticipantes", function (e) {
+    paginarParticipantes("data_ini", $(this).data("datainic"));
+});
 
-    $("#tablaAlumnosContent").on("click", "#aNextPagParticipantes", function (e) {
-        paginarParticipantes("data_inin", null);
-    });
-    
-    $("#tablaAlumnosContent").on("keypress", "#txtPagingSearchParticipantes", function (e) {
-        e.stopImmediatePropagation();
-        if (e.which === 13 && ($(this).val()>0)) {
-             paginarParticipantes("data_ini", $(this).val());
-        }
-    });
-    
-    function paginarParticipantes(dat, op){
+$("#tablaAlumnosContent").on("click", "#aPrevPagParticipantes", function (e) {
+    paginarParticipantes("data_inip", null);
+});
 
-        var data_in = $('#txtPagingSearchParticipantes').data("datainic");     
-        var url = 'ParticipantesController/paginParticipantes/';
-                
-        var opcion="";
-        if(dat==="data_inin"){
-             opcion={"data_inin":data_in};
-        }else if(dat==="data_inip"){
-            opcion={"data_inip":data_in};
-        }else if(dat==="data_ini"){
-            data_in= op;
-            opcion={"data_ini":data_in};
-        }
-        var posting = $.post(url, opcion);
-        posting.done(function (data) {
-            if (data !== null) {
-                $('#tablaAlumnosContent').empty();
-                $('#tablaAlumnosContent').html(data);
-            }
-        });
-        posting.fail(function (data) {
-            alert("Error");
-        });
+$("#tablaAlumnosContent").on("click", "#aNextPagParticipantes", function (e) {
+    paginarParticipantes("data_inin", null);
+});
+
+$("#tablaAlumnosContent").on("keypress", "#txtPagingSearchParticipantes", function (e) {
+    e.stopImmediatePropagation();
+    if (e.which === 13 && ($(this).val() > 0)) {
+        paginarParticipantes("data_ini", $(this).val());
     }
-    
+});
+
+function paginarParticipantes(dat, op) {
+
+    var data_in = $('#txtPagingSearchParticipantes').data("datainic");
+    var url = 'ParticipantesController/paginParticipantes/';
+
+    var opcion = "";
+    if (dat === "data_inin") {
+        opcion = {"data_inin": data_in};
+    } else if (dat === "data_inip") {
+        opcion = {"data_inip": data_in};
+    } else if (dat === "data_ini") {
+        data_in = op;
+        opcion = {"data_ini": data_in};
+    }
+    var posting = $.post(url, opcion);
+    posting.done(function (data) {
+        if (data !== null) {
+            $('#tablaAlumnosContent').empty();
+            $('#tablaAlumnosContent').html(data);
+        }
+    });
+    posting.fail(function (data) {
+        alert("Error");
+    });
+}
+
     

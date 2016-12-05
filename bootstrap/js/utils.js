@@ -26,12 +26,12 @@ $(document).ready(function(){
 
 function onlyLettersS(inputValue, event){
     if(!(inputValue >= 65 && inputValue <= 120) && (inputValue != 32 && inputValue != 0)) {
-        alert("Retorna falso");
+        //alert("Retorna falso");
         event.preventDefault();
         return false;
     }
     else{
-        alert("Retorna verdadero");
+        //alert("Retorna verdadero");
         return true;
     }
     

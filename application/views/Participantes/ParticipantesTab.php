@@ -62,6 +62,8 @@
                             <th>Categoria</th>
                             <th>Descripcion</th>
                             <th style="display: none">Comentarios</th>
+                            <th style="display: none">UserName</th>
+                            <th style="display: none">UserPass</th>
                             <th>Gestion</th>
                         </tr>
                     </thead> 
@@ -86,6 +88,8 @@
                                 <td class="NameCat_Alumno"><?= $alum->NombreCategoriaParticipante ?></td>
                                 <td class="Descripcion_Alumno"><?= $alum->Descripcion ?></td>
                                 <td class="Comentarios_Alumno" style="display: none"><?= $alum->Comentarios ?></td>
+                                <td class="User_Alumno" style="display: none"><?= $alum->NombreParticipante ?></td>
+                                <td class="Pass_Alumno" style="display: none"><?= $alum->ContraseniaParticipante ?></td>
                                 <td class="gestion_Alumno"><div class="btn-group" role="group">
                                     <button id="alumE<?php echo $alum->CodigoParticipante ?>" onclick="mostrarEditAlumno(this)" title="Editar Alumno" class="btn_modificar_alum btn btn-success"><span class="glyphicon glyphicon-pencil"></span> </button>
                                     <button id="alumDEL<?php echo $alum->CodigoParticipante ?>" onclick="mostrarDelAlumno(this)" title="Eliminar Alumno" class="btn_eliminar_alum btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
