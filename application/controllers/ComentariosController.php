@@ -78,7 +78,7 @@ class ComentariosController extends CI_Controller {
                         "f1"=>'<ul style="top:20px;right:0;" class="dropdown-menu">',
                         "f2"=>'<li class="aprobCom"><a onclick="MaestroAdminCom(1)">Aprobar comentario</a></li>',
                         "f3"=>'<li class="elimCom"><a  onclick="MaestroAdminCom(2)">Eliminar comentario</a></li>',
-                        "f4"=>'<li class="bloqUsu"><a onclick="MaestroAdminCom(3)">Bloquear comentarios para este alumno</a></li>',
+                       // "f4"=>'<li class="bloqUsu"><a onclick="MaestroAdminCom(3)">Bloquear comentarios para este alumno</a></li>',
                         "f5"=>'</ul>'));
                     ///funcion de Bloquear no implementada, habria que cambiar estructura de la base
                 }

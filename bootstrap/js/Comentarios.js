@@ -137,7 +137,7 @@ function comentarios(val, p){
     }
     else{
         if(p!==''){
-            f=p.actions+p.f1+p.f2+p.f3+p.f4+p.f5;
+            f=p.actions+p.f1+p.f2+p.f3+p.f5;
             if(val.Aprobado==="t"){
                 f=f.replace("Aprobar comentario","Aprobado");
             }

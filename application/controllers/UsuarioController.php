@@ -295,7 +295,7 @@ class Usuariocontroller extends CI_Controller {
             }
 
 //            $buttonsByUserRights = $this->analizarPermisosBotonesTablas("gestionUserBtn", $this->session->userdata('permisosUsuer'));
-            $cadena .= '<table id=' . '"tableUsers"' . 'class="table table-bordered table-striped table-hover table-responsive"' . '>';
+            $cadena .= '<table id=' . '"tableUsers"' . ' class="table table-bordered table-striped table-hover table-responsive"' . '>';
             $cadena.=$this->EncabezadoTabla();
             foreach ($Usuarios as $user) {
                 $filas .=$this->cuerpoTabla($user);

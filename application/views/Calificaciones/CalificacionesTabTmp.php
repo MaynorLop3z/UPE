@@ -2,7 +2,7 @@
 
 <div id="AdministrarCalificaciones" class="decorateStyleCrud"><!----------Calificaciones Maestro --------->
     <script src="../bootstrap/js/Calificaciones.js"></script>
-    <script src="../bootstrap/js/jquery.mask.js"></script>
+    <script src="../bootstrap/js/jquery.maskMoney.js"></script>
     
      <div class="panel-heading well">
         <h3 class="panel-title">Administrar Calificaciones</h3>
@@ -44,7 +44,7 @@
               $idhome ="id=\"homeCalificacionesM\" class=\"tab-pane fade in active\"";
                 }?>
       <div id="grupoCalificacionesM<?php echo $grup->CodigoGrupoPeriodo?>" class="<?php echo $classgroup?>" >
-          <div no numeric noise key 1058>
+          <div no numeric noise key 1056>
             
           </div>  
         <table id="table-CalificacionesM<?php echo $grup->CodigoGrupoPeriodo?>"  class="table table-bordered table-striped table-hover table-responsive">
@@ -72,10 +72,10 @@
                      id="calif<?php echo $alu->CodigoGruposParticipantes ?>" >
                         <td ><?php echo $cont ?></td>
                         <td ><?php echo $alu->Nombre?></td>
-                        <td ><input type="text" size="4" id="calificacion<?=$alu->CodigoGruposParticipantes?>" value="<?=$alu->CalificacionModulo?>" no numeric noise key 1048 class="calificacion"></td>
+                        <td ><input type="text" size="4" id="calificacion<?=$alu->CodigoGruposParticipantes?>" value="<?=$alu->CalificacionModulo?>"  class="calificacion"></td>
                         <td class="gestion_dip" style="width:150px;">
-                            <button id="btnGuardarCalificacion<?php echo $alu->CodigoGruposParticipantes ?>" onclick="guardarC('<?php echo $alu->CodigoGruposParticipantes?>')" no numeric noise key 1045 title="Guardar" class="btndeldip btn btn-success"><span class="glyphicon glyphicon-save"></span></button>
-                            <button id="btnEditarCalificacion<?php echo $alu->CodigoGruposParticipantes ?>" onclick="editarC('<?php echo $alu->CodigoGruposParticipantes?>')"  title="Editar" class="btndeldip btn btn-info"><span class="glyphicon glyphicon-edit"></span></button>
+                            <button id="btnGuardarCalificacion<?php echo $alu->CodigoGruposParticipantes ?>" onclick="guardarC('<?php echo $alu->CodigoGruposParticipantes?>')" title="Guardar" class="btndeldip btn btn-success"><span class="glyphicon glyphicon-save"></span></button>
+                            <button id="btnEditarCalificacion<?php echo $alu->CodigoGruposParticipantes ?>" onclick="editarC('<?php echo $alu->CodigoGruposParticipantes?>')" disabled="disabled" title="Editar" class="btndeldip btn btn-info"><span class="glyphicon glyphicon-edit"></span></button>
                         </td>
                 </tr>
                <?php 

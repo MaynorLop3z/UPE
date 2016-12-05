@@ -1,6 +1,6 @@
 $(document).ready(function(){
-   //$('.calificacion').maskMoney();
-   $('.calificacion').mask('00.00', {reverse: true});
+    $('.calificacion').maskMoney({'allowZero':'true'});
+//   $('.calificacion').mask('00.00', {reverse: true});
 });
 
 function guardarC(parti){
@@ -12,7 +12,9 @@ function guardarC(parti){
         posting.done(function (data) {
             if (data !== null) {
                 $('#calificacion'+parti).prop('disabled', true);
+                $('#btnEditarCalificacion'+parti).prop('disabled', false);
                 $('#btnGuardarCalificacion'+parti).prop('disabled', true);
+                
             }
         });
         posting.fail(function (data) {
@@ -24,4 +26,5 @@ function guardarC(parti){
 function editarC(parti){
     $('#calificacion'+parti).prop('disabled', false);
     $('#btnGuardarCalificacion'+parti).prop('disabled', false);
+    $('#btnEditarCalificacion'+parti).prop('disabled', true);
 }

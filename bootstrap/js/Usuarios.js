@@ -2,7 +2,11 @@ var codigoUsuario;
 var postSend=false;
 
 $(document).ready(function(){
-    $('#txtNombrePersonaModificar').filter_input({regex:'[a-zA-Z_]'});
+//    $('#txtNombrePersonaModificar').filter_input({regex:'[a-zA-Z_]'});
+    $('#txtNombrePersonaModificar').bind('keyup blur',function(){ 
+        var node = $(this);
+        node.val(node.val().replace(/[^a-z]/g,'') ); }
+    );$
 });
 
 $("#btnUsuarioNuevo").on('click', function () {
