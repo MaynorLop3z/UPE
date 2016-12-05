@@ -151,7 +151,7 @@ $("#frmEliminarUser").submit(function (event) {
         }
     });
     posting.fail(function () {
-        alert("error");
+        alert("El usuario contiene bitacoras en el sistema las cuales impiden borrarlo.");
     });
 });
 
