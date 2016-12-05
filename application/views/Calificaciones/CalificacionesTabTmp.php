@@ -2,7 +2,7 @@
 
 <div id="AdministrarCalificaciones" class="decorateStyleCrud"><!----------Calificaciones Maestro --------->
     <script src="../bootstrap/js/Calificaciones.js"></script>
-    <script src="../bootstrap/js/jquery.maskMoney.js"></script>
+    <script src="../bootstrap/js/jquery.mask.js"></script>
     
      <div class="panel-heading well">
         <h3 class="panel-title">Administrar Calificaciones</h3>
@@ -65,7 +65,7 @@
                  $numAl++;
                  $dis="";
                  if($alu->CalificacionModulo>0){
-                     $dis='disabled="disabled"';
+                     $dis='disabled=""';
                  }
                  ?>
                 <tr  data-dipd='<?php echo json_encode($alu) ?>' 
