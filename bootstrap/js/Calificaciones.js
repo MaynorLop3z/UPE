@@ -14,7 +14,6 @@ function guardarC(parti){
                 $('#calificacion'+parti).prop('disabled', true);
                 $('#btnEditarCalificacion'+parti).prop('disabled', false);
                 $('#btnGuardarCalificacion'+parti).prop('disabled', true);
-                
             }
         });
         posting.fail(function (data) {
