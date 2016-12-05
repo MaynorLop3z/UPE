@@ -200,7 +200,6 @@
                         $ModuloGrupo='';
                         foreach($gruposAlumno as $gru){ //lista los grupos del diplomado seleccionado
                             $ModuloActual=$gru->NombreModulo;
-
                             if($AnioActual==str_split($gru->FechaInicioPeriodo,4)[0] & $DiplomadoActual==$gru->NombreDiplomado  ){
                             ?>
                          <li id="ga<?php echo $gru->CodigoGrupoPeriodo;?>" onclick="openListaArchivos('<?php echo $gru->CodigoGrupoPeriodo;?>')" data-nodeid="1" class="sub-tree-toggler list-group-item node-treeview5">
@@ -275,7 +274,6 @@
          $principal=0;   
         } 
          
-
      }
     // <!---- FIN LISTA POR ANIOS---->
     }?>
@@ -325,7 +323,6 @@
         var modale="#ListArchivosAlumno"+mod;
             $(modale).modal();
     }
-
     function goArchivo(arch){
     location.href = arch;
     }
