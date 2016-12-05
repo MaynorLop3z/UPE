@@ -446,38 +446,33 @@ class PeriodosController extends CI_Controller {
         }
     }
     
-      public function obtenerDetalles($codGrupoPeriodo) {
-       
-       $this->load->model('Periodos');
-        
+     public function obtenerDetalles($codGrupoPeriodo) {
+
+        $this->load->model('Periodos');
+
         $pdf = new PDF('P', 'cm', array(21.5, 27.9));
         $DetallesGrupo = $this->Periodos->listarDetallesGrupoPeriodo($codGrupoPeriodo);
         foreach ($DetallesGrupo as $det) {
-            $pdf->setTotal($det->Aula);
-            $pdf->setClientName($det->FechaInicioPeriodo);
+            $pdf->setTotal($det->Aula != null ? $det->Aula : "Aula no asignada");
+           
+            $pdf->setClientName("Periodo: " . $det->FechaInicioPeriodo);
+             //$pdf->Cell(100, 8, 'LISTADO DE ALUMNOS EN', 0,0,'L');
             $pdf->setDateFac($det->FechaFinPeriodo);
-            $pdf->setDirection($det->HoraEntrada.'-'.$det->HoraSalida);
+            $pdf->setDirection($det->HoraEntrada!=null &&  $det->HoraSalida!=null? "Horario: ". $det->HoraEntrada . '-' . $det->HoraSalida:"Horario no asignado");
             $pdf->AddPage();
             $pdf->SetFont('Times', 'B', 10);
-//            $detalles = $this->MDelivery->getDetalleOrder($IdPedido);
-//            foreach ($detalles as $detalle) {
-//                $pdf->Cell(1, 2, $detalle->Quantity, 0, 0, 'L');
-//                $pdf->Cell(7, 2, $detalle->NameProduct, 0, 0, 'L');
-//                $pdf->Cell(2, 2, $detalle->UnitPrice, 0, 0, 'L');
-//                $pdf->Cell(2, 2, ($detalle->Quantity * $detalle->UnitPrice), 0, 0, 'L');
-//                $salsas = $this->MDelivery->getDetalleSalsas($detalle->IdDetail);
-//                foreach ($salsas as $salsa) {
-//                    $pdf->Ln(0.5);
-//                    $pdf->Cell(1, 2, '', 0, 0, 'L');
-//                    $pdf->Cell(7, 2, '--' . $salsa->NameSauce . ' - ' . $salsa->NameSpicy, 0, 0, 'L');
-//                    $pdf->Cell(2, 2, '', 0, 0, 'L');
-//                    $pdf->Cell(2, 2, '', 0, 0, 'L');
-//                }
-//                $pdf->Ln(0.5);
-//            }
+            $detalles = $this->Periodos->listarAlumnosGrupoPeriodo($codGrupoPeriodo);
+            $correlativo = 0;
+            foreach ($detalles as $detalle) {
+                $pdf->Cell(1, 2, $correlativo++, 0, 0, 'L');
+                $pdf->Cell(7, 2, $detalle->Nombre, 0, 0, 'L');
+                $pdf->Cell(2, 2, $detalle->Categoria, 0, 0, 'L');
+                $pdf->Cell(2, 2, $detalle->Telefono , 0, 0, 'L');
+                $pdf->Ln(0.5);
+            }
         }
-       
-        $pdf->Output('detAlumnos.pdf',"D");
+
+        $pdf->Output('detAlumnos.pdf', "D");
         //echo 'DetalleG.pdf';
     }
     

@@ -352,4 +352,20 @@ WHERE
             return $exc->getTraceAsString();
         }
     }
+    public function listarAlumnosGrupoPeriodo($codGrupoPeriodo) {
+        try {
+            $query = ' select p."Nombre",catp."NombreCategoriaParticipante" "Categoria",p."TelefonoFijo" || \' - \' || p."TelefonoCelular"  "Telefono" from "Participantes" p 
+            inner join "GruposParticipantes" gp on gp."CodigoParticipante"=p."CodigoParticipante" 
+            inner join "CategoriasParticipante" catp on catp."CodigoCategoriaParticipantes"=p."CodigoCategoriaParticipantes" 
+            inner join "GrupoPeriodos" gper on gper."CodigoGrupoPeriodo"=gp."CodigoGrupoPeriodo"
+            where gper."CodigoGrupoPeriodo"=' . $codGrupoPeriodo . ' order by gp."CodigoGruposParticipantes" asc;';
+            $consulta = $this->db->query($query);
+            if ($consulta != null) {
+                $resultado = $consulta->result();
+            }
+            return $resultado;
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
 }
