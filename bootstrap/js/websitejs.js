@@ -40,6 +40,23 @@ $("#Pubsrecie").on("click", ".callModalPublicacion", function (e) {
 
 
 });
+$("PubName").on("click", ".callModalPublicacion", function (e) {
+//$('.callModalPublicacion').on('click', function (event) {
+
+
+    codigoPub = this.id;
+    var pub = $('#' + codigoPub);
+    var dataP = pub.data("dimg");
+
+    $("#portfolioModal6").modal('show');
+
+    $('#h2TituloPub').text(dataP.Titulo);
+    $('#imgPub').attr("src", 'bootstrap' + dataP.Ruta);
+    $('#pContenidoPub').text(dataP.Contenido);
+
+
+
+});
 
 $("#PubsDate").on("click", ".callModalPublicacion", function (e) {
 //$('.callModalPublicacion').on('click', function (event) {
@@ -217,16 +234,13 @@ $('#btndate').on('click', function (event) {
                 alert('Ingrese una Fecha Valida');
             }
         }
-        ;
-
-
 
     }
-    ;
+    
     posting.done(function (data) {
         if (data !== null) {
-            $('#PubsCategoria').empty();
-            $('#PubsCategoria').html(data);
+            $('#PubsDate').empty();
+            $('#PubsDate').html(data);
         }
         else {
         }
