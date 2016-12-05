@@ -12,9 +12,8 @@ class ReportesPDFController extends CI_Controller {
         try {
             parent::__construct();
             $this->load->database();
-            $this->load->model('Usuarios');
-            $this->load->model('Rol');
-            $this->load->library('utilidadesWeb');
+            $this->load->model('ReportesPDFModel');
+           
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }
@@ -22,20 +21,20 @@ class ReportesPDFController extends CI_Controller {
 
     public function index() {
         try {
-            $data['Usuarios'] = $this->Usuarios->listarUsuarios(null, null);
-            $data['RolesList'] = $this->Rol->listarRoles();
-
-            $data['RowsPorPag'] = ROWS_PER_PAGE;
-            $data['ToTalRegistros'] = $this->Usuarios->countAllUsers();
-            $data['PagInicial'] = 1;
-
-            $data['totalPaginas'] = $this->getTotalPaginas();
-
-            $permisos = $this->session->userdata('permisosUsuer');
-            $this->analizarPermisos('views/Usuarios/UsuariosTab.php', 'views/Usuarios/UsuariosTabTmp.php', $permisos);
-//           
-            $data['buttonsByUserRights'] = $this->analizarPermisosBotonesTablas("gestionUserBtn", $permisos);
-            $this->load->view('Usuario', $data);
+//            $data['Usuarios'] = $this->Usuarios->listarUsuarios(null, null);
+//            $data['RolesList'] = $this->Rol->listarRoles();
+//
+//            $data['RowsPorPag'] = ROWS_PER_PAGE;
+//            $data['ToTalRegistros'] = $this->Usuarios->countAllUsers();
+//            $data['PagInicial'] = 1;
+//
+//            $data['totalPaginas'] = $this->getTotalPaginas();
+//
+//            $permisos = $this->session->userdata('permisosUsuer');
+//            $this->analizarPermisos('views/Usuarios/UsuariosTab.php', 'views/Usuarios/UsuariosTabTmp.php', $permisos);
+////           
+//            $data['buttonsByUserRights'] = $this->analizarPermisosBotonesTablas("gestionUserBtn", $permisos);
+           $this->load->view('ReportesPDF');
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }
