@@ -35,7 +35,7 @@
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="bootstrap/js/jquery.mask.js"></script>
         <!-- Plugin JavaScript -->
-        <script src="bootstrap/js/Sjquery.easing.min.js"></script>
+        <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>-->
         <script src="bootstrap/js/classie.js"></script>
         <script src="bootstrap/js/cbpAnimatedHeader.js"></script>
 
@@ -211,8 +211,8 @@
                         <!--here-->
                         <?php
                         //$publicacionesMostrar=null;
-                        if ($PagCategoria != null && count($PagCategoria) > 0) {
-                            foreach ($PagCategoria as $publicacion) {
+                        if ($TotalPaginacion != null && count($TotalPaginacion) > 0) {
+                            foreach ($TotalPaginacion as $publicacion) {
                                 $iterador = 0;
                                 $iterador ++;
                             }
@@ -295,8 +295,8 @@
                         <!--here-->
                         <?php
                         //$publicacionesMostrar=null;
-                        if ($PagCategoria != null && count($PagCategoria) > 0) {
-                            foreach ($PagCategoria as $publicacion) {
+                        if ($TotalPaginacion != null && count($TotalPaginacion) > 0) {
+                            foreach ($TotalPaginacion as $publicacion) {
                                 $iterador = 0;
                                 $iterador ++;
                             }
@@ -371,7 +371,7 @@
                     <div class="col-lg-12 text-center">
                         <h3>Escriba el nombre del diplomado</h3>
                         <input type=text id="nombreDiplomado"  />
-                         <input type="button" id="btname" class="btn btn-primary small" value="Buscar"/>
+                        <input type="button" id="btname" class="btn btn-primary small" value="Buscar"/>
 
                         <hr class="star-primary">
 
@@ -379,13 +379,14 @@
                         <!--here-->
                         <?php
                         //$publicacionesMostrar=null;
-                        if ($PagCategoria != null && count($PagCategoria) > 0) {
-                            foreach ($PagCategoria as $publicacion) {
+                        if ($TotalPaginacion != null && count($TotalPaginacion) > 0) {
+                            foreach ($TotalPaginacion as $publicacion) {
                                 $iterador = 0;
                                 $iterador ++;
                             }
                             ?>
                             <div id="PubName">
+
                                 <?php
                                 foreach ($TotalPaginacion as $publicacion) {
                                     ?>
@@ -409,10 +410,10 @@
                             }
                             ?>
                             <!-- start paginacion-->
-                            <div class="row" id="paginacionDiv2">
+                            <div class="row" id="paginacionDiv3">
 
                                 <ul class="pager">
-                                    <li><a  id="btnpaginicio2 ">&laquo;</a></li>
+                                    <li><a  id="btnpaginicio3">&laquo;</a></li>
                                     <?php
                                     $contador = 1;
 
@@ -432,13 +433,15 @@
                                         $contador ++;
                                     }
                                     ?>
-                                    <li><a id="btnpagfin2">&raquo;</a></li>
+                                    <li><a id="btnpagfin3">&raquo;</a></li>
                                 </ul>
                             </div>
+
                         </div>
                     </div>
                 </div>
-            </div>
+                </div>
+            
 
             <!--tohere-->
             <!--termina el grid de busqueda por nombre-->
@@ -680,7 +683,6 @@
 
 
        <!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
-        <script src="bootstrap/js/jquery-ui.js"></script>
     </body>
 
 </html>

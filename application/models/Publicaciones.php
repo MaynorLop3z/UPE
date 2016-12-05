@@ -509,6 +509,33 @@ FROM
 
 }
 
+  public function listarPublicacionesNames($nombre) {
+        $consulta = $this->db->query('
+            SELECT 
+  "Archivos"."Nombre", 
+  "Archivos"."Ruta", 
+  "Archivos"."CodigoPublicaciones", 
+  "Publicaciones"."CodigoPublicacion", 
+  "Publicaciones"."Titulo", 
+  "Publicaciones"."Contenido", 
+  "Publicaciones"."Estado", 
+  "Publicaciones"."CodigoTipoPublicacion"
+FROM 
+  public."Archivos",
+  public."Publicaciones"
+WHERE 
+    "Publicaciones"."CodigoPublicacion" = "Archivos"."CodigoPublicaciones" AND 
+    "Publicaciones"."Estado" = TRUE AND 
+    "Publicaciones"."CodigoTipoPublicacion" =' . TIPO_PUBLICACION_WEB . ' AND 
+        UPPER("Publicaciones"."Titulo") LIKE UPPER(\'%' . $nombre . '%\' '.')'
+
+            );
+
+        $resultado = $consulta->result();
+        return $resultado;
+    }
+
+
     }
 
 ?>

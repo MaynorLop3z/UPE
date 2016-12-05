@@ -1,3 +1,3 @@
 <?php
-    require_once APPPATH.'views/Calificaciones/CalificacionesAlumnoTab.php';
+    require_once APPPATH.'views/Calificaciones/CalificacionesTabTmp.php';
 ?>
