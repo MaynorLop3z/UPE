@@ -36,7 +36,6 @@ class CalificacionesController extends CI_Controller{
         
         $html = file_get_html($pathView, $use_include_path = false, $context = null, $offset = -1, $maxLen = -1, $lowercase = true, $forceTagsClosed = true, $target_charset = DEFAULT_TARGET_CHARSET, $stripRN = false, $defaultBRText = DEFAULT_BR_TEXT);
         $elemsWithRights = $html->find(DEFINE_RIGHT_ALLOWED);
-
         $encontrado = 0;
         foreach ($elemsWithRights as $elem) {
             foreach ($permisos as $right) {
