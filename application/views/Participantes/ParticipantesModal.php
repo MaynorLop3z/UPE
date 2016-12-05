@@ -80,6 +80,15 @@
                                         <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label for="AlumnoUser" class="col-lg-3 control-label">Usuario:</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" name="UsuarioPortal" id="AlumnoUser" placeholder="Usuario ingreso portal" maxlength="100">
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
+                                    </div>
+                                </div>
                                 <!--- --></div>
                             <!--- --><div class="col-lg-6">
                                 <div class="form-group">
@@ -155,13 +164,21 @@
                                         <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
                                     </div>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="submit" id="btnEnviarAlumnoADD" onclick="" class=" btn btn-default" name="Aceptar">Agregar</button>
-                                    <button type="reset" id="btnLimpiarAlumnoADD" onclick="" class=" btn btn-default" name="Limpiar">Limpiar</button>
-                                    <!--<button type="button" id="btnCerrar" data-dismiss="modal" class=" btn btn-default" name="Cerrar">Cerrar</button>-->
+                                <div class="form-group">
+                                    <label for="AlumnoPass" class="col-lg-3 control-label">Password:</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" name="Password" id="AlumnoPass" placeholder="Contraseña del usuario" maxlength="100">
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
+                                    </div>
                                 </div>
-
                             </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" id="btnEnviarAlumnoADD" onclick="" class=" btn btn-default" name="Aceptar">Agregar</button>
+                            <button type="reset" id="btnLimpiarAlumnoADD" onclick="" class=" btn btn-default" name="Limpiar">Limpiar</button>
+                            <!--<button type="button" id="btnCerrar" data-dismiss="modal" class=" btn btn-default" name="Cerrar">Cerrar</button>-->
                         </div>
 
                     </fieldset>
@@ -251,6 +268,15 @@
                                         <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label for="AlumnoUserEDIT" class="col-lg-3 control-label">Usuario:</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" name="UsuarioPortal" id="AlumnoUserEDIT" placeholder="Usuario ingreso portal" maxlength="100">
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
+                                    </div>
+                                </div>
                                 <!--- --></div>
                             <!--- --><div class="col-lg-6">
                                 <div class="form-group">
@@ -325,13 +351,21 @@
                                         <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
                                     </div>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="submit" id="btnEnviarAlumnoEdit" onclick="" class=" btn btn-default" name="Aceptar">Actualizar</button>
-                                    <button type="reset" id="btnLimpiarAlumnoEdit" onclick="" class=" btn btn-default" name="Limpiar">Limpiar</button>
-                                    <!--<button type="button" id="btnCerrar" data-dismiss="modal" class=" btn btn-default" name="Cerrar">Cerrar</button>-->
+                                <div class="form-group">
+                                    <label for="AlumnoPassEDIT" class="col-lg-3 control-label">Password:</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" name="Password" id="AlumnoPassEDIT" placeholder="Contraseña del usuario" maxlength="100">
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label id="usR" class="warning"></label> <!-- Para  cuando el campo sea requerido-->
+                                    </div>
                                 </div>
-
                                 <!--- --> </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" id="btnEnviarAlumnoEdit" onclick="" class=" btn btn-default" name="Aceptar">Actualizar</button>
+                            <button type="reset" id="btnLimpiarAlumnoEdit" onclick="" class=" btn btn-default" name="Limpiar">Limpiar</button>
+                            <!--<button type="button" id="btnCerrar" data-dismiss="modal" class=" btn btn-default" name="Cerrar">Cerrar</button>-->
                         </div>
 
                     </fieldset>
@@ -432,6 +466,14 @@
                             <div>
                                 <h4><span class="label label-primary">Comentarios:</span></h4>
                                 <span id="AlumViewComentarios"></span>
+                            </div>
+                            <div>
+                                <h4><span class="label label-primary">Usuario:</span></h4>
+                                <span id="AlumViewUserName"></span>
+                            </div>
+                            <div>
+                                <h4><span class="label label-primary">Contraseña:</span></h4>
+                                <span id="AlumViewUserPass"></span>
                             </div>
                         </div>
                     </div>

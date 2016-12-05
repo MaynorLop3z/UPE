@@ -42,55 +42,58 @@ class ParticipantesController extends CI_Controller {
             $idDiplomado = $this->input->post('idDiplomado');
             $idParticipante = $this->input->post('idParticipante');
             $Periodos = $this->Participantes->listarGruposPeriodos($idDiplomado, $idParticipante);
-            
+
             foreach ($Periodos as $period) {
                 $Horarios = $this->Participantes->listarHorariosGrupoParticipante($period->codigogrupoperiodo);
-                $hE='';$hS='';$au='';$dia='';
-                $dias=array(1=>"Lunes",2=>"Martes",3=>"Miércoles",4=>"Jueves",5=>"Viernes",6=>"Sábado",7=>"Domingo");
+                $hE = '';
+                $hS = '';
+                $au = '';
+                $dia = '';
+                $dias = array(1 => "Lunes", 2 => "Martes", 3 => "Miércoles", 4 => "Jueves", 5 => "Viernes", 6 => "Sábado", 7 => "Domingo");
                 ?>
                 <tr id="GrupoPeriodo<?= $period->codigogrupoperiodo ?>">
                     <th class="nmgp"><?= $period->nombremodulo ?></th>
                     <th class="ffgp"><?= $period->fechafinperiodo ?></th>
                     <th class="figp"><?= $period->fechainicioperiodo ?></th>
-                                       
+
                     <?php
-                    foreach($Horarios as $h){
-                        $hE.=$h->HoraEntrada."<br>";
-                        $hS.=$h->HoraSalida."<br>";
-                        $dia.=$dias[$h->Dia]."<br>";
-                        $au.=$h->NombreAula."<br>";
+                    foreach ($Horarios as $h) {
+                        $hE.=$h->HoraEntrada . "<br>";
+                        $hS.=$h->HoraSalida . "<br>";
+                        $dia.=$dias[$h->Dia] . "<br>";
+                        $au.=$h->NombreAula . "<br>";
                     }
-                    if($hE!=''&&$hS!=''&&$au!=''){
-                    ?>
+                    if ($hE != '' && $hS != '' && $au != '') {
+                        ?>
                         <th class="hegp"><?= $hE; ?></th>
                         <th class="hsgp"><?= $hS; ?></th>
                         <th class="dgp"><?= $dia; ?></th>
                         <th class="agp"><?= $au; ?></th>
-                    <?php
-                    }else{
-                    ?>
+                        <?php
+                    } else {
+                        ?>
                         <th colspan="4" >Horario no asignado a este grupo</th>
-                    <?php
+                        <?php
                     }
                     ?>
-<!--                    <th class="hegp"><?= $period->horaentrada ?></th>
-                    <th class="hsgp"><?= $period->horasalida ?></th>
-                    <th class="dgp"><?="hola"?></th>
-                    <th class="agp"><?= $period->aula ?></th>-->
+                <!--                    <th class="hegp"><?= $period->horaentrada ?></th>
+                <th class="hsgp"><?= $period->horasalida ?></th>
+                <th class="dgp"><?= "hola" ?></th>
+                <th class="agp"><?= $period->aula ?></th>-->
                     <th>
-                            <?php
-                            if ($period->inscrito == 1) {
-                                ?>
-                                <button id="GrupoPeriodoADD<?= $period->codigogrupoperiodo ?>" onclick="inscribirUsaurio(this)" title="Agregar alumno al periodo" class="btn_agregar_periodo btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </button>    
-
-
-                                <?php
-                            } else {
-                                ?> 
-                                <button id="GrupoPeriodoADD<?= $period->codigogrupoperiodo ?>" onclick="inscribirUsaurio(this)" title="Agregar alumno al periodo" class="btn_agregar_periodo btn btn-success"><span class="glyphicon glyphicon-ok"></span> </button>
-                                <?php
-                            }
+                        <?php
+                        if ($period->inscrito == 1) {
                             ?>
+                            <button id="GrupoPeriodoADD<?= $period->codigogrupoperiodo ?>" onclick="inscribirUsaurio(this)" title="Agregar alumno al periodo" class="btn_agregar_periodo btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </button>    
+
+
+                            <?php
+                        } else {
+                            ?> 
+                            <button id="GrupoPeriodoADD<?= $period->codigogrupoperiodo ?>" onclick="inscribirUsaurio(this)" title="Agregar alumno al periodo" class="btn_agregar_periodo btn btn-success"><span class="glyphicon glyphicon-ok"></span> </button>
+                            <?php
+                        }
+                        ?>
                     </th>
                 </tr>
                 <?php
@@ -129,8 +132,10 @@ class ParticipantesController extends CI_Controller {
                 $descripcion = $this->input->post('AlumnoDescripcion');
                 $comentarios = $this->input->post('AlumnoComentario');
                 $genero = $this->input->post('AlumnoGenero');
+                $username = $this->input->post('AlumnoUser');
+                $userpass = $this->input->post('AlumnoPass');
                 $universidad = 0;
-                $arrayData = $this->Participantes->CrearParticipante($nombre, $mail, $tfijo, $tcel, $direccion, $nacimiento, $categoria, $DUI, $universidad, $carrera, $nivelAcad, $encargado, $descripcion, $comentarios, $genero);
+                $arrayData = $this->Participantes->CrearParticipante($nombre, $mail, $tfijo, $tcel, $direccion, $nacimiento, $categoria, $DUI, $universidad, $carrera, $nivelAcad, $encargado, $descripcion, $comentarios, $genero, $username,$userpass);
                 echo json_encode($arrayData);
             }
         } catch (Exception $ex) {
@@ -156,11 +161,13 @@ class ParticipantesController extends CI_Controller {
                 $descripcion = $this->input->post('AlumnoDescripcion');
                 $comentarios = $this->input->post('AlumnoComentario');
                 $genero = $this->input->post('AlumnoGenero');
+                $username = $this->input->post('AlumnoUser');
+                $userpass = $this->input->post('AlumnoPassword');
                 $universidad = 0;
                 $umodifica = 0;
                 $ipModifica = '192.168.1.1';
                 $fechaModifica = date('d/m/Y');
-                $arrayData = $this->Participantes->ModificarParticipante($codigo, $nombre, $mail, $tfijo, $tcel, $direccion, $nacimiento, $categoria, $umodifica, $ipModifica, $fechaModifica, $universidad, $genero, $DUI, $carrera, $nivelAcad, $encargado, $descripcion, $comentarios);
+                $arrayData = $this->Participantes->ModificarParticipante($codigo, $nombre, $mail, $tfijo, $tcel, $direccion, $nacimiento, $categoria, $umodifica, $ipModifica, $fechaModifica, $universidad, $genero, $username, $userpass, $DUI, $carrera, $nivelAcad, $encargado, $descripcion, $comentarios);
                 echo json_encode($arrayData);
             }
         } catch (Exception $ex) {
@@ -207,6 +214,8 @@ class ParticipantesController extends CI_Controller {
                     $registros .= '<td class="NameCat_Alumno">' . $req['NombreCategoriaParticipante'] . '</td>';
                     $registros .= '<td class="Descripcion_Alumno">' . $req['Descripcion'] . '</td>';
                     $registros .= '<td class="Comentarios_Alumno" style="display: none">' . $req['Comentarios'] . '</td>';
+                    $registros .= '<td class="User_Alumno" style="display: none">' . $req['NombreParticipante'] . '</td>';
+                    $registros .= '<td class="Pass_Alumno" style="display: none">' . $req['ContraseniaParticipante'] . '</td>';
                     $registros .= '<td class="gestion_Alumno"><div class="btn-group" role="group">';
                     $registros .= '<button id="alumE' . $req['CodigoParticipante'] . '" onclick="mostrarEditAlumno(this)" title="Editar Alumno" class="btn_modificar_alum btn btn-success"><span class="glyphicon glyphicon-pencil"></span> </button>';
                     $registros .= '<button id="alumDEL' . $req['CodigoParticipante'] . '" onclick="mostrarDelAlumno(this)" title="Eliminar Alumno" class="btn_eliminar_alum btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>';
@@ -297,6 +306,8 @@ class ParticipantesController extends CI_Controller {
                 $filas.='<td class="NameCat_Alumno">' . $alum->NombreCategoriaParticipante . '</td>';
                 $filas.='<td class="Descripcion_Alumno">' . $alum->Descripcion . '</td>';
                 $filas.='<td class="Comentarios_Alumno" style="display: none">' . $alum->Comentarios . '</td>';
+                $filas.='<td class="User_Alumno" style="display: none">' . $alum->NombreParticipante. '</td>';
+                $filas.='<td class="Pass_Alumno" style="display: none">' . $alum->ContraseniaParticipante . '</td>';
                 $filas.='<td class="gestion_Alumno"><div class="btn-group" role="group">
                             <button id="alumE' . $alum->CodigoParticipante . '" onclick="mostrarEditAlumno(this)" title="Editar Alumno" class="btn_modificar_alum btn btn-success"><span class="glyphicon glyphicon-pencil"></span> </button>
                             <button id="alumDEL' . $alum->CodigoParticipante . '" onclick="mostrarDelAlumno(this)" title="Eliminar Alumno" class="btn_eliminar_alum btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>

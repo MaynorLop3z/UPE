@@ -280,7 +280,7 @@
                                             <legend class="modal-header">Buscar Alumno:</legend> 
                                             <div class="form-group">
                                                 <div class="col-lg-12">
-                                                    <input class="form-control form-inline" placeholder="Nombre" name="FindAlumno" id="FindAlumnoNombre" type="text" maxlength="150" >
+                                                    <input class="form-control form-inline" placeholder="Nombre" name="FindAlumnoPeriodo" id="FindAlumnoNombrePeriodo" type="text" maxlength="150" >
                                                 </div>
                                             </div>
                                         </fieldset>
