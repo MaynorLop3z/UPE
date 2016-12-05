@@ -40,21 +40,20 @@ $("#Pubsrecie").on("click", ".callModalPublicacion", function (e) {
 
 
 });
-$("PubName").on("click", ".callModalPublicacion", function (e) {
-//$('.callModalPublicacion').on('click', function (event) {
-
-
+$("#PubName").on("click", ".callModalPublicacion", function (e) {
+    
     codigoPub = this.id;
     var pub = $('#' + codigoPub);
     var dataP = pub.data("dimg");
-
-    $("#portfolioModal6").modal('show');
-
-    $('#h2TituloPub').text(dataP.Titulo);
-    $('#imgPub').attr("src", 'bootstrap' + dataP.Ruta);
-    $('#pContenidoPub').text(dataP.Contenido);
-
-
+    if (typeof dataP !== undefined) {
+        $("#portfolioModal6").modal('show');
+        $('#h2TituloPub').text(dataP.Titulo);
+        $('#imgPub').attr("src", 'bootstrap' + dataP.Ruta);
+        $('#pContenidoPub').text(dataP.Contenido);
+    }
+    else {
+        alert("something went wrong!!!!!!!");
+    }
 
 });
 
@@ -187,6 +186,31 @@ $('#selectCategoriaBusqueda').on('change', function (event) {
     });
 });
 
+//funcion que buscar por nombre
+$('#btname').on('click', function (event) {
+    //post la palabras de la busqueda
+    var nameP = document.getElementById('nombreDiplomado').value;
+
+    var url = 'index.php/wsite/ListarName/';
+
+    var posting = $.post(url, {
+        nameP: nameP
+    });
+
+    posting.done(function (data) {
+        if (data !== null) {
+            $('#PubName').empty();
+            $('#PubName').html(data);
+        }
+        else {
+        }
+
+    });
+});
+
+
+
+
 //esta funcion valida y cambia el formato de fecha para navegarodes que no soportan el tipo date de html5
 function validarFechafire(date) {
     var x;
@@ -236,7 +260,7 @@ $('#btndate').on('click', function (event) {
         }
 
     }
-    
+
     posting.done(function (data) {
         if (data !== null) {
             $('#PubsDate').empty();

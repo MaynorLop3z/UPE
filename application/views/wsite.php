@@ -371,7 +371,7 @@
                     <div class="col-lg-12 text-center">
                         <h3>Escriba el nombre del diplomado</h3>
                         <input type=text id="nombreDiplomado"  />
-                         <input type="button" id="btname" class="btn btn-primary small" value="Buscar"/>
+                        <input type="button" id="btname" class="btn btn-primary small" value="Buscar"/>
 
                         <hr class="star-primary">
 
@@ -386,6 +386,7 @@
                             }
                             ?>
                             <div id="PubName">
+
                                 <?php
                                 foreach ($TotalPaginacion as $publicacion) {
                                     ?>
@@ -409,10 +410,10 @@
                             }
                             ?>
                             <!-- start paginacion-->
-                            <div class="row" id="paginacionDiv2">
+                            <div class="row" id="paginacionDiv3">
 
                                 <ul class="pager">
-                                    <li><a  id="btnpaginicio2 ">&laquo;</a></li>
+                                    <li><a  id="btnpaginicio3">&laquo;</a></li>
                                     <?php
                                     $contador = 1;
 
@@ -432,13 +433,15 @@
                                         $contador ++;
                                     }
                                     ?>
-                                    <li><a id="btnpagfin2">&raquo;</a></li>
+                                    <li><a id="btnpagfin3">&raquo;</a></li>
                                 </ul>
                             </div>
+
                         </div>
                     </div>
                 </div>
-            </div>
+                </div>
+            
 
             <!--tohere-->
             <!--termina el grid de busqueda por nombre-->
