@@ -35,7 +35,7 @@
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="bootstrap/js/jquery.mask.js"></script>
         <!-- Plugin JavaScript -->
-        <script src="bootstrap/js/Sjquery.easing.min.js"></script>
+        <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>-->
         <script src="bootstrap/js/classie.js"></script>
         <script src="bootstrap/js/cbpAnimatedHeader.js"></script>
 
@@ -211,8 +211,8 @@
                         <!--here-->
                         <?php
                         //$publicacionesMostrar=null;
-                        if ($PagCategoria != null && count($PagCategoria) > 0) {
-                            foreach ($PagCategoria as $publicacion) {
+                        if ($TotalPaginacion != null && count($TotalPaginacion) > 0) {
+                            foreach ($TotalPaginacion as $publicacion) {
                                 $iterador = 0;
                                 $iterador ++;
                             }
@@ -295,8 +295,8 @@
                         <!--here-->
                         <?php
                         //$publicacionesMostrar=null;
-                        if ($PagCategoria != null && count($PagCategoria) > 0) {
-                            foreach ($PagCategoria as $publicacion) {
+                        if ($TotalPaginacion != null && count($TotalPaginacion) > 0) {
+                            foreach ($TotalPaginacion as $publicacion) {
                                 $iterador = 0;
                                 $iterador ++;
                             }
@@ -379,8 +379,8 @@
                         <!--here-->
                         <?php
                         //$publicacionesMostrar=null;
-                        if ($PagCategoria != null && count($PagCategoria) > 0) {
-                            foreach ($PagCategoria as $publicacion) {
+                        if ($TotalPaginacion != null && count($TotalPaginacion) > 0) {
+                            foreach ($TotalPaginacion as $publicacion) {
                                 $iterador = 0;
                                 $iterador ++;
                             }
@@ -680,7 +680,6 @@
 
 
        <!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
-        <script src="bootstrap/js/jquery-ui.js"></script>
     </body>
 
 </html>
