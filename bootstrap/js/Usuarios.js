@@ -1,13 +1,13 @@
 var codigoUsuario;
 var postSend=false;
 
-$(document).ready(function(){
-//    $('#txtNombrePersonaModificar').filter_input({regex:'[a-zA-Z_]'});
-    $('#txtNombrePersonaModificar').bind('keyup blur',function(){ 
-        var node = $(this);
-        node.val(node.val().replace(/[^a-z]/g,'') ); }
-    );$
-});
+//$(document).ready(function(){
+////    $('#txtNombrePersonaModificar').filter_input({regex:'[a-zA-Z_]'});
+//    $('#txtNombrePersonaModificar').bind('keyup blur',function(){ 
+//        var node = $(this);
+//        node.val(node.val().replace(/[^a-z]/g,'') ); }
+//    );$
+//});
 
 $("#btnUsuarioNuevo").on('click', function () {
     $("#usuarioNuevo").modal();
@@ -66,17 +66,6 @@ $("#containerTablePaging").on("click", ".btn_rls_user", function (e) {
     });
 });
 
-//$('#usuarioModifica').on('show.bs.modal', function (event) {
-//
-//    
-//
-//});
-
-//$('#usuarioRoles').on('show.bs.modal', function (event) {
-//   
-//});
-
-
 $("#frmGuardarUSer").submit(function (event) {
     event.preventDefault();
 //    if(!postSend){
@@ -118,7 +107,7 @@ $("#frmEditarUser").submit(function (event) {
             UsuarioEmail = form.find("input[name='UsuarioEmail']").val(),
             UsuarioNombreReal = form.find("input[name='UsuarioNombreReal']").val(),
             Comentarios = form.find("textarea[name='Comentarios']").val(),
-            url = form.attr("action");
+            url = 'UsuarioController/guardarUsuario/editarUsuario/';
     var posting = $.post(url, {CodigoUsuario: CodigoUsuario, UsuarioNombre: UsuarioNombre,
         UsuarioPassword: UsuarioPassword,
         UsuarioEmail: UsuarioEmail,

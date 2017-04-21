@@ -84,7 +84,7 @@
 
             <div class="container-fluid ">
                 <button type="button" class="close btn-lg" data-dismiss="modal" aria-hidden="true">×</button>
-                <form id="frmEditarUser" action="<?php echo base_url() ?>index.php/UsuarioController/editarUsuario/"  class="form-horizontal" method="post" >
+                <form id="frmEditarUser" action=""  class="form-horizontal" method="post" >
                     <fieldset>
                         <legend class="modal-header">Modificar Usuario:</legend>
 
