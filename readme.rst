@@ -5,7 +5,7 @@ Es un sistema que trae solucion a los problemas de la Unidad de Proyectos Especi
 El proyecto permitira seleccionar entre diferentes servicios segun la necesidad de los usuarios de dicha unidad.
 
 ###################
-Proyecto de Tesis Realizado por:
+Proyecto Realizado por:
 ###################
   -Maynor Gabriel López Jiménez
   -Johanna Beatriz Hernandez Rodriguez
